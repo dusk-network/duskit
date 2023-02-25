@@ -35,6 +35,9 @@ jobs:
         env:
           REGISTRY_TOKEN: ${{secrets.REGISTRY_TOKEN}}
 
+      - name: Lint
+        run: pnpm lint
+
       - name: Build
         run: pnpm build
 
