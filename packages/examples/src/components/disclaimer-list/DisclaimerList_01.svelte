@@ -1,6 +1,7 @@
 <script>
 	import DisclaimerList, { Item } from "@dusk-network/disclaimer-list";
-	import Icon from "@dusk-network/icon";
+	import Icon from '@iconify/svelte';
+  import emoticonHappy from '@iconify/icons-mdi/emoticon-happy';
 	import RichText from "@dusk-network/rich-text";
 	import Heading from "@dusk-network/heading";
 </script>
@@ -9,14 +10,14 @@
 	<svelte:fragment slot="heading">
 		<Heading variant="danger">
 			<svelte:fragment slot="icon">
-				<Icon name="alert-outline" />
+				<Icon icon={emoticonHappy} />
 			</svelte:fragment>
 			<h1>Warning</h1>
 		</Heading>
 	</svelte:fragment>
 	<Item>
 		<svelte:fragment slot="icon">
-			<Icon name="safe" size="xxxl" variant="danger" />
+			<Icon icon={emoticonHappy} />
 		</svelte:fragment>
 		<RichText size="sm">
 			<h2>Don't Lose It</h2>
@@ -25,7 +26,7 @@
 	</Item>
 	<Item>
 		<svelte:fragment slot="icon">
-			<Icon name="eye-outline" size="xxxl" variant="danger" />
+			<Icon icon={emoticonHappy} />
 		</svelte:fragment>
 		<RichText size="sm">
 			<h2>Don't Share It</h2>
@@ -36,7 +37,7 @@
 	</Item>
 	<Item>
 		<svelte:fragment slot="icon">
-			<Icon name="content-save-alert-outline" size="xxxl" variant="danger" />
+			<Icon icon={emoticonHappy} />
 		</svelte:fragment>
 		<RichText size="sm">
 			<h2>Store It Securely</h2>

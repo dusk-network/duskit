@@ -1,6 +1,7 @@
 <script>
 	import Table, { Row, Datum } from "@dusk-network/table";
-	import Icon from "@dusk-network/icon";
+	import Icon from '@iconify/svelte';
+  import emoticonHappy from '@iconify/icons-mdi/emoticon-happy';
 	import { apiData } from "./data.js";
 
 	const settings = {
@@ -36,7 +37,7 @@
 				{#each $rows as _}
 					<Row type="head">
 						<Datum key="id">
-							<Icon name="key-outline" />
+							<Icon icon={emoticonHappy} />
 							ID</Datum
 						>
 						<Datum key="first_name">Status</Datum>

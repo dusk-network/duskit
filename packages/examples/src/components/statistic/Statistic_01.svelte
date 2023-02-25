@@ -1,11 +1,12 @@
 <script>
 	import Statistic from "@dusk-network/statistic";
-	import Icon from "@dusk-network/icon";
+	import Icon from '@iconify/svelte';
+  import emoticonHappy from '@iconify/icons-mdi/emoticon-happy';
 </script>
 
 <Statistic>
 	<svelte:fragment slot="icon">
-		<Icon name="chart-areaspline" variant="brand" size="xxxl" />
+		<Icon icon={emoticonHappy} />
 	</svelte:fragment>
 	<p>$108.048.497</p>
 </Statistic>

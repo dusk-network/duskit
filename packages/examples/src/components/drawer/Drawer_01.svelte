@@ -1,6 +1,7 @@
 <script>
 	import Drawer from "@dusk-network/drawer";
-	import Icon from "@dusk-network/icon";
+	import Icon from '@iconify/svelte';
+  import emoticonHappy from '@iconify/icons-mdi/emoticon-happy';
 
 	let items = [
 		{
@@ -29,6 +30,6 @@
 
 <Drawer items="{items}" activePath="/components/organisms/drawer/Drawer/">
 	<svelte:fragment slot="logo">
-		<Icon name="dusk-ticker" size="lg" />
+		<Icon icon={emoticonHappy} />
 	</svelte:fragment>
 </Drawer>

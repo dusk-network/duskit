@@ -24,7 +24,6 @@ import * as Form from "./form";
 import * as Gauge from "./gauge";
 import * as Heading from "./heading";
 import * as Hero from "./hero";
-import * as Icon from "./icon";
 import * as LoadingIndicator from "./loading-indicator";
 import * as Logo from "./logo";
 import * as MediaContent from "./media-content";
@@ -75,7 +74,6 @@ export {
 	Gauge,
 	Heading,
 	Hero,
-	Icon,
 	LoadingIndicator,
 	Logo,
 	MediaContent,

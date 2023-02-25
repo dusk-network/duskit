@@ -63,11 +63,14 @@
 	},
 	"devDependencies": {
 		"@dusk-network/eslint-config": "^1.2.8",
+		"@iconify/icons-mdi": "^1.2.41",
+		"@iconify/svelte": "^3.1.0",
 		"eslint": "^8.34.0",
 		"prettier": "^2.8.4",
 		"prettier-plugin-packagejson": "^2.4.3",
 		"prettier-plugin-svelte": "^2.9.0",
-		"prettier-plugin-tailwindcss": "^0.2.3"
+		"prettier-plugin-tailwindcss": "^0.2.3",
+		"yup": "^1.0.0"
 	},
 	"peerDependencies": {
 		"svelte": "^3.55.1",

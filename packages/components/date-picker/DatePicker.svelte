@@ -1,9 +1,6 @@
 <script>
 	import "./styles.css";
 	import DropDown from "@dusk-network/drop-down";
-	import Icon from "@iconify/svelte";
-	import chevronLeft from "@iconify/icons-material-symbols/chevron-left";
-	import chevronRight from "@iconify/icons-material-symbols/chevron-right";
 	import { getMonthLength, getCalendarDays, getDefaultLocalization } from "./date-picker";
 	import { createEventDispatcher } from "svelte";
 
@@ -141,7 +138,7 @@
 
 <div class="{$$props.class || ''} duk-date-picker">
 	<div class="duk-date-picker__navigation">
-		<Icon icon="{chevronLeft}" />
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12A10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.6 4.6L10.8 12l4.6-4.6L14 6l-6 6l6 6l1.4-1.4Z"/></svg>
 		<DropDown
 			class="duk-date-picker__months"
 			options="{dateLocale.months}"
@@ -154,7 +151,7 @@
 			selectedIndex="{years.indexOf(browseYear)}"
 			on:select="{(e) => setYear(parseInt(e.detail))}"
 		/>
-		<Icon icon="{chevronRight}" />
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12A10 10 0 0 1 12 2a10 10 0 0 1 10 10m-12 6l6-6l-6-6l-1.4 1.4l4.6 4.6l-4.6 4.6L10 18Z"/></svg>
 	</div>
 	<div class="duk-date-picker__weekdays">
 		{#each Array(7) as _, i}
