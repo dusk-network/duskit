@@ -21,8 +21,7 @@
 </style>
 
 <script>
-	import { onMount, afterUpdate } from "svelte";
-	import DarkMode from "svelte-dark-mode";
+	import { onMount } from "svelte";
 	import Button from "@dusk-network/button";
 	import Content from "@dusk-network/content";
 	import Heading from "@dusk-network/heading";
@@ -31,13 +30,11 @@
 	import Toggle from "@dusk-network/toggle";
 	import Card from "@dusk-network/card";
 	import Group from "@dusk-network/group";
-	import Icon from "@dusk-network/icon";
 	import { getCookie, setCookie } from "$lib/helpers/cookie-utils.js";
-	import { isSettingsVisible, isCookieBannerVisible, theme as themeStore } from "$lib/store.js";
+	import { isSettingsVisible, isCookieBannerVisible } from "$lib/store.js";
 	import config from "../../config/index.js";
 
 	export let showSettings = false;
-	export let theme;
 
 	let fields = config.cookieFields;
 
@@ -50,15 +47,9 @@
 		}
 	});
 
-	afterUpdate(() => {
-		document.documentElement.className = theme;
-	});
 
-	$: switchTheme = theme === "dark" ? "light" : "dark";
-	$: isDarkTheme = theme === "dark";
 </script>
 
-<DarkMode bind:theme="{theme}" />
 
 <svelte:window
 	on:keydown="{(event) => {
@@ -84,7 +75,7 @@
 						on:click="{() => isSettingsVisible.update(() => false)}"
 						label="close settings"
 					>
-						<Icon name="menu-burger-close" size="sm" />
+						Close
 					</Button>
 				</svelte:fragment>
 			</Heading>
@@ -152,37 +143,12 @@
 						}}"
 					/>
 				</Control>
-				<RichText><strong>Color Theme</strong></RichText>
-				<Control
-					name="darkTheme"
-					type="inline-fixed"
-					width="full"
-					label="Toggle color theme"
-					message="Toggle between light and dark colors."
-				>
-					<Toggle
-						name="darkTheme"
-						id="__DUK-dark-mode"
-						onIcon="brightness-4"
-						offIcon="brightness-5"
-						bind:checked="{isDarkTheme}"
-						on:click="{() => {
-							theme = switchTheme;
-							themeStore.update(() => theme);
-							if (!$isCookieBannerVisible) {
-								setCookie(config.themeCookieName, { theme }, config.cookieConfig);
-							}
-						}}"
-						value="{isDarkTheme ? true : false}"
-					/>
-				</Control>
 				<Group align="center">
 					<Button
 						label="save settings"
 						variant="cta"
 						on:click="{() => {
 							setCookie(config.gdprCookieName, fields, config.cookieConfig);
-							setCookie(config.themeCookieName, { theme }, config.cookieConfig);
 							isSettingsVisible.update(() => false);
 							isCookieBannerVisible.update(() => false);
 						}}"

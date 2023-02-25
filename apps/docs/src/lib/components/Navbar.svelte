@@ -1,7 +1,6 @@
 <script>
 	import { page } from "$app/stores";
 	import { base } from "$app/paths";
-	import Icon from "@dusk-network/icon";
 	import Navbar from "@dusk-network/navbar";
 	import Menu, { Item } from "@dusk-network/menu";
 	import { isSettingsVisible } from "$lib/store.js";
@@ -27,16 +26,6 @@
 			<Item href="{base}/components" active="{$page.url.pathname.includes('components')}"
 				>Components</Item
 			>
-		</Menu>
-	</svelte:fragment>
-	<svelte:fragment slot="links">
-		<Menu orientation="horizontal" name="Developer Links">
-			<Item href="https://github.com/dusk-network/dusk-ui-kit">
-				<Icon name="github" />
-			</Item>
-			<Item href="https://dusk-network.github.io/dusk-ui-kit/storybook">
-				<Icon name="storybook" />
-			</Item>
 		</Menu>
 	</svelte:fragment>
 </Navbar>
