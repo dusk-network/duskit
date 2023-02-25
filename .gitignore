@@ -7,6 +7,7 @@
 .vscode
 .svelte
 .svelte-kit
+.histoire
 node_modules
 build
 storybook-static

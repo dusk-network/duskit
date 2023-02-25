@@ -2,7 +2,7 @@
 	"$schema": "https://turbo.build/schema.json",
 	"pipeline": {
 		"build": {
-			"outputs": [".svelte-kit/**", "storybook-static/**"],
+			"outputs": [".svelte-kit/**", ".histoire/dist/**"],
 			"dependsOn": ["^build"]
 		},
 		"test": {

@@ -28,7 +28,7 @@ const config = {
 		paths: {
 			base: process.env.NODE_ENV === "production" ? "/duskit/docs" : "",
 		},
-		appDir: "internal", // Needed to work with Github pages.
+		// appDir: "internal", // Needed to work with Github pages.
 	},
 	preprocess: sveltePreprocess({
 		postcss: {
