@@ -1,6 +1,4 @@
 <script>
-	import { setContext, getContext } from "svelte";
-	import { writable } from "svelte/store";
 	import { logEvent } from "histoire/client";
 	import Button from "@dusk-network/button";
 	import variants from "@dusk-network/utilities/variants.js";
