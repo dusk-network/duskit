@@ -1,0 +1,78 @@
+.duk-step-list {
+	@apply flex flex-col gap-y-12;
+	&__item {
+		@apply relative flex flex-row gap-x-6;
+
+		&--content {
+			@apply flex flex-col;
+		}
+	}
+
+	&--brand {
+		^&__item {
+			&--icon {
+				@apply bg-cornflower;
+				.duk-icon {
+					@apply fill-current text-white;
+				}
+			}
+		}
+	}
+
+	/* &--cta {
+		^&__item {
+			&--icon {
+				@apply bg-gold-500;
+				.duk-icon {
+					@apply fill-current text-black;
+				}
+			}
+		}
+	}
+
+	&--info {
+		^&__item {
+			&--icon {
+				@apply bg-blue-500;
+				.duk-icon {
+					@apply fill-current text-black;
+				}
+			}
+		}
+	}
+
+	&--success {
+		^&__item {
+			&--icon {
+				@apply bg-green-500;
+				.duk-icon {
+					@apply fill-current text-black;
+				}
+			}
+		}
+	}
+
+	&--warning {
+		^&__item {
+			&--icon {
+				@apply bg-yellow-500;
+				.duk-icon {
+					@apply fill-current text-black;
+				}
+			}
+		}
+	}
+
+	&--danger {
+		^&__item {
+			&--icon {
+				@apply bg-red-500;
+				.duk-icon {
+					@apply fill-current text-black;
+				}
+			}
+		}
+	} */
+}
+
+@tailwind base;

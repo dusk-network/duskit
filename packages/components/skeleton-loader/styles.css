@@ -1,0 +1,66 @@
+.duk-skeleton-loader {
+	&__wrapper {
+		@apply w-full;
+	}
+
+	&__placeholder {
+		@apply bg-gray relative w-full overflow-hidden;
+		/* @apply dark:bg-black; */
+	}
+
+	&--rounded {
+		^&__placeholder {
+			@apply rounded-xl;
+		}
+	}
+
+	&--pulse {
+		^&__placeholder {
+			@apply animate-pulse;
+		}
+	}
+
+	&--loader {
+		^&__placeholder::after {
+			@apply via-gray animate-shimmer absolute top-0 right-0 bottom-0 left-0 -translate-x-full bg-gradient-to-l from-transparent;
+			/* @apply dark:bg-gradient-to-l dark:from-transparent dark:via-black; */
+			content: "";
+		}
+	}
+
+	/* @screen xs {
+		&__placeholder {
+			height: var(--xs-height);
+		}
+	} */
+
+	@screen sm {
+		&__placeholder {
+			height: var(--sm-height);
+		}
+	}
+
+	@screen md {
+		&__placeholder {
+			height: var(--md-height);
+		}
+	}
+
+	@screen lg {
+		&__placeholder {
+			height: var(--lg-height);
+		}
+	}
+
+	@screen xl {
+		&__placeholder {
+			height: var(--xl-height);
+		}
+	}
+
+	@screen 2xl {
+		&__placeholder {
+			height: var(--jumbo-height);
+		}
+	}
+}

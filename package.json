@@ -1,0 +1,35 @@
+{
+	"name": "duskit",
+	"private": true,
+	"description": "Component library for building Dusk user interfaces",
+	"homepage": "https://dusk-network.github.io/duskit/",
+	"bugs": {
+		"url": "https://github.com/dusk-network/issues"
+	},
+	"repository": "https://github.com/dusk-network/duskit",
+	"license": "MPL-2.0",
+	"author": "Kieran Hall <kieran@dusk.network>",
+	"type": "module",
+	"scripts": {
+		"build": "turbo run build",
+		"changeset": "changeset",
+		"clean": "turbo run clean && rm -rf node_modules",
+		"dev": "turbo run dev --no-cache --continue",
+		"format": "pnpm exec prettier . -w --plugin-search-dir=.",
+		"lint": "turbo run lint",
+		"release": "turbo run build --filter=docs^... && changeset publish",
+		"version-packages": "changeset version"
+	},
+	"devDependencies": {
+		"@changesets/cli": "^2.26.0",
+		"prettier": "^2.8.4",
+		"prettier-plugin-packagejson": "^2.4.3",
+		"prettier-plugin-svelte": "^2.9.0",
+		"prettier-plugin-tailwindcss": "^0.2.3",
+		"turbo": "^1.8.2"
+	},
+	"packageManager": "pnpm@7.15.0",
+	"engines": {
+		"pnpm": "^7.0.0"
+	}
+}

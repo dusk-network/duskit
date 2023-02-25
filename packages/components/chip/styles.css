@@ -1,0 +1,143 @@
+.duk-chip {
+	@apply text-smokey border-smokey relative m-1 flex items-center justify-center rounded-full border bg-transparent py-1 px-2 font-medium;
+	/* @apply dark:border-gray; */
+
+	max-width: fit-content;
+
+	&__icon {
+		@apply text-smokey bg-smokey absolute -left-px flex h-8 w-8 items-center justify-center rounded-full border border-transparent;
+		/* @apply dark:bg-gray; */
+
+		&--brand {
+			@apply bg-cornflower;
+			/* @apply dark:bg-cornflower; */
+		}
+
+		/* &--cta {
+			@apply bg-orange-500;
+			@apply dark:bg-orange-200;
+
+			.duk-icon {
+				@apply !text-gray !fill-current;
+				@apply dark:!text-gray;
+			}
+		}
+
+		&--info {
+			@apply bg-blue-500;
+			@apply dark:bg-blue-200;
+
+			.duk-icon {
+				@apply !text-gray !fill-current;
+				@apply dark:!text-black;
+			}
+		}
+
+		&--success {
+			@apply bg-green-500;
+			@apply dark:bg-green-200;
+
+			.duk-icon {
+				@apply !text-gray !fill-current;
+				@apply dark:!text-gray;
+			}
+		}
+
+		&--warning {
+			@apply bg-yellow-500;
+			@apply dark:bg-yellow-200;
+
+			.duk-icon {
+				@apply !text-gray !fill-current;
+				@apply dark:!text-gray;
+			}
+		}
+
+		&--danger {
+			@apply bg-red-500;
+			@apply dark:bg-red-200;
+
+			.duk-icon {
+				@apply !text-gray !fill-current;
+				@apply dark:!text-gray;
+			}
+		} */
+	}
+
+	&__text {
+		@apply max-w-full flex-initial whitespace-nowrap text-sm font-normal leading-none;
+	}
+
+	&--icon {
+		@apply pl-16 pr-5;
+	}
+
+	&--brand {
+		@apply text-cornflower border-cornflower border;
+		/* @apply dark:text-cornflower dark:border-cornflower; */
+	}
+
+	/* &--cta {
+		@apply text-orange-500 border border-orange-500;
+		@apply dark:text-orange-200 dark:border-orange-200;
+	}
+
+	&--info {
+		@apply text-blue-500 border border-blue-500;
+		@apply dark:text-blue-200 dark:border-blue-200;
+	}
+
+	&--success {
+		@apply text-green-500 border border-green-500;
+		@apply dark:text-green-200 dark:border-green-200;
+	}
+
+	&--danger {
+		@apply text-red-500 border border-red-500;
+		@apply dark:text-red-200 dark:border-red-200;
+	}
+
+	&--warning {
+		@apply text-yellow-500 border border-yellow-500;
+		@apply dark:text-yellow-200 dark:border-yellow-200;
+	} */
+
+	&--statistic {
+		@apply ml-auto;
+		@apply md:ml-0;
+	}
+
+	&--detail-list {
+		@apply mx-auto my-1;
+		@apply sm:m-1;
+	}
+
+	&--datum {
+		@apply m-0;
+	}
+
+	&__badge {
+		@apply text-taupe border-smokey bg-smokey border px-5;
+		/* @apply dark:text-black dark:border-gray dark:bg-gray; */
+
+		&--brand {
+			@apply text-smokey border-cornflower bg-cornflower border;
+			/* @apply dark:text-gray dark:border-cornflower dark:bg-cornflower; */
+		}
+
+		/* &--success {
+			@apply text-black border border-green-500 bg-green-500;
+			@apply dark:text-black dark:border-green-200 dark:bg-green-200;
+		}
+
+		&--danger {
+			@apply text-black border border-red-500 bg-red-500;
+			@apply dark:text-gray dark:border-red-200 dark:bg-red-200;
+		}
+
+		&--warning {
+			@apply text-black border border-yellow-500 bg-yellow-500;
+			@apply dark:text-black dark:border-yellow-200 dark:bg-yellow-200;
+		} */
+	}
+}

@@ -1,0 +1,7 @@
+packages:
+  - "apps/*"
+  - "packages/components/*"
+  - "packages/examples"
+  - "packages/meta"
+  - "packages/tokens"
+  - "packages/utilities"

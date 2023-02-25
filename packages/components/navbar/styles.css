@@ -1,0 +1,162 @@
+.duk-navbar {
+	@apply absolute top-0 left-0 z-10 flex w-full flex-col bg-transparent transition-all duration-500 ease-out;
+	/* @apply dark:bg-black; */
+
+	&__wrapper {
+		@apply lg:flex lg:w-full lg:flex-none lg:items-end lg:justify-between;
+
+		&--primary {
+			@apply text-smokey fill-current pt-2;
+			/* @apply dark:text-white; */
+			@apply lg:h-auto lg:px-6;
+		}
+
+		&--secondary {
+			@apply bg-jet pl-0 pr-0 pb-3 pt-4 text-white;
+			@apply lg:px-6;
+			/* @apply dark:bg-cornflower dark:text-black; */
+
+			& .duk-button {
+				@apply border-0;
+			}
+		}
+	}
+
+	&__brand {
+		@apply flex flex-col items-start pt-5;
+		@apply lg:flex-grow lg:flex-row lg:items-center lg:space-x-6 lg:pl-0 lg:pt-0;
+	}
+
+	&__heading {
+		@apply ml-3 block w-full text-center text-base font-medium leading-relaxed;
+		@apply lg:ml-0 lg:mr-5 lg:inline lg:w-auto lg:pb-2;
+	}
+
+	&__collapse {
+		@apply absolute top-5 right-5;
+		@apply lg:hidden;
+
+		& button {
+			@apply flex items-center;
+		}
+	}
+
+	&__navigation {
+		@apply w-full flex-grow;
+		@apply lg:flex lg:h-auto lg:w-auto lg:flex-shrink lg:flex-grow-0;
+
+		&--primary {
+			@apply mt-4;
+			@apply lg:mt-0 lg:!items-end lg:space-x-5;
+
+			@media (display-mode: standalone) {
+				visibility: hidden;
+			}
+
+			& .duk-menu__list {
+				@apply flex flex-col space-y-0 space-x-0;
+				@apply lg:mb-0 lg:flex-1 lg:flex-row lg:justify-end lg:space-y-0 lg:space-x-5;
+
+				& .duk-menu__item {
+					@apply w-full py-0 pl-0 leading-relaxed;
+					@apply lg:mb-0 lg:w-auto lg:pr-0;
+
+					& .duk-menu__item-wrapper {
+						&:is(a):not(.duk-menu__item-wrapper--active) {
+							@apply opacity-80;
+						}
+					}
+
+					&--active {
+						@apply order-last font-semibold;
+						@apply lg:order-none;
+					}
+				}
+
+				& .duk-menu__item-wrapper {
+					@apply px-6 py-4;
+					@apply lg:rounded-t lg:border-l lg:border-t lg:border-r lg:border-transparent lg:px-5 lg:pt-2;
+
+					&--active {
+						@apply bg-jet px-6 text-white;
+						/* @apply dark:bg-cornflower dark:border-cornflower dark:text-black; */
+						@apply lg:px-5;
+					}
+				}
+			}
+
+			&:hover {
+				& a {
+					@apply lg:opacity-80 lg:transition lg:transition-all lg:duration-1000 lg:ease-in-out;
+				}
+
+				& a.duk-menu__item-wrapper--active:hover {
+					@apply opacity-100 transition transition-all duration-1000 ease-in-out;
+				}
+
+				& a:not(.duk-menu__item-wrapper--active) {
+					&:hover {
+						@apply border-jet border-dashed opacity-100 transition transition-all duration-1000 ease-in-out;
+					}
+				}
+			}
+		}
+
+		&--secondary {
+			& .duk-menu {
+				&__list {
+					@apply flex flex-col space-y-5 space-x-0;
+					@apply lg:mb-0 lg:flex-1 lg:flex-row lg:justify-end lg:space-y-0 lg:space-x-5;
+				}
+
+				&__item {
+					@apply w-full py-0 pl-0 leading-relaxed;
+					@apply lg:mb-0 lg:w-auto lg:pr-0;
+
+					&--active {
+						@apply font-semibold;
+					}
+				}
+
+				&__item-wrapper {
+					@apply px-6 pt-4 pb-4;
+					@apply lg:px-0 lg:pt-2;
+				}
+			}
+		}
+
+		/* FIXME Temp solution, we need to always show this. */
+		&--tertiary {
+			@apply hidden;
+			@apply lg:mb-3 lg:flex lg:items-center lg:space-x-5;
+		}
+	}
+
+	&__light-mode-icon {
+		/* @apply dark:text-yellow-900; */
+	}
+
+	&__dark-mode-icon {
+		@apply text-black;
+		/* @apply dark:text-cornflower; */
+	}
+
+	&--hidden {
+		@apply relative h-auto bg-transparent;
+		/* @apply dark:bg-transparent; */
+		/* @apply md:bg-gray; */
+		/* @apply md:dark:bg-black; */
+
+		& ^&__navigation,
+		& ^&__wrapper--secondary {
+			@apply hidden;
+			@apply lg:flex lg:items-center;
+		}
+	}
+
+	&__a11y-menu {
+		& .duk-menu__list {
+			@apply !space-x-2;
+		}
+	}
+}

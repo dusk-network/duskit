@@ -1,0 +1,118 @@
+.duk-heading {
+	@apply flex items-center space-x-2;
+
+	&--left {
+		@apply !justify-start;
+	}
+
+	&--center {
+		@apply !justify-center;
+	}
+
+	&--right {
+		@apply !justify-end;
+	}
+
+	a {
+		@apply text-cornflower text-right text-xs font-bold uppercase;
+		/* @apply dark:text-white; */
+	}
+
+	/* & > .duk-icon {
+    @apply block order-first pr-4;
+  } */
+
+	/* & h1 + .duk-icon {
+    @apply text-cornflower;
+    @apply dark:text-cornflower;
+  } */
+
+	& > *:not(button):not(a) {
+		@apply text-smokey;
+		/* @apply dark:text-cornflower; */
+	}
+
+	& h1,
+	& h2,
+	& h3,
+	& h4,
+	& h5 {
+		@apply text-smokey text-2xl leading-7;
+		/* @apply dark:text-cornflower; */
+	}
+
+	&--large {
+		@apply space-x-6;
+		> *:not(button) {
+			@apply text-3xl leading-8;
+		}
+	}
+
+	&--small {
+		@apply space-x-3;
+		> *:not(button) {
+			@apply text-lg leading-6;
+		}
+	}
+
+	&--disclaimer-list {
+		@apply mb-5;
+	}
+
+	&--hero,
+	&--card {
+		@apply px-6 pt-5;
+
+		&:first-child {
+			@apply !mb-0;
+		}
+		&:not(:first-child) {
+			@apply mt-12;
+		}
+		&:not(:last-child) {
+			@apply mb-5;
+		}
+	}
+
+	&--content {
+		@apply !mb-5;
+	}
+
+	&--card {
+		> *:not(button) {
+			& h1,
+			& h2,
+			& h3,
+			& h4,
+			& h5 {
+				@apply text-black;
+				/* @apply dark:text-cornflower; */
+			}
+		}
+	}
+
+	/* &--success {
+    & > *:not(button) {
+      @apply !text-green-900;
+      @apply dark:!text-green-200;
+    }
+  }
+
+  &--warning {
+    & > *:not(button) {
+      @apply !text-yellow-900;
+      @apply dark:!text-yellow-200;
+    }
+  }
+
+  &--danger {
+    & > *:not(button) {
+      @apply !text-red-900;
+      @apply dark:!text-red-200;
+    }
+  } */
+
+	&--datum {
+		@apply ml-0 !mb-0;
+	}
+}

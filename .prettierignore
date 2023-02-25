@@ -1,0 +1,12 @@
+node_modules
+minimal
+types
+.svelte-kit
+.DS_Store
+/.github
+/dist
+/build
+/package
+.env
+pnpm-lock.yaml
+pnpm-workspace.yaml

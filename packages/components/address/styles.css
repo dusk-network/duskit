@@ -1,0 +1,42 @@
+.duk-address {
+	@apply border-smokey text-smokey flex w-full flex-col break-all rounded border p-3 font-mono;
+	/* @apply dark:border-gray dark:text-gray; */
+
+	&--brand {
+		@apply border-cornflower text-cornflower;
+		/* @apply dark:border-gray dark:text-gray; */
+	}
+
+	/* &--cta {
+		@apply border-gold-500 text-gold-500;
+		@apply dark:border-gray dark:text-gray;
+	}
+
+	&--info {
+		@apply border-blue-500 text-blue-500;
+		@apply dark:border-gray dark:text-gray;
+	}
+
+	&--success {
+		@apply border-green-500 text-green-500;
+		@apply dark:border-gray dark:text-gray;
+	}
+
+	&--warning {
+		@apply border-yellow-500 text-yellow-500;
+		@apply dark:border-gray dark:text-gray;
+	}
+
+	&--danger {
+		@apply border-red-300 text-red-300;
+		@apply dark:border-gray dark:text-gray;
+	} */
+
+	&--content {
+		@apply my-5;
+
+		&:first-child {
+			@apply mt-0;
+		}
+	}
+}

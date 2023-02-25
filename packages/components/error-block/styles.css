@@ -1,0 +1,50 @@
+.duk-error-block {
+	@apply h-full w-full;
+	&__image {
+		@apply flex items-center justify-center;
+
+		> svg {
+			/* @apply h-128 md:h-225; */
+		}
+	}
+
+	&__message {
+		@apply my-6 italic;
+	}
+
+	&__text {
+		@apply my-6 text-center text-3xl font-semibold;
+
+		/* &--warning {
+			@apply text-yellow-900;
+		}
+
+		&--danger {
+			@apply text-red-900;
+		} */
+	}
+
+	&__stack {
+		@apply my-10 block bg-black p-4 text-lg;
+
+		/* &--warning {
+			@apply text-yellow-100;
+		}
+
+		&--danger {
+			@apply text-red-100;
+		} */
+	}
+
+	&__stack-text {
+		@apply mt-5 text-lg font-semibold;
+
+		/* &--warning {
+			@apply text-yellow-900;
+		}
+
+		&--danger {
+			@apply text-red-900;
+		} */
+	}
+}

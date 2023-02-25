@@ -1,0 +1,30 @@
+.duk-text-field {
+	@apply placeholder-taupe rounded-md border border-black bg-white px-4 py-2 text-sm text-black outline-none;
+	/* @apply dark:bg-black dark:text-gray dark:border dark:border-gray dark:placeholder-gray; */
+
+	/* min-height: 30px; */
+
+	&--mnemonic {
+		@apply placeholder-taupe w-full border-0 bg-transparent p-0 text-lg;
+		/* @apply dark:bg-transparent dark:border-0 dark:placeholder-gray; */
+	}
+
+	/* &--success {
+    @apply border-green-900 text-green-900 placeholder-green-500;
+    @apply dark:border-green-500 dark:text-green-500;
+  }
+
+  &--warning {
+    @apply border-yellow-600 text-yellow-900 placeholder-yellow-500;
+    @apply dark:border-yellow-400 dark:text-yellow-500;
+  }
+
+  &--danger {
+    @apply border-red-600 text-red-900 placeholder-red-500;
+    @apply dark:border-red-400 dark:text-red-500;
+  } */
+
+	&:disabled {
+		@apply cursor-not-allowed placeholder-opacity-50;
+	}
+}

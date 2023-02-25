@@ -1,0 +1,10 @@
+.duk-content {
+	&--card {
+		@apply py-5 px-6;
+	}
+
+	& .duk-control,
+	& .duk-group {
+		@apply px-0;
+	}
+}

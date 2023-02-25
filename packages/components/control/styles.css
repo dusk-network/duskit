@@ -1,0 +1,165 @@
+.duk-control {
+	@apply w-full p-5;
+
+	.duk-button-wrapper {
+		@apply justify-center;
+	}
+
+	&--search-list {
+		@apply px-0;
+	}
+
+	&__label {
+		@apply pr-3;
+	}
+
+	&__controls-wrapper {
+		@apply flex items-center;
+
+		& .duk-group {
+			@apply flex-grow;
+		}
+	}
+
+	&__input {
+		@apply w-full;
+	}
+
+	&__message {
+		@apply mt-2 flex items-center justify-end space-x-2 text-sm;
+
+		min-height: 1.5rem;
+
+		& > p:empty::before {
+			content: "\00a0";
+		}
+	}
+
+	&--stacked {
+		&:not(:last-child) {
+			@apply pb-0;
+		}
+
+		^&__label {
+			@apply mb-1;
+		}
+
+		^&__input {
+			flex: 2;
+		}
+	}
+
+	&--inline-fixed {
+		&:not(:last-child) {
+			@apply pb-0;
+		}
+
+		^&__wrapper {
+			@apply mb-3 flex w-full items-center justify-center text-right;
+			@apply md:justify-start;
+		}
+
+		^&__label {
+			flex: 1;
+		}
+
+		^&__input {
+			flex: 2;
+		}
+	}
+
+	&--inline-flex {
+		&:not(:last-child) {
+			@apply pb-0;
+		}
+
+		^&__wrapper {
+			@apply mb-3 flex w-full items-center justify-center;
+			@apply md:justify-start;
+		}
+
+		^&__input {
+			flex: 1;
+		}
+	}
+
+	&--with-postfix,
+	&--with-prefix {
+		.duk-icon {
+			height: calc(1.375rem - 1px);
+			@apply min-h-fit;
+		}
+	}
+
+	&--with-postfix {
+		^&__input {
+			&--text-field {
+				@apply rounded-tr-none rounded-br-none border-r-0;
+			}
+		}
+
+		.duk-button--control,
+		.duk-toggle--control > label {
+			@apply rounded-tl-none rounded-bl-none border border-l-0 border-solid border-black px-5;
+			/* @apply dark:border-gray; */
+
+			line-height: 1.5;
+		}
+	}
+
+	&--with-prefix {
+		^&__input {
+			&--text-field {
+				@apply z-10 rounded-tl-none rounded-bl-none border-l-0;
+			}
+		}
+
+		.duk-button--control,
+		.duk-toggle--control > label {
+			@apply rounded-tr-none rounded-br-none border border-r-0 border-solid border-black px-5;
+			/* @apply dark:border-gray; */
+
+			line-height: inherit;
+		}
+	}
+
+	/* &--success {
+		^&__label,
+		^&__message {
+			@apply text-green-900 not-italic;
+			@apply dark:text-green-600;
+		}
+	}
+
+	&--warning {
+		^&__label,
+		^&__message {
+			@apply text-yellow-900 not-italic;
+			@apply dark:text-yellow-600;
+		}
+	}
+
+	&--danger {
+		^&__label,
+		^&__message {
+			@apply text-red-900 not-italic;
+			@apply dark:text-red-600;
+		}
+	} */
+
+	&--full {
+		@apply w-full;
+	}
+	&--half {
+		@apply sm:w-1/2;
+	}
+	&--quarter {
+		@apply sm:w-1/4;
+	}
+
+	&--group {
+		& .duk-toggle-group {
+			@apply my-5;
+		}
+	}
+}

@@ -1,0 +1,23 @@
+.duk-pagination {
+	@apply text-smokey flex flex-row items-center justify-around bg-transparent;
+	@apply sm:justify-between sm:space-x-8;
+
+	&__menu {
+		@apply hidden;
+		@apply sm:flex sm:overflow-visible;
+	}
+
+	&__ellipsis {
+		@apply hidden;
+		@apply sm:block sm:font-bold;
+	}
+
+	&__button {
+		@apply text-smokey bg-transparent p-4 text-base shadow-none;
+		/* @apply dark:text-gray; */
+
+		/* &^&--active {
+			@apply dark:bg-cornflower;
+		} */
+	}
+}

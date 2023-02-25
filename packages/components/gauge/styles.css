@@ -1,0 +1,41 @@
+.duk-gauge {
+	@apply relative flex;
+
+	&__dial {
+		@apply absolute;
+		left: 50%;
+		bottom: -16.67%;
+		transform: translateX(-50%);
+		transform-origin: center 75%;
+		width: auto;
+		height: 62.5%;
+	}
+
+	&__tooltip {
+		@apply invisible absolute top-2/4 -translate-y-2/4 py-3 px-4 text-base opacity-0 duration-200 ease-out;
+		background-color: hsla(0, 0%, 20%, 0.9);
+		transition: 0.2s ease-out;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		color: white;
+		left: calc(50% + 18px);
+
+		&:after {
+			border-top: 10px solid transparent;
+			border-bottom: 10px solid transparent;
+			border-right: 18px solid hsla(0, 0%, 20%, 0.9);
+			content: " ";
+			font-size: 0;
+			line-height: 0;
+			left: -18px;
+			@apply absolute bottom-2/4 w-0 translate-y-2/4;
+		}
+	}
+
+	&:hover {
+		.duk-gauge__tooltip {
+			@apply visible opacity-100;
+		}
+	}
+}

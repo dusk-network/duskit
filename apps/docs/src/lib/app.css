@@ -1,0 +1,46 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@font-face {
+	font-family: "Soehne";
+	font-style: normal;
+	font-weight: 300;
+	src: url("/fonts/test-soehne-leicht.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Soehne";
+	font-style: normal;
+	font-weight: 400;
+	src: url("/fonts/test-soehne-buch.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Soehne";
+	font-style: normal;
+	font-weight: 500;
+	src: url("/fonts/test-soehne-kraftig.woff2") format("woff2");
+}
+
+body {
+	@apply bg-gray;
+}
+
+section {
+	@apply container;
+}
+
+mark {
+	@apply text-cornflower bg-transparent;
+}
+
+small {
+	@apply text-sm;
+}
+
+a {
+	&:hover {
+		@apply text-cornflower;
+	}
+}

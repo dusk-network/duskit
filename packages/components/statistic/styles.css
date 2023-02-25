@@ -1,0 +1,26 @@
+.duk-statistic {
+	@apply overflow-hidden rounded-lg bg-white;
+	/* @apply dark:bg-black; */
+
+	&__icon {
+		@apply mr-auto p-3;
+		@apply md:mr-4;
+	}
+
+	&__content {
+		@apply flex items-center justify-around p-4;
+		@apply sm:justify-start;
+	}
+
+	&__title {
+		@apply text-smokey mb-2 text-right text-sm font-bold;
+		/* @apply dark:text-cornflower; */
+		@apply md:text-left;
+	}
+
+	&__value {
+		@apply text-smokey text-right text-lg font-semibold;
+		/* @apply dark:text-gray; */
+		@apply md:text-left;
+	}
+}

@@ -1,0 +1,56 @@
+.duk-date-picker {
+	@apply inline-block cursor-default select-none rounded-md bg-white px-4 py-5 text-xs;
+	/* @apply dark:bg-black; */
+	width: 21.5rem;
+
+	&__navigation {
+		@apply flex content-center items-center justify-around pb-3;
+
+		^&__prev,
+		^&__next {
+			@apply cursor-pointer;
+			/* @apply dark:!text-gray; */
+		}
+	}
+
+	&__months {
+		@apply w-56;
+	}
+
+	&__years {
+		@apply w-48;
+	}
+
+	&__weekdays {
+		@apply flex pb-1 text-sm font-normal;
+	}
+
+	&__weekday {
+		@apply w-10 grow text-center;
+	}
+
+	&__week {
+		@apply flex justify-around;
+	}
+
+	&__date {
+		@apply flex h-6 w-8 items-center justify-center rounded font-light;
+		&:hover {
+			@apply bg-cornflower text-white;
+			/* @apply dark:bg-cornflower; */
+		}
+
+		&.duk-date-picker__date--disabled {
+			@apply invisible;
+		}
+
+		&.duk-date-picker__date--other span {
+			@apply opacity-40;
+		}
+
+		&.duk-date-picker__date--selected {
+			@apply bg-cornflower text-white;
+			/* @apply dark:bg-cornflower; */
+		}
+	}
+}

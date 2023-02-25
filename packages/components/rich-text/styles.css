@@ -1,0 +1,47 @@
+.duk-rich-text {
+	@apply prose max-w-none;
+	/* @apply dark:prose-light; */
+	@apply lg:prose-xl;
+
+	&--small {
+		@apply !prose-sm;
+	}
+
+	&--large {
+		@apply !prose-lg;
+	}
+
+	&--left {
+		@apply !text-left;
+	}
+
+	&--right {
+		@apply !text-right;
+	}
+
+	&--center {
+		@apply !text-center;
+	}
+
+	&--hero,
+	&--xl {
+		@apply !prose-xl;
+	}
+
+	&--xxl {
+		@apply !prose-2xl;
+	}
+
+	&--content,
+	&--detail-list {
+		@apply my-5;
+
+		&:first-child {
+			@apply mt-0;
+		}
+	}
+
+	/* & .duk-button {
+    @apply not-prose;
+  } */
+}

@@ -1,0 +1,23 @@
+.duk-qr-code {
+	@apply flex items-center;
+
+	&--left {
+		@apply justify-start;
+	}
+
+	&--center {
+		@apply justify-center;
+	}
+
+	&--right {
+		@apply justify-end;
+	}
+
+	&--content {
+		@apply my-5;
+
+		&:first-child {
+			@apply mt-0;
+		}
+	}
+}

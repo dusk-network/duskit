@@ -1,0 +1,499 @@
+.duk-table {
+	@apply bg-transparent;
+
+	&__header {
+		@apply rounded-tl-xl rounded-tr-xl bg-white py-2 px-5;
+		/* @apply dark:bg-black dark:text-gray; */
+
+		&--title {
+			@apply flex justify-between;
+
+			& h1,
+			& h2,
+			& h3,
+			& h4 {
+				@apply text-cornflower flex items-center space-x-4 text-xl;
+				/* @apply dark:text-gray; */
+			}
+
+			.duk-icon {
+				@apply my-auto cursor-pointer;
+			}
+		}
+
+		&--filter {
+			@apply flex justify-between py-3;
+		}
+	}
+
+	&__title {
+	}
+
+	&__wrapper {
+		@apply overflow-auto;
+	}
+
+	&__table {
+		@apply flex w-full border-collapse flex-row flex-nowrap bg-white;
+		/* @apply dark:bg-black; */
+
+		& thead,
+		& tbody,
+		& tfoot,
+		tr,
+		th {
+			@apply text-left;
+		}
+
+		tr {
+			@apply flex flex-col flex-nowrap text-right;
+		}
+
+		td,
+		th {
+			@apply py-3 px-6;
+		}
+
+		& thead {
+			& th {
+				@apply font-light;
+			}
+		}
+
+		&.duk-table__table--stripe {
+			& thead {
+				& tr {
+					&:nth-child(2n) {
+						@apply bg-gray;
+						/* @apply dark:bg-black; */
+					}
+				}
+			}
+		}
+
+		&.duk-table__table--uniform {
+			& thead {
+				& tr {
+					@apply border-gray border-b;
+					/* @apply dark:border-gray; */
+				}
+			}
+		}
+
+		& tbody {
+			@apply flex-1;
+			& tr {
+				&.duk-table__row--active {
+					& > .duk-table__datum--extra-information {
+						@apply flex;
+					}
+				}
+			}
+
+			& td {
+				& a {
+					@apply text-cornflower;
+					/* @apply dark:text-cornflower; */
+				}
+
+				&.duk-table__datum--extra-information {
+					@apply hidden;
+				}
+			}
+		}
+
+		&:not(.duk-table__table--expandable).duk-table__table--stripe {
+			& tbody {
+				& tr {
+					&:nth-child(2n) {
+						@apply bg-gray;
+						/* @apply dark:bg-black; */
+					}
+
+					&.duk-table__row--selected {
+						@apply !bg-cornflower text-black;
+					}
+				}
+			}
+		}
+
+		&:not(.duk-table__table--expandable).duk-table__table--uniform {
+			& tbody {
+				& tr {
+					@apply border-gray border-b;
+					/* @apply dark:border-gray; */
+
+					&.duk-table__row--selected {
+						@apply !bg-cornflower text-black;
+					}
+				}
+			}
+		}
+
+		&--selectable {
+			& tbody {
+				& tr {
+					@apply cursor-pointer;
+
+					&.duk-table__row--hidden {
+						@apply cursor-auto;
+					}
+
+					&.duk-table__row--selected {
+						@apply cursor-auto;
+					}
+				}
+			}
+		}
+
+		&--expandable.duk-table__table--stripe {
+			& tbody {
+				& tr {
+					&.duk-table__row--selected {
+						@apply !bg-cornflower text-black;
+					}
+
+					&.duk-table__row--expand {
+						&:nth-child(4n-1) {
+							@apply bg-gray;
+							/* @apply dark:bg-black; */
+						}
+					}
+
+					&.duk-table__row--expand + .duk-table__row--extra-information {
+						&:nth-child(4n) {
+							@apply bg-gray;
+							/* @apply dark:bg-black; */
+						}
+					}
+
+					&.duk-table__body-row--selected {
+						@apply !bg-cornflower text-black;
+					}
+				}
+			}
+		}
+
+		&--expandable.duk-table__table--uniform {
+			& tbody {
+				& tr {
+					&.duk-table__row--selected {
+						@apply !bg-cornflower text-black;
+					}
+
+					&.duk-table__row--expand + .duk-table__row--extra-information {
+						@apply border-gray border-b;
+						/* @apply dark:border-gray; */
+					}
+
+					&.duk-table__body-row--selected {
+						@apply !bg-cornflower text-black;
+					}
+				}
+			}
+		}
+
+		&--sm {
+			& {
+				@apply sm:inline-table;
+
+				tr {
+					@apply sm:table-row sm:text-left;
+				}
+			}
+
+			& thead {
+				@apply sm:bg-gray;
+				/* @apply dark:sm:bg-black; */
+
+				& tr {
+					@apply sm:!border-b-0;
+					&:not(:first-child) {
+						@apply sm:hidden;
+					}
+
+					&.duk-table__row--hidden {
+						@apply flex;
+					}
+
+					&.duk-table__header-row--selected {
+						@apply max-sm:!bg-cornflower max-sm:text-black;
+					}
+				}
+
+				& th {
+					&.duk-table__datum--hidden {
+						@apply sm:hidden;
+					}
+				}
+			}
+
+			& tbody {
+				@apply sm:flex-none;
+
+				& .duk-table__row {
+					&--hidden > td {
+						@apply sm:hidden;
+					}
+
+					&--active > td {
+						@apply border-cornflower sm:table-cell;
+					}
+
+					&--expand {
+						@apply sm:cursor-row-resize;
+					}
+				}
+			}
+		}
+
+		&--md {
+			& {
+				@apply md:inline-table;
+
+				tr {
+					@apply md:table-row md:text-left;
+				}
+			}
+
+			& thead {
+				@apply md:bg-gray;
+				/* @apply dark:md:bg-black; */
+
+				& tr {
+					@apply md:!border-b-0;
+					&:not(:first-child) {
+						@apply md:hidden;
+					}
+					&.duk-table__header-row--selected {
+						@apply max-md:!bg-cornflower max-md:text-black;
+					}
+				}
+
+				& th {
+					&.duk-table__datum--hidden {
+						@apply md:hidden;
+					}
+				}
+			}
+
+			& tbody {
+				@apply md:flex-none;
+
+				& .duk-table__row {
+					&--hidden > td {
+						@apply md:hidden;
+					}
+
+					&--active > td {
+						@apply border-cornflower md:table-cell;
+					}
+
+					&--expand {
+						@apply md:cursor-row-resize;
+					}
+				}
+			}
+		}
+
+		&--lg {
+			& {
+				@apply lg:inline-table;
+
+				tr {
+					@apply lg:table-row lg:text-left;
+				}
+			}
+
+			& thead {
+				@apply lg:bg-gray;
+				/* @apply dark:lg:bg-black; */
+
+				& tr {
+					@apply lg:!border-b-0;
+					&:not(:first-child) {
+						@apply lg:hidden;
+					}
+					&.duk-table__header-row--selected {
+						@apply max-lg:!bg-cornflower max-lg:text-black;
+					}
+				}
+
+				& th {
+					&.duk-table__datum--hidden {
+						@apply lg:hidden;
+					}
+				}
+			}
+
+			& tbody {
+				@apply lg:flex-none;
+
+				& .duk-table__row {
+					&--hidden > td {
+						@apply lg:hidden;
+					}
+
+					&--active > td {
+						@apply border-cornflower lg:table-cell;
+					}
+
+					&--expand {
+						@apply lg:cursor-row-resize;
+					}
+				}
+			}
+		}
+
+		&--xl {
+			& {
+				@apply xl:inline-table;
+
+				tr {
+					@apply xl:table-row xl:text-left;
+				}
+			}
+
+			& thead {
+				@apply xl:bg-gray;
+				/* @apply dark:xl:bg-black; */
+
+				& tr {
+					@apply xl:!border-b-0;
+					&:not(:first-child) {
+						@apply xl:hidden;
+					}
+					&.duk-table__header-row--selected {
+						@apply max-xl:!bg-cornflower max-xl:text-black;
+					}
+				}
+
+				& th {
+					&.duk-table__datum--hidden {
+						@apply xl:hidden;
+					}
+				}
+			}
+
+			& tbody {
+				@apply xl:flex-none;
+
+				& .duk-table__row {
+					&--hidden > td {
+						@apply xl:hidden;
+					}
+
+					&--active > td {
+						@apply border-cornflower xl:table-cell;
+					}
+
+					&--expand {
+						@apply xl:cursor-row-resize;
+					}
+				}
+			}
+		}
+
+		&--xxl {
+			& {
+				@apply 2xl:inline-table;
+
+				tr {
+					@apply 2xl:table-row 2xl:text-left;
+				}
+			}
+
+			& thead {
+				@apply 2xl:bg-gray;
+				/* @apply dark:2xl:bg-black; */
+
+				& tr {
+					@apply 2xl:!border-b-0;
+					&:not(:first-child) {
+						@apply 2xl:hidden;
+					}
+					&.duk-table__header-row--selected {
+						@apply max-2xl:!bg-cornflower max-2xl:text-black;
+					}
+				}
+
+				& th {
+					&.duk-table__datum--hidden {
+						@apply 2xl:hidden;
+					}
+				}
+			}
+
+			& tbody {
+				@apply 2xl:flex-none;
+
+				& .duk-table__row {
+					&--hidden > td {
+						@apply 2xl:hidden;
+					}
+
+					&--active > td {
+						@apply border-cornflower 2xl:table-cell;
+					}
+
+					&--expand {
+						@apply 2xl:cursor-row-resize;
+					}
+				}
+			}
+		}
+	}
+
+	&__actions {
+		@apply flex items-center justify-between rounded-bl-xl rounded-br-xl bg-white py-2 px-5;
+		/* @apply dark:bg-black dark:text-gray; */
+
+		min-height: 3.25rem;
+
+		& .duk-button-wrapper,
+		& .duk-button-group {
+			@apply mx-auto;
+		}
+
+		.duk-infinite-scroll {
+			@apply mx-auto flex;
+
+			.duk-loading-indicator {
+				width: 2.5rem;
+			}
+		}
+	}
+
+	&__datum {
+		&--sortable {
+			@apply cursor-pointer;
+		}
+
+		/* &--cta {
+			@apply text-orange-900;
+		}
+
+		&--success {
+			@apply text-green-900;
+		}
+
+		&--warning {
+			@apply text-yellow-900;
+		}
+
+		&--danger {
+			@apply text-red-900;
+		} */
+
+		&--content {
+			@apply flex gap-x-4;
+		}
+
+		&--head {
+			^&--content {
+				@apply items-center;
+			}
+		}
+	}
+}
+@tailwind base;

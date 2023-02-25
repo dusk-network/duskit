@@ -1,0 +1,44 @@
+{
+	"name": "@dusk-network/navbar",
+	"version": "0.0.0",
+	"description": "Duskit - Navbar",
+	"bugs": {
+		"url": "https://github.com/dusk-network/duskit/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:dusk-network/duskit.git",
+		"directory": "packages/navbar"
+	},
+	"type": "module",
+	"main": "index.js",
+	"svelte": "index.js",
+	"module": "index.js",
+	"scripts": {
+		"format": "prettier --write --ignore-path=../../../.prettierignore .",
+		"lint": "prettier --check --ignore-path=../../../.prettierignore . && eslint \".\" --ignore-path=../../../.eslintignore"
+	},
+	"devDependencies": {
+		"@dusk-network/button": "workspace:*",
+		"@dusk-network/drop-down": "workspace:*",
+		"@dusk-network/eslint-config": "^1.2.8",
+		"@dusk-network/logo": "workspace:*",
+		"@dusk-network/menu": "workspace:*",
+		"@dusk-network/toggle": "workspace:*",
+		"@dusk-network/utilities": "workspace:*",
+		"eslint": "^8.34.0",
+		"prettier": "^2.8.4",
+		"prettier-plugin-packagejson": "^2.4.3",
+		"prettier-plugin-svelte": "^2.9.0",
+		"prettier-plugin-tailwindcss": "^0.2.3"
+	},
+	"peerDependencies": {
+		"@dusk-network/button": "workspace:*",
+		"@dusk-network/drop-down": "workspace:*",
+		"@dusk-network/logo": "workspace:*",
+		"@dusk-network/menu": "workspace:*",
+		"@dusk-network/toggle": "workspace:*",
+		"@dusk-network/utilities": "workspace:*"
+	},
+	"gitHead": "d47daad4d164fdf8a79bc04118e3c06f6b421fd9"
+}

@@ -1,0 +1,31 @@
+.duk-form {
+	@apply block;
+
+	&--content {
+		@apply py-5;
+
+		&:first-child {
+			@apply pt-0;
+		}
+	}
+
+	&--wizard {
+		@apply py-5;
+
+		&:first-child {
+			@apply pt-0;
+		}
+	}
+
+	&--content {
+		@apply py-5;
+
+		&:first-child {
+			@apply pt-0;
+		}
+
+		&:not(:last-child) {
+			@apply pb-0;
+		}
+	}
+}

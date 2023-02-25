@@ -1,0 +1,53 @@
+.duk-accordion {
+	&__action {
+		@apply mr-5 cursor-row-resize;
+	}
+
+	&__term {
+		@apply mb-32 flex cursor-row-resize items-center text-2xl font-semibold leading-loose;
+	}
+
+	&__datum {
+		@apply ml-5 mb-32 text-xl leading-relaxed;
+	}
+
+	&--card {
+		@apply border-gray divide-gray divide-y border-t border-b;
+
+		^&__term {
+			@apply mb-0 flex-row-reverse justify-between py-4 text-base;
+		}
+
+		^&__action {
+			@apply mr-0 bg-transparent text-black shadow-none;
+
+			&:hover {
+				@apply !bg-transparent !text-black !shadow-none;
+			}
+		}
+
+		^&__datum {
+			@apply ml-0 mb-0 !border-t-0 pb-4 text-base font-normal;
+		}
+	}
+
+	&--rich-text {
+		@apply border-gray divide-gray divide-y border-t border-b;
+
+		^&__term {
+			@apply mb-0 flex-row-reverse justify-between py-4 text-base;
+		}
+
+		^&__action {
+			@apply mr-0 bg-transparent text-black shadow-none;
+
+			&:hover {
+				@apply !bg-transparent !text-black !shadow-none;
+			}
+		}
+
+		^&__datum {
+			@apply ml-0 mb-0 !border-t-0 pb-4 text-base font-normal;
+		}
+	}
+}

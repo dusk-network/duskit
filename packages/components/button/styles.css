@@ -1,0 +1,45 @@
+.dusk-button {
+	@apply text-smokey whitespace-nowrap rounded-full py-[16px] px-[18px] font-medium uppercase;
+
+	&:hover:not(:disabled) {
+		@apply transition-colors duration-300 ease-in;
+	}
+
+	&:disabled {
+		@apply cursor-not-allowed brightness-75;
+	}
+
+	&--primary {
+		@apply bg-white;
+
+		&:hover:not(:disabled) {
+			@apply bg-metallic;
+		}
+	}
+
+	&--secondary {
+		@apply bg-jet text-white;
+
+		&:hover:not(:disabled) {
+			@apply bg-cornflower;
+		}
+	}
+
+	&--tertiary {
+		@apply border-smokey border border-solid bg-transparent;
+
+		&:hover:not(:disabled) {
+			@apply text-granite border-granite;
+		}
+	}
+
+	&--small {
+		@apply px-[14px] pt-[9px] pb-[10px] text-[14px];
+	}
+
+	&--navbar,
+	&--footer {
+		@apply w-full;
+		@apply md:w-auto md:py-[8px] md:px-[14px] md:text-[14px];
+	}
+}

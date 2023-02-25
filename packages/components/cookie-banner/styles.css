@@ -1,0 +1,23 @@
+.duk-cookie-banner {
+	@apply fixed bottom-0 left-0 z-50 flex h-auto w-screen items-center justify-center;
+
+	&__banner {
+		@apply bg-jet absolute bottom-0 -mx-3 w-full items-center p-5 text-white;
+		/* @apply dark:bg-cornflower dark:text-black; */
+		@apply md:flex md:p-20;
+		@apply lg:px-24;
+	}
+
+	&__disclaimer {
+		@apply mb-5 px-3;
+		@apply mb-5 px-3 md:mb-0 md:flex-1;
+
+		& a {
+			@apply underline;
+		}
+	}
+
+	&__controls {
+		@apply px-3 text-center;
+	}
+}

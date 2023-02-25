@@ -1,0 +1,99 @@
+.duk-chart {
+	@apply relative h-full w-full overflow-hidden;
+
+	svg {
+		@apply pointer-events-auto;
+	}
+
+	&__tooltip {
+		@apply bg-metallic pointer-events-none absolute z-20 rounded-lg p-4 text-black;
+		transition: left 250ms ease-out, top 250ms ease-out;
+
+		&--arrow-left {
+			@apply absolute top-1/2 inline-block w-6 -translate-y-2/4 overflow-hidden;
+			left: -22px;
+		}
+
+		&--arrow-left-interior {
+			@apply bg-metallic h-12 origin-top-right -rotate-45;
+		}
+
+		&--arrow-right {
+			@apply absolute top-1/2 inline-block w-6 -translate-y-2/4 overflow-hidden;
+			right: -22px;
+		}
+
+		&--arrow-right-interior {
+			@apply bg-metallic h-12 origin-top-left rotate-45;
+		}
+
+		&--text {
+			@apply whitespace-nowrap text-base font-normal;
+		}
+	}
+}
+
+.duk-chart-world-map {
+	/* @apply overflow-hidden; */
+
+	&__background-dot {
+		@apply text-gray fill-current stroke-0;
+	}
+
+	&__marker-background {
+		@apply text-metallic fill-current stroke-1;
+		@apply animate-pulse;
+		/* @apply dark:text-cornflower; */
+	}
+
+	&__marker-foreground {
+		@apply text-cornflower fill-current;
+		/* @apply dark:text-cornflower; */
+	}
+
+	&__marker-text {
+		@apply text-gray fill-current text-xs font-medium leading-none;
+	}
+}
+
+.duk-chart-bar-horizontal {
+	@apply bg-gray rounded py-6;
+	/* @apply dark:bg-black; */
+
+	&__bar {
+		@apply text-cornflower fill-current focus:outline-none;
+		/* @apply hover:text-yellow-500 fill-current; */
+		/* @apply dark:text-cornflower; */
+	}
+
+	&__tooltip {
+		@apply top-1/2 -translate-y-2/4;
+	}
+}
+
+.duk-chart-line {
+	@apply bg-gray rounded;
+	/* @apply dark:bg-black; */
+
+	&__line {
+		@apply text-cornflower stroke-current stroke-2;
+		/* @apply dark:text-cornflower; */
+		fill: none;
+	}
+
+	&__dot {
+		@apply border-metallic bg-metallic pointer-events-none absolute top-0 bottom-0 h-3 w-3 rounded-full border-2;
+		/* @apply dark:border-cornflower; */
+		transition: left 250ms ease-out, top 250ms ease-out;
+	}
+
+	&__tooltip {
+		@apply -translate-x-2/4 -translate-y-full;
+	}
+
+	&__quadtree {
+		@apply absolute inset-0;
+	}
+}
+
+@tailwind base;

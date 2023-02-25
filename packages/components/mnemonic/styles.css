@@ -1,0 +1,30 @@
+.duk-mnemonic {
+	@apply mx-auto max-w-2xl;
+
+	&__buttons {
+		@apply mx-0 mb-6 flex-wrap justify-center gap-6 px-5;
+	}
+
+	&__list {
+		@apply bg-gray mx-auto mb-6 mt-0 flex max-w-xl list-none flex-wrap items-center rounded-xl border border-black p-6;
+		/* @apply dark:bg-black dark:border-0 dark:text-gray; */
+		counter-reset: duk-counter;
+	}
+
+	&__word {
+		@apply my-3 flex items-center;
+		@apply w-1/2;
+		@apply md:w-1/3;
+		counter-increment: duk-counter;
+
+		&::before {
+			@apply mr-3 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded border border-black;
+			/* @apply dark:border-gray; */
+			content: counter(duk-counter);
+		}
+
+		input {
+			@apply overflow-hidden;
+		}
+	}
+}

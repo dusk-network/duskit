@@ -1,0 +1,178 @@
+.duk-drawer {
+	@apply text-smokey invisible z-50 inline-block overflow-hidden bg-white;
+	/* @apply dark:bg-black; */
+
+	&__collapsed {
+		^&__item--text {
+			@apply visible;
+		}
+	}
+
+	&__header {
+		@apply flex items-center justify-between px-8 py-6;
+
+		/* FIXME This should be styled in Icon, based on it's context */
+		.duk-icon {
+			@apply cursor-pointer;
+		}
+	}
+
+	&__list {
+		@apply px-8 py-0;
+		transition: width 0.25s, height 0.2s;
+	}
+
+	&__item {
+		@apply table cursor-pointer select-none py-3;
+
+		& > a {
+			@apply flex items-center;
+		}
+
+		& .duk-icon {
+			@apply my-1;
+		}
+
+		a &--text {
+			@apply whitespace-nowrap pl-4;
+		}
+
+		&--disabled a {
+			@apply opacity-40;
+		}
+
+		&--active a {
+			@apply text-cornflower;
+			/* @apply dark:text-cornflower; */
+		}
+
+		&--toggle {
+			@apply hidden justify-end;
+		}
+	}
+
+	&--sm {
+		@apply max-sm:w-full max-sm:rounded-b-xl;
+		@apply sm:rounded-r-xl;
+
+		^&__collapsed {
+			^&__item--text {
+				@apply sm:invisible;
+			}
+		}
+
+		^&__header {
+			@apply sm:hidden;
+		}
+
+		^&__list {
+			@apply sm:py-4;
+		}
+
+		^&__item {
+			&--toggle {
+				@apply sm:flex;
+			}
+		}
+	}
+
+	&--md {
+		@apply max-md:w-full max-md:rounded-b-xl;
+		@apply md:rounded-r-xl;
+
+		^&__collapsed {
+			^&__item--text {
+				@apply md:invisible;
+			}
+		}
+
+		^&__header {
+			@apply md:hidden;
+		}
+
+		^&__list {
+			@apply md:py-4;
+		}
+
+		^&__item {
+			&--toggle {
+				@apply md:flex;
+			}
+		}
+	}
+
+	&--lg {
+		@apply max-lg:w-full max-lg:rounded-b-xl;
+		@apply lg:rounded-r-xl;
+
+		^&__collapsed {
+			^^&__item--text {
+				@apply lg:invisible;
+			}
+		}
+
+		^&__header {
+			@apply lg:hidden;
+		}
+
+		^&__list {
+			@apply lg:py-4;
+		}
+
+		^&__item {
+			&--toggle {
+				@apply lg:flex;
+			}
+		}
+	}
+
+	&--xl {
+		@apply max-xl:w-full max-xl:rounded-b-xl;
+		@apply xl:rounded-r-xl;
+
+		^&__collapsed {
+			^^&__item--text {
+				@apply xl:invisible;
+			}
+		}
+
+		^&__header {
+			@apply xl:hidden;
+		}
+
+		^&__list {
+			@apply xl:py-4;
+		}
+
+		^&__item {
+			&--toggle {
+				@apply xl:flex;
+			}
+		}
+	}
+
+	&--xxl {
+		@apply max-2xl:w-full max-2xl:rounded-b-xl;
+		@apply 2xl:rounded-r-xl;
+
+		^&__collapsed {
+			^&__item--text {
+				@apply 2xl:invisible;
+			}
+		}
+
+		^&__header {
+			@apply 2xl:hidden;
+		}
+
+		^&__list {
+			@apply 2xl:py-4;
+		}
+
+		^&__item {
+			&--toggle {
+				@apply 2xl:flex;
+			}
+		}
+	}
+}
