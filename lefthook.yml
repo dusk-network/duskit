@@ -1,0 +1,5 @@
+pre-commit:
+  commands:
+    eslint:
+      glob: "*.{js,svelte}"
+      run: npx eslint {staged_files} && git add {staged_files}
