@@ -2,8 +2,6 @@ import adapter from "@sveltejs/adapter-static";
 import sveltePreprocess from "svelte-preprocess";
 import metadata from "@dusk-network/meta/index.cjs";
 
-let dev = process.env.NODE_ENV === "development";
-
 const getEntries = (obj) => {
 	let entries = ["/", "/components"];
 	Object.keys(obj).forEach((pkg) => {
@@ -28,7 +26,7 @@ const config = {
 			entries: entries,
 		},
 		paths: {
-			base: dev ? "" : "/duskit/docs",
+			base: process.env.NODE_ENV === "production" ? "/duskit/docs" : "",
 		},
 		appDir: "internal", // Needed to work with Github pages.
 	},
