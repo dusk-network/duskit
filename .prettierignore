@@ -1,7 +1,7 @@
 node_modules
 .svelte-kit
 .DS_Store
-/.github
+/.github/*.md
 /dist
 /build
 /package
