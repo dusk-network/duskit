@@ -1,5 +1,5 @@
 .dusk-button {
-	@apply text-smokey whitespace-nowrap rounded-full py-[16px] px-[18px] font-medium uppercase;
+	@apply text-smokey whitespace-nowrap rounded-full px-[18px] py-[16px] font-medium uppercase;
 
 	&:hover:not(:disabled) {
 		@apply transition-colors duration-300 ease-in;
@@ -34,12 +34,12 @@
 	}
 
 	&--small {
-		@apply px-[14px] pt-[9px] pb-[10px] text-[14px];
+		@apply px-[14px] pb-[10px] pt-[9px] text-[14px];
 	}
 
 	&--navbar,
 	&--footer {
 		@apply w-full;
-		@apply md:w-auto md:py-[8px] md:px-[14px] md:text-[14px];
+		@apply md:w-auto md:px-[14px] md:py-[8px] md:text-[14px];
 	}
 }

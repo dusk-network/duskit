@@ -2,8 +2,8 @@
 	import Navbar from "@dusk-network/navbar";
 	import DropDown from "@dusk-network/drop-down";
 	import Logo from "@dusk-network/logo";
-	import Icon from '@iconify/svelte';
-  import emoticonHappy from '@iconify/icons-mdi/emoticon-happy';
+	import Icon from "@iconify/svelte";
+	import emoticonHappy from "@iconify/icons-mdi/emoticon-happy";
 	import Menu, { Item } from "@dusk-network/menu";
 </script>
 
@@ -28,7 +28,7 @@
 	<svelte:fragment slot="links">
 		<Menu orientation="horizontal" name="Developer Links">
 			<Item href="https://shop.dusk.network">
-				<Icon icon={emoticonHappy} /><span>Shop</span>
+				<Icon icon="{emoticonHappy}" /><span>Shop</span>
 			</Item>
 		</Menu>
 	</svelte:fragment>

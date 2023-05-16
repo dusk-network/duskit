@@ -1,11 +1,11 @@
 .duk-file-upload {
 	@apply text-smokey container;
 	&__dropzone {
-		@apply border-cornflower relative mt-8 mb-12 h-56 w-full rounded-2xl border-2  border-dashed text-center;
+		@apply border-cornflower relative mb-12 mt-8 h-56 w-full rounded-2xl border-2  border-dashed text-center;
 		@apply sm:h-64 sm:rounded-md;
 
 		^&__input {
-			@apply absolute top-0 right-0 bottom-0 left-0 w-full cursor-pointer opacity-0;
+			@apply absolute bottom-0 left-0 right-0 top-0 w-full cursor-pointer opacity-0;
 		}
 
 		^&__layout {
@@ -25,7 +25,7 @@
 	}
 
 	&--control {
-		@apply mt-0 mb-0;
+		@apply mb-0 mt-0;
 	}
 }
 @tailwind base;

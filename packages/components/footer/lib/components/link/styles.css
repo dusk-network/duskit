@@ -1,0 +1,4 @@
+.footer-cta {
+	@apply text-gray container py-[100px] text-center;
+	@apply lg:py-[250px];
+}

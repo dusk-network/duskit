@@ -1,0 +1,55 @@
+.button {
+	@apply text-smokey whitespace-nowrap rounded-full px-[22px] py-[16px] font-medium uppercase leading-[100%];
+
+	&--primary {
+		@apply !bg-white;
+
+		&:hover {
+			@apply !bg-metallic;
+		}
+	}
+
+	&--secondary {
+		@apply !bg-jet text-white;
+
+		&:hover {
+			@apply !bg-cornflower;
+		}
+	}
+
+	&--tertiary {
+		@apply text-smokey border-smokey border border-solid bg-transparent;
+		@apply dark:border-white dark:text-white;
+
+		&:hover {
+			@apply text-granite border-granite;
+			@apply dark:text-cornflower dark:border-cornflower;
+		}
+	}
+
+	&--text&--active {
+		@apply !bg-jet text-gray;
+	}
+
+	&--circular {
+		@apply rounded-full;
+	}
+
+	&--icon {
+		@apply flex flex-row flex-nowrap items-center gap-x-2.5;
+	}
+
+	&--large {
+		@apply text-[17px];
+	}
+
+	&--small {
+		@apply px-[14px] py-[8px] text-[14px];
+	}
+
+	&--navbar,
+	&--footer {
+		@apply w-full;
+		@apply lg:w-auto lg:px-[14px] lg:py-[8px] lg:text-[14px];
+	}
+}

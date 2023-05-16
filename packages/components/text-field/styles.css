@@ -1,30 +1,25 @@
 .duk-text-field {
-	@apply placeholder-taupe rounded-md border border-black bg-white px-4 py-2 text-sm text-black outline-none;
-	/* @apply dark:bg-black dark:text-gray dark:border dark:border-gray dark:placeholder-gray; */
+	@apply border-metallic placeholder:text-taupe border-b bg-transparent py-3 outline-none placeholder:text-[19px];
+	@apply lg:py-[14px] lg:placeholder:text-[23px];
 
-	/* min-height: 30px; */
-
-	&--mnemonic {
-		@apply placeholder-taupe w-full border-0 bg-transparent p-0 text-lg;
-		/* @apply dark:bg-transparent dark:border-0 dark:placeholder-gray; */
+	&--success {
+		@apply border-success text-success placeholder-success;
 	}
 
-	/* &--success {
-    @apply border-green-900 text-green-900 placeholder-green-500;
-    @apply dark:border-green-500 dark:text-green-500;
-  }
+	&--attention {
+		@apply border-attention text-attention placeholder-attention;
+	}
 
-  &--warning {
-    @apply border-yellow-600 text-yellow-900 placeholder-yellow-500;
-    @apply dark:border-yellow-400 dark:text-yellow-500;
-  }
-
-  &--danger {
-    @apply border-red-600 text-red-900 placeholder-red-500;
-    @apply dark:border-red-400 dark:text-red-500;
-  } */
+	&--warning {
+		@apply border-warning text-warning placeholder-warning;
+	}
 
 	&:disabled {
 		@apply cursor-not-allowed placeholder-opacity-50;
+	}
+
+	&:focus {
+		@apply border-smokey;
+		@apply dark:border-white;
 	}
 }

@@ -1,7 +1,7 @@
 <script>
 	import { getContext, createEventDispatcher } from "svelte";
 	import contexts from "@dusk-network/utilities/contexts.js";
-	import RichText from "@dusk-network/rich-text";
+	import Text from "@dusk-network/text";
 	import "./styles.css";
 
 	/**
@@ -57,18 +57,18 @@
 >
 	<div class="duk-file-upload__layout">
 		{#if !isFileLoaded && !uploaded}
-			<RichText align="center">
+			<Text align="center">
 				<p class="duk-file-upload__text">
 					Drag your file here
 					<br />or<br />
 					<span>Upload File</span>
 				</p>
-			</RichText>
+			</Text>
 		{/if}
 		{#if isFileLoaded && !uploaded}
-			<RichText align="center">
+			<Text align="center">
 				<p class="duk-file-upload__text">{fields.file[0].name}</p>
-			</RichText>
+			</Text>
 		{/if}
 		{#if isFileLoaded && uploaded}
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

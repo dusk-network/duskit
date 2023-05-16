@@ -1,0 +1,57 @@
+{
+	"id": 1,
+	"attributes": {
+		"createdAt": "2023-04-03T08:44:10.834Z",
+		"updatedAt": "2023-04-10T15:43:48.193Z",
+		"publishedAt": null,
+		"footer": {
+			"id": 1,
+			"small_print": "@ 2023 Dusk. All Rights Reserved.",
+			"heading": {
+				"id": 9,
+				"heading": "The privacy blockchain for <mark>financial applications</mark>"
+			},
+			"navigation": {
+				"data": {
+					"id": 1,
+					"attributes": {
+						"UUID": "navigation",
+						"createdAt": "2023-04-10T15:43:41.835Z",
+						"updatedAt": "2023-04-10T15:43:41.835Z",
+						"publishedAt": null,
+						"menus": {
+							"data": [
+								{
+									"id": 1,
+									"attributes": {
+										"UUID": "media",
+										"createdAt": "2023-04-10T15:43:31.662Z",
+										"updatedAt": "2023-04-10T15:43:31.662Z",
+										"publishedAt": null,
+										"title": "Media",
+										"menu_items": {
+											"data": [
+												{
+													"id": 1,
+													"attributes": {
+														"title": "media",
+														"href": "/media",
+														"description": "<p>Media page</p>",
+														"createdAt": "2023-04-10T15:43:15.212Z",
+														"updatedAt": "2023-04-10T15:43:15.212Z",
+														"publishedAt": null
+													}
+												}
+											]
+										}
+									}
+								}
+							]
+						}
+					}
+				}
+			},
+			"padding": null
+		}
+	}
+}

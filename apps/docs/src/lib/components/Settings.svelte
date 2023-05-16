@@ -46,10 +46,7 @@
 			fields = savedFields;
 		}
 	});
-
-
 </script>
-
 
 <svelte:window
 	on:keydown="{(event) => {

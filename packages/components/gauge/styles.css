@@ -12,7 +12,7 @@
 	}
 
 	&__tooltip {
-		@apply invisible absolute top-2/4 -translate-y-2/4 py-3 px-4 text-base opacity-0 duration-200 ease-out;
+		@apply invisible absolute top-2/4 -translate-y-2/4 px-4 py-3 text-base opacity-0 duration-200 ease-out;
 		background-color: hsla(0, 0%, 20%, 0.9);
 		transition: 0.2s ease-out;
 		-webkit-border-radius: 3px;

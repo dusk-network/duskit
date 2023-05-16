@@ -24,7 +24,7 @@
 
 	setContext("DUK:heading:context", contexts.HEADING.CONTENT);
 	setContext("DUK:group:context", contexts.GROUP.CONTENT);
-	setContext("DUK:rich-text:context", contexts.RICH_TEXT.CONTENT);
+	setContext("DUK:text:context", contexts.TEXT.CONTENT);
 	setContext("DUK:detail-list:context", contexts.DETAIL_LIST.CONTENT);
 </script>
 

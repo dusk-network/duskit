@@ -1,4 +1,6 @@
 <script>
+	import Icon from "@iconify/svelte";
+
 	export let message;
 	export let submitted;
 	export let fields;
@@ -11,6 +13,7 @@
 		{#await $schema.validateAt(name, $fields) then result}
 			<p>&nbsp;</p>
 		{:catch error}
+			<Icon icon="mdi:alert-outline" />
 			<p>{error.errors[0]}</p>
 		{/await}
 	{:else if message}

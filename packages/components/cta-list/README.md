@@ -17,17 +17,17 @@ npm i -D @dusk-network/cta-list
 ```svelte
 <script>
 	import CtaList, { Item } from "@dusk-network/cta-list";
-	import RichText from "@dusk-network/rich-text";
+	import Text from "@dusk-network/text";
 
 	const type = "ordered";
 </script>
 
 <CtaList type="{type}">
 	<Item>
-		<RichText>First</RichText>
+		<Text>First</Text>
 	</Item>
 	<Item>
-		<RichText>Second</RichText>
+		<Text>Second</Text>
 	</Item>
 </CtaList>
 ```

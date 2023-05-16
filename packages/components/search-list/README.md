@@ -17,7 +17,7 @@ npm i -D @dusk-network/search-list
 ```svelte
 <script>
 	import SearchList from "@dusk-network/search-list";
-	import RichText from "@dusk-network/rich-text";
+	import Text from "@dusk-network/text";
 	import DetailList, { Item } from "@dusk-network/detail-list";
 	import { tokens } from "./data.js";
 
@@ -37,14 +37,14 @@ npm i -D @dusk-network/search-list
 						{/if}
 					</svelte:fragment>
 					<svelte:fragment slot="term">
-						<RichText>
+						<Text>
 							<p>{token.token}</p>
-						</RichText>
+						</Text>
 					</svelte:fragment>
 					<svelte:fragment slot="definition">
-						<RichText align="right">
+						<Text align="right">
 							<p>{token.amount}</p>
-						</RichText>
+						</Text>
 					</svelte:fragment>
 				</Item>
 			{/each}

@@ -56,12 +56,12 @@
 	}
 
 	&--card {
-		@apply py-10 px-6 pt-24;
+		@apply px-6 py-10 pt-24;
 		@apply sm:pt-10;
 	}
 
 	&--content {
-		@apply py-0 px-0;
+		@apply px-0 py-0;
 	}
 
 	&--search-list {
@@ -72,7 +72,7 @@
 			@apply mb-0;
 		}
 
-		.duk-rich-text {
+		.duk-text {
 			@apply m-0;
 		}
 

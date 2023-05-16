@@ -1,5 +1,5 @@
 .duk-chip {
-	@apply text-smokey border-smokey relative m-1 flex items-center justify-center rounded-full border bg-transparent py-1 px-2 font-medium;
+	@apply text-smokey border-smokey relative m-1 flex items-center justify-center rounded-full border bg-transparent px-2 py-1 font-medium;
 	/* @apply dark:border-gray; */
 
 	max-width: fit-content;

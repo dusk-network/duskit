@@ -11,22 +11,33 @@
 		"preview": "histoire preview --port 4567"
 	},
 	"dependencies": {
+		"@dusk-network/accordion": "workspace:*",
 		"@dusk-network/button": "workspace:*",
+		"@dusk-network/card": "workspace:*",
+		"@dusk-network/control": "workspace:*",
+		"@dusk-network/footer": "workspace:*",
+		"@dusk-network/form": "workspace:*",
+		"@dusk-network/heading": "workspace:*",
+		"@dusk-network/logo": "workspace:*",
+		"@dusk-network/navbar": "workspace:*",
+		"@dusk-network/pagination": "workspace:*",
+		"@dusk-network/text": "workspace:*",
+		"@dusk-network/text-field": "workspace:*",
 		"@dusk-network/tokens": "workspace:*",
 		"@dusk-network/utilities": "workspace:*",
-		"svelte": "^3.55.1"
+		"svelte": "^3.59.1"
 	},
 	"devDependencies": {
 		"@dusk-network/eslint-config": "^1.2.8",
-		"@histoire/plugin-svelte": "0.15.8",
-		"@sveltejs/vite-plugin-svelte": "^2.0.2",
-		"eslint": "^8.34.0",
-		"histoire": "0.15.8",
-		"prettier": "^2.8.4",
-		"prettier-plugin-packagejson": "^2.4.3",
-		"prettier-plugin-svelte": "^2.9.0",
-		"prettier-plugin-tailwindcss": "^0.2.3",
-		"svelte-preprocess": "^5.0.1",
-		"vite": "^4.1.4"
+		"@histoire/plugin-svelte": "0.16.1",
+		"@sveltejs/vite-plugin-svelte": "2.2.0",
+		"eslint": "8.40.0",
+		"histoire": "0.16.1",
+		"prettier": "2.8.8",
+		"prettier-plugin-packagejson": "2.4.3",
+		"prettier-plugin-svelte": "2.10.0",
+		"prettier-plugin-tailwindcss": "0.2.8",
+		"svelte-preprocess": "5.0.3",
+		"vite": "4.3.5"
 	}
 }

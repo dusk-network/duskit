@@ -47,13 +47,13 @@
 		"@dusk-network/password-strength": "workspace:*",
 		"@dusk-network/progress-bar": "workspace:*",
 		"@dusk-network/qr-code": "workspace:*",
-		"@dusk-network/rich-text": "workspace:*",
 		"@dusk-network/search-list": "workspace:*",
 		"@dusk-network/skeleton-loader": "workspace:*",
 		"@dusk-network/slider": "workspace:*",
 		"@dusk-network/statistic": "workspace:*",
 		"@dusk-network/step-list": "workspace:*",
 		"@dusk-network/table": "workspace:*",
+		"@dusk-network/text": "workspace:*",
 		"@dusk-network/text-field": "workspace:*",
 		"@dusk-network/toggle": "workspace:*",
 		"@dusk-network/tokens": "workspace:*",
@@ -62,21 +62,18 @@
 		"@dusk-network/wizard": "workspace:*"
 	},
 	"devDependencies": {
-		"@dusk-network/eslint-config": "^1.2.8",
-		"@iconify/icons-mdi": "^1.2.41",
-		"@iconify/svelte": "^3.1.0",
-		"eslint": "^8.34.0",
-		"prettier": "^2.8.4",
-		"prettier-plugin-packagejson": "^2.4.3",
-		"prettier-plugin-svelte": "^2.9.0",
-		"prettier-plugin-tailwindcss": "^0.2.3",
-		"yup": "^1.0.0"
+		"@dusk-network/eslint-config": "1.2.8",
+		"@iconify/icons-mdi": "1.2.45",
+		"@iconify/svelte": "3.1.3",
+		"eslint": "8.40.0",
+		"prettier": "2.8.8",
+		"prettier-plugin-packagejson": "2.4.3",
+		"prettier-plugin-svelte": "2.10.0",
+		"prettier-plugin-tailwindcss": "0.2.8",
+		"yup": "1.1.1"
 	},
 	"peerDependencies": {
-		"svelte": "^3.55.1",
-		"svelte-preprocess": "^5.0.1"
-	},
-	"engines": {
-		"node": "^18.0.0"
+		"svelte": "3.55.1",
+		"svelte-preprocess": "5.0.1"
 	}
 }

@@ -2,8 +2,8 @@
 	import Alert from "@dusk-network/alert";
 	import Button from "@dusk-network/button/Button.svelte";
 	import Group from "@dusk-network/group/Group.svelte";
-  import Icon from '@iconify/svelte';
-  import emoticonHappy from '@iconify/icons-mdi/emoticon-happy';
+	import Icon from "@iconify/svelte";
+	import emoticonHappy from "@iconify/icons-mdi/emoticon-happy";
 
 	function onClick() {}
 	function onMouseover() {}
@@ -20,7 +20,7 @@
 	on:mouseover="{onMouseover}"
 >
 	<div slot="icon">
-		<Icon icon={emoticonHappy} />
+		<Icon icon="{emoticonHappy}" />
 	</div>
 	<div slot="title">Alert Title!</div>
 	<p>This is an alert!</p>

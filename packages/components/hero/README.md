@@ -18,7 +18,7 @@ npm i -D @dusk-network/hero
 <script>
 	import Hero from "@dusk-network/hero";
 	import Button from "@dusk-network/button";
-	import RichText from "@dusk-network/rich-text";
+	import Text from "@dusk-network/text";
 
 	const introduction =
 		"<h1>Heros are very reusable!</h1> <p>The Dusk Grants Program helps projects and developers launch to drive mainstream adoption of blockchain and build the future of finance. Opportunities on Dusk Network are endless.</p>";
@@ -29,21 +29,21 @@ npm i -D @dusk-network/hero
 
 <Hero>
 	<div slot="introduction">
-		<RichText>
+		<Text>
 			{@html introduction}
-		</RichText>
+		</Text>
 	</div>
 	<div slot="cta">
 		<Button href="https://google.com">
 			Apply
 			<svelte:fragment slot="labelRight">Join the Dusk Mission</svelte:fragment>
 		</Button>
-		<RichText>
+		<Text>
 			{@html description}
-		</RichText>
+		</Text>
 	</div>
 	<div slot="image">
-		<RichText>{@html image}</RichText>
+		<Text>{@html image}</Text>
 	</div>
 </Hero>
 ```

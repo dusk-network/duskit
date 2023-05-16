@@ -10,7 +10,7 @@
 	setContext("DUK:address:context", contexts.ADDRESS.CONTENT);
 	setContext("DUK:qr-code:context", contexts.QR_CODE.CONTENT);
 	setContext("DUK:form:context", contexts.FORM.CONTENT);
-	setContext("DUK:rich-text:context", contexts.RICH_TEXT.CONTENT);
+	setContext("DUK:text:context", contexts.TEXT.CONTENT);
 	setContext("DUK:detail-list:context", contexts.DETAIL_LIST.CONTENT);
 </script>
 

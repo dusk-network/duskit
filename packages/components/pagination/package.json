@@ -20,18 +20,16 @@
 	},
 	"devDependencies": {
 		"@dusk-network/button": "workspace:*",
-		"@dusk-network/eslint-config": "^1.2.8",
-		"@dusk-network/menu": "workspace:*",
+		"@dusk-network/eslint-config": "1.2.8",
 		"@dusk-network/utilities": "workspace:*",
-		"eslint": "^8.34.0",
-		"prettier": "^2.8.4",
-		"prettier-plugin-packagejson": "^2.4.3",
-		"prettier-plugin-svelte": "^2.9.0",
-		"prettier-plugin-tailwindcss": "^0.2.3"
+		"eslint": "8.40.0",
+		"prettier": "2.8.8",
+		"prettier-plugin-packagejson": "2.4.3",
+		"prettier-plugin-svelte": "2.10.0",
+		"prettier-plugin-tailwindcss": "0.2.8"
 	},
 	"peerDependencies": {
 		"@dusk-network/button": "workspace:*",
-		"@dusk-network/menu": "workspace:*",
 		"@dusk-network/utilities": "workspace:*"
 	},
 	"gitHead": "d47daad4d164fdf8a79bc04118e3c06f6b421fd9"

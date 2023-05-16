@@ -19,20 +19,20 @@
 		"lint": "prettier --check --ignore-path=../../../.prettierignore . && eslint \".\" --ignore-path=../../../.eslintignore"
 	},
 	"dependencies": {
-		"yup": "^0.32.11"
+		"yup": "1.1.1"
 	},
 	"devDependencies": {
-		"@dusk-network/eslint-config": "^1.2.8",
+		"@dusk-network/eslint-config": "1.2.8",
 		"@dusk-network/utilities": "workspace:*",
-		"eslint": "^8.34.0",
-		"prettier": "^2.8.4",
-		"prettier-plugin-packagejson": "^2.4.3",
-		"prettier-plugin-svelte": "^2.9.0",
-		"prettier-plugin-tailwindcss": "^0.2.3"
+		"eslint": "8.40.0",
+		"prettier": "2.8.8",
+		"prettier-plugin-packagejson": "2.4.3",
+		"prettier-plugin-svelte": "2.10.0",
+		"prettier-plugin-tailwindcss": "0.2.8"
 	},
 	"peerDependencies": {
 		"@dusk-network/utilities": "workspace:*",
-		"yup": "^0.32.11"
+		"yup": "0.32.11"
 	},
 	"gitHead": "d47daad4d164fdf8a79bc04118e3c06f6b421fd9"
 }

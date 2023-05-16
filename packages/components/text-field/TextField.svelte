@@ -1,5 +1,4 @@
 <script>
-	// FIXME Needs DRYing up
 	import { getContext } from "svelte";
 	import states from "@dusk-network/utilities/states.js";
 	import contexts from "@dusk-network/utilities/contexts.js";
@@ -28,7 +27,7 @@
 
 	/**
 	 * Sets the state of the Text Field
-	 * @type { "success" | "warning" | "danger" }
+	 * @type { "success" | "attention" | "warning" }
 	 */
 	export let state = states.TEXT_FIELD.DEFAULT;
 
@@ -48,6 +47,12 @@
 	 */
 	export let focused = false;
 
+	/**
+	 * Sets the theme of the TextField.
+	 * @type {'light'|'dark'}
+	 */
+	export let theme;
+
 	let context = getContext("DUK:text-field:context") || "";
 
 	function toggleFocused() {
@@ -59,15 +64,15 @@
 	<textarea
 		bind:value="{value}"
 		class="{$$props.class || ''} duk-text-field"
-		class:duk-text-field--danger="{state === states.TEXT_FIELD.DANGER}"
-		class:duk-text-field--success="{state === states.TEXT_FIELD.SUCCESS}"
 		class:duk-text-field--warning="{state === states.TEXT_FIELD.WARNING}"
+		class:duk-text-field--success="{state === states.TEXT_FIELD.SUCCESS}"
+		class:duk-text-field--attention="{state === states.TEXT_FIELD.ATTENTION}"
 		class:duk-control__input--text-field="{context === contexts.TEXT_FIELD.CONTROL}"
 		class:duk-control__input="{context === contexts.TEXT_FIELD.CONTROL}"
-		class:duk-text-field--mnemonic="{context === contexts.TEXT_FIELD.MNEMONIC}"
+		class:duk-text-field--dark="{theme === 'dark'}"
 		disabled="{disabled}"
 		aria-describedby="{id}-label"
-		aria-invalid="{state === states.TEXT_FIELD.DANGER ? 'true' : 'false'}"
+		aria-invalid="{state === states.TEXT_FIELD.WARNING ? 'true' : 'false'}"
 		id="{id}"
 		name="{name}"
 		on:blur
@@ -86,15 +91,15 @@
 	<input
 		bind:value="{value}"
 		class="{$$props.class || ''} duk-text-field"
-		class:duk-text-field--danger="{state === states.TEXT_FIELD.DANGER}"
-		class:duk-text-field--success="{state === states.TEXT_FIELD.SUCCESS}"
 		class:duk-text-field--warning="{state === states.TEXT_FIELD.WARNING}"
+		class:duk-text-field--success="{state === states.TEXT_FIELD.SUCCESS}"
+		class:duk-text-field--attention="{state === states.TEXT_FIELD.ATTENTION}"
 		class:duk-control__input--text-field="{context === contexts.TEXT_FIELD.CONTROL}"
 		class:duk-control__input="{context === contexts.TEXT_FIELD.CONTROL}"
-		class:duk-text-field--mnemonic="{context === contexts.TEXT_FIELD.MNEMONIC}"
+		class:duk-text-field--dark="{theme === 'dark'}"
 		disabled="{disabled}"
 		aria-describedby="{id}-message"
-		aria-invalid="{state === states.TEXT_FIELD.DANGER ? 'true' : 'false'}"
+		aria-invalid="{state === states.TEXT_FIELD.WARNING ? 'true' : 'false'}"
 		id="{id}"
 		name="{name}"
 		on:blur

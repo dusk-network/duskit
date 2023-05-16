@@ -22,7 +22,7 @@
 
 	&--loader {
 		^&__placeholder::after {
-			@apply via-gray animate-shimmer absolute top-0 right-0 bottom-0 left-0 -translate-x-full bg-gradient-to-l from-transparent;
+			@apply via-gray absolute bottom-0 left-0 right-0 top-0 -translate-x-full animate-pulse bg-gradient-to-l from-transparent;
 			/* @apply dark:bg-gradient-to-l dark:from-transparent dark:via-black; */
 			content: "";
 		}

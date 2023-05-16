@@ -28,7 +28,7 @@
 	}
 
 	&__dismiss {
-		@apply text-jet absolute top-3 right-3;
+		@apply text-jet absolute right-3 top-3;
 	}
 
 	/* &--success {

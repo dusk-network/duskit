@@ -19,26 +19,26 @@
 		"lint": "prettier --check --ignore-path=../../../.prettierignore . && eslint \".\" --ignore-path=../../../.eslintignore"
 	},
 	"dependencies": {
-		"js-cookie": "^3.0.1",
-		"svelte-dark-mode": "^2.1.0"
+		"js-cookie": "3.0.5",
+		"svelte-dark-mode": "2.1.0"
 	},
 	"devDependencies": {
 		"@dusk-network/button": "workspace:*",
 		"@dusk-network/card": "workspace:*",
 		"@dusk-network/content": "workspace:*",
 		"@dusk-network/control": "workspace:*",
-		"@dusk-network/eslint-config": "^1.2.8",
+		"@dusk-network/eslint-config": "1.2.8",
 		"@dusk-network/form": "workspace:*",
 		"@dusk-network/group": "workspace:*",
 		"@dusk-network/heading": "workspace:*",
-		"@dusk-network/rich-text": "workspace:*",
+		"@dusk-network/text": "workspace:*",
 		"@dusk-network/toggle": "workspace:*",
 		"@dusk-network/utilities": "workspace:*",
-		"eslint": "^8.34.0",
-		"prettier": "^2.8.4",
-		"prettier-plugin-packagejson": "^2.4.3",
-		"prettier-plugin-svelte": "^2.9.0",
-		"prettier-plugin-tailwindcss": "^0.2.3"
+		"eslint": "8.40.0",
+		"prettier": "2.8.8",
+		"prettier-plugin-packagejson": "2.4.3",
+		"prettier-plugin-svelte": "2.10.0",
+		"prettier-plugin-tailwindcss": "0.2.8"
 	},
 	"peerDependencies": {
 		"@dusk-network/button": "workspace:*",
@@ -48,7 +48,7 @@
 		"@dusk-network/form": "workspace:*",
 		"@dusk-network/group": "workspace:*",
 		"@dusk-network/heading": "workspace:*",
-		"@dusk-network/rich-text": "workspace:*",
+		"@dusk-network/text": "workspace:*",
 		"@dusk-network/toggle": "workspace:*",
 		"@dusk-network/utilities": "workspace:*"
 	},

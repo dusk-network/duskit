@@ -5,20 +5,12 @@
 		@apply justify-center;
 	}
 
-	&--search-list {
-		@apply px-0;
-	}
-
 	&__label {
 		@apply pr-3;
 	}
 
 	&__controls-wrapper {
 		@apply flex items-center;
-
-		& .duk-group {
-			@apply flex-grow;
-		}
 	}
 
 	&__input {
@@ -32,6 +24,24 @@
 
 		& > p:empty::before {
 			content: "\00a0";
+		}
+	}
+
+	&--start {
+		^&__controls-wrapper {
+			@apply justify-start;
+		}
+	}
+
+	&--center {
+		^&__controls-wrapper {
+			@apply justify-center;
+		}
+	}
+
+	&--end {
+		^&__controls-wrapper {
+			@apply justify-end;
 		}
 	}
 
@@ -83,69 +93,26 @@
 		}
 	}
 
-	&--with-postfix,
-	&--with-prefix {
-		.duk-icon {
-			height: calc(1.375rem - 1px);
-			@apply min-h-fit;
-		}
-	}
-
-	&--with-postfix {
-		^&__input {
-			&--text-field {
-				@apply rounded-tr-none rounded-br-none border-r-0;
-			}
-		}
-
-		.duk-button--control,
-		.duk-toggle--control > label {
-			@apply rounded-tl-none rounded-bl-none border border-l-0 border-solid border-black px-5;
-			/* @apply dark:border-gray; */
-
-			line-height: 1.5;
-		}
-	}
-
-	&--with-prefix {
-		^&__input {
-			&--text-field {
-				@apply z-10 rounded-tl-none rounded-bl-none border-l-0;
-			}
-		}
-
-		.duk-button--control,
-		.duk-toggle--control > label {
-			@apply rounded-tr-none rounded-br-none border border-r-0 border-solid border-black px-5;
-			/* @apply dark:border-gray; */
-
-			line-height: inherit;
-		}
-	}
-
-	/* &--success {
+	&--success {
 		^&__label,
 		^&__message {
-			@apply text-green-900 not-italic;
-			@apply dark:text-green-600;
+			@apply text-success not-italic;
+		}
+	}
+
+	&--attention {
+		^&__label,
+		^&__message {
+			@apply text-attention not-italic;
 		}
 	}
 
 	&--warning {
 		^&__label,
 		^&__message {
-			@apply text-yellow-900 not-italic;
-			@apply dark:text-yellow-600;
+			@apply text-warning not-italic;
 		}
 	}
-
-	&--danger {
-		^&__label,
-		^&__message {
-			@apply text-red-900 not-italic;
-			@apply dark:text-red-600;
-		}
-	} */
 
 	&--full {
 		@apply w-full;
@@ -155,11 +122,5 @@
 	}
 	&--quarter {
 		@apply sm:w-1/4;
-	}
-
-	&--group {
-		& .duk-toggle-group {
-			@apply my-5;
-		}
 	}
 }

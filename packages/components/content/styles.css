@@ -1,6 +1,6 @@
 .duk-content {
 	&--card {
-		@apply py-5 px-6;
+		@apply px-6 py-5;
 	}
 
 	& .duk-control,

@@ -2,7 +2,7 @@
 	@apply bg-transparent;
 
 	&__header {
-		@apply rounded-tl-xl rounded-tr-xl bg-white py-2 px-5;
+		@apply rounded-tl-xl rounded-tr-xl bg-white px-5 py-2;
 		/* @apply dark:bg-black dark:text-gray; */
 
 		&--title {
@@ -51,7 +51,7 @@
 
 		td,
 		th {
-			@apply py-3 px-6;
+			@apply px-6 py-3;
 		}
 
 		& thead {
@@ -445,7 +445,7 @@
 	}
 
 	&__actions {
-		@apply flex items-center justify-between rounded-bl-xl rounded-br-xl bg-white py-2 px-5;
+		@apply flex items-center justify-between rounded-bl-xl rounded-br-xl bg-white px-5 py-2;
 		/* @apply dark:bg-black dark:text-gray; */
 
 		min-height: 3.25rem;

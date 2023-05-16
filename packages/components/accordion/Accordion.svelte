@@ -1,6 +1,5 @@
 <script>
-	import { setContext, getContext } from "svelte";
-	import contexts from "@dusk-network/utilities/contexts.js";
+	import { setContext } from "svelte";
 	import { items } from "./stores/items.js";
 	import "./styles.css";
 
@@ -8,8 +7,6 @@
 	 * Sets the Accordion so multiple items can be opened at the same time when true.
 	 */
 	export let multiselect = false;
-
-	const context = getContext("DUK:accordion:context");
 
 	setContext("DUK:accordion:methods", {
 		items,
@@ -34,10 +31,6 @@
 	});
 </script>
 
-<dl
-	class="{$$props.class || ''} duk-accordion"
-	class:duk-accordion--card="{context === contexts.ACCORDION.CARD}"
-	class:duk-accordion--rich-text="{context === contexts.ACCORDION.RICH_TEXT}"
->
+<dl class="{$$props.class || ''} duk-accordion">
 	<slot />
 </dl>

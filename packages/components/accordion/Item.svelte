@@ -1,19 +1,15 @@
 <script>
-	import { getContext, setContext, onMount } from "svelte";
-	import sizes from "@dusk-network/utilities/sizes.js";
-	import contexts from "@dusk-network/utilities/contexts.js";
-	import Button from "@dusk-network/button";
+	import { getContext, onMount } from "svelte";
+	import Heading from "@dusk-network/heading";
+	import Text from "@dusk-network/text";
 
 	export let id = "__DUK-accordion-item" + Math.random().toString(36);
 	export let title = "Title";
 	export let expanded = false;
-	export let disabled = false;
 	export let ref = null;
+	export let dark;
 
-	const size = sizes.ACCORDION.LARGE;
 	const ctx = getContext("DUK:accordion:methods");
-
-	setContext("DUK:button:context", contexts.BUTTON.ACCORDION);
 
 	let unsubscribe = undefined;
 
@@ -45,29 +41,54 @@
 	on:click="{handleToggle}"
 	on:keypress="{handleToggle}"
 >
-	<Button
-		bind:this="{ref}"
-		aria-expanded="{expanded}"
-		aria-controls="{id}"
-		aria-disabled="{disabled}"
-		disabled="{disabled}"
-		id="{buttonId}"
-		circle="{true}"
-		size="{size}"
-		label="Toggle Accordion"
-	>
-		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-			><path fill="currentColor" d="M11 19v-6H5v-2h6V5h2v6h6v2h-6v6h-2Z"></path></svg
+	<div>
+		<Heading size="x-small">{title}</Heading>
+		<div
+			class="duk-accordion__action"
+			bind:this="{ref}"
+			aria-expanded="{expanded}"
+			aria-controls="{id}"
+			id="{buttonId}"
+			label="Toggle Accordion"
 		>
-	</Button>
-	<slot name="title">{title}</slot>
+			{#if expanded}
+				<svg
+					width="20"
+					height="19"
+					viewBox="0 0 20 19"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M19.088 7.74H11.384V0H8.50405V7.74H0.800049V10.62H8.50405V18.324H11.384V10.62H19.088V7.74Z"
+						fill="{dark ? 'var(--colors-gray)' : 'var(--colors-smokey)'}"></path>
+				</svg>
+			{:else}
+				<svg
+					width="20"
+					height="4"
+					viewBox="0 0 20 4"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M19.088 0.73999H11.384L8.50405 0.739999L0.800049 0.73999V3.61999H8.50405H11.384H19.088V0.73999Z"
+						fill="{dark ? 'var(--colors-gray)' : 'var(--colors-smokey)'}"></path>
+				</svg>
+			{/if}
+		</div>
+	</div>
+	<div>
+		<dd
+			role="region"
+			id="{id}"
+			aria-labelledby="{buttonId}"
+			hidden="{!expanded}"
+			class="duk-accordion__datum"
+		>
+			<Text size="medium">
+				<slot />
+			</Text>
+		</dd>
+	</div>
 </dt>
-<dd
-	role="region"
-	id="{id}"
-	aria-labelledby="{buttonId}"
-	hidden="{!expanded}"
-	class="duk-accordion__datum"
->
-	<slot />
-</dd>

@@ -12,7 +12,7 @@
 	}
 
 	&__item {
-		@apply flex w-full flex-row items-center justify-start gap-x-5 rounded py-3 px-5;
+		@apply flex w-full flex-row items-center justify-start gap-x-5 rounded px-5 py-3;
 		/* @apply dark:bg-black; */
 	}
 }

@@ -2,8 +2,8 @@
 	import CtaList, { Item } from "@dusk-network/cta-list";
 	import RichText from "@dusk-network/rich-text";
 	import Heading from "@dusk-network/heading";
-	import Icon from '@iconify/svelte';
-  import emoticonHappy from '@iconify/icons-mdi/emoticon-happy';
+	import Icon from "@iconify/svelte";
+	import emoticonHappy from "@iconify/icons-mdi/emoticon-happy";
 
 	const type = "unordered";
 </script>
@@ -13,7 +13,7 @@
 		<svelte:fragment slot="heading">
 			<Heading>
 				<svelte:fragment slot="icon">
-					<Icon icon={emoticonHappy} />
+					<Icon icon="{emoticonHappy}" />
 				</svelte:fragment>
 				<h3>A new Blockchain for privacy on a public network</h3>
 			</Heading>
@@ -30,7 +30,7 @@
 		<svelte:fragment slot="heading">
 			<Heading>
 				<svelte:fragment slot="icon">
-					<Icon icon={emoticonHappy} />
+					<Icon icon="{emoticonHappy}" />
 				</svelte:fragment>
 				<h3>A new Blockchain for privacy on a public network</h3>
 			</Heading>
@@ -40,7 +40,7 @@
 		<svelte:fragment slot="heading">
 			<Heading>
 				<svelte:fragment slot="icon">
-					<Icon icon={emoticonHappy} />
+					<Icon icon="{emoticonHappy}" />
 				</svelte:fragment>
 				<h3>A new Blockchain for privacy on a public network</h3>
 			</Heading>

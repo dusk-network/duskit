@@ -73,6 +73,6 @@
 	}
 
 	&--card {
-		@apply py-5 px-6 font-light;
+		@apply px-6 py-5 font-light;
 	}
 }
