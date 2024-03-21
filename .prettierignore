@@ -1,12 +1,2 @@
-node_modules
-.svelte-kit
-.DS_Store
-/.github/*.md
-dist
-build
-package
-.env
-.npmrc
-.nvmrc
-pnpm-lock.yaml
-pnpm-workspace.yaml
+apps/**
+packages/**

@@ -1,36 +1,24 @@
 <script>
-	import { logEvent } from "histoire/client";
-	import Button from "@dusk-network/button";
-	import variants from "@dusk-network/utilities/variants.js";
-	// import states from "@dusk-network/utilities/states.js";
-	import sizes from "@dusk-network/utilities/sizes.js";
-	// import contexts from "@dusk-network/utilities/contexts.js";
+  /* eslint-disable import/named */
+  import { logEvent } from "histoire/client";
+  /* eslint-enable import/named */
+	import { Button } from "@duskit/components";
 
 	export let Hst;
 
-	let disabled = false;
-	let size = sizes.BUTTON.DEFAULT;
-
-	$: properties = { disabled, size };
+	let properties = { disabled: false, text: "click me" };
 </script>
 
 <Hst.Story title="Button" group="components">
-	{#each Object.values(variants.BUTTON) as variant}
-		<Hst.Variant title="{variant}">
+
 			<Button
-				variant="{variant}"
-				disabled="{disabled}"
-				size="{size}"
+				disabled="{properties.disabled}"
 				on:click="{(event) => logEvent('click', event)}"
-			>
-				Click me!
-			</Button>
-		</Hst.Variant>
-	{/each}
+        text="{properties.text}"
+			/>
 
 	<svelte:fragment slot="controls">
-		<Hst.Checkbox bind:value="{disabled}" title="Disabled" />
-		<Hst.Select bind:value="{size}" options="{Object.values(sizes.BUTTON)}" title="Size" />
+		<Hst.Checkbox bind:value="{properties.disabled}" title="Disabled" />
 		<!-- <Hst.Select bind:value="{context}" options="{Object.values(contexts.BUTTON)}" title="Context" /> -->
 		<br />
 		<hr />

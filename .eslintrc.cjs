@@ -1,12 +1,17 @@
 module.exports = {
-	root: true,
-	extends: ["@dusk-network"],
-	parserOptions: {
-		ecmaVersion: 2023,
-	},
-	settings: {
-		next: {
-			rootDir: ["apps/*/"],
-		},
-	},
+  env: {
+    es2022: true,
+    node: true,
+  },
+  extends: ["@dusk-network/eslint-config/js", "turbo"],
+  ignorePatterns: [
+    "apps/**",
+    "packages/**",
+    "!.prettierrc.js",
+    "!.eslintrc.cjs",
+  ],
+  parserOptions: {
+    project: true,
+  },
+  root: true,
 };

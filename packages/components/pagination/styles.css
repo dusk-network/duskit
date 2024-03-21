@@ -1,8 +1,0 @@
-.pagination {
-	@apply hidden;
-	@apply lg:block lg:flex lg:flex-row lg:flex-nowrap;
-
-	&__menu {
-		@apply flex flex-row;
-	}
-}
