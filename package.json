@@ -1,39 +1,61 @@
 {
-	"name": "duskit",
-	"private": true,
-	"description": "Component library for building Dusk user interfaces",
-	"homepage": "https://dusk-network.github.io/duskit/",
-	"bugs": {
-		"url": "https://github.com/dusk-network/issues"
-	},
-	"repository": "https://github.com/dusk-network/duskit",
-	"license": "MPL-2.0",
-	"author": "Kieran Hall <kieran@dusk.network>",
-	"type": "module",
-	"scripts": {
-		"build": "turbo run build",
-		"changeset": "changeset",
-		"clean": "turbo run clean && rm -rf node_modules",
-		"dev": "turbo run dev --no-cache --continue",
-		"format": "pnpm exec prettier . -w --plugin-search-dir=.",
-		"lint": "turbo run lint",
-		"release": "turbo run build --filter=docs^... && changeset publish",
-		"test": "echo \"Work in progress...\" && exit 1",
-		"version-packages": "changeset version"
-	},
-	"devDependencies": {
-		"@changesets/cli": "2.26.1",
-		"@evilmartians/lefthook": "1.3.12",
-		"lefthook": "1.3.12",
-		"prettier": "2.8.8",
-		"prettier-plugin-packagejson": "2.4.3",
-		"prettier-plugin-svelte": "2.10.0",
-		"prettier-plugin-tailwindcss": "0.0.0-insiders.6ba6faa",
-		"turbo": "1.8.3"
-	},
-	"packageManager": "pnpm@8.5.1",
-	"engines": {
-		"node": "18.16.0",
-		"pnpm": "^8.5.0"
-	}
+  "name": "duskit",
+  "private": true,
+  "description": "Component and utility library for building Dusk user interfaces",
+  "author": {
+    "name": "Dusk Network B.V.",
+    "url": "https://dusk.network/",
+    "mail": "info@dusk.network"
+  },
+  "contributors": [
+    "Kieran Hall <kieran@dusk.network>"
+  ],
+  "homepage": "https://dusk-network.github.io/duskit/",
+  "bugs": {
+    "url": "https://github.com/dusk-network/issues"
+  },
+  "repository": "https://github.com/dusk-network/duskit",
+  "license": "MPL-2.0",
+  "type": "module",
+  "workspaces": [
+    "apps/workshop",
+    "packages/array",
+    "packages/base64",
+    "packages/components",
+    "packages/currency",
+    "packages/design-tokens",
+    "packages/http",
+    "packages/icons",
+    "packages/math",
+    "packages/polyfill",
+    "packages/string",
+    "packages/test-helpers",
+    "packages/ui-helpers"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "changeset": "changeset",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "dev": "turbo run dev --no-cache --continue",
+    "format": "turbo run format",
+    "format:fix": "turbo run format:fix",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "release": "turbo run build && changeset publish",
+    "test": "turbo run test",
+    "version-packages": "changeset version"
+  },
+  "devDependencies": {
+    "@changesets/cli": "2.27.1",
+    "@dusk-network/eslint-config": "3.2.0",
+    "@dusk-network/prettier-config": "1.0.0",
+    "eslint": "8.57.0",
+    "eslint-config-turbo": "1.12.5",
+    "prettier": "3.2.5",
+    "turbo": "1.12.5"
+  },
+  "engines": {
+    "node": ">=20.11.1",
+    "npm": ">=10.2.4"
+  }
 }

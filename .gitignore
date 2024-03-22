@@ -14,3 +14,6 @@ storybook-static
 build-storybook.log
 coverage
 pnpm-global
+lefthook.yml
+.nvmrc
+*.code-workspace
