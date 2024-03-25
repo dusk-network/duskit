@@ -19,18 +19,13 @@
   "type": "module",
   "workspaces": [
     "apps/workshop",
-    "packages/array",
-    "packages/base64",
     "packages/components",
     "packages/currency",
     "packages/design-tokens",
     "packages/http",
     "packages/icons",
-    "packages/math",
-    "packages/polyfill",
     "packages/string",
-    "packages/test-helpers",
-    "packages/ui-helpers"
+    "packages/test-helpers"
   ],
   "scripts": {
     "build": "turbo run build",
