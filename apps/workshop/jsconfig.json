@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "forceConsistentCasingInFileNames": true,
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "node",
@@ -11,7 +14,7 @@
     "removeComments": false,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "types": ["node"],
+    "types": ["node", "lamb-types"],
     "lib": ["ESNext", "DOM"],
     "sourceMap": false,
     "preserveWatchOutput": true,
@@ -19,9 +22,11 @@
     // Strict
     "noImplicitAny": false,
     "noImplicitThis": true,
+    "noUnusedParameters": true,
     "alwaysStrict": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
+    "strictNullChecks": true,
     // Volar
     "jsx": "preserve"
   },
