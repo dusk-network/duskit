@@ -1,2 +1,9 @@
 export { default as getAsHTMLElement } from "./src/getAsHTMLElement";
+export { default as mockIntersectionObserver } from "./src/mockIntersectionObserver";
 export { default as mockReadableStore } from "./src/mockReadableStore";
+export { default as mockResizeObserver } from "./src/mockResizeObserver";
+export { default as rejectAfter } from "./src/rejectAfter";
+export { default as renderWithSimpleContent } from "./src/renderWithSimpleContent";
+export { default as renderWithSlots } from "./src/renderWithSlots";
+export { default as resolveAfter } from "./src/resolveAfter";
+export { default as SlotContent } from "./src/SlotContent.svelte";
