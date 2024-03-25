@@ -1,11 +1,11 @@
 // prettier-ignore
 import {
-afterAll,
-describe,
-expect,
-it,
-vi
-} from "vitest"
+  afterAll,
+  describe,
+  expect,
+  it,
+  vi
+  } from "vitest"
 import { randomInt, sort } from "lamb";
 import shuffleArray from "../shuffleArray.js";
 
