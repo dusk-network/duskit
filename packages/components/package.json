@@ -19,10 +19,14 @@
   },
   "type": "module",
   "main": "index.js",
-  "svelte": "index.js",
   "module": "index.js",
+  "dependencies": {
+    "@floating-ui/dom": "1.6.3",
+    "lamb": "0.61.1",
+    "svelte": "4.2.12"
+  },
   "devDependencies": {
-    "@dusk-network/eslint-config": "3.2.0",
+    "@dusk-network/eslint-config": "3.3.1",
     "@dusk-network/prettier-config": "1.1.0",
     "@mdi/js": "7.4.47",
     "@sveltejs/vite-plugin-svelte": "3.0.2",

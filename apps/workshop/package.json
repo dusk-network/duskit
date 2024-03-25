@@ -14,13 +14,13 @@
   },
   "dependencies": {
     "@duskit/components": "*",
-    "histoire": "0.17.9",
+    "histoire": "0.17.14",
     "svelte": "4.2.12"
   },
   "devDependencies": {
     "@dusk-network/eslint-config": "3.2.0",
-    "@dusk-network/prettier-config": "1.0.0",
-    "@histoire/plugin-svelte": "0.17.9",
+    "@dusk-network/prettier-config": "1.1.0",
+    "@histoire/plugin-svelte": "0.17.14",
     "@sveltejs/vite-plugin-svelte": "3.0.2",
     "eslint": "8.57.0",
     "prettier": "3.2.5",

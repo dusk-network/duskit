@@ -7,9 +7,7 @@ module.exports = {
   extends: [
     "@dusk-network/eslint-config/js",
     "@dusk-network/eslint-config/svelte",
+    "@dusk-network/eslint-config/vitest",
   ],
-  globals: {
-    CONFIG: false,
-  },
   root: true,
 };
