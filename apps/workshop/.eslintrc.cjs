@@ -9,7 +9,7 @@ module.exports = {
     "@dusk-network/eslint-config/svelte",
   ],
   parserOptions: {
-    project: true,
+    project: true
   },
-  root: true,
+  root: true
 };

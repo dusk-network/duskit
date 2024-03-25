@@ -1,8 +1,6 @@
 <script>
-  /* eslint-disable import/named */
   import { logEvent } from "histoire/client";
-  /* eslint-enable import/named */
-	import { Button } from "@duskit/components";
+	import Button from "@dusk-network/button";
 
 	export let Hst;
 

@@ -1,1 +1,1 @@
-export { default as lerp } from "./src/lerp";
+export { default as lerp } from "./lerp";

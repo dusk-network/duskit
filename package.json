@@ -2,26 +2,20 @@
   "name": "duskit",
   "private": true,
   "description": "Component and utility library for building Dusk user interfaces",
-  "author": {
-    "name": "Dusk Network B.V.",
-    "url": "https://dusk.network/",
-    "mail": "info@dusk.network"
-  },
-  "contributors": [
-    "Kieran Hall <kieran@dusk.network>"
-  ],
   "homepage": "https://dusk-network.github.io/duskit/",
   "bugs": {
     "url": "https://github.com/dusk-network/issues"
   },
   "repository": "https://github.com/dusk-network/duskit",
   "license": "MPL-2.0",
+  "author": "Kieran Hall <kieran@dusk.network>",
   "type": "module",
   "workspaces": [
     "apps/workshop",
     "packages/array",
     "packages/base64",
-    "packages/components",
+    "packages/components/button",
+    "packages/components/icon",
     "packages/currency",
     "packages/design-tokens",
     "packages/http",
@@ -50,12 +44,11 @@
     "@dusk-network/eslint-config": "3.2.0",
     "@dusk-network/prettier-config": "1.0.0",
     "eslint": "8.57.0",
-    "eslint-config-turbo": "1.12.5",
     "prettier": "3.2.5",
     "turbo": "1.12.5"
   },
   "engines": {
-    "node": ">=20.11.1",
+    "node": "20.11.1",
     "npm": ">=10.2.4"
   }
 }

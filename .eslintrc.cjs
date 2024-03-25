@@ -3,15 +3,12 @@ module.exports = {
     es2022: true,
     node: true,
   },
-  extends: ["@dusk-network/eslint-config/js", "turbo"],
-  ignorePatterns: [
-    "apps/**",
-    "packages/**",
-    "!.prettierrc.js",
-    "!.eslintrc.cjs",
+  extends: [
+    "@dusk-network/eslint-config/js"
   ],
+  ignorePatterns: ["apps/**", "packages/**"],
   parserOptions: {
-    project: true,
+    project: true
   },
-  root: true,
+  root: true
 };

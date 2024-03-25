@@ -1,5 +1,5 @@
 {
-  "name": "@duskit/polyfill",
+  "name": "@dusk-network/polyfill",
   "version": "0.0.0",
   "bugs": {
     "url": "https://github.com/dusk-network/duskit/issues"
@@ -23,11 +23,5 @@
     "@dusk-network/prettier-config": "1.1.0",
     "eslint": "8.57.0",
     "prettier": "3.2.5"
-  },
-  "license": "MPL-2.0",
-  "author": {
-    "name": "Dusk Network B.V.",
-    "url": "https://dusk.network/",
-    "mail": "info@dusk.network"
   }
 }

@@ -1,9 +1,6 @@
-/* eslint-disable import/no-unresolved */
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-/* eslint-enable import/no-unresolved */
-/* eslint-disable import/named */
 import { HstSvelte as hst } from "@histoire/plugin-svelte";
-/* eslint-enable import/named */
+// import dusk from "@dusk-network/design-tokens/plugin/";
 
 /** @type {import('vite').UserConfig} */
 const config = {
@@ -22,7 +19,7 @@ const config = {
       {
         color: "#101010",
         contrastColor: "#E2DFE9",
-        label: "Smokey",
+        label: "Smokey"
       },
     ],
     plugins: [hst()],
@@ -119,7 +116,7 @@ const config = {
       ],
     },
     vite: {
-      base: process.env.VITE_GITHUB_PAGES ? "/workshop/" : "",
+      base: process.env.VITE_GITHUB_PAGES ? "/dusk-website/" : "",
     },
   },
   plugins: [svelte()],

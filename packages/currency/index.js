@@ -1,6 +1,6 @@
-export { default as createCurrencyFormatter } from "./src/createCurrencyFormatter";
-export { default as createFeeFormatter } from "./src/createFeeFormatter";
-export { default as createTransferFormatter } from "./src/createTransferFormatter";
-export { default as currencies } from "./src/currencies";
-export { default as duskToLux } from "./src/duskToLux";
-export { default as luxToDusk } from "./src/luxToDusk";
+export { default as createCurrencyFormatter } from "./createCurrencyFormatter";
+export { default as createFeeFormatter } from "./createFeeFormatter";
+export { default as createTransferFormatter } from "./createTransferFormatter";
+export { default as currencies } from "./currencies";
+export { default as duskToLux } from "./duskToLux";
+export { default as luxToDusk } from "./luxToDusk";

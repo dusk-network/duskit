@@ -1,5 +1,5 @@
 {
-  "name": "@duskit/test-helpers",
+  "name": "@dusk-network/test-helpers",
   "version": "0.0.0",
   "bugs": {
     "url": "https://github.com/dusk-network/duskit/issues"
@@ -30,11 +30,5 @@
   },
   "peerDependencies": {
     "svelte": "4.2.12"
-  },
-  "license": "MPL-2.0",
-  "author": {
-    "name": "Dusk Network B.V.",
-    "url": "https://dusk.network/",
-    "mail": "info@dusk.network"
   }
 }
