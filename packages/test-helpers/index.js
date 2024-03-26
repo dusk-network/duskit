@@ -1,7 +1,7 @@
 export { default as getAsHTMLElement } from "./src/getAsHTMLElement";
-export { default as mockIntersectionObserver } from "./src/mockIntersectionObserver";
-export { default as mockReadableStore } from "./src/mockReadableStore";
-export { default as mockResizeObserver } from "./src/mockResizeObserver";
+export { default as IntersectionObserverMock } from "./src/IntersectionObserverMock";
+export { default as readableStoreMock } from "./src/readableStoreMock";
+export { default as ResizeObserverMock } from "./src/ResizeObserverMock";
 export { default as rejectAfter } from "./src/rejectAfter";
 export { default as renderWithSimpleContent } from "./src/renderWithSimpleContent";
 export { default as renderWithSlots } from "./src/renderWithSlots";

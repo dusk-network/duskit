@@ -1,4 +1,8 @@
 export default class IntersectionObserver {
+  constructor() {
+    console.log('constructor')
+  }
+  
   get root() {
     return document;
   }
