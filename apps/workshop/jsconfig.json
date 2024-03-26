@@ -14,7 +14,7 @@
     "removeComments": false,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "types": ["node", "lamb-types"],
+    "types": ["node"],
     "lib": ["ESNext", "DOM"],
     "sourceMap": false,
     "preserveWatchOutput": true,
