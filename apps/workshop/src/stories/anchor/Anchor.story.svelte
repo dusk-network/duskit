@@ -13,19 +13,21 @@
 
   $: {
     source = `<Anchor`;
-    if (className) source += ` className="${className}"`
-    if (href) source += ` href="${href}"`
-    source += `>`
+    if (className) {
+      source += ` className="${className}"`;
+    }
+    if (href) {
+      source += ` href="${href}"`;
+    }
+    source += `>`;
     source += `${slotContent}`;
     source += `</Anchor>`;
   }
 </script>
 
 <svelte:component this={Hst.Story} title="Anchor" group="components" {source}>
-  <Anchor
-    className={className}
-    href={href}
-    on:click={(event) => logEvent("click", event)}>{slotContent}</Anchor
+  <Anchor {className} {href} on:click={(event) => logEvent("click", event)}
+    >{slotContent}</Anchor
   >
   <svelte:fragment slot="controls">
     <div class="htw-p-2 htw-text-gray-900 dark:htw-text-gray-100">Slots</div>
@@ -40,10 +42,6 @@
       bind:value={className}
       title="className"
     />
-    <svelte:component
-      this={Hst.Text}
-      bind:value={href}
-      title="href"
-    />
+    <svelte:component this={Hst.Text} bind:value={href} title="href" />
   </svelte:fragment>
 </svelte:component>

@@ -1,10 +1,10 @@
 import * as matchers from "@testing-library/jest-dom/matchers";
-import { expect, vi } from "vitest";
+import { expect } from "vitest";
 import "jsdom-worker";
 // prettier-ignore
-import { mockIntersectionObserver, mockResizeObserver } from "@duskit/test-helpers";
+import { IntersectionObserverMock, ResizeObserverMock } from "@duskit/test-helpers";
 
 expect.extend(matchers);
-
-vi.stubGlobal("IntersectionObserver", mockIntersectionObserver);
-vi.stubGlobal("ResizeObserver", mockResizeObserver);
+// @ts-ignore
+global.IntersectionObserver = IntersectionObserverMock;
+global.ResizeObserver = ResizeObserverMock;

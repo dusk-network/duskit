@@ -1,6 +1,6 @@
 ---
-group: 'top'
-icon: 'carbon:bookmark'
+group: "top"
+icon: "carbon:bookmark"
 ---
 
 # Welcome
