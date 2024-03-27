@@ -7,7 +7,7 @@
     },
     "test": {
       "outputs": ["coverage/**"],
-      "dependsOn": ["format", "lint"]
+      "dependsOn": ["format", "lint", "typecheck"]
     },
     "lint": {
       "dependsOn": ["^lint"]
@@ -27,6 +27,9 @@
     },
     "clean": {
       "cache": false
+    },
+    "typecheck": {
+      "dependsOn": ["^typecheck"]
     }
   }
 }

@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   import { makeClassName } from "@duskit/string";
   import { Icon } from "@duskit/components";
@@ -18,7 +16,7 @@
   export let size = "normal";
 
   /** @type {ButtonVariant} */
-  export let variant = "primary";
+  export let variant = "secondary";
 
   /** @type {String | Undefined} */
   export let text = undefined;
