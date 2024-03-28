@@ -1,4 +1,13 @@
-@import url("@duskit/design-tokens/src/themes/dusk/theme.css");
+.dusk-button:enabled {
+  transition: all 0.2s linear 0s;
+}
+
+:is(.dusk-button:enabled):focus {
+  border-color: var(--secondary-color-variant-dark);
+  box-shadow: inset 0 0 0 var(--control-border-size)
+    var(--secondary-color-variant-dark);
+  outline: 0 none;
+}
 
 .dusk-button,
 .dusk-anchor-button,
@@ -41,6 +50,13 @@
 .dusk-button:enabled:active,
 .dusk-anchor-button:not(.dusk-anchor-button--disabled):active {
   transform: scale(0.98, 0.98);
+}
+
+.dusk-icon-button:not(.dusk-icon-button-labeled) {
+  background-color: var(--secondary-color);
+  color: var(--on-secondary-color);
+  border-radius: 50%;
+  padding: 0.2em;
 }
 
 .dusk-button--variant--quaternary.dusk-icon-button:not(

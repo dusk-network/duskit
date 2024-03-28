@@ -1,8 +1,6 @@
 .dusk-icon {
   display: inline-block;
   fill: currentColor;
-  --icon-size: 1.2em;
-  --scaler: 1.5;
 }
 
 .dusk-icon rect {

@@ -8,7 +8,10 @@
     "mail": "info@dusk.network"
   },
   "contributors": [
-    "Kieran Hall <kieran@dusk.network>"
+    "Kieran Hall <kieran@dusk.network>",
+    "Alexandru Panturu <alex@dusk.network>",
+    "Andrea Scartabelli <andrea@dusk.network>",
+    "Norton Andreev <norton@dusk.network>"
   ],
   "homepage": "https://dusk-network.github.io/duskit/",
   "bugs": {
@@ -22,6 +25,7 @@
     "packages/components",
     "packages/currency",
     "packages/design-tokens",
+    "packages/error",
     "packages/http",
     "packages/icons",
     "packages/string",
@@ -46,9 +50,8 @@
     "@dusk-network/prettier-config": "1.0.0",
     "eslint": "8.57.0",
     "eslint-config-turbo": "1.12.5",
-    "lamb-types": "0.61.0",
     "prettier": "3.2.5",
-    "turbo": "1.12.5"
+    "turbo": "1.13.0"
   },
   "engines": {
     "node": ">=20.11.1",

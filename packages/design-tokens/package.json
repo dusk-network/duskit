@@ -5,7 +5,7 @@
     "url": "https://github.com/dusk-network/duskit/issues"
   },
   "files": [
-    "themes/**/*"
+    "src/themes/**/*"
   ],
   "repository": {
     "type": "git",
