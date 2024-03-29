@@ -5,6 +5,7 @@ import "jsdom-worker";
 import { IntersectionObserverMock, ResizeObserverMock } from "@duskit/test-helpers";
 
 expect.extend(matchers);
-// @ts-ignore
+
+//@ts-ignore
 global.IntersectionObserver = IntersectionObserverMock;
 global.ResizeObserver = ResizeObserverMock;

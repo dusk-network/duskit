@@ -12,8 +12,10 @@ import { cleanup, fireEvent, render } from "@testing-library/svelte";
 import { tick } from "svelte";
 
 import { Tooltip } from "..";
+import { IntersectionObserverMock } from "@duskit/test-helpers";
 
 vi.mock("@floating-ui/dom");
+vi.mock("@duskit/test-helpers");
 vi.useFakeTimers();
 
 /** @param {Record<string, string>} dataset */
@@ -51,6 +53,10 @@ describe("Tooltip", () => {
     y: 888,
   };
 
+  const originalIntersectionObserver = global.IntersectionObserver;
+  //@ts-ignore
+  global.IntersectionObserver = IntersectionObserverMock;
+
   const clearTimeoutSpy = vi.spyOn(window, "clearTimeout");
   const disconnectSpy = vi.spyOn(IntersectionObserver.prototype, "disconnect");
   const observeSpy = vi.spyOn(IntersectionObserver.prototype, "observe");
@@ -62,6 +68,7 @@ describe("Tooltip", () => {
     cleanup();
     vi.mocked(computePosition).mockClear();
     vi.mocked(setOffset).mockClear();
+    vi.mocked(IntersectionObserver).mockClear();
     clearTimeoutSpy.mockClear();
     disconnectSpy.mockClear();
     observeSpy.mockClear();
@@ -70,10 +77,13 @@ describe("Tooltip", () => {
 
   afterAll(() => {
     vi.doUnmock("@floating-ui/dom");
+    vi.doUnmock("@duskit/test-helpers");
     clearTimeoutSpy.mockRestore();
     disconnectSpy.mockRestore();
     observeSpy.mockRestore();
     unobserveSpy.mockRestore();
+
+    global.IntersectionObserver = originalIntersectionObserver;
   });
 
   it("should render the Tooltip component", () => {
@@ -581,6 +591,108 @@ describe("Tooltip", () => {
         expect(tooltip).toHaveTextContent("");
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
         expect(target.getAttribute("aria-described-by")).toBeNull();
+      });
+
+      it("should hide the tooltip if the target element is detached from the DOM and disconnect the observer", async () => {
+        const { getByRole } = render(Tooltip, baseOptions);
+        const tooltip = getByRole("tooltip", { hidden: true });
+        const [callback] = vi.mocked(IntersectionObserver).mock.calls[0];
+
+        await fireEvent.focusIn(target);
+        await vi.advanceTimersToNextTimerAsync();
+
+        clearTimeoutSpy.mockClear();
+
+        expect(target.isConnected).toBe(true);
+        expect(tooltip.getAttribute("aria-hidden")).toBe("false");
+
+        target.remove();
+
+        // @ts-ignore
+        callback([{ target }], new IntersectionObserver(() => {}));
+
+        await tick();
+
+        expect(target.isConnected).toBe(false);
+        expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
+        expect(tooltip.getAttribute("aria-hidden")).toBe("true");
+        expect(disconnectSpy).toHaveBeenCalledTimes(1);
+      });
+
+      it("shouldn't hide the tooltip if unrelated elements are detached from the DOM", async () => {
+        const unrelatedElement = document.body.appendChild(
+          document.createElement("span")
+        );
+        const { getByRole } = render(Tooltip, baseOptions);
+        const tooltip = getByRole("tooltip", { hidden: true });
+        const [callback] = vi.mocked(IntersectionObserver).mock.calls[0];
+
+        await fireEvent.focusIn(target);
+        await vi.advanceTimersToNextTimerAsync();
+
+        clearTimeoutSpy.mockClear();
+
+        expect(tooltip.getAttribute("aria-hidden")).toBe("false");
+
+        unrelatedElement.remove();
+
+        // @ts-ignore
+        callback([{ target }], new IntersectionObserver(() => {}));
+
+        await tick();
+
+        expect(clearTimeoutSpy).not.toHaveBeenCalled();
+        expect(tooltip.getAttribute("aria-hidden")).toBe("false");
+        expect(disconnectSpy).not.toHaveBeenCalled();
+      });
+
+      it("should hide the tooltip if the intersection ratio of the target element is less or equal to zero", async () => {
+        const { getByRole } = render(Tooltip, baseOptions);
+        const tooltip = getByRole("tooltip", { hidden: true });
+        const [callback] = vi.mocked(IntersectionObserver).mock.calls[0];
+
+        await fireEvent.focusIn(target);
+        await vi.advanceTimersToNextTimerAsync();
+
+        clearTimeoutSpy.mockClear();
+
+        expect(target.isConnected).toBe(true);
+        expect(tooltip.getAttribute("aria-hidden")).toBe("false");
+
+        const entries = [{ intersectionRatio: 0, target }];
+
+        // @ts-ignore
+        callback(entries, new IntersectionObserver(() => {}));
+
+        await tick();
+
+        expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
+        expect(tooltip.getAttribute("aria-hidden")).toBe("true");
+        expect(disconnectSpy).toHaveBeenCalledTimes(1);
+      });
+
+      it("shouldn't hide the tooltip if the intersection ration of the target is greater than zero", async () => {
+        const { getByRole } = render(Tooltip, baseOptions);
+        const tooltip = getByRole("tooltip", { hidden: true });
+        const [callback] = vi.mocked(IntersectionObserver).mock.calls[0];
+
+        await fireEvent.focusIn(target);
+        await vi.advanceTimersToNextTimerAsync();
+
+        clearTimeoutSpy.mockClear();
+
+        expect(tooltip.getAttribute("aria-hidden")).toBe("false");
+
+        const entries = [{ intersectionRatio: 1, target }];
+
+        // @ts-ignore
+        callback(entries, new IntersectionObserver(() => {}));
+
+        await tick();
+
+        expect(clearTimeoutSpy).not.toHaveBeenCalled();
+        expect(tooltip.getAttribute("aria-hidden")).toBe("false");
+        expect(disconnectSpy).not.toHaveBeenCalled();
       });
     });
     /* eslint-enable max-nested-callbacks */
