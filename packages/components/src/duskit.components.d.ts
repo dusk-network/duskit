@@ -14,16 +14,6 @@ type BadgeVariant = "neutral" | "success" | "warning" | "error";
  */
 type ButtonVariant = "secondary" | "tertiary" | "quaternary";
 
-type WizardButtonProps = {
-  isAnchor?: boolean;
-  href?: string;
-  disabled?: boolean;
-  icon?: IconProp | null;
-  variant?: ButtonVariant;
-  label?: string;
-  action?: () => void;
-};
-
 type GapSize = "small" | "normal" | "large";
 
 type IconSize = "small" | "normal" | "large";
@@ -38,12 +28,6 @@ type SelectOption = {
 
 type SuspenseErrorVariant = "alert" | "details";
 
-type TabItem = {
-  icon?: IconProp;
-  id: string;
-  label?: string;
-};
-
 type TextboxTypes =
   | "email"
   | "hidden"
@@ -57,11 +41,9 @@ type TextboxTypes =
 
 type TooltipType = "error" | "info" | "success" | "warning";
 
-type MnemonicType = "authenticate" | "validate";
+type NavListProp = NavListItem[];
 
-type ToastItem = {
-  icon?: string;
-  id: string;
-  message: string;
-  type: TooltipType;
+type NavListItem = {
+  title: string;
+  link: string;
 };

@@ -7,6 +7,7 @@ export { Checkbox } from "./src/checkbox";
 export { ErrorAlert } from "./src/error-alert";
 export { ErrorDetails } from "./src/error-details";
 export { Icon } from "./src/icon";
+export { NavList } from "./src/nav-list";
 export { Select } from "./src/select";
 export { Suspense } from "./src/suspense";
 export { Switch } from "./src/switch";
