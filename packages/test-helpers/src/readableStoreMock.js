@@ -1,6 +1,5 @@
-/* eslint-disable import/no-unresolved */
+// eslint-disable-next-line import/no-unresolved
 import { get, writable } from "svelte/store";
-/* eslint-enable import/no-unresolved */
 
 /** @param {*} initialValue */
 function mockReadableStore(initialValue) {

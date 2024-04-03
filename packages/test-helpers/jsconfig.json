@@ -7,11 +7,7 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
     "resolveJsonModule": true,
-    "skipLibCheck": false,
-    "types": [
-      "./node_modules/@testing-library/jest-dom/types/vitest.d.ts",
-      "lamb-types"
-    ]
+    "skipLibCheck": false
   },
   "exclude": ["coverage", "node_modules"]
 }

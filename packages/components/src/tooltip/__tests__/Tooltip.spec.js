@@ -224,7 +224,6 @@ describe("Tooltip", () => {
     });
 
     describe("Tooltip show events", () => {
-      /* eslint-disable max-nested-callbacks */
       it("should ignore mouse enter and focus-in events if the target element doesn't refer to the tooltip", async () => {
         const { getByRole } = render(Tooltip, baseOptions);
         const tooltip = getByRole("tooltip", { hidden: true });
@@ -249,8 +248,7 @@ describe("Tooltip", () => {
         expect(clearTimeoutSpy).not.toHaveBeenCalled();
         expect(computePosition).not.toHaveBeenCalled();
       });
-      /* eslint-enable max-nested-callbacks */
-      /* eslint-disable max-nested-callbacks */
+
       it('should ignore mouse enter and focus-in events if the target element has the `data-tooltip-disabled` attribute set to `"true"`', async () => {
         const disabledTarget = createEventTarget({
           ...dataset,
@@ -279,8 +277,7 @@ describe("Tooltip", () => {
         expect(clearTimeoutSpy).not.toHaveBeenCalled();
         expect(computePosition).not.toHaveBeenCalled();
       });
-      /* eslint-enable max-nested-callbacks */
-      /* eslint-disable max-nested-callbacks */
+
       it("should show the tooltip on a focus-in event if the target element refers to it and start observing target's intersection", async () => {
         const { getByRole } = render(Tooltip, baseOptions);
         const tooltip = getByRole("tooltip", { hidden: true });
@@ -314,8 +311,7 @@ describe("Tooltip", () => {
         expect(target.getAttribute("aria-described-by")).toBe(baseProps.id);
         expect(prevTooltipElement.getAttribute("aria-described-by")).toBeNull();
       });
-      /* eslint-enable max-nested-callbacks */
-      /* eslint-disable max-nested-callbacks */
+
       it("should show the tooltip on a mouse enter event if the target element refers to it and start observing target mutations", async () => {
         const { getByRole } = render(Tooltip, baseOptions);
         const tooltip = getByRole("tooltip", { hidden: true });
@@ -349,8 +345,7 @@ describe("Tooltip", () => {
         expect(target.getAttribute("aria-described-by")).toBe(baseProps.id);
         expect(prevTooltipElement.getAttribute("aria-described-by")).toBeNull();
       });
-      /* eslint-enable max-nested-callbacks */
-      /* eslint-disable max-nested-callbacks */
+
       it("should use attributes defined on the target element, if they are present, rather than the defaults", async () => {
         target.setAttribute("data-tooltip-delay-show", "700");
         target.setAttribute("data-tooltip-offset", "0");
@@ -397,8 +392,7 @@ describe("Tooltip", () => {
         expect(target.getAttribute("aria-described-by")).toBe(baseProps.id);
         expect(prevTooltipElement.getAttribute("aria-described-by")).toBeNull();
       });
-      /* eslint-enable max-nested-callbacks */
-      /* eslint-disable max-nested-callbacks */
+
       it("should not wait for a delay before showing if the value is zero", async () => {
         target.setAttribute("data-tooltip-delay-show", "0");
 
@@ -413,8 +407,7 @@ describe("Tooltip", () => {
         expect(target.getAttribute("aria-described-by")).toBe(baseProps.id);
         expect(prevTooltipElement.getAttribute("aria-described-by")).toBeNull();
       });
-      /* eslint-enable max-nested-callbacks */
-      /* eslint-disable max-nested-callbacks */
+
       it("should not show the tooltip after the delay if the target element doesn't exist anymore", async () => {
         const { getByRole } = render(Tooltip, baseOptions);
         const tooltip = getByRole("tooltip", { hidden: true });
@@ -435,8 +428,7 @@ describe("Tooltip", () => {
         expect(target.getAttribute("aria-described-by")).toBeNull();
       });
     });
-    /* eslint-enable max-nested-callbacks */
-    /* eslint-disable max-nested-callbacks */
+
     describe("Tooltip hide events", () => {
       it("should ignore mouse leave and focus-out events if the target element doesn't refer to the tooltip", async () => {
         const { getByRole } = render(Tooltip, baseOptions);
@@ -695,6 +687,5 @@ describe("Tooltip", () => {
         expect(disconnectSpy).not.toHaveBeenCalled();
       });
     });
-    /* eslint-enable max-nested-callbacks */
   });
 });

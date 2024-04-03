@@ -1,7 +1,6 @@
 <script>
-  /* eslint-disable import/named */
+  // eslint-disable-next-line import/named
   import { logEvent } from "histoire/client";
-  /* eslint-enable import/named */
   import { Switch } from "@duskit/components";
 
   export let Hst;

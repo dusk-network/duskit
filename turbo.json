@@ -1,35 +1,37 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "experimentalUI": true,
   "pipeline": {
     "build": {
-      "outputs": [".histoire/dist/**"],
-      "dependsOn": ["^build"]
+      "outputs": [".histoire/dist/**"]
     },
-    "test": {
-      "outputs": ["coverage/**"],
-      "dependsOn": ["format", "lint", "typecheck"]
+    "checks": {
+      "outputMode": "errors-only"
     },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
-    "lint:fix": {
-      "dependsOn": ["^lint:fix"]
-    },
-    "format": {
-      "dependsOn": ["^format"]
-    },
-    "format:fix": {
-      "dependsOn": ["^format:fix"]
+    "clean": {
+      "cache": false
     },
     "dev": {
       "cache": false,
       "persistent": true
     },
-    "clean": {
-      "cache": false
+    "format:check": {},
+    "format": {},
+    "lint": {},
+    "lint:fix": {},
+    "test": {},
+    "test:coverage": {
+      "outputs": ["coverage/**"]
     },
-    "typecheck": {
-      "dependsOn": ["^typecheck"]
+    "test:watch": {
+      "cache": false,
+      "interactive": true,
+      "persistent": true
+    },
+    "typecheck": {},
+    "typecheck:watch": {
+      "cache": false,
+      "persistent": true
     }
   }
 }
