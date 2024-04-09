@@ -1,10 +1,9 @@
 <svelte:options immutable={true} />
 
 <script>
-  import { onDestroy } from "svelte";
-  /* eslint-disable import/no-unresolved */
+  // eslint-disable-next-line import/no-unresolved
   import { writable } from "svelte/store";
-  /* eslint-enable import/no-unresolved */
+  import { onDestroy } from "svelte";
   import {
     computePosition,
     flip,
@@ -158,7 +157,6 @@
 
     // We consider only "top", "right", "bottom" and "left" for now.
     // The extra parenthesis are needed to force the cast for the type checker.
-    // eslint-disable-next-line no-extra-parens
     const place = /** @type {import("@floating-ui/dom").Side} */ (
       placement.replace(/-.+$/, "")
     );

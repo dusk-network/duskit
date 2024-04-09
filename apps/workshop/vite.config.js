@@ -1,9 +1,8 @@
-/* eslint-disable import/no-unresolved */
+// eslint-disable-next-line import/no-unresolved
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-/* eslint-enable import/no-unresolved */
-/* eslint-disable import/named */
+
+// eslint-disable-next-line import/named
 import { HstSvelte as hst } from "@histoire/plugin-svelte";
-/* eslint-enable import/named */
 
 /** @type {import('vite').UserConfig} */
 const config = {

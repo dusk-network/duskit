@@ -10,10 +10,17 @@
     "directory": "packages/test-helpers"
   },
   "scripts": {
-    "format": "prettier . --check",
-    "format:fix": "prettier . --write",
+    "checks": "npm run format:check && npm run lint && npm run test:coverage",
+    "clean": "rimraf node_modules coverage",
+    "format:check": "prettier . --check",
+    "format": "prettier . --write",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "test": "vitest --run",
+    "test:coverage": "vitest --run --coverage.enabled",
+    "test:watch": "vitest",
+    "typecheck": "svelte-check --tsconfig ./jsconfig.json --fail-on-warnings",
+    "typecheck:watch": "svelte-check --tsconfig ./jsconfig.json --watch --fail-on-warnings"
   },
   "type": "module",
   "main": "index.js",
@@ -22,14 +29,19 @@
     "svelte": "4.2.12"
   },
   "devDependencies": {
-    "@dusk-network/eslint-config": "3.2.0",
+    "@dusk-network/eslint-config": "3.3.1",
     "@dusk-network/prettier-config": "1.1.0",
+    "@sveltejs/vite-plugin-svelte": "3.0.2",
     "@testing-library/svelte": "4.1.0",
+    "@tsconfig/svelte": "5.0.4",
+    "@vitest/coverage-istanbul": "1.4.0",
     "eslint": "8.57.0",
-    "prettier": "3.2.5"
-  },
-  "peerDependencies": {
-    "svelte": "4.2.12"
+    "eslint-plugin-svelte": "2.35.1",
+    "eslint-plugin-vitest": "0.4.1",
+    "prettier": "3.2.5",
+    "rimraf": "5.0.5",
+    "svelte-check": "3.6.9",
+    "vitest": "1.4.0"
   },
   "license": "MPL-2.0",
   "author": {
