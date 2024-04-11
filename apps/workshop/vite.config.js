@@ -96,9 +96,9 @@ const config = {
       defaultColorScheme: "light",
       favicon: "./static/favicon.svg",
       logo: {
-        dark: "./src/logo/combination-mark-light.svg",
-        light: "./src/logo/combination-mark-dark.svg",
-        square: "./src/logo/symbol.svg",
+        dark: "./src/lib/logo/combination-mark-light.svg",
+        light: "./src/lib/logo/combination-mark-dark.svg",
+        square: "./src/lib/logo/symbol.svg",
       },
       logoHref: "https://dusk.network",
       storeColorScheme: false,
@@ -109,6 +109,18 @@ const config = {
         {
           id: "top",
           title: "",
+        },
+        {
+          id: "foundations",
+          title: "Foundations",
+        },
+        {
+          id: "design-tokens",
+          title: "Design Tokens",
+        },
+        {
+          id: "patterns",
+          title: "Patterns",
         },
         {
           id: "components",

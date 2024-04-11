@@ -1,4 +1,4 @@
-import "@duskit/design-tokens/src/themes/dusk/theme.css";
+import "@duskit/design-tokens/src/skins/dusk/theme.css";
 import "./app.css";
 import { IntersectionObserverMock } from "@duskit/test-helpers";
 

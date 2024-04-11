@@ -1,0 +1,18 @@
+{
+  "source": [
+    "src/skins/dusk/**/*.json"
+  ],
+  "platforms": {
+    "css": {
+      "transformGroup": "css",
+      "buildPath": "dist/css/",
+      "files": [{
+        "destination": "variables.css",
+        "format": "css/variables"
+      }, {
+        "destination": "fonts.css",
+        "format": "css/fonts.css"
+      }]
+    }
+  }
+}

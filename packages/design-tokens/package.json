@@ -5,7 +5,8 @@
     "url": "https://github.com/dusk-network/duskit/issues"
   },
   "files": [
-    "src/themes/**/*"
+    "src/skins/**/*.css",
+    "dist/**/*"
   ],
   "repository": {
     "type": "git",
@@ -13,10 +14,12 @@
     "directory": "packages/design-tokens"
   },
   "scripts": {
+    "build": "npx style-dictionary build",
     "checks": "npm run format:check",
     "clean": "rimraf node_modules coverage",
     "format:check": "prettier . --check",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "prepare": "npm run build"
   },
   "type": "module",
   "dependencies": {
@@ -32,7 +35,8 @@
     "@dusk-network/prettier-config": "1.1.0",
     "eslint-plugin-vitest": "0.4.1",
     "prettier": "3.2.5",
-    "rimraf": "5.0.5"
+    "rimraf": "5.0.5",
+    "style-dictionary": "3.9.2"
   },
   "license": "MPL-2.0",
   "author": {
