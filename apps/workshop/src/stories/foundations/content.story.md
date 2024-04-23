@@ -31,10 +31,10 @@ Dusk's voice is:
 
 If you’re in a hurry, these are the most important content guidelines to keep in mind, in no particular order.
 
-- Write in plain English, don’t sound like a robot.
 - Be brief, remove unnecessary words like adjectives and adverbs.
 - Use active voice.
-- Use sentence case, and when in doubt, don’t capitalize.
+- User title case in headings.
+- Use sentence case everywhere else, and when in doubt, don’t capitalize.
 - Always capitalize Dusk.
 - Avoid gendered language.
 - Do not use slang or culturally-specific references.
@@ -42,7 +42,7 @@ If you’re in a hurry, these are the most important content guidelines to keep 
 - Avoid introducing humor to the interface.
 - Have someone else proofread your text.
 
-## Content guidelines
+## Content Guidelines
 
 ### Acronyms and abbreviations
 
