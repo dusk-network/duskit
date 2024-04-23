@@ -6,7 +6,7 @@ group: "foundations"
 
 # Content
 
-Keep the following principles in mind when creating UI content for GitHub.
+Keep the following principles in mind when creating UI content for Dusk.
 
 ## Be clear
 
