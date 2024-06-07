@@ -2,6 +2,6 @@
   font-family: "Soehne";
   font-style: normal;
   font-weight: 400;
-  src: url("../../fonts/soehne-buch.woff2") format("woff2")
+  src: url("../../fonts/soehne-buch.woff2") format("woff2");
   font-display: fallback;
 }

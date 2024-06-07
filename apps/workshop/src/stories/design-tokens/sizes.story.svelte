@@ -1,6 +1,9 @@
 <script>
+  /* eslint-disable svelte/require-optimized-style-attribute */
+
   export let Hst;
 
+  /* eslint-disable sort-keys */
   const tokens = {
     0: 0,
     1: "0.25rem",
@@ -50,18 +53,19 @@
     "11/12": "91.666667%",
     full: "100%",
   };
+  /* eslint-enable sort-keys */
 </script>
 
 <svelte:component
   this={Hst.Story}
-  layout={{ type: "single", iframe: false }}
+  layout={{ iframe: false, type: "single" }}
   icon="mdi:ruler"
   title="Sizes"
   group="design-tokens"
   responsiveDisabled
   autoPropsDisabled
 >
-  {#each Object.entries(tokens) as [key, value]}
+  {#each Object.entries(tokens) as [key, value] (key)}
     <div class="htw-flex htw-flex-col htw-gap-2 htw-my-8">
       <div class="htw-bg-gray-500/10">
         <div

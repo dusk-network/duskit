@@ -10,29 +10,27 @@ const globals = [
 
 export const themes = [
   {
-    filename: 'light',
+    filename: "light",
     source: [
       `src/skins/dusk/tokens/functional/border/light/light.json`,
       `src/skins/dusk/tokens/functional/color/light/light.json`,
-
     ],
     include: [
       ...globals,
       `src/skins/dusk/tokens/base/color/light/light.json`,
-      `src/skins/dusk/tokens/functional/color/light/light-primitives.json`
+      `src/skins/dusk/tokens/functional/color/light/light-primitives.json`,
     ],
   },
   {
-    filename: 'dark',
+    filename: "dark",
     source: [
       `src/skins/dusk/tokens/functional/border/dark/dark.json`,
       `src/skins/dusk/tokens/functional/color/dark/dark.json`,
-
     ],
     include: [
       ...globals,
       `src/skins/dusk/tokens/base/color/dark/dark.json`,
-      `src/skins/dusk/tokens/functional/color/dark/dark-primitives.json`
+      `src/skins/dusk/tokens/functional/color/dark/dark-primitives.json`,
     ],
-  }
-]
+  },
+];
