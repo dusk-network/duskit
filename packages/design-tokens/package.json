@@ -18,8 +18,7 @@
     "checks": "npm run format:check",
     "clean": "rimraf node_modules coverage",
     "format:check": "prettier . --check",
-    "format": "prettier . --write",
-    "prepare": "npm run build"
+    "format": "prettier . --write"
   },
   "type": "module",
   "dependencies": {

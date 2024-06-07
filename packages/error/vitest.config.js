@@ -7,6 +7,7 @@ export default defineConfig({
       all: true,
       include: ["src/**"],
       provider: "istanbul",
+      thresholds: { 100: true },
     },
     environment: "node",
     include: ["src/**/*.{test,spec}.{js,ts}"],

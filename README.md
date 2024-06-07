@@ -1,5 +1,15 @@
 # Duskit
 
+[![Duskit CI](https://github.com/dusk-network/duskit/actions/workflows/ci.yml/badge.svg)](https://github.com/dusk-network/duskit/actions/workflows/ci.yml)
+[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Fcomponents)](https://www.npmjs.com/package/@duskit/components)
+[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Fcurrency)](https://www.npmjs.com/package/@duskit/currency)
+[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Fdesign-tokens)](https://www.npmjs.com/package/@duskit/design-tokens)
+[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Ferror)](https://www.npmjs.com/package/@duskit/error)
+[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Fhttp)](https://www.npmjs.com/package/@duskit/http)
+[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Ficons)](https://www.npmjs.com/package/@duskit/icons)
+[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Fstring)](https://www.npmjs.com/package/@duskit/string)
+[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Ftest-helpers)](https://www.npmjs.com/package/@duskit/test-helpers)
+
 Duskit (Dusk Kit) contains Svelte components and JS utilities that can help you quickly build a Dusk web app.
 
 ## TOC
@@ -77,8 +87,8 @@ Refer to the package's README to see which commands are available.
 - `npm run checks` - runs all health checks (formatting, linting, type checking, tests)
 - `npm run clean` - runs the `clean` script for all packages (currently removes all `coverage` and `node_modules` folders)
 - `npm run dev` - runs the [Histoire](https://histoire.dev/) app in dev mode
-- `npm run format:check` - performs the formatting check
 - `npm run format` - fixes the formatting in all files
+- `npm run format:check` - performs the formatting check
 - `npm run lint` - performs the linting check
 - `npm run lint:fix` - fixes, where possible, linting errors
 - `npm run release` - [publishes][changeset-publish] a new release

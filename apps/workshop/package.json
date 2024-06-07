@@ -8,8 +8,8 @@
     "checks": "npm run format:check && npm run lint",
     "clean": "rimraf node_modules",
     "dev": "histoire dev",
-    "format:check": "prettier . --check",
     "format": "prettier . --write",
+    "format:check": "prettier . --check",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preview": "histoire preview --port 4567"

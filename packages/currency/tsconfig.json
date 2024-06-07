@@ -11,7 +11,8 @@
     "noImplicitAny": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "target": "es2022"
   },
   "exclude": ["coverage", "node_modules"]
 }
