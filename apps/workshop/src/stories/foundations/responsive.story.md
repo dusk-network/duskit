@@ -22,6 +22,7 @@ To guarantee maximum compatibility, pages should adapt to the [browser’s viewp
 To understand how to break down a page to work on smaller viewports, check out [Responsive foundations](/foundations/layout#responsive-foundations) and [Responsive behavior](/foundations/layout#responsive-behavior) sections in the [Layout](/foundations/layout) page.
 
 ## Figma Templates
+
 ...
 
 ## Minimum Target

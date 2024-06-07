@@ -13,17 +13,18 @@ icon: "mi:layout"
 ## Responsive foundations
 
 Duskit provides two levels of abstraction for handling responsive designs:
+
 - **Viewport ranges**, for defining the layout and navigation affordance of a page at a high level.
 - **Breakpoints**, for fine-tuning custom experiences.
 
 ### Viewport ranges
 
 ...
-Viewport range | Width range   | Columns  | Description
+Viewport range | Width range | Columns | Description
 ---------------|---------------|----------|------------
-`narrow`       | < 768px        | 1        | Supports a single-column layout. Also known as “mobile”.
-`regular`      | >= 768px      | Up to 2  | All desktop-friendly patterns start at this range.
-`wide`         | >= 1400px     | Up to 3  | Optional range when a 3rd layout column is needed.
+`narrow` | < 768px | 1 | Supports a single-column layout. Also known as “mobile”.
+`regular` | >= 768px | Up to 2 | All desktop-friendly patterns start at this range.
+`wide` | >= 1400px | Up to 3 | Optional range when a 3rd layout column is needed.
 
 ### Breakpoints
 
@@ -31,14 +32,14 @@ Breakpoints enable designers to fine-tune their responsive experiences, adjustin
 
 Breakpoint sizes should be simply seen as a unit in a ruler. The numbers are not opinionated into how they should be used when applied to a media query. That is, they don't refer to ranges that go upwards or downwards.
 
-Breakpoint | Size
------------|-------
-`xsmall`   | 320px
-`small`    | 544px
-`medium`   | 768px
-`large`    | 1012px
-`xlarge`   | 1280px
-`xxlarge`  | 1400px
+| Breakpoint | Size   |
+| ---------- | ------ |
+| `xsmall`   | 320px  |
+| `small`    | 544px  |
+| `medium`   | 768px  |
+| `large`    | 1012px |
+| `xlarge`   | 1280px |
+| `xxlarge`  | 1400px |
 
 ## Anatomy of a page
 

@@ -25,8 +25,8 @@ npm install @dusk-network/design-tokens
 ### Usage
 
 ```css
-@import '@dusk-network/design-tokens/css/fonts.css';
-@import '@dusk-network/design-tokens/css/variables.css';
+@import "@dusk-network/design-tokens/css/fonts.css";
+@import "@dusk-network/design-tokens/css/variables.css";
 ```
 
 ### Theming
@@ -34,7 +34,7 @@ npm install @dusk-network/design-tokens
 Duskit design token primitives are used to set less specific variables whose value depends on whether the document root has a `dark` class. If the `dark` class is present, Duskit components apply primitives to variables for use in dark mode, light mode is the default theme.
 
 ```html
-<body class="dark">
+<body class="dark"></body>
 ```
 
 ### Variables
@@ -43,6 +43,5 @@ Duskit design token primitives are used to set less specific variables whose val
 
 ## Available Themes
 
-* Light
-* Dark
-
+- Light
+- Dark

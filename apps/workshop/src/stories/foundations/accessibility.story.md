@@ -16,10 +16,10 @@ Dusk aims for Web Content Accessibility Guidelines (WCAG) 2.1 AA compliance. Thi
 
 Dusk aims to actively consider the needs of users whose disabilities fall into any of the following categories:
 
-* __Visual__: Anything disabilities related to sight, or technology that helps someone to see. This includes people who have different types of sight such as color blindness.
-* __Cognitive__: Any condition that affects concentration, memory, judgement, problem solving or logic solving.
-* __Mobility__: Any condition that affects bodily movement.
-* __Hearing__: Any disabilities related to sound or the technology that helps someone to hear.
+- **Visual**: Anything disabilities related to sight, or technology that helps someone to see. This includes people who have different types of sight such as color blindness.
+- **Cognitive**: Any condition that affects concentration, memory, judgement, problem solving or logic solving.
+- **Mobility**: Any condition that affects bodily movement.
+- **Hearing**: Any disabilities related to sound or the technology that helps someone to hear.
 
 ## Guidelines
 
@@ -27,16 +27,16 @@ For official guidance, always refer to the [WCAG 2.1 W3C documentation](https://
 
 ### Checklist
 
- 1. Have you annotated the headings on your feature?
- 2. Have you defined the focus/tabbing order on your feature?
- 3. Have you added screen reader labels for elements that are not focusable? (Dynamic content changes, images and their alt text)
- 4. If this is a new page outside the GitHub monolith, are the landmarks annotated?
- 5. Does the text meet color contrast?
- 6. Do graphic objects meet color contrast?
- 7. With color removed, can you still understand the design?
- 8. Can all revealable information (hover card, tooltips, accordions) be accessed with a keyboard or a mouse?
- 9. If the user increases the text size to 200%, is the page still usable?
- 10. When the screen reduces in size (down to 320px wide), is everything usable without scrolling horizontally? (There are a few exceptions to this rule: check 1.4.10 - Reflow for details)
+1.  Have you annotated the headings on your feature?
+2.  Have you defined the focus/tabbing order on your feature?
+3.  Have you added screen reader labels for elements that are not focusable? (Dynamic content changes, images and their alt text)
+4.  If this is a new page outside the GitHub monolith, are the landmarks annotated?
+5.  Does the text meet color contrast?
+6.  Do graphic objects meet color contrast?
+7.  With color removed, can you still understand the design?
+8.  Can all revealable information (hover card, tooltips, accordions) be accessed with a keyboard or a mouse?
+9.  If the user increases the text size to 200%, is the page still usable?
+10. When the screen reduces in size (down to 320px wide), is everything usable without scrolling horizontally? (There are a few exceptions to this rule: check 1.4.10 - Reflow for details)
 
 ## Common Patterns
 
@@ -50,8 +50,8 @@ To help you determine the best way to communicate the information of an image to
 
 Depending the purpose of the images, they can be categorized into one of two categories: [informative](https://www.w3.org/WAI/tutorials/images/informative/) or [decorative](https://www.w3.org/WAI/tutorials/images/decorative/) images.
 
-* __Informative__ images convey a simple concept or information that can be expressed in a short phrase or sentence. The alt text must contain the description of what is displayed visually in the image.
-* __Decorative__ images don’t add information to the content of a page. For example, an image that is included to make the website more visually attractive. You will always get an affirmative answer to the question "if the image was removed, would the user still get all the information from the page?".
+- **Informative** images convey a simple concept or information that can be expressed in a short phrase or sentence. The alt text must contain the description of what is displayed visually in the image.
+- **Decorative** images don’t add information to the content of a page. For example, an image that is included to make the website more visually attractive. You will always get an affirmative answer to the question "if the image was removed, would the user still get all the information from the page?".
 
 #### Guidelines
 
@@ -77,14 +77,14 @@ These guidelines will help you determine when assistive tools should output a me
 
 #### Guidelines
 
-- __Always__: Announce location changes — Help users understand where they are on a page. Maintain positional awareness.
-- __Always__: Announce results of user actions — Give feedback about the success or failure directly following a user action.
-- __Sometimes__: Announce other changes — Explore case-by-case when changes are disconnected from the user’s place and the success or failure of the user’s actions.
-For example:
+- **Always**: Announce location changes — Help users understand where they are on a page. Maintain positional awareness.
+- **Always**: Announce results of user actions — Give feedback about the success or failure directly following a user action.
+- **Sometimes**: Announce other changes — Explore case-by-case when changes are disconnected from the user’s place and the success or failure of the user’s actions.
+  For example:
 
-    - Distracting change announcements: When other users add issue comments; when presence indicators appear
+      - Distracting change announcements: When other users add issue comments; when presence indicators appear
 
-    - Essential change announcements: When log lines stream in on the GitHub Actions workflow run page
+      - Essential change announcements: When log lines stream in on the GitHub Actions workflow run page
 
 ### Descriptive buttons
 
@@ -94,7 +94,7 @@ Labeling buttons properly let's users know what will happen when they activate t
 
 In order for a button’s purpose to be clear to all users, it must have a meaningful name.
 
-__What is a meaningful name and why it is necessary?__
+**What is a meaningful name and why it is necessary?**
 
 A meaningful name describes the button’s purpose: the action that occurs when the button is activated (for example: removing a list item), and the action’s associated context (for example: the specific item to be removed). To avoid unnecessary verbosity, button names should be as succinct as possible while still being descriptive and unique.
 
@@ -154,7 +154,7 @@ Keep in mind high-contrast mode, dark mode, and light mode. Ensure the focus ind
 
 Most interactive elements will have a focus indicator automatically.
 
-For example, if you use a __button__ element, it should automatically receive focus when using a keyboard. If you need to create your own focus indicator, you can do so with the CSS pseudo-class :focus. You may also need to add/remove a class with JavaScript to apply/remove the focus indicator.
+For example, if you use a **button** element, it should automatically receive focus when using a keyboard. If you need to create your own focus indicator, you can do so with the CSS pseudo-class :focus. You may also need to add/remove a class with JavaScript to apply/remove the focus indicator.
 
 A common complaint when using :focus is that when a user clicks on a button, for example, they see the focus indicator which isn't always necessary for a mouse user. This may lead to an engineer removing the outline entirely — never remove the focus indicator unless you are replacing it with a border or some other visual indicator. Using :focus-visible will prevent the focus indicator from being seen for mouse users, but show it for keyboard users.
 
@@ -171,7 +171,7 @@ Headings play a critical role in communicating the structure of a page. Heading 
 Best practices:
 
 - Avoid skipping heading levels. `h1` should be followed by `h2` and so on.
-Do not use heading elements solely for resizing text.
+  Do not use heading elements solely for resizing text.
 - Avoid setting more than one `h1` per page. `h1` should be reserved to describe the page as a whole, similar to a page "title". (Dialog headings are excepted from this rule.)
 
 #### Why?
@@ -233,15 +233,16 @@ Some examples of this are:
 ##### For Designers
 
 - Visually demarcate your links by using:
-    - the accent color in combination with default for the surrounding text on any of the canvas.
-    - an underline for the link text
-    - an icon before or after the link text
-    - using a background shape behind the link
-    - using a link color that has a 3:1 contrast against the surrounding text color AND a 4.5:1 against the background color
+  - the accent color in combination with default for the surrounding text on any of the canvas.
+  - an underline for the link text
+  - an icon before or after the link text
+  - using a background shape behind the link
+  - using a link color that has a 3:1 contrast against the surrounding text color AND a 4.5:1 against the background color
 - Make sure a link's purpose can be understood from the link text alone, without needing the surrounding context.
 - Links should look like links, not buttons, except in rare circumstances, like calls to action.
 
 ##### For Engineers
+
     - ...
     - ...
     - ...
@@ -334,10 +335,10 @@ Tooltips should never be set on non-interactive elements (for example, div, span
 
 ##### For Designers
 
--   Reserve tooltips for components like icon buttons.
--   Keep your tooltip text minimal.
--   Only include tooltips on other components as a last resort.
--   Never include tooltips on non-interactive components (div, span, p).
+- Reserve tooltips for components like icon buttons.
+- Keep your tooltip text minimal.
+- Only include tooltips on other components as a last resort.
+- Never include tooltips on non-interactive components (div, span, p).
 
 ##### For Developers
 
@@ -359,4 +360,5 @@ If you come across a design or a page with a tooltip on a static element (for ex
 - [a11ymatters patterns](https://www.a11ymatters.com/patterns) includes useful information for developers.
 
 ## Tools
+
 ...

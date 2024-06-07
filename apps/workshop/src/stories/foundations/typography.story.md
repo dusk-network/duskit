@@ -11,6 +11,7 @@ group: "foundations"
 Typography design tokens use `rem` units for a more [accessible](https://www.w3.org/WAI/WCAG21/Understanding/resize-text.html) browser zoom experience.
 
 ### Headings
+
 ...
 
 ### Body

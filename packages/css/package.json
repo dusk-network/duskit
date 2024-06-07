@@ -1,0 +1,32 @@
+{
+  "name": "@duskit/css",
+  "version": "0.0.0",
+  "bugs": {
+    "url": "https://github.com/dusk-network/duskit/issues"
+  },
+  "files": [
+    "src/**/*.css",
+    "fonts/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dusk-network/duskit.git",
+    "directory": "packages/css"
+  },
+  "scripts": {
+    "checks": "npm run format:check",
+    "format:check": "prettier . --check",
+    "format": "prettier . --write"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@dusk-network/prettier-config": "1.1.0",
+    "prettier": "3.2.5"
+  },
+  "license": "MPL-2.0",
+  "author": {
+    "name": "Dusk Network B.V.",
+    "url": "https://dusk.network/",
+    "mail": "info@dusk.network"
+  }
+}

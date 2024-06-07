@@ -14,7 +14,7 @@
     "directory": "packages/design-tokens"
   },
   "scripts": {
-    "build": "npx style-dictionary build",
+    "build": "node ./bin/build.js",
     "checks": "npm run format:check",
     "clean": "rimraf node_modules coverage",
     "format:check": "prettier . --check",
@@ -36,7 +36,8 @@
     "eslint-plugin-vitest": "0.4.1",
     "prettier": "3.2.5",
     "rimraf": "5.0.5",
-    "style-dictionary": "3.9.2"
+    "style-dictionary": "3.9.2",
+    "style-dictionary-utils": "2.2.1"
   },
   "license": "MPL-2.0",
   "author": {

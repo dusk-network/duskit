@@ -11,10 +11,9 @@ Duskit is made for Dusk, it embodies the ethos of the Dusk community, serving as
 
 ...
 
-
 ### Design Tokens
 
-Duskit uses design tokens to deliver color, font, size and time information to the UI.  Duskit represents color design tokens as CSS variables for development and Figma design tokens for design work, respectively.
+Duskit uses design tokens to deliver color, font, size and time information to the UI. Duskit represents color design tokens as CSS variables for development and Figma design tokens for design work, respectively.
 
 #### Naming Convention
 

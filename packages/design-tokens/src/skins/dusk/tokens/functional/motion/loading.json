@@ -1,3 +1,13 @@
 {
-
+  "motion": {
+    "loading": {
+      "delay": {
+        "default": {
+          "$value": "1000ms",
+          "$type": "duration",
+          "$description": "The standard delay before changing the state of the UI (e.g. displaying a loading indicator)"
+        }
+      }
+    }
+  }
 }
