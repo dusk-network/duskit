@@ -1,0 +1,96 @@
+{
+  "boxShadow": {
+    "thin": {
+      "$value": "inset 0 0 0 {borderWidth.thin}",
+      "$type": "string"
+    },
+    "thick": {
+      "$value": "inset 0 0 0 {borderWidth.thick}",
+      "$type": "string"
+    },
+    "thicker": {
+      "$value": "inset 0 0 0 {borderWidth.thicker}",
+      "$type": "string"
+    }
+  },
+  "borderWidth": {
+    "thin": {
+      "$value": "max(1px, 0.0625rem)",
+      "$type": "string"
+    },
+    "thick": {
+      "$value": "max(2px, 0.125rem)",
+      "$type": "string"
+    },
+    "thicker": {
+      "$value": "max(4px, 0.25rem)",
+      "$type": "string"
+    }
+  },
+  "borderRadius": {
+    "small": {
+      "$value": "3px",
+      "$type": "dimension",
+      "$extensions": {
+        "org.dusk.figma": {
+          "collection": "functional/size",
+          "scopes": ["radius"],
+          "codeSyntax": {
+            "web": "var(--borderRadius-small)"
+          }
+        }
+      }
+    },
+    "medium": {
+      "$value": "6px",
+      "$type": "dimension",
+      "$extensions": {
+        "org.dusk.figma": {
+          "collection": "functional/size",
+          "scopes": ["radius"],
+          "codeSyntax": {
+            "web": "var(--borderRadius-medium)"
+          }
+        }
+      }
+    },
+    "large": {
+      "$value": "12px",
+      "$type": "dimension",
+      "$extensions": {
+        "org.dusk.figma": {
+          "collection": "functional/size",
+          "scopes": ["radius"],
+          "codeSyntax": {
+            "web": "var(--borderRadius-large)"
+          }
+        }
+      }
+    },
+    "full": {
+      "$value": "9999px",
+      "$type": "dimension",
+      "$extensions": {
+        "org.dusk.figma": {
+          "collection": "functional/size",
+          "scopes": ["radius"],
+          "codeSyntax": {
+            "web": "var(--borderRadius-full)"
+          }
+        }
+      }
+    }
+  },
+  "outline": {
+    "focus": {
+      "offset": {
+        "$value": "-2px",
+        "$type": "dimension"
+      },
+      "width": {
+        "$value": "2px",
+        "$type": "dimension"
+      }
+    }
+  }
+}

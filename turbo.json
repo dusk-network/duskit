@@ -3,7 +3,7 @@
   "experimentalUI": true,
   "pipeline": {
     "build": {
-      "outputs": [".histoire/dist/**"]
+      "outputs": [".histoire/dist/**", "dist/**"]
     },
     "checks": {
       "outputMode": "errors-only"

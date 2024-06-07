@@ -8,9 +8,9 @@
     "mail": "info@dusk.network"
   },
   "contributors": [
-    "Kieran Hall <kieran@dusk.network>",
     "Alexandru Panturu <alex@dusk.network>",
     "Andrea Scartabelli <andrea@dusk.network>",
+    "Kieran Hall <kieran@dusk.network>",
     "Norton Andreev <norton@dusk.network>"
   ],
   "homepage": "https://dusk-network.github.io/duskit/",
@@ -23,6 +23,7 @@
   "workspaces": [
     "apps/workshop",
     "packages/components",
+    "packages/css",
     "packages/currency",
     "packages/design-tokens",
     "packages/error",

@@ -10,6 +10,7 @@
 .histoire
 node_modules
 build
+dist
 storybook-static
 build-storybook.log
 coverage

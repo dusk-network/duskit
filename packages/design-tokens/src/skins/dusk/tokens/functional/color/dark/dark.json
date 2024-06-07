@@ -1,0 +1,18 @@
+{
+  "page": {
+    "header": {
+      "bgColor": {
+        "$value": "{bgColor.default}",
+        "$type": "color",
+        "$extensions": {
+          "org.dusk.figma": {
+            "collection": "mode",
+            "mode": "dark",
+            "group": "component",
+            "scopes": ["bgColor"]
+          }
+        }
+      }
+    }
+  }
+}

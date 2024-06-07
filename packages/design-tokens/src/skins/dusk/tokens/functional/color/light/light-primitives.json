@@ -1,0 +1,19 @@
+{
+  "bgColor": {
+    "default": {
+      "$value": "{base.color.white}",
+      "$type": "color",
+      "$extensions": {
+        "org.dusk.figma": {
+          "collection": "mode",
+          "mode": "light",
+          "scopes": ["bgColor", "borderColor"],
+          "group": "semantic",
+          "codeSyntax": {
+            "web": "var(--bgColor-default)"
+          }
+        }
+      }
+    }
+  }
+}
