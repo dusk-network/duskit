@@ -1,4 +1,4 @@
-// stylelint-disable
+/* stylelint-disable */
 /*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
 
 /**
@@ -6,7 +6,7 @@
  * 2. Prevent adjustments of font size after orientation changes in IE and iOS.
  */
 
- html {
+html {
   font-size: 16px; /* this can be removed when all of GitHub uses rem units */
   font-family: sans-serif; /* 1 */
   -ms-text-size-adjust: 100%; /* 2 */

@@ -1,5 +1,8 @@
 .dusk-checkbox:enabled {
-  transition: all 0.2s linear 0s;
+  transition-delay: 0s;
+  transition-timing-function: linear;
+  transition-duration: 0.2s;
+  transition-property: background-color, border-color, color, transform;
 }
 
 .dusk-checkbox:enabled:focus {
@@ -9,14 +12,14 @@
 
 .dusk-checkbox {
   display: inline-block;
-  appearance: none;
-  background-color: transparent;
-  border-style: solid;
-  border-color: var(--checkbox-control-border-color);
-  border-radius: var(--checkbox-control-border-radius);
-  border-width: var(--checkbox-control-border-width);
   width: var(--checkbox-control-size);
   height: var(--checkbox-control-size);
+  background-color: transparent;
+  border-color: var(--checkbox-control-border-color);
+  border-style: solid;
+  border-width: var(--checkbox-control-border-width);
+  border-radius: var(--checkbox-control-border-radius);
+  appearance: none;
   flex-shrink: 0;
 }
 
@@ -26,7 +29,7 @@
 
 .dusk-checkbox:disabled,
 .dusk-checkbox:checked:disabled {
-  opacity: 0.5;
   /* workaround for Safari */
   pointer-events: none;
+  opacity: 0.5;
 }
