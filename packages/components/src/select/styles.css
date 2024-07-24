@@ -1,38 +1,41 @@
 .dusk-select:enabled {
-  transition: all 0.2s linear 0s;
+  transition-delay: 0s;
+  transition-timing-function: linear;
+  transition-duration: 0.2s;
+  transition-property: background-color, border-color, color, transform;
 }
 
 :is(.dusk-select:enabled):focus {
   border-color: var(--secondary-color-variant-dark);
+  outline: 0 none;
   box-shadow: inset 0 0 0 var(--control-border-size)
     var(--secondary-color-variant-dark);
-  outline: 0 none;
 }
 
 .dusk-select {
   display: inline-block;
-  appearance: none;
-  font-size: var(--control-font-size);
   padding: var(--control-padding);
   padding-right: 2.25em;
+  font-size: var(--control-font-size);
   background-color: var(--control-bg-color);
-  border-color: var(--control-border-color);
-  border-radius: var(--control-border-radius-size);
-  border-style: solid;
-  border-width: var(--control-border-size);
-  background-position:
-    calc(100% - 1.4em) 50%,
-    calc(100% - 1em) 50%;
-  background-size:
-    0.4em 0.4em,
-    0.4em 0.4em;
-  background-repeat: no-repeat;
   background-image: linear-gradient(
       45deg,
       transparent 50%,
       var(--control-text-color) 50%
     ),
     linear-gradient(135deg, var(--control-text-color) 50%, transparent 50%);
+  background-repeat: no-repeat;
+  background-position:
+    calc(100% - 1.4em) 50%,
+    calc(100% - 1em) 50%;
+  background-size:
+    0.4em 0.4em,
+    0.4em 0.4em;
+  border-color: var(--control-border-color);
+  border-style: solid;
+  border-width: var(--control-border-size);
+  border-radius: var(--control-border-radius-size);
+  appearance: none;
 }
 
 .dusk-select,

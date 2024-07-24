@@ -3,9 +3,9 @@
 
   --page-background-color: var(--smokey-black);
   --background-color: var(--light-grey);
-  --background-color-alt: #fff;
+  --background-color-alt: white;
   --primary-color: var(--smokey-black);
-  --primary-color-variant-dark: #000;
+  --primary-color-variant-dark: black;
   --primary-color-variant-light: var(--jet);
   --secondary-color: var(--cornflower);
   --secondary-color-variant-dark: var(--cornflower-dark);
@@ -16,17 +16,15 @@
   --error-color: var(--error);
   --info-color: var(--info);
   --danger-color: var(--error);
-
   --on-background-color: var(--smokey-black);
   --on-primary-color: var(--light-grey);
   --on-secondary-color: var(--smokey-black);
   --on-surface-color: var(--smokey-black);
-
   --on-error-color: white;
 
   /* Typography */
 
-  --main-font-family: "Soehne", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --main-font-family: "Soehne", "Helvetica Neue", helvetica, arial, sans-serif;
   --main-font-size: 16px;
   --mono-font-family: "Soehne Mono", monospace;
 
@@ -51,21 +49,18 @@
   --control-padding: 0.9em 1.25em;
   --control-small-font-size: 0.875em;
   --control-small-padding: 0.625em 0.875em;
-
-  --control-bg-color: #fff;
+  --control-bg-color: white;
   --control-bg-color-hover: var(--silver-metallic);
   --control-border-color: transparent;
   --control-border-color-hover: transparent;
   --control-text-color: var(--smokey-black);
   --control-text-color-hover: var(--smokey-black);
-
   --control-secondary-bg-color: var(--smokey-black);
   --control-secondary-bg-color-hover: var(--cornflower);
   --control-secondary-border-color: transparent;
   --control-secondary-border-color-hover: transparent;
-  --control-secondary-text-color: #fff;
+  --control-secondary-text-color: white;
   --control-secondary-text-color-hover: var(--smokey-black);
-
   --control-tertiary-bg-color: transparent;
   --control-tertiary-bg-color-hover: transparent;
   --control-tertiary-border-color: var(--smokey-black);

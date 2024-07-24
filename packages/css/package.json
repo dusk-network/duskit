@@ -14,14 +14,22 @@
     "directory": "packages/css"
   },
   "scripts": {
-    "checks": "npm run format:check",
+    "checks": "npm run format:check && npm run lint",
     "format:check": "prettier . --check",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "lint": "stylelint --quiet --rd 'src/**/*.css'",
+    "lint:fix": "stylelint --quiet --rd 'src/**/*.css' --fix"
   },
   "type": "module",
   "devDependencies": {
     "@dusk-network/prettier-config": "1.1.0",
-    "prettier": "3.2.5"
+    "@dusk-network/stylelint-config": "1.0.6",
+    "prettier": "3.2.5",
+    "stylelint": "16.3.1",
+    "stylelint-config-standard": "36.0.0",
+    "stylelint-no-unsupported-browser-features": "8.0.1",
+    "stylelint-order": "6.0.4",
+    "stylelint-selector-bem-pattern": "4.0.0"
   },
   "license": "MPL-2.0",
   "author": {

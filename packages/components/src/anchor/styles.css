@@ -1,6 +1,7 @@
 .dusk-anchor {
   color: var(--anchor-color);
 }
+
 .dusk-anchor:visited {
   color: var(--anchor-color-visited);
 }

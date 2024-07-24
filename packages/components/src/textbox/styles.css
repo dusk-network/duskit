@@ -1,23 +1,26 @@
 .dusk-textbox:enabled {
-  transition: all 0.2s linear 0s;
+  transition-delay: 0s;
+  transition-timing-function: linear;
+  transition-duration: 0.2s;
+  transition-property: background-color, border-color, color, transform;
 }
 
 :is(.dusk-textbox:read-write:enabled):focus {
   border-color: var(--secondary-color-variant-dark);
+  outline: 0 none;
   box-shadow: inset 0 0 0 var(--control-border-size)
     var(--secondary-color-variant-dark);
-  outline: 0 none;
 }
 
 .dusk-textbox {
-  font-size: var(--control-font-size);
   padding: var(--control-padding);
+  font-size: var(--control-font-size);
+  color: var(--control-text-color);
   background-color: var(--control-bg-color);
   border-color: var(--control-border-color);
-  border-radius: var(--control-border-radius-size);
   border-style: solid;
   border-width: var(--control-border-size);
-  color: var(--control-text-color);
+  border-radius: var(--control-border-radius-size);
 }
 
 .dusk-textbox:disabled,

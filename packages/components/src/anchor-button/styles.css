@@ -1,40 +1,43 @@
 .dusk-anchor-button:not(.dusk-anchor-button__disabled) {
-  transition: all 0.2s linear 0s;
+  transition-delay: 0s;
+  transition-timing-function: linear;
+  transition-duration: 0.2s;
+  transition-property: background-color, border-color, color, transform;
 }
 
 :is(.dusk-anchor-button:not(.dusk-anchor-button__disabled)):focus {
   border-color: var(--secondary-color-variant-dark);
+  outline: 0 none;
   box-shadow: inset 0 0 0 var(--control-border-size)
     var(--secondary-color-variant-dark);
-  outline: 0 none;
 }
 
 .dusk-anchor-button {
-  appearance: button;
-  text-decoration: none;
   text-align: center;
+  text-decoration: none;
+  appearance: button;
 }
 
 .dusk-anchor-button.dusk-anchor-button--disabled {
-  cursor: default;
   pointer-events: none;
+  cursor: default;
 }
 
 .dusk-anchor-button,
 .dusk-anchor-button:visited {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
   line-height: 1;
-  border-radius: var(--control-border-radius-size);
+  text-transform: uppercase;
   border-style: solid;
   border-width: var(--control-border-size);
-  text-transform: uppercase;
-  transform-origin: center center;
+  border-radius: var(--control-border-radius-size);
   transition-delay: 0s;
+  transition-timing-function: ease-in-out;
   transition-duration: 0.2s;
   transition-property: background-color, border-color, color, transform;
-  transition-timing-function: ease-in-out;
+  transform-origin: center center;
+  align-items: center;
+  justify-content: center;
 }
 
 .dusk-anchor-button.dusk-anchor-button--disabled,
@@ -44,11 +47,11 @@
 }
 
 .dusk-anchor-button > span {
-  flex: 1;
   display: inline-block;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
 }
 
 .dusk-anchor-button:not(.dusk-anchor-button--disabled):active {
@@ -71,37 +74,37 @@
 
 .dusk-anchor-button--size--normal,
 .dusk-anchor-button--size--normal:visited {
+  padding: var(--control-padding);
   font-size: var(--control-font-size);
   gap: calc(var(--control-font-size) / 2);
-  padding: var(--control-padding);
 }
 
 .dusk-anchor-button--size--small,
 .dusk-anchor-button--size--small:visited {
+  padding: var(--control-small-padding);
   font-size: var(--control-small-font-size);
   gap: calc(var(--control-small-font-size) / 2);
-  padding: var(--control-small-padding);
 }
 
 .dusk-anchor-button--variant--primary,
 .dusk-anchor-button--variant--primary:visited {
+  color: var(--control-text-color);
   background-color: var(--control-bg-color);
   border-color: var(--control-border-color);
-  color: var(--control-text-color);
 }
 
 .dusk-anchor-button--variant--primary:not(.dusk-anchor-button--disabled):active,
 .dusk-anchor-button--variant--primary:not(.dusk-anchor-button--disabled):hover {
+  color: var(--control-text-color-hover);
   background-color: var(--control-bg-color-hover);
   border-color: var(--control-border-color-hover);
-  color: var(--control-text-color-hover);
 }
 
 .dusk-anchor-button--variant--secondary,
 .dusk-anchor-button--variant--secondary:visited {
+  color: var(--control-secondary-text-color);
   background-color: var(--control-secondary-bg-color);
   border-color: var(--control-secondary-border-color);
-  color: var(--control-secondary-text-color);
 }
 
 .dusk-anchor-button--variant--secondary:not(
@@ -110,16 +113,16 @@
 .dusk-anchor-button--variant--secondary:not(
     .dusk-anchor-button--disabled
   ):hover {
+  color: var(--control-secondary-text-color-hover);
   background-color: var(--control-secondary-bg-color-hover);
   border-color: var(--control-secondary-border-color-hover);
-  color: var(--control-secondary-text-color-hover);
 }
 
 .dusk-anchor-button--variant--tertiary,
 .dusk-anchor-button--variant--tertiary:visited {
+  color: var(--control-tertiary-text-color);
   background-color: var(--control-tertiary-bg-color);
   border-color: var(--control-tertiary-border-color);
-  color: var(--control-tertiary-text-color);
 }
 
 .dusk-anchor-button--variant--tertiary:not(
@@ -128,20 +131,20 @@
 .dusk-anchor-button--variant--tertiary:not(
     .dusk-anchor-button--disabled
   ):hover {
+  color: var(--control-tertiary-text-color-hover);
   background-color: var(--control-tertiary-bg-color-hover);
   border-color: var(--control-tertiary-border-color-hover);
-  color: var(--control-tertiary-text-color-hover);
 }
 
 .dusk-anchor-button.dusk-anchor-button--variant--quaternary {
+  padding: 0 0.3em;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--control-text-color);
+  text-align: left;
+  text-transform: none;
   background-color: transparent;
   border-color: transparent;
-  color: var(--control-text-color);
-  text-transform: none;
-  font-weight: 700;
-  text-align: left;
-  padding: 0 0.3em;
-  line-height: 1.5;
 }
 
 .dusk-anchor-button--variant--quaternary:not(
@@ -150,6 +153,6 @@
 .dusk-anchor-button--variant--quaternary:not(
     .dusk-anchor-button--disabled
   ):active {
-  background-color: inherit;
   color: var(--secondary-color);
+  background-color: inherit;
 }

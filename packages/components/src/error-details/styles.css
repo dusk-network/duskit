@@ -1,6 +1,6 @@
 .dusk-error-details__summary {
-  outline: none;
   cursor: default;
+  outline: none;
 
   &::marker {
     font-size: 1.2em;
@@ -15,6 +15,6 @@
 .dusk-error-details__error {
   margin-top: var(--default-gap);
   font-size: 0.875em;
-  white-space: pre-line;
   word-break: break-word;
+  white-space: pre-line;
 }
