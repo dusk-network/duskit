@@ -1,9 +1,5 @@
-/* eslint-disable import/no-unresolved */
-
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { defineConfig } from "vitest/config";
-
-/* eslint-enable import/no-unresolved */
 
 export default defineConfig({
   plugins: [svelte({ hot: !process.env.VITEST })],

@@ -1,18 +1,22 @@
 {
+  "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["ESNext", "WebWorker"],
+    "lib": ["DOM", "ESNext"],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "noEmit": true,
     "noImplicitAny": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "target": "ESNext"
+    "skipLibCheck": false,
+    "target": "ESNext",
+    "types": [
+      "../../node_modules/@testing-library/jest-dom/types/vitest.d.ts",
+      "lamb-types"
+    ]
   },
   "exclude": ["coverage", "node_modules"]
 }

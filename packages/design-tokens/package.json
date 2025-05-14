@@ -1,6 +1,9 @@
 {
-  "name": "@duskit/design-tokens",
-  "version": "0.0.0",
+  "author": {
+    "name": "Dusk Network B.V.",
+    "url": "https://dusk.network/",
+    "mail": "info@dusk.network"
+  },
   "bugs": {
     "url": "https://github.com/dusk-network/duskit/issues"
   },
@@ -8,6 +11,8 @@
     "src/skins/**/*.css",
     "dist/**/*"
   ],
+  "license": "MPL-2.0",
+  "name": "@duskit/design-tokens",
   "repository": {
     "type": "git",
     "url": "git@github.com:dusk-network/duskit.git",
@@ -16,11 +21,12 @@
   "scripts": {
     "build": "node ./bin/build.js",
     "checks": "npm run format:check",
-    "clean": "rimraf node_modules coverage",
+    "clean": "rimraf node_modules dist",
     "format:check": "prettier . --check",
     "format": "prettier . --write"
   },
   "type": "module",
+  "version": "0.0.0",
   "dependencies": {
     "autoprefixer": "10.4.19",
     "postcss": "8.4.38",
@@ -32,16 +38,9 @@
   },
   "devDependencies": {
     "@dusk-network/prettier-config": "1.1.0",
-    "eslint-plugin-vitest": "0.4.1",
-    "prettier": "3.2.5",
-    "rimraf": "5.0.5",
+    "prettier": "3.5.3",
+    "rimraf": "6.0.1",
     "style-dictionary": "3.9.2",
     "style-dictionary-utils": "2.2.1"
-  },
-  "license": "MPL-2.0",
-  "author": {
-    "name": "Dusk Network B.V.",
-    "url": "https://dusk.network/",
-    "mail": "info@dusk.network"
   }
 }

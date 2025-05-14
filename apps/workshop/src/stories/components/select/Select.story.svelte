@@ -1,5 +1,4 @@
 <script>
-  // eslint-disable-next-line import/named
   import { logEvent } from "histoire/client";
   import { Select } from "@duskit/components";
 

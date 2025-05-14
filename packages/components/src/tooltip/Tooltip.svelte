@@ -1,7 +1,6 @@
 <svelte:options immutable={true} />
 
 <script>
-  // eslint-disable-next-line import/no-unresolved
   import { writable } from "svelte/store";
   import { onDestroy } from "svelte";
   import {

@@ -15,6 +15,6 @@
 .dusk-error-details__error {
   margin-top: var(--default-gap);
   font-size: 0.875em;
-  word-break: break-word;
+  overflow-wrap: break-word;
   white-space: pre-line;
 }

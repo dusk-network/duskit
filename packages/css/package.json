@@ -1,6 +1,9 @@
 {
-  "name": "@duskit/css",
-  "version": "0.0.0",
+  "author": {
+    "name": "Dusk Network B.V.",
+    "url": "https://dusk.network/",
+    "mail": "info@dusk.network"
+  },
   "bugs": {
     "url": "https://github.com/dusk-network/duskit/issues"
   },
@@ -8,6 +11,8 @@
     "src/**/*.css",
     "fonts/**/*"
   ],
+  "license": "MPL-2.0",
+  "name": "@duskit/css",
   "repository": {
     "type": "git",
     "url": "git@github.com:dusk-network/duskit.git",
@@ -21,20 +26,15 @@
     "lint:fix": "stylelint --quiet --rd 'src/**/*.css' --fix"
   },
   "type": "module",
+  "version": "0.0.0",
   "devDependencies": {
     "@dusk-network/prettier-config": "1.1.0",
     "@dusk-network/stylelint-config": "1.0.6",
-    "prettier": "3.2.5",
-    "stylelint": "16.3.1",
-    "stylelint-config-standard": "36.0.0",
-    "stylelint-no-unsupported-browser-features": "8.0.1",
-    "stylelint-order": "6.0.4",
+    "prettier": "3.5.3",
+    "stylelint": "16.19.1",
+    "stylelint-config-standard": "38.0.0",
+    "stylelint-no-unsupported-browser-features": "8.0.4",
+    "stylelint-order": "7.0.0",
     "stylelint-selector-bem-pattern": "4.0.0"
-  },
-  "license": "MPL-2.0",
-  "author": {
-    "name": "Dusk Network B.V.",
-    "url": "https://dusk.network/",
-    "mail": "info@dusk.network"
   }
 }

@@ -4,15 +4,14 @@
     "checkJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["ESNext", "WebWorker"],
+    "lib": ["ESNext"],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "noEmit": true,
     "noImplicitAny": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "strict": true,
     "target": "ESNext"
-  },
-  "exclude": ["coverage", "node_modules"]
+  }
 }

@@ -20,7 +20,6 @@
   };
 </script>
 
-<!-- eslint-disable svelte/require-optimized-style-attribute -->
 <div
   style={`background-color: ${bgColor ? `${bgColor}` : "var(--secondary-color)"};
 			 color: ${color ? `${color}` : "var(--on-secondary-color)"}`}
@@ -28,4 +27,3 @@
 >
   <slot />
 </div>
-<!-- eslint-enable svelte/require-optimized-style-attribute -->

@@ -1,9 +1,16 @@
 {
-  "name": "@duskit/icons",
-  "version": "0.0.0",
+  "author": {
+    "name": "Dusk Network B.V.",
+    "url": "https://dusk.network/",
+    "mail": "info@dusk.network"
+  },
   "bugs": {
     "url": "https://github.com/dusk-network/duskit/issues"
   },
+  "license": "MPL-2.0",
+  "main": "index.js",
+  "module": "index.js",
+  "name": "@duskit/icons",
   "repository": {
     "type": "git",
     "url": "git@github.com:dusk-network/duskit.git",
@@ -18,20 +25,16 @@
     "lint:fix": "eslint . --fix"
   },
   "type": "module",
-  "main": "index.js",
-  "module": "index.js",
+  "version": "0.0.0",
   "devDependencies": {
-    "@dusk-network/eslint-config": "3.3.1",
+    "@dusk-network/eslint-config": "4.0.1",
     "@dusk-network/prettier-config": "1.1.0",
-    "eslint": "8.57.0",
-    "eslint-plugin-vitest": "0.4.1",
-    "prettier": "3.2.5",
-    "rimraf": "5.0.5"
-  },
-  "license": "MPL-2.0",
-  "author": {
-    "name": "Dusk Network B.V.",
-    "url": "https://dusk.network/",
-    "mail": "info@dusk.network"
+    "@eslint/js": "9.27.0",
+    "eslint": "9.27.0",
+    "eslint-config-prettier": "10.1.5",
+    "eslint-import-resolver-typescript": "4.3.5",
+    "globals": "16.1.0",
+    "prettier": "3.5.3",
+    "rimraf": "6.0.1"
   }
 }

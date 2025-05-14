@@ -1,11 +1,4 @@
-// prettier-ignore
-import {
-afterEach,
-describe,
-expect,
-it,
-vi
-} from "vitest"
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render } from "@testing-library/svelte";
 import { Textbox } from "..";
 

@@ -1,2 +1,3 @@
-apps/**
-packages/**
+apps/*/coverage/**
+packages/*/coverage/**
+**/.turbo/**

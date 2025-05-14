@@ -1,5 +1,4 @@
 <script>
-  /* eslint-disable svelte/require-optimized-style-attribute */
   export let Hst;
 
   const tokens = {};
