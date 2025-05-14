@@ -1,8 +1,11 @@
 import * as matchers from "@testing-library/jest-dom/matchers";
 import { expect } from "vitest";
 import "jsdom-worker";
-// prettier-ignore
-import { IntersectionObserverMock, ResizeObserverMock } from "@duskit/test-helpers";
+
+import {
+  IntersectionObserverMock,
+  ResizeObserverMock,
+} from "@duskit/test-helpers";
 
 expect.extend(matchers);
 

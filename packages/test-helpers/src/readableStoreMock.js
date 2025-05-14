@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { get, writable } from "svelte/store";
 
 /** @param {*} initialValue */

@@ -5,13 +5,15 @@
     "checkJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "lib": ["ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
     "noImplicitAny": true,
     "resolveJsonModule": true,
     "skipLibCheck": false,
-    "types": [
-      "./node_modules/@testing-library/jest-dom/types/vitest.d.ts",
-      "lamb-types"
-    ]
+    "strict": true,
+    "target": "ESNext"
   },
   "exclude": ["coverage", "node_modules"]
 }

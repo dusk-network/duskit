@@ -2,13 +2,14 @@
 
 [![Duskit CI](https://github.com/dusk-network/duskit/actions/workflows/ci.yml/badge.svg)](https://github.com/dusk-network/duskit/actions/workflows/ci.yml)
 [![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Fcomponents)](https://www.npmjs.com/package/@duskit/components)
-[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Fcurrency)](https://www.npmjs.com/package/@duskit/currency)
-[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Fdesign-tokens)](https://www.npmjs.com/package/@duskit/design-tokens)
-[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Ferror)](https://www.npmjs.com/package/@duskit/error)
-[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Fhttp)](https://www.npmjs.com/package/@duskit/http)
-[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Ficons)](https://www.npmjs.com/package/@duskit/icons)
-[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Fstring)](https://www.npmjs.com/package/@duskit/string)
-[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Ftest-helpers)](https://www.npmjs.com/package/@duskit/test-helpers)
+[![NPM version](https://img.shields.io/npm/v/@duskit/css.svg?label=%40duskit%2Fcss)](https://www.npmjs.com/package/@duskit/css)
+[![NPM version](https://img.shields.io/npm/v/@duskit/currency.svg?label=%40duskit%2Fcurrency)](https://www.npmjs.com/package/@duskit/currency)
+[![NPM version](https://img.shields.io/npm/v/@duskit/design-tokens.svg?label=%40duskit%2Fdesign-tokens)](https://www.npmjs.com/package/@duskit/design-tokens)
+[![NPM version](https://img.shields.io/npm/v/@duskit/error.svg?label=%40duskit%2Ferror)](https://www.npmjs.com/package/@duskit/error)
+[![NPM version](https://img.shields.io/npm/v/@duskit/http.svg?label=%40duskit%2Fhttp)](https://www.npmjs.com/package/@duskit/http)
+[![NPM version](https://img.shields.io/npm/v/@duskit/icons.svg?label=%40duskit%2Ficons)](https://www.npmjs.com/package/@duskit/icons)
+[![NPM version](https://img.shields.io/npm/v/@duskit/string.svg?label=%40duskit%2Fstring)](https://www.npmjs.com/package/@duskit/string)
+[![NPM version](https://img.shields.io/npm/v/@duskit/test-helpers.svg?label=%40duskit%2Ftest-helpers)](https://www.npmjs.com/package/@duskit/test-helpers)
 
 Duskit (Dusk Kit) contains Svelte components and JS utilities that can help you quickly build a Dusk web app.
 
@@ -53,6 +54,7 @@ Alternatively you can move to a package root and install the dependency from the
 
 - [@duskit/workshop](apps/workshop/README.md)
 - [@duskit/components](packages/components/README.md)
+- [@duskit/css](packages/css/README.md)
 - [@duskit/currency](packages/currency/README.md)
 - [@duskit/design-tokens](packages/design-tokens/README.md)
 - [@duskit/error](packages/error/README.md)
@@ -67,6 +69,12 @@ Alternatively you can move to a package root and install the dependency from the
 
 All [terminal commands](#npm-scripts) listed here assume that you are positioned in root folder of the repository.
 Commands executed from the root folder take advantage of [Turbo's caching](https://turbo.build/repo/docs/core-concepts/caching).
+To run a command skipping the cache read (not the writing), add the `--force` flag.
+For example for the `checks` task:
+
+```bash
+npm run checks -- --force
+```
 
 The following commands act on all packages in the monorepo, where applicable.
 If you want instead to run a command for a single package you can add a [filter](https://turbo.build/repo/docs/core-concepts/monorepos/filtering):

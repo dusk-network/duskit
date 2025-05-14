@@ -5,7 +5,7 @@
     "forceConsistentCasingInFileNames": true,
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "outDir": "dist",
     "rootDir": "src",
     "baseUrl": ".",
@@ -13,9 +13,10 @@
     "esModuleInterop": true,
     "removeComments": false,
     "resolveJsonModule": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "types": ["node"],
     "lib": ["ESNext", "DOM"],
+    "noEmit": true,
     "sourceMap": false,
     "preserveWatchOutput": true,
     "declaration": false,
@@ -31,5 +32,11 @@
     "jsx": "preserve"
   },
   "include": ["src"],
-  "exclude": ["node_modules", "generated/**/*", "dist/**/*", "src/**/*.spec.js"]
+  "exclude": [
+    "../../node_modules",
+    "node_modules",
+    "generated/**/*",
+    "dist/**/*",
+    "src/**/*.spec.js"
+  ]
 }

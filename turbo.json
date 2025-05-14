@@ -1,12 +1,11 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "experimentalUI": true,
-  "pipeline": {
+  "tasks": {
     "build": {
       "outputs": [".histoire/dist/**", "dist/**"]
     },
     "checks": {
-      "outputMode": "errors-only"
+      "outputLogs": "errors-only"
     },
     "clean": {
       "cache": false
@@ -33,5 +32,6 @@
       "cache": false,
       "persistent": true
     }
-  }
+  },
+  "ui": "tui"
 }

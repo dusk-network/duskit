@@ -1,13 +1,17 @@
 {
-  "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "lib": ["ESNext", "WebWorker"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
     "noImplicitAny": true,
     "resolveJsonModule": true,
-    "skipLibCheck": false
-  },
-  "exclude": ["coverage", "node_modules"]
+    "skipLibCheck": false,
+    "strict": true,
+    "target": "ESNext"
+  }
 }
