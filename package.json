@@ -54,6 +54,7 @@
     "packages/error",
     "packages/http",
     "packages/icons",
+    "packages/promise",
     "packages/string",
     "packages/test-helpers"
   ],

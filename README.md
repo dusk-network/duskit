@@ -10,6 +10,7 @@
 [![NPM version](https://img.shields.io/npm/v/@duskit/error.svg?label=%40duskit%2Ferror)](https://www.npmjs.com/package/@duskit/error)
 [![NPM version](https://img.shields.io/npm/v/@duskit/http.svg?label=%40duskit%2Fhttp)](https://www.npmjs.com/package/@duskit/http)
 [![NPM version](https://img.shields.io/npm/v/@duskit/icons.svg?label=%40duskit%2Ficons)](https://www.npmjs.com/package/@duskit/icons)
+[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Fpromise)](https://www.npmjs.com/package/@duskit/promise)
 [![NPM version](https://img.shields.io/npm/v/@duskit/string.svg?label=%40duskit%2Fstring)](https://www.npmjs.com/package/@duskit/string)
 [![NPM version](https://img.shields.io/npm/v/@duskit/test-helpers.svg?label=%40duskit%2Ftest-helpers)](https://www.npmjs.com/package/@duskit/test-helpers)
 
@@ -64,6 +65,7 @@ Alternatively you can move to a package root and install the dependency from the
 - [@duskit/error](packages/error/README.md)
 - [@duskit/http](packages/http/README.md)
 - [@duskit/icons](packages/icons/README.md)
+- [@duskit/promise](packages/promise/README.md)
 - [@duskit/string](packages/string/README.md)
 - [@duskit/test-helpers](packages/test-helpers/README.md)
 
