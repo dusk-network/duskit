@@ -1,6 +1,7 @@
 # Duskit
 
 [![Duskit CI](https://github.com/dusk-network/duskit/actions/workflows/ci.yml/badge.svg)](https://github.com/dusk-network/duskit/actions/workflows/ci.yml)
+[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Farray)](https://www.npmjs.com/package/@duskit/array)
 [![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Fcomponents)](https://www.npmjs.com/package/@duskit/components)
 [![NPM version](https://img.shields.io/npm/v/@duskit/css.svg?label=%40duskit%2Fcss)](https://www.npmjs.com/package/@duskit/css)
 [![NPM version](https://img.shields.io/npm/v/@duskit/currency.svg?label=%40duskit%2Fcurrency)](https://www.npmjs.com/package/@duskit/currency)
@@ -22,7 +23,7 @@ Duskit (Dusk Kit) contains Svelte components and JS utilities that can help you 
 
 ## Dev environment
 
-The dev environment assumes that you have at least Node.js v20.x installed. The LTS version is 20.12.1 at the time of writing.
+The dev environment assumes that you have at least Node.js v20.19.2 installed. The LTS version is 22.16.0 at the time of writing.
 
 Duskit is a monorepo managed with [npm workspaces](https://docs.npmjs.com/cli/v10/using-npm/workspaces) and [Turbo](https://turbo.build/).
 
@@ -53,6 +54,7 @@ Alternatively you can move to a package root and install the dependency from the
 ## Packages
 
 - [@duskit/workshop](apps/workshop/README.md)
+- [@duskit/array](packages/array/README.md)
 - [@duskit/components](packages/components/README.md)
 - [@duskit/css](packages/css/README.md)
 - [@duskit/currency](packages/currency/README.md)

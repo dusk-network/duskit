@@ -44,7 +44,7 @@
     "eslint-config-prettier": "10.1.5",
     "eslint-import-resolver-typescript": "4.3.5",
     "globals": "16.1.0",
-    "lamb-types": "0.61.13",
+    "lamb-types": "0.61.14",
     "prettier": "3.5.3",
     "rimraf": "6.0.1",
     "typescript": "5.4.4",
