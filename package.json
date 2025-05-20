@@ -45,6 +45,7 @@
   "type": "module",
   "workspaces": [
     "apps/workshop",
+    "packages/array",
     "packages/components",
     "packages/css",
     "packages/currency",

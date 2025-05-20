@@ -10,11 +10,11 @@
   "license": "MPL-2.0",
   "main": "index.js",
   "module": "index.js",
-  "name": "@duskit/string",
+  "name": "@duskit/array",
   "repository": {
     "type": "git",
     "url": "git@github.com:dusk-network/duskit.git",
-    "directory": "packages/string"
+    "directory": "packages/array"
   },
   "scripts": {
     "checks": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage",
@@ -30,6 +30,7 @@
     "typecheck:watch": "tsc --watch --project tsconfig.json"
   },
   "type": "module",
+  "types": "index.d.ts",
   "version": "0.0.0",
   "dependencies": {
     "lamb": "0.61.1"
