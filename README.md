@@ -2,6 +2,7 @@
 
 [![Duskit CI](https://github.com/dusk-network/duskit/actions/workflows/ci.yml/badge.svg)](https://github.com/dusk-network/duskit/actions/workflows/ci.yml)
 [![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Farray)](https://www.npmjs.com/package/@duskit/array)
+[![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Fbase64)](https://www.npmjs.com/package/@duskit/base64)
 [![NPM version](https://img.shields.io/npm/v/@duskit/components.svg?label=%40duskit%2Fcomponents)](https://www.npmjs.com/package/@duskit/components)
 [![NPM version](https://img.shields.io/npm/v/@duskit/css.svg?label=%40duskit%2Fcss)](https://www.npmjs.com/package/@duskit/css)
 [![NPM version](https://img.shields.io/npm/v/@duskit/currency.svg?label=%40duskit%2Fcurrency)](https://www.npmjs.com/package/@duskit/currency)
@@ -55,6 +56,7 @@ Alternatively you can move to a package root and install the dependency from the
 
 - [@duskit/workshop](apps/workshop/README.md)
 - [@duskit/array](packages/array/README.md)
+- [@duskit/base64](packages/base64/README.md)
 - [@duskit/components](packages/components/README.md)
 - [@duskit/css](packages/css/README.md)
 - [@duskit/currency](packages/currency/README.md)
