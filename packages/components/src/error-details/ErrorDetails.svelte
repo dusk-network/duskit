@@ -1,17 +1,25 @@
 <svelte:options immutable={true} />
 
 <script>
-  import { makeClassName } from "@duskit/string";
-  import "./styles.css";
+  /** @typedef {import("./ErrorDetails").ErrorDetailsProps} ErrorDetailsProps */
 
-  /** @type {String | Undefined} */
+  import { makeClassName } from "@duskit/string";
+
+  import "./ErrorDetails.css";
+
+  /** @type {ErrorDetailsProps["className"]} */
   export let className = undefined;
 
-  /** @type {Error | null} */
+  /** @type {ErrorDetailsProps["error"]} */
   export let error;
 
-  /** @type {String} */
+  /** @type {ErrorDetailsProps["summary"]} */
   export let summary;
+
+  /** @type {HTMLDetailsElement} */
+  let rootElement;
+
+  export const getRootElement = () => (error ? null : rootElement);
 
   $: classes = makeClassName([
     "dusk-error-details",
@@ -21,7 +29,7 @@
 </script>
 
 {#if error}
-  <details class={classes}>
+  <details bind:this={rootElement} class={classes}>
     <summary class="dusk-error-details__summary">
       {summary}
     </summary>

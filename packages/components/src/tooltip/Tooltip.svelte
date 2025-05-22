@@ -1,8 +1,10 @@
 <svelte:options immutable={true} />
 
 <script>
-  import { writable } from "svelte/store";
+  /** @typedef {import("./Tooltip").TooltipProps} TooltipProps */
+
   import { onDestroy } from "svelte";
+  import { writable } from "svelte/store";
   import {
     computePosition,
     flip,
@@ -10,53 +12,57 @@
     offset as setOffset,
     shift,
   } from "@floating-ui/dom";
-  import { makeClassName } from "@duskit/string";
-  import "./styles.css";
 
-  /** @type {String | Undefined} */
+  import { makeClassName } from "@duskit/string";
+
+  import "./Tooltip.css";
+
+  /** @type {TooltipProps["className"]} */
   export let className = undefined;
 
   /**
    * Default delay in ms before hiding the tooltip.
-   * @type {Number}
+   * @type {TooltipProps["defaultDelayHide"]}
    */
   export let defaultDelayHide = 0;
 
   /**
    * Default delay in ms before showing the tooltip.
-   * @type {Number}
+   * @type {TooltipProps["defaultDelayShow"]}
    */
   export let defaultDelayShow = 500;
 
   /**
    * Default offset from the target element.
-   * @type {Number}
+   * @type {TooltipProps["defaultOffset"]}
    */
   export let defaultOffset = 10;
 
   /**
    * Preferred default placement.
-   * @type {import("@floating-ui/dom").Side}
+   * @type {TooltipProps["defaultPlace"]}
    */
   export let defaultPlace = "top";
 
   /**
    * Tooltip's default type.
-   * @type {TooltipType}
+   * @type {TooltipProps["defaultType"]}
    */
   export let defaultType = "info";
 
   /**
    * ID of the tooltip element.
-   * @type {String}
+   * @type {TooltipProps["id"]}
    */
   export let id;
 
-  /** @type {Number} */
-  let timeoutID = 0;
-
   /** @type {HTMLDivElement} */
-  let tooltipElement;
+  let rootElement;
+
+  export const getRootElement = () => rootElement;
+
+  /** @type {number} */
+  let timeoutID = 0;
 
   const state = writable({
     delayHide: defaultDelayHide,
@@ -141,7 +147,7 @@
 
     const { placement, x, y } = await computePosition(
       event.target,
-      tooltipElement,
+      rootElement,
       {
         middleware: [
           setOffset({ mainAxis: +tooltipOffset }),
@@ -156,6 +162,7 @@
 
     // We consider only "top", "right", "bottom" and "left" for now.
     // The extra parenthesis are needed to force the cast for the type checker.
+
     const place = /** @type {import("@floating-ui/dom").Side} */ (
       placement.replace(/-.+$/, "")
     );
@@ -222,7 +229,7 @@
 />
 <div
   {...$$restProps}
-  bind:this={tooltipElement}
+  bind:this={rootElement}
   aria-hidden={!visible}
   class={classes}
   {id}

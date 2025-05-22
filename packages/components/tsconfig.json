@@ -10,6 +10,15 @@
     "moduleResolution": "bundler",
     "noEmit": true,
     "noImplicitAny": true,
+    "paths": {
+      "svelte/motion": [
+        "../../node_modules/svelte/src/runtime/motion/index.js"
+      ],
+      "svelte/store": ["../../node_modules/svelte/src/runtime/store/index.js"],
+      "svelte/transition": [
+        "../../node_modules/svelte/src/runtime/transition/index.js"
+      ]
+    },
     "resolveJsonModule": true,
     "skipLibCheck": false,
     "target": "ESNext",

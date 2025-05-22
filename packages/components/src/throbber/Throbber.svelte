@@ -1,22 +1,31 @@
 <svelte:options immutable={true} />
 
 <script>
+  /** @typedef {import("./Throbber").ThrobberProps} ThrobberProps */
+
   import { makeClassName } from "@duskit/string";
 
-  /** @type {String | Undefined} */
+  import "./Throbber.css";
+
+  /** @type {ThrobberProps["className"]} */
   export let className = undefined;
 
   /**
    * The animation duration in milliseconds.
-   * @type {Number}
+   * @type {ThrobberProps["duration"]}
    */
   export let duration = 1800;
 
   /**
    * The throbber's size in pixels.
-   * @type {Number}
+   * @type {ThrobberProps["size"]}
    */
   export let size = 64;
+
+  /** @type {SVGSVGElement} */
+  let rootElement;
+
+  export const getRootElement = () => rootElement;
 
   const path = [
     "M75.4 126.63",
@@ -29,10 +38,14 @@
     "a11.38 11.38 0 0 1-2.93.37",
     "z",
   ].join("");
+
+  $: classes = makeClassName(["dusk-throbber", className]);
 </script>
 
 <svg
-  class={makeClassName(["dusk-throbber", className])}
+  bind:this={rootElement}
+  {...$$restProps}
+  class={classes}
   height={`${size}px`}
   role="progressbar"
   viewBox="0 0 128 128"

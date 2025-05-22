@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`QrCode > should render the QrCode component and update it when any of the prop change 1`] = `
+<div
+  class="dusk-suspense dusk-qr-code"
+>
+  <img
+    alt="some alt text"
+    class="dusk-qr-code__image"
+    height="200"
+    src="data:image/png;base64,00"
+    width="200"
+  />
+</div>
+`;

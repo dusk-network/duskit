@@ -1,0 +1,34 @@
+.dusk-textbox {
+  padding: var(--control-small-padding);
+  font-family: inherit;
+  font-size: var(--control-font-size);
+  color: var(--non-button-control-text-color);
+  letter-spacing: inherit;
+  background-color: var(--non-button-control-bg-color);
+  border-color: var(--control-border-color);
+  border-style: solid;
+  border-width: var(--control-border-size);
+  border-radius: var(--control-border-radius-size);
+}
+
+.dusk-textbox::placeholder {
+  color: var(--non-button-control-text-color);
+}
+
+.dusk-textbox:disabled,
+.dusk-textbox::placeholder {
+  opacity: 0.5;
+}
+
+.dusk-textbox:not(:focus):invalid {
+  color: var(--error-color);
+}
+
+.dusk-textbox:read-only {
+  outline: 0 none;
+  opacity: 0.5;
+}
+
+.dusk-textbox.dusk-textbox-multiline {
+  line-height: 1.3;
+}
