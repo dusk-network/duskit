@@ -1,0 +1,54 @@
+.dusk-banner {
+  display: flex;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-size: 0.875em;
+  line-height: 1.5;
+  border-style: solid;
+  border-width: var(--control-border-size);
+  border-radius: calc(var(--control-border-radius-size) / 2);
+  align-items: center;
+}
+
+.dusk-banner--error {
+  border-color: var(--banner-error-color);
+}
+
+.dusk-banner--info {
+  border-color: var(--banner-info-color);
+}
+
+.dusk-banner--success {
+  border-color: var(--banner-success-color);
+}
+
+.dusk-banner--warning {
+  border-color: var(--banner-warning-color);
+}
+
+.dusk-banner__title {
+  display: block;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.dusk-banner__icon {
+  margin-right: var(--default-gap);
+  flex-shrink: 0;
+}
+
+.dusk-banner__icon--error {
+  fill: var(--banner-error-color);
+}
+
+.dusk-banner__icon--info {
+  fill: var(--banner-info-color);
+}
+
+.dusk-banner__icon--success {
+  fill: var(--banner-success-color);
+}
+
+.dusk-banner__icon--warning {
+  fill: var(--banner-warning-color);
+}

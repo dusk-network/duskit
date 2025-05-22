@@ -1,0 +1,99 @@
+.dusk-tabs {
+  display: flex;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--on-surface-color);
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.dusk-button.dusk-icon-button.dusk-tab-scroll-button {
+  padding: 0;
+  border: 0;
+}
+
+.dusk-button.dusk-icon-button.dusk-tab-scroll-button:enabled:focus {
+  box-shadow: none;
+}
+
+.dusk-button.dusk-icon-button.dusk-tab-scroll-button > .dusk-icon {
+  width: var(--control-icon-size);
+  height: var(--control-icon-size);
+}
+
+.dusk-button.dusk-icon-button.dusk-tab-scroll-button[hidden="true"] {
+  display: none;
+}
+
+.dusk-tabs-list {
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+  list-style-type: none;
+  cursor: default;
+  user-select: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overscroll-behavior: contain;
+}
+
+.dusk-tabs-list::-webkit-scrollbar {
+  display: none;
+}
+
+.dusk-tab-item {
+  position: relative;
+  display: inline-flex;
+  padding: var(--control-padding);
+  font-size: 1.125rem;
+  line-height: 1;
+  border-radius: var(--control-border-radius-size)
+    var(--control-border-radius-size) 0 0;
+  flex: 50%;
+  align-items: center;
+  justify-content: center;
+  gap: var(--small-gap);
+}
+
+.dusk-tab-item,
+.dusk-tab-item > * {
+  transition-delay: 0s;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.4s;
+  transition-property: background-color, border-color, color, transform;
+}
+
+.dusk-tab-item > .dusk-tab-label {
+  display: none;
+}
+
+.dusk-tab-item__selected > .dusk-tab-label,
+.dusk-tab-item > span:only-child {
+  display: block;
+}
+
+.dusk-tab-item:focus-visible {
+  color: var(--secondary-color);
+  outline: 0 none;
+}
+
+.dusk-tab-item:hover:not(.dusk-tab-item__selected),
+.dusk-tab-item:focus-visible > * {
+  transform: translateY(-0.3rem);
+}
+
+.dusk-tab-item__selected {
+  color: var(--secondary-color);
+  background-color: var(--surface-color);
+}
+
+.dusk-tab-item__selected > .dusk-tab-label {
+  color: var(--primary-color);
+}
+
+.dusk-tab-item > .dusk-icon {
+  width: var(--control-icon-size);
+  height: var(--control-icon-size);
+}

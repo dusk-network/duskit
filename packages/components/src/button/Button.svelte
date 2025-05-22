@@ -1,41 +1,53 @@
-<script>
-  import { makeClassName } from "@duskit/string";
-  import { Icon } from "@duskit/components";
-  import "./styles.css";
+<svelte:options immutable={true} />
 
-  /** @type {Boolean} */
+<script>
+  /** @typedef {import("./Button").ButtonProps} ButtonProps */
+
+  import { makeClassName } from "@duskit/string";
+
+  import { Icon } from "../..";
+
+  import "./Button.css";
+
+  /** @type {ButtonProps["active"]} */
   export let active = false;
 
-  /** @type {String | Undefined} */
+  /** @type {ButtonProps["className"]} */
   export let className = undefined;
 
-  /** @type {IconProp | Undefined} */
+  /** @type {ButtonProps["icon"]} */
   export let icon = undefined;
 
-  /** @type {ButtonSize} */
-  export let size = "normal";
+  /** @type {ButtonProps["size"]} */
+  export let size = "default";
 
-  /** @type {ButtonVariant} */
-  export let variant = "secondary";
-
-  /** @type {String | Undefined} */
+  /** @type {ButtonProps["text"]} */
   export let text = undefined;
 
-  /** @type {"button" | "reset" | "submit" | "toggle"} */
+  /** @type {ButtonProps["type"]} */
   export let type = "button";
+
+  /** @type {ButtonProps["variant"]} */
+  export let variant = "primary";
+
+  /** @type {HTMLButtonElement} */
+  let rootElement;
+
+  export const getRootElement = () => rootElement;
 
   $: classes = makeClassName([
     "dusk-button",
     `dusk-button--type--${type}`,
     `dusk-button--variant--${variant}`,
     `dusk-button--size--${size}`,
-    icon && text ? "dusk-icon-button-labeled" : icon ? "dusk-icon-button" : "",
-    type === "toggle" && active ? "dusk-button--type--toggle--active" : "",
+    icon && text ? "dusk-icon-button--labeled" : icon ? "dusk-icon-button" : "",
+    type === "toggle" && active ? "dusk-button--active" : "",
     className,
   ]);
 </script>
 
 <button
+  bind:this={rootElement}
   {...$$restProps}
   aria-pressed={type === "toggle" ? active : undefined}
   class={classes}
@@ -48,9 +60,17 @@
     {#if text}
       <span class="dusk-button__text">{text}</span>
     {/if}
-    <Icon className="dusk-button__icon" path={icon.path} size={icon.size} />
+    <Icon
+      className="dusk-button__icon"
+      path={icon.path}
+      size={icon.size ?? "default"}
+    />
   {:else if icon}
-    <Icon className="dusk-button__icon" path={icon.path} size={icon.size} />
+    <Icon
+      className="dusk-button__icon"
+      path={icon.path}
+      size={icon.size ?? "default"}
+    />
     {#if text}
       <span class="dusk-button__text">{text}</span>
     {/if}

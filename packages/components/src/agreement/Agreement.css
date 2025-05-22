@@ -1,0 +1,11 @@
+.dusk-agreement {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--small-gap);
+}
+
+.dusk-agreement__label {
+  margin-top: -0.2rem;
+  line-height: 1.5;
+}

@@ -1,25 +1,37 @@
 <svelte:options immutable={true} />
 
 <script>
-  import { ownPairs } from "lamb";
-  import { makeClassName } from "@duskit/string";
-  import Options from "./Options.svelte";
-  import "./styles.css";
+  /** @typedef {import("./Select").SelectProps} SelectProps */
 
-  /** @type {String | Undefined} */
+  import { ownPairs } from "lamb";
+
+  import { makeClassName } from "@duskit/string";
+
+  import Options from "./Options.svelte";
+  import "./Select.css";
+
+  /** @type {SelectProps["className"]} */
   export let className = undefined;
 
-  /** @type {GroupedSelectOptions | SelectOption[] | String[]} */
+  /** @type {SelectProps["options"]} */
   export let options;
 
-  /** @type {String | Undefined} */
+  /** @type {SelectProps["value"]} */
   export let value = undefined;
+
+  /** @type {HTMLSelectElement} */
+  let rootElement;
+
+  export const getRootElement = () => rootElement;
+
+  $: classes = makeClassName(["dusk-select", className]);
 </script>
 
 <select
+  bind:this={rootElement}
   {...$$restProps}
   bind:value
-  class={makeClassName(["dusk-select", className])}
+  class={classes}
   on:change
 >
   {#if Array.isArray(options)}

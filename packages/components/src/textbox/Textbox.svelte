@@ -1,36 +1,34 @@
 <svelte:options immutable={true} />
 
 <script>
-  import { makeClassName } from "@duskit/string";
-  import "./styles.css";
+  /** @typedef {import("./Textbox").TextboxProps} TextboxProps */
+  /** @typedef {import("./Textbox").TextboxType} TextboxType */
 
-  /** @type {String | Undefined} */
+  import { makeClassName } from "@duskit/string";
+
+  import "./Textbox.css";
+
+  /** @type {TextboxProps["className"]} */
   export let className = undefined;
 
-  /** @type {TextboxTypes} */
+  /** @type {TextboxType} */
   export let type = "text";
 
-  /** @type {String | Number} */
+  /** @type {string | number} */
   export let value = type === "number" ? 0 : "";
 
-  /**
-   * @type {HTMLInputElement | HTMLTextAreaElement}
-   */
-  let inputElement;
+  /** @type {HTMLTextAreaElement | HTMLInputElement} */
+  let rootElement;
+
+  export const getRootElement = () => rootElement;
 
   export function focus() {
-    inputElement?.focus();
+    rootElement?.focus();
   }
 
   export function select() {
-    inputElement?.select();
+    rootElement?.select();
   }
-
-  $: classes = makeClassName([
-    "dusk-textbox",
-    `dusk-textbox-${type}`,
-    className,
-  ]);
 
   /**
    * Needed, as the value cannot be bound to the input element
@@ -42,15 +40,25 @@
 
     value = target.type === "number" ? target.valueAsNumber : target.value;
   }
+
+  $: classes = makeClassName([
+    "dusk-textbox",
+    `dusk-textbox-${type}`,
+    className,
+  ]);
 </script>
 
 {#if type === "multiline"}
   <textarea
     {...$$restProps}
     class={classes}
-    bind:this={inputElement}
+    bind:this={rootElement}
     bind:value
+    on:blur
+    on:focus
     on:input
+    on:keydown
+    on:paste
   />
 {:else}
   <input
@@ -58,8 +66,9 @@
     class={classes}
     {type}
     {value}
-    bind:this={inputElement}
+    bind:this={rootElement}
     on:blur
+    on:focus
     on:input={handleInput}
     on:input
     on:keydown

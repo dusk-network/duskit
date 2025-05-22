@@ -15,7 +15,9 @@ export default class IntersectionObserver {
 
   observe() {}
 
-  takeRecords() {}
+  takeRecords() {
+    return [];
+  }
 
   unobserve() {}
 }

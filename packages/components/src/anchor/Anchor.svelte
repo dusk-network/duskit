@@ -1,21 +1,33 @@
 <svelte:options immutable={true} />
 
 <script>
-  import { makeClassName } from "@duskit/string";
-  import "./styles.css";
+  /** @typedef {import("./Anchor").AnchorProps} AnchorProps */
 
-  /** @type {String | Undefined} */
+  import { makeClassName } from "@duskit/string";
+
+  import "./Anchor.css";
+
+  /** @type {AnchorProps["className"]} */
   export let className = undefined;
 
-  /** @type {String} */
+  /** @type {AnchorProps["href"]} */
   export let href;
+
+  /** @type {AnchorProps["onSurface"]} */
+  export let onSurface = true;
+
+  /** @type {HTMLAnchorElement} */
+  let rootElement;
+
+  export const getRootElement = () => rootElement;
+
+  $: classes = makeClassName([
+    "dusk-anchor",
+    `dusk-anchor--${onSurface ? "on-surface" : "off-surface"}`,
+    className,
+  ]);
 </script>
 
-<a
-  {...$$restProps}
-  class={makeClassName(["dusk-anchor", className])}
-  {href}
-  on:click
->
+<a bind:this={rootElement} {...$$restProps} class={classes} {href} on:click>
   <slot />
 </a>

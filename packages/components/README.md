@@ -14,7 +14,7 @@ Svelte components to build a Dusk web application.
 
 ## Dev environment
 
-The dev environment assumes that you have at least Node.js v20.x installed. The LTS version is 20.12.1 at the time of writing.
+The dev environment assumes that you have at least Node.js v20.19.2 installed. The LTS version is 22.16.0 at the time of writing.
 
 This package is part of the [Duskit](https://github.com/dusk-network/duskit/) monorepo.
 Please refer to the [main README](../../README.md) for monorepo usage, changeset management and installation of dependencies.

@@ -1,29 +1,40 @@
+<svelte:options immutable={true} />
+
 <script>
-  import { makeClassName } from "@duskit/string";
-  import "./styles.css";
+  /** @typedef {import("./Checkbox").CheckboxProps} CheckboxProps */
 
-  /** @type {String} */
-  export let name;
+  import { makeClassName, randomUUID } from "@duskit/string";
 
-  /** @type {String} */
-  export let id = `dusk-checkbox-${Math.random().toString(36)}`;
+  import "./Checkbox.css";
 
-  /** @type {Boolean} */
-  export let disabled = false;
-
-  /** @type {Boolean} */
+  /** @type {CheckboxProps["checked"]} */
   export let checked = false;
 
-  /** @type {String|Undefined} */
+  /** @type {CheckboxProps["className"]} */
   export let className = undefined;
 
-  /** @type {Number|Undefined} */
+  /** @type {CheckboxProps["disabled"]} */
+  export let disabled = false;
+
+  /** @type {CheckboxProps["id"]} */
+  export let id = `dusk-checkbox-${randomUUID()}`;
+
+  /** @type {CheckboxProps["name"]} */
+  export let name;
+
+  /** @type {CheckboxProps["tabindex"]} */
   export let tabindex = undefined;
 
-  const classes = makeClassName(["dusk-checkbox", className]);
+  /** @type {HTMLInputElement} */
+  let rootElement;
+
+  export const getRootElement = () => rootElement;
+
+  $: classes = makeClassName(["dusk-checkbox", className]);
 </script>
 
 <input
+  bind:this={rootElement}
   {...$$restProps}
   type="checkbox"
   {id}

@@ -1,24 +1,31 @@
 <svelte:options immutable={true} />
 
 <script>
+  /** @typedef {import("./Icon").IconProps} IconProps */
+
   import { makeClassName } from "@duskit/string";
 
-  import "./styles.css";
+  import "./Icon.css";
 
-  /** @type {String|Undefined} */
+  /** @type {IconProps["className"]} */
   export let className = undefined;
 
-  /** @type {IconSize} */
-  export let size = "normal";
-
-  /** @type {Boolean} */
+  /** @type {IconProps["isInStack"]} */
   export let isInStack = false;
 
-  /** @type {String} */
+  /** @type {IconProps["path"]} */
   export let path;
 
-  /** @type {String} */
+  /** @type {IconProps["role"]} */
   export let role = "graphics-symbol";
+
+  /** @type {IconProps["size"]} */
+  export let size = "default";
+
+  /** @type {SVGGElement | SVGSVGElement} */
+  let rootElement;
+
+  export const getRootElement = () => rootElement;
 
   $: commonAttributes = {
     ...$$restProps,
@@ -27,12 +34,12 @@
 </script>
 
 {#if isInStack}
-  <g {...commonAttributes}>
+  <g bind:this={rootElement} {...commonAttributes}>
     <rect />
     <path d={path} />
   </g>
 {:else}
-  <svg {...commonAttributes} {role} viewBox="0 0 24 24">
+  <svg bind:this={rootElement} {...commonAttributes} {role} viewBox="0 0 24 24">
     <path d={path} />
   </svg>
 {/if}

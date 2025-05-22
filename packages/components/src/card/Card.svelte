@@ -1,45 +1,55 @@
+<svelte:options immutable={true} />
+
 <script>
-  import { Icon, Switch } from "@duskit/components";
+  /** @typedef {import("./Card").CardProps} CardProps */
+
   import { makeClassName } from "@duskit/string";
-  import "./styles.css";
 
-  /** @type {string} */
-  export let tag = "div";
+  import "./Card.css";
 
-  /** @type {string | Undefined} */
+  /** @type {CardProps["as"]} */
+  export let as = "div";
+
+  /** @type {CardProps["className"]} */
   export let className = undefined;
 
-  /** @type {string | Undefined} */
-  export let iconPath = undefined;
+  /** @type {CardProps["gap"]} */
+  export let gap = "default";
 
-  /** @type {string} */
-  export let heading;
-  export let hasToggle = false;
-  export let isToggled = false;
+  /** @type {CardProps["onSurface"]} */
   export let onSurface = false;
 
-  $: classes = makeClassName(["dusk-card", className]);
+  /** @type {CardProps["showBody"]} */
+  export let showBody = true;
+
+  /** @type {HTMLElement} */
+  let rootElement;
+
+  export const getRootElement = () => rootElement;
+
+  $: classes = makeClassName(["dusk-card", `dusk-card--gap-${gap}`, className]);
 </script>
 
 <svelte:element
-  this={tag}
+  this={as}
+  bind:this={rootElement}
   {...$$restProps}
   class={classes}
   class:dusk-card--on-surface={onSurface}
 >
-  <header
-    class="dusk-card__header"
-    class:dusk-card__header--toggle-off={hasToggle && !isToggled}
-  >
-    {#if iconPath}
-      <Icon className="dusk-card__icon" path={iconPath} />
-    {/if}
-    <h3 class="h4">{heading}</h3>
-    {#if hasToggle}
-      <Switch onSurface bind:value={isToggled} />
-    {/if}
-  </header>
-  {#if !hasToggle || isToggled}
-    <slot />
+  {#if $$slots.header}
+    <div class="dusk-card__header-container">
+      <slot name="header" />
+    </div>
+  {/if}
+  {#if showBody}
+    <div class="dusk-card__body-container">
+      <slot />
+    </div>
+  {/if}
+  {#if $$slots.footer}
+    <div class="dusk-card__footer-container">
+      <slot name="footer" />
+    </div>
   {/if}
 </svelte:element>

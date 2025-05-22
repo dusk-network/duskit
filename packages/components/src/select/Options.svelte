@@ -6,7 +6,7 @@
   /** @type {(v: any) => v is string} */
   const isString = isType("String");
 
-  /** @type SelectOption[] | string[] */
+  /** @type {OptionItem[] | string[]} */
   export let options;
 </script>
 

@@ -1,0 +1,9 @@
+.dusk-copy-field {
+  display: flex;
+  align-items: center;
+  gap: var(--default-gap);
+}
+
+.dusk-copy-field__content {
+  flex: 1;
+}

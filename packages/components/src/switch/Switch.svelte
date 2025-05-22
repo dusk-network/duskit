@@ -1,23 +1,33 @@
 <svelte:options immutable={true} />
 
 <script>
-  import { createEventDispatcher } from "svelte";
-  import { makeClassName } from "@duskit/string";
-  import "./styles.css";
+  /** @typedef {import("./Switch").SwitchProps} SwitchProps */
 
-  /** @type {String | Undefined} */
+  import { createEventDispatcher } from "svelte";
+
+  import { makeClassName } from "@duskit/string";
+
+  import "./Switch.css";
+
+  /** @type {SwitchProps["className"]} */
   export let className = undefined;
 
-  /** @type {Boolean} */
+  /** @type {SwitchProps["disabled"]} */
   export let disabled = false;
 
-  /** @type {Number} */
-  export let tabindex = 0;
-
+  /** @type {SwitchProps["onSurface"]} */
   export let onSurface = false;
 
-  /** @type {Boolean} */
+  /** @type {SwitchProps["tabindex"]} */
+  export let tabindex = 0;
+
+  /** @type {SwitchProps["value"]} */
   export let value = false;
+
+  /** @type {HTMLDivElement} */
+  let rootElement;
+
+  export const getRootElement = () => rootElement;
 
   const dispatch = createEventDispatcher();
 
@@ -40,14 +50,20 @@
 
     dispatch("change", value);
   }
+
+  $: classes = makeClassName([
+    "dusk-switch",
+    className,
+    onSurface ? "dxusk-switch--on-surface" : "",
+  ]);
 </script>
 
 <div
+  bind:this={rootElement}
   {...$$restProps}
   aria-checked={value}
   aria-disabled={disabled}
-  class={makeClassName(["dusk-switch", className])}
-  class:dusk-switch--on-surface={onSurface}
+  class={classes}
   on:click={handleClick}
   on:keydown|preventDefault={handleKeyDown}
   role="switch"

@@ -1,14 +1,25 @@
-<script>
-  import { makeClassName } from "@duskit/string";
-  import "./styles.css";
+<svelte:options immutable={true} />
 
+<script>
+  /** @typedef {import("./Badge").BadgeProps} BadgeProps */
+
+  import { makeClassName } from "@duskit/string";
+
+  import "./Badge.css";
+
+  /** @type {BadgeProps["className"]} */
+  export let className = undefined;
+
+  /** @type {BadgeProps["text"]} */
   export let text = "";
 
-  /** @type {BadgeVariant} */
+  /** @type {BadgeProps["variant"]} */
   export let variant = "neutral";
 
-  /** @type {String | Undefined} */
-  export let className = undefined;
+  /** @type {HTMLSpanElement} */
+  let rootElement;
+
+  export const getRootElement = () => rootElement;
 
   $: classes = makeClassName([
     "dusk-badge",
@@ -17,4 +28,4 @@
   ]);
 </script>
 
-<span class={classes}>{text}</span>
+<span bind:this={rootElement} class={classes}>{text}</span>
