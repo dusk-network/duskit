@@ -5,6 +5,7 @@ export default defineWorkspace([
   "./packages/base64/vitest.config.js",
   "./packages/components/vitest.config.js",
   "./packages/currency/vitest.config.js",
+  "./packages/date/vitest.config.js",
   "./packages/error/vitest.config.js",
   "./packages/http/vitest.config.js",
   "./packages/promise/vitest.config.js",

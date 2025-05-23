@@ -50,6 +50,7 @@
     "packages/components",
     "packages/css",
     "packages/currency",
+    "packages/date",
     "packages/design-tokens",
     "packages/error",
     "packages/http",
