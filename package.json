@@ -15,8 +15,8 @@
   ],
   "description": "Component and utility library for building Dusk user interfaces",
   "engines": {
-    "node": ">=20.19.2",
-    "npm": ">=10.8.2"
+    "node": ">=22.11.0",
+    "npm": ">=10.9.2"
   },
   "homepage": "https://dusk-network.github.io/duskit/",
   "license": "MPL-2.0",

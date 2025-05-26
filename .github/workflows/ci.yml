@@ -31,16 +31,16 @@ jobs:
     if: needs.changes.outputs.run-ci == 'true' && (github.event.pull_request.draft == false || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
 
-    name: Node 20.19.2
+    name: Node 22.11.0
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setting up Node 20.19.2
+      - name: Setting up Node 22.11.0
         uses: actions/setup-node@v4
         with:
-          node-version: 20.19.2
+          node-version: 22.11.0
           scope: "@duskit"
 
       - name: Installing dependencies
