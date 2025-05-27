@@ -8,6 +8,7 @@ export default defineWorkspace([
   "./packages/date/vitest.config.js",
   "./packages/error/vitest.config.js",
   "./packages/http/vitest.config.js",
+  "./packages/math/vitest.config.js",
   "./packages/promise/vitest.config.js",
   "./packages/string/vitest.config.js",
   "./packages/test-helpers/vitest.config.js",
