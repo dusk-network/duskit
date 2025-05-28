@@ -11,5 +11,6 @@ export default defineWorkspace([
   "./packages/math/vitest.config.js",
   "./packages/promise/vitest.config.js",
   "./packages/string/vitest.config.js",
+  "./packages/svelte-stores/vitest.config.js",
   "./packages/test-helpers/vitest.config.js",
 ]);

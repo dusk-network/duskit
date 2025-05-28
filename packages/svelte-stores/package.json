@@ -10,11 +10,11 @@
   "license": "MPL-2.0",
   "main": "index.js",
   "module": "index.js",
-  "name": "@duskit/error",
+  "name": "@duskit/svelte-stores",
   "repository": {
     "type": "git",
     "url": "git@github.com:dusk-network/duskit.git",
-    "directory": "packages/error"
+    "directory": "packages/svelte-stores"
   },
   "scripts": {
     "checks": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage",
@@ -33,11 +33,13 @@
   "types": "index.d.ts",
   "version": "0.0.0",
   "dependencies": {
-    "lamb": "0.61.1"
+    "@duskit/error": "*",
+    "svelte": "4.2.19"
   },
   "devDependencies": {
     "@dusk-network/eslint-config": "4.0.1",
     "@dusk-network/prettier-config": "1.1.0",
+    "@duskit/promise": "*",
     "@eslint/js": "9.27.0",
     "@vitest/coverage-istanbul": "3.1.4",
     "@vitest/eslint-plugin": "1.1.44",
@@ -45,7 +47,6 @@
     "eslint-config-prettier": "10.1.5",
     "eslint-import-resolver-typescript": "4.3.5",
     "globals": "16.1.0",
-    "lamb-types": "0.61.14",
     "prettier": "3.5.3",
     "rimraf": "6.0.1",
     "typescript": "5.4.4",

@@ -14,6 +14,7 @@
 [![NPM version](https://img.shields.io/npm/v/@duskit/math.svg?label=%40duskit%2Fmath)](https://www.npmjs.com/package/@duskit/math)
 [![NPM version](https://img.shields.io/npm/v/@duskit/promise.svg?label=%40duskit%2Fpromise)](https://www.npmjs.com/package/@duskit/promise)
 [![NPM version](https://img.shields.io/npm/v/@duskit/string.svg?label=%40duskit%2Fstring)](https://www.npmjs.com/package/@duskit/string)
+[![NPM version](https://img.shields.io/npm/v/@duskit/svelte-stores.svg?label=%40duskit%2Fsvelte-stores)](https://www.npmjs.com/package/@duskit/svelte-stores)
 [![NPM version](https://img.shields.io/npm/v/@duskit/test-helpers.svg?label=%40duskit%2Ftest-helpers)](https://www.npmjs.com/package/@duskit/test-helpers)
 
 Duskit (Dusk Kit) contains Svelte components and JS utilities that can help you quickly build a Dusk web app.
@@ -71,6 +72,7 @@ Alternatively you can move to a package root and install the dependency from the
 - [@duskit/math](packages/math/README.md)
 - [@duskit/promise](packages/promise/README.md)
 - [@duskit/string](packages/string/README.md)
+- [@duskit/svelte-stores](packages/svelte-stores/README.md)
 - [@duskit/test-helpers](packages/test-helpers/README.md)
 
 <p align="right"><a href="#toc">[back to TOC]</a></p>

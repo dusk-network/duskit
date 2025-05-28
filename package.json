@@ -58,6 +58,7 @@
     "packages/math",
     "packages/promise",
     "packages/string",
+    "packages/svelte-stores",
     "packages/test-helpers"
   ],
   "devDependencies": {
