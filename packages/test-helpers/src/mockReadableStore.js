@@ -1,12 +1,12 @@
 import { get, writable } from "svelte/store";
 
-/** @param {*} initialValue */
+/** @type {import("..").mockReadableStore} */
 function mockReadableStore(initialValue) {
   const store = writable(initialValue);
   const { set, subscribe } = store;
   const getMockedStoreValue = () => get(store);
 
-  /** @param {*} value */
+  /** @param {typeof initialValue} value */
   const setMockedStoreValue = (value) => set(value);
 
   return {

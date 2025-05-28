@@ -1,4 +1,5 @@
-export default class IntersectionObserver {
+/** @type {import("..").IntersectionObserverMock} */
+export default class IntersectionObserverMock {
   get root() {
     return document;
   }

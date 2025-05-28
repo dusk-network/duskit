@@ -5,7 +5,7 @@ import RerenderCounter from "./test-components/RerenderCounter.svelte";
 import RerenderGenerateValue1 from "./test-components/RerenderGenerateValue1.svelte";
 import RerenderGenerateValue2 from "./test-components/RerenderGenerateValue2.svelte";
 
-describe("renderWithSimpleContent", () => {
+describe("Rerender", () => {
   vi.useFakeTimers();
 
   let domMutations = 0;
