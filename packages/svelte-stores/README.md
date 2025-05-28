@@ -1,9 +1,9 @@
-# @duskit/math
+# @duskit/svelte-stores
 
 [![Duskit CI](https://github.com/dusk-network/duskit/actions/workflows/ci.yml/badge.svg)](https://github.com/dusk-network/duskit/actions/workflows/ci.yml)
-[![NPM version](https://img.shields.io/npm/v/@duskit/math.svg)](https://www.npmjs.com/package/@duskit/math)
+[![NPM version](https://img.shields.io/npm/v/@duskit/svelte-stores.svg)](https://www.npmjs.com/package/@duskit/svelte-stores)
 
-Math related functions.
+Svelte stores and helpers.
 
 ## TOC
 
@@ -26,7 +26,7 @@ Please refer to the [main README](../../README.md) for monorepo usage, changeset
 Install it with your favourite package manager:
 
 ```bash
-npm install @duskit/math --save
+npm install @duskit/svelte-stores --save
 ```
 
 <p align="right"><a href="#toc">[back to TOC]</a></p>

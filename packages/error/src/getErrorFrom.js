@@ -14,7 +14,7 @@ const isError = isType("Error");
 /** @type {(value: any) => value is string} */
 const isString = isType("String");
 
-/** @type {(value: any) => Error} */
+/** @type {import("..").getErrorFrom} */
 const getErrorFrom = adapter([
   casus(isError, identity),
   casus(isNil, always(new Error("Unknown error"))),
