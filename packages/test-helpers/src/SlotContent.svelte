@@ -1,11 +1,13 @@
 <script>
-  /** @type {Record<String, *>} */
+  /** @typedef {import("..").SlotContentProps} SlotContentProps */
+
+  /** @type {SlotContentProps["componentOptions"]} */
   export let componentOptions;
 
-  /** @type {ConstructorOfATypedSvelteComponent} */
+  /** @type {SlotContentProps["component"]} */
   export let Component;
 
-  /** @type {String} */
+  /** @type {SlotContentProps["text"]} */
   export let text;
 </script>
 

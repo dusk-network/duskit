@@ -14,7 +14,7 @@ Helpers function for easier testing.
 
 ## Dev environment
 
-The dev environment assumes that you have at least Node.js v20.x installed. The LTS version is 20.12.1 at the time of writing.
+The dev environment assumes that you have at least Node.js v20.19.2 installed. The LTS version is 22.16.0 at the time of writing.
 
 This package is part of the [Duskit](https://github.com/dusk-network/duskit/) monorepo.
 Please refer to the [main README](../../README.md) for monorepo usage, changeset management and installation of dependencies.
@@ -27,20 +27,6 @@ Install it with your favourite package manager:
 
 ```bash
 npm install @duskit/test-helpers --save
-```
-
-Import the functions you need:
-
-```js
-import { resolveAfter } from "@duskit/test-helpers";
-
-const promise = resolveAfter(2000, "some result");
-
-promise; // => Promise { <state>: "pending" }
-
-// after 2 seconds
-
-promise; // => Promise { <state>: "fulfilled", <value>: "some result" }
 ```
 
 <p align="right"><a href="#toc">[back to TOC]</a></p>
