@@ -69,7 +69,7 @@
     "stylelint-no-unsupported-browser-features": "8.0.4",
     "stylelint-order": "7.0.0",
     "stylelint-selector-bem-pattern": "4.0.1",
-    "svelte": "4.2.19",
+    "svelte": "4.2.20",
     "svelte-check": "3.8.6",
     "vitest": "3.1.4",
     "vitest-canvas-mock": "0.3.3"
