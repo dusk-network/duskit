@@ -40,15 +40,7 @@ Features that rely on hover such as tooltips may not be available on these devic
 
 ## User Preferences
 
-People may set system preferences to change the way they prefer to interact with their devices. By default, Dusk must respect these preferences. Providing a way to override these options through the application UI is also recommended.
-
-On the web, these user preference media features include:
-
-- [`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
-- [`prefers-contrast`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-contrast)
-- [`prefers-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
-- [`forced-colors`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/forced-colors)
-- [`inverted-colors`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/inverted-colors)
+People may set system preferences to change the way they prefer to interact with their devices. By default, Dusk must respect these preferences.
 
 ### Browser default font size
 
