@@ -53,7 +53,7 @@ App header is never fixed to the top of the viewport. It scrolls with the rest o
 
 ### App Footer
 
-App footer contains useful links and legal information about GitHub. It remains “after the fold” in smaller pages to keep the focus on the main content.
+App footer contains useful links and legal information about Dusk. It remains “after the fold” in smaller pages to keep the focus on the main content.
 
 The App footer should be present in all core pages. Experiences that require rich interactions, such as when manipulating large amounts of data, may opt-out of the App footer.
 
