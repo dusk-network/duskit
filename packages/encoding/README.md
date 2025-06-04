@@ -1,9 +1,9 @@
-# @duskit/base64
+# @duskit/encoding
 
 [![Duskit CI](https://github.com/dusk-network/duskit/actions/workflows/ci.yml/badge.svg)](https://github.com/dusk-network/duskit/actions/workflows/ci.yml)
-[![NPM version](https://img.shields.io/npm/v/@duskit/base64.svg)](https://www.npmjs.com/package/@duskit/base64)
+[![NPM version](https://img.shields.io/npm/v/@duskit/encoding.svg)](https://www.npmjs.com/package/@duskit/encoding)
 
-Functions to convert to and from base64.
+Functions to convert to and from encoding.
 
 ## TOC
 
@@ -26,7 +26,7 @@ Please refer to the [main README](../../README.md) for monorepo usage, changeset
 Install it with your favourite package manager:
 
 ```bash
-npm install @duskit/base64 --save
+npm install @duskit/encoding --save
 ```
 
 <p align="right"><a href="#toc">[back to TOC]</a></p>

@@ -46,12 +46,12 @@
   "workspaces": [
     "apps/workshop",
     "packages/array",
-    "packages/base64",
     "packages/components",
     "packages/css",
     "packages/currency",
     "packages/date",
     "packages/design-tokens",
+    "packages/encoding",
     "packages/error",
     "packages/http",
     "packages/icons",
