@@ -10,11 +10,11 @@
   "license": "MPL-2.0",
   "main": "index.js",
   "module": "index.js",
-  "name": "@duskit/base64",
+  "name": "@duskit/encoding",
   "repository": {
     "type": "git",
     "url": "git@github.com:dusk-network/duskit.git",
-    "directory": "packages/base64"
+    "directory": "packages/encoding"
   },
   "scripts": {
     "checks": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage",
