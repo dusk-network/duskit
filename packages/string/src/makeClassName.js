@@ -33,6 +33,8 @@ const makeClassNameFromObject = pipe([pickIf(Boolean), keys, joinWithSpace]);
  * makeClassName(arr) // => "foo baz"
  * makeClassName({}) // => ""
  * makeClassName([]) // => ""
+ *
+ * @type {import("..").makeClassName}
  */
 const makeClassName = condition(
   Array.isArray,
