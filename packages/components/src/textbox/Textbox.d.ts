@@ -4,6 +4,8 @@ import type {
   HTMLTextareaAttributes,
 } from "svelte/elements";
 
+import type { OmitSvelteSpecificProps } from "../dusk.components";
+
 export type TextboxType =
   | "email"
   | "hidden"

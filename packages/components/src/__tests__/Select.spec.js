@@ -3,6 +3,8 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/svelte";
 
 import { Select } from "../..";
 
+/** @typedef {import("../dusk.components").OptionItem} OptionItem */
+
 const stringOptions = ["one", "two", "three", "four"];
 
 /** @type {OptionItem[]} */

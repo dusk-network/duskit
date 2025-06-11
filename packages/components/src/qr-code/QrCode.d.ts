@@ -1,5 +1,6 @@
 import type { SvelteComponent } from "svelte";
 
+import type { OmitSvelteSpecificProps } from "../dusk.components";
 import type { default as Suspense, SuspenseProps } from "../suspense/Suspense";
 
 export interface QrCodeProps

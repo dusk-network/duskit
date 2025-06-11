@@ -1,6 +1,8 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
+import type { GapSize, OmitSvelteSpecificProps } from "../dusk.components";
+
 export type SuspenseProps<
   R = any,
   T extends keyof HTMLElementTagNameMap = "div",

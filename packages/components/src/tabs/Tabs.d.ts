@@ -1,6 +1,8 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
+import type { IconProp, OmitSvelteSpecificProps } from "../dusk.components";
+
 type TabItem = {
   icon?: IconProp;
   id: string;

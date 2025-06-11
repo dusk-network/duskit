@@ -1,5 +1,7 @@
 import type { SvelteComponent } from "svelte";
-import type { HTMLButtonAttributes, MouseEventHandler } from "svelte/elements";
+import type { HTMLButtonAttributes } from "svelte/elements";
+
+import type { IconProp, OmitSvelteSpecificProps } from "../dusk.components";
 
 export type ButtonSize = "default" | "small";
 

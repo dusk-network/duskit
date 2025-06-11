@@ -1,4 +1,4 @@
-type OmitSvelteSpecificProps<T> = {
+export type OmitSvelteSpecificProps<T> = {
   [K in keyof T as K extends
     | `on:${string}`
     | `bind:${string}`
@@ -8,20 +8,20 @@ type OmitSvelteSpecificProps<T> = {
     : K]: T[K];
 };
 
-type GapSize = "small" | "default" | "medium" | "large";
+export type GapSize = "small" | "default" | "medium" | "large";
 
-type IconProp = {
+export type IconProp = {
   path: string;
   position?: "after" | "before";
   size?: IconSize;
 };
 
-type IconSize = "small" | "default" | "large";
+export type IconSize = "small" | "default" | "large";
 
-type OptionItem = {
+export type OptionItem = {
   disabled?: boolean;
   label?: string;
   value: string;
 };
 
-type StatusType = "error" | "info" | "success" | "warning";
+export type StatusType = "error" | "info" | "success" | "warning";

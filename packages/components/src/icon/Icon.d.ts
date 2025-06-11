@@ -1,6 +1,8 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
+import type { IconSize, OmitSvelteSpecificProps } from "../dusk.components";
+
 export type IconProps<Stacked extends boolean = false> =
   OmitSvelteSpecificProps<
     SvelteHTMLElements[Stacked extends true ? "g" : "svg"]

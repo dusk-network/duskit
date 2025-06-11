@@ -1,6 +1,8 @@
 import type { SvelteComponent } from "svelte";
 import type { HTMLTimeAttributes } from "svelte/elements";
 
+import type { OmitSvelteSpecificProps } from "../dusk.components";
+
 export interface RelativeTimeProps
   extends OmitSvelteSpecificProps<HTMLTimeAttributes> {
   autoRefresh?: boolean;

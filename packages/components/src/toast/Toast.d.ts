@@ -1,6 +1,8 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
+import type { OmitSvelteSpecificProps, StatusType } from "../dusk.components";
+
 export type ToastItem = {
   icon?: string;
   id: string;

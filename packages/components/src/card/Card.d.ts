@@ -1,6 +1,8 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
+import type { GapSize, OmitSvelteSpecificProps } from "../dusk.components";
+
 export type CardProps<T extends keyof HTMLElementTagNameMap = "div"> =
   OmitSvelteSpecificProps<SvelteHTMLElements[T]> & {
     as?: T;
