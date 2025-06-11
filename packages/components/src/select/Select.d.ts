@@ -1,6 +1,8 @@
 import type { SvelteComponent } from "svelte";
 import type { HTMLSelectAttributes } from "svelte/elements";
 
+import type { OmitSvelteSpecificProps, OptionItem } from "../dusk.components";
+
 type GroupedOptionItems = Record<string, OptionItem[] | string[]>;
 
 export interface SelectProps

@@ -3,6 +3,8 @@ import { cleanup, fireEvent, render } from "@testing-library/svelte";
 
 import { ExclusiveChoice } from "../..";
 
+/** @typedef {import("../dusk.components").OptionItem} OptionItem */
+
 vi.mock("@duskit/string", async (importOriginal) => {
   /** @type {typeof import("@duskit/string")} */
   const original = await importOriginal();

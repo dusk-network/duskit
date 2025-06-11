@@ -1,6 +1,8 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
+import type { OmitSvelteSpecificProps, OptionItem } from "../dusk.components";
+
 export interface ExclusiveChoiceProps
   extends OmitSvelteSpecificProps<SvelteHTMLElements["div"]> {
   className?: string;

@@ -1,6 +1,8 @@
 <svelte:options immutable={true} />
 
 <script>
+  /** @typedef {import("../dusk.components").OptionItem} OptionItem */
+
   import { isType } from "lamb";
 
   /** @type {(v: any) => v is string} */
