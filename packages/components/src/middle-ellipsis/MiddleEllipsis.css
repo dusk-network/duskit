@@ -1,0 +1,5 @@
+.dusk-middle-ellipsis {
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}
