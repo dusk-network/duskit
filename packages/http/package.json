@@ -30,7 +30,11 @@
     "typecheck:watch": "tsc --watch --project ./tsconfig.json"
   },
   "type": "module",
+  "types": "index.d.ts",
   "version": "0.0.0",
+  "dependencies": {
+    "lamb": "0.61.1"
+  },
   "devDependencies": {
     "@dusk-network/eslint-config": "4.0.1",
     "@dusk-network/prettier-config": "1.1.0",
@@ -41,9 +45,10 @@
     "eslint-config-prettier": "10.1.5",
     "eslint-import-resolver-typescript": "4.3.5",
     "globals": "16.1.0",
+    "lamb-types": "0.61.14",
     "prettier": "3.5.3",
     "rimraf": "6.0.1",
-    "typescript": "5.4.4",
+    "typescript": "5.8.3",
     "vitest": "3.1.4"
   }
 }

@@ -4,7 +4,7 @@
     "checkJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["ESNext", "WebWorker"],
+    "lib": ["DOM.Iterable", "ESNext", "WebWorker"],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "noEmit": true,
@@ -12,7 +12,8 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "types": ["lamb-types"]
   },
   "exclude": ["coverage", "node_modules"]
 }
