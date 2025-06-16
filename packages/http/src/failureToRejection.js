@@ -3,16 +3,18 @@
  * with the Reponse itself if its status is ok, and
  * rejects with an Error otherwise.
  *
- * @param {Response} response
- * @returns {Promise<Response>}
+ * @type {import("..").failureToRejection}
  */
 const failureToRejection = (response) =>
   response.ok
     ? Promise.resolve(response)
     : Promise.reject(
-        new Error(`HTTP Request failed - ${response.statusText}`, {
-          cause: response,
-        })
+        new Error(
+          `HTTP Request failed with status ${response.status}: ${response.statusText}`,
+          {
+            cause: response,
+          }
+        )
       );
 
 export default failureToRejection;
