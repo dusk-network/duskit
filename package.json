@@ -48,7 +48,6 @@
     "packages/array",
     "packages/components",
     "packages/css",
-    "packages/currency",
     "packages/date",
     "packages/design-tokens",
     "packages/encoding",
