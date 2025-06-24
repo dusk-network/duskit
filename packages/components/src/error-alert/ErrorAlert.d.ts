@@ -1,7 +1,7 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
-import type { OmitSvelteSpecificProps } from "../dusk.components";
+import type { GapSize, OmitSvelteSpecificProps } from "../dusk.components";
 
 export interface ErrorAlertProps
   extends OmitSvelteSpecificProps<SvelteHTMLElements["div"]> {

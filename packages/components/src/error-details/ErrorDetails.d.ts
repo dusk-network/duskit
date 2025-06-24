@@ -15,5 +15,5 @@ export default class ErrorDetails extends SvelteComponent<
   {},
   {}
 > {
-  getRootElement(): HTMLDetailsElement;
+  getRootElement(): HTMLDetailsElement | null;
 }

@@ -3,6 +3,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.dusk-suspense.dusk-suspense--default-gap {
   gap: var(--default-gap);
 }
 

@@ -28,4 +28,4 @@
   ]);
 </script>
 
-<span bind:this={rootElement} class={classes}>{text}</span>
+<span bind:this={rootElement} {...$$restProps} class={classes}>{text}</span>

@@ -1,4 +1,4 @@
-import type { SvelteComponent } from "svelte";
+import type { ComponentType, SvelteComponent } from "svelte";
 import type { Readable } from "svelte/store";
 import type { render } from "@testing-library/svelte";
 
@@ -40,4 +40,6 @@ export declare interface SlotContentProps<
 
 export declare class SlotContent<
   C extends SvelteComponentConstructor = SvelteComponentConstructor,
-> extends SvelteComponent<SlotContentProps<C>, {}, { default: {} }> {}
+> extends SvelteComponent<SlotContentProps<C>, {}, { default: {} }> {
+  getRootElement: SvelteComponent<C, SlotContentProps<C>["componentOptions"]>;
+}

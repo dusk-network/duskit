@@ -16,20 +16,16 @@
   /** @type {ErrorDetailsProps["summary"]} */
   export let summary;
 
-  /** @type {HTMLDetailsElement} */
-  let rootElement;
+  /** @type {HTMLDetailsElement | null} */
+  let rootElement = null;
 
-  export const getRootElement = () => (error ? null : rootElement);
+  export const getRootElement = () => rootElement;
 
-  $: classes = makeClassName([
-    "dusk-error-details",
-    "dusk-error-details__details",
-    className,
-  ]);
+  $: classes = makeClassName(["dusk-error-details", className]);
 </script>
 
 {#if error}
-  <details bind:this={rootElement} class={classes}>
+  <details bind:this={rootElement} {...$$restProps} class={classes}>
     <summary class="dusk-error-details__summary">
       {summary}
     </summary>

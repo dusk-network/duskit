@@ -9,7 +9,6 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "noEmit": true,
-    "noImplicitAny": true,
     "paths": {
       "svelte/motion": [
         "../../node_modules/svelte/src/runtime/motion/index.js"
@@ -21,6 +20,7 @@
     },
     "resolveJsonModule": true,
     "skipLibCheck": false,
+    "strict": true,
     "target": "ESNext",
     "types": [
       "../../node_modules/@testing-library/jest-dom/types/vitest.d.ts",

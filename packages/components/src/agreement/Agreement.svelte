@@ -37,12 +37,13 @@
 
 <div bind:this={rootElement} {...$$restProps} class={classes}>
   <Checkbox
-    tabindex={0}
+    bind:checked
+    on:change
+    className="dusk-agreement__checkbox"
     id={controlId}
     {name}
     {disabled}
-    bind:checked
-    on:change
+    tabindex={0}
   />
   <label for={controlId} class="dusk-agreement__label">
     {label}

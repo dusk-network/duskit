@@ -1,9 +1,11 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { cleanup, render } from "@testing-library/svelte";
+import { mdiAbTesting } from "@mdi/js";
 
 import { Icon } from "../..";
 
 describe("Icon", () => {
+  const sizes = /** @type {const} */ (["default", "large", "small"]);
   const baseProps = {
     path: "M3,3H21V21H3V3M5,5V19H19V5H5Z",
   };
@@ -25,9 +27,9 @@ describe("Icon", () => {
       ...baseProps,
       role: "presentation",
     };
-    const { container } = render(Icon, { ...baseOptions, props });
+    const { component } = render(Icon, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(component.getRootElement()).toHaveRole(props.role);
   });
 
   it("should render the icon inside a `g` element if it's part of a stack", () => {
@@ -35,30 +37,58 @@ describe("Icon", () => {
       ...baseProps,
       isInStack: true,
     };
-    const { container } = render(Icon, { ...baseOptions, props });
+    const { component } = render(Icon, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(component.getRootElement().nodeName.toLowerCase()).toBe("g");
   });
 
-  it("should pass additional class names and attributes to the rendered element", async () => {
+  it.each(sizes)('should render the `Icon` of the "%s" size', (size) => {
+    const props = { ...baseProps, size };
+    const { component } = render(Icon, { ...baseOptions, props });
+    const element = component.getRootElement();
+
+    expect(element).toHaveClass("dusk-icon", `dusk-icon--size--${size}`);
+  });
+
+  it("should pass additional class names and attributes to the rendered element", () => {
     const props = {
       ...baseProps,
       className: "foo bar",
       "data-baz": "baz",
     };
-    const { container, rerender } = render(Icon, { ...baseOptions, props });
-    const icon = container.firstChild;
+    const { component } = render(Icon, { ...baseOptions, props });
+    const icon = component.getRootElement();
 
+    expect(icon.nodeName.toLowerCase()).toBe("svg");
     expect(icon).toHaveClass("foo bar");
     expect(icon).toHaveAttribute("data-baz", "baz");
-    expect(icon).toMatchSnapshot();
+    expect(icon.querySelector("path")).toHaveAttribute("d", baseProps.path);
+  });
 
-    await rerender({ ...props, isInStack: true });
+  it("should react to prop changes", async () => {
+    const { component, rerender } = render(Icon, baseOptions);
 
-    const icon2 = container.firstChild;
+    let icon = component.getRootElement();
 
-    expect(icon2).toHaveClass("foo bar");
-    expect(icon2).toHaveAttribute("data-baz", "baz");
-    expect(icon2).toMatchSnapshot();
+    expect(icon).toHaveRole("graphics-symbol");
+
+    await rerender({ role: "img" });
+
+    expect(component.getRootElement()).toHaveAttribute("role", "img");
+
+    await rerender({
+      className: "baz",
+      isInStack: true,
+      path: mdiAbTesting,
+      role: "img",
+      size: "small",
+    });
+
+    icon = component.getRootElement();
+
+    expect(icon.nodeName.toLowerCase()).toBe("g");
+    expect(icon).toHaveClass("dusk-icon--size--small", "baz");
+    expect(icon).not.toHaveAttribute("role");
+    expect(icon.querySelector("path")).toHaveAttribute("d", mdiAbTesting);
   });
 });

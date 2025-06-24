@@ -1,13 +1,17 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Card > renders the Card component 1`] = `
+exports[`Card > should render the \`Card\` component in a \`div\` with a standard gap by default 1`] = `
 <div
-  class="dusk-card dusk-card--gap-default"
+  class="dusk-card dusk-card--gap-default dusk-card--off-surface"
 >
    
   <div
     class="dusk-card__body-container"
-  />
+  >
+    <span>
+      some text
+    </span>
+  </div>
    
 </div>
 `;

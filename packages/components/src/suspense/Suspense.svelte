@@ -39,7 +39,7 @@
 
   $: classes = makeClassName([
     "dusk-suspense",
-    gap !== "default" ? `dusk-suspense--${gap}-gap` : "",
+    `dusk-suspense--${gap}-gap`,
     className,
   ]);
 </script>

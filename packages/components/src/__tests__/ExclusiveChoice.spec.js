@@ -1,5 +1,6 @@
 import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render } from "@testing-library/svelte";
+import { everyIn } from "lamb";
 
 import { ExclusiveChoice } from "../..";
 
@@ -21,7 +22,7 @@ describe("ExclusiveChoice", () => {
   /** @type {OptionItem[]} */
   const objectOptionsA = [
     { label: "one", value: "1" },
-    { label: "two", value: "2" },
+    { disabled: false, label: "two", value: "2" },
     { disabled: true, label: "three", value: "3" },
     { label: "four", value: "4" },
   ];
@@ -49,10 +50,30 @@ describe("ExclusiveChoice", () => {
     vi.doUnmock("@duskit/string");
   });
 
-  it("should render the `ExclusiveChoice` component", () => {
-    const { container } = render(ExclusiveChoice, baseOptions);
+  it("should render the `ExclusiveChoice` component and assign a name to the radio inputs if it's not provided", () => {
+    const { component } = render(ExclusiveChoice, baseOptions);
+    const element = component.getRootElement();
+    const radios = element.querySelectorAll("input[type='radio']");
+    const labels = element.querySelectorAll("label");
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(baseProps.options.length).toBeGreaterThan(1);
+    expect(radios.length).toBe(baseProps.options.length);
+    expect(labels.length).toBe(baseProps.options.length);
+
+    radios.forEach((radio, idx) => {
+      expect(radio).toHaveAttribute(
+        "name",
+        "dusk-exclusive-choice-some-generated-id"
+      );
+      expect(radio).toHaveAttribute(
+        "id",
+        `dusk-exclusive-choice-some-generated-id-${baseProps.options[idx].value}`
+      );
+      expect(labels[idx]).toHaveAttribute("for", radio.getAttribute("id"));
+    });
+
+    expect(element).toMatchSnapshot();
+    expect.assertions(radios.length * 3 + 4);
   });
 
   it("should accept a custom name for the radio elements", () => {
@@ -60,9 +81,23 @@ describe("ExclusiveChoice", () => {
       ...baseProps,
       name: "my-custom-name",
     };
-    const { container } = render(ExclusiveChoice, { ...baseOptions, props });
+    const { component } = render(ExclusiveChoice, { ...baseOptions, props });
+    const element = component.getRootElement();
+    const radios = element.querySelectorAll("input[type='radio']");
+    const labels = element.querySelectorAll("label");
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(baseProps.options.length).toBeGreaterThan(1);
+    expect(radios.length).toBe(baseProps.options.length);
+    expect(labels.length).toBe(baseProps.options.length);
+
+    radios.forEach((radio, idx) => {
+      expect(radio).toHaveAttribute("name", props.name);
+      expect(radio).toHaveAttribute(
+        "id",
+        `dusk-exclusive-choice-some-generated-id-${baseProps.options[idx].value}`
+      );
+      expect(labels[idx]).toHaveAttribute("for", radio.getAttribute("id"));
+    });
   });
 
   it("should accept an array of options object without labels and use the value as labels", () => {
@@ -70,9 +105,17 @@ describe("ExclusiveChoice", () => {
       ...baseProps,
       options: objectOptionsB,
     };
-    const { container } = render(ExclusiveChoice, { ...baseOptions, props });
+    const { component } = render(ExclusiveChoice, { ...baseOptions, props });
+    const labels = component.getRootElement().querySelectorAll("label");
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(objectOptionsB.length).toBeGreaterThan(1);
+    expect(labels.length).toBe(objectOptionsB.length);
+    expect(
+      everyIn(
+        labels,
+        (label, idx) => label.textContent === objectOptionsB[idx].value
+      )
+    ).toBe(true);
   });
 
   it("should accept an array of string as options", () => {
@@ -80,9 +123,19 @@ describe("ExclusiveChoice", () => {
       ...baseProps,
       options: stringOptions,
     };
-    const { container } = render(ExclusiveChoice, { ...baseOptions, props });
+    const { component } = render(ExclusiveChoice, { ...baseOptions, props });
+    const element = component.getRootElement();
+    const radios = element.querySelectorAll("input[type='radio']");
+    const labels = element.querySelectorAll("label");
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(stringOptions.length).toBeGreaterThan(1);
+
+    radios.forEach((radio, idx) => {
+      expect(radio).toHaveAttribute("value", stringOptions[idx]);
+      expect(labels[idx]).toHaveTextContent(stringOptions[idx]);
+    });
+
+    expect.assertions(stringOptions.length * 2 + 1);
   });
 
   it("should pass additional class names and attributes to the rendered element", () => {
@@ -91,12 +144,14 @@ describe("ExclusiveChoice", () => {
       className: "foo bar",
       id: "some-id",
     };
-    const { container } = render(ExclusiveChoice, { ...baseOptions, props });
+    const { component } = render(ExclusiveChoice, { ...baseOptions, props });
+    const element = component.getRootElement();
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(element).toHaveClass("dusk-exclusive-choice", "foo", "bar");
+    expect(element).toHaveAttribute("id", props.id);
   });
 
-  it("should accept a change event handler", async () => {
+  it("should forward the change event to the radio elements", async () => {
     const changeHandler = vi.fn();
     const { component, container } = render(ExclusiveChoice, baseOptions);
     const target = /** @type {HTMLInputElement} */ (
@@ -109,6 +164,66 @@ describe("ExclusiveChoice", () => {
 
     expect(changeHandler).toHaveBeenCalledTimes(1);
     expect(changeHandler).toHaveBeenCalledWith(expect.any(Event));
-    expect(target.checked).toBe(true);
+    expect(target).toBeChecked();
+  });
+
+  it("should react to prop changes", async () => {
+    const { component, rerender } = render(ExclusiveChoice, baseOptions);
+    const element = component.getRootElement();
+
+    await rerender({
+      className: "baz",
+      name: "some-new-name",
+      options: objectOptionsB,
+      value: "3",
+    });
+
+    let radios = element.querySelectorAll("input[type='radio']");
+    let labels = element.querySelectorAll("label");
+
+    expect(element).toHaveClass("baz");
+    expect(objectOptionsB.length).toBeGreaterThan(1);
+    expect(radios.length).toBe(objectOptionsB.length);
+    expect(labels.length).toBe(objectOptionsB.length);
+
+    radios.forEach((radio, idx) => {
+      expect(radio).toHaveAttribute("name", "some-new-name");
+      expect(radio).toHaveAttribute(
+        "id",
+        `dusk-exclusive-choice-some-generated-id-${objectOptionsB[idx].value}`
+      );
+      expect(labels[idx]).toHaveAttribute("for", radio.getAttribute("id"));
+    });
+
+    expect(
+      element.querySelector("input[type='radio'][value='3']")
+    ).toBeChecked();
+
+    await rerender({
+      options: stringOptions,
+      value: stringOptions[1],
+    });
+
+    radios = element.querySelectorAll("input[type='radio']");
+    labels = element.querySelectorAll("label");
+
+    expect(stringOptions.length).toBeGreaterThan(1);
+    expect(radios.length).toBe(stringOptions.length);
+    expect(labels.length).toBe(stringOptions.length);
+
+    radios.forEach((radio, idx) => {
+      expect(radio).toHaveAttribute("name", "some-new-name");
+      expect(radio).toHaveAttribute(
+        "id",
+        `dusk-exclusive-choice-some-generated-id-${stringOptions[idx]}`
+      );
+      expect(labels[idx]).toHaveAttribute("for", radio.getAttribute("id"));
+    });
+
+    expect(
+      element.querySelector(`input[type='radio'][value='${stringOptions[1]}']`)
+    ).toBeChecked();
+
+    expect.assertions(radios.length * 3 * 2 + 9);
   });
 });

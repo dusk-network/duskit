@@ -26,10 +26,13 @@ describe("ErrorDetails", () => {
     const props = {
       ...baseProps,
       className: "foo bar",
+      id: "some-id",
     };
-    const { container } = render(ErrorDetails, { ...baseOptions, props });
+    const { component } = render(ErrorDetails, { ...baseOptions, props });
+    const element = component.getRootElement();
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(element).toHaveClass("dusk-error-details", "foo", "bar");
+    expect(element).toHaveAttribute("id", props.id);
   });
 
   it("should render nothing if the error is `null`", () => {
@@ -37,8 +40,31 @@ describe("ErrorDetails", () => {
       ...baseProps,
       error: null,
     };
-    const { container } = render(ErrorDetails, { ...baseOptions, props });
+    const { container, component } = render(ErrorDetails, {
+      ...baseOptions,
+      props,
+    });
 
+    expect(component.getRootElement()).toBeNull();
     expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it("should react to prop changes", async () => {
+    const { component, rerender } = render(ErrorDetails, baseOptions);
+    const element = component.getRootElement();
+
+    await rerender({
+      className: "baz",
+      error: new Error("some new error"),
+      summary: "new error summary",
+    });
+
+    expect(element).toHaveClass("baz");
+    expect(
+      element?.querySelector(".dusk-error-details__summary")
+    ).toHaveTextContent("new error summary");
+    expect(
+      element?.querySelector(".dusk-error-details__error")
+    ).toHaveTextContent("some new error");
   });
 });

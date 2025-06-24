@@ -1,17 +1,17 @@
-import { afterEach, describe, expect, it } from "vitest";
-import { cleanup, render } from "@testing-library/svelte";
-import { mdiFolderOutline } from "@mdi/js";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { cleanup, fireEvent, render } from "@testing-library/svelte";
+import { mdiAbTesting, mdiFolderOutline } from "@mdi/js";
+import { skipIn } from "lamb";
+
+import { getAsHTMLElement } from "@duskit/test-helpers";
 
 import { Button } from "../..";
 
 describe("Button", () => {
-  const buttonTypes = /** @type {const} */ ([
-    "button",
-    "reset",
-    "submit",
-    "toggle",
-  ]);
+  const types = /** @type {const} */ (["button", "reset", "submit", "toggle"]);
   const iconPositions = /** @type {const} */ (["after", "before"]);
+  const sizes = /** @type {const} */ (["default", "small"]);
+  const variants = /** @type {const} */ (["primary", "secondary", "tertiary"]);
 
   const baseProps = {
     text: "some text",
@@ -29,16 +29,38 @@ describe("Button", () => {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  it("should render a button of the desired type", () => {
-    buttonTypes.forEach((type) => {
-      const props = {
-        ...baseProps,
-        type,
-      };
-      const { container } = render(Button, { ...baseOptions, props });
+  it.each(types)('should render a button with type "%s"', (type) => {
+    const props = { ...baseProps, type };
+    const { component } = render(Button, { ...baseOptions, props });
+    const element = component.getRootElement();
 
-      expect(container.firstChild).toMatchSnapshot();
-    });
+    expect(element).toHaveClass(`dusk-button--type--${type}`);
+
+    if (type === "toggle") {
+      expect(element).toHaveAttribute("type", "button");
+      expect(element).toHaveAttribute("aria-pressed", "false");
+    } else {
+      expect(element).toHaveAttribute("type", type);
+      expect(element).not.toHaveAttribute("aria-pressed");
+    }
+
+    expect.assertions(3);
+  });
+
+  it('should add an "active" class when the active property of a toggle button changes', async () => {
+    const props = Object.freeze({ ...baseProps, type: "toggle" });
+    const { component, rerender } = render(Button, { ...baseOptions, props });
+    const element = component.getRootElement();
+
+    expect(element).toHaveClass("dusk-button--type--toggle");
+    expect(element).not.toHaveClass("dusk-button--active");
+    expect(element).toHaveAttribute("type", "button");
+    expect(element).toHaveAttribute("aria-pressed", "false");
+
+    await rerender({ active: true });
+
+    expect(element).toHaveClass("dusk-button--active");
+    expect(element).toHaveAttribute("aria-pressed", "true");
   });
 
   it("should pass additional class names and attributes to the rendered element", () => {
@@ -47,23 +69,62 @@ describe("Button", () => {
       className: "foo bar",
       id: "some-id",
     };
-    const { container } = render(Button, { ...baseOptions, props });
+    const { component } = render(Button, { ...baseOptions, props });
+    const element = component.getRootElement();
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(element).toHaveClass(
+      "dusk-button",
+      "dusk-button--type--button",
+      "dusk-button--variant--primary",
+      "dusk-button--size--default",
+      "foo",
+      "bar"
+    );
+    expect(element).toHaveAttribute("id", props.id);
   });
 
-  it("should render a button without a text", () => {
-    const props = {
-      ...baseProps,
-      text: "",
-    };
-    const { container } = render(Button, { ...baseOptions, props });
+  it.each(variants)(
+    'should render the `Button` in the "%s" variant',
+    (variant) => {
+      const props = { ...baseProps, variant };
+      const { component } = render(Button, { ...baseOptions, props });
+      const element = component.getRootElement();
 
-    expect(container.firstChild).toMatchSnapshot();
+      expect(element).toHaveClass(
+        "dusk-button",
+        "dusk-button--type--button",
+        `dusk-button--variant--${variant}`,
+        "dusk-button--size--default"
+      );
+    }
+  );
+
+  it.each(sizes)('should render the `Button` of the "%s" size', (size) => {
+    const props = { ...baseProps, size };
+    const { component } = render(Button, { ...baseOptions, props });
+    const element = component.getRootElement();
+
+    expect(element).toHaveClass(
+      "dusk-button",
+      "dusk-button--type--button",
+      "dusk-button--variant--primary",
+      `dusk-button--size--${size}`
+    );
   });
 
-  it("should be able to render a button with an icon and text", () => {
-    iconPositions.forEach((position) => {
+  it("should be able to render a `Button` without a text", () => {
+    const propsA = { ...baseProps, text: "" };
+    const propsB = skipIn(baseProps, ["text"]);
+    const resultA = render(Button, { ...baseOptions, props: propsA });
+    const resultB = render(Button, { ...baseOptions, props: propsB });
+
+    expect(resultA.container.querySelector(".dusk-button__text")).toBeNull();
+    expect(resultB.container.querySelector(".dusk-button__text")).toBeNull();
+  });
+
+  it.each(iconPositions)(
+    'should be able to render a `Button` with an icon in "%s" position in respect to the text',
+    (position) => {
       const props = {
         ...baseProps,
         icon: {
@@ -71,14 +132,31 @@ describe("Button", () => {
           position,
         },
       };
-      const { container } = render(Button, { ...baseOptions, props });
+      const { component } = render(Button, { ...baseOptions, props });
+      const element = component.getRootElement();
+      const svgElement = /** @type {SVGSVGElement} */ (
+        element.querySelector("svg")
+      );
+      const spanElement = getAsHTMLElement(element, ".dusk-button__text");
+      const iconPosition = spanElement.compareDocumentPosition(svgElement);
+      const expectedFlag =
+        position === "after"
+          ? Node.DOCUMENT_POSITION_FOLLOWING
+          : Node.DOCUMENT_POSITION_PRECEDING;
 
-      expect(container.firstChild).toMatchSnapshot();
-    });
-  });
+      expect(iconPosition & expectedFlag).toBeTruthy();
+      expect(element).toHaveClass("dusk-icon-button--labeled");
+      expect(element).not.toHaveClass("dusk-icon-button");
+      expect(svgElement.querySelector("path")).toHaveAttribute(
+        "d",
+        mdiFolderOutline
+      );
+    }
+  );
 
-  it("should be able to render a button with an icon only", () => {
-    iconPositions.forEach((position) => {
+  it.each(iconPositions)(
+    'should be able to render a `Button` with an icon only ignoring the icon position ("%s") property',
+    (position) => {
       const props = {
         ...baseProps,
         icon: {
@@ -87,9 +165,114 @@ describe("Button", () => {
         },
         text: "",
       };
-      const { container } = render(Button, { ...baseOptions, props });
+      const { component } = render(Button, { ...baseOptions, props });
+      const element = component.getRootElement();
 
-      expect(container.firstChild).toMatchSnapshot();
+      expect(element).toHaveClass("dusk-icon-button");
+      expect(element).not.toHaveClass("dusk-icon-button--labeled");
+      expect(element.querySelector(".dusk-button__text")).toBeNull();
+      expect(element.querySelector(".dusk-icon > path")).toHaveAttribute(
+        "d",
+        mdiFolderOutline
+      );
+    }
+  );
+
+  it("should forward the `on:click`, `on:mousedown` and `on:mouseup` handlers to the underlying element", async () => {
+    const handleEvent = vi.fn((evt) => evt.preventDefault());
+    const { component } = render(Button, baseOptions);
+
+    const element = component.getRootElement();
+
+    component.$on("click", handleEvent);
+    component.$on("mousedown", handleEvent);
+    component.$on("mouseup", handleEvent);
+
+    await fireEvent.click(element);
+    await fireEvent.mouseDown(element);
+    await fireEvent.mouseUp(element);
+
+    expect(handleEvent).toHaveBeenCalledTimes(3);
+  });
+
+  describe("Reactivity", () => {
+    it("should react to property changes", async () => {
+      const props = Object.freeze({
+        ...baseProps,
+        type: "submit",
+        variant: "primary",
+      });
+      const { component, rerender } = render(Button, { ...baseOptions, props });
+      const element = component.getRootElement();
+
+      await rerender({
+        disabled: true,
+        size: "small",
+        text: "some new text",
+        type: "toggle",
+        variant: "secondary",
+      });
+
+      expect(element).toHaveClass("dusk-button--variant--secondary");
+      expect(element).toHaveClass("dusk-button--size--small");
+      expect(element).toBeDisabled();
+      expect(element).toHaveAttribute("type", "button");
+    });
+
+    it("should update icon and text props correctly in all conditional rendering branches", async () => {
+      // the default props have text only
+      const { component, rerender } = render(Button, baseOptions);
+      const element = component.getRootElement();
+
+      expect(element).toHaveTextContent(baseProps.text);
+
+      await rerender({ text: "Updated Text Only" });
+
+      expect(element).toHaveTextContent("Updated Text Only");
+
+      const propsIconBefore = {
+        icon: Object.freeze({ path: mdiFolderOutline, position: "before" }),
+        text: "Initial Before",
+      };
+
+      await rerender(propsIconBefore);
+
+      expect(element.querySelector(".dusk-button__text")).toHaveTextContent(
+        "Initial Before"
+      );
+
+      await rerender({
+        ...propsIconBefore,
+        icon: { ...propsIconBefore.icon, path: mdiAbTesting },
+        text: "Updated Before",
+      });
+
+      expect(element.querySelector(".dusk-button__text")).toHaveTextContent(
+        "Updated Before"
+      );
+      expect(element.querySelector("path")).toHaveAttribute("d", mdiAbTesting);
+
+      const propsIconAfter = {
+        icon: Object.freeze({ path: mdiFolderOutline, position: "after" }),
+        text: "Initial After",
+      };
+
+      await rerender(propsIconAfter);
+
+      expect(element.querySelector(".dusk-button__text")).toHaveTextContent(
+        "Initial After"
+      );
+
+      await rerender({
+        ...propsIconAfter,
+        icon: { ...propsIconAfter.icon, path: mdiAbTesting, size: "small" },
+        text: "Updated After",
+      });
+
+      expect(element.querySelector(".dusk-button__text")).toHaveTextContent(
+        "Updated After"
+      );
+      expect(element.querySelector("path")).toHaveAttribute("d", mdiAbTesting);
     });
   });
 });

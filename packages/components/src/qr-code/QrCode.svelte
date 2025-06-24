@@ -11,12 +11,13 @@
 
   import { Suspense } from "../..";
 
+  const defaultAltText = "QR Code";
   const defaultBgColor = "#fff";
   const defaultQrColor = "#101";
   const defaultSize = 200;
 
   /** @type {QrCodeProps["altText"]} */
-  export let altText = "QR Code";
+  export let altText = defaultAltText;
 
   /** @type {QrCodeProps["bgColor"]} */
   export let bgColor = defaultBgColor;
@@ -52,7 +53,7 @@
         light: options.bgColor,
       },
       width: options.size,
-    }).catch((/** @type {unknown} */ failure) => {
+    }).catch((failure) => {
       const error = getErrorFrom(failure);
 
       dispatch("error", error.message);
@@ -81,7 +82,7 @@
 >
   <svelte:fragment slot="success-content" let:result>
     <img
-      alt={altText}
+      alt={altText ?? defaultAltText}
       class="dusk-qr-code__image"
       height={size}
       src={result}

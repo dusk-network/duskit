@@ -27,7 +27,12 @@
 
   export const getRootElement = () => rootElement;
 
-  $: classes = makeClassName(["dusk-card", `dusk-card--gap-${gap}`, className]);
+  $: classes = makeClassName([
+    "dusk-card",
+    `dusk-card--gap-${gap}`,
+    `dusk-card--${onSurface ? "on-surface" : "off-surface"}`,
+    className,
+  ]);
 </script>
 
 <svelte:element
@@ -35,7 +40,6 @@
   bind:this={rootElement}
   {...$$restProps}
   class={classes}
-  class:dusk-card--on-surface={onSurface}
 >
   {#if $$slots.header}
     <div class="dusk-card__header-container">

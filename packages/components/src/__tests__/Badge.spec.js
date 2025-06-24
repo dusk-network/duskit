@@ -4,6 +4,12 @@ import { cleanup, render } from "@testing-library/svelte";
 import { Badge } from "../..";
 
 describe("Badge", () => {
+  const variants = /** @type {const} */ ([
+    "error",
+    "neutral",
+    "success",
+    "warning",
+  ]);
   const baseProps = {
     text: "Badge",
   };
@@ -16,21 +22,48 @@ describe("Badge", () => {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  it('should render the Badge component using the type "warning" variant', () => {
-    const { container } = render(Badge, { ...baseProps, variant: "warning" });
+  it("should be able to render the component without text", () => {
+    const { component } = render(Badge, {});
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(component.getRootElement()).toHaveTextContent("");
   });
 
-  it('should render the Badge component using the type "error" variant', () => {
-    const { container } = render(Badge, { ...baseProps, variant: "error" });
+  it.each(variants)(
+    'should be able to render the component using the "%s" variant',
+    (variant) => {
+      const { component } = render(Badge, { ...baseProps, variant });
 
-    expect(container.firstChild).toMatchSnapshot();
+      expect(component.getRootElement()).toHaveClass(
+        `dusk-badge--variant-${variant}`
+      );
+    }
+  );
+
+  it("should pass additional class names and attributes to the rendered element", () => {
+    const props = { className: "foo bar", id: "some-id", text: "some text" };
+    const { component } = render(Badge, props);
+    const element = component.getRootElement();
+
+    expect(element).toHaveClass(
+      "dusk-badge",
+      "dusk-badge--variant-neutral",
+      "foo",
+      "bar"
+    );
+    expect(element).toHaveAttribute("id", "some-id");
   });
 
-  it('should render the Badge component using the type "success" variant', () => {
-    const { container } = render(Badge, { ...baseProps, variant: "success" });
+  it("should react to prop changes", async () => {
+    const { component, rerender } = render(Badge, baseProps);
+    const element = component.getRootElement();
 
-    expect(container.firstChild).toMatchSnapshot();
+    await rerender({
+      className: "baz",
+      text: "modified text",
+      variant: "error",
+    });
+
+    expect(element).toHaveClass("dusk-badge--variant-error", "baz");
+    expect(element).toHaveTextContent("modified text");
   });
 });

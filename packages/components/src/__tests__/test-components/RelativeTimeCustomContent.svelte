@@ -3,11 +3,19 @@
 <script>
   import { RelativeTime } from "../../..";
 
+  /** @type {boolean} */
+  export let autoRefresh;
+
   /** @type {Date} */
   export let date;
+
+  /** @type {RelativeTime} */
+  let rootElement;
+
+  export const getRootElement = () => rootElement;
 </script>
 
-<RelativeTime autoRefresh={true} {date}>
+<RelativeTime bind:this={rootElement} {autoRefresh} {date}>
   <svelte:fragment let:relativeTime>
     <span>The relative time now is {relativeTime}</span>
   </svelte:fragment>

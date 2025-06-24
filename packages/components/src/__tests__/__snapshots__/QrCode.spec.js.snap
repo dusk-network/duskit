@@ -1,15 +1,49 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`QrCode > should render the QrCode component and update it when any of the prop change 1`] = `
+exports[`QrCode > should render the \`QrCode\` component and update it when any of the QR code related props change 1`] = `
 <div
-  class="dusk-suspense dusk-qr-code"
+  class="dusk-suspense dusk-suspense--default-gap dusk-qr-code"
+>
+  <svg
+    class="dusk-throbber dusk-suspense__throbber"
+    height="64px"
+    role="progressbar"
+    viewBox="0 0 128 128"
+    width="64px"
+  >
+    <g>
+      <path
+        d="M75.4 126.63a11.43 11.43 0 0 1-2.1-22.65 40.9 40.9 0 0 0 30.5-30.6 11.4 11.4 0 1 1 22.27 4.87h.02a63.77 63.77 0 0 1-47.8 48.05v-.02a11.38 11.38 0 0 1-2.93.37z"
+      />
+      <animatetransform
+        attributeName="transform"
+        dur="1800ms"
+        from="0 64 64"
+        repeatCount="indefinite"
+        to="360 64 64"
+        type="rotate"
+      />
+    </g>
+  </svg>
+   
+  <span
+    class="dusk-suspense__pending-message"
+  >
+    
+  </span>
+</div>
+`;
+
+exports[`QrCode > should render the \`QrCode\` component and update it when any of the QR code related props change 2`] = `
+<div
+  class="dusk-suspense dusk-suspense--default-gap dusk-qr-code"
 >
   <img
     alt="some alt text"
     class="dusk-qr-code__image"
-    height="200"
-    src="data:image/png;base64,00"
-    width="200"
+    height="500"
+    src="fake-data-url"
+    width="500"
   />
 </div>
 `;

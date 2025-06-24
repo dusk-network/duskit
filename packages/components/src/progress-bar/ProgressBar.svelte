@@ -33,7 +33,12 @@
   $: currentPercentage !== undefined && progress.set(currentPercentage);
 </script>
 
-<div bind:this={rootElement} role="progressbar" class={classes}>
+<div
+  bind:this={rootElement}
+  {...$$restProps}
+  class={classes}
+  role="progressbar"
+>
   <div
     style={currentPercentage !== undefined ? `width: ${$progress}%` : undefined}
     class:dusk-progress-bar__filler--undetermined={currentPercentage ===
