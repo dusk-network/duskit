@@ -2,13 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.dusk-error-alert.dusk-error-alert--default-gap {
   gap: var(--default-gap);
 }
 
-.dusk-error-alert.dusk-error-large-gap {
+.dusk-error-alert.dusk-error-alert--large-gap {
   gap: var(--large-gap);
 }
 
-.dusk-error-alert.dusk-error-small-gap {
+.dusk-error-alert.dusk-error-alert--small-gap {
   gap: var(--small-gap);
 }

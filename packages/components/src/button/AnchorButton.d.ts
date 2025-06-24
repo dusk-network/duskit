@@ -25,5 +25,5 @@ export default class AnchorButton extends SvelteComponent<
   AnchorButtonEvents,
   {}
 > {
-  getRootElement: Anchor;
+  getRootElement(): Anchor;
 }

@@ -182,34 +182,48 @@ describe("MiddleEllipsis", () => {
       // not enough available space, only the ellipsis should be visible
       expect(element.textContent).toBe("…");
     });
+  });
 
-    describe("Reactivity", () => {
-      it("should react from a text change and apply truncation when necessary", async () => {
-        const { component, rerender } = render(MiddleEllipsis, {
-          text: "short",
-        });
-        const element = component.getRootElement();
-
-        // Trigger initial calculation as the mock doesn't call the callback
-        // @ts-expect-error
-        resizeObserverCallback();
-
-        await new Promise(requestAnimationFrame);
-
-        expect(element.textContent).toBe("short");
-
-        await rerender({ text: "this is now a long text to display" });
-
-        await new Promise(requestAnimationFrame);
-
-        expect(element.textContent).toBe("this is n…to display");
-
-        await rerender({ text: "short again" });
-
-        await new Promise(requestAnimationFrame);
-
-        expect(element.textContent).toBe("short again");
+  describe("Reactivity", () => {
+    it("should react from a text change and apply truncation when necessary", async () => {
+      const { component, rerender } = render(MiddleEllipsis, {
+        text: "short",
       });
+      const element = component.getRootElement();
+
+      // Trigger initial calculation as the mock doesn't call the callback
+      // @ts-expect-error
+      resizeObserverCallback();
+
+      await new Promise(requestAnimationFrame);
+
+      expect(element.textContent).toBe("short");
+
+      await rerender({ text: "this is now a long text to display" });
+
+      await new Promise(requestAnimationFrame);
+
+      expect(element.textContent).toBe("this is n…to display");
+
+      await rerender({ text: "short again" });
+
+      await new Promise(requestAnimationFrame);
+
+      expect(element.textContent).toBe("short again");
+    });
+
+    it("should react to other prop changes", async () => {
+      const { component, rerender } = render(MiddleEllipsis, { text: "" });
+
+      await rerender({
+        as: "li",
+        className: "baz",
+      });
+
+      const element = component.getRootElement();
+
+      expect(element.nodeName.toLowerCase()).toBe("li");
+      expect(element).toHaveClass("baz");
     });
   });
 });

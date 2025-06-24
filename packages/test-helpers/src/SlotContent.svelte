@@ -1,3 +1,5 @@
+<svelte:options immutable={true} />
+
 <script>
   /** @typedef {import("..").SlotContentProps} SlotContentProps */
 
@@ -9,8 +11,17 @@
 
   /** @type {SlotContentProps["text"]} */
   export let text;
+
+  /** @type {import("svelte").SvelteComponent<Component, SlotContentProps["componentOptions"]>}*/
+  let rootElement;
+
+  export const getRootElement = () => rootElement;
 </script>
 
-<svelte:component this={Component} {...componentOptions}>
+<svelte:component
+  this={Component}
+  bind:this={rootElement}
+  {...componentOptions}
+>
   <span>{text}</span>
 </svelte:component>

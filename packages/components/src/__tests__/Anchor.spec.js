@@ -1,5 +1,5 @@
-import { afterEach, describe, expect, it } from "vitest";
-import { cleanup } from "@testing-library/svelte";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { cleanup, fireEvent, render } from "@testing-library/svelte";
 
 import { renderWithSimpleContent } from "@duskit/test-helpers";
 
@@ -12,6 +12,7 @@ describe("Anchor", () => {
 
   const baseOptions = {
     props: baseProps,
+    target: document.body,
   };
 
   afterEach(cleanup);
@@ -22,18 +23,68 @@ describe("Anchor", () => {
     expect(container.firstChild).toMatchSnapshot();
   });
 
+  it("should update a specific class when its `onSurface` property changes", async () => {
+    /**
+     * `rerender` returned by `renderWithSimpleContent` doesn't
+     * trigger a rerender of the underlying component.
+     */
+    const { component, rerender } = render(Anchor, baseOptions);
+    const element = component.getRootElement();
+
+    expect(element).toHaveClass("dusk-anchor--on-surface");
+    expect(element).not.toHaveClass("dusk-anchor--off-surface");
+
+    await rerender({ onSurface: false });
+
+    expect(element).toHaveClass("dusk-anchor--off-surface");
+    expect(element).not.toHaveClass("dusk-anchor--on-surface");
+  });
+
+  it("should forward the `on:click` handler", async () => {
+    const handleClick = vi.fn((evt) => evt.preventDefault());
+    const { component } = renderWithSimpleContent(Anchor, baseOptions);
+
+    const anchorComponent = component.getRootElement();
+    const element = anchorComponent.getRootElement();
+
+    anchorComponent.$on("click", handleClick);
+
+    await fireEvent.click(element);
+
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
   it("should pass additional class names and attributes to the rendered element", () => {
     const props = {
       ...baseProps,
       className: "foo bar",
-      href: "https://dusk.network",
       title: "Some title",
     };
-    const { container } = renderWithSimpleContent(Anchor, {
+    const { component } = renderWithSimpleContent(Anchor, {
       ...baseOptions,
       props,
     });
 
-    expect(container.firstChild).toMatchSnapshot();
+    const element = component.getRootElement().getRootElement();
+
+    expect(element).toHaveClass("dusk-anchor", "foo", "bar");
+    expect(element).toHaveAttribute("title", props.title);
+  });
+
+  it("should react to prop changes", async () => {
+    /**
+     * `rerender` returned by `renderWithSimpleContent` doesn't
+     * trigger a rerender of the underlying component.
+     */
+    const { component, rerender } = render(Anchor, baseOptions);
+    const element = component.getRootElement();
+
+    await rerender({
+      className: "baz",
+      href: `${baseProps.href}/some-path`,
+    });
+
+    expect(element).toHaveClass("baz");
+    expect(element).toHaveAttribute("href", "https://example.com/some-path");
   });
 });
