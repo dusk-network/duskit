@@ -1,0 +1,13 @@
+{
+  "borderColor": {
+    "default": {
+      "$value": "{base.color.neutral.600}",
+      "$type": "color",
+      "$extensions": {
+        "org.duskit.overrides": {
+          "dark": "{base.color.neutral.900}"
+        }
+      }
+    }
+  }
+}

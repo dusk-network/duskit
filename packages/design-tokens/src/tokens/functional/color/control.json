@@ -1,0 +1,26 @@
+{
+  "controlColor": {
+    "backgroundColor": {
+      "default": {
+        "$value": "{base.color.neutral.100}",
+        "$type": "color",
+        "$extensions": {
+          "org.duskit.overrides": {
+            "dark": "{base.color.neutral.900}"
+          }
+        }
+      }
+    },
+    "surfaceColor": {
+      "default": {
+        "$value": "{base.color.neutral.200}",
+        "$type": "color",
+        "$extensions": {
+          "org.duskit.overrides": {
+            "dark": "{base.color.neutral.600}"
+          }
+        }
+      }
+    }
+  }
+}

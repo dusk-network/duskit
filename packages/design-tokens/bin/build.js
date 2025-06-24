@@ -1,37 +1,32 @@
-import StyleDictionary from "style-dictionary";
-import StyleDictionaryUtils from "style-dictionary-utils";
-import { themes } from "./themes.config.js";
+import { rimraf } from "rimraf";
 
-try {
-  for (const { filename, source, include } of themes) {
-    console.log({ filename });
-    console.log({ ...source });
-    console.log({ ...include });
-    StyleDictionaryUtils.extend({
-      include: [...include],
-      source: [...source],
-      platforms: {
-        css: {
-          transformGroup: "css/extended",
-          options: {
-            basePxFontSize: 16,
-          },
-          buildPath: "dist/css/",
-          files: [
-            {
-              filter: () => true,
-              destination: `${filename}-variables.css`,
-              format: "css/variables",
-            },
-          ],
-        },
-      },
-    }).buildAllPlatforms();
-  }
-} catch (e) {
-  // eslint-disable-next-line no-console
-  console.error(
-    "🛑 Error trying to build internal css colors for code output:",
-    e
-  );
-}
+import { build as buildMotion } from "./stage/motion.js";
+import { build as buildTheme } from "./stage/theme.js";
+import { build as buildSize } from "./stage/size.js";
+import { build as buildTypography } from "./stage/typography.js";
+
+/**
+ * buildDesignTokens
+ *
+ * @param {ConfigGeneratorOptions} buildOptions
+ */
+const buildDesignTokens = async (buildOptions) => {
+  await Promise.all([
+    buildTheme(buildOptions),
+    buildSize(buildOptions),
+    buildTypography(buildOptions),
+    buildMotion(buildOptions),
+  ]).catch((e) => {
+    // eslint-disable-next-line no-console
+    console.error(e);
+    rimraf("dist");
+  });
+};
+
+// Implicit clean
+rimraf("dist");
+
+// Run
+await buildDesignTokens({
+  buildPath: "dist/",
+});

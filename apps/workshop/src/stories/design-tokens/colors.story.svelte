@@ -1,6 +1,40 @@
 <script>
-  // import * from "@duskit/design-tokens"
+  import config from "@duskit/design-tokens/js/functional/themes/light.js";
   export let Hst;
+
+  function getBaseScaleGroups(tokens) {
+    const baseColor = tokens?.base?.color;
+
+    if (!baseColor) return [];
+
+    return Object.values(baseColor).map((colorGroup) => {
+      if (colorGroup.$value) {
+        return [colorGroup];
+      }
+
+      const shades = Object.values(colorGroup)
+        .filter((shade) => shade.$value)
+        .sort((a, b) => {
+          // Sort numerically
+          const aShade = parseInt(a.attributes.subitem || "0", 10);
+          const bShade = parseInt(b.attributes.subitem || "0", 10);
+
+          return aShade - bShade;
+        });
+
+      return shades;
+    });
+  }
+
+  function getShades(group) {
+    const shades = [];
+
+    for (const shade of group) {
+      shades.push({ [shade.name]: shade.$value });
+    }
+
+    return shades;
+  }
 </script>
 
 <svelte:component
@@ -12,65 +46,9 @@
   responsiveDisabled
   autoPropsDisabled
 >
-  <svelte:component
-    this={Hst.Variant}
-    title="Primary Color Palette"
-    responsiveDisabled
-  >
-    <svelte:component
-      this={Hst.ColorShades}
-      shades={{
-        "Cornflower Blue": "#71B1FF",
-        Jet: "#EDEAF3",
-        "Light Gray": "#E2DFE9",
-        "Smokey Black": "#101010",
-      }}
-    />
-  </svelte:component>
-  <svelte:component
-    this={Hst.Variant}
-    title="Secondary Color Palette"
-    responsiveDisabled
-  >
-    <svelte:component
-      this={Hst.ColorShades}
-      shades={{
-        "Granite Gray": "#636167",
-        Jet: "#2E2D30",
-        "Silver Metallic": "#A8A5AF",
-        "Taupe Gray": "#908E94",
-      }}
-    />
-  </svelte:component>
-  <svelte:component
-    this={Hst.Variant}
-    title="Stateful Color Palette"
-    responsiveDisabled
-  >
-    <svelte:component
-      this={Hst.ColorShades}
-      shades={{
-        Attention: "#FFCF23",
-        Neutral: "#71B1FF",
-        Success: "#16DB93",
-        Warning: "#ED254E",
-      }}
-    />
-  </svelte:component>
   <svelte:component this={Hst.Variant} title="Base Scales" responsiveDisabled>
-    <svelte:component
-      this={Hst.ColorShades}
-      shades={{
-        "base-color-cornflower-0": "#f1f7ff",
-        "base-color-cornflower-1": "#d5e8ff",
-        "base-color-cornflower-2": "#abd1ff",
-        "base-color-cornflower-3": "#8ec1ff",
-        "base-color-cornflower-4": "#71B1FF",
-        "base-color-cornflower-5": "#0B79FF",
-        "base-color-cornflower-6": "#0863D1",
-        "base-color-cornflower-7": "#064B9E",
-        "base-color-cornflower-8": "#04336B",
-      }}
-    />
+    {#each getBaseScaleGroups(config) as group (group[0])}
+      <svelte:component this={Hst.ColorShades} shades={getShades(group)} />
+    {/each}
   </svelte:component>
 </svelte:component>

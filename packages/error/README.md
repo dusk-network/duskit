@@ -14,7 +14,7 @@ Functions for creating and managing errors.
 
 ## Dev environment
 
-The dev environment assumes that you have at least Node.js v20.19.2 installed. The LTS version is 22.16.0 at the time of writing.
+The dev environment assumes that you have at least Node.js v22.11.0 installed. The LTS version is 22.11.0 at the time of writing.
 
 This package is part of the [Duskit](https://github.com/dusk-network/duskit/) monorepo.
 Please refer to the [main README](../../README.md) for monorepo usage, changeset management and installation of dependencies.
