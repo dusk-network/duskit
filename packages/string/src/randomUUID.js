@@ -1,4 +1,7 @@
-/** @type {import("..").randomUUID} */
+/**
+ * @function
+ * @type {import("..").randomUUID}
+ */
 const randomUUID = crypto?.randomUUID
   ? () => crypto.randomUUID()
   : () =>

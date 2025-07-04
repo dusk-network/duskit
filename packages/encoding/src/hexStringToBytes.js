@@ -1,15 +1,4 @@
-/**
- * Converts a hexadecimal string to a `Uint8Array`.
- *
- * @example
- *
- * hexStringToBytes("ffae0253") // => Uint8Array(4) [ 255, 174, 2, 83 ]
- *
- * @throws {TypeError} If called with `null` or `undefined`
- * @throws {TypeError} If the source string has not an even length
- * @throws {TypeError} If the source string contains invalid characters
- * @type {import("..").hexStringToBytes}
- */
+/** @type {import("..").hexStringToBytes} */
 function hexStringToBytes(s) {
   s = String(s);
 

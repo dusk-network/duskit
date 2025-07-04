@@ -34,13 +34,14 @@ npm install @duskit/encoding --save
 ## NPM scripts
 
 - `npm run checks` - runs all health checks (formatting, linting, type checking, tests)
-- `npm run clean` - removes the `coverage` and `node_modules` folders
+- `npm run clean` - removes the `coverage`, `docs` and `node_modules` folders
+- `npm run docs` - generates the HTML documentation in the `docs` folder
 - `npm run format` - fixes the formatting in all files
 - `npm run format:check` - performs the formatting check
 - `npm run lint` - performs the linting check
 - `npm run lint:fix` - fixes, where possible, linting errors
 - `npm run test` - runs the test suite
-- `npm run test:coverage` - runs the test suite and generates the code coverage report in the `coverage` folder of each package
+- `npm run test:coverage` - runs the test suite and generates the code coverage report in the `coverage` folder
 - `npm run test:watch` - runs the test suite in watch mode
 - `npm run typecheck` - runs the type checker
 - `npm run typecheck:watch` - runs the type checker in watch mode

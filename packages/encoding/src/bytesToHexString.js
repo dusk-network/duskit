@@ -1,8 +1,4 @@
-/**
- * Converts a `Uint8Array` to a hexadecimal string.
- *
- * @type {import("..").bytesToHexString}
- */
+/** @type {import("..").bytesToHexString} */
 function bytesToHexString(bytes) {
   if (!(bytes instanceof Uint8Array)) {
     throw new TypeError("Uint8Array expected");

@@ -1,7 +1,14 @@
-import type { ComponentType, SvelteComponent } from "svelte";
+import type { SvelteComponent } from "svelte";
 import type { Readable } from "svelte/store";
 import type { render } from "@testing-library/svelte";
 
+/**
+ * Utility function to force the type checker to see
+ * the return value of `querySelector` as a HTMLElement
+ * eliminating the possibility of a `null` value.
+ * Use with caution, although your test will fail anyway
+ * if you get a `null`.
+ */
 export declare function getAsHTMLElement(
   container: HTMLElement,
   selector: string

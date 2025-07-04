@@ -1,10 +1,6 @@
 import { randomInt } from "lamb";
 
-/**
- * Shuffles an array using the Fisher-Yates algorithm.
- *
- * @type {import("..").shuffle}
- */
+/** @type {import("..").shuffle} */
 function shuffle(array) {
   const shuffled = [...array];
 

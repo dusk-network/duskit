@@ -30,13 +30,7 @@ function getTimeUnit(diff) {
   return units[6];
 }
 
-/**
- * Creates a string representing the relative time
- * from the given date.
- *
- * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/RelativeTimeFormat/RelativeTimeFormat}
- * @type {import("..").getRelativeTimeString}
- */
+/** @type {import("..").getRelativeTimeString} */
 function getRelativeTimeString(date, style) {
   const rtf = new Intl.RelativeTimeFormat("en", {
     localeMatcher: "best fit",
