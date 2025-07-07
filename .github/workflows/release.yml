@@ -31,7 +31,9 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
+          commit: "Version packages [skip ci]"
           publish: npm run release
+          title: "Version packages"
           version: npm run version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
