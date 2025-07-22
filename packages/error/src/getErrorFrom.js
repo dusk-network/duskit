@@ -14,13 +14,22 @@ const isError = isType("Error");
 /** @type {(value: any) => value is string} */
 const isString = isType("String");
 
+/** @param {any} value */
+function fallback(value) {
+  try {
+    return new Error(JSON.stringify(value));
+  } catch {
+    return new Error("Unknown error");
+  }
+}
+
 /** @type {import("..").getErrorFrom} */
 const getErrorFrom = adapter([
   casus(isError, identity),
   casus(isNil, always(new Error("Unknown error"))),
   casus(isString, (msg) => new Error(msg)),
   casus(keySatisfies(isString, "message"), ({ message }) => new Error(message)),
-  (v) => new Error(JSON.stringify(v)),
+  fallback,
 ]);
 
 export default getErrorFrom;
