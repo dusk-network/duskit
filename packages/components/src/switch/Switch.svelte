@@ -42,6 +42,7 @@
   function handleKeyDown(event) {
     if (!disabled && event.key === " ") {
       toggleSwitch();
+      event.preventDefault();
     }
   }
 
@@ -65,7 +66,7 @@
   aria-disabled={disabled}
   class={classes}
   on:click={handleClick}
-  on:keydown|preventDefault={handleKeyDown}
+  on:keydown={handleKeyDown}
   role="switch"
   tabindex={disabled ? -1 : tabindex}
 />
