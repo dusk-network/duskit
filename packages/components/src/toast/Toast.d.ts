@@ -10,6 +10,8 @@ export type ToastItem = {
   type: StatusType;
 };
 
+export function toast(type: StatusType, message: string, icon: string): void;
+
 export interface ToastProps
   extends OmitSvelteSpecificProps<SvelteHTMLElements["ul"]> {
   className?: string;

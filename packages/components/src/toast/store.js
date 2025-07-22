@@ -4,11 +4,7 @@ import { randomUUID } from "@duskit/string";
 
 /** @typedef {import("./Toast").ToastItem} ToastItem */
 
-/**
- * @param {string} message
- * @param {string} icon
- * @param {ToastItem["type"]} type
- */
+/** @type {import("./Toast").toast} */
 function addToast(type, message, icon) {
   const id = `dusk-toast-${randomUUID()}`;
 

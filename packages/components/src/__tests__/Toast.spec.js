@@ -4,8 +4,8 @@ import { get } from "svelte/store";
 import { fly } from "svelte/transition";
 import { mdiAlertOutline } from "@mdi/js";
 
-import { Toast } from "../..";
-import { toast, toastList } from "../toast/store";
+import { Toast, toast } from "../..";
+import { toastList } from "../toast/store";
 
 vi.mock("svelte/transition");
 

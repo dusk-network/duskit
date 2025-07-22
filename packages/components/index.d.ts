@@ -24,5 +24,5 @@ export { default as Switch } from "./src/switch/Switch";
 export { default as Tabs } from "./src/tabs/Tabs";
 export { default as Textbox } from "./src/textbox/Textbox";
 export { default as Throbber } from "./src/throbber/Throbber";
-export { default as Toast } from "./src/toast/Toast";
+export { default as Toast, toast } from "./src/toast/Toast";
 export { default as Tooltip } from "./src/tooltip/Tooltip";
