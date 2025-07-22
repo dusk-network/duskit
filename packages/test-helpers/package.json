@@ -41,14 +41,17 @@
   "types": "index.d.ts",
   "version": "0.0.1",
   "dependencies": {
-    "@testing-library/svelte": "5.2.7",
     "svelte": "4.2.20"
+  },
+  "peerDependencies": {
+    "@testing-library/svelte": "^5.2.7"
   },
   "devDependencies": {
     "@dusk-network/eslint-config": "4.0.1",
     "@dusk-network/prettier-config": "1.1.0",
     "@eslint/js": "9.27.0",
     "@sveltejs/vite-plugin-svelte": "3.0.2",
+    "@testing-library/svelte": "5.2.7",
     "@tsconfig/svelte": "5.0.4",
     "@vitest/coverage-istanbul": "3.1.4",
     "@vitest/eslint-plugin": "1.1.44",
