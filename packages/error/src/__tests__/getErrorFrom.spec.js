@@ -59,4 +59,14 @@ describe("getErrorFrom", () => {
       expect(result).toStrictEqual(new Error(JSON.stringify(arg)));
     });
   });
+
+  it("should build a generic error if `JSON.stringify` fails", () => {
+    const valid = { message: "Some error message", value: 2n };
+    const invalid = { something: "Some error message", value: 2n };
+
+    // this shouldn't reach the `JSON.stringify` case
+    expect(getErrorFrom(valid)).toStrictEqual(new Error(valid.message));
+
+    expect(getErrorFrom(invalid)).toStrictEqual(new Error("Unknown error"));
+  });
 });
