@@ -1,3 +1,4 @@
+export * from "./src/dusk.components";
 export { default as Agreement } from "./src/agreement/Agreement";
 export { default as Anchor } from "./src/anchor/Anchor";
 export { default as AnchorButton } from "./src/button/AnchorButton";
