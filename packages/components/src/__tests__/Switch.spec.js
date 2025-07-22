@@ -18,7 +18,7 @@ describe("Switch", () => {
 
     expect(container.firstChild).toMatchSnapshot();
 
-    await rerender({ ...baseProps, value: true });
+    await rerender({ ...baseProps, active: true });
 
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -43,7 +43,7 @@ describe("Switch", () => {
 
     expect(container.firstChild).toMatchSnapshot();
 
-    await rerender({ ...props, value: true });
+    await rerender({ ...props, active: true });
 
     expect(container.firstChild).toMatchSnapshot();
   });
