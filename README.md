@@ -116,7 +116,7 @@ Refer to the package's README to see which commands are available.
 - `npm run test:watch` - runs the test suite in watch mode
 - `npm run typecheck` - runs the type checker
 - `npm run typecheck:watch` - runs the type checker in watch mode
-- `npm run version-packages` - [updates][changeset-version] versions and dependencies of packages and creates the changelogs
+- `npm run version` - [updates][changeset-version] versions and dependencies of packages and creates the changelogs
 
 <p align="right"><a href="#toc">[back to TOC]</a></p>
 
