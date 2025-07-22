@@ -5,11 +5,11 @@ import type { OmitSvelteSpecificProps } from "../dusk.components";
 
 export interface SwitchProps
   extends OmitSvelteSpecificProps<Omit<SvelteHTMLElements["div"], "tabindex">> {
+  active?: boolean;
   className?: string;
   disabled?: boolean;
   onSurface?: boolean;
   tabindex?: number;
-  value?: boolean;
 }
 
 interface SwitchEvents {

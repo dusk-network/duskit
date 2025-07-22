@@ -9,6 +9,9 @@
 
   import "./Switch.css";
 
+  /** @type {SwitchProps["active"]} */
+  export let active = false;
+
   /** @type {SwitchProps["className"]} */
   export let className = undefined;
 
@@ -20,9 +23,6 @@
 
   /** @type {SwitchProps["tabindex"]} */
   export let tabindex = 0;
-
-  /** @type {SwitchProps["value"]} */
-  export let value = false;
 
   /** @type {HTMLDivElement} */
   let rootElement;
@@ -47,9 +47,9 @@
   }
 
   function toggleSwitch() {
-    value = !value;
+    active = !active;
 
-    dispatch("change", value);
+    dispatch("change", active);
   }
 
   $: classes = makeClassName([
@@ -62,7 +62,7 @@
 <div
   bind:this={rootElement}
   {...$$restProps}
-  aria-checked={value}
+  aria-checked={active}
   aria-disabled={disabled}
   class={classes}
   on:click={handleClick}
