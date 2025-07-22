@@ -59,6 +59,12 @@ describe("Switch", () => {
     expect(container.firstChild).toMatchSnapshot();
   });
 
+  /**
+   * For `event.preventDefault` testing see
+   * https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent#return_value
+   * as `fireEvent.<something>` returns a promise holding the return
+   * value of `dispatchEvent`.
+   */
   describe("Event handlers", () => {
     it("should dispatch a `change` event when the switch is clicked", async () => {
       const { component, getByRole } = render(Switch, baseOptions);
@@ -88,8 +94,12 @@ describe("Switch", () => {
 
       component.$on("change", handler);
 
-      await fireEvent.keyDown(switchElement, { key: " " });
-      await fireEvent.keyDown(switchElement, { key: " " });
+      await expect(
+        fireEvent.keyDown(switchElement, { key: " " })
+      ).resolves.toBe(false);
+      await expect(
+        fireEvent.keyDown(switchElement, { key: " " })
+      ).resolves.toBe(false);
 
       expect(handler).toHaveBeenCalledTimes(2);
       expect(handler).toHaveBeenNthCalledWith(
@@ -109,8 +119,12 @@ describe("Switch", () => {
 
       component.$on("change", handler);
 
-      await fireEvent.keyDown(switchElement, { key: "Enter" });
-      await fireEvent.keyDown(switchElement, { key: "a" });
+      await expect(
+        fireEvent.keyDown(switchElement, { key: "Enter" })
+      ).resolves.toBe(true);
+      await expect(
+        fireEvent.keyDown(switchElement, { key: "a" })
+      ).resolves.toBe(true);
 
       expect(handler).not.toHaveBeenCalled();
     });
@@ -130,7 +144,9 @@ describe("Switch", () => {
       component.$on("change", handler);
 
       await fireEvent.click(switchElement);
-      await fireEvent.keyDown(switchElement, { key: " " });
+      await expect(
+        fireEvent.keyDown(switchElement, { key: " " })
+      ).resolves.toBe(true);
 
       expect(handler).not.toHaveBeenCalled();
     });
