@@ -25,4 +25,5 @@ export { default as Tabs } from "./src/tabs/Tabs.svelte";
 export { default as Textbox } from "./src/textbox/Textbox.svelte";
 export { default as Throbber } from "./src/throbber/Throbber.svelte";
 export { default as Toast } from "./src/toast/Toast.svelte";
+export { toast } from "./src/toast/store";
 export { default as Tooltip } from "./src/tooltip/Tooltip.svelte";
