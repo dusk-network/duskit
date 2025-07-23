@@ -39,6 +39,32 @@ Import the components you need in your Svelte files:
 <Button text="Hi there" />
 ```
 
+This package doesn't include a prebuilt output, and lets the consumer application do the job.
+
+This works well in out usual setup (SvelteKit), but causes issues in Vitest: components imported from `node_modules` won't be compiled in the testing environment.
+
+The easy solution is to inline this dependency in tests, but after that other `@duskit` libraries used by this one aren't correctly imported.
+
+To avoid these issues, make sure to inline all `@duskit` packages in your test configuration::
+
+```js
+// example vite.config.js
+
+import { defineConfig } from "vite";
+
+export default defineConfig(() => ({
+  // ... your config
+
+  test: {
+    server: {
+      deps: {
+        inline: [/@duskit\/.*/],
+      },
+    },
+  },
+}));
+```
+
 <p align="right"><a href="#toc">[back to TOC]</a></p>
 
 ## NPM scripts
