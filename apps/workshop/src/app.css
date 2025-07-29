@@ -49,3 +49,8 @@
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+#app {
+  background-color: var(--background-color);
+  padding: 2rem 1rem;
+}
