@@ -1,5 +1,12 @@
 # @duskit/svelte-stores
 
+## 0.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`91c7505`](https://github.com/dusk-network/duskit/commit/91c75056ab0f15d7e2fe85dff06928c33ba4c9f5)]:
+  - @duskit/error@0.0.2
+
 ## 0.0.1
 
 ### Patch Changes
