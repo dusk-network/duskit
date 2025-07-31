@@ -19,9 +19,9 @@
     "preview": "histoire preview --port 4567"
   },
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
-    "@duskit/components": "0.0.1",
+    "@duskit/components": "0.1.0",
     "@duskit/design-tokens": "0.0.0"
   },
   "devDependencies": {

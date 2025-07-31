@@ -39,9 +39,9 @@
   },
   "type": "module",
   "types": "index.d.ts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
-    "@duskit/error": "0.0.1",
+    "@duskit/error": "0.0.2",
     "svelte": "4.2.20"
   },
   "devDependencies": {
