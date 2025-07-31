@@ -1,0 +1,59 @@
+/**
+ * We use separate borders with zero spacing
+ * and we apply the bottom border to the header
+ * cells.
+ * This is because if a consumer puts the table
+ * in a scrollable container and makes the
+ * `thead` sticky, the border somehow disappears
+ * with `border: collapse` and the bottom border
+ * applied to the `thead`.
+ */
+.duskit-table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: separate;
+}
+
+.duskit-table__head-cell {
+  border-bottom: 0.0625rem solid var(--on-background-color);
+}
+
+.duskit-table__row:nth-child(even) > .duskit-table__cell {
+  background-color: var(--background-color-alt);
+}
+
+.duskit-table__head-cell-text,
+.duskit-table__sort-button .dusk-button__text,
+.duskit-table__cell {
+  padding: var(--control-small-padding);
+}
+
+.duskit-table__head-cell-text {
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.duskit-table__sort-button {
+  width: 100%;
+  padding: 0;
+  font-weight: bold;
+  color: var(--on-background-color);
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.duskit-table__sort-button,
+.duskit-table__sort-button:enabled:hover,
+.duskit-table__sort-button:enabled:active {
+  background-color: transparent;
+}
+
+.duskit-table__sort-button:enabled:hover,
+.duskit-table__sort-button:enabled:active {
+  color: var(--secondary-color);
+  scale: unset;
+}

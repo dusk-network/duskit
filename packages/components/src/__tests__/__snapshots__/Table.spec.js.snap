@@ -1,0 +1,366 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Table > should react to prop changes 1`] = `
+<table
+  class="duskit-table foo bar"
+>
+  <caption>
+    List of users
+  </caption>
+   
+  <thead
+    class="duskit-table__head"
+  >
+    <tr
+      class="duskit-table__row"
+    >
+      <th
+        aria-sort="none"
+        class="duskit-table__head-cell"
+        data-column="name"
+        scope="col"
+      >
+        <span
+          class="duskit-table__head-cell-text"
+        >
+          New name label
+        </span>
+         
+      </th>
+      <th
+        aria-sort="none"
+        class="duskit-table__head-cell"
+        data-column="custom"
+        scope="col"
+      >
+        <span
+          class="duskit-table__head-cell-text"
+        >
+          Custom
+        </span>
+         
+      </th>
+    </tr>
+  </thead>
+   
+  <tbody
+    class="duskit-table__body"
+  >
+    <tr
+      class="duskit-table__row"
+    >
+      
+      <td
+        class="duskit-table__cell"
+        data-column="name"
+      >
+        <div
+          class="table-cell__simple"
+        >
+          2 - Jane Doe
+        </div>
+        
+        
+      </td>
+      
+      
+      <td
+        class="duskit-table__cell"
+        data-column="custom"
+      >
+        N/A
+      </td>
+      
+       
+    </tr>
+    <tr
+      class="duskit-table__row"
+    >
+      
+      <td
+        class="duskit-table__cell"
+        data-column="name"
+      >
+        <div
+          class="table-cell__simple"
+        >
+          1 - John Doe
+        </div>
+        
+        
+      </td>
+      
+      
+      <td
+        class="duskit-table__cell"
+        data-column="custom"
+      >
+        N/A
+      </td>
+      
+       
+    </tr>
+    <tr
+      class="duskit-table__row"
+    >
+      
+      <td
+        class="duskit-table__cell"
+        data-column="name"
+      >
+        <div
+          class="table-cell__simple"
+        >
+          3 - Mario Rossi
+        </div>
+        
+        
+      </td>
+      
+      
+      <td
+        class="duskit-table__cell"
+        data-column="custom"
+      >
+        N/A
+      </td>
+      
+       
+    </tr>
+  </tbody>
+</table>
+`;
+
+exports[`Table > should render the Table component using the provided descriptors 1`] = `
+<table
+  class="duskit-table"
+>
+   
+  <thead
+    class="duskit-table__head"
+  >
+    <tr
+      class="duskit-table__row"
+    >
+      <th
+        aria-sort="none"
+        class="duskit-table__head-cell"
+        data-column="name"
+        scope="col"
+      >
+        <button
+          class="dusk-button dusk-button--type--button dusk-button--variant--primary dusk-button--size--default dusk-icon-button--labeled duskit-table__sort-button"
+          type="button"
+        >
+          <span
+            class="dusk-button__text"
+          >
+            Full Name
+          </span>
+           
+          <svg
+            class="dusk-icon dusk-icon--size--small dusk-button__icon"
+            role="graphics-symbol"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M17.45,17.55L12,23L6.55,17.55L7.96,16.14L11,19.17V4.83L7.96,7.86L6.55,6.45L12,1L17.45,6.45L16.04,7.86L13,4.83V19.17L16.04,16.14L17.45,17.55Z"
+            />
+          </svg>
+          
+        </button>
+         
+      </th>
+      <th
+        aria-sort="none"
+        class="duskit-table__head-cell"
+        data-column="email"
+        scope="col"
+      >
+        <span
+          class="duskit-table__head-cell-text"
+        >
+          Email Address
+        </span>
+         
+      </th>
+      <th
+        aria-sort="none"
+        class="duskit-table__head-cell"
+        data-column="posts"
+        scope="col"
+      >
+        <button
+          class="dusk-button dusk-button--type--button dusk-button--variant--primary dusk-button--size--default dusk-icon-button--labeled duskit-table__sort-button"
+          type="button"
+        >
+          <span
+            class="dusk-button__text"
+          >
+            Post Count
+          </span>
+           
+          <svg
+            class="dusk-icon dusk-icon--size--small dusk-button__icon"
+            role="graphics-symbol"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M17.45,17.55L12,23L6.55,17.55L7.96,16.14L11,19.17V4.83L7.96,7.86L6.55,6.45L12,1L17.45,6.45L16.04,7.86L13,4.83V19.17L16.04,16.14L17.45,17.55Z"
+            />
+          </svg>
+          
+        </button>
+         
+      </th>
+      <th
+        aria-sort="none"
+        class="duskit-table__head-cell"
+        data-column="actions"
+        scope="col"
+      >
+        <span
+          class="duskit-table__head-cell-text"
+        >
+          Actions
+        </span>
+         
+      </th>
+    </tr>
+  </thead>
+   
+  <tbody
+    class="duskit-table__body"
+  >
+    <tr
+      class="duskit-table__row"
+    >
+      
+      <td
+        class="duskit-table__cell"
+        data-column="name"
+      >
+        Jane Doe
+      </td>
+      
+      
+      <td
+        class="duskit-table__cell"
+        data-column="email"
+      >
+        jane.doe@example.com
+      </td>
+      
+      
+      <td
+        class="duskit-table__cell"
+        data-column="posts"
+      >
+        Total: 15 (2)
+        
+      </td>
+      
+      
+      <td
+        class="duskit-table__cell"
+        data-column="actions"
+      >
+        <div
+          class="table-cell__simple"
+        >
+          Edit Jane Doe
+        </div>
+        
+      </td>
+      
+       
+    </tr>
+    <tr
+      class="duskit-table__row"
+    >
+      
+      <td
+        class="duskit-table__cell"
+        data-column="name"
+      >
+        John Doe
+      </td>
+      
+      
+      <td
+        class="duskit-table__cell"
+        data-column="email"
+      >
+        john.doe@example.com
+      </td>
+      
+      
+      <td
+        class="duskit-table__cell"
+        data-column="posts"
+      >
+        Total: 5 (1)
+        
+      </td>
+      
+      
+      <td
+        class="duskit-table__cell"
+        data-column="actions"
+      >
+        <div
+          class="table-cell__simple"
+        >
+          Edit John Doe
+        </div>
+        
+      </td>
+      
+       
+    </tr>
+    <tr
+      class="duskit-table__row"
+    >
+      
+      <td
+        class="duskit-table__cell"
+        data-column="name"
+      >
+        Mario Rossi
+      </td>
+      
+      
+      <td
+        class="duskit-table__cell"
+        data-column="email"
+      >
+        mario.rossi@example.com
+      </td>
+      
+      
+      <td
+        class="duskit-table__cell"
+        data-column="posts"
+      >
+        Total: 25 (3)
+        
+      </td>
+      
+      
+      <td
+        class="duskit-table__cell"
+        data-column="actions"
+      >
+        <div
+          class="table-cell__simple"
+        >
+          Edit Mario Rossi
+        </div>
+        
+      </td>
+      
+       
+    </tr>
+  </tbody>
+</table>
+`;

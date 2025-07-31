@@ -22,6 +22,13 @@ export { default as Select } from "./src/select/Select";
 export { default as Stepper } from "./src/stepper/Stepper";
 export { default as Suspense } from "./src/suspense/Suspense";
 export { default as Switch } from "./src/switch/Switch";
+export {
+  default as Table,
+  TableCellDataComponentRenderer,
+  TableCellDataCustomComponentRenderer,
+  TableDescriptor,
+  TableSortState,
+} from "./src/table/Table";
 export { default as Tabs } from "./src/tabs/Tabs";
 export { default as Textbox } from "./src/textbox/Textbox";
 export { default as Throbber } from "./src/throbber/Throbber";
