@@ -46,7 +46,7 @@ class HttpTransport {
   constructor(options) {
     const { baseURL, headers, errorTransformer, responseTransformer } = options;
 
-    this.#baseURL = baseURL;
+    this.#baseURL = baseURL.endsWith("/") ? baseURL : `${baseURL}/`;
     this.#headers = new Headers(headers);
     this.#errorTransformer = errorTransformer;
     this.#responseTransformer = responseTransformer ?? identity;
@@ -72,6 +72,8 @@ class HttpTransport {
    * @param {HttpTransportRequestOptions} [options]
    */
   async #fetch(method, endpoint, params, body, options = {}) {
+    endpoint = endpoint.startsWith("/") ? endpoint.slice(1) : endpoint;
+
     const { headers, signal } = options;
     const url = new URL(endpoint, this.#baseURL);
 

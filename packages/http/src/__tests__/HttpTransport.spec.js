@@ -46,12 +46,35 @@ describe("HttpTransport", () => {
         description: "baseURL without slash, endpoint with slash",
         endpoint: "/users",
       },
+      {
+        baseURL: "https://api.example.com/v1/",
+        description: "baseURL with path and slash, endpoint without slash",
+        endpoint: "users",
+      },
+      {
+        baseURL: "https://api.example.com/v1",
+        description:
+          "baseURL with path and without slash, endpoint without slash",
+        endpoint: "users",
+      },
+      {
+        baseURL: "https://api.example.com/v1/",
+        description: "baseURL with path and slash, endpoint with slash",
+        endpoint: "/users",
+      },
+      {
+        baseURL: "https://api.example.com/v1",
+        description: "baseURL with path and without slash, endpoint with slash",
+        endpoint: "/users",
+      },
     ];
 
     it.each(urlTestCases)(
       "should correctly construct URL and pass initial headers for: $description",
       async ({ baseURL, endpoint }) => {
-        const expectedUrl = "https://api.example.com/users";
+        const expectedUrl = baseURL.includes("/v1")
+          ? "https://api.example.com/v1/users"
+          : "https://api.example.com/users";
         const headers = baseOptions.headers;
         const transport = new HttpTransport({ baseURL, headers });
 
