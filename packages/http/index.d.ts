@@ -41,7 +41,7 @@ export declare class HttpTransport<
     endpoint: string,
     params?: HttpTransportSearchParams,
     options?: HttpTransportRequestOptions
-  ): Promise<ReturnType<RTransformer> | ReturnType<ETransformer>>;
+  ): Promise<Awaited<ReturnType<RTransformer> | ReturnType<ETransformer>>>;
 
   /**
    * Deletes an HTTP header.
@@ -61,7 +61,7 @@ export declare class HttpTransport<
     endpoint: string,
     params?: HttpTransportSearchParams,
     options?: HttpTransportRequestOptions
-  ): Promise<ReturnType<RTransformer> | ReturnType<ETransformer>>;
+  ): Promise<Awaited<ReturnType<RTransformer> | ReturnType<ETransformer>>>;
 
   /**
    * Performs a HEAD request.
@@ -76,7 +76,7 @@ export declare class HttpTransport<
     endpoint: string,
     params?: HttpTransportSearchParams,
     options?: HttpTransportRequestOptions
-  ): Promise<ReturnType<RTransformer> | ReturnType<ETransformer>>;
+  ): Promise<Awaited<ReturnType<RTransformer> | ReturnType<ETransformer>>>;
 
   /**
    * Performs a PATCH request.
@@ -92,7 +92,7 @@ export declare class HttpTransport<
     params?: HttpTransportSearchParams,
     body?: HttpTransportBody | null,
     options?: HttpTransportRequestOptions
-  ): Promise<ReturnType<RTransformer> | ReturnType<ETransformer>>;
+  ): Promise<Awaited<ReturnType<RTransformer> | ReturnType<ETransformer>>>;
 
   /**
    * Performs a POST request.
@@ -108,7 +108,7 @@ export declare class HttpTransport<
     params?: HttpTransportSearchParams,
     body?: HttpTransportBody | null,
     options?: HttpTransportRequestOptions
-  ): Promise<ReturnType<RTransformer> | ReturnType<ETransformer>>;
+  ): Promise<Awaited<ReturnType<RTransformer> | ReturnType<ETransformer>>>;
 
   /**
    * Performs a PUT request.
@@ -124,7 +124,7 @@ export declare class HttpTransport<
     params?: HttpTransportSearchParams,
     body?: HttpTransportBody | null,
     options?: HttpTransportRequestOptions
-  ): Promise<ReturnType<RTransformer> | ReturnType<ETransformer>>;
+  ): Promise<Awaited<ReturnType<RTransformer> | ReturnType<ETransformer>>>;
 
   /**
    * Sets or replace a HTTP header.

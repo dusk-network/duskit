@@ -3,7 +3,10 @@ import { allOf, hasKeyValue, isInstanceOf, skipIn } from "lamb";
 
 import { HttpTransport } from "../..";
 
+/** @typedef {{ bar: string, foo: number }} TestData */
+
 describe("HttpTransport", () => {
+  /** @type {TestData} */
   const data = { bar: "baz", foo: 2 };
   const fetchSpy = vi
     .spyOn(global, "fetch")
@@ -349,5 +352,43 @@ describe("HttpTransport", () => {
       expect(requestHeaders.get("Accept")).toBe("application/json, text/plain");
       expect(requestHeaders.has("X-Api-Key")).toBe(false);
     });
+  });
+
+  /** @see https://github.com/dusk-network/duskit/issues/176 */
+  describe("Type correctness for async transformers", () => {
+    const methods = /** @type {const} */ ([
+      "delete",
+      "get",
+      "head",
+      "patch",
+      "post",
+      "put",
+    ]);
+
+    it.each(methods)(
+      "should allow casting to a flattened `Promise<TestData>` for async transformers using method '%s'",
+      async (method) => {
+        /** @type {import('../..').HttpTransportOptions<(r: Response) => Promise<TestData>>} */
+        const options = {
+          ...baseOptions,
+          responseTransformer: async (r) => r.json(),
+        };
+        const transport = new HttpTransport(options);
+
+        /**
+         * This only tests that the type returned by
+         * an async transformer is flattened by TS:
+         * there is no effect on the JS test at all.
+         * If the `get` return type wasn't `Awaited`
+         * we would have a TS error here because the type
+         * would have been `Promise<Promise<TestData>>`.
+         *
+         * @type {Promise<TestData>}
+         */
+        const result = transport[method]("test-endpoint");
+
+        await expect(result).resolves.toStrictEqual(data);
+      }
+    );
   });
 });
