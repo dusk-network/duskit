@@ -8,9 +8,7 @@ import { createPollingDataStore } from "../..";
 /** @typedef {{ a: number }} T */
 /** @typedef {import("../..").DataStoreContent<T>} TestStoreContent */
 
-/* * @typedef {import("../..").PollingDataStore} PollingDataStore */
-
-describe("createPollingDataStore", () => {
+describe("createPollingDataStore (browser)", () => {
   /** @type {TestArgs} */
   const args1 = [1, "a", new Date()];
 

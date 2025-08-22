@@ -4,6 +4,8 @@ import { resolveAfter } from "@duskit/promise";
 
 import createDataStore from "./createDataStore";
 
+const isBrowser = "document" in globalThis;
+
 /** @type {import("..").createPollingDataStore} */
 const createPollingDataStore = (dataRetriever, fetchInterval) => {
   let currentPollId = 0;
@@ -46,13 +48,19 @@ const createPollingDataStore = (dataRetriever, fetchInterval) => {
   };
 
   const stop = () => {
-    document.removeEventListener("visibilitychange", visibilityChangeHandler);
+    if (isBrowser) {
+      document.removeEventListener("visibilitychange", visibilityChangeHandler);
+    }
     resumeArgs = null;
     currentPollId++;
   };
 
   /** @type {(...args: Parameters<dataRetriever>) => void} */
   const start = (...args) => {
+    if (!isBrowser) {
+      return;
+    }
+
     document.addEventListener("visibilitychange", visibilityChangeHandler);
     resumeArgs = args;
     poll(++currentPollId, args);
