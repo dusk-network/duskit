@@ -1,5 +1,11 @@
 # @duskit/svelte-stores
 
+## 0.1.1
+
+### Patch Changes
+
+- [#187](https://github.com/dusk-network/duskit/pull/187) [`506c2b3`](https://github.com/dusk-network/duskit/commit/506c2b3b9e64ac9a96b887545ae50d8f05def482) Thanks [@ascartabelli](https://github.com/ascartabelli)! - Fixed `@duskit/promise` not being a dependency in `@duskit/svelte-stores` (was a "dev" one)
+
 ## 0.1.0
 
 ### Minor Changes
