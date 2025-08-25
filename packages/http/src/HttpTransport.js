@@ -1,4 +1,4 @@
-import { identity, isNil, isType } from "lamb";
+import { identity, isNil, isType, isUndefined, skipIf } from "lamb";
 
 /** @import {HttpTransport as HttpTransportType} from ".." */
 
@@ -11,6 +11,8 @@ import { identity, isNil, isType } from "lamb";
 
 /** @type {(v: any) => v is Record<string, any>} */
 const isObject = isType("Object");
+
+const skipUndefineds = skipIf(isUndefined);
 
 /**
  * @param {Headers} commonHeaders
@@ -81,12 +83,15 @@ class HttpTransport {
       url.search = new URLSearchParams(params).toString();
     }
 
-    const result = fetch(url, {
-      body: isObject(body) ? JSON.stringify(body) : body,
-      headers: headers ? mergeHeaders(this.#headers, headers) : this.#headers,
-      method,
-      signal,
-    }).then(this.#responseTransformer);
+    const result = fetch(
+      url,
+      skipUndefineds({
+        body: isObject(body) ? JSON.stringify(body) : body,
+        headers: headers ? mergeHeaders(this.#headers, headers) : this.#headers,
+        method,
+        signal,
+      })
+    ).then(this.#responseTransformer);
 
     return this.#errorTransformer
       ? result.catch(this.#errorTransformer)
