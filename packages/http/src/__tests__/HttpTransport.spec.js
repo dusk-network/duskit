@@ -193,6 +193,38 @@ describe("HttpTransport", () => {
         expect(fetchOptions?.body).toBe(JSON.stringify(body));
       }
     );
+
+    it("should not pass `undefined` keys in `fetch`'s options", async () => {
+      const transport = new HttpTransport(baseOptions);
+      const body = { message: "hello" };
+      const controller = new AbortController();
+
+      // GET request (no body and no signal provided)
+      await transport.get("some-endpoint");
+
+      const getOptions = fetchSpy.mock.calls[0][1];
+
+      expect(getOptions).not.toHaveProperty("body");
+      expect(getOptions).not.toHaveProperty("signal");
+
+      // POST request (with body, but no signal provided)
+      await transport.post("some-endpoint", undefined, body);
+
+      const postOptions = fetchSpy.mock.calls[1][1];
+
+      expect(postOptions).toHaveProperty("body", JSON.stringify(body));
+      expect(postOptions).not.toHaveProperty("signal");
+
+      // GET request (no body, but with a signal provided)
+      await transport.get("some-endpoint", undefined, {
+        signal: controller.signal,
+      });
+
+      const getWithOptions = fetchSpy.mock.calls[2][1];
+
+      expect(getWithOptions).not.toHaveProperty("body");
+      expect(getWithOptions).toHaveProperty("signal", controller.signal);
+    });
   });
 
   describe("Response and Error Transformers", () => {
