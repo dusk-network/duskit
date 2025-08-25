@@ -42,12 +42,12 @@
   "version": "0.1.0",
   "dependencies": {
     "@duskit/error": "0.0.2",
+    "@duskit/promise": "0.0.1",
     "svelte": "4.2.20"
   },
   "devDependencies": {
     "@dusk-network/eslint-config": "4.0.1",
     "@dusk-network/prettier-config": "1.1.0",
-    "@duskit/promise": "0.0.1",
     "@eslint/js": "9.27.0",
     "@vitest/coverage-istanbul": "3.1.4",
     "@vitest/eslint-plugin": "1.1.44",
