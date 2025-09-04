@@ -12,7 +12,8 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "types": ["lamb-types"]
   },
   "exclude": ["coverage", "docs", "node_modules"]
 }

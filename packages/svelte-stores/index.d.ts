@@ -1,4 +1,4 @@
-import type { Readable, Writable } from "svelte/store";
+import type { Readable, Unsubscriber, Writable } from "svelte/store";
 
 type DataStoreContent<T> = {
   data: T | null;
@@ -43,3 +43,19 @@ export declare function createPollingDataStore<
   dataRetriever: F,
   fetchInterval: number
 ): PollingDataStore<Parameters<F>, Awaited<ReturnType<F>>>;
+
+/**
+ * Subscribes to any Svelte store and executes a handler
+ * function whenever the store's value changes.
+ * The handler receives the previous and current values
+ * as separate arguments.
+ *
+ * Uses the `SameValueZero` comparison to determine if
+ * the store value has changed.
+ *
+ * @see [SameValueZero comparison]{@link https://262.ecma-international.org/#sec-samevaluezero}
+ */
+export declare function onStoreChange<T>(
+  store: Readable<T>,
+  handler: (prev: T, curr: T) => void
+): Unsubscriber;
