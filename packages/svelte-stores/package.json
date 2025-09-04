@@ -43,8 +43,10 @@
   "dependencies": {
     "@duskit/error": "0.0.2",
     "@duskit/promise": "0.0.1",
-    "lamb": "0.61.1",
-    "svelte": "4.2.20"
+    "lamb": "0.61.1"
+  },
+  "peerDependencies": {
+    "svelte": "^4.2.0"
   },
   "devDependencies": {
     "@dusk-network/eslint-config": "4.0.1",
@@ -59,6 +61,7 @@
     "lamb-types": "0.61.14",
     "prettier": "3.5.3",
     "rimraf": "6.0.1",
+    "svelte": "4.2.20",
     "typedoc": "0.28.7",
     "typedoc-plugin-dt-links": "2.0.8",
     "typedoc-plugin-mdn-links": "5.0.2",
