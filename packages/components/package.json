@@ -38,7 +38,7 @@
   },
   "type": "module",
   "types": "index.d.ts",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "dependencies": {
     "@duskit/date": "0.0.1",
     "@duskit/error": "0.0.2",
@@ -55,7 +55,7 @@
     "@dusk-network/eslint-config": "4.0.1",
     "@dusk-network/prettier-config": "1.1.0",
     "@dusk-network/stylelint-config": "1.0.6",
-    "@duskit/test-helpers": "0.0.2",
+    "@duskit/test-helpers": "0.1.0",
     "@eslint/js": "9.27.0",
     "@juggle/resize-observer": "3.4.0",
     "@sveltejs/vite-plugin-svelte": "3.0.2",

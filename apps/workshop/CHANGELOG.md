@@ -1,5 +1,12 @@
 # @duskit/workshop
 
+## 0.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`9c1cf4a`](https://github.com/dusk-network/duskit/commit/9c1cf4ad1a16110f05de8b7623e2304343a080f7)]:
+  - @duskit/components@0.2.0
+
 ## 0.0.2
 
 ### Patch Changes
