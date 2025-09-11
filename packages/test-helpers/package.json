@@ -39,7 +39,7 @@
   },
   "type": "module",
   "types": "index.d.ts",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "peerDependencies": {
     "@testing-library/svelte": "^5.2.7",
     "svelte": "^4.2.0"

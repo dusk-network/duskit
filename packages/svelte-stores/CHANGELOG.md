@@ -1,5 +1,13 @@
 # @duskit/svelte-stores
 
+## 0.2.0
+
+### Minor Changes
+
+- [#193](https://github.com/dusk-network/duskit/pull/193) [`9c1cf4a`](https://github.com/dusk-network/duskit/commit/9c1cf4ad1a16110f05de8b7623e2304343a080f7) Thanks [@ascartabelli](https://github.com/ascartabelli)! - Change `svelte` to a peer dependency in packages using it
+
+- [#191](https://github.com/dusk-network/duskit/pull/191) [`a8765a9`](https://github.com/dusk-network/duskit/commit/a8765a9938ef18147f979f9cfa0aa950ceaa86a0) Thanks [@ascartabelli](https://github.com/ascartabelli)! - Add the `onStoreChange` helper
+
 ## 0.1.1
 
 ### Patch Changes

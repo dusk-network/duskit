@@ -1,5 +1,11 @@
 # @duskit/test-helpers
 
+## 0.1.0
+
+### Minor Changes
+
+- [#193](https://github.com/dusk-network/duskit/pull/193) [`9c1cf4a`](https://github.com/dusk-network/duskit/commit/9c1cf4ad1a16110f05de8b7623e2304343a080f7) Thanks [@ascartabelli](https://github.com/ascartabelli)! - Change `svelte` to a peer dependency in packages using it
+
 ## 0.0.2
 
 ### Patch Changes
