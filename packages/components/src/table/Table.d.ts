@@ -35,19 +35,63 @@ export type TableDataDescriptor<
   T extends Record<string, any>,
   K extends keyof T,
 > = {
+  /**
+   * The text to display in the column header.
+   * If omitted, the value of the `name` property will be used.
+   */
   label?: string;
+
+  /**
+   * The key of the data object `T` to be displayed in this column.
+   * This value is used to access the data for each row.
+   */
   name: K;
+
+  /**
+   * Optional custom renderer for the cell's content.
+   * Can be a function that returns a string, or an object specifying a
+   * Svelte component to render. If omitted, the data value is cast to a string.
+   */
   renderer?: TableCellDataComponentRenderer<T, K> | TableCellDataRenderer<T, K>;
-  sortable: boolean;
+
+  /**
+   * Determines if the column can be sorted by the user.
+   * If omitted, the column will not be sortable.
+   *
+   * @default false
+   */
+  sortable?: boolean;
 };
 
 export type TableCustomDescriptor<T extends Record<string, any>> = {
+  /**
+   * The text to display in the column header.
+   * If omitted, the value of the `name` property will be used.
+   */
   label?: string;
+
+  /**
+   * A unique identifier for a custom column that does not directly map
+   * to a key of the data object `T`.
+   */
   name: Exclude<string, keyof T>;
+
+  /**
+   * Required renderer for the custom column's content.
+   * Can be a function that returns a string, or an object specifying a
+   * Svelte component to render, based on the entire row data.
+   */
   renderer:
     | TableCellDataCustomComponentRenderer<T>
     | TableCellCustomRenderer<T>;
-  sortable: boolean;
+
+  /**
+   * Determines if the column can be sorted by the user.
+   * If omitted, the column will not be sortable.
+   *
+   * @default false
+   */
+  sortable?: boolean;
 };
 
 export type TableDescriptor<T extends Record<string, any>> =

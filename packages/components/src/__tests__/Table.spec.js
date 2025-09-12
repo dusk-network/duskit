@@ -192,6 +192,25 @@ describe("Table", () => {
     expect.assertions(descriptors.length);
   });
 
+  it("should not render a sort button when the `sortable` property is omitted", () => {
+    /** @type {UserDescriptor[]} */
+    const testDescriptors = [
+      { label: "User ID", name: "id" },
+      { label: "Full Name", name: "name", sortable: true },
+    ];
+
+    const { component } = render(UserTable, {
+      ...baseProps,
+      descriptors: testDescriptors,
+    });
+    const table = component.getRootElement();
+    const idHeader = getAsHTMLElement(table, 'th[data-column="id"]');
+    const nameHeader = getAsHTMLElement(table, 'th[data-column="name"]');
+
+    expect(idHeader.querySelector("button")).toBeNull();
+    expect(nameHeader.querySelector("button")).toBeInTheDocument();
+  });
+
   it("should sort data and emit a `sort` event when a sortable column header is clicked", async () => {
     const sortHandler = vi.fn();
     const { component } = render(UserTable, baseProps);

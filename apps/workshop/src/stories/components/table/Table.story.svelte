@@ -50,8 +50,6 @@
           variant: "secondary",
         }),
       },
-
-      sortable: false,
     },
   ];
 </script>
