@@ -103,6 +103,7 @@
         <th
           aria-sort={ariaSort}
           class="duskit-table__head-cell"
+          class:duskit-table__head-cell--hidden={descriptor.hidden ?? false}
           data-column={descriptor.name}
           scope="col"
         >
@@ -136,7 +137,11 @@
           {@const columnName = descriptor.name}
           {#if descriptor.name in row}
             {@const renderer = descriptor.renderer}
-            <td class="duskit-table__cell" data-column={columnName}>
+            <td
+              class="duskit-table__cell"
+              class:duskit-table__cell--hidden={descriptor.hidden ?? false}
+              data-column={columnName}
+            >
               {#if renderer}
                 {@const value = row[columnName]}
                 {#if typeof renderer === "function"}
@@ -155,7 +160,11 @@
             {@const renderer = /** @type {CustomRenderer<row>} */ (
               descriptor.renderer
             )}
-            <td class="duskit-table__cell" data-column={columnName}>
+            <td
+              class="duskit-table__cell"
+              class:duskit-table__cell--hidden={descriptor.hidden ?? false}
+              data-column={columnName}
+            >
               {#if typeof renderer === "function"}
                 {renderer(row)}
               {:else}
