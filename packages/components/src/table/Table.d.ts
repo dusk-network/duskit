@@ -36,6 +36,14 @@ export type TableDataDescriptor<
   K extends keyof T,
 > = {
   /**
+   * Determines whether the column is hidden or not.
+   * If omitted the column will be visible.
+   *
+   * @default false
+   */
+  hidden?: boolean;
+
+  /**
    * The text to display in the column header.
    * If omitted, the value of the `name` property will be used.
    */
@@ -64,6 +72,14 @@ export type TableDataDescriptor<
 };
 
 export type TableCustomDescriptor<T extends Record<string, any>> = {
+  /**
+   * Determines whether the column is hidden or not.
+   * If omitted the column will be visible.
+   *
+   * @default false
+   */
+  hidden?: boolean;
+
   /**
    * The text to display in the column header.
    * If omitted, the value of the `name` property will be used.

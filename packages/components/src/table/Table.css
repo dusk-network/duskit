@@ -22,6 +22,11 @@
   background-color: var(--background-color-alt);
 }
 
+.duskit-table__head-cell--hidden,
+.duskit-table__cell--hidden {
+  display: none;
+}
+
 .duskit-table__head-cell-text,
 .duskit-table__sort-button .dusk-button__text,
 .duskit-table__cell {
