@@ -1,5 +1,15 @@
 # @duskit/components
 
+## 0.3.0
+
+### Minor Changes
+
+- [#201](https://github.com/dusk-network/duskit/pull/201) [`ee98d47`](https://github.com/dusk-network/duskit/commit/ee98d4704ca112e2d12153d2b5b4d50b24735a57) Thanks [@ascartabelli](https://github.com/ascartabelli)! - Add an optional `hidden` boolean attribute in `Table`'s descriptors
+
+### Patch Changes
+
+- [#197](https://github.com/dusk-network/duskit/pull/197) [`9ca3805`](https://github.com/dusk-network/duskit/commit/9ca3805d32edf0b8ab2ba2fbf5994f4470c43f73) Thanks [@ascartabelli](https://github.com/ascartabelli)! - Make the `sortable` field optional in `Table`'s descriptors
+
 ## 0.2.0
 
 ### Minor Changes
