@@ -1,5 +1,11 @@
 # @duskit/svelte-stores
 
+## 0.2.1
+
+### Patch Changes
+
+- [#204](https://github.com/dusk-network/duskit/pull/204) [`087f180`](https://github.com/dusk-network/duskit/commit/087f180d014ce43911e4c4d8de48b215a782810d) Thanks [@ascartabelli](https://github.com/ascartabelli)! - Fix: merge initial state with stored data in `createPersistedStore` to support schema updates
+
 ## 0.2.0
 
 ### Minor Changes
