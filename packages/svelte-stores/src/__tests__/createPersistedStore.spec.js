@@ -49,6 +49,99 @@ describe("createPersistedStore", () => {
 
         expect(get(store)).toStrictEqual(storedValue);
       });
+
+      it("should support schema updates and merge the initial value with the one in local storage", () => {
+        const storedValue = { count: 1, text: "stored" };
+
+        localStorage.setItem(testKey, JSON.stringify(storedValue));
+
+        const newInitialValue = { ...initialValue, extraKey: true };
+        const store = createPersistedStore(testKey, newInitialValue);
+
+        expect(get(store)).toStrictEqual({
+          ...newInitialValue,
+          ...storedValue,
+        });
+      });
+
+      it("should perform a shallow merge (not deep) for nested objects", () => {
+        const newInitialValue = {
+          config: { notifications: true, theme: "dark" },
+          version: 1,
+        };
+        const storedValue = {
+          config: { theme: "light" },
+          version: 1,
+        };
+
+        localStorage.setItem(testKey, JSON.stringify(storedValue));
+
+        const store = createPersistedStore(testKey, newInitialValue);
+
+        expect(get(store)).toStrictEqual(storedValue);
+      });
+
+      it("shouldn't attempt a merge if the initial value is an array", () => {
+        const storedValue = [3, 4, 5];
+
+        localStorage.setItem(testKey, JSON.stringify(storedValue));
+
+        const store = createPersistedStore(testKey, [1, 2, 3]);
+
+        expect(get(store)).toStrictEqual(storedValue);
+      });
+
+      it("shouldn't attempt a merge if the initial value is primitive", () => {
+        const storedValue = false;
+
+        localStorage.setItem(testKey, JSON.stringify(storedValue));
+
+        const store = createPersistedStore(testKey, true);
+
+        expect(get(store)).toStrictEqual(storedValue);
+      });
+
+      it("shouldn't attempt a merge and return the stored value if the initial value is `null` or `undefined`", () => {
+        const storedValue = { count: 1, text: "stored" };
+
+        localStorage.setItem(testKey, JSON.stringify(storedValue));
+
+        const storeA = createPersistedStore(testKey, null);
+        const storeB = createPersistedStore(testKey, void 0);
+
+        expect(get(storeA)).toStrictEqual(storedValue);
+        expect(get(storeB)).toStrictEqual(storedValue);
+      });
+
+      it("should fall back to the initial value if it's not `null` or `undefined` and add a warning in console when there is a type mismatch between the initial value and the stored one", () => {
+        const consoleWarnSpy = vi
+          .spyOn(console, "warn")
+          .mockImplementation(() => {});
+        const storedValue = 3;
+
+        localStorage.setItem(testKey, JSON.stringify(storedValue));
+
+        const store = createPersistedStore(testKey, initialValue);
+
+        expect(get(store)).toStrictEqual(initialValue);
+        expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
+
+        consoleWarnSpy.mockRestore();
+      });
+
+      it("should give precedence to the initial value even if it's `undefined` if there is no stored value", () => {
+        const store = createPersistedStore(testKey, void 0);
+
+        expect(get(store)).toBe(void 0);
+      });
+
+      it("should give precedence to the stored value, if exists, even if its parsed value is `null`", () => {
+        localStorage.setItem(testKey, JSON.stringify(null));
+
+        const store = createPersistedStore(testKey, {});
+
+        expect(get(store)).toBeNull();
+      });
     });
 
     describe("persistence", () => {
