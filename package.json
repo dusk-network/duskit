@@ -26,6 +26,7 @@
   "repository": "https://github.com/dusk-network/duskit",
   "scripts": {
     "build": "turbo run build",
+    "build-storybook": "npm --workspace apps/storybook run build-storybook",
     "changeset": "changeset",
     "checks": "turbo run checks",
     "clean": "turbo run clean && rimraf package-lock.json && rimraf node_modules && rimraf docs",
@@ -36,6 +37,7 @@
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "release": "turbo run build && changeset publish",
+    "storybook": "npm --workspace apps/storybook run storybook",
     "test": "turbo run test",
     "test:coverage": "turbo run test:coverage",
     "test:watch": "turbo run test:watch",
@@ -45,6 +47,7 @@
   },
   "type": "module",
   "workspaces": [
+    "apps/storybook",
     "packages/array",
     "packages/components",
     "packages/css",
