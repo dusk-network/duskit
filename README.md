@@ -27,7 +27,7 @@ Duskit (Dusk Kit) contains Svelte components and JS utilities that can help you 
 
 ## Dev environment
 
-The dev environment assumes that you have at least Node.js v22.11.0 installed. The LTS version is 22.11.0 at the time of writing.
+The dev environment assumes that you have at least Node.js v22.15.0 installed. The LTS version is 22.15.0 at the time of writing.
 
 Duskit is a monorepo managed with [npm workspaces](https://docs.npmjs.com/cli/v10/using-npm/workspaces) and [Turbo](https://turbo.build/).
 
@@ -112,7 +112,12 @@ Refer to the package's README to see which commands are available.
 - `npm run lint` - performs the linting check
 - `npm run lint:fix` - fixes, where possible, linting errors
 - `npm run release` - [publishes][changeset-publish] a new release
+<<<<<<< HEAD
 - `npm run build:storybook` - builds a static Storybook into `apps/storybook/storybook-static`
+=======
+- `npm run storybook` - runs Storybook (see `apps/storybook`)
+- `npm run build-storybook` - builds a static Storybook into `apps/storybook/storybook-static`
+>>>>>>> d9e59ff (chore: upgrade deps to Svelte 5 + Storybook 10)
 - `npm run test` - runs the test suite
 - `npm run test:coverage` - runs the test suite and generates the code coverage report in the `coverage` folder of each package
 - `npm run test:watch` - runs the test suite in watch mode

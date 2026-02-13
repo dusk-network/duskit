@@ -15,10 +15,11 @@ describe("Banner", () => {
     "success",
     "warning",
   ]);
-  const baseProps = Object.freeze({
+  /** @type {import("svelte").ComponentProps<Banner>} */
+  const baseProps = {
     title: "Some banner title",
     variant: "info",
-  });
+  };
   const baseOptions = {
     props: baseProps,
     target: document.body,
@@ -29,13 +30,13 @@ describe("Banner", () => {
   it("should render the `Banner` component", () => {
     const { container } = renderWithSimpleContent(Banner, baseOptions);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should render a warning message if no content is provided for the default slot", () => {
     const { container } = render(Banner, baseOptions);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should pass additional class names and attributes to the rendered element", () => {
@@ -66,7 +67,7 @@ describe("Banner", () => {
 
       // we use snapshots here as other than the class name
       // the component uses a different icon for each variant
-      expect(container.firstChild).toMatchSnapshot();
+      expect(container.firstElementChild).toMatchSnapshot();
     }
   );
 

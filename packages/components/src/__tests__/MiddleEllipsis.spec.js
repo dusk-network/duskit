@@ -25,7 +25,7 @@ describe("MiddleEllipsis", () => {
     .spyOn(HTMLPreElement.prototype, "getBoundingClientRect")
     .mockReturnValue(DOMRect.fromRect({ width: 200 }));
 
-  vi.spyOn(window, "ResizeObserver").mockImplementation((callback) => {
+  vi.spyOn(window, "ResizeObserver").mockImplementation(function (callback) {
     resizeObserverCallback = callback;
     return {
       disconnect: vi.fn(),
@@ -52,8 +52,8 @@ describe("MiddleEllipsis", () => {
 
     await new Promise(requestAnimationFrame);
 
-    expect(container.firstChild?.textContent).toBe("Short text");
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild?.textContent).toBe("Short text");
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should render the correct element specified by the `as` prop", () => {
@@ -62,7 +62,7 @@ describe("MiddleEllipsis", () => {
       text: "Short text",
     });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should pass additional class names and attributes to the rendered element", () => {

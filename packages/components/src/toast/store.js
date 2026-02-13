@@ -48,6 +48,6 @@ export const toastList = writable([]);
  * @type {import("svelte/store").Writable<Number>}
  * @description Stores the timer fused by all toasts
  */
-export const toastTimer = writable(0);
+export const toastTimer = writable(2000);
 
 export const toast = addToast;

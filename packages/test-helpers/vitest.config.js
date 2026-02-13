@@ -5,8 +5,7 @@ export default defineConfig({
   plugins: [svelte({ hot: !process.env.VITEST })],
   test: {
     coverage: {
-      all: true,
-      include: ["src/**"],
+      include: ["src/**/*.{js,ts,svelte}"],
       provider: "istanbul",
     },
     environment: "jsdom",

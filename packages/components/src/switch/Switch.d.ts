@@ -3,8 +3,9 @@ import type { SvelteHTMLElements } from "svelte/elements";
 
 import type { OmitSvelteSpecificProps } from "../dusk.components";
 
-export interface SwitchProps
-  extends OmitSvelteSpecificProps<Omit<SvelteHTMLElements["div"], "tabindex">> {
+export interface SwitchProps extends OmitSvelteSpecificProps<
+  Omit<SvelteHTMLElements["div"], "tabindex">
+> {
   active?: boolean;
   className?: string;
   disabled?: boolean;

@@ -9,7 +9,7 @@ const config = {
     },
     "lamb-types": {
       '"lamb".Ord':
-        "https://github.com/ascartabelli/lamb-types/blob/master/index.d.ts#L47",
+        "https://github.com/ascartabelli/lamb-types/blob/master/index.d.ts#L53",
       "*": "https://github.com/ascartabelli/lamb-types/blob/master/index.d.ts",
     },
   },

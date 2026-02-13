@@ -45,6 +45,16 @@
 
   let sortedData = data;
 
+  /**
+   * @template {Record<string, any>} T
+   * @param {T} row
+   * @param {import("./Table").TableDescriptor<T>} descriptor
+   * @returns {descriptor is import("./Table").TableCustomDescriptor<T>}
+   */
+  function isCustomDescriptor(row, descriptor) {
+    return !(descriptor.name in row);
+  }
+
   /** @type {import("svelte/elements").MouseEventHandler<HTMLButtonElement>}*/
   function handleSortButtonClick(event) {
     const column =
@@ -135,7 +145,22 @@
       <tr class="duskit-table__row">
         {#each tableDescriptors as descriptor (descriptor.name)}
           {@const columnName = descriptor.name}
-          {#if descriptor.name in row}
+          {#if isCustomDescriptor(row, descriptor)}
+            <td
+              class="duskit-table__cell"
+              class:duskit-table__cell--hidden={descriptor.hidden ?? false}
+              data-column={columnName}
+            >
+              {#if typeof descriptor.renderer === "function"}
+                {descriptor.renderer(row)}
+              {:else}
+                <svelte:component
+                  this={descriptor.renderer.component}
+                  {...descriptor.renderer.getProps(row)}
+                />
+              {/if}
+            </td>
+          {:else}
             {@const renderer = descriptor.renderer}
             <td
               class="duskit-table__cell"
@@ -154,24 +179,6 @@
                 {/if}
               {:else}
                 {String(row[columnName])}
-              {/if}
-            </td>
-          {:else}
-            {@const renderer = /** @type {CustomRenderer<row>} */ (
-              descriptor.renderer
-            )}
-            <td
-              class="duskit-table__cell"
-              class:duskit-table__cell--hidden={descriptor.hidden ?? false}
-              data-column={columnName}
-            >
-              {#if typeof renderer === "function"}
-                {renderer(row)}
-              {:else}
-                <svelte:component
-                  this={renderer.component}
-                  {...renderer.getProps(row)}
-                />
               {/if}
             </td>
           {/if}

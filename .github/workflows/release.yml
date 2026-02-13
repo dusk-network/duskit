@@ -16,10 +16,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setting up Node 22.11.0
+      - name: Setting up Node 22.15.0
         uses: actions/setup-node@v4
         with:
-          node-version: 22.11.0
+          node-version: 22.15.0
           scope: "@duskit"
           cache: npm
           cache-dependency-path: package-lock.json

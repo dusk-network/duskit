@@ -3,8 +3,9 @@ import type { HTMLAnchorAttributes } from "svelte/elements";
 
 import type { OmitSvelteSpecificProps } from "../dusk.components";
 
-export interface AnchorProps
-  extends OmitSvelteSpecificProps<Omit<HTMLAnchorAttributes, "href">> {
+export interface AnchorProps extends OmitSvelteSpecificProps<
+  Omit<HTMLAnchorAttributes, "href">
+> {
   className?: string;
   href: string;
   onSurface?: boolean;

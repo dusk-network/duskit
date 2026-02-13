@@ -26,7 +26,7 @@ describe("Button", () => {
   it('should render the Button component using the type "button" as a default', () => {
     const { container } = render(Button, baseOptions);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it.each(types)('should render a button with type "%s"', (type) => {
@@ -44,7 +44,8 @@ describe("Button", () => {
   });
 
   it('should add an "active" class when the active property of a toggle button changes', async () => {
-    const props = Object.freeze({ ...baseProps, type: "toggle" });
+    /** @type {import("svelte").ComponentProps<Button>} */
+    const props = { ...baseProps, type: "toggle" };
     const { component, rerender } = render(Button, { ...baseOptions, props });
     const element = component.getRootElement();
 
@@ -176,13 +177,16 @@ describe("Button", () => {
 
   it("should forward the `on:click`, `on:mousedown` and `on:mouseup` handlers to the underlying element", async () => {
     const handleEvent = vi.fn((evt) => evt.preventDefault());
-    const { component } = render(Button, baseOptions);
+    const { component } = render(Button, {
+      ...baseOptions,
+      events: {
+        click: handleEvent,
+        mousedown: handleEvent,
+        mouseup: handleEvent,
+      },
+    });
 
     const element = component.getRootElement();
-
-    component.$on("click", handleEvent);
-    component.$on("mousedown", handleEvent);
-    component.$on("mouseup", handleEvent);
 
     await fireEvent.click(element);
     await fireEvent.mouseDown(element);
@@ -193,11 +197,12 @@ describe("Button", () => {
 
   describe("Reactivity", () => {
     it("should react to property changes", async () => {
-      const props = Object.freeze({
+      /** @type {import("svelte").ComponentProps<Button>} */
+      const props = {
         ...baseProps,
         type: "submit",
         variant: "primary",
-      });
+      };
       const { component, rerender } = render(Button, { ...baseOptions, props });
       const element = component.getRootElement();
 
@@ -226,8 +231,9 @@ describe("Button", () => {
 
       expect(element).toHaveTextContent("Updated Text Only");
 
+      /** @type {Partial<import("svelte").ComponentProps<Button>>} */
       const propsIconBefore = {
-        icon: Object.freeze({ path: mdiFolderOutline, position: "before" }),
+        icon: { path: mdiFolderOutline, position: "before" },
         text: "Initial Before",
       };
 
@@ -248,8 +254,9 @@ describe("Button", () => {
       );
       expect(element.querySelector("path")).toHaveAttribute("d", mdiAbTesting);
 
+      /** @type {Partial<import("svelte").ComponentProps<Button>>} */
       const propsIconAfter = {
-        icon: Object.freeze({ path: mdiFolderOutline, position: "after" }),
+        icon: { path: mdiFolderOutline, position: "after" },
         text: "Initial After",
       };
 

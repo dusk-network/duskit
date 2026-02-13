@@ -121,8 +121,9 @@ export type TableSortState = {
   direction: "ascending" | "descending";
 } | null;
 
-export interface TableProps<T extends Record<string, any> = Record<string, any>>
-  extends OmitSvelteSpecificProps<SvelteHTMLElements["table"]> {
+export interface TableProps<
+  T extends Record<string, any> = Record<string, any>,
+> extends OmitSvelteSpecificProps<SvelteHTMLElements["table"]> {
   caption?: string;
   className?: string;
   data: T[];

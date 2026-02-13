@@ -6,11 +6,13 @@ exports[`AnchorButton > should render the \`AnchorButton\` component 1`] = `
   class="dusk-anchor dusk-anchor--on-surface dusk-anchor-button dusk-anchor-button--variant--primary dusk-anchor-button--size--default"
   href="/some-url"
 >
+  <!---->
   <span
     class="dusk-anchor-button__text"
   >
     some text
   </span>
   
+  <!---->
 </a>
 `;

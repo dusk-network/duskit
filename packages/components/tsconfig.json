@@ -22,10 +22,7 @@
     "skipLibCheck": false,
     "strict": true,
     "target": "ESNext",
-    "types": [
-      "../../node_modules/@testing-library/jest-dom/types/vitest.d.ts",
-      "lamb-types"
-    ]
+    "types": ["lamb-types"]
   },
   "exclude": ["coverage", "node_modules"]
 }

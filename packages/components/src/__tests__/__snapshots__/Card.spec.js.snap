@@ -4,6 +4,8 @@ exports[`Card > should render the \`Card\` component in a \`div\` with a standar
 <div
   class="dusk-card dusk-card--gap-default dusk-card--off-surface"
 >
+  <!---->
+  <!---->
    
   <div
     class="dusk-card__body-container"
@@ -11,7 +13,11 @@ exports[`Card > should render the \`Card\` component in a \`div\` with a standar
     <span>
       some text
     </span>
+    <!---->
   </div>
+  <!---->
    
+  <!---->
+  
 </div>
 `;

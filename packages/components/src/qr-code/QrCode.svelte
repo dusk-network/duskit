@@ -53,13 +53,21 @@
         light: options.bgColor,
       },
       width: options.size,
-    }).catch((failure) => {
-      const error = getErrorFrom(failure);
+    })
+      .then((url) => {
+        if (typeof url !== "string" || !url.trim()) {
+          throw new Error("Unable to generate QR code");
+        }
 
-      dispatch("error", error.message);
+        return url;
+      })
+      .catch((failure) => {
+        const error = getErrorFrom(failure);
 
-      return Promise.reject(error);
-    });
+        dispatch("error", error.message);
+
+        return Promise.reject(error);
+      });
 
   $: classes = makeClassName(["dusk-qr-code", className]);
   $: qrOptions = {
@@ -84,9 +92,9 @@
     <img
       alt={altText ?? defaultAltText}
       class="dusk-qr-code__image"
-      height={size}
+      height={size ?? defaultSize}
       src={result}
-      width={size}
+      width={size ?? defaultSize}
     />
   </svelte:fragment>
 </Suspense>

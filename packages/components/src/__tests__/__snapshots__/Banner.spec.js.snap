@@ -4,6 +4,7 @@ exports[`Banner > should be able to render the component using the "error" varia
 <div
   class="dusk-banner dusk-banner--error"
 >
+  <!---->
   <svg
     class="dusk-icon dusk-icon--size--large dusk-banner__icon banner__icon--error"
     role="graphics-symbol"
@@ -14,6 +15,7 @@ exports[`Banner > should be able to render the component using the "error" varia
     />
   </svg>
   
+  <!---->
    
   <div>
     <strong
@@ -25,6 +27,7 @@ exports[`Banner > should be able to render the component using the "error" varia
     <span>
       some text
     </span>
+    <!---->
   </div>
 </div>
 `;
@@ -33,6 +36,7 @@ exports[`Banner > should be able to render the component using the "info" varian
 <div
   class="dusk-banner dusk-banner--info"
 >
+  <!---->
   <svg
     class="dusk-icon dusk-icon--size--large dusk-banner__icon banner__icon--info"
     role="graphics-symbol"
@@ -43,6 +47,7 @@ exports[`Banner > should be able to render the component using the "info" varian
     />
   </svg>
   
+  <!---->
    
   <div>
     <strong
@@ -54,6 +59,7 @@ exports[`Banner > should be able to render the component using the "info" varian
     <span>
       some text
     </span>
+    <!---->
   </div>
 </div>
 `;
@@ -62,6 +68,7 @@ exports[`Banner > should be able to render the component using the "success" var
 <div
   class="dusk-banner dusk-banner--success"
 >
+  <!---->
   <svg
     class="dusk-icon dusk-icon--size--large dusk-banner__icon banner__icon--success"
     role="graphics-symbol"
@@ -72,6 +79,7 @@ exports[`Banner > should be able to render the component using the "success" var
     />
   </svg>
   
+  <!---->
    
   <div>
     <strong
@@ -83,6 +91,7 @@ exports[`Banner > should be able to render the component using the "success" var
     <span>
       some text
     </span>
+    <!---->
   </div>
 </div>
 `;
@@ -91,6 +100,7 @@ exports[`Banner > should be able to render the component using the "warning" var
 <div
   class="dusk-banner dusk-banner--warning"
 >
+  <!---->
   <svg
     class="dusk-icon dusk-icon--size--large dusk-banner__icon banner__icon--warning"
     role="graphics-symbol"
@@ -101,6 +111,7 @@ exports[`Banner > should be able to render the component using the "warning" var
     />
   </svg>
   
+  <!---->
    
   <div>
     <strong
@@ -112,6 +123,7 @@ exports[`Banner > should be able to render the component using the "warning" var
     <span>
       some text
     </span>
+    <!---->
   </div>
 </div>
 `;
@@ -120,6 +132,7 @@ exports[`Banner > should render a warning message if no content is provided for 
 <div
   class="dusk-banner dusk-banner--info"
 >
+  <!---->
   <svg
     class="dusk-icon dusk-icon--size--large dusk-banner__icon banner__icon--info"
     role="graphics-symbol"
@@ -130,6 +143,7 @@ exports[`Banner > should render a warning message if no content is provided for 
     />
   </svg>
   
+  <!---->
    
   <div>
     <strong
@@ -141,6 +155,7 @@ exports[`Banner > should render a warning message if no content is provided for 
     <p>
       No banner content provided.
     </p>
+    <!---->
   </div>
 </div>
 `;
@@ -149,6 +164,7 @@ exports[`Banner > should render the \`Banner\` component 1`] = `
 <div
   class="dusk-banner dusk-banner--info"
 >
+  <!---->
   <svg
     class="dusk-icon dusk-icon--size--large dusk-banner__icon banner__icon--info"
     role="graphics-symbol"
@@ -159,6 +175,7 @@ exports[`Banner > should render the \`Banner\` component 1`] = `
     />
   </svg>
   
+  <!---->
    
   <div>
     <strong
@@ -170,6 +187,7 @@ exports[`Banner > should render the \`Banner\` component 1`] = `
     <span>
       some text
     </span>
+    <!---->
   </div>
 </div>
 `;

@@ -57,7 +57,7 @@ describe("Table", () => {
   it("should render the Table component using the provided descriptors", () => {
     const { container } = render(UserTable, baseProps);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should auto-generate headers and content if descriptors are not provided", () => {
@@ -87,10 +87,12 @@ describe("Table", () => {
     const { component } = render(UserTable, props);
     const table = component.getRootElement();
     const headers = table.querySelectorAll("th");
-    const tbody = table.querySelector("tbody");
+    const tbody = /** @type {HTMLTableSectionElement} */ (
+      table.querySelector("tbody")
+    );
 
     expect(headers.length).toBe(descriptors.length);
-    expect(tbody).toBeEmptyDOMElement();
+    expect(tbody.querySelectorAll("tr")).toHaveLength(0);
   });
 
   it("should render an empty table if descriptors aren't provided and the data array is empty", () => {
@@ -98,10 +100,12 @@ describe("Table", () => {
     const { component } = render(UserTable, props);
     const table = component.getRootElement();
     const headers = table.querySelectorAll("th");
-    const tbody = table.querySelector("tbody");
+    const tbody = /** @type {HTMLTableSectionElement} */ (
+      table.querySelector("tbody")
+    );
 
     expect(headers.length).toBe(0);
-    expect(tbody).toBeEmptyDOMElement();
+    expect(tbody.querySelectorAll("tr")).toHaveLength(0);
   });
 
   it("should use descriptor names if labels are not provided", () => {
@@ -253,7 +257,12 @@ describe("Table", () => {
 
   it("should sort data and emit a `sort` event when a sortable column header is clicked", async () => {
     const sortHandler = vi.fn();
-    const { component } = render(UserTable, baseProps);
+    /** @param {CustomEvent<unknown>} event */
+    const onSort = (event) => sortHandler(event.detail);
+    const { component } = render(UserTable, {
+      events: { sort: onSort },
+      props: baseProps,
+    });
     const table = component.getRootElement();
     const nameHeader = getAsHTMLElement(table, 'th[data-column="name"]');
     const nameSortButton = getAsHTMLElement(nameHeader, "button");
@@ -263,8 +272,6 @@ describe("Table", () => {
     /** @param {string} name */
     const getFirstRowCellByName = (name) =>
       table.querySelector(`td[data-column="${name}"]`);
-
-    component.$on("sort", (event) => sortHandler(event.detail));
 
     expect(nameHeader).toHaveAttribute("aria-sort", "none");
     expect(getFirstRowCellByName("name")).toHaveTextContent(testData[0].name);
