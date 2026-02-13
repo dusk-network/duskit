@@ -60,3 +60,6 @@ jobs:
 
       - name: Building the apps
         run: npm run build
+
+      - name: Build Storybook
+        run: npm run build:storybook
