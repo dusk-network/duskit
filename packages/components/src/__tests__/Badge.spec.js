@@ -19,7 +19,7 @@ describe("Badge", () => {
   it('should render the Badge component using the type "neutral" as a default', () => {
     const { container } = render(Badge, baseProps);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should be able to render the component without text", () => {

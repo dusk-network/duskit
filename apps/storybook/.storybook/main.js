@@ -1,11 +1,14 @@
-const path = require("node:path");
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "../../..");
 
 /** @type {import("@storybook/svelte-vite").StorybookConfig} */
 const config = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|svelte)"],
-  addons: ["@storybook/addon-essentials"],
+  // Actions/controls are part of Storybook core (v9+). Only keep real addons here.
+  addons: ["@storybook/addon-docs"],
   core: {
     disableTelemetry: true,
   },
@@ -45,9 +48,10 @@ const config = {
         },
       },
     });
+
     merged.plugins = plugins;
     return merged;
   },
 };
 
-module.exports = config;
+export default config;

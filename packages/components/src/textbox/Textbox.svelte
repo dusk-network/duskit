@@ -59,7 +59,7 @@
     on:input
     on:keydown
     on:paste
-  />
+  ></textarea>
 {:else}
   <input
     {...$$restProps}

@@ -3,8 +3,7 @@ import type { HTMLDetailsAttributes } from "svelte/elements";
 
 import type { OmitSvelteSpecificProps } from "../dusk.components";
 
-export interface ErrorDetailsProps
-  extends OmitSvelteSpecificProps<HTMLDetailsAttributes> {
+export interface ErrorDetailsProps extends OmitSvelteSpecificProps<HTMLDetailsAttributes> {
   className?: string;
   error: Error | null;
   summary: string;

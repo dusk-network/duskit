@@ -35,7 +35,7 @@ describe("AnchorButton", () => {
   it("should render the `AnchorButton` component", () => {
     const { container } = render(AnchorButton, baseOptions);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should add a disabled class and set its `tabindex` to `-1` if the related property is `true`", () => {
@@ -170,10 +170,11 @@ describe("AnchorButton", () => {
 
   it("should forward the `on:click` handler to the underlying element", async () => {
     const handleEvent = vi.fn((evt) => evt.preventDefault());
-    const { component } = render(AnchorButton, baseOptions);
+    const { component } = render(AnchorButton, {
+      ...baseOptions,
+      events: { click: handleEvent },
+    });
     const element = component.getRootElement().getRootElement();
-
-    component.$on("click", handleEvent);
 
     await fireEvent.click(element);
 
@@ -182,11 +183,12 @@ describe("AnchorButton", () => {
 
   describe("Reactivity", () => {
     it("should react to property changes", async () => {
-      const props = Object.freeze({
+      /** @type {import("svelte").ComponentProps<AnchorButton>} */
+      const props = {
         ...baseProps,
         disabled: false,
         variant: "primary",
-      });
+      };
       const { component, rerender } = render(AnchorButton, {
         ...baseOptions,
         props,
@@ -219,8 +221,9 @@ describe("AnchorButton", () => {
 
       expect(element).toHaveTextContent("Updated Text Only");
 
+      /** @type {Partial<import("svelte").ComponentProps<AnchorButton>>} */
       const propsIconBefore = {
-        icon: Object.freeze({ path: mdiFolderOutline, position: "before" }),
+        icon: { path: mdiFolderOutline, position: "before" },
         text: "Initial Before",
       };
 
@@ -241,8 +244,9 @@ describe("AnchorButton", () => {
       ).toHaveTextContent("Updated Before");
       expect(element.querySelector("path")).toHaveAttribute("d", mdiAbTesting);
 
+      /** @type {Partial<import("svelte").ComponentProps<AnchorButton>>} */
       const propsIconAfter = {
-        icon: Object.freeze({ path: mdiFolderOutline, position: "after" }),
+        icon: { path: mdiFolderOutline, position: "after" },
         text: "Initial After",
       };
 

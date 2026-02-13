@@ -24,7 +24,7 @@ describe("Suspense", () => {
   it("should be able to render the `Suspense` component in a pending state", () => {
     const { container } = render(Suspense, baseOptions);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should allow to specify the preferred tag for the rendered element", () => {
@@ -34,7 +34,7 @@ describe("Suspense", () => {
     });
     const { container } = render(Suspense, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should pass additional class names and attributes to the rendered element", () => {
@@ -46,7 +46,7 @@ describe("Suspense", () => {
     };
     const { container } = render(Suspense, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should add appropriate class names for gap variants", async () => {
@@ -57,11 +57,11 @@ describe("Suspense", () => {
     };
     const { container, rerender } = render(Suspense, { ...baseOptions, props });
 
-    expect(container.firstChild).toHaveClass("dusk-suspense--small-gap");
+    expect(container.firstElementChild).toHaveClass("dusk-suspense--small-gap");
 
     await rerender({ ...props, gap: "large" });
 
-    expect(container.firstChild).toHaveClass("dusk-suspense--large-gap");
+    expect(container.firstElementChild).toHaveClass("dusk-suspense--large-gap");
   });
 
   it("should accept a custom message for the pending state", () => {
@@ -71,7 +71,7 @@ describe("Suspense", () => {
     };
     const { container } = render(Suspense, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should be able to render the `Suspense` in a successful state", async () => {
@@ -79,7 +79,7 @@ describe("Suspense", () => {
 
     await vi.advanceTimersByTimeAsync(delay);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it('should be able to render the `Suspense` in a failure state with the "alert" variant as a default', async () => {
@@ -92,7 +92,7 @@ describe("Suspense", () => {
 
     await vi.advanceTimersByTimeAsync(delay);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it('should be able to render the `Suspense` in a failure state with the "banner" error variant', async () => {
@@ -107,7 +107,7 @@ describe("Suspense", () => {
 
     await vi.advanceTimersByTimeAsync(delay);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it('should be able to render the `Suspense` in a failure state with the "details" error variant', async () => {
@@ -122,7 +122,7 @@ describe("Suspense", () => {
 
     await vi.advanceTimersByTimeAsync(delay);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should accept a custom message for the failure state", async () => {
@@ -136,6 +136,6 @@ describe("Suspense", () => {
 
     await vi.advanceTimersByTimeAsync(delay);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 });

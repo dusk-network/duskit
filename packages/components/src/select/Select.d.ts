@@ -5,8 +5,9 @@ import type { OmitSvelteSpecificProps, OptionItem } from "../dusk.components";
 
 type GroupedOptionItems = Record<string, OptionItem[] | string[]>;
 
-export interface SelectProps
-  extends OmitSvelteSpecificProps<Omit<HTMLSelectAttributes, "value">> {
+export interface SelectProps extends OmitSvelteSpecificProps<
+  Omit<HTMLSelectAttributes, "value">
+> {
   className?: string;
   options: GroupedOptionItems | OptionItem[] | string[];
   value?: string;

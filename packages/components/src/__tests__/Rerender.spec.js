@@ -48,15 +48,15 @@ describe("Rerender", () => {
       baseOptions
     );
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"0"`);
+    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->0"`);
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"1"`);
+    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->1"`);
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"2"`);
+    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->2"`);
 
     expect(domMutations).toBe(2);
   });
@@ -68,23 +68,23 @@ describe("Rerender", () => {
       props,
     });
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"0"`);
+    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->0"`);
 
     await vi.advanceTimersByTimeAsync(props.interval / 2);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"0"`);
+    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->0"`);
 
     await vi.advanceTimersByTimeAsync(props.interval / 2);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"1"`);
+    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->1"`);
 
     await vi.advanceTimersByTimeAsync(props.interval / 2);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"1"`);
+    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->1"`);
 
     await vi.advanceTimersByTimeAsync(props.interval / 2);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"2"`);
+    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->2"`);
     expect(domMutations).toBe(2);
   });
 
@@ -95,11 +95,11 @@ describe("Rerender", () => {
       props: { values },
     });
 
-    expect(container.innerHTML).toBe("1");
+    expect(container.textContent).toBe("1");
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toBe("2");
+    expect(container.textContent).toBe("2");
     expect(domMutations).toBe(1);
   });
 
@@ -112,41 +112,41 @@ describe("Rerender", () => {
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toBe("2");
+    expect(container.textContent).toBe("2");
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toBe("0");
+    expect(container.textContent).toBe("0");
     expect(domMutations).toBe(2);
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toBe("0");
+    expect(container.textContent).toBe("0");
     expect(domMutations).toBe(2);
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toBe("NaN");
+    expect(container.textContent).toBe("NaN");
     expect(domMutations).toBe(3);
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toBe("NaN");
+    expect(container.textContent).toBe("NaN");
     expect(domMutations).toBe(3);
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toBe("3");
+    expect(container.textContent).toBe("3");
     expect(domMutations).toBe(4);
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toBe("3");
+    expect(container.textContent).toBe("3");
     expect(domMutations).toBe(4);
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toBe("4");
+    expect(container.textContent).toBe("4");
     expect(domMutations).toBe(5);
   });
 
@@ -157,19 +157,19 @@ describe("Rerender", () => {
     );
 
     expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<span>now the value is: 0</span>"`
+      `"<!----><!----><span>now the value is: 0</span>"`
     );
 
     await vi.advanceTimersByTimeAsync(1000);
 
     expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<span>now the value is: 1</span>"`
+      `"<!----><!----><span>now the value is: 1</span>"`
     );
 
     await vi.advanceTimersByTimeAsync(1000);
 
     expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<span>now the value is: 2</span>"`
+      `"<!----><!----><span>now the value is: 2</span>"`
     );
     expect(domMutations).toBe(2);
   });

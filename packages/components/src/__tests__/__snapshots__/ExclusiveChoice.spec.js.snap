@@ -62,5 +62,6 @@ exports[`ExclusiveChoice > should render the \`ExclusiveChoice\` component and a
   >
     four
   </label>
+  
 </div>
 `;

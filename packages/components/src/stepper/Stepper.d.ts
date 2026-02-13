@@ -8,8 +8,9 @@ type StepperStep = {
   label: string;
 };
 
-export interface StepperProps
-  extends OmitSvelteSpecificProps<SvelteHTMLElements["div"]> {
+export interface StepperProps extends OmitSvelteSpecificProps<
+  SvelteHTMLElements["div"]
+> {
   activeStep: number;
   className?: string;
   showStepLabelWhenInactive?: boolean;

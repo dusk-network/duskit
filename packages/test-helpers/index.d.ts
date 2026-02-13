@@ -14,7 +14,16 @@ export declare function getAsHTMLElement(
   selector: string
 ): HTMLElement;
 
-export declare class IntersectionObserverMock extends IntersectionObserver {}
+export declare class IntersectionObserverMock extends IntersectionObserver {
+  constructor(
+    callback: IntersectionObserverCallback,
+    options?: IntersectionObserverInit
+  );
+  static trigger(
+    element: Element,
+    data?: Partial<IntersectionObserverEntry>
+  ): void;
+}
 
 export declare function mockReadableStore<T>(initialValue: T): Readable<T> & {
   getMockedStoreValue(): T;
@@ -48,5 +57,5 @@ export declare interface SlotContentProps<
 export declare class SlotContent<
   C extends SvelteComponentConstructor = SvelteComponentConstructor,
 > extends SvelteComponent<SlotContentProps<C>, {}, { default: {} }> {
-  getRootElement: SvelteComponent<C, SlotContentProps<C>["componentOptions"]>;
+  getRootElement: () => InstanceType<C>;
 }

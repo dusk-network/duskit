@@ -31,12 +31,12 @@
   "devDependencies": {
     "@dusk-network/prettier-config": "1.1.0",
     "@dusk-network/stylelint-config": "1.0.6",
-    "prettier": "3.5.3",
-    "rimraf": "6.0.1",
-    "stylelint": "16.19.1",
-    "stylelint-config-standard": "38.0.0",
-    "stylelint-no-unsupported-browser-features": "8.0.4",
-    "stylelint-order": "7.0.0",
-    "stylelint-selector-bem-pattern": "4.0.0"
+    "prettier": "3.8.1",
+    "rimraf": "6.1.2",
+    "stylelint": "16.26.1",
+    "stylelint-config-standard": "39.0.1",
+    "stylelint-no-unsupported-browser-features": "8.1.1",
+    "stylelint-order": "7.0.1",
+    "stylelint-selector-bem-pattern": "4.0.1"
   }
 }

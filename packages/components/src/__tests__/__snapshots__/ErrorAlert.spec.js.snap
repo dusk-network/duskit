@@ -4,6 +4,7 @@ exports[`ErrorAlert > should render the \`ErrorAlert\` component 1`] = `
 <div
   class="dusk-error-alert dusk-error-alert--default-gap"
 >
+  <!---->
   <svg
     class="dusk-icon dusk-icon--size--large dusk-error-alert__icon"
     role="graphics-symbol"
@@ -14,7 +15,9 @@ exports[`ErrorAlert > should render the \`ErrorAlert\` component 1`] = `
     />
   </svg>
   
+  <!---->
    
+  <!---->
   <details
     class="dusk-error-details dusk-error-alert__error-details"
   >
@@ -27,12 +30,12 @@ exports[`ErrorAlert > should render the \`ErrorAlert\` component 1`] = `
     <pre
       class="dusk-error-details__error"
     >
-      			
-      some error message
       
+			some error message
 		
     </pre>
   </details>
   
+  <!---->
 </div>
 `;

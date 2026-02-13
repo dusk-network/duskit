@@ -8,5 +8,6 @@ exports[`Anchor > should render the Anchor component 1`] = `
   <span>
     some text
   </span>
+  <!---->
 </a>
 `;

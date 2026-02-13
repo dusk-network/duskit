@@ -38,5 +38,21 @@ export default defineConfig([
     extends: [vitestEsLintConfig],
     files: ["*.js", "**/*.spec.js"],
   },
+
+  /**
+   * Because of how svelte export types, currently
+   * `eslint-plugin-import`'s sees duplicates imports
+   * (`import/no-duplicates` rule)
+   */
+  {
+    files: [
+      "src/__tests__/Toast.spec.js",
+      "src/progress-bar/ProgressBar.svelte",
+      "src/toast/Toast.svelte",
+    ],
+    rules: {
+      "import/no-duplicates": "off",
+    },
+  },
   globalIgnores(["coverage/"]),
 ]);

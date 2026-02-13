@@ -5,6 +5,7 @@ exports[`MiddleEllipsis > should render the correct element specified by the \`a
   class="dusk-middle-ellipsis"
 >
   Short text
+  
 </p>
 `;
 
@@ -13,5 +14,6 @@ exports[`MiddleEllipsis > should render the full text when there is enough space
   class="dusk-middle-ellipsis"
 >
   Short text
+  
 </pre>
 `;

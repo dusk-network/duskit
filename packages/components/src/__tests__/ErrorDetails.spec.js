@@ -19,7 +19,7 @@ describe("ErrorDetails", () => {
   it("should render the `ErrorDetails` component", () => {
     const { container } = render(ErrorDetails, baseOptions);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should pass additional class names to the rendered element", () => {
@@ -46,7 +46,7 @@ describe("ErrorDetails", () => {
     });
 
     expect(component.getRootElement()).toBeNull();
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should react to prop changes", async () => {

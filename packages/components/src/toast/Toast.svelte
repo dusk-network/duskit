@@ -5,7 +5,6 @@
 
   import { flip } from "svelte/animate";
   import { fly } from "svelte/transition";
-  import { onMount } from "svelte";
 
   import { makeClassName } from "@duskit/string";
 
@@ -29,11 +28,8 @@
 
   export const getRootElement = () => rootElement;
 
-  onMount(() => {
-    $toastTimer = timer ?? defaultTimer;
-  });
-
   $: classes = makeClassName(["dusk-toast", className]);
+  $: $toastTimer = timer ?? defaultTimer;
 </script>
 
 <ul bind:this={rootElement} {...$$restProps} class={classes}>

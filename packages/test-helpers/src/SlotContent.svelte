@@ -12,7 +12,7 @@
   /** @type {SlotContentProps["text"]} */
   export let text;
 
-  /** @type {import("svelte").SvelteComponent<Component, SlotContentProps["componentOptions"]>}*/
+  /** @type {InstanceType<SlotContentProps["component"]>} */
   let rootElement;
 
   export const getRootElement = () => rootElement;

@@ -25,7 +25,7 @@ describe("Checkbox", () => {
   it("renders the Checkbox component", () => {
     const { container } = render(Checkbox, baseProps);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should generate an id if it's not received by props", () => {
@@ -89,11 +89,12 @@ describe("Checkbox", () => {
 
   it("should forward the `on:change` handler to the underlying element", async () => {
     const handleChange = vi.fn();
-    const { component } = render(Checkbox, baseProps);
+    const { component } = render(Checkbox, {
+      events: { change: handleChange },
+      props: baseProps,
+    });
 
     const element = component.getRootElement();
-
-    component.$on("change", handleChange);
 
     await fireEvent.change(element);
 
