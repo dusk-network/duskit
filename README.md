@@ -57,7 +57,6 @@ Alternatively you can move to a package root and install the dependency from the
 
 ## Packages
 
-- [@duskit/workshop](apps/workshop/README.md)
 - [@duskit/array](packages/array/README.md)
 - [@duskit/components](packages/components/README.md)
 - [@duskit/css](packages/css/README.md)
@@ -100,11 +99,9 @@ Refer to the package's README to see which commands are available.
 
 **N.B.** the `changeset`, `release` and `version-packages` scripts are commands related to the whole monorepo and cannot be run from a single package.
 
-- `npm run build` - builds the [Histoire](https://histoire.dev/) app
 - `npm run changeset` - shows an interactive shell to [create][changeset-add] a new changeset entry
 - `npm run checks` - runs all health checks (formatting, linting, type checking, tests)
 - `npm run clean` - runs the `clean` script for all packages (currently removes all `coverage`, `docs` and `node_modules` folders)
-- `npm run dev` - runs the [Histoire](https://histoire.dev/) app in dev mode
 - `npm run docs` - generates HTML documentation for all `@duskit` in the `docs` folder
 - `npm run format` - fixes the formatting in all files
 - `npm run format:check` - performs the formatting check
