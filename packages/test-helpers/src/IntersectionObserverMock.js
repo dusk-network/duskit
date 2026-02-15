@@ -1,5 +1,6 @@
 /** @type {import("..").IntersectionObserverMock} */
 export default class IntersectionObserverMock {
+  /** @type {IntersectionObserverMock[]} */
   static instances = [];
 
   /** @param {IntersectionObserverCallback} callback */

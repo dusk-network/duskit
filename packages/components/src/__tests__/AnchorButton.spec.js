@@ -35,7 +35,7 @@ describe("AnchorButton", () => {
   it("should render the `AnchorButton` component", () => {
     const { container } = render(AnchorButton, baseOptions);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should add a disabled class and set its `tabindex` to `-1` if the related property is `true`", () => {

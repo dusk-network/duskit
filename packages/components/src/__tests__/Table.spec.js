@@ -57,7 +57,7 @@ describe("Table", () => {
   it("should render the Table component using the provided descriptors", () => {
     const { container } = render(UserTable, baseProps);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should auto-generate headers and content if descriptors are not provided", () => {

@@ -48,7 +48,7 @@ describe("Select", () => {
   it("should render the Select component", () => {
     const { container } = render(Select, baseOptions);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should accept a change event handler", async () => {
@@ -83,7 +83,7 @@ describe("Select", () => {
     };
     const { container } = render(Select, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should accept an array of objects as options", () => {
@@ -93,7 +93,7 @@ describe("Select", () => {
     };
     const { container } = render(Select, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should use the value as label if an object is missing it", () => {
@@ -104,7 +104,7 @@ describe("Select", () => {
     };
     const { container } = render(Select, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should accept an empty string as label and use it instead of falling back to the value", () => {
@@ -115,7 +115,7 @@ describe("Select", () => {
     };
     const { container } = render(Select, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should accept an array of strings as `options` and use each string as both label and value", () => {
@@ -125,7 +125,7 @@ describe("Select", () => {
     };
     const { container } = render(Select, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should accept a grouped object as `options` and create option groups", () => {
@@ -135,7 +135,7 @@ describe("Select", () => {
     };
     const { container } = render(Select, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should accept an array of string as values of a grouped object", () => {
@@ -145,6 +145,6 @@ describe("Select", () => {
     };
     const { container } = render(Select, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 });

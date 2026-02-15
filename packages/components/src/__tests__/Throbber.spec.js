@@ -16,7 +16,7 @@ describe("Throbber", () => {
   it("should render the Throbber component", () => {
     const { container } = render(Throbber, baseOptions);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should pass additional class names and attributes to the rendered element", () => {
@@ -28,7 +28,7 @@ describe("Throbber", () => {
     };
     const { container } = render(Throbber, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should accept a custom duration and size", () => {
@@ -39,6 +39,6 @@ describe("Throbber", () => {
     };
     const { container } = render(Throbber, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 });

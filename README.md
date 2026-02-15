@@ -27,7 +27,7 @@ Duskit (Dusk Kit) contains Svelte components and JS utilities that can help you 
 
 ## Dev environment
 
-The dev environment assumes that you have at least Node.js v22.11.0 installed. The LTS version is 22.11.0 at the time of writing.
+The dev environment assumes that you have at least Node.js v22.15.0 installed. The LTS version is 22.15.0 at the time of writing.
 
 Duskit is a monorepo managed with [npm workspaces](https://docs.npmjs.com/cli/v10/using-npm/workspaces) and [Turbo](https://turbo.build/).
 

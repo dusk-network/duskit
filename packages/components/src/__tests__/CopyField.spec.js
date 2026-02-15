@@ -54,7 +54,7 @@ describe("CopyField", () => {
   it("should render the `CopyField` component", () => {
     const { container } = render(CopyField, baseOptions);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should pass additional class names and attributes to the rendered element", () => {

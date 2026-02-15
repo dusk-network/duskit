@@ -25,7 +25,7 @@ describe("Checkbox", () => {
   it("renders the Checkbox component", () => {
     const { container } = render(Checkbox, baseProps);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should generate an id if it's not received by props", () => {

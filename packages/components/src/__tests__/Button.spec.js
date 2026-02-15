@@ -26,7 +26,7 @@ describe("Button", () => {
   it('should render the Button component using the type "button" as a default', () => {
     const { container } = render(Button, baseOptions);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it.each(types)('should render a button with type "%s"', (type) => {

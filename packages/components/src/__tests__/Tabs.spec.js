@@ -126,7 +126,7 @@ describe("Tabs", () => {
 
     expect(tabsList.scrollTo).toHaveBeenCalledTimes(1);
     expect(tabsList.scrollTo).toHaveBeenCalledWith(0, 0);
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should scroll the selected tab into view if there's a selection", async () => {
@@ -145,7 +145,7 @@ describe("Tabs", () => {
       items: itemsWithTextAndIcon,
     });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should be able to render tabs with icons only", async () => {
@@ -154,7 +154,7 @@ describe("Tabs", () => {
       items: itemsWithIcon,
     });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should use the id as label if the tab hasn't one and is without icon", async () => {
@@ -163,7 +163,7 @@ describe("Tabs", () => {
       items: itemsWithIdOnly,
     });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should observe the tab list resize on mounting and stop observing when unmounting", async () => {
@@ -190,7 +190,7 @@ describe("Tabs", () => {
       id: "some-id",
     });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should fire a change event when a tab is selected and it's not the current selection", async () => {
