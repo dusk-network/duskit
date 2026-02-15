@@ -52,5 +52,5 @@ export declare interface SlotContentProps<
 export declare class SlotContent<
   C extends SvelteComponentConstructor = SvelteComponentConstructor,
 > extends SvelteComponent<SlotContentProps<C>, {}, { default: {} }> {
-  getRootElement: SvelteComponent<C, SlotContentProps<C>["componentOptions"]>;
+  getRootElement: () => InstanceType<C>;
 }
