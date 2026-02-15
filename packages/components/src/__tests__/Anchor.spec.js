@@ -42,12 +42,11 @@ describe("Anchor", () => {
 
   it("should forward the `on:click` handler", async () => {
     const handleClick = vi.fn((evt) => evt.preventDefault());
-    const { component } = renderWithSimpleContent(Anchor, baseOptions);
-
-    const anchorComponent = component.getRootElement();
-    const element = anchorComponent.getRootElement();
-
-    anchorComponent.$on("click", handleClick);
+    const { component } = render(Anchor, {
+      ...baseOptions,
+      events: { click: handleClick },
+    });
+    const element = component.getRootElement();
 
     await fireEvent.click(element);
 

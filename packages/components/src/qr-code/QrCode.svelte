@@ -84,9 +84,9 @@
     <img
       alt={altText ?? defaultAltText}
       class="dusk-qr-code__image"
-      height={size}
-      src={result}
-      width={size}
+      height={size ?? defaultSize}
+      src={result || undefined}
+      width={size ?? defaultSize}
     />
   </svelte:fragment>
 </Suspense>

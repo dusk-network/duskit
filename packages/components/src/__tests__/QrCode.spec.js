@@ -152,12 +152,14 @@ describe("QrCode", () => {
     await rerender(mapValues(baseProps, always(undefined)));
     await vi.runAllTimersAsync();
 
+    const updatedImg = element.querySelector(".dusk-qr-code__image");
+
     expect(toDataURLMock).toHaveBeenCalledTimes(3);
     expect(toDataURLMock).toHaveBeenCalledWith("", defaultQROptions);
-    expect(img).toHaveAttribute("alt", "QR Code");
-    expect(img).toHaveAttribute("src", "fake-data-url");
-    expect(img).toHaveAttribute("height", "200");
-    expect(img).toHaveAttribute("width", "200");
+    expect(updatedImg).toHaveAttribute("alt", "QR Code");
+    expect(updatedImg).toHaveAttribute("src", "fake-data-url");
+    expect(updatedImg).toHaveAttribute("height", "200");
+    expect(updatedImg).toHaveAttribute("width", "200");
   });
 
   it("should pass additional class names and attributes to the rendered element", () => {

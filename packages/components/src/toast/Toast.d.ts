@@ -12,8 +12,9 @@ export type ToastItem = {
 
 export function toast(type: StatusType, message: string, icon: string): void;
 
-export interface ToastProps
-  extends OmitSvelteSpecificProps<SvelteHTMLElements["ul"]> {
+export interface ToastProps extends OmitSvelteSpecificProps<
+  SvelteHTMLElements["ul"]
+> {
   className?: string;
   flyDuration?: number;
   timer?: number;

@@ -89,11 +89,12 @@ describe("Checkbox", () => {
 
   it("should forward the `on:change` handler to the underlying element", async () => {
     const handleChange = vi.fn();
-    const { component } = render(Checkbox, baseProps);
+    const { component } = render(Checkbox, {
+      events: { change: handleChange },
+      props: baseProps,
+    });
 
     const element = component.getRootElement();
-
-    component.$on("change", handleChange);
 
     await fireEvent.change(element);
 

@@ -57,11 +57,11 @@ describe("Suspense", () => {
     };
     const { container, rerender } = render(Suspense, { ...baseOptions, props });
 
-    expect(container.firstChild).toHaveClass("dusk-suspense--small-gap");
+    expect(container.firstElementChild).toHaveClass("dusk-suspense--small-gap");
 
     await rerender({ ...props, gap: "large" });
 
-    expect(container.firstChild).toHaveClass("dusk-suspense--large-gap");
+    expect(container.firstElementChild).toHaveClass("dusk-suspense--large-gap");
   });
 
   it("should accept a custom message for the pending state", () => {

@@ -170,10 +170,11 @@ describe("AnchorButton", () => {
 
   it("should forward the `on:click` handler to the underlying element", async () => {
     const handleEvent = vi.fn((evt) => evt.preventDefault());
-    const { component } = render(AnchorButton, baseOptions);
+    const { component } = render(AnchorButton, {
+      ...baseOptions,
+      events: { click: handleEvent },
+    });
     const element = component.getRootElement().getRootElement();
-
-    component.$on("click", handleEvent);
 
     await fireEvent.click(element);
 
@@ -182,7 +183,7 @@ describe("AnchorButton", () => {
 
   describe("Reactivity", () => {
     it("should react to property changes", async () => {
-      const props = Object.freeze({
+      const props = /** @type {const} */ ({
         ...baseProps,
         disabled: false,
         variant: "primary",
@@ -219,10 +220,10 @@ describe("AnchorButton", () => {
 
       expect(element).toHaveTextContent("Updated Text Only");
 
-      const propsIconBefore = {
-        icon: Object.freeze({ path: mdiFolderOutline, position: "before" }),
+      const propsIconBefore = /** @type {const} */ ({
+        icon: { path: mdiFolderOutline, position: "before" },
         text: "Initial Before",
-      };
+      });
 
       await rerender(propsIconBefore);
 
@@ -241,10 +242,10 @@ describe("AnchorButton", () => {
       ).toHaveTextContent("Updated Before");
       expect(element.querySelector("path")).toHaveAttribute("d", mdiAbTesting);
 
-      const propsIconAfter = {
-        icon: Object.freeze({ path: mdiFolderOutline, position: "after" }),
+      const propsIconAfter = /** @type {const} */ ({
+        icon: { path: mdiFolderOutline, position: "after" },
         text: "Initial After",
-      };
+      });
 
       await rerender(propsIconAfter);
 

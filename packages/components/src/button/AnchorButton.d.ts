@@ -5,8 +5,9 @@ import type { IconProp, OmitSvelteSpecificProps } from "../dusk.components";
 import type { Anchor } from "../..";
 import type { ButtonSize, ButtonVariant } from "./Button";
 
-export interface AnchorButtonProps
-  extends OmitSvelteSpecificProps<Omit<HTMLAnchorAttributes, "href">> {
+export interface AnchorButtonProps extends OmitSvelteSpecificProps<
+  Omit<HTMLAnchorAttributes, "href">
+> {
   className?: string;
   href: string;
   disabled?: boolean;

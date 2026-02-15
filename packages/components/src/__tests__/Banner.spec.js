@@ -15,10 +15,11 @@ describe("Banner", () => {
     "success",
     "warning",
   ]);
-  const baseProps = Object.freeze({
+  /** @type {import("svelte").ComponentProps<Banner>} */
+  const baseProps = {
     title: "Some banner title",
     variant: "info",
-  });
+  };
   const baseOptions = {
     props: baseProps,
     target: document.body,

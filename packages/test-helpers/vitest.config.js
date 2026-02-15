@@ -5,7 +5,6 @@ export default defineConfig({
   plugins: [svelte({ hot: !process.env.VITEST })],
   test: {
     coverage: {
-      all: true,
       include: ["src/**"],
       provider: "istanbul",
     },

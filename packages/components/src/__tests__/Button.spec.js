@@ -36,19 +36,18 @@ describe("Button", () => {
 
     expect(element).toHaveClass(`dusk-button--type--${type}`);
 
-    if (type === "toggle") {
-      expect(element).toHaveAttribute("type", "button");
-      expect(element).toHaveAttribute("aria-pressed", "false");
-    } else {
-      expect(element).toHaveAttribute("type", type);
-      expect(element).not.toHaveAttribute("aria-pressed");
-    }
+    expect(element.getAttribute("type")).toBe(
+      type === "toggle" ? "button" : type
+    );
+    expect(element.getAttribute("aria-pressed")).toBe(
+      type === "toggle" ? "false" : null
+    );
 
     expect.assertions(3);
   });
 
   it('should add an "active" class when the active property of a toggle button changes', async () => {
-    const props = Object.freeze({ ...baseProps, type: "toggle" });
+    const props = /** @type {const} */ ({ ...baseProps, type: "toggle" });
     const { component, rerender } = render(Button, { ...baseOptions, props });
     const element = component.getRootElement();
 
@@ -180,13 +179,16 @@ describe("Button", () => {
 
   it("should forward the `on:click`, `on:mousedown` and `on:mouseup` handlers to the underlying element", async () => {
     const handleEvent = vi.fn((evt) => evt.preventDefault());
-    const { component } = render(Button, baseOptions);
+    const { component } = render(Button, {
+      ...baseOptions,
+      events: {
+        click: handleEvent,
+        mousedown: handleEvent,
+        mouseup: handleEvent,
+      },
+    });
 
     const element = component.getRootElement();
-
-    component.$on("click", handleEvent);
-    component.$on("mousedown", handleEvent);
-    component.$on("mouseup", handleEvent);
 
     await fireEvent.click(element);
     await fireEvent.mouseDown(element);
@@ -197,7 +199,7 @@ describe("Button", () => {
 
   describe("Reactivity", () => {
     it("should react to property changes", async () => {
-      const props = Object.freeze({
+      const props = /** @type {const} */ ({
         ...baseProps,
         type: "submit",
         variant: "primary",
@@ -230,10 +232,10 @@ describe("Button", () => {
 
       expect(element).toHaveTextContent("Updated Text Only");
 
-      const propsIconBefore = {
-        icon: Object.freeze({ path: mdiFolderOutline, position: "before" }),
+      const propsIconBefore = /** @type {const} */ ({
+        icon: { path: mdiFolderOutline, position: "before" },
         text: "Initial Before",
-      };
+      });
 
       await rerender(propsIconBefore);
 
@@ -252,10 +254,10 @@ describe("Button", () => {
       );
       expect(element.querySelector("path")).toHaveAttribute("d", mdiAbTesting);
 
-      const propsIconAfter = {
-        icon: Object.freeze({ path: mdiFolderOutline, position: "after" }),
+      const propsIconAfter = /** @type {const} */ ({
+        icon: { path: mdiFolderOutline, position: "after" },
         text: "Initial After",
-      };
+      });
 
       await rerender(propsIconAfter);
 

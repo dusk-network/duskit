@@ -5,6 +5,9 @@ exports[`RelativeTime > should render the relative time of the given date and sh
   class="dusk-relative-time"
   datetime="2024-05-20T15:25:10.000Z"
 >
+  <!---->
   20 seconds ago
+  
+  <!---->
 </time>
 `;

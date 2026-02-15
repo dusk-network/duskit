@@ -153,12 +153,13 @@ describe("ExclusiveChoice", () => {
 
   it("should forward the change event to the radio elements", async () => {
     const changeHandler = vi.fn();
-    const { component, container } = render(ExclusiveChoice, baseOptions);
+    const { container } = render(ExclusiveChoice, {
+      ...baseOptions,
+      events: { change: changeHandler },
+    });
     const target = /** @type {HTMLInputElement} */ (
       container.querySelector("input[value='4']")
     );
-
-    component.$on("change", changeHandler);
 
     await fireEvent.click(target);
 

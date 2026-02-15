@@ -4,9 +4,11 @@ import DuskitStyleDictionary from "../duskitStyleDictionary.js";
 
 const mockRegisterPreprocessor = vi.hoisted(() => vi.fn());
 const mockSDConstructor = vi.hoisted(() =>
-  vi.fn(() => ({
-    registerPreprocessor: mockRegisterPreprocessor,
-  }))
+  vi.fn(function () {
+    return {
+      registerPreprocessor: mockRegisterPreprocessor,
+    };
+  })
 );
 
 vi.mock("style-dictionary", () => ({
