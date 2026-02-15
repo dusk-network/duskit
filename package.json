@@ -15,7 +15,7 @@
   ],
   "description": "Component and utility library for building Dusk user interfaces",
   "engines": {
-    "node": ">=22.11.0",
+    "node": ">=22.15.0",
     "npm": ">=10.9.2"
   },
   "homepage": "https://dusk-network.github.io/duskit/",
