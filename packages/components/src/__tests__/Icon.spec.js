@@ -19,7 +19,7 @@ describe("Icon", () => {
   it("should render the Icon component", () => {
     const { container } = render(Icon, baseOptions);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should accept a custom role for the SVG component", () => {

@@ -20,7 +20,7 @@ describe("Anchor", () => {
   it("should render the Anchor component", () => {
     const { container } = renderWithSimpleContent(Anchor, baseOptions);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should update a specific class when its `onSurface` property changes", async () => {

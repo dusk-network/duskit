@@ -16,11 +16,11 @@ describe("Switch", () => {
   it('should render the "Switch" component with a default tab index of `0`', async () => {
     const { container, rerender } = render(Switch, baseOptions);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
 
     await rerender({ ...baseProps, active: true });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should use the received tab index", () => {
@@ -30,7 +30,7 @@ describe("Switch", () => {
     };
     const { container } = render(Switch, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should render the component in a disabled status with a tabindex of `-1`", async () => {
@@ -41,11 +41,11 @@ describe("Switch", () => {
     };
     const { container, rerender } = render(Switch, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
 
     await rerender({ ...props, active: true });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should pass additional class names and attributes to the root element", () => {
@@ -56,7 +56,7 @@ describe("Switch", () => {
     };
     const { container } = render(Switch, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   /**

@@ -29,7 +29,7 @@ describe("Textbox", () => {
   it('should render a Textbox of type "text" as a default', () => {
     const { container } = render(Textbox, baseOptions);
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should render a Textbox component of the desired type", () => {
@@ -40,7 +40,7 @@ describe("Textbox", () => {
       };
       const { container } = render(Textbox, { ...baseOptions, props });
 
-      expect(container.firstChild).toMatchSnapshot();
+      expect(container.firstElementChild).toMatchSnapshot();
 
       cleanup();
     });
@@ -55,7 +55,7 @@ describe("Textbox", () => {
     };
     const { container } = render(Textbox, { ...baseOptions, props });
 
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstElementChild).toMatchSnapshot();
   });
 
   it("should change value before forwarding the `input` event", async () => {
