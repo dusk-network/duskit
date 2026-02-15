@@ -10,5 +10,6 @@ exports[`Button > should render the Button component using the type "button" as 
   >
     some text
   </span>
+  <!---->
 </button>
 `;

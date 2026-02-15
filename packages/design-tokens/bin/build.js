@@ -16,15 +16,16 @@ const buildDesignTokens = async (buildOptions) => {
     buildSize(buildOptions),
     buildTypography(buildOptions),
     buildMotion(buildOptions),
-  ]).catch((e) => {
+  ]).catch(async (e) => {
     // eslint-disable-next-line no-console
     console.error(e);
-    rimraf("dist");
+    await rimraf("dist");
+    throw e;
   });
 };
 
 // Implicit clean
-rimraf("dist");
+await rimraf("dist");
 
 // Run
 await buildDesignTokens({

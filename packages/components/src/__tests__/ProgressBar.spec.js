@@ -9,16 +9,7 @@ import { ProgressBar } from "../..";
 const getBarElement = (container) =>
   getAsHTMLElement(container, ".dusk-progress-bar__filler");
 
-/**
- * `$capture_state` is a bit weird as it returns `void`,
- * so we rely on this little helper.
- *
- * @type {(component: import("svelte").SvelteComponent) => number}
- */
-const getMotionDuration = (component) =>
-  /** @type {{ motionDuration: number }} */ (
-    /** @type {unknown} */ (component.$capture_state())
-  ).motionDuration;
+const DEFAULT_MOTION_DURATION = 400;
 
 /** @type {(element: HTMLElement) => number} */
 function getRoundedBarPercentage(element) {
@@ -44,7 +35,7 @@ describe("ProgressBar", () => {
   it("should render the `ProgressBar` component with no current percentage set", async () => {
     const { component } = render(ProgressBar);
 
-    await vi.advanceTimersByTimeAsync(getMotionDuration(component));
+    await vi.advanceTimersByTimeAsync(DEFAULT_MOTION_DURATION);
 
     const element = component.getRootElement();
     const barElement = getBarElement(element);
@@ -57,7 +48,7 @@ describe("ProgressBar", () => {
   it("should render the `ProgressBar` component with a set percentage", async () => {
     const { component } = render(ProgressBar, { currentPercentage: 33 });
 
-    await vi.advanceTimersByTimeAsync(getMotionDuration(component));
+    await vi.advanceTimersByTimeAsync(DEFAULT_MOTION_DURATION);
 
     const barElement = getBarElement(component.getRootElement());
 
@@ -86,22 +77,20 @@ describe("ProgressBar", () => {
     });
     const barElement = getBarElement(component.getRootElement());
 
-    await vi.advanceTimersByTimeAsync(getMotionDuration(component));
+    await vi.advanceTimersByTimeAsync(DEFAULT_MOTION_DURATION);
 
     expect(getRoundedBarPercentage(barElement)).toBe(0);
 
     await rerender({ currentPercentage: 50 });
-    await vi.advanceTimersByTimeAsync(getMotionDuration(component));
+    await vi.advanceTimersByTimeAsync(DEFAULT_MOTION_DURATION);
 
     expect(getRoundedBarPercentage(barElement)).toBe(50);
   });
 
   it("should allow for a custom motion duration", async () => {
-    const { component: defaultComponent } = render(ProgressBar);
-    const defaultMotionDuration = getMotionDuration(defaultComponent);
     const props = {
       currentPercentage: 25,
-      motionDuration: defaultMotionDuration / 2,
+      motionDuration: DEFAULT_MOTION_DURATION / 2,
     };
     const { component, rerender } = render(ProgressBar, props);
     const barElement = getBarElement(component.getRootElement());

@@ -9,8 +9,9 @@ type TabItem = {
   label?: string;
 };
 
-export interface TabsProps
-  extends OmitSvelteSpecificProps<SvelteHTMLElements["div"]> {
+export interface TabsProps extends OmitSvelteSpecificProps<
+  SvelteHTMLElements["div"]
+> {
   className?: string;
   items: TabItem[];
   selectedTab?: string;

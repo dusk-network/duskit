@@ -74,9 +74,12 @@ describe("Tabs", () => {
     target: document.body,
   };
 
-  /** @param {import("svelte").ComponentProps<Tabs>} props */
-  const renderTabs = async (props) => {
-    const renderResult = render(Tabs, { ...baseOptions, props });
+  /**
+   * @param {import("svelte").ComponentProps<Tabs>} props
+   * @param {Record<string, any>} [options]
+   */
+  const renderTabs = async (props, options = {}) => {
+    const renderResult = render(Tabs, { ...baseOptions, ...options, props });
 
     /**
      * `@juggle/resize-observer` uses some scheduling, so we
@@ -191,16 +194,21 @@ describe("Tabs", () => {
   });
 
   it("should fire a change event when a tab is selected and it's not the current selection", async () => {
-    const { component, getAllByRole } = await renderTabs(baseProps);
+    let expectedTabId = "";
+    /** @param {CustomEvent<string>} event */
+    const onChange = (event) => {
+      expect(event.detail).toBe(expectedTabId);
+    };
+
+    const { getAllByRole } = await renderTabs(baseProps, {
+      events: { change: onChange },
+    });
     const tabs = getAllByRole("tab");
 
     let expectedTab = tabs[0];
+    expectedTabId = expectedTab.dataset.tabid ?? "";
 
     expect.assertions(3);
-
-    component.$on("change", (event) => {
-      expect(event.detail).toBe(expectedTab.dataset.tabid);
-    });
 
     // does nothing as it's currently selected
     await fireEvent.click(tabs[1]);
@@ -208,10 +216,12 @@ describe("Tabs", () => {
     await fireEvent.click(expectedTab);
 
     expectedTab = tabs[1];
+    expectedTabId = expectedTab.dataset.tabid ?? "";
 
     await fireEvent.keyDown(expectedTab, { key: "Enter" });
 
     expectedTab = tabs[2];
+    expectedTabId = expectedTab.dataset.tabid ?? "";
 
     await fireEvent.keyDown(expectedTab, { key: " " });
 
@@ -243,9 +253,9 @@ describe("Tabs", () => {
       ".dusk-tab-scroll-button:last-of-type"
     );
 
-    expect(leftBtn.getAttribute("hidden")).toBe("true");
+    expect(leftBtn.hidden).toBe(true);
     expect(leftBtn.getAttribute("disabled")).toBe("");
-    expect(rightBtn.getAttribute("hidden")).toBe("true");
+    expect(rightBtn.hidden).toBe(true);
     expect(rightBtn.getAttribute("disabled")).toBe("");
   });
 
@@ -262,9 +272,9 @@ describe("Tabs", () => {
       ".dusk-tab-scroll-button:last-of-type"
     );
 
-    expect(leftBtn.getAttribute("hidden")).toBe("false");
+    expect(leftBtn.hidden).toBe(false);
     expect(leftBtn.getAttribute("disabled")).toBe("");
-    expect(rightBtn.getAttribute("hidden")).toBe("false");
+    expect(rightBtn.hidden).toBe(false);
     expect(rightBtn.getAttribute("disabled")).toBeNull();
 
     await fireEvent.mouseDown(rightBtn, { buttons: 1 });
@@ -293,9 +303,9 @@ describe("Tabs", () => {
       ".dusk-tab-scroll-button:last-of-type"
     );
 
-    expect(leftBtn.getAttribute("hidden")).toBe("false");
+    expect(leftBtn.hidden).toBe(false);
     expect(leftBtn.getAttribute("disabled")).toBeNull();
-    expect(rightBtn.getAttribute("hidden")).toBe("false");
+    expect(rightBtn.hidden).toBe(false);
     expect(rightBtn.getAttribute("disabled")).toBe("");
 
     scrollBySpy.mockClear();
@@ -318,7 +328,7 @@ describe("Tabs", () => {
       ".dusk-tab-scroll-button:last-of-type"
     );
 
-    expect(rightBtn.getAttribute("hidden")).toBe("false");
+    expect(rightBtn.hidden).toBe(false);
     expect(rightBtn.getAttribute("disabled")).toBeNull();
 
     await fireEvent.mouseDown(rightBtn, { buttons: 1 });

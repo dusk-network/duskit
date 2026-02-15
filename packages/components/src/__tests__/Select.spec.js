@@ -58,13 +58,15 @@ describe("Select", () => {
       "data-testid": "my-select",
       value: "two",
     };
-    const { component } = render(Select, { ...baseOptions, props });
+    render(Select, {
+      ...baseOptions,
+      events: { change: changeHandler },
+      props,
+    });
 
     /** @type {HTMLSelectElement} */
     const select = screen.getByTestId("my-select");
     const target = select.querySelector("option[value='four']");
-
-    component.$on("change", changeHandler);
 
     await fireEvent.change(select, { target });
 

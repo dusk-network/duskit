@@ -10,6 +10,7 @@ import {
 import { computePosition, offset as setOffset } from "@floating-ui/dom";
 import { cleanup, fireEvent, render } from "@testing-library/svelte";
 import { tick } from "svelte";
+import { IntersectionObserverMock } from "@duskit/test-helpers";
 
 import { Tooltip } from "../..";
 
@@ -28,8 +29,6 @@ function createEventTarget(dataset) {
 }
 
 describe("Tooltip", () => {
-  const ioSpy = vi.spyOn(global, "IntersectionObserver").mockReturnThis();
-
   /** @type {import("svelte").ComponentProps<Tooltip>} */
   const baseProps = {
     defaultDelayHide: 300,
@@ -64,7 +63,7 @@ describe("Tooltip", () => {
     cleanup();
     vi.mocked(computePosition).mockClear();
     vi.mocked(setOffset).mockClear();
-    ioSpy.mockClear();
+    IntersectionObserverMock.instances.length = 0;
     clearTimeoutSpy.mockClear();
     disconnectSpy.mockClear();
     observeSpy.mockClear();
@@ -73,7 +72,6 @@ describe("Tooltip", () => {
 
   afterAll(() => {
     vi.doUnmock("@floating-ui/dom");
-    ioSpy.mockRestore();
     clearTimeoutSpy.mockRestore();
     disconnectSpy.mockRestore();
     observeSpy.mockRestore();
@@ -133,31 +131,31 @@ describe("Tooltip", () => {
       1,
       "focusin",
       expect.any(Function),
-      true
+      expect.objectContaining({ capture: true })
     );
     expect(addListenerSpy).toHaveBeenNthCalledWith(
       2,
       "focusout",
       expect.any(Function),
-      true
+      expect.objectContaining({ capture: true })
     );
     expect(addListenerSpy).toHaveBeenNthCalledWith(
       3,
       "keydown",
       expect.any(Function),
-      true
+      expect.objectContaining({ capture: true })
     );
     expect(addListenerSpy).toHaveBeenNthCalledWith(
       4,
       "mouseenter",
       expect.any(Function),
-      true
+      expect.objectContaining({ capture: true })
     );
     expect(addListenerSpy).toHaveBeenNthCalledWith(
       5,
       "mouseleave",
       expect.any(Function),
-      true
+      expect.objectContaining({ capture: true })
     );
 
     unmount();
@@ -168,31 +166,31 @@ describe("Tooltip", () => {
       1,
       "focusin",
       handlers[0],
-      true
+      expect.objectContaining({ capture: true })
     );
     expect(removeListenerSpy).toHaveBeenNthCalledWith(
       2,
       "focusout",
       handlers[1],
-      true
+      expect.objectContaining({ capture: true })
     );
     expect(removeListenerSpy).toHaveBeenNthCalledWith(
       3,
       "keydown",
       handlers[2],
-      true
+      expect.objectContaining({ capture: true })
     );
     expect(removeListenerSpy).toHaveBeenNthCalledWith(
       4,
       "mouseenter",
       handlers[3],
-      true
+      expect.objectContaining({ capture: true })
     );
     expect(removeListenerSpy).toHaveBeenNthCalledWith(
       5,
       "mouseleave",
       handlers[4],
-      true
+      expect.objectContaining({ capture: true })
     );
 
     addListenerSpy.mockRestore();
@@ -582,7 +580,7 @@ describe("Tooltip", () => {
       it("should hide the tooltip if the target element is detached from the DOM and disconnect the observer", async () => {
         const { getByRole } = render(Tooltip, baseOptions);
         const tooltip = getByRole("tooltip", { hidden: true });
-        const [callback] = ioSpy.mock.calls[0];
+        const { callback } = IntersectionObserverMock.instances[0];
 
         await fireEvent.focusIn(target);
         await vi.advanceTimersToNextTimerAsync();
@@ -611,7 +609,7 @@ describe("Tooltip", () => {
         );
         const { getByRole } = render(Tooltip, baseOptions);
         const tooltip = getByRole("tooltip", { hidden: true });
-        const [callback] = ioSpy.mock.calls[0];
+        const { callback } = IntersectionObserverMock.instances[0];
 
         await fireEvent.focusIn(target);
         await vi.advanceTimersToNextTimerAsync();
@@ -635,7 +633,7 @@ describe("Tooltip", () => {
       it("should hide the tooltip if the intersection ratio of the target element is less or equal to zero", async () => {
         const { getByRole } = render(Tooltip, baseOptions);
         const tooltip = getByRole("tooltip", { hidden: true });
-        const [callback] = ioSpy.mock.calls[0];
+        const { callback } = IntersectionObserverMock.instances[0];
 
         await fireEvent.focusIn(target);
         await vi.advanceTimersToNextTimerAsync();
@@ -660,7 +658,7 @@ describe("Tooltip", () => {
       it("shouldn't hide the tooltip if the intersection ration of the target is greater than zero", async () => {
         const { getByRole } = render(Tooltip, baseOptions);
         const tooltip = getByRole("tooltip", { hidden: true });
-        const [callback] = ioSpy.mock.calls[0];
+        const { callback } = IntersectionObserverMock.instances[0];
 
         await fireEvent.focusIn(target);
         await vi.advanceTimersToNextTimerAsync();

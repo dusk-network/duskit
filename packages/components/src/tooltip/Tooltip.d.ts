@@ -4,8 +4,9 @@ import type { Side } from "@floating-ui/dom";
 
 import type { OmitSvelteSpecificProps, StatusType } from "../dusk.components";
 
-export interface TooltipProps
-  extends OmitSvelteSpecificProps<Omit<SvelteHTMLElements["div"], "id">> {
+export interface TooltipProps extends OmitSvelteSpecificProps<
+  Omit<SvelteHTMLElements["div"], "id">
+> {
   className?: string;
   defaultDelayHide?: number;
   defaultDelayShow?: number;

@@ -70,13 +70,15 @@ describe("Textbox", () => {
 
     const changeHandler = vi.fn();
 
-    const { component, getByRole } = render(Textbox, { ...baseOptions, props });
+    const { getByRole } = render(Textbox, {
+      ...baseOptions,
+      events: { input: changeHandler },
+      props,
+    });
 
     const input = getByRole("textbox");
 
     expect(input).toHaveValue(initialValue);
-
-    component.$on("input", changeHandler);
 
     await fireEvent.input(input, { target: { value: newValue } });
 

@@ -9,8 +9,9 @@ export type ButtonType = "button" | "reset" | "submit" | "toggle";
 
 export type ButtonVariant = "primary" | "secondary" | "tertiary";
 
-export interface ButtonProps
-  extends OmitSvelteSpecificProps<Omit<HTMLButtonAttributes, "type">> {
+export interface ButtonProps extends OmitSvelteSpecificProps<
+  Omit<HTMLButtonAttributes, "type">
+> {
   active?: boolean;
   className?: string;
   icon?: IconProp;

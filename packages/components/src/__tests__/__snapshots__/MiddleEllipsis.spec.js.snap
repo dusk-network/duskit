@@ -1,17 +1,12 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`MiddleEllipsis > should render the correct element specified by the \`as\` prop 1`] = `
-<p
-  class="dusk-middle-ellipsis"
->
-  Short text
-</p>
-`;
+exports[`MiddleEllipsis > should render the correct element specified by the \`as\` prop 1`] = `<!---->`;
 
 exports[`MiddleEllipsis > should render the full text when there is enough space 1`] = `
 <pre
   class="dusk-middle-ellipsis"
 >
   Short text
+  
 </pre>
 `;

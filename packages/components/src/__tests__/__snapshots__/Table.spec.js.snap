@@ -7,7 +7,7 @@ exports[`Table > should react to prop changes 1`] = `
   <caption>
     List of users
   </caption>
-   
+  <!---->
   <thead
     class="duskit-table__head"
   >
@@ -25,7 +25,7 @@ exports[`Table > should react to prop changes 1`] = `
         >
           New name label
         </span>
-         
+        <!---->
       </th>
       <th
         aria-sort="none"
@@ -38,22 +38,24 @@ exports[`Table > should react to prop changes 1`] = `
         >
           Custom
         </span>
-         
+        <!---->
       </th>
+      
     </tr>
   </thead>
-   
   <tbody
     class="duskit-table__body"
   >
     <tr
       class="duskit-table__row"
     >
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="name"
       >
+        <!---->
+        <!---->
         <div
           class="table-cell__simple"
         >
@@ -61,26 +63,30 @@ exports[`Table > should react to prop changes 1`] = `
         </div>
         
         
+        <!---->
       </td>
       
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="custom"
       >
         N/A
+        <!---->
       </td>
       
-       
+      
     </tr>
     <tr
       class="duskit-table__row"
     >
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="name"
       >
+        <!---->
+        <!---->
         <div
           class="table-cell__simple"
         >
@@ -88,26 +94,30 @@ exports[`Table > should react to prop changes 1`] = `
         </div>
         
         
+        <!---->
       </td>
       
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="custom"
       >
         N/A
+        <!---->
       </td>
       
-       
+      
     </tr>
     <tr
       class="duskit-table__row"
     >
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="name"
       >
+        <!---->
+        <!---->
         <div
           class="table-cell__simple"
         >
@@ -115,18 +125,21 @@ exports[`Table > should react to prop changes 1`] = `
         </div>
         
         
+        <!---->
       </td>
       
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="custom"
       >
         N/A
+        <!---->
       </td>
       
-       
+      
     </tr>
+    
   </tbody>
 </table>
 `;
@@ -135,7 +148,7 @@ exports[`Table > should render the Table component using the provided descriptor
 <table
   class="duskit-table"
 >
-   
+  <!---->
   <thead
     class="duskit-table__head"
   >
@@ -152,12 +165,15 @@ exports[`Table > should render the Table component using the provided descriptor
           class="dusk-button dusk-button--type--button dusk-button--variant--primary dusk-button--size--default dusk-icon-button--labeled duskit-table__sort-button"
           type="button"
         >
+          <!---->
           <span
             class="dusk-button__text"
           >
             Full Name
           </span>
+          <!---->
            
+          <!---->
           <svg
             class="dusk-icon dusk-icon--size--small dusk-button__icon"
             role="graphics-symbol"
@@ -168,8 +184,10 @@ exports[`Table > should render the Table component using the provided descriptor
             />
           </svg>
           
+          <!---->
+          <!---->
         </button>
-         
+        <!---->
       </th>
       <th
         aria-sort="none"
@@ -182,7 +200,7 @@ exports[`Table > should render the Table component using the provided descriptor
         >
           Email Address
         </span>
-         
+        <!---->
       </th>
       <th
         aria-sort="none"
@@ -194,12 +212,15 @@ exports[`Table > should render the Table component using the provided descriptor
           class="dusk-button dusk-button--type--button dusk-button--variant--primary dusk-button--size--default dusk-icon-button--labeled duskit-table__sort-button"
           type="button"
         >
+          <!---->
           <span
             class="dusk-button__text"
           >
             Post Count
           </span>
+          <!---->
            
+          <!---->
           <svg
             class="dusk-icon dusk-icon--size--small dusk-button__icon"
             role="graphics-symbol"
@@ -210,8 +231,10 @@ exports[`Table > should render the Table component using the provided descriptor
             />
           </svg>
           
+          <!---->
+          <!---->
         </button>
-         
+        <!---->
       </th>
       <th
         aria-sort="none"
@@ -224,143 +247,162 @@ exports[`Table > should render the Table component using the provided descriptor
         >
           Actions
         </span>
-         
+        <!---->
       </th>
+      
     </tr>
   </thead>
-   
   <tbody
     class="duskit-table__body"
   >
     <tr
       class="duskit-table__row"
     >
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="name"
       >
         Jane Doe
+        <!---->
       </td>
       
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="email"
       >
         jane.doe@example.com
+        <!---->
       </td>
       
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="posts"
       >
+        <!---->
         Total: 15 (2)
         
+        <!---->
       </td>
       
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="actions"
       >
+        <!---->
         <div
           class="table-cell__simple"
         >
           Edit Jane Doe
         </div>
         
+        <!---->
       </td>
       
-       
+      
     </tr>
     <tr
       class="duskit-table__row"
     >
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="name"
       >
         John Doe
+        <!---->
       </td>
       
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="email"
       >
         john.doe@example.com
+        <!---->
       </td>
       
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="posts"
       >
+        <!---->
         Total: 5 (1)
         
+        <!---->
       </td>
       
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="actions"
       >
+        <!---->
         <div
           class="table-cell__simple"
         >
           Edit John Doe
         </div>
         
+        <!---->
       </td>
       
-       
+      
     </tr>
     <tr
       class="duskit-table__row"
     >
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="name"
       >
         Mario Rossi
+        <!---->
       </td>
       
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="email"
       >
         mario.rossi@example.com
+        <!---->
       </td>
       
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="posts"
       >
+        <!---->
         Total: 25 (3)
         
+        <!---->
       </td>
       
-      
+      <!---->
       <td
         class="duskit-table__cell"
         data-column="actions"
       >
+        <!---->
         <div
           class="table-cell__simple"
         >
           Edit Mario Rossi
         </div>
         
+        <!---->
       </td>
       
-       
+      
     </tr>
+    
   </tbody>
 </table>
 `;

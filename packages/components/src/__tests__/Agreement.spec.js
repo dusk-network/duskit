@@ -100,11 +100,12 @@ describe("Agreement", () => {
 
   it("should forward the `on:change` handler to the underlying element", async () => {
     const handleChange = vi.fn();
-    const { component } = render(Agreement, baseOptions);
+    const { component } = render(Agreement, {
+      ...baseOptions,
+      events: { change: handleChange },
+    });
     const element = component.getRootElement();
     const checkbox = getAsHTMLElement(element, ".dusk-agreement__checkbox");
-
-    component.$on("change", handleChange);
 
     await fireEvent.change(checkbox);
 

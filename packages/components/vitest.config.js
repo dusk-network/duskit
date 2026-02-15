@@ -3,14 +3,13 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   plugins: [svelte({ hot: !process.env.VITEST })],
+  resolve: {
+    // Vitest runs in Node, but these are DOM tests (jsdom). Prefer browser export
+    // conditions so Svelte resolves to the client runtime (where `mount()` exists).
+    conditions: ["browser"],
+  },
   test: {
-    /**
-     * @see https://github.com/vitest-dev/vitest/issues/2834
-     * @see https://github.com/testing-library/svelte-testing-library/issues/222#issuecomment-1588987135
-     */
-    alias: [{ find: /^svelte$/, replacement: "svelte/internal" }],
     coverage: {
-      all: true,
       include: ["src/**"],
       provider: "istanbul",
     },

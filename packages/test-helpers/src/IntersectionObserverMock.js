@@ -1,5 +1,13 @@
 /** @type {import("..").IntersectionObserverMock} */
 export default class IntersectionObserverMock {
+  static instances = [];
+
+  /** @param {IntersectionObserverCallback} callback */
+  constructor(callback) {
+    this.callback = callback;
+    IntersectionObserverMock.instances.push(this);
+  }
+
   get root() {
     return document;
   }
@@ -11,6 +19,9 @@ export default class IntersectionObserverMock {
   get thresholds() {
     return [0];
   }
+
+  /** @type {IntersectionObserverCallback} */
+  callback;
 
   disconnect() {}
 

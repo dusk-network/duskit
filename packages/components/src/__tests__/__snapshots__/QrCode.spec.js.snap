@@ -4,6 +4,9 @@ exports[`QrCode > should render the \`QrCode\` component and update it when any 
 <div
   class="dusk-suspense dusk-suspense--default-gap dusk-qr-code"
 >
+  <!---->
+  <!---->
+  <!---->
   <svg
     class="dusk-throbber dusk-suspense__throbber"
     height="64px"
@@ -25,12 +28,16 @@ exports[`QrCode > should render the \`QrCode\` component and update it when any 
       />
     </g>
   </svg>
+  <!---->
    
   <span
     class="dusk-suspense__pending-message"
   >
     
   </span>
+  
+  
+  
 </div>
 `;
 
@@ -38,6 +45,8 @@ exports[`QrCode > should render the \`QrCode\` component and update it when any 
 <div
   class="dusk-suspense dusk-suspense--default-gap dusk-qr-code"
 >
+  <!---->
+  <!---->
   <img
     alt="some alt text"
     class="dusk-qr-code__image"
@@ -45,5 +54,8 @@ exports[`QrCode > should render the \`QrCode\` component and update it when any 
     src="fake-data-url"
     width="500"
   />
+  
+  
+  
 </div>
 `;

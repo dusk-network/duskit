@@ -14,7 +14,11 @@ export declare function getAsHTMLElement(
   selector: string
 ): HTMLElement;
 
-export declare class IntersectionObserverMock extends IntersectionObserver {}
+export declare class IntersectionObserverMock extends IntersectionObserver {
+  static instances: IntersectionObserverMock[];
+  callback: IntersectionObserverCallback;
+  constructor(callback: IntersectionObserverCallback);
+}
 
 export declare function mockReadableStore<T>(initialValue: T): Readable<T> & {
   getMockedStoreValue(): T;
