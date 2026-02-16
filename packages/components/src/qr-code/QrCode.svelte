@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("./QrCode").QrCodeProps} QrCodeProps */
 
@@ -16,26 +14,29 @@
   const defaultQrColor = "#101";
   const defaultSize = 200;
 
-  /** @type {QrCodeProps["altText"]} */
-  export let altText = defaultAltText;
+  /**
+   * @typedef {Object} Props
+   * @property {QrCodeProps["altText"]} [altText]
+   * @property {QrCodeProps["bgColor"]} [bgColor]
+   * @property {QrCodeProps["className"]} [className]
+   * @property {QrCodeProps["qrColor"]} [qrColor]
+   * @property {QrCodeProps["size"]} [size]
+   * @property {QrCodeProps["value"]} [value]
+   */
 
-  /** @type {QrCodeProps["bgColor"]} */
-  export let bgColor = defaultBgColor;
-
-  /** @type {QrCodeProps["className"]} */
-  export let className = undefined;
-
-  /** @type {QrCodeProps["qrColor"]} */
-  export let qrColor = defaultQrColor;
-
-  /** @type {QrCodeProps["size"]} */
-  export let size = defaultSize;
-
-  /** @type {QrCodeProps["value"]} */
-  export let value = "";
+  /** @type {Props & { [key: string]: any }} */
+  const {
+    altText = defaultAltText,
+    bgColor = defaultBgColor,
+    className = undefined,
+    qrColor = defaultQrColor,
+    size = defaultSize,
+    value = "",
+    ...rest
+  } = $props();
 
   /** @type {Suspense<string, "div">} */
-  let rootElement;
+  let rootElement = /** @type {Suspense<string, "div">} */ ($state());
 
   export const getRootElement = () => rootElement;
 
@@ -69,25 +70,26 @@
         return Promise.reject(error);
       });
 
-  $: classes = makeClassName(["dusk-qr-code", className]);
-  $: qrOptions = {
+  const classes = $derived(makeClassName(["dusk-qr-code", className]));
+  const qrOptions = $derived({
     bgColor: bgColor ?? defaultBgColor,
     qrColor: qrColor ?? defaultQrColor,
     size: size ?? defaultSize,
-  };
-  $: qrText = value ?? "";
-  $: dataUrl = getDataUrl(qrText, qrOptions);
+  });
+  const qrText = $derived(value ?? "");
+  const dataUrl = $derived(getDataUrl(qrText, qrOptions));
 </script>
 
 <Suspense
   bind:this={rootElement}
-  {...$$restProps}
+  {...rest}
   as="div"
   className={classes}
   errorMessage="Unable to generate QR code"
   errorVariant="banner"
   waitFor={dataUrl}
 >
+  <!-- @migration-task: migrate this slot by hand, `success-content` is an invalid identifier -->
   <svelte:fragment slot="success-content" let:result>
     <img
       alt={altText ?? defaultAltText}

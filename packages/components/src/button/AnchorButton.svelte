@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("./AnchorButton").AnchorButtonProps} AnchorButtonProps */
 
@@ -9,50 +7,58 @@
 
   import "./Button.css";
 
-  /** @type {AnchorButtonProps["className"]} */
-  export let className = undefined;
+  /**
+   * @typedef {Object} Props
+   * @property {AnchorButtonProps["className"]} [className]
+   * @property {AnchorButtonProps["disabled"]} [disabled]
+   * @property {AnchorButtonProps["href"]} href
+   * @property {AnchorButtonProps["icon"]} [icon]
+   * @property {AnchorButtonProps["size"]} [size]
+   * @property {AnchorButtonProps["text"]} [text]
+   * @property {AnchorButtonProps["variant"]} [variant]
+   */
 
-  /** @type {AnchorButtonProps["disabled"]} */
-  export let disabled = false;
-
-  /** @type {AnchorButtonProps["href"]} */
-  export let href;
-
-  /** @type {AnchorButtonProps["icon"]} */
-  export let icon = undefined;
-
-  /** @type {AnchorButtonProps["size"]} */
-  export let size = "default";
-
-  /** @type {AnchorButtonProps["text"]} */
-  export let text = undefined;
-
-  /** @type {AnchorButtonProps["variant"]} */
-  export let variant = "primary";
+  /** @type {Props & { [key: string]: any }} */
+  const {
+    className = undefined,
+    disabled = false,
+    href,
+    icon = undefined,
+    size = "default",
+    text = undefined,
+    variant = "primary",
+    ...rest
+  } = $props();
 
   /** @type {Anchor} */
-  let rootElement;
+  let rootElement = /** @type {Anchor} */ ($state());
 
   export const getRootElement = () => rootElement;
 
-  $: classes = makeClassName([
-    "dusk-anchor-button",
-    `dusk-anchor-button--variant--${variant}`,
-    `dusk-anchor-button--size--${size}`,
-    disabled ? "dusk-anchor-button--disabled" : "",
-    icon && text ? "dusk-icon-button--labeled" : icon ? "dusk-icon-button" : "",
-    className,
-  ]);
+  const classes = $derived(
+    makeClassName([
+      "dusk-anchor-button",
+      `dusk-anchor-button--variant--${variant}`,
+      `dusk-anchor-button--size--${size}`,
+      disabled ? "dusk-anchor-button--disabled" : "",
+      icon && text
+        ? "dusk-icon-button--labeled"
+        : icon
+          ? "dusk-icon-button"
+          : "",
+      className,
+    ])
+  );
 </script>
 
 <Anchor
   bind:this={rootElement}
-  {...$$restProps}
+  {...rest}
   aria-disabled={disabled}
   className={classes}
   {href}
   on:click
-  tabindex={disabled ? "-1" : ($$restProps.tabindex ?? undefined)}
+  tabindex={disabled ? "-1" : (rest.tabindex ?? undefined)}
 >
   {#if icon?.position === "after"}
     {#if text}

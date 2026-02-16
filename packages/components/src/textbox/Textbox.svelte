@@ -1,6 +1,7 @@
-<svelte:options immutable={true} />
-
 <script>
+  import { createBubbler, handlers } from "svelte/legacy";
+
+  const bubble = createBubbler();
   /** @typedef {import("./Textbox").TextboxProps} TextboxProps */
   /** @typedef {import("./Textbox").TextboxType} TextboxType */
 
@@ -8,17 +9,27 @@
 
   import "./Textbox.css";
 
-  /** @type {TextboxProps["className"]} */
-  export let className = undefined;
+  /**
+   * @typedef {Object} Props
+   * @property {TextboxProps["className"]} [className]
+   * @property {TextboxType} [type]
+   * @property {string | number} [value]
+   */
 
-  /** @type {TextboxType} */
-  export let type = "text";
-
-  /** @type {string | number} */
-  export let value = type === "number" ? 0 : "";
+  /** @type {Props & { [key: string]: any }} */
+  /* eslint-disable prefer-const */
+  let {
+    className = undefined,
+    type = "text",
+    value = $bindable(type === "number" ? 0 : ""),
+    ...rest
+  } = $props();
+  /* eslint-enable prefer-const */
 
   /** @type {HTMLTextAreaElement | HTMLInputElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLTextAreaElement | HTMLInputElement} */ (
+    $state()
+  );
 
   export const getRootElement = () => rootElement;
 
@@ -33,45 +44,42 @@
   /**
    * Needed, as the value cannot be bound to the input element
    * when the type is set dynamically
-   * @param {Event & {currentTarget: EventTarget & HTMLInputElement}} event
+   * @param {Event} event
    */
   function handleInput(event) {
-    const target = event.currentTarget;
+    const target = /** @type {HTMLInputElement} */ (event.currentTarget);
 
     value = target.type === "number" ? target.valueAsNumber : target.value;
   }
 
-  $: classes = makeClassName([
-    "dusk-textbox",
-    `dusk-textbox-${type}`,
-    className,
-  ]);
+  const classes = $derived(
+    makeClassName(["dusk-textbox", `dusk-textbox-${type}`, className])
+  );
 </script>
 
 {#if type === "multiline"}
   <textarea
-    {...$$restProps}
+    {...rest}
     class={classes}
     bind:this={rootElement}
     bind:value
-    on:blur
-    on:focus
-    on:input
-    on:keydown
-    on:paste
+    onblur={bubble("blur")}
+    onfocus={bubble("focus")}
+    oninput={bubble("input")}
+    onkeydown={bubble("keydown")}
+    onpaste={bubble("paste")}
   ></textarea>
 {:else}
   <input
-    {...$$restProps}
+    {...rest}
     class={classes}
     {type}
     {value}
     bind:this={rootElement}
-    on:blur
-    on:focus
-    on:input={handleInput}
-    on:input
-    on:keydown
-    on:paste
+    onblur={bubble("blur")}
+    onfocus={bubble("focus")}
+    oninput={handlers(handleInput, bubble("input"))}
+    onkeydown={bubble("keydown")}
+    onpaste={bubble("paste")}
   />
 {/if}

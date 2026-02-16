@@ -1,6 +1,7 @@
-<svelte:options immutable={true} />
-
 <script>
+  import { createBubbler } from "svelte/legacy";
+
+  const bubble = createBubbler();
   /** @typedef {import("./Select").SelectProps} SelectProps */
 
   import { ownPairs } from "lamb";
@@ -10,29 +11,37 @@
   import Options from "./Options.svelte";
   import "./Select.css";
 
-  /** @type {SelectProps["className"]} */
-  export let className = undefined;
+  /**
+   * @typedef {Object} Props
+   * @property {SelectProps["className"]} [className]
+   * @property {SelectProps["options"]} options
+   * @property {SelectProps["value"]} [value]
+   */
 
-  /** @type {SelectProps["options"]} */
-  export let options;
-
-  /** @type {SelectProps["value"]} */
-  export let value = undefined;
+  /** @type {Props & { [key: string]: any }} */
+  /* eslint-disable prefer-const */
+  let {
+    className = undefined,
+    options,
+    value = $bindable(undefined),
+    ...rest
+  } = $props();
+  /* eslint-enable prefer-const */
 
   /** @type {HTMLSelectElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLSelectElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
-  $: classes = makeClassName(["dusk-select", className]);
+  const classes = $derived(makeClassName(["dusk-select", className]));
 </script>
 
 <select
   bind:this={rootElement}
-  {...$$restProps}
+  {...rest}
   bind:value
   class={classes}
-  on:change
+  onchange={bubble("change")}
 >
   {#if Array.isArray(options)}
     <Options {options} />

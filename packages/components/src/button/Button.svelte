@@ -1,6 +1,7 @@
-<svelte:options immutable={true} />
-
 <script>
+  import { createBubbler } from "svelte/legacy";
+
+  const bubble = createBubbler();
   /** @typedef {import("./Button").ButtonProps} ButtonProps */
 
   import { makeClassName } from "@duskit/string";
@@ -9,51 +10,59 @@
 
   import "./Button.css";
 
-  /** @type {ButtonProps["active"]} */
-  export let active = false;
+  /**
+   * @typedef {Object} Props
+   * @property {ButtonProps["active"]} [active]
+   * @property {ButtonProps["className"]} [className]
+   * @property {ButtonProps["icon"]} [icon]
+   * @property {ButtonProps["size"]} [size]
+   * @property {ButtonProps["text"]} [text]
+   * @property {ButtonProps["type"]} [type]
+   * @property {ButtonProps["variant"]} [variant]
+   */
 
-  /** @type {ButtonProps["className"]} */
-  export let className = undefined;
-
-  /** @type {ButtonProps["icon"]} */
-  export let icon = undefined;
-
-  /** @type {ButtonProps["size"]} */
-  export let size = "default";
-
-  /** @type {ButtonProps["text"]} */
-  export let text = undefined;
-
-  /** @type {ButtonProps["type"]} */
-  export let type = "button";
-
-  /** @type {ButtonProps["variant"]} */
-  export let variant = "primary";
+  /** @type {Props & { [key: string]: any }} */
+  const {
+    active = false,
+    className = undefined,
+    icon = undefined,
+    size = "default",
+    text = undefined,
+    type = "button",
+    variant = "primary",
+    ...rest
+  } = $props();
 
   /** @type {HTMLButtonElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLButtonElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
-  $: classes = makeClassName([
-    "dusk-button",
-    `dusk-button--type--${type}`,
-    `dusk-button--variant--${variant}`,
-    `dusk-button--size--${size}`,
-    icon && text ? "dusk-icon-button--labeled" : icon ? "dusk-icon-button" : "",
-    type === "toggle" && active ? "dusk-button--active" : "",
-    className,
-  ]);
+  const classes = $derived(
+    makeClassName([
+      "dusk-button",
+      `dusk-button--type--${type}`,
+      `dusk-button--variant--${variant}`,
+      `dusk-button--size--${size}`,
+      icon && text
+        ? "dusk-icon-button--labeled"
+        : icon
+          ? "dusk-icon-button"
+          : "",
+      type === "toggle" && active ? "dusk-button--active" : "",
+      className,
+    ])
+  );
 </script>
 
 <button
   bind:this={rootElement}
-  {...$$restProps}
+  {...rest}
   aria-pressed={type === "toggle" ? active : undefined}
   class={classes}
-  on:click
-  on:mousedown
-  on:mouseup
+  onclick={bubble("click")}
+  onmousedown={bubble("mousedown")}
+  onmouseup={bubble("mouseup")}
   type={type === "toggle" ? "button" : type}
 >
   {#if icon?.position === "after"}

@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @import {TableCellDataCustomComponentRenderer} from "./Table" */
   /** @import {TableCellCustomRenderer} from "./Table" */
@@ -21,29 +19,35 @@
 
   import "./Table.css";
 
-  /** @type {TableProps["caption"]} */
-  export let caption = undefined;
+  /**
+   * @typedef {Object} Props
+   * @property {TableProps["caption"]} [caption]
+   * @property {TableProps["className"]} [className]
+   * @property {TableProps["data"]} data
+   * @property {TableProps["descriptors"]} [descriptors]
+   */
 
-  /** @type {TableProps["className"]} */
-  export let className = undefined;
-
-  /** @type {TableProps["data"]} */
-  export let data;
-
-  /** @type {TableProps["descriptors"]} */
-  export let descriptors = undefined;
+  /** @type {Props & { [key: string]: any }} */
+  const {
+    caption = undefined,
+    className = undefined,
+    data,
+    descriptors = undefined,
+    ...rest
+  } = $props();
 
   /** @type {HTMLTableElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLTableElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
   const dispatch = createEventDispatcher();
 
   /** @type {TableSortState} */
-  let sortState = null;
+  let sortState = $state(null);
 
-  let sortedData = data;
+  /** @type {typeof data} */
+  let sortedData = $state([]);
 
   /**
    * @template {Record<string, any>} T
@@ -74,33 +78,38 @@
       sortState = { column, direction: "ascending" };
     }
 
-    if (sortState === null) {
-      sortedData = data;
-      dispatch("sort", null);
-    } else {
-      const sorter =
-        sortState.direction === "ascending"
-          ? getKey(sortState.column)
-          : sorterDesc(getKey(sortState.column));
-
-      sortedData = sort(data, [sorter]);
-      dispatch("sort", { ...sortState });
-    }
+    dispatch("sort", sortState ? { ...sortState } : null);
   }
 
   /** @type {Exclude<TableProps["descriptors"], undefined>} */
-  $: tableDescriptors =
+  const tableDescriptors = $derived(
     descriptors ??
-    (data.length
-      ? Object.keys(data[0]).map((name) => ({
-          name,
-          sortable: false,
-        }))
-      : []);
-  $: classes = makeClassName(["duskit-table", className]);
+      (data.length
+        ? Object.keys(data[0]).map((name) => ({
+            name,
+            sortable: false,
+          }))
+        : [])
+  );
+  const classes = $derived(makeClassName(["duskit-table", className]));
+
+  $effect(() => {
+    if (sortState === null) {
+      sortedData = data;
+
+      return;
+    }
+
+    const sorter =
+      sortState.direction === "ascending"
+        ? getKey(sortState.column)
+        : sorterDesc(getKey(sortState.column));
+
+    sortedData = sort(data, [sorter]);
+  });
 </script>
 
-<table bind:this={rootElement} class={classes} {...$$restProps}>
+<table bind:this={rootElement} class={classes} {...rest}>
   {#if caption}
     <caption>{caption}</caption>
   {/if}
@@ -154,8 +163,7 @@
               {#if typeof descriptor.renderer === "function"}
                 {descriptor.renderer(row)}
               {:else}
-                <svelte:component
-                  this={descriptor.renderer.component}
+                <descriptor.renderer.component
                   {...descriptor.renderer.getProps(row)}
                 />
               {/if}
@@ -172,8 +180,7 @@
                 {#if typeof renderer === "function"}
                   {renderer(value, row)}
                 {:else}
-                  <svelte:component
-                    this={renderer.component}
+                  <renderer.component
                     {...renderer.getProps(row[columnName], row)}
                   />
                 {/if}

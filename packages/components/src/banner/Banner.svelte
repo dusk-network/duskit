@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("./Banner").BannerProps} BannerProps */
 
@@ -16,17 +14,19 @@
 
   import "./Banner.css";
 
-  /** @type {BannerProps["className"]} */
-  export let className = undefined;
+  /**
+   * @typedef {Object} Props
+   * @property {BannerProps["className"]} [className]
+   * @property {BannerProps["title"]} title
+   * @property {BannerProps["variant"]} variant
+   * @property {import('svelte').Snippet} [children]
+   */
 
-  /** @type {BannerProps["title"]} */
-  export let title;
-
-  /** @type {BannerProps["variant"]} */
-  export let variant;
+  /** @type {Props & { [key: string]: any }} */
+  const { className = undefined, title, variant, children, ...rest } = $props();
 
   /** @type {HTMLDivElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLDivElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
@@ -43,14 +43,12 @@
     }
   }
 
-  $: classes = makeClassName([
-    "dusk-banner",
-    `dusk-banner--${variant}`,
-    className,
-  ]);
+  const classes = $derived(
+    makeClassName(["dusk-banner", `dusk-banner--${variant}`, className])
+  );
 </script>
 
-<div bind:this={rootElement} {...$$restProps} class={classes}>
+<div bind:this={rootElement} {...rest} class={classes}>
   <Icon
     path={getBannerIconPath()}
     size="large"
@@ -58,8 +56,8 @@
   />
   <div>
     <strong class="dusk-banner__title">{title}</strong>
-    <slot>
+    {#if children}{@render children()}{:else}
       <p>No banner content provided.</p>
-    </slot>
+    {/if}
   </div>
 </div>

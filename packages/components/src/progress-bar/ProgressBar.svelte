@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("./ProgressBar").ProgressBarProps} ProgressBarProps */
 
@@ -11,35 +9,42 @@
 
   import "./ProgressBar.css";
 
-  /** @type {ProgressBarProps["className"]} */
-  export let className = undefined;
+  /**
+   * @typedef {Object} Props
+   * @property {ProgressBarProps["className"]} [className]
+   * @property {ProgressBarProps["currentPercentage"]} [currentPercentage]
+   * @property {ProgressBarProps["motionDuration"]} [motionDuration]
+   */
 
-  /** @type {ProgressBarProps["currentPercentage"]} */
-  export let currentPercentage = undefined;
-
-  /** @type {ProgressBarProps["motionDuration"]} */
-  export let motionDuration = DEFAULT_PROGRESS_BAR_MOTION_DURATION;
+  /** @type {Props & { [key: string]: any }} */
+  const {
+    className = undefined,
+    currentPercentage = undefined,
+    motionDuration = DEFAULT_PROGRESS_BAR_MOTION_DURATION,
+    ...rest
+  } = $props();
 
   /** @type {HTMLDivElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLDivElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
   const progress = tweened(0, {
-    duration: motionDuration,
+    duration: DEFAULT_PROGRESS_BAR_MOTION_DURATION,
     easing: expoOut,
   });
 
-  $: classes = makeClassName(["dusk-progress-bar", className]);
-  $: currentPercentage !== undefined && progress.set(currentPercentage);
+  const classes = $derived(makeClassName(["dusk-progress-bar", className]));
+  $effect(() => {
+    if (currentPercentage !== undefined) {
+      progress.set(currentPercentage, {
+        duration: motionDuration,
+      });
+    }
+  });
 </script>
 
-<div
-  bind:this={rootElement}
-  {...$$restProps}
-  class={classes}
-  role="progressbar"
->
+<div bind:this={rootElement} {...rest} class={classes} role="progressbar">
   <div
     style={currentPercentage !== undefined ? `width: ${$progress}%` : undefined}
     class:dusk-progress-bar__filler--undetermined={currentPercentage ===

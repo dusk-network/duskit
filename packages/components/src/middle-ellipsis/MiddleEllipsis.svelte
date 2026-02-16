@@ -7,17 +7,18 @@
 
   import "./MiddleEllipsis.css";
 
-  /** @type {MiddleEllipsisProps["as"]} */
-  export let as = "pre";
+  /**
+   * @typedef {Object} Props
+   * @property {MiddleEllipsisProps["as"]} [as]
+   * @property {MiddleEllipsisProps["className"]} [className]
+   * @property {MiddleEllipsisProps["text"]} text
+   */
 
-  /** @type {MiddleEllipsisProps["className"]} */
-  export let className = undefined;
-
-  /** @type {MiddleEllipsisProps["text"]} */
-  export let text;
+  /** @type {Props & { [key: string]: any }} */
+  const { as = "pre", className = undefined, text, ...rest } = $props();
 
   /** @type {HTMLElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
@@ -27,24 +28,26 @@
   /** @type {CanvasRenderingContext2D | null} */
   let context;
 
-  let displayText = text;
+  let displayText = $state("");
 
   /** @type {number | null} */
   let pendingFrameId = null;
 
-  function scheduleUpdate() {
+  /** @param {string} [nextText] */
+  function scheduleUpdate(nextText = text) {
     if (pendingFrameId !== null) {
       return;
     }
 
     pendingFrameId = requestAnimationFrame(() => {
       pendingFrameId = null;
-      update();
+      update(nextText);
     });
   }
 
+  /** @param {string} textValue */
   // eslint-disable-next-line max-statements
-  function update() {
+  function update(textValue) {
     if (!context) {
       return;
     }
@@ -54,21 +57,21 @@
     const availableWidth = rootElement.getBoundingClientRect().width;
     const ellipsis = "…";
 
-    if (context.measureText(text).width <= availableWidth) {
-      displayText = text;
+    if (context.measureText(textValue).width <= availableWidth) {
+      displayText = textValue;
 
       return;
     }
 
     let start = 0;
-    let end = text.length;
-    let bestFit = text;
+    let end = textValue.length;
+    let bestFit = textValue;
 
     while (start <= end) {
       const mid = Math.floor((start + end) / 2);
       const half = Math.floor(mid / 2);
-      const leftPart = text.slice(0, half);
-      const rightPart = text.slice(-(mid - half));
+      const leftPart = textValue.slice(0, half);
+      const rightPart = textValue.slice(-(mid - half));
       const measured = context.measureText(
         leftPart + ellipsis + rightPart
       ).width;
@@ -119,6 +122,7 @@
     });
 
     resizeObserver.observe(rootElement);
+    scheduleUpdate();
 
     return () => {
       if (pendingFrameId !== null) {
@@ -129,17 +133,14 @@
     };
   });
 
-  $: classes = makeClassName(["dusk-middle-ellipsis", className]);
-  $: {
-    // eslint-disable-next-line no-unused-expressions
-    text; // We need to be reactive when text changes
-    rootElement && scheduleUpdate();
-  }
+  const classes = $derived(makeClassName(["dusk-middle-ellipsis", className]));
+  $effect(() => {
+    if (rootElement && context) {
+      scheduleUpdate(text);
+    }
+  });
 </script>
 
-<svelte:element
-  this={as}
-  bind:this={rootElement}
-  {...$$restProps}
-  class={classes}>{displayText}</svelte:element
+<svelte:element this={as} bind:this={rootElement} {...rest} class={classes}
+  >{displayText || text}</svelte:element
 >

@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("./Badge").BadgeProps} BadgeProps */
 
@@ -7,25 +5,29 @@
 
   import "./Badge.css";
 
-  /** @type {BadgeProps["className"]} */
-  export let className = undefined;
+  /**
+   * @typedef {Object} Props
+   * @property {BadgeProps["className"]} [className]
+   * @property {BadgeProps["text"]} [text]
+   * @property {BadgeProps["variant"]} [variant]
+   */
 
-  /** @type {BadgeProps["text"]} */
-  export let text = "";
-
-  /** @type {BadgeProps["variant"]} */
-  export let variant = "neutral";
+  /** @type {Props & { [key: string]: any }} */
+  const {
+    className = undefined,
+    text = "",
+    variant = "neutral",
+    ...rest
+  } = $props();
 
   /** @type {HTMLSpanElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLSpanElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
-  $: classes = makeClassName([
-    "dusk-badge",
-    `dusk-badge--variant-${variant}`,
-    className,
-  ]);
+  const classes = $derived(
+    makeClassName(["dusk-badge", `dusk-badge--variant-${variant}`, className])
+  );
 </script>
 
-<span bind:this={rootElement} {...$$restProps} class={classes}>{text}</span>
+<span bind:this={rootElement} {...rest} class={classes}>{text}</span>

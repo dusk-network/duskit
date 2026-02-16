@@ -1,21 +1,25 @@
-<svelte:options immutable={true} />
-
 <script>
   import { onMount } from "svelte";
+  /**
+   * @typedef {Object} Props
+   * @property {import('svelte').Snippet<[any]>} [children]
+   */
+
+  /** @type {Props} */
+  const { children } = $props();
 
   /** @type {HTMLDivElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLDivElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
-  let rect = new DOMRect();
-  let { height, width } = rect;
+  let rect = $state(new DOMRect());
+  const height = $derived(rect.height);
+  const width = $derived(rect.width);
 
   onMount(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       rect = entries[0].contentRect;
-      height = rect.height;
-      width = rect.width;
     });
 
     resizeObserver.observe(rootElement);
@@ -25,5 +29,5 @@
 </script>
 
 <div bind:this={rootElement} style:height="100%" style:width="100%">
-  <slot {height} {rect} {width} />
+  {@render children?.({ height, rect, width })}
 </div>

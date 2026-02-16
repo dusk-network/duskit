@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("../dusk.components").OptionItem} OptionItem */
 
@@ -8,8 +6,13 @@
   /** @type {(v: any) => v is string} */
   const isString = isType("String");
 
-  /** @type {OptionItem[] | string[]} */
-  export let options;
+  /**
+   * @typedef {Object} Props
+   * @property {OptionItem[] | string[]} options
+   */
+
+  /** @type {Props} */
+  const { options } = $props();
 </script>
 
 {#each options as option (isString(option) ? option : option.value)}

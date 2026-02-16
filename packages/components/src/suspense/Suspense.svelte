@@ -1,5 +1,4 @@
-<svelte:options immutable={true} />
-
+<!-- @migration-task Error while migrating Svelte code: This migration would change the name of a slot (pending-content to pending_content) making the component unusable -->
 <script>
   /** @typedef {import("./Suspense").SuspenseProps} SuspenseProps */
 

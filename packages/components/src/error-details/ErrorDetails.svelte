@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("./ErrorDetails").ErrorDetailsProps} ErrorDetailsProps */
 
@@ -7,25 +5,26 @@
 
   import "./ErrorDetails.css";
 
-  /** @type {ErrorDetailsProps["className"]} */
-  export let className = undefined;
+  /**
+   * @typedef {Object} Props
+   * @property {ErrorDetailsProps["className"]} [className]
+   * @property {ErrorDetailsProps["error"]} error
+   * @property {ErrorDetailsProps["summary"]} summary
+   */
 
-  /** @type {ErrorDetailsProps["error"]} */
-  export let error;
-
-  /** @type {ErrorDetailsProps["summary"]} */
-  export let summary;
+  /** @type {Props & { [key: string]: any }} */
+  const { className = undefined, error, summary, ...rest } = $props();
 
   /** @type {HTMLDetailsElement | null} */
-  let rootElement = null;
+  let rootElement = $state(null);
 
   export const getRootElement = () => rootElement;
 
-  $: classes = makeClassName(["dusk-error-details", className]);
+  const classes = $derived(makeClassName(["dusk-error-details", className]));
 </script>
 
 {#if error}
-  <details bind:this={rootElement} {...$$restProps} class={classes}>
+  <details bind:this={rootElement} {...rest} class={classes}>
     <summary class="dusk-error-details__summary">
       {summary}
     </summary>

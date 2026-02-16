@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("./Switch").SwitchProps} SwitchProps */
 
@@ -9,23 +7,29 @@
 
   import "./Switch.css";
 
-  /** @type {SwitchProps["active"]} */
-  export let active = false;
+  /**
+   * @typedef {Object} Props
+   * @property {SwitchProps["active"]} [active]
+   * @property {SwitchProps["className"]} [className]
+   * @property {SwitchProps["disabled"]} [disabled]
+   * @property {SwitchProps["onSurface"]} [onSurface]
+   * @property {SwitchProps["tabindex"]} [tabindex]
+   */
 
-  /** @type {SwitchProps["className"]} */
-  export let className = undefined;
-
-  /** @type {SwitchProps["disabled"]} */
-  export let disabled = false;
-
-  /** @type {SwitchProps["onSurface"]} */
-  export let onSurface = false;
-
-  /** @type {SwitchProps["tabindex"]} */
-  export let tabindex = 0;
+  /** @type {Props & { [key: string]: any }} */
+  /* eslint-disable prefer-const */
+  let {
+    active = $bindable(false),
+    className = undefined,
+    disabled = false,
+    onSurface = false,
+    tabindex = 0,
+    ...rest
+  } = $props();
+  /* eslint-enable prefer-const */
 
   /** @type {HTMLDivElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLDivElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
@@ -52,21 +56,23 @@
     dispatch("change", active);
   }
 
-  $: classes = makeClassName([
-    "dusk-switch",
-    className,
-    onSurface ? "dxusk-switch--on-surface" : "",
-  ]);
+  const classes = $derived(
+    makeClassName([
+      "dusk-switch",
+      className,
+      onSurface ? "dxusk-switch--on-surface" : "",
+    ])
+  );
 </script>
 
 <div
   bind:this={rootElement}
-  {...$$restProps}
+  {...rest}
   aria-checked={active}
   aria-disabled={disabled}
   class={classes}
-  on:click={handleClick}
-  on:keydown={handleKeyDown}
+  onclick={handleClick}
+  onkeydown={handleKeyDown}
   role="switch"
   tabindex={disabled ? -1 : tabindex}
 ></div>

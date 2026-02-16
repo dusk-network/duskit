@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("./Icon").IconProps} IconProps */
 
@@ -7,30 +5,34 @@
 
   import "./Icon.css";
 
-  /** @type {IconProps["className"]} */
-  export let className = undefined;
+  /**
+   * @typedef {Object} Props
+   * @property {IconProps["className"]} [className]
+   * @property {IconProps["isInStack"]} [isInStack]
+   * @property {IconProps["path"]} path
+   * @property {IconProps["role"]} [role]
+   * @property {IconProps["size"]} [size]
+   */
 
-  /** @type {IconProps["isInStack"]} */
-  export let isInStack = false;
-
-  /** @type {IconProps["path"]} */
-  export let path;
-
-  /** @type {IconProps["role"]} */
-  export let role = "graphics-symbol";
-
-  /** @type {IconProps["size"]} */
-  export let size = "default";
+  /** @type {Props & { [key: string]: any }} */
+  const {
+    className = undefined,
+    isInStack = false,
+    path,
+    role = "graphics-symbol",
+    size = "default",
+    ...rest
+  } = $props();
 
   /** @type {SVGGElement | SVGSVGElement} */
-  let rootElement;
+  let rootElement = /** @type {SVGGElement | SVGSVGElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
-  $: commonAttributes = {
-    ...$$restProps,
+  const commonAttributes = $derived({
+    ...rest,
     class: makeClassName(["dusk-icon", `dusk-icon--size--${size}`, className]),
-  };
+  });
 </script>
 
 {#if isInStack}

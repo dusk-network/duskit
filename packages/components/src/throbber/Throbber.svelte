@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("./Throbber").ThrobberProps} ThrobberProps */
 
@@ -7,23 +5,23 @@
 
   import "./Throbber.css";
 
-  /** @type {ThrobberProps["className"]} */
-  export let className = undefined;
-
   /**
-   * The animation duration in milliseconds.
-   * @type {ThrobberProps["duration"]}
+   * @typedef {Object} Props
+   * @property {ThrobberProps["className"]} [className]
+   * @property {ThrobberProps["duration"]} [duration] - The animation duration in milliseconds.
+   * @property {ThrobberProps["size"]} [size] - The throbber's size in pixels.
    */
-  export let duration = 1800;
 
-  /**
-   * The throbber's size in pixels.
-   * @type {ThrobberProps["size"]}
-   */
-  export let size = 64;
+  /** @type {Props & { [key: string]: any }} */
+  const {
+    className = undefined,
+    duration = 1800,
+    size = 64,
+    ...rest
+  } = $props();
 
   /** @type {SVGSVGElement} */
-  let rootElement;
+  let rootElement = /** @type {SVGSVGElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
@@ -39,12 +37,12 @@
     "z",
   ].join("");
 
-  $: classes = makeClassName(["dusk-throbber", className]);
+  const classes = $derived(makeClassName(["dusk-throbber", className]));
 </script>
 
 <svg
   bind:this={rootElement}
-  {...$$restProps}
+  {...rest}
   class={classes}
   height={`${size}px`}
   role="progressbar"

@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("./CopyField").CopyFieldProps} CopyFieldProps */
 
@@ -12,26 +10,29 @@
 
   import "./CopyField.css";
 
-  /** @type {CopyFieldProps["className"]} */
-  export let className = undefined;
+  /**
+   * @typedef {Object} Props
+   * @property {CopyFieldProps["className"]} [className]
+   * @property {CopyFieldProps["disabled"]} [disabled]
+   * @property {CopyFieldProps["displayValue"]} displayValue
+   * @property {CopyFieldProps["name"]} name
+   * @property {CopyFieldProps["rawValue"]} rawValue
+   * @property {CopyFieldProps["tooltipId"]} [tooltipId]
+   */
 
-  /** @type {CopyFieldProps["disabled"]} */
-  export let disabled = false;
-
-  /** @type {CopyFieldProps["displayValue"]} */
-  export let displayValue;
-
-  /** @type {CopyFieldProps["name"]} */
-  export let name;
-
-  /** @type {CopyFieldProps["rawValue"]} */
-  export let rawValue;
-
-  /** @type {CopyFieldProps["tooltipId"]} */
-  export let tooltipId = "main-tooltip";
+  /** @type {Props & { [key: string]: any }} */
+  const {
+    className = undefined,
+    disabled = false,
+    displayValue,
+    name,
+    rawValue,
+    tooltipId = "main-tooltip",
+    ...rest
+  } = $props();
 
   /** @type {HTMLDivElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLDivElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
@@ -52,10 +53,10 @@
       });
   }
 
-  $: classes = makeClassName(["dusk-copy-field", className]);
+  const classes = $derived(makeClassName(["dusk-copy-field", className]));
 </script>
 
-<div bind:this={rootElement} class={classes} {...$$restProps}>
+<div bind:this={rootElement} class={classes} {...rest}>
   <Textbox
     className="dusk-copy-field__content"
     value={displayValue}

@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("./Tabs").TabsProps} TabsProps */
 
@@ -14,17 +12,25 @@
 
   import "./Tabs.css";
 
-  /** @type {TabsProps["className"]} */
-  export let className = undefined;
+  /**
+   * @typedef {Object} Props
+   * @property {TabsProps["className"]} [className]
+   * @property {TabsProps["items"]} items
+   * @property {TabsProps["selectedTab"]} [selectedTab]
+   */
 
-  /** @type {TabsProps["items"]} */
-  export let items;
-
-  /** @type {TabsProps["selectedTab"]} */
-  export let selectedTab = undefined;
+  /** @type {Props & { [key: string]: any }} */
+  /* eslint-disable prefer-const */
+  let {
+    className = undefined,
+    items,
+    selectedTab = $bindable(undefined),
+    ...rest
+  } = $props();
+  /* eslint-enable prefer-const */
 
   /** @type {HTMLDivElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLDivElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
@@ -32,7 +38,7 @@
   let rafID = 0;
 
   /** @type {HTMLUListElement} */
-  let tabsList;
+  let tabsList = /** @type {HTMLUListElement} */ ($state());
 
   const dispatch = createEventDispatcher();
 
@@ -170,11 +176,11 @@
     return () => resizeObserver.disconnect();
   });
 
-  $: classes = makeClassName(["dusk-tabs", className]);
-  $: ({ canScroll, canScrollLeft, canScrollRight } = $scrollStatus);
+  const classes = $derived(makeClassName(["dusk-tabs", className]));
+  const { canScroll, canScrollLeft, canScrollRight } = $derived($scrollStatus);
 </script>
 
-<div bind:this={rootElement} {...$$restProps} class={classes}>
+<div bind:this={rootElement} {...rest} class={classes}>
   <Button
     className="dusk-tab-scroll-button"
     disabled={!canScrollLeft}
@@ -189,7 +195,7 @@
   <ul
     bind:this={tabsList}
     class="dusk-tabs-list"
-    on:scroll={updateScrollStatus}
+    onscroll={updateScrollStatus}
     role="tablist"
   >
     {#each items as item (item.id)}
@@ -198,9 +204,9 @@
         aria-selected={id === selectedTab}
         class={`dusk-tab-item${id === selectedTab ? " dusk-tab-item__selected" : ""}`}
         data-tabid={id}
-        on:click={handleTabClick}
-        on:focusin={handleTabFocusin}
-        on:keydown={handleTabKeyDown}
+        onclick={handleTabClick}
+        onfocusin={handleTabFocusin}
+        onkeydown={handleTabKeyDown}
         role="tab"
         tabindex={0}
       >

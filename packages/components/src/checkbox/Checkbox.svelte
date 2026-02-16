@@ -1,41 +1,47 @@
-<svelte:options immutable={true} />
-
 <script>
+  import { createBubbler } from "svelte/legacy";
+
+  const bubble = createBubbler();
   /** @typedef {import("./Checkbox").CheckboxProps} CheckboxProps */
 
   import { makeClassName, randomUUID } from "@duskit/string";
 
   import "./Checkbox.css";
 
-  /** @type {CheckboxProps["checked"]} */
-  export let checked = false;
+  /**
+   * @typedef {Object} Props
+   * @property {CheckboxProps["checked"]} [checked]
+   * @property {CheckboxProps["className"]} [className]
+   * @property {CheckboxProps["disabled"]} [disabled]
+   * @property {CheckboxProps["id"]} [id]
+   * @property {CheckboxProps["name"]} name
+   * @property {CheckboxProps["tabindex"]} [tabindex]
+   */
 
-  /** @type {CheckboxProps["className"]} */
-  export let className = undefined;
-
-  /** @type {CheckboxProps["disabled"]} */
-  export let disabled = false;
-
-  /** @type {CheckboxProps["id"]} */
-  export let id = `dusk-checkbox-${randomUUID()}`;
-
-  /** @type {CheckboxProps["name"]} */
-  export let name;
-
-  /** @type {CheckboxProps["tabindex"]} */
-  export let tabindex = undefined;
+  /** @type {Props & { [key: string]: any }} */
+  /* eslint-disable prefer-const */
+  let {
+    checked = $bindable(false),
+    className = undefined,
+    disabled = false,
+    id = `dusk-checkbox-${randomUUID()}`,
+    name,
+    tabindex = undefined,
+    ...rest
+  } = $props();
+  /* eslint-enable prefer-const */
 
   /** @type {HTMLInputElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLInputElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
-  $: classes = makeClassName(["dusk-checkbox", className]);
+  const classes = $derived(makeClassName(["dusk-checkbox", className]));
 </script>
 
 <input
   bind:this={rootElement}
-  {...$$restProps}
+  {...rest}
   type="checkbox"
   {id}
   {tabindex}
@@ -43,5 +49,5 @@
   {disabled}
   class={classes}
   bind:checked
-  on:change
+  onchange={bubble("change")}
 />

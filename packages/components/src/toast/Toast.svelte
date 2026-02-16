@@ -1,6 +1,6 @@
-<svelte:options immutable={true} />
-
 <script>
+  import { run } from "svelte/legacy";
+
   /** @typedef {import("./Toast").ToastProps} ToastProps */
 
   import { flip } from "svelte/animate";
@@ -14,25 +14,33 @@
 
   const defaultTimer = 2000;
 
-  /** @type {ToastProps["className"]} */
-  export let className = undefined;
+  /**
+   * @typedef {Object} Props
+   * @property {ToastProps["className"]} [className]
+   * @property {ToastProps["flyDuration"]} [flyDuration]
+   * @property {ToastProps["timer"]} [timer]
+   */
 
-  /** @type {ToastProps["flyDuration"]} */
-  export let flyDuration = 500;
-
-  /** @type {ToastProps["timer"]} */
-  export let timer = defaultTimer;
+  /** @type {Props & { [key: string]: any }} */
+  const {
+    className = undefined,
+    flyDuration = 500,
+    timer = defaultTimer,
+    ...rest
+  } = $props();
 
   /** @type {HTMLUListElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLUListElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
-  $: classes = makeClassName(["dusk-toast", className]);
-  $: $toastTimer = timer ?? defaultTimer;
+  const classes = $derived(makeClassName(["dusk-toast", className]));
+  run(() => {
+    $toastTimer = timer ?? defaultTimer;
+  });
 </script>
 
-<ul bind:this={rootElement} {...$$restProps} class={classes}>
+<ul bind:this={rootElement} {...rest} class={classes}>
   {#each $toastList as { id, icon, message, type } (id)}
     <li
       in:fly|global={{ duration: flyDuration, x: 200 }}

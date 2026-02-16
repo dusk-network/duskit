@@ -1,6 +1,7 @@
-<svelte:options immutable={true} />
-
 <script>
+  import { createBubbler } from "svelte/legacy";
+
+  const bubble = createBubbler();
   /** @typedef {import("./ExclusiveChoice").ExclusiveChoiceProps} ExclusiveChoiceProps */
 
   import { isType } from "lamb";
@@ -9,20 +10,27 @@
 
   import "./ExclusiveChoice.css";
 
-  /** @type {ExclusiveChoiceProps["className"]} */
-  export let className = undefined;
+  /**
+   * @typedef {Object} Props
+   * @property {ExclusiveChoiceProps["className"]} [className]
+   * @property {ExclusiveChoiceProps["name"]} [name]
+   * @property {ExclusiveChoiceProps["options"]} options
+   * @property {ExclusiveChoiceProps["value"]} value
+   */
 
-  /** @type {ExclusiveChoiceProps["name"]} */
-  export let name = undefined;
-
-  /** @type {ExclusiveChoiceProps["options"]} */
-  export let options;
-
-  /** @type {ExclusiveChoiceProps["value"]} */
-  export let value;
+  /** @type {Props & { [key: string]: any }} */
+  /* eslint-disable prefer-const */
+  let {
+    className = undefined,
+    name = undefined,
+    options,
+    value = $bindable(),
+    ...rest
+  } = $props();
+  /* eslint-enable prefer-const */
 
   /** @type {HTMLDivElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLDivElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
@@ -31,10 +39,10 @@
 
   const baseId = `dusk-exclusive-choice-${randomUUID()}`;
 
-  $: classes = makeClassName(["dusk-exclusive-choice", className]);
+  const classes = $derived(makeClassName(["dusk-exclusive-choice", className]));
 </script>
 
-<div bind:this={rootElement} {...$$restProps} class={classes} role="radiogroup">
+<div bind:this={rootElement} {...rest} class={classes} role="radiogroup">
   {#each options as option (option)}
     {@const isStringOption = isString(option)}
     {@const optionValue = isStringOption ? option : option.value}
@@ -46,7 +54,7 @@
       disabled={isStringOption ? false : option.disabled}
       {id}
       name={name ?? baseId}
-      on:change
+      onchange={bubble("change")}
       type="radio"
       value={optionValue}
     />

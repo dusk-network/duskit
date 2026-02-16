@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("./Card").CardProps} CardProps */
 
@@ -7,53 +5,60 @@
 
   import "./Card.css";
 
-  /** @type {CardProps["as"]} */
-  export let as = "div";
+  /**
+   * @typedef {Object} Props
+   * @property {CardProps["as"]} [as]
+   * @property {CardProps["className"]} [className]
+   * @property {CardProps["gap"]} [gap]
+   * @property {CardProps["onSurface"]} [onSurface]
+   * @property {CardProps["showBody"]} [showBody]
+   * @property {import('svelte').Snippet} [header]
+   * @property {import('svelte').Snippet} [children]
+   * @property {import('svelte').Snippet} [footer]
+   */
 
-  /** @type {CardProps["className"]} */
-  export let className = undefined;
-
-  /** @type {CardProps["gap"]} */
-  export let gap = "default";
-
-  /** @type {CardProps["onSurface"]} */
-  export let onSurface = false;
-
-  /** @type {CardProps["showBody"]} */
-  export let showBody = true;
+  /** @type {Props & { [key: string]: any }} */
+  const {
+    as = "div",
+    className = undefined,
+    gap = "default",
+    onSurface = false,
+    showBody = true,
+    header,
+    children,
+    footer,
+    ...rest
+  } = $props();
 
   /** @type {HTMLElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
-  $: classes = makeClassName([
-    "dusk-card",
-    `dusk-card--gap-${gap}`,
-    `dusk-card--${onSurface ? "on-surface" : "off-surface"}`,
-    className,
-  ]);
+  const classes = $derived(
+    makeClassName([
+      "dusk-card",
+      `dusk-card--gap-${gap}`,
+      `dusk-card--${onSurface ? "on-surface" : "off-surface"}`,
+      className,
+    ])
+  );
 </script>
 
-<svelte:element
-  this={as}
-  bind:this={rootElement}
-  {...$$restProps}
-  class={classes}
->
-  {#if $$slots.header}
+<svelte:element this={as} bind:this={rootElement} {...rest} class={classes}>
+  {#if header}
     <div class="dusk-card__header-container">
-      <slot name="header" />
+      {@render header?.()}
     </div>
   {/if}
   {#if showBody}
     <div class="dusk-card__body-container">
-      <slot />
+      {@render children?.()}
     </div>
   {/if}
-  {#if $$slots.footer}
+  {#if footer}
     <div class="dusk-card__footer-container">
-      <slot name="footer" />
+      {@render footer?.()}
     </div>
   {/if}
 </svelte:element>

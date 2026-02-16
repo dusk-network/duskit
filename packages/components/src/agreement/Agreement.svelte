@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("./Agreement").AgreementProps} AgreementProps */
 
@@ -9,33 +7,38 @@
 
   import "./Agreement.css";
 
-  /** @type {AgreementProps["checked"]} */
-  export let checked = false;
+  /**
+   * @typedef {Object} Props
+   * @property {AgreementProps["checked"]} [checked]
+   * @property {AgreementProps["className"]} [className]
+   * @property {AgreementProps["controlId"]} [controlId]
+   * @property {AgreementProps["disabled"]} [disabled]
+   * @property {AgreementProps["label"]} label
+   * @property {AgreementProps["name"]} name
+   */
 
-  /** @type {AgreementProps["className"]} */
-  export let className = undefined;
-
-  /** @type {AgreementProps["controlId"]} */
-  export let controlId = `dusk-checkbox-${randomUUID()}`;
-
-  /** @type {AgreementProps["disabled"]} */
-  export let disabled = false;
-
-  /** @type {AgreementProps["label"]} */
-  export let label;
-
-  /** @type {AgreementProps["name"]} */
-  export let name;
+  /** @type {Props & { [key: string]: any }} */
+  /* eslint-disable prefer-const */
+  let {
+    checked = $bindable(false),
+    className = undefined,
+    controlId = `dusk-checkbox-${randomUUID()}`,
+    disabled = false,
+    label,
+    name,
+    ...rest
+  } = $props();
+  /* eslint-enable prefer-const */
 
   /** @type {HTMLDivElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLDivElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
-  $: classes = makeClassName(["dusk-agreement", className]);
+  const classes = $derived(makeClassName(["dusk-agreement", className]));
 </script>
 
-<div bind:this={rootElement} {...$$restProps} class={classes}>
+<div bind:this={rootElement} {...rest} class={classes}>
   <Checkbox
     bind:checked
     on:change

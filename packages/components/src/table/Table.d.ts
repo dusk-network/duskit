@@ -1,17 +1,25 @@
-import type { SvelteComponent, ComponentProps } from "svelte";
+import type { SvelteComponent, Component, ComponentProps } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
 import { OmitSvelteSpecificProps } from "../dusk.components";
 
 type SvelteComponentConstructor = new (...args: any) => SvelteComponent;
+type SvelteComponentType = SvelteComponentConstructor | Component<any>;
+
+type SvelteComponentTypeProps<C extends SvelteComponentType> =
+  C extends SvelteComponentConstructor
+    ? ComponentProps<InstanceType<C>>
+    : C extends Component<any>
+      ? ComponentProps<C>
+      : never;
 
 export type TableCellDataComponentRenderer<
   T extends Record<string, any>,
   K extends keyof T,
-  C extends SvelteComponentConstructor = SvelteComponentConstructor,
+  C extends SvelteComponentType = SvelteComponentType,
 > = {
   component: C;
-  getProps: (value: T[K], row: T) => ComponentProps<InstanceType<C>>;
+  getProps: (value: T[K], row: T) => SvelteComponentTypeProps<C>;
 };
 
 export type TableCellDataRenderer<
@@ -25,10 +33,10 @@ export type TableCellCustomRenderer<T extends Record<string, any>> = (
 
 export type TableCellDataCustomComponentRenderer<
   T extends Record<string, any>,
-  C extends SvelteComponentConstructor = SvelteComponentConstructor,
+  C extends SvelteComponentType = SvelteComponentType,
 > = {
   component: C;
-  getProps: (row: T) => ComponentProps<InstanceType<C>>;
+  getProps: (row: T) => SvelteComponentTypeProps<C>;
 };
 
 export type TableDataDescriptor<

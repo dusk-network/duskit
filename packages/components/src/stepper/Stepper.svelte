@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("./Stepper").StepperProps} StepperProps */
 
@@ -9,51 +7,43 @@
   import "./Stepper.css";
 
   /**
-   * The current active step.
-   * The value starts from zero as it refers
-   * to the `steps` array elements.
-   * @type {number}
+   * @typedef {Object} Props
+   * @property {number} activeStep - The current active step.
+The value starts from zero as it refers
+to the `steps` array elements.
+   * @property {StepperProps["className"]} [className]
+   * @property {StepperProps["showStepLabelWhenInactive"]} [showStepLabelWhenInactive] - Whether to show the step label when the step is inactive.
+   * @property {StepperProps["showStepNumbers"]} [showStepNumbers] - Whether to show step numbers or not.
+   * @property {StepperProps["steps"]} steps - The number of steps, greater or equal to two,
+if a number is passed.
+An array of `StepperStep` objects otherwise.
+   * @property {StepperProps["variant"]} [variant]
    */
-  export let activeStep;
 
-  /** @type {StepperProps["className"]} */
-  export let className = undefined;
-
-  /**
-   * Whether to show the step label when the step is inactive.
-   * @type {StepperProps["showStepLabelWhenInactive"]}
-   */
-  export let showStepLabelWhenInactive = false;
-
-  /**
-   * Whether to show step numbers or not.
-   * @type {StepperProps["showStepNumbers"]}
-   */
-  export let showStepNumbers = true;
-
-  /**
-   * The number of steps, greater or equal to two,
-   * if a number is passed.
-   * An array of `StepperStep` objects otherwise.
-   *
-   * @type {StepperProps["steps"]}
-   */
-  export let steps;
-
-  /** @type {StepperProps["variant"]} */
-  export let variant = "primary";
+  /** @type {Props & { [key: string]: any }} */
+  const {
+    activeStep,
+    className = undefined,
+    showStepLabelWhenInactive = false,
+    showStepNumbers = true,
+    steps,
+    variant = "primary",
+    ...rest
+  } = $props();
 
   /** @type {HTMLDivElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLDivElement} */ ($state());
 
   export const getRootElement = () => (stepsAmount >= 2 ? rootElement : null);
 
-  $: classes = makeClassName([
-    "dusk-stepper",
-    `dusk-stepper--variant--${variant}`,
-    className,
-  ]);
-  $: stepsAmount = Array.isArray(steps) ? steps.length : steps;
+  const classes = $derived(
+    makeClassName([
+      "dusk-stepper",
+      `dusk-stepper--variant--${variant}`,
+      className,
+    ])
+  );
+  const stepsAmount = $derived(Array.isArray(steps) ? steps.length : steps);
 
   /**
    * The width of the bar connecting the steps, based on
@@ -71,7 +61,7 @@
    * If there are 5 steps in total and the active step is 2,
    * the width will be 40%.
    */
-  $: progressWidth = `${(100 * activeStep) / stepsAmount}%`;
+  const progressWidth = $derived(`${(100 * activeStep) / stepsAmount}%`);
 </script>
 
 {#if stepsAmount >= 2}
@@ -80,7 +70,7 @@
     class={classes}
     style:--columns={stepsAmount}
     style:--progress-width={progressWidth}
-    {...$$restProps}
+    {...rest}
   >
     {#if Array.isArray(steps)}
       {#each steps as currentStep, idx (currentStep)}

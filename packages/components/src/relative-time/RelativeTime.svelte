@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   /** @typedef {import("./RelativeTime").RelativeTimeProps} RelativeTimeProps */
 
@@ -8,38 +6,52 @@
   import { getRelativeTimeString } from "@duskit/date";
   import { makeClassName } from "@duskit/string";
 
-  /** @type {RelativeTimeProps["autoRefresh"]} */
-  export let autoRefresh = false;
+  /**
+   * @typedef {Object} Props
+   * @property {RelativeTimeProps["autoRefresh"]} [autoRefresh]
+   * @property {RelativeTimeProps["className"]} [className]
+   * @property {RelativeTimeProps["date"]} date
+   * @property {import('svelte').Snippet<[any]>} [children]
+   */
 
-  /** @type {RelativeTimeProps["className"]} */
-  export let className = undefined;
-
-  /** @type {RelativeTimeProps["date"]} */
-  export let date;
+  /** @type {Props & { [key: string]: any }} */
+  const {
+    autoRefresh = false,
+    className = undefined,
+    date,
+    children,
+    ...rest
+  } = $props();
 
   /** @type {HTMLTimeElement} */
-  let rootElement;
+  let rootElement = /** @type {HTMLTimeElement} */ ($state());
 
   export const getRootElement = () => rootElement;
 
-  $: classes = makeClassName(["dusk-relative-time", className]);
+  const classes = $derived(makeClassName(["dusk-relative-time", className]));
+
+  const childrenRender = $derived(children);
 </script>
 
 <time
   bind:this={rootElement}
-  {...$$restProps}
+  {...rest}
   class={classes}
   datetime={date.toISOString()}
 >
   {#if autoRefresh}
-    <Rerender
-      generateValue={() => getRelativeTimeString(date, "long")}
-      let:value
-    >
-      <slot relativeTime={value}>{value}</slot>
+    <Rerender generateValue={() => getRelativeTimeString(date, "long")}>
+      {#snippet children({ value = "" })}
+        {@const relativeTime = value}
+        {#if childrenRender}
+          {@render childrenRender({ relativeTime })}
+        {:else}
+          {relativeTime}
+        {/if}
+      {/snippet}
     </Rerender>
   {:else}
     {@const relativeTime = getRelativeTimeString(date, "long")}
-    <slot {relativeTime}>{relativeTime}</slot>
+    {#if children}{@render children({ relativeTime })}{:else}{relativeTime}{/if}
   {/if}
 </time>
