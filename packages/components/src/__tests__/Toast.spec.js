@@ -69,7 +69,6 @@ describe("Toast", () => {
     expect(list).toMatchSnapshot();
 
     await vi.advanceTimersByTimeAsync(baseProps.timer);
-    await tick();
 
     expect(get(toastList).length).toBe(0);
     expect(fly).toHaveBeenCalledTimes(2);
@@ -160,7 +159,6 @@ describe("Toast", () => {
     expect(list).toMatchSnapshot();
 
     await vi.advanceTimersByTimeAsync(baseProps.timer);
-    await tick();
 
     expect(get(toastList).length).toBe(0);
     expect(fly).toHaveBeenCalledTimes(4);

@@ -224,7 +224,13 @@ describe("Table", () => {
     descriptors.forEach(({ sortable }, idx) => {
       const btn = headers[idx].querySelector("button");
 
-      expect(sortable).toBe(btn !== null);
+      if (sortable) {
+        // eslint-disable-next-line vitest/no-conditional-expect
+        expect(btn).toBeInTheDocument();
+      } else {
+        // eslint-disable-next-line vitest/no-conditional-expect
+        expect(btn).toBeNull();
+      }
     });
 
     expect.assertions(descriptors.length);

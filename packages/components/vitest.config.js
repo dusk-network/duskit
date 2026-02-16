@@ -10,7 +10,7 @@ export default defineConfig({
   },
   test: {
     coverage: {
-      include: ["src/**"],
+      include: ["src/**/*.{js,ts,svelte}"],
       provider: "istanbul",
     },
     environment: "jsdom",

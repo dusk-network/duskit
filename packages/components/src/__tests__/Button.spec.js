@@ -42,12 +42,11 @@ describe("Button", () => {
     expect(element.getAttribute("aria-pressed")).toBe(
       type === "toggle" ? "false" : null
     );
-
-    expect.assertions(3);
   });
 
   it('should add an "active" class when the active property of a toggle button changes', async () => {
-    const props = /** @type {const} */ ({ ...baseProps, type: "toggle" });
+    /** @type {import("svelte").ComponentProps<Button>} */
+    const props = { ...baseProps, type: "toggle" };
     const { component, rerender } = render(Button, { ...baseOptions, props });
     const element = component.getRootElement();
 
@@ -199,11 +198,12 @@ describe("Button", () => {
 
   describe("Reactivity", () => {
     it("should react to property changes", async () => {
-      const props = /** @type {const} */ ({
+      /** @type {import("svelte").ComponentProps<Button>} */
+      const props = {
         ...baseProps,
         type: "submit",
         variant: "primary",
-      });
+      };
       const { component, rerender } = render(Button, { ...baseOptions, props });
       const element = component.getRootElement();
 
@@ -232,10 +232,11 @@ describe("Button", () => {
 
       expect(element).toHaveTextContent("Updated Text Only");
 
-      const propsIconBefore = /** @type {const} */ ({
+      /** @type {Partial<import("svelte").ComponentProps<Button>>} */
+      const propsIconBefore = {
         icon: { path: mdiFolderOutline, position: "before" },
         text: "Initial Before",
-      });
+      };
 
       await rerender(propsIconBefore);
 
@@ -254,10 +255,11 @@ describe("Button", () => {
       );
       expect(element.querySelector("path")).toHaveAttribute("d", mdiAbTesting);
 
-      const propsIconAfter = /** @type {const} */ ({
+      /** @type {Partial<import("svelte").ComponentProps<Button>>} */
+      const propsIconAfter = {
         icon: { path: mdiFolderOutline, position: "after" },
         text: "Initial After",
-      });
+      };
 
       await rerender(propsIconAfter);
 

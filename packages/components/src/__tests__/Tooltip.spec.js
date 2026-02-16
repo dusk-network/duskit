@@ -52,10 +52,48 @@ describe("Tooltip", () => {
     y: 888,
   };
 
+  const NativeIntersectionObserver = globalThis.IntersectionObserver;
   const clearTimeoutSpy = vi.spyOn(window, "clearTimeout");
-  const disconnectSpy = vi.spyOn(IntersectionObserver.prototype, "disconnect");
-  const observeSpy = vi.spyOn(IntersectionObserver.prototype, "observe");
-  const unobserveSpy = vi.spyOn(IntersectionObserver.prototype, "unobserve");
+  const disconnectSpy = vi.spyOn(
+    NativeIntersectionObserver.prototype,
+    "disconnect"
+  );
+  const observeSpy = vi.spyOn(NativeIntersectionObserver.prototype, "observe");
+  const unobserveSpy = vi.spyOn(
+    NativeIntersectionObserver.prototype,
+    "unobserve"
+  );
+  const ioSpy = vi
+    .spyOn(globalThis, "IntersectionObserver")
+    .mockImplementation(function (...args) {
+      return new NativeIntersectionObserver(...args);
+    });
+
+  /**
+   * @param {Element} element
+   * @param {Partial<IntersectionObserverEntry>} [data]
+   */
+  const triggerIntersection = (element, data = {}) => {
+    const observer = /** @type {IntersectionObserverMock | undefined} */ (
+      ioSpy.mock.results.at(-1)?.value
+    );
+
+    if (!observer) {
+      throw new Error("IntersectionObserver instance not found");
+    }
+
+    observer.callback(
+      [
+        /** @type {IntersectionObserverEntry} */ ({
+          intersectionRatio: 1,
+          isIntersecting: true,
+          target: element,
+          ...data,
+        }),
+      ],
+      observer
+    );
+  };
 
   vi.mocked(computePosition).mockResolvedValue(defaultComputedPosition);
 
@@ -63,7 +101,8 @@ describe("Tooltip", () => {
     cleanup();
     vi.mocked(computePosition).mockClear();
     vi.mocked(setOffset).mockClear();
-    IntersectionObserverMock.instances.length = 0;
+    IntersectionObserverMock.reset();
+    ioSpy.mockClear();
     clearTimeoutSpy.mockClear();
     disconnectSpy.mockClear();
     observeSpy.mockClear();
@@ -72,6 +111,7 @@ describe("Tooltip", () => {
 
   afterAll(() => {
     vi.doUnmock("@floating-ui/dom");
+    ioSpy.mockRestore();
     clearTimeoutSpy.mockRestore();
     disconnectSpy.mockRestore();
     observeSpy.mockRestore();
@@ -580,7 +620,6 @@ describe("Tooltip", () => {
       it("should hide the tooltip if the target element is detached from the DOM and disconnect the observer", async () => {
         const { getByRole } = render(Tooltip, baseOptions);
         const tooltip = getByRole("tooltip", { hidden: true });
-        const { callback } = IntersectionObserverMock.instances[0];
 
         await fireEvent.focusIn(target);
         await vi.advanceTimersToNextTimerAsync();
@@ -592,8 +631,7 @@ describe("Tooltip", () => {
 
         target.remove();
 
-        // @ts-ignore
-        callback([{ target }], new IntersectionObserver(() => {}));
+        triggerIntersection(target);
 
         await tick();
 
@@ -609,7 +647,6 @@ describe("Tooltip", () => {
         );
         const { getByRole } = render(Tooltip, baseOptions);
         const tooltip = getByRole("tooltip", { hidden: true });
-        const { callback } = IntersectionObserverMock.instances[0];
 
         await fireEvent.focusIn(target);
         await vi.advanceTimersToNextTimerAsync();
@@ -620,8 +657,7 @@ describe("Tooltip", () => {
 
         unrelatedElement.remove();
 
-        // @ts-ignore
-        callback([{ target }], new IntersectionObserver(() => {}));
+        triggerIntersection(target);
 
         await tick();
 
@@ -633,7 +669,6 @@ describe("Tooltip", () => {
       it("should hide the tooltip if the intersection ratio of the target element is less or equal to zero", async () => {
         const { getByRole } = render(Tooltip, baseOptions);
         const tooltip = getByRole("tooltip", { hidden: true });
-        const { callback } = IntersectionObserverMock.instances[0];
 
         await fireEvent.focusIn(target);
         await vi.advanceTimersToNextTimerAsync();
@@ -643,10 +678,7 @@ describe("Tooltip", () => {
         expect(target.isConnected).toBe(true);
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
 
-        const entries = [{ intersectionRatio: 0, target }];
-
-        // @ts-ignore
-        callback(entries, new IntersectionObserver(() => {}));
+        triggerIntersection(target, { intersectionRatio: 0 });
 
         await tick();
 
@@ -658,7 +690,6 @@ describe("Tooltip", () => {
       it("shouldn't hide the tooltip if the intersection ration of the target is greater than zero", async () => {
         const { getByRole } = render(Tooltip, baseOptions);
         const tooltip = getByRole("tooltip", { hidden: true });
-        const { callback } = IntersectionObserverMock.instances[0];
 
         await fireEvent.focusIn(target);
         await vi.advanceTimersToNextTimerAsync();
@@ -667,10 +698,7 @@ describe("Tooltip", () => {
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
 
-        const entries = [{ intersectionRatio: 1, target }];
-
-        // @ts-ignore
-        callback(entries, new IntersectionObserver(() => {}));
+        triggerIntersection(target, { intersectionRatio: 1 });
 
         await tick();
 

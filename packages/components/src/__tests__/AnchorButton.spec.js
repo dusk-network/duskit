@@ -183,11 +183,12 @@ describe("AnchorButton", () => {
 
   describe("Reactivity", () => {
     it("should react to property changes", async () => {
-      const props = /** @type {const} */ ({
+      /** @type {import("svelte").ComponentProps<AnchorButton>} */
+      const props = {
         ...baseProps,
         disabled: false,
         variant: "primary",
-      });
+      };
       const { component, rerender } = render(AnchorButton, {
         ...baseOptions,
         props,
@@ -220,10 +221,11 @@ describe("AnchorButton", () => {
 
       expect(element).toHaveTextContent("Updated Text Only");
 
-      const propsIconBefore = /** @type {const} */ ({
+      /** @type {Partial<import("svelte").ComponentProps<AnchorButton>>} */
+      const propsIconBefore = {
         icon: { path: mdiFolderOutline, position: "before" },
         text: "Initial Before",
-      });
+      };
 
       await rerender(propsIconBefore);
 
@@ -242,10 +244,11 @@ describe("AnchorButton", () => {
       ).toHaveTextContent("Updated Before");
       expect(element.querySelector("path")).toHaveAttribute("d", mdiAbTesting);
 
-      const propsIconAfter = /** @type {const} */ ({
+      /** @type {Partial<import("svelte").ComponentProps<AnchorButton>>} */
+      const propsIconAfter = {
         icon: { path: mdiFolderOutline, position: "after" },
         text: "Initial After",
-      });
+      };
 
       await rerender(propsIconAfter);
 

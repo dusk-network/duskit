@@ -19,7 +19,7 @@
       ]
     },
     "resolveJsonModule": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "strict": true,
     "target": "ESNext",
     "types": ["lamb-types"]

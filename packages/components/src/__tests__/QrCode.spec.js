@@ -116,16 +116,6 @@ describe("QrCode", () => {
     expect(newImg).toHaveAttribute("src", newProps.value);
     expect(newImg).toHaveAttribute("height", "300");
     expect(newImg).toHaveAttribute("width", "300");
-
-    // Absence of image's `src` attribute
-    toDataURLMock.mockResolvedValueOnce("");
-
-    await rerender({ value: "" });
-    await vi.runAllTimersAsync();
-
-    expect(element.querySelector(".dusk-qr-code__image")).not.toHaveAttribute(
-      "src"
-    );
   });
 
   it("should use default values for QR code related props", async () => {

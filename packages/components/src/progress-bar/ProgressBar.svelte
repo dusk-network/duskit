@@ -7,6 +7,7 @@
   import { tweened } from "svelte/motion";
 
   import { makeClassName } from "@duskit/string";
+  import { DEFAULT_PROGRESS_BAR_MOTION_DURATION } from "./motion";
 
   import "./ProgressBar.css";
 
@@ -17,7 +18,7 @@
   export let currentPercentage = undefined;
 
   /** @type {ProgressBarProps["motionDuration"]} */
-  export let motionDuration = 400;
+  export let motionDuration = DEFAULT_PROGRESS_BAR_MOTION_DURATION;
 
   /** @type {HTMLDivElement} */
   let rootElement;

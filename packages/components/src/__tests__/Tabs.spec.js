@@ -194,10 +194,11 @@ describe("Tabs", () => {
   });
 
   it("should fire a change event when a tab is selected and it's not the current selection", async () => {
-    let expectedTabId = "";
+    /** @type {HTMLElement | null} */
+    let expectedTab = null;
     /** @param {CustomEvent<string>} event */
     const onChange = (event) => {
-      expect(event.detail).toBe(expectedTabId);
+      expect(event.detail).toBe(expectedTab?.dataset.tabid ?? "");
     };
 
     const { getAllByRole } = await renderTabs(baseProps, {
@@ -205,8 +206,7 @@ describe("Tabs", () => {
     });
     const tabs = getAllByRole("tab");
 
-    let expectedTab = tabs[0];
-    expectedTabId = expectedTab.dataset.tabid ?? "";
+    expectedTab = tabs[0];
 
     expect.assertions(3);
 
@@ -216,12 +216,10 @@ describe("Tabs", () => {
     await fireEvent.click(expectedTab);
 
     expectedTab = tabs[1];
-    expectedTabId = expectedTab.dataset.tabid ?? "";
 
     await fireEvent.keyDown(expectedTab, { key: "Enter" });
 
     expectedTab = tabs[2];
-    expectedTabId = expectedTab.dataset.tabid ?? "";
 
     await fireEvent.keyDown(expectedTab, { key: " " });
 

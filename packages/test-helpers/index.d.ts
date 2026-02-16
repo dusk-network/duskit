@@ -15,9 +15,13 @@ export declare function getAsHTMLElement(
 ): HTMLElement;
 
 export declare class IntersectionObserverMock extends IntersectionObserver {
-  static instances: IntersectionObserverMock[];
   callback: IntersectionObserverCallback;
   constructor(callback: IntersectionObserverCallback);
+  static trigger(
+    element: Element,
+    data?: Partial<IntersectionObserverEntry>
+  ): void;
+  static reset(): void;
 }
 
 export declare function mockReadableStore<T>(initialValue: T): Readable<T> & {
