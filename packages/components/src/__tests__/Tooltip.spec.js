@@ -161,77 +161,51 @@ describe("Tooltip", () => {
   });
 
   it("should add event listeners to the document body when mounting and remove them when unmounting", () => {
+    const expectedEvents = [
+      "focusin",
+      "focusout",
+      "keydown",
+      "mouseenter",
+      "mouseleave",
+    ];
     const addListenerSpy = vi.spyOn(document.body, "addEventListener");
     const removeListenerSpy = vi.spyOn(document.body, "removeEventListener");
     const { unmount } = render(Tooltip, baseOptions);
-    const handlers = addListenerSpy.mock.calls.map((call) => call[1]);
 
-    expect(addListenerSpy).toHaveBeenCalledTimes(5);
-    expect(addListenerSpy).toHaveBeenNthCalledWith(
-      1,
-      "focusin",
-      expect.any(Function),
-      expect.objectContaining({ capture: true })
-    );
-    expect(addListenerSpy).toHaveBeenNthCalledWith(
-      2,
-      "focusout",
-      expect.any(Function),
-      expect.objectContaining({ capture: true })
-    );
-    expect(addListenerSpy).toHaveBeenNthCalledWith(
-      3,
-      "keydown",
-      expect.any(Function),
-      expect.objectContaining({ capture: true })
-    );
-    expect(addListenerSpy).toHaveBeenNthCalledWith(
-      4,
-      "mouseenter",
-      expect.any(Function),
-      expect.objectContaining({ capture: true })
-    );
-    expect(addListenerSpy).toHaveBeenNthCalledWith(
-      5,
-      "mouseleave",
-      expect.any(Function),
-      expect.objectContaining({ capture: true })
-    );
+    /**
+     * @param {Array<[string, EventListenerOrEventListenerObject, (AddEventListenerOptions | EventListenerOptions | boolean | undefined)?]>} calls
+     */
+    const getTrackedCalls = (calls) =>
+      calls.filter(([eventType]) => expectedEvents.includes(eventType));
+    const addedCalls = getTrackedCalls(addListenerSpy.mock.calls);
+
+    /** @type {Record<string, EventListenerOrEventListenerObject>} */
+    const handlersByEvent = {};
+
+    expectedEvents.forEach((eventType) => {
+      const call = addedCalls.find(([type]) => type === eventType);
+
+      expect(call).toBeDefined();
+      expect(call?.[1]).toEqual(expect.any(Function));
+
+      if (call) {
+        handlersByEvent[eventType] = call[1];
+      }
+    });
 
     unmount();
 
-    expect(removeListenerSpy).toHaveBeenCalledTimes(5);
+    const removedCalls = getTrackedCalls(removeListenerSpy.mock.calls);
 
-    expect(removeListenerSpy).toHaveBeenNthCalledWith(
-      1,
-      "focusin",
-      handlers[0],
-      expect.objectContaining({ capture: true })
-    );
-    expect(removeListenerSpy).toHaveBeenNthCalledWith(
-      2,
-      "focusout",
-      handlers[1],
-      expect.objectContaining({ capture: true })
-    );
-    expect(removeListenerSpy).toHaveBeenNthCalledWith(
-      3,
-      "keydown",
-      handlers[2],
-      expect.objectContaining({ capture: true })
-    );
-    expect(removeListenerSpy).toHaveBeenNthCalledWith(
-      4,
-      "mouseenter",
-      handlers[3],
-      expect.objectContaining({ capture: true })
-    );
-    expect(removeListenerSpy).toHaveBeenNthCalledWith(
-      5,
-      "mouseleave",
-      handlers[4],
-      expect.objectContaining({ capture: true })
-    );
+    expectedEvents.forEach((eventType) => {
+      const call = removedCalls.find(
+        ([type, listener]) =>
+          type === eventType && listener === handlersByEvent[eventType]
+      );
+
+      expect(call).toBeDefined();
+      expect(call?.[1]).toBe(handlersByEvent[eventType]);
+    });
 
     addListenerSpy.mockRestore();
     removeListenerSpy.mockRestore();

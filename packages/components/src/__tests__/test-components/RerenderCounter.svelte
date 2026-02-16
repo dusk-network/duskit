@@ -1,12 +1,18 @@
-<svelte:options immutable={true} />
-
 <script>
   import { Rerender } from "../../..";
 
-  /** @type {number | undefined} */
-  export let interval = undefined;
+  /**
+   * @typedef {Object} Props
+   * @property {number | undefined} [interval]
+   */
+
+  /** @type {Props} */
+  const { interval = undefined } = $props();
 
   let counter = 0;
+
+  /** @type {() => number} */
+  const generateValue = () => counter++;
 </script>
 
-<Rerender {interval}>{counter++}</Rerender>
+<Rerender {generateValue} {interval}></Rerender>

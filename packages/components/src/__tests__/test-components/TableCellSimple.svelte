@@ -1,6 +1,11 @@
 <script>
-  /** @type {string} */
-  export let text;
+  /**
+   * @typedef {Object} Props
+   * @property {string} text
+   */
+
+  /** @type {Props} */
+  const { text } = $props();
 </script>
 
 <div class="table-cell__simple">{text}</div>

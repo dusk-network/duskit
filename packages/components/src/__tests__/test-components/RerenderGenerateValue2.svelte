@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script>
   import { Rerender } from "../../..";
 
@@ -10,6 +8,8 @@
   const generateValue = () => values[index++];
 </script>
 
-<Rerender {generateValue} let:value>
-  <span>now the value is: {value}</span>
+<Rerender {generateValue}>
+  {#snippet children({ value = 0 })}
+    <span>now the value is: {value}</span>
+  {/snippet}
 </Rerender>

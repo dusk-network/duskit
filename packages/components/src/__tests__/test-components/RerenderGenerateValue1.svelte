@@ -1,10 +1,13 @@
-<svelte:options immutable={true} />
-
 <script>
   import { Rerender } from "../../..";
 
-  /** @type {Array<any>} */
-  export let values;
+  /**
+   * @typedef {Object} Props
+   * @property {Array<any>} values
+   */
+
+  /** @type {Props} */
+  const { values } = $props();
 
   let index = 0;
 

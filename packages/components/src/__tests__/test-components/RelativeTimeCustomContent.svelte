@@ -1,22 +1,23 @@
-<svelte:options immutable={true} />
-
 <script>
   import { RelativeTime } from "../../..";
 
-  /** @type {boolean} */
-  export let autoRefresh;
+  /**
+   * @typedef {Object} Props
+   * @property {boolean} autoRefresh
+   * @property {Date} date
+   */
 
-  /** @type {Date} */
-  export let date;
+  /** @type {Props} */
+  const { autoRefresh, date } = $props();
 
   /** @type {RelativeTime} */
-  let rootElement;
+  let rootElement = /** @type {RelativeTime} */ ($state());
 
   export const getRootElement = () => rootElement;
 </script>
 
 <RelativeTime bind:this={rootElement} {autoRefresh} {date}>
-  <svelte:fragment let:relativeTime>
+  {#snippet children({ relativeTime = "" })}
     <span>The relative time now is {relativeTime}</span>
-  </svelte:fragment>
+  {/snippet}
 </RelativeTime>

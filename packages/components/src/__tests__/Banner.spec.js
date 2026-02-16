@@ -8,6 +8,35 @@ import {
 
 import { Banner } from "../..";
 
+/** @param {Node} node */
+const removeCommentNodes = (node) => {
+  Array.from(node.childNodes).forEach((child) => {
+    if (child.nodeType === Node.COMMENT_NODE) {
+      child.remove();
+
+      return;
+    }
+
+    removeCommentNodes(child);
+  });
+};
+
+/**
+ * @param {Element | null} element
+ * @returns {Element | null}
+ */
+const withoutCommentNodes = (element) => {
+  if (!element) {
+    return element;
+  }
+
+  const clone = /** @type {Element} */ (element.cloneNode(true));
+
+  removeCommentNodes(clone);
+
+  return clone;
+};
+
 describe("Banner", () => {
   const variants = /** @type {const} */ ([
     "error",
@@ -30,13 +59,13 @@ describe("Banner", () => {
   it("should render the `Banner` component", () => {
     const { container } = renderWithSimpleContent(Banner, baseOptions);
 
-    expect(container.firstElementChild).toMatchSnapshot();
+    expect(withoutCommentNodes(container.firstElementChild)).toMatchSnapshot();
   });
 
   it("should render a warning message if no content is provided for the default slot", () => {
     const { container } = render(Banner, baseOptions);
 
-    expect(container.firstElementChild).toMatchSnapshot();
+    expect(withoutCommentNodes(container.firstElementChild)).toMatchSnapshot();
   });
 
   it("should pass additional class names and attributes to the rendered element", () => {
@@ -67,7 +96,9 @@ describe("Banner", () => {
 
       // we use snapshots here as other than the class name
       // the component uses a different icon for each variant
-      expect(container.firstElementChild).toMatchSnapshot();
+      expect(
+        withoutCommentNodes(container.firstElementChild)
+      ).toMatchSnapshot();
     }
   );
 

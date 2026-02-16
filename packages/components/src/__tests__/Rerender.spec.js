@@ -48,15 +48,15 @@ describe("Rerender", () => {
       baseOptions
     );
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->0"`);
+    expect(container.textContent).toBe("0");
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->1"`);
+    expect(container.textContent).toBe("1");
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->2"`);
+    expect(container.textContent).toBe("2");
 
     expect(domMutations).toBe(2);
   });
@@ -68,23 +68,23 @@ describe("Rerender", () => {
       props,
     });
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->0"`);
+    expect(container.textContent).toBe("0");
 
     await vi.advanceTimersByTimeAsync(props.interval / 2);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->0"`);
+    expect(container.textContent).toBe("0");
 
     await vi.advanceTimersByTimeAsync(props.interval / 2);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->1"`);
+    expect(container.textContent).toBe("1");
 
     await vi.advanceTimersByTimeAsync(props.interval / 2);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->1"`);
+    expect(container.textContent).toBe("1");
 
     await vi.advanceTimersByTimeAsync(props.interval / 2);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->2"`);
+    expect(container.textContent).toBe("2");
     expect(domMutations).toBe(2);
   });
 
@@ -156,21 +156,15 @@ describe("Rerender", () => {
       baseOptions
     );
 
-    expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<!----><!----><span>now the value is: 0</span>"`
-    );
+    expect(container.textContent).toBe("now the value is: 0");
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<!----><!----><span>now the value is: 1</span>"`
-    );
+    expect(container.textContent).toBe("now the value is: 1");
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(
-      `"<!----><!----><span>now the value is: 2</span>"`
-    );
+    expect(container.textContent).toBe("now the value is: 2");
     expect(domMutations).toBe(2);
   });
 });

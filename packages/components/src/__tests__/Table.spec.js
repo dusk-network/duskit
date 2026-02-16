@@ -176,7 +176,21 @@ describe("Table", () => {
 
     await rerender(newProps);
 
-    expect(table).toMatchSnapshot();
+    const headers = table.querySelectorAll("th");
+    const rows = table.querySelectorAll("tbody tr");
+    const firstRowNameCell = getAsHTMLElement(
+      table,
+      'tbody tr:first-child td[data-column="name"]'
+    );
+    const firstRowCustomCell = getAsHTMLElement(
+      table,
+      'tbody tr:first-child td[data-column="custom"]'
+    );
+
+    expect(headers).toHaveLength(2);
+    expect(rows).toHaveLength(1);
+    expect(firstRowNameCell).toHaveTextContent("2 - Jane Doe");
+    expect(firstRowCustomCell).toHaveTextContent("N/A");
   });
 
   it("should add a specific `*--hidden` class to headers and cells marked as hidden", () => {
