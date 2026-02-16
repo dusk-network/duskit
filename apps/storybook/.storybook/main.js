@@ -9,6 +9,9 @@ const config = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|svelte)"],
   // Actions/controls are part of Storybook core (v9+). Only keep real addons here.
   addons: ["@storybook/addon-docs"],
+  core: {
+    disableTelemetry: true,
+  },
   framework: {
     name: "@storybook/svelte-vite",
     options: {},
@@ -21,8 +24,12 @@ const config = {
 
     // Storybook's Svelte renderer ships `.svelte` sources. Ensure Vite can compile them.
     const existingPlugins = viteConfig.plugins ?? [];
-    const hasSveltePlugin = existingPlugins.some((p) => p?.name === "vite-plugin-svelte");
-    const plugins = hasSveltePlugin ? existingPlugins : [svelte(), ...existingPlugins];
+    const hasSveltePlugin = existingPlugins.some(
+      (p) => p?.name === "vite-plugin-svelte"
+    );
+    const plugins = hasSveltePlugin
+      ? existingPlugins
+      : [svelte(), ...existingPlugins];
 
     const merged = mergeConfig(viteConfig, {
       // Make the static build deployable under GitHub Pages' subpath.
@@ -48,4 +55,3 @@ const config = {
 };
 
 export default config;
-

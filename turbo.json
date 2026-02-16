@@ -37,9 +37,6 @@
       "cache": false,
       "persistent": true
     },
-    "build-storybook": {
-      "outputs": ["storybook-static/**"]
-    },
     "typecheck": {},
     "typecheck:watch": {
       "cache": false,
