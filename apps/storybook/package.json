@@ -1,0 +1,23 @@
+{
+  "name": "@duskit/storybook",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build --output-dir storybook-static"
+  },
+  "dependencies": {
+    "@duskit/components": "*",
+    "@duskit/css": "*"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "8.6.15",
+    "@storybook/svelte-vite": "8.6.15",
+    "@sveltejs/vite-plugin-svelte": "3.0.2",
+    "@mdi/js": "7.4.47",
+    "storybook": "8.6.15",
+    "svelte": "4.2.20",
+    "vite": "5.4.21"
+  }
+}

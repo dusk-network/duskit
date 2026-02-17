@@ -1,0 +1,14 @@
+import { Meta, Title, Subtitle } from "@storybook/blocks";
+
+<Meta title="Docs/Welcome" />
+
+<Title>Welcome</Title>
+<Subtitle>Duskit components in isolation</Subtitle>
+
+This Storybook lives in `apps/storybook` and is deployed to GitHub Pages via
+`.github/workflows/storybook-pages.yml`.
+
+Notes:
+
+- Global overlays are mounted for most stories (Tooltip `id="main-tooltip"` and
+  Toast). You can opt out per-story with `parameters.disableGlobalOverlays`.

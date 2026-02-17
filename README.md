@@ -103,11 +103,16 @@ Refer to the package's README to see which commands are available.
 - `npm run checks` - runs all health checks (formatting, linting, type checking, tests)
 - `npm run clean` - runs the `clean` script for all packages (currently removes all `coverage`, `docs` and `node_modules` folders)
 - `npm run docs` - generates HTML documentation for all `@duskit` in the `docs` folder
+- `npm run dev` - runs the dev tasks (including Storybook)
+- `npm run dev:storybook` - runs Storybook only
+- `npm run build` - runs all build tasks (tokens + Storybook)
+- `npm run build:tokens` - builds the design tokens
 - `npm run format` - fixes the formatting in all files
 - `npm run format:check` - performs the formatting check
 - `npm run lint` - performs the linting check
 - `npm run lint:fix` - fixes, where possible, linting errors
 - `npm run release` - [publishes][changeset-publish] a new release
+- `npm run build:storybook` - builds a static Storybook into `apps/storybook/storybook-static`
 - `npm run test` - runs the test suite
 - `npm run test:coverage` - runs the test suite and generates the code coverage report in the `coverage` folder of each package
 - `npm run test:watch` - runs the test suite in watch mode

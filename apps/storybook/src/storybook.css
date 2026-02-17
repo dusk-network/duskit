@@ -1,0 +1,46 @@
+:root {
+  /*
+   * @duskit/components uses these vars (e.g. Badge/Tooltip) but they are not
+   * currently defined by @duskit/css. Keep Storybook rendering sane.
+   */
+  --on-info-color: var(--on-background-color);
+  --on-success-color: var(--on-background-color);
+  --on-warning-color: var(--on-background-color);
+
+  /* Gaps */
+  --medium-gap: 1.5em;
+
+  /* Inputs */
+  --non-button-control-bg-color: var(--control-bg-color);
+  --non-button-control-text-color: var(--control-text-color);
+
+  /* Links */
+  --anchor-color: var(--secondary-color-variant-dark);
+  --anchor-color-active: var(--secondary-color-variant-dark);
+  --anchor-color-hover: var(--secondary-color-variant-dark);
+  --anchor-color-on-surface: var(--secondary-color-variant-dark);
+  --anchor-color-visited: var(--secondary-color-variant-dark);
+
+  /* Banners */
+  --banner-error-color: var(--error-color);
+  --banner-info-color: var(--info-color);
+  --banner-success-color: var(--success-color);
+  --banner-warning-color: var(--warning-color);
+
+  /* Stepper */
+  --stepper-bar-height: 0.25rem;
+  --stepper-filler-color: var(--secondary-color);
+  --stepper-on-filler-color: var(--on-secondary-color);
+  --stepper-on-rail-color: var(--on-background-color);
+  --stepper-on-rail-variant-secondary-color: white;
+  --stepper-rail-color: var(--divider-color-primary);
+  --stepper-rail-color-variant-secondary: var(--primary-color-variant-light);
+
+  /* Normalize fallbacks */
+  --base-size-40: 40px;
+  --color-attention-subtle: #fff4c2;
+  --color-fg-default: var(--on-background-color);
+
+  /* Typo in @duskit/css */
+  --light-gray: var(--light-grey);
+}

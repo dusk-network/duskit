@@ -58,5 +58,5 @@ jobs:
       - name: Run the test suite
         run: npm run test:coverage
 
-      - name: Building the apps
+      - name: Build
         run: npm run build
