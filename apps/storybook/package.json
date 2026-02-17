@@ -8,8 +8,8 @@
     "build": "storybook build --output-dir storybook-static"
   },
   "dependencies": {
-    "@duskit/components": "0.3.0",
-    "@duskit/css": "0.0.1"
+    "@duskit/components": "*",
+    "@duskit/css": "*"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "8.6.15",
