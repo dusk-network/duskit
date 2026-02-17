@@ -35,16 +35,12 @@ describe("Button", () => {
     const element = component.getRootElement();
 
     expect(element).toHaveClass(`dusk-button--type--${type}`);
-
-    if (type === "toggle") {
-      expect(element).toHaveAttribute("type", "button");
-      expect(element).toHaveAttribute("aria-pressed", "false");
-    } else {
-      expect(element).toHaveAttribute("type", type);
-      expect(element).not.toHaveAttribute("aria-pressed");
-    }
-
-    expect.assertions(3);
+    expect(element.getAttribute("type")).toBe(
+      type === "toggle" ? "button" : type
+    );
+    expect(element.getAttribute("aria-pressed")).toBe(
+      type === "toggle" ? "false" : null
+    );
   });
 
   it('should add an "active" class when the active property of a toggle button changes', async () => {
