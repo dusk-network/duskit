@@ -2,6 +2,7 @@
 const config = {
   cacheBust: true,
   cleanOutputDir: true,
+  entryPoints: ["./index.d.ts"],
   includeHierarchySummary: true,
   includeVersion: true,
   out: "./docs",
