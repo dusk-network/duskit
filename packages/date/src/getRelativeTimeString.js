@@ -16,9 +16,16 @@ const units = [
 /* eslint-enable sort-keys */
 
 /**
+ * Resolves the optimal time unit for a given time difference in milliseconds.
+ *
+ * Note: This function prioritizes performance and zero dependencies over strict calendar accuracy.
+ * It uses fixed mathematical approximations for larger units (e.g., a month is strictly 30 days,
+ * a year is strictly 365 days). It is designed for relative UI time formatting rather than
+ * precise chronological calculations.
+ *
  * @private
- * @param {number} diff
- * @returns {TimeUnit}
+ * @param {number} diff - The time difference in milliseconds.
+ * @returns {TimeUnit} The resolved time unit object containing the name and millisecond factor.
  */
 function getTimeUnit(diff) {
   for (const unit of units) {
