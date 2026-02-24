@@ -173,4 +173,49 @@ describe("Rerender", () => {
     );
     expect(domMutations).toBe(2);
   });
+
+  it("should clear the previous timeout when the interval property changes to prevent overlapping loops", async () => {
+    const props = { interval: 1000 };
+    const { container, rerender } = renderAndObserveContainer(RerenderCounter, {
+      ...baseOptions,
+      props,
+    });
+
+    // Advance to 500ms. The first timer is halfway done.
+    await vi.advanceTimersByTimeAsync(500);
+
+    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->0"`);
+    expect(domMutations).toBe(0);
+
+    // Change the interval to 2000ms. This should destroy the old 1000ms timer
+    // and start a fresh 2000ms timer.
+    await rerender({ interval: 2000 });
+
+    // Advance another 500ms. If the old timer wasn't cleared, it would fire now
+    // (500 + 500 = 1000) causing a mutation. We check that the DOM is untouched.
+    await vi.advanceTimersByTimeAsync(500);
+
+    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->0"`);
+    expect(domMutations).toBe(0);
+
+    // Advance 1500ms more to complete the new 2000ms timer (500 + 1500 = 2000).
+    await vi.advanceTimersByTimeAsync(1500);
+
+    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->1"`);
+    expect(domMutations).toBe(1);
+  });
+
+  it("should clear the timeout when the component is unmounted", () => {
+    const clearTimeoutSpy = vi.spyOn(window, "clearTimeout");
+    const { unmount } = renderAndObserveContainer(RerenderCounter, baseOptions);
+
+    // Clear the spy history because the reactive statement
+    // calls clearTimeout(undefined) on initial mount
+    clearTimeoutSpy.mockClear();
+    unmount();
+
+    expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
+
+    clearTimeoutSpy.mockRestore();
+  });
 });

@@ -6,6 +6,7 @@
   /* eslint-disable svelte/infinite-reactive-loop */
 
   import { areSVZ } from "lamb";
+  import { onDestroy } from "svelte";
 
   /**
    * If a function is passed the generated value
@@ -29,19 +30,28 @@
   /** @type {undefined | ReturnType<Exclude<RerenderProps["generateValue"], undefined>>}*/
   let value = generateValue && generateValue();
 
+  /** @type {number | undefined} */
+  let timeoutId;
+
   let updateFlag = 0;
 
-  $: setTimeout(() => {
-    if (generateValue) {
-      const newValue = generateValue();
+  onDestroy(() => clearTimeout(timeoutId));
 
-      if (!areSVZ(value, newValue)) {
-        value = newValue;
+  $: {
+    clearTimeout(timeoutId);
+
+    timeoutId = window.setTimeout(() => {
+      if (generateValue) {
+        const newValue = generateValue();
+
+        if (!areSVZ(value, newValue)) {
+          value = newValue;
+        }
       }
-    }
 
-    updateFlag ^= 1;
-  }, interval);
+      updateFlag ^= 1;
+    }, interval);
+  }
 </script>
 
 {#key generateValue ? value : updateFlag}
