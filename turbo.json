@@ -18,11 +18,9 @@
       "cache": false,
       "persistent": true
     },
-    "format:check": {},
     "format": {},
-    "lint": {
-      "dependsOn": ["@duskit/design-tokens#build"]
-    },
+    "format:check": {},
+    "lint": {},
     "lint:fix": {},
     "test": {},
     "test:coverage": {
@@ -31,10 +29,6 @@
     "test:watch": {
       "cache": false,
       "interactive": true,
-      "persistent": true
-    },
-    "storybook": {
-      "cache": false,
       "persistent": true
     },
     "typecheck": {},
