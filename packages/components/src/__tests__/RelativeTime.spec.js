@@ -1,4 +1,12 @@
-import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
+import {
+  afterAll,
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from "vitest";
 import { cleanup, render } from "@testing-library/svelte";
 
 import RelativeTimeCustomContent from "./test-components/RelativeTimeCustomContent.svelte";
@@ -7,16 +15,20 @@ import { RelativeTime } from "../..";
 
 describe("RelativeTime", () => {
   vi.useFakeTimers();
-  vi.setSystemTime(new Date(2024, 4, 20, 15, 25, 30));
 
+  const baseDate = new Date(2024, 4, 20, 15, 25, 30);
   const baseProps = {
-    date: new Date(2024, 4, 20, 15, 25, 10),
+    date: new Date(baseDate.getTime() - 20_000),
   };
 
   const baseOptions = {
     props: baseProps,
     target: document.body,
   };
+
+  beforeEach(() => {
+    vi.setSystemTime(baseDate);
+  });
 
   afterEach(async () => {
     await vi.runOnlyPendingTimersAsync();
@@ -55,20 +67,49 @@ describe("RelativeTime", () => {
     expect(element).toHaveAttribute("data-baz", "baz");
   });
 
-  it("should update the relative time every second if the `autoRefresh` property is set to `true`", async () => {
+  it('should update the relative time every second if the `autoRefresh` property is set to `true` and the time factor is "second"', async () => {
     const props = { ...baseProps, autoRefresh: true };
     const { component } = render(RelativeTime, { ...baseOptions, props });
     const element = component.getRootElement();
 
-    expect(element.textContent).toMatchInlineSnapshot(`"30 seconds ago"`);
+    expect(element.textContent).toMatchInlineSnapshot(`"20 seconds ago"`);
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(element.textContent).toMatchInlineSnapshot(`"31 seconds ago"`);
+    expect(element.textContent).toMatchInlineSnapshot(`"21 seconds ago"`);
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(element.textContent).toMatchInlineSnapshot(`"32 seconds ago"`);
+    expect(element.textContent).toMatchInlineSnapshot(`"22 seconds ago"`);
+  });
+
+  it("should adapt the refresh interval based on the relative time unit factor", async () => {
+    const props = {
+      ...baseProps,
+      autoRefresh: true,
+      date: new Date(Date.now() - 120_000),
+    };
+    const { component } = render(RelativeTime, { ...baseOptions, props });
+    const element = component.getRootElement();
+
+    expect(element.textContent).toMatchInlineSnapshot(`"2 minutes ago"`);
+
+    // Empirical verification of the refresh interval: if the timer were still
+    // firing every second, at the +31s mark the distance would be 151000ms.
+    // Since 151000 / 60000 is approximately 2.51, the formatting logic would round
+    // this up to "3 minutes ago".
+    // The fact that the text remains unchanged confirms the component is correctly
+    // "napping" thanks to the extended interval.
+    await vi.advanceTimersByTimeAsync(31000);
+
+    expect(element.textContent).toMatchInlineSnapshot(`"2 minutes ago"`);
+
+    // Advancing the remaining 29 seconds to cross the minute threshold and
+    // verify that the extended timer eventually wakes up and triggers the
+    // update as expected.
+    await vi.advanceTimersByTimeAsync(29000);
+
+    expect(element.textContent).toMatchInlineSnapshot(`"3 minutes ago"`);
   });
 
   it("should allow to put custom content in the default slot", async () => {
@@ -79,25 +120,25 @@ describe("RelativeTime", () => {
     const element = component.getRootElement().getRootElement();
 
     expect(element.textContent).toMatchInlineSnapshot(
-      `"The relative time now is 33 seconds ago"`
+      `"The relative time now is 20 seconds ago"`
     );
 
     await vi.advanceTimersByTimeAsync(1000);
 
     expect(element.textContent).toMatchInlineSnapshot(
-      `"The relative time now is 34 seconds ago"`
+      `"The relative time now is 21 seconds ago"`
     );
 
     await vi.advanceTimersByTimeAsync(1000);
 
     expect(element.textContent).toMatchInlineSnapshot(
-      `"The relative time now is 35 seconds ago"`
+      `"The relative time now is 22 seconds ago"`
     );
 
     await rerender({ autoRefresh: false });
 
     expect(element.textContent).toMatchInlineSnapshot(
-      `"The relative time now is 35 seconds ago"`
+      `"The relative time now is 22 seconds ago"`
     );
   });
 

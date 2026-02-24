@@ -3,10 +3,10 @@
 <script>
   /** @typedef {import("./RelativeTime").RelativeTimeProps} RelativeTimeProps */
 
-  import { Rerender } from "../..";
-
-  import { getRelativeTimeString } from "@duskit/date";
+  import { getRelativeTimeString, getRelativeTimeUnit } from "@duskit/date";
   import { makeClassName } from "@duskit/string";
+
+  import { Rerender } from "../..";
 
   /** @type {RelativeTimeProps["autoRefresh"]} */
   export let autoRefresh = false;
@@ -23,6 +23,7 @@
   export const getRootElement = () => rootElement;
 
   $: classes = makeClassName(["dusk-relative-time", className]);
+  $: interval = getRelativeTimeUnit(date.getTime() - Date.now()).factor;
 </script>
 
 <time
@@ -34,6 +35,7 @@
   {#if autoRefresh}
     <Rerender
       generateValue={() => getRelativeTimeString(date, "long")}
+      {interval}
       let:value
     >
       <slot relativeTime={value}>{value}</slot>
