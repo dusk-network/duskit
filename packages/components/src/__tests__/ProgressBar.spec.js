@@ -86,6 +86,22 @@ describe("ProgressBar", () => {
     expect(getRoundedBarPercentage(barElement)).toBe(50);
   });
 
+  it("should clamp the percentage value between `0` and `100`", async () => {
+    const { component, rerender } = render(ProgressBar, {
+      currentPercentage: 150,
+    });
+    const barElement = getBarElement(component.getRootElement());
+
+    await vi.advanceTimersByTimeAsync(DEFAULT_PROGRESS_BAR_MOTION_DURATION);
+
+    expect(getRoundedBarPercentage(barElement)).toBe(100);
+
+    await rerender({ currentPercentage: -50 });
+    await vi.advanceTimersByTimeAsync(DEFAULT_PROGRESS_BAR_MOTION_DURATION);
+
+    expect(getRoundedBarPercentage(barElement)).toBe(0);
+  });
+
   it("should restore the indeterminate state and clear the width when current percentage is set back to `undefined`", async () => {
     const { component, rerender } = render(ProgressBar, {
       currentPercentage: 80,
