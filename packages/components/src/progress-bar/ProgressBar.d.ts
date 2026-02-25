@@ -8,6 +8,7 @@ export interface ProgressBarProps extends OmitSvelteSpecificProps<
 > {
   className?: string;
   currentPercentage?: number;
+  easing?: (t: number) => number;
   motionDuration?: number;
 }
 

@@ -18,8 +18,11 @@
   /** @type {ProgressBarProps["currentPercentage"]} */
   export let currentPercentage = undefined;
 
+  /** @type {ProgressBarProps["easing"]} */
+  export let easing = undefined;
+
   /** @type {ProgressBarProps["motionDuration"]} */
-  export let motionDuration = DEFAULT_PROGRESS_BAR_MOTION_DURATION;
+  export let motionDuration = undefined;
 
   /** @type {HTMLDivElement} */
   let rootElement;
@@ -29,16 +32,16 @@
   /** @type {Record<`aria-${string}`, number> | null} */
   let ariaProps;
 
-  const progress = tweened(0, {
-    duration: motionDuration,
-    easing: expoOut,
-  });
+  const progress = tweened(0);
 
   $: classes = makeClassName(["dusk-progress-bar", className]);
   $: if (currentPercentage === undefined) {
     progress.set(0);
   } else {
-    progress.set(clamp(currentPercentage, 0, 100));
+    progress.set(clamp(currentPercentage, 0, 100), {
+      duration: motionDuration ?? DEFAULT_PROGRESS_BAR_MOTION_DURATION,
+      easing: easing ?? expoOut,
+    });
   }
 
   // separate statement as it depends on $progress
