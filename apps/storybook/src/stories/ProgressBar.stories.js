@@ -11,6 +11,15 @@ export default {
     currentPercentage: {
       control: { type: "range", min: 0, max: 100, step: 1 },
     },
+    direction: {
+      control: "select",
+      options: ["ltr", "rtl"],
+      table: {
+        defaultValue: {
+          summary: "ltr",
+        },
+      },
+    },
     easing: {
       control: "select",
       description:
@@ -37,6 +46,7 @@ export default {
 export const Determinate = {
   args: {
     currentPercentage: 42,
+    direction: "ltr",
     easing: "Exponential out",
     motionDuration: 400,
     style: "max-width: 420px;",
@@ -46,6 +56,7 @@ export const Determinate = {
 export const Indeterminate = {
   args: {
     currentPercentage: undefined,
+    direction: "ltr",
     motionDuration: 400,
     style: "max-width: 420px;",
   },
