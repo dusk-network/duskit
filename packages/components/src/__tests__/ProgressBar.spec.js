@@ -40,17 +40,23 @@ describe("ProgressBar", () => {
     const barElement = getBarElement(element);
 
     expect(element).toMatchSnapshot();
+    expect(element).not.toHaveAttribute("aria-valuemax");
+    expect(element).not.toHaveAttribute("aria-valuemin");
+    expect(element).not.toHaveAttribute("aria-valuenow");
     expect(barElement).toHaveClass("dusk-progress-bar__filler--undetermined");
     expect(getComputedStyle(barElement).width).toBe("");
   });
 
   it("should render the `ProgressBar` component with a set percentage", async () => {
     const { component } = render(ProgressBar, { currentPercentage: 33 });
+    const element = component.getRootElement();
+    const barElement = getBarElement(element);
 
     await vi.advanceTimersByTimeAsync(DEFAULT_PROGRESS_BAR_MOTION_DURATION);
 
-    const barElement = getBarElement(component.getRootElement());
-
+    expect(element).toHaveAttribute("aria-valuemax", "100");
+    expect(element).toHaveAttribute("aria-valuemin", "0");
+    expect(element).toHaveAttribute("aria-valuenow", "33");
     expect(getComputedStyle(barElement).width).toBe("33%");
   });
 
@@ -74,15 +80,23 @@ describe("ProgressBar", () => {
     const { component, rerender } = render(ProgressBar, {
       currentPercentage: 0,
     });
-    const barElement = getBarElement(component.getRootElement());
+    const element = component.getRootElement();
+    const barElement = getBarElement(element);
 
     await vi.advanceTimersByTimeAsync(DEFAULT_PROGRESS_BAR_MOTION_DURATION);
+
+    expect(element).toHaveAttribute("aria-valuemax", "100");
+    expect(element).toHaveAttribute("aria-valuemin", "0");
+    expect(element).toHaveAttribute("aria-valuenow", "0");
 
     expect(getRoundedBarPercentage(barElement)).toBe(0);
 
     await rerender({ currentPercentage: 50 });
     await vi.advanceTimersByTimeAsync(DEFAULT_PROGRESS_BAR_MOTION_DURATION);
 
+    expect(element).toHaveAttribute("aria-valuemax", "100");
+    expect(element).toHaveAttribute("aria-valuemin", "0");
+    expect(element).toHaveAttribute("aria-valuenow", "50");
     expect(getRoundedBarPercentage(barElement)).toBe(50);
   });
 
@@ -90,15 +104,18 @@ describe("ProgressBar", () => {
     const { component, rerender } = render(ProgressBar, {
       currentPercentage: 150,
     });
-    const barElement = getBarElement(component.getRootElement());
+    const element = component.getRootElement();
+    const barElement = getBarElement(element);
 
     await vi.advanceTimersByTimeAsync(DEFAULT_PROGRESS_BAR_MOTION_DURATION);
 
+    expect(element).toHaveAttribute("aria-valuenow", "100");
     expect(getRoundedBarPercentage(barElement)).toBe(100);
 
     await rerender({ currentPercentage: -50 });
     await vi.advanceTimersByTimeAsync(DEFAULT_PROGRESS_BAR_MOTION_DURATION);
 
+    expect(element).toHaveAttribute("aria-valuenow", "0");
     expect(getRoundedBarPercentage(barElement)).toBe(0);
   });
 
@@ -111,6 +128,9 @@ describe("ProgressBar", () => {
 
     await vi.advanceTimersByTimeAsync(DEFAULT_PROGRESS_BAR_MOTION_DURATION);
 
+    expect(element).toHaveAttribute("aria-valuemax", "100");
+    expect(element).toHaveAttribute("aria-valuemin", "0");
+    expect(element).toHaveAttribute("aria-valuenow", "80");
     expect(getRoundedBarPercentage(barElement)).toBe(80);
     expect(barElement).not.toHaveClass(
       "dusk-progress-bar__filler--undetermined"
@@ -119,6 +139,9 @@ describe("ProgressBar", () => {
     await rerender({ currentPercentage: undefined });
     await vi.advanceTimersByTimeAsync(DEFAULT_PROGRESS_BAR_MOTION_DURATION);
 
+    expect(element).not.toHaveAttribute("aria-valuemax");
+    expect(element).not.toHaveAttribute("aria-valuemin");
+    expect(element).not.toHaveAttribute("aria-valuenow");
     expect(barElement).toHaveClass("dusk-progress-bar__filler--undetermined");
     expect(getComputedStyle(barElement).width).toBe("");
   });
