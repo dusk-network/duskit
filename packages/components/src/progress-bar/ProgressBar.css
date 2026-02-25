@@ -12,9 +12,17 @@
   background-color: var(--progress-filler-color);
 }
 
+.dusk-progress-bar--rtl > .dusk-progress-bar__filler {
+  margin-left: auto;
+}
+
 .dusk-progress-bar__filler--undetermined {
   width: 20%;
   animation: progressBarAnimation 2s infinite;
+}
+
+.dusk-progress-bar--rtl > .dusk-progress-bar__filler--undetermined {
+  animation: progressBarAnimationRTL 2s infinite;
 }
 
 @keyframes progressBarAnimation {
@@ -24,5 +32,15 @@
 
   100% {
     left: 100%;
+  }
+}
+
+@keyframes progressBarAnimationRTL {
+  0% {
+    right: -20%;
+  }
+
+  100% {
+    right: 100%;
   }
 }

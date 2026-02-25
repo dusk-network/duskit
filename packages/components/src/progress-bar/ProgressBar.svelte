@@ -18,6 +18,9 @@
   /** @type {ProgressBarProps["currentPercentage"]} */
   export let currentPercentage = undefined;
 
+  /** @type {ProgressBarProps["direction"]} */
+  export let direction = undefined;
+
   /** @type {ProgressBarProps["easing"]} */
   export let easing = undefined;
 
@@ -34,7 +37,12 @@
 
   const progress = tweened(0);
 
-  $: classes = makeClassName(["dusk-progress-bar", className]);
+  $: dir = direction ?? "ltr";
+  $: classes = makeClassName([
+    "dusk-progress-bar",
+    `dusk-progress-bar--${dir}`,
+    className,
+  ]);
   $: if (currentPercentage === undefined) {
     progress.set(0);
   } else {
@@ -61,6 +69,7 @@
   {...$$restProps}
   {...ariaProps}
   class={classes}
+  {dir}
   role="progressbar"
 >
   <div

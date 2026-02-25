@@ -58,6 +58,27 @@ describe("ProgressBar", () => {
     expect(getComputedStyle(barElement).width).toBe("");
   });
 
+  it('should allow to pick a direction for the progress bar using "ltr" as a default', async () => {
+    const { component, rerender } = render(ProgressBar);
+    const element = component.getRootElement();
+
+    expect(element).toHaveAttribute("dir", "ltr");
+    expect(element).toHaveClass("dusk-progress-bar--ltr");
+    expect(element).not.toHaveClass("dusk-progress-bar--rtl");
+
+    await rerender({ direction: "rtl" });
+
+    expect(element).toHaveAttribute("dir", "rtl");
+    expect(element).not.toHaveClass("dusk-progress-bar--ltr");
+    expect(element).toHaveClass("dusk-progress-bar--rtl");
+
+    await rerender({ direction: "ltr" });
+
+    expect(element).toHaveAttribute("dir", "ltr");
+    expect(element).toHaveClass("dusk-progress-bar--ltr");
+    expect(element).not.toHaveClass("dusk-progress-bar--rtl");
+  });
+
   it("should render the `ProgressBar` component with a set percentage", async () => {
     const { component } = render(ProgressBar, { currentPercentage: 33 });
     const element = component.getRootElement();
