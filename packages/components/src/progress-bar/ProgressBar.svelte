@@ -3,6 +3,7 @@
 <script>
   /** @typedef {import("./ProgressBar").ProgressBarProps} ProgressBarProps */
 
+  import { clamp } from "lamb";
   import { expoOut } from "svelte/easing";
   import { tweened } from "svelte/motion";
 
@@ -34,7 +35,7 @@
   $: if (currentPercentage === undefined) {
     progress.set(0);
   } else {
-    progress.set(currentPercentage);
+    progress.set(clamp(currentPercentage, 0, 100));
   }
 </script>
 
