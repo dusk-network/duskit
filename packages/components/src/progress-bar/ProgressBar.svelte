@@ -31,7 +31,11 @@
   });
 
   $: classes = makeClassName(["dusk-progress-bar", className]);
-  $: currentPercentage !== undefined && progress.set(currentPercentage);
+  $: if (currentPercentage === undefined) {
+    progress.set(0);
+  } else {
+    progress.set(currentPercentage);
+  }
 </script>
 
 <div
@@ -41,9 +45,9 @@
   role="progressbar"
 >
   <div
-    style={currentPercentage !== undefined ? `width: ${$progress}%` : undefined}
+    class="dusk-progress-bar__filler"
     class:dusk-progress-bar__filler--undetermined={currentPercentage ===
       undefined}
-    class="dusk-progress-bar__filler"
+    style={currentPercentage !== undefined ? `width: ${$progress}%` : undefined}
   ></div>
 </div>
