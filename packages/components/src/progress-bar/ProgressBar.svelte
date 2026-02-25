@@ -26,6 +26,9 @@
 
   export const getRootElement = () => rootElement;
 
+  /** @type {Record<`aria-${string}`, number> | null} */
+  let ariaProps;
+
   const progress = tweened(0, {
     duration: motionDuration,
     easing: expoOut,
@@ -37,11 +40,23 @@
   } else {
     progress.set(clamp(currentPercentage, 0, 100));
   }
+
+  // separate statement as it depends on $progress
+  // which is set in the previous one
+  $: ariaProps =
+    currentPercentage === undefined
+      ? null
+      : {
+          "aria-valuemax": 100,
+          "aria-valuemin": 0,
+          "aria-valuenow": Math.round($progress),
+        };
 </script>
 
 <div
   bind:this={rootElement}
   {...$$restProps}
+  {...ariaProps}
   class={classes}
   role="progressbar"
 >
