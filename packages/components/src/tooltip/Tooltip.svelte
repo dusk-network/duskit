@@ -2,6 +2,9 @@
 
 <script>
   /** @typedef {import("./Tooltip").TooltipProps} TooltipProps */
+  /** @typedef {Exclude<TooltipProps["defaultPlace"], undefined>} ValidPlacement */
+  /** @typedef {Exclude<TooltipProps["defaultType"], undefined>} ValidType */
+  /** @typedef {HTMLElement | SVGElement} ValidTarget */
 
   import { onDestroy } from "svelte";
   import { writable } from "svelte/store";
@@ -24,31 +27,31 @@
    * Default delay in ms before hiding the tooltip.
    * @type {TooltipProps["defaultDelayHide"]}
    */
-  export let defaultDelayHide = 0;
+  export let defaultDelayHide = undefined;
 
   /**
    * Default delay in ms before showing the tooltip.
    * @type {TooltipProps["defaultDelayShow"]}
    */
-  export let defaultDelayShow = 500;
+  export let defaultDelayShow = undefined;
 
   /**
    * Default offset from the target element.
    * @type {TooltipProps["defaultOffset"]}
    */
-  export let defaultOffset = 10;
+  export let defaultOffset = undefined;
 
   /**
    * Preferred default placement.
    * @type {TooltipProps["defaultPlace"]}
    */
-  export let defaultPlace = "top";
+  export let defaultPlace = undefined;
 
   /**
    * Tooltip's default type.
    * @type {TooltipProps["defaultType"]}
    */
-  export let defaultType = "info";
+  export let defaultType = undefined;
 
   /**
    * ID of the tooltip element.
@@ -61,43 +64,152 @@
 
   export const getRootElement = () => rootElement;
 
+  const DEFAULT_DELAY_HIDE = 0;
+  const DEFAULT_DELAY_SHOW = 500;
+  const DEFAULT_OFFSET = 10;
+
+  /** @type {ValidPlacement} */
+  const DEFAULT_PLACE = "top";
+
+  /** @type {ValidType} */
+  const DEFAULT_TYPE = "info";
+
+  /** @type {ValidPlacement[]} */
+  const validPlacements = ["top", "right", "bottom", "left"];
+
+  /** @type {ValidType[]}*/
+  const validTypes = ["error", "info", "success", "warning"];
+
+  /** @type {(value: string | undefined) => value is ValidPlacement} */
+  const isValidPlacement = (value) =>
+    value !== undefined &&
+    validPlacements.includes(/** @type {ValidPlacement} */ (value));
+
+  /** @type {(target: EventTarget | null) => target is ValidTarget} */
+  const isValidTarget = (target) =>
+    target !== null &&
+    (target instanceof HTMLElement || target instanceof SVGElement);
+
+  /** @type {(value: string | undefined) => value is ValidType} */
+  const isValidType = (value) =>
+    value !== undefined &&
+    validTypes.includes(/** @type {ValidType} */ (value));
+
+  /** @type {(fallback: number) => (value: string | undefined) => number} */
+  function parseNumericAttribute(fallback) {
+    return (value) => {
+      const n = parseInt(value ?? "", 10);
+
+      return Number.isNaN(n) ? fallback : n;
+    };
+  }
+
+  const parseDelayHide = parseNumericAttribute(
+    defaultDelayHide ?? DEFAULT_DELAY_HIDE
+  );
+  const parseDelayShow = parseNumericAttribute(
+    defaultDelayShow ?? DEFAULT_DELAY_SHOW
+  );
+  const parseOffset = parseNumericAttribute(defaultOffset ?? DEFAULT_OFFSET);
+
+  /** @type {(value: string | undefined) => ValidPlacement} */
+  const parsePlacement = (value) =>
+    isValidPlacement(value) ? value : (defaultPlace ?? DEFAULT_PLACE);
+
+  /** @type {(value: string | undefined) => ValidType} */
+  const parseType = (value) =>
+    isValidType(value) ? value : (defaultType ?? DEFAULT_TYPE);
+
+  /** @param {Element} targetNode */
+  function teardown(targetNode) {
+    clearTimeout(timeoutID);
+    state.update((current) => ({ ...current, text: "", visible: false }));
+    intersectionObserver.disconnect();
+    mutationObserver.disconnect();
+    targetNode.removeAttribute("aria-described-by");
+    activeTargetNode = null;
+  }
+
+  /**
+   * Tracks the current active trigger to handle async race conditions.
+   * See `handleTooltipShow` function.
+   *
+   * @type {ValidTarget | null}
+   */
+  let activeTargetNode = null;
+
   /** @type {number} */
   let timeoutID = 0;
 
   const state = writable({
-    delayHide: defaultDelayHide,
-    delayShow: defaultDelayShow,
-    offset: defaultOffset,
-    place: defaultPlace,
+    delayHide: defaultDelayHide ?? DEFAULT_DELAY_HIDE,
+    delayShow: defaultDelayShow ?? DEFAULT_DELAY_SHOW,
+    offset: defaultOffset ?? DEFAULT_OFFSET,
+    place: defaultPlace ?? DEFAULT_PLACE,
     text: "",
-    type: defaultType,
+    type: defaultType ?? DEFAULT_TYPE,
     visible: false,
     x: 0,
     y: 0,
   });
 
-  const intersectionObserver = new IntersectionObserver((entries, observer) => {
+  const intersectionObserver = new IntersectionObserver((entries) => {
     if (entries[0].intersectionRatio <= 0 || !entries[0].target.isConnected) {
-      clearTimeout(timeoutID);
-      state.set({
-        ...$state,
-        text: "",
-        visible: false,
-      });
-      observer.disconnect();
+      teardown(entries[0].target);
     }
   });
 
-  /** @type {import("svelte/elements").KeyboardEventHandler<HTMLElement>} */
+  const mutationObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      // The "if" is for the type checker as we already
+      // know we have a valid target here
+      // istanbul ignore next
+      if (!isValidTarget(mutation.target)) {
+        return;
+      }
+
+      if (!mutation.target.isConnected) {
+        teardown(mutation.target);
+
+        return;
+      }
+
+      const {
+        tooltipDisabled,
+        tooltipText = "",
+        tooltipType,
+      } = mutation.target.dataset;
+
+      if (tooltipDisabled === "true") {
+        teardown(mutation.target);
+
+        return;
+      }
+
+      state.update((current) => ({
+        ...current,
+        text: tooltipText,
+        type: parseType(tooltipType),
+      }));
+    });
+  });
+
+  /** @param {KeyboardEvent} event */
   function handleKeydown(event) {
     if (event.key === "Escape") {
       handleTooltipHide(event);
     }
   }
 
-  // @ts-ignore
+  /** @param {FocusEvent | KeyboardEvent | MouseEvent} event */
+  // eslint-disable-next-line max-statements
   function handleTooltipHide(event) {
-    const { tooltipDelayHide, tooltipId } = event.target.dataset;
+    if (!isValidTarget(event.target)) {
+      return;
+    }
+
+    const targetNode = event.target;
+    const { tooltipDelayHide, tooltipId } = targetNode.dataset;
 
     if (tooltipId !== id) {
       return;
@@ -105,64 +217,80 @@
 
     clearTimeout(timeoutID);
 
-    const delayHide = tooltipDelayHide ? +tooltipDelayHide : defaultDelayHide;
+    const delayHide = parseDelayHide(tooltipDelayHide);
     const newState = {
       ...$state,
       text: "",
       visible: false,
     };
 
-    intersectionObserver.unobserve(event.target);
+    intersectionObserver.unobserve(targetNode);
+    mutationObserver.disconnect();
+    activeTargetNode = null;
 
     if (delayHide) {
       timeoutID = window.setTimeout(() => {
-        event.target.removeAttribute("aria-described-by");
+        targetNode.removeAttribute("aria-described-by");
         state.set(newState);
       }, delayHide);
     } else {
-      event.target.removeAttribute("aria-described-by");
+      targetNode.removeAttribute("aria-described-by");
       state.set(newState);
     }
   }
 
-  // @ts-ignore
+  /** @param {FocusEvent | MouseEvent} event */
+  // eslint-disable-next-line max-statements
   async function handleTooltipShow(event) {
+    if (!isValidTarget(event.target)) {
+      return;
+    }
+
+    const targetNode = event.target;
     const {
       tooltipDelayShow,
       tooltipDisabled,
       tooltipId,
-      tooltipOffset = defaultOffset,
-      tooltipPlace = defaultPlace,
+      tooltipOffset,
+      tooltipPlace,
       tooltipText = "",
-      tooltipType = defaultType,
-    } = event.target.dataset;
+      tooltipType,
+    } = targetNode.dataset;
 
     if (tooltipId !== id || tooltipDisabled === "true") {
       return;
     }
 
+    activeTargetNode = targetNode;
     clearTimeout(timeoutID);
-    state.set({ ...$state, text: tooltipText });
-    intersectionObserver.observe(event.target);
+    state.update((current) => ({ ...current, text: tooltipText }));
+    intersectionObserver.observe(targetNode);
+    mutationObserver.observe(targetNode, {
+      attributeFilter: [
+        "data-tooltip-disabled",
+        "data-tooltip-text",
+        "data-tooltip-type",
+      ],
+      attributes: true,
+    });
 
-    const { placement, x, y } = await computePosition(
-      event.target,
-      rootElement,
-      {
-        middleware: [
-          setOffset({ mainAxis: +tooltipOffset }),
-          inline(),
-          flip({ fallbackAxisSideDirection: "start" }),
-          shift(),
-        ],
-        placement: tooltipPlace,
-        strategy: "fixed",
-      }
-    );
+    const { placement, x, y } = await computePosition(targetNode, rootElement, {
+      middleware: [
+        setOffset({ mainAxis: parseOffset(tooltipOffset) }),
+        inline(),
+        flip({ fallbackAxisSideDirection: "start" }),
+        shift(),
+      ],
+      placement: parsePlacement(tooltipPlace),
+      strategy: "fixed",
+    });
+
+    // Abort if the target changed or was cleared (e.g., by a hide event) during async positioning.
+    if (activeTargetNode !== targetNode) {
+      return;
+    }
 
     // We consider only "top", "right", "bottom" and "left" for now.
-    // The extra parenthesis are needed to force the cast for the type checker.
-
     const place = /** @type {import("@floating-ui/dom").Side} */ (
       placement.replace(/-.+$/, "")
     );
@@ -170,28 +298,28 @@
     const newState = {
       ...$state,
       place,
-      type: tooltipType,
+      type: parseType(tooltipType),
       visible: true,
       x,
       y,
     };
 
-    const delayShow = tooltipDelayShow ? +tooltipDelayShow : defaultDelayShow;
+    const delayShow = parseDelayShow(tooltipDelayShow);
 
     if (delayShow) {
       timeoutID = window.setTimeout(() => {
-        if (event.target && event.target.isConnected) {
-          setAriaDescription(event.target);
+        if (targetNode && targetNode.isConnected) {
+          setAriaDescription(targetNode);
           state.set(newState);
         }
       }, delayShow);
     } else {
-      setAriaDescription(event.target);
+      setAriaDescription(targetNode);
       state.set(newState);
     }
   }
 
-  /** @param {HTMLElement} target */
+  /** @param {ValidTarget} target */
   function setAriaDescription(target) {
     document
       .querySelector(`[aria-described-by="${id}"]`)
@@ -201,17 +329,10 @@
 
   onDestroy(() => {
     intersectionObserver.disconnect();
+    mutationObserver.disconnect();
   });
 
-  $: ({
-    place = defaultPlace,
-    text,
-    type = defaultType,
-    visible,
-    x,
-    y,
-  } = $state);
-
+  $: ({ place, text, type, visible, x, y } = $state);
   $: classes = makeClassName([
     "dusk-tooltip",
     `dusk-tooltip-${place}`,
