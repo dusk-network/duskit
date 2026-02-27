@@ -210,7 +210,7 @@ describe("Tooltip", () => {
 
     beforeEach(() => {
       badTarget = createEventTarget({ tooltipId: "fake-tooltip-id" });
-      prevTooltipElement.setAttribute("aria-described-by", baseProps.id);
+      prevTooltipElement.setAttribute("aria-describedby", baseProps.id);
       target = createEventTarget(dataset);
     });
 
@@ -240,8 +240,8 @@ describe("Tooltip", () => {
         await vi.advanceTimersToNextTimerAsync();
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
-        expect(badTarget.getAttribute("aria-described-by")).toBeNull();
-        expect(prevTooltipElement.getAttribute("aria-described-by")).toBe(
+        expect(badTarget.getAttribute("aria-describedby")).toBeNull();
+        expect(prevTooltipElement.getAttribute("aria-describedby")).toBe(
           baseProps.id
         );
 
@@ -249,8 +249,8 @@ describe("Tooltip", () => {
         await vi.advanceTimersToNextTimerAsync();
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
-        expect(badTarget.getAttribute("aria-described-by")).toBeNull();
-        expect(prevTooltipElement.getAttribute("aria-described-by")).toBe(
+        expect(badTarget.getAttribute("aria-describedby")).toBeNull();
+        expect(prevTooltipElement.getAttribute("aria-describedby")).toBe(
           baseProps.id
         );
         expect(clearTimeoutSpy).not.toHaveBeenCalled();
@@ -269,8 +269,8 @@ describe("Tooltip", () => {
         await vi.advanceTimersToNextTimerAsync();
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
-        expect(disabledTarget.getAttribute("aria-described-by")).toBeNull();
-        expect(prevTooltipElement.getAttribute("aria-described-by")).toBe(
+        expect(disabledTarget.getAttribute("aria-describedby")).toBeNull();
+        expect(prevTooltipElement.getAttribute("aria-describedby")).toBe(
           baseProps.id
         );
 
@@ -278,8 +278,8 @@ describe("Tooltip", () => {
         await vi.advanceTimersToNextTimerAsync();
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
-        expect(disabledTarget.getAttribute("aria-described-by")).toBeNull();
-        expect(prevTooltipElement.getAttribute("aria-described-by")).toBe(
+        expect(disabledTarget.getAttribute("aria-describedby")).toBeNull();
+        expect(prevTooltipElement.getAttribute("aria-describedby")).toBe(
           baseProps.id
         );
         expect(clearTimeoutSpy).not.toHaveBeenCalled();
@@ -308,16 +308,16 @@ describe("Tooltip", () => {
 
         expect(tooltip).toHaveTextContent(dataset.tooltipText);
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
-        expect(target.getAttribute("aria-described-by")).toBeNull();
-        expect(prevTooltipElement.getAttribute("aria-described-by")).toBe(
+        expect(target.getAttribute("aria-describedby")).toBeNull();
+        expect(prevTooltipElement.getAttribute("aria-describedby")).toBe(
           baseProps.id
         );
 
         await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
-        expect(target.getAttribute("aria-described-by")).toBe(baseProps.id);
-        expect(prevTooltipElement.getAttribute("aria-described-by")).toBeNull();
+        expect(target.getAttribute("aria-describedby")).toBe(baseProps.id);
+        expect(prevTooltipElement.getAttribute("aria-describedby")).toBeNull();
       });
 
       it("should show the tooltip on a mouse enter event if the target element refers to it and start observing target mutations", async () => {
@@ -342,16 +342,16 @@ describe("Tooltip", () => {
 
         expect(tooltip).toHaveTextContent(dataset.tooltipText);
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
-        expect(target.getAttribute("aria-described-by")).toBeNull();
-        expect(prevTooltipElement.getAttribute("aria-described-by")).toBe(
+        expect(target.getAttribute("aria-describedby")).toBeNull();
+        expect(prevTooltipElement.getAttribute("aria-describedby")).toBe(
           baseProps.id
         );
 
         await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
-        expect(target.getAttribute("aria-described-by")).toBe(baseProps.id);
-        expect(prevTooltipElement.getAttribute("aria-described-by")).toBeNull();
+        expect(target.getAttribute("aria-describedby")).toBe(baseProps.id);
+        expect(prevTooltipElement.getAttribute("aria-describedby")).toBeNull();
       });
 
       it("should show the tooltip if the target is a SVG element", async () => {
@@ -405,8 +405,8 @@ describe("Tooltip", () => {
 
         expect(tooltip).toHaveTextContent(dataset.tooltipText);
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
-        expect(target.getAttribute("aria-described-by")).toBeNull();
-        expect(prevTooltipElement.getAttribute("aria-described-by")).toBe(
+        expect(target.getAttribute("aria-describedby")).toBeNull();
+        expect(prevTooltipElement.getAttribute("aria-describedby")).toBe(
           baseProps.id
         );
 
@@ -414,8 +414,8 @@ describe("Tooltip", () => {
 
         expect(tooltip).toHaveTextContent(dataset.tooltipText);
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
-        expect(target.getAttribute("aria-described-by")).toBeNull();
-        expect(prevTooltipElement.getAttribute("aria-described-by")).toBe(
+        expect(target.getAttribute("aria-describedby")).toBeNull();
+        expect(prevTooltipElement.getAttribute("aria-describedby")).toBe(
           baseProps.id
         );
 
@@ -425,8 +425,8 @@ describe("Tooltip", () => {
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
         expect(tooltip).toHaveClass("dusk-tooltip-error");
-        expect(target.getAttribute("aria-described-by")).toBe(baseProps.id);
-        expect(prevTooltipElement.getAttribute("aria-described-by")).toBeNull();
+        expect(target.getAttribute("aria-describedby")).toBe(baseProps.id);
+        expect(prevTooltipElement.getAttribute("aria-describedby")).toBeNull();
       });
 
       it("should use the tooltip's component defaults if it receives invalid dataset attributes", async () => {
@@ -514,8 +514,8 @@ describe("Tooltip", () => {
 
         expect(tooltip).toHaveTextContent(dataset.tooltipText);
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
-        expect(target.getAttribute("aria-described-by")).toBe(baseProps.id);
-        expect(prevTooltipElement.getAttribute("aria-described-by")).toBeNull();
+        expect(target.getAttribute("aria-describedby")).toBe(baseProps.id);
+        expect(prevTooltipElement.getAttribute("aria-describedby")).toBeNull();
       });
 
       it("should not show the tooltip after the delay if the target element doesn't exist anymore", async () => {
@@ -535,7 +535,7 @@ describe("Tooltip", () => {
         await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
-        expect(target.getAttribute("aria-described-by")).toBeNull();
+        expect(target.getAttribute("aria-describedby")).toBeNull();
       });
 
       it("should not show the tooltip if a hide event is triggered while the position is being computed", async () => {
@@ -632,7 +632,7 @@ describe("Tooltip", () => {
 
         expect(tooltip).toHaveTextContent("");
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
-        expect(target.getAttribute("aria-described-by")).toBeNull();
+        expect(target.getAttribute("aria-describedby")).toBeNull();
       });
 
       it("should hide the tooltip on a mouse leave event if the target element refers to it", async () => {
@@ -657,7 +657,7 @@ describe("Tooltip", () => {
 
         expect(tooltip).toHaveTextContent("");
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
-        expect(target.getAttribute("aria-described-by")).toBeNull();
+        expect(target.getAttribute("aria-describedby")).toBeNull();
       });
 
       it("should use the hide delay on the target element, if present, rather than the default", async () => {
@@ -690,7 +690,7 @@ describe("Tooltip", () => {
 
         expect(tooltip).toHaveTextContent("");
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
-        expect(target.getAttribute("aria-described-by")).toBeNull();
+        expect(target.getAttribute("aria-describedby")).toBeNull();
       });
 
       it("should use the tooltip's component defaults if it receives invalid dataset attributes", async () => {
@@ -774,7 +774,7 @@ describe("Tooltip", () => {
         expect(moDisconnectSpy).toHaveBeenCalledTimes(1);
         expect(tooltip).toHaveTextContent("");
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
-        expect(target.getAttribute("aria-described-by")).toBeNull();
+        expect(target.getAttribute("aria-describedby")).toBeNull();
       });
 
       it("should hide the tooltip if the user presses the escape key", async () => {
@@ -804,7 +804,7 @@ describe("Tooltip", () => {
         expect(moDisconnectSpy).toHaveBeenCalledTimes(1);
         expect(tooltip).toHaveTextContent("");
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
-        expect(target.getAttribute("aria-described-by")).toBeNull();
+        expect(target.getAttribute("aria-describedby")).toBeNull();
       });
 
       it("should hide the tooltip if the target element is detached from the DOM and disconnect the observers", async () => {
@@ -965,9 +965,7 @@ describe("Tooltip", () => {
         ],
         attributes: true,
       });
-      expect(dynamicTarget.getAttribute("aria-described-by")).toBe(
-        baseProps.id
-      );
+      expect(dynamicTarget.getAttribute("aria-describedby")).toBe(baseProps.id);
 
       ioDisconnectSpy.mockClear();
       moDisconnectSpy.mockClear();
@@ -979,7 +977,7 @@ describe("Tooltip", () => {
 
       expect(tooltip.getAttribute("aria-hidden")).toBe("true");
       expect(tooltip).toHaveTextContent("");
-      expect(dynamicTarget.getAttribute("aria-described-by")).toBeNull();
+      expect(dynamicTarget.getAttribute("aria-describedby")).toBeNull();
       expect(ioDisconnectSpy).toHaveBeenCalledTimes(1);
       expect(moDisconnectSpy).toHaveBeenCalledTimes(1);
     });
@@ -1069,9 +1067,7 @@ describe("Tooltip", () => {
       await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
 
       expect(tooltip.getAttribute("aria-hidden")).toBe("false");
-      expect(dynamicTarget.getAttribute("aria-described-by")).toBe(
-        baseProps.id
-      );
+      expect(dynamicTarget.getAttribute("aria-describedby")).toBe(baseProps.id);
 
       ioDisconnectSpy.mockClear();
       moDisconnectSpy.mockClear();
@@ -1081,7 +1077,7 @@ describe("Tooltip", () => {
 
       await tick();
 
-      expect(dynamicTarget.getAttribute("aria-described-by")).toBeNull();
+      expect(dynamicTarget.getAttribute("aria-describedby")).toBeNull();
       expect(tooltip.getAttribute("aria-hidden")).toBe("true");
       expect(tooltip).toHaveTextContent("");
       expect(ioDisconnectSpy).toHaveBeenCalledTimes(1);

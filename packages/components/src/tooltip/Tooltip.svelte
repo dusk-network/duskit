@@ -126,7 +126,7 @@
     state.update((current) => ({ ...current, text: "", visible: false }));
     intersectionObserver.disconnect();
     mutationObserver.disconnect();
-    targetNode.removeAttribute("aria-described-by");
+    targetNode.removeAttribute("aria-describedby");
     activeTargetNode = null;
   }
 
@@ -230,11 +230,11 @@
 
     if (delayHide) {
       timeoutID = window.setTimeout(() => {
-        targetNode.removeAttribute("aria-described-by");
+        targetNode.removeAttribute("aria-describedby");
         state.set(newState);
       }, delayHide);
     } else {
-      targetNode.removeAttribute("aria-described-by");
+      targetNode.removeAttribute("aria-describedby");
       state.set(newState);
     }
   }
@@ -322,9 +322,9 @@
   /** @param {ValidTarget} target */
   function setAriaDescription(target) {
     document
-      .querySelector(`[aria-described-by="${id}"]`)
-      ?.removeAttribute("aria-described-by");
-    target.setAttribute("aria-described-by", id);
+      .querySelector(`[aria-describedby="${id}"]`)
+      ?.removeAttribute("aria-describedby");
+    target.setAttribute("aria-describedby", id);
   }
 
   onDestroy(() => {
