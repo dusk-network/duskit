@@ -7,6 +7,7 @@ export { default as Button } from "./src/button/Button.svelte";
 export { default as Card } from "./src/card/Card.svelte";
 export { default as Checkbox } from "./src/checkbox/Checkbox.svelte";
 export { default as CopyField } from "./src/copy-field/CopyField.svelte";
+export { default as Drawer } from "./src/drawer/Drawer.svelte";
 export { default as ErrorAlert } from "./src/error-alert/ErrorAlert.svelte";
 export { default as ErrorDetails } from "./src/error-details/ErrorDetails.svelte";
 export { default as ExclusiveChoice } from "./src/exclusive-choice/ExclusiveChoice.svelte";

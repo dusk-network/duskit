@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Drawer > should render the \`Drawer\` component in a closed state by default 1`] = `
+<aside
+  aria-hidden="true"
+  class="dusk-drawer dusk-drawer--from--left dusk-drawer--size--default"
+  inert="true"
+>
+  <!---->
+</aside>
+`;
