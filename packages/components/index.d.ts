@@ -8,6 +8,7 @@ export { default as Button } from "./src/button/Button";
 export { default as Card } from "./src/card/Card";
 export { default as Checkbox } from "./src/checkbox/Checkbox";
 export { default as CopyField } from "./src/copy-field/CopyField";
+export { default as Drawer } from "./src/drawer/Drawer";
 export { default as ErrorAlert } from "./src/error-alert/ErrorAlert";
 export { default as ErrorDetails } from "./src/error-details/ErrorDetails";
 export { default as ExclusiveChoice } from "./src/exclusive-choice/ExclusiveChoice";

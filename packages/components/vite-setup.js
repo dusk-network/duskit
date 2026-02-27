@@ -31,6 +31,7 @@ if (!Element.prototype.getAnimations) {
 }
 
 const elementMethods = /** @type {const} */ ([
+  "animate",
   "scrollBy",
   "scrollTo",
   "scrollIntoView",
