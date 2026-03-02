@@ -80,7 +80,7 @@ describe("ProgressBar", () => {
   });
 
   it("should render the `ProgressBar` component with a set percentage", async () => {
-    const { component } = render(ProgressBar, { currentPercentage: 33 });
+    const { component } = render(ProgressBar, { value: 33 });
     const element = component.getRootElement();
     const barElement = getBarElement(element);
 
@@ -109,9 +109,7 @@ describe("ProgressBar", () => {
   });
 
   it("should update the `ProgressBar` component when the current percentage property changes", async () => {
-    const { component, rerender } = render(ProgressBar, {
-      currentPercentage: 0,
-    });
+    const { component, rerender } = render(ProgressBar, { value: 0 });
     const element = component.getRootElement();
     const barElement = getBarElement(element);
 
@@ -123,7 +121,7 @@ describe("ProgressBar", () => {
 
     expect(getRoundedBarPercentage(barElement)).toBe(0);
 
-    await rerender({ currentPercentage: 50 });
+    await rerender({ value: 50 });
     await vi.advanceTimersByTimeAsync(TEST_MOTION_DURATION);
 
     expect(element).toHaveAttribute("aria-valuemax", "100");
@@ -134,7 +132,7 @@ describe("ProgressBar", () => {
 
   it("should clamp the percentage value between `0` and `100`", async () => {
     const { component, rerender } = render(ProgressBar, {
-      currentPercentage: 150,
+      value: 150,
     });
     const element = component.getRootElement();
     const barElement = getBarElement(element);
@@ -144,7 +142,7 @@ describe("ProgressBar", () => {
     expect(element).toHaveAttribute("aria-valuenow", "100");
     expect(getRoundedBarPercentage(barElement)).toBe(100);
 
-    await rerender({ currentPercentage: -50 });
+    await rerender({ value: -50 });
     await vi.advanceTimersByTimeAsync(TEST_MOTION_DURATION);
 
     expect(element).toHaveAttribute("aria-valuenow", "0");
@@ -152,9 +150,7 @@ describe("ProgressBar", () => {
   });
 
   it("should restore the indeterminate state and clear the width when current percentage is set back to `undefined`", async () => {
-    const { component, rerender } = render(ProgressBar, {
-      currentPercentage: 80,
-    });
+    const { component, rerender } = render(ProgressBar, { value: 80 });
     const element = component.getRootElement();
     const barElement = getBarElement(element);
 
@@ -168,7 +164,7 @@ describe("ProgressBar", () => {
       "dusk-progress-bar__filler--undetermined"
     );
 
-    await rerender({ currentPercentage: undefined });
+    await rerender({ value: undefined });
     await vi.advanceTimersByTimeAsync(TEST_MOTION_DURATION);
 
     expect(element).not.toHaveAttribute("aria-valuemax");
@@ -181,8 +177,8 @@ describe("ProgressBar", () => {
   it("should allow for a custom easing function and react to its changes", async () => {
     const customEasing = vi.fn((t) => t);
     const props = {
-      currentPercentage: 25,
       easing: customEasing,
+      value: 25,
     };
     const { component, rerender } = render(ProgressBar, props);
     const barElement = getBarElement(component.getRootElement());
@@ -196,10 +192,7 @@ describe("ProgressBar", () => {
 
     const newEasing = vi.fn((t) => t);
 
-    await rerender({
-      currentPercentage: 50,
-      easing: newEasing,
-    });
+    await rerender({ easing: newEasing, value: 50 });
 
     await vi.advanceTimersByTimeAsync(TEST_MOTION_DURATION);
 
@@ -210,11 +203,10 @@ describe("ProgressBar", () => {
 
   it("should allow for a custom motion duration and react to its changes", async () => {
     const props = {
-      currentPercentage: 25,
-
       /** @type {(t: number) => number} */
       easing: (t) => t,
       motionDuration: nextMultipleOf16(TEST_MOTION_DURATION / 2),
+      value: 25,
     };
     const { component, rerender } = render(ProgressBar, props);
     const barElement = getBarElement(component.getRootElement());
@@ -225,10 +217,7 @@ describe("ProgressBar", () => {
 
     const newDuration = nextMultipleOf16(TEST_MOTION_DURATION * 2);
 
-    await rerender({
-      currentPercentage: 77,
-      motionDuration: newDuration,
-    });
+    await rerender({ motionDuration: newDuration, value: 77 });
 
     await vi.advanceTimersByTimeAsync(TEST_MOTION_DURATION);
 
