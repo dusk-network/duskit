@@ -8,9 +8,6 @@ export default {
     controls: { expanded: true },
   },
   argTypes: {
-    currentPercentage: {
-      control: { type: "range", min: 0, max: 100, step: 1 },
-    },
     direction: {
       control: "select",
       options: ["ltr", "rtl"],
@@ -40,24 +37,27 @@ export default {
       },
     },
     motionDuration: { control: "number" },
+    value: {
+      control: { type: "range", min: 0, max: 100, step: 1 },
+    },
   },
 };
 
 export const Determinate = {
   args: {
-    currentPercentage: 42,
     direction: "ltr",
     easing: "Exponential out",
     motionDuration: 400,
     style: "max-width: 420px;",
+    value: 42,
   },
 };
 
 export const Indeterminate = {
   args: {
-    currentPercentage: undefined,
     direction: "ltr",
     motionDuration: 400,
     style: "max-width: 420px;",
+    value: undefined,
   },
 };

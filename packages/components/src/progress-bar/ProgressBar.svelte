@@ -15,9 +15,6 @@
   /** @type {ProgressBarProps["className"]} */
   export let className = undefined;
 
-  /** @type {ProgressBarProps["currentPercentage"]} */
-  export let currentPercentage = undefined;
-
   /** @type {ProgressBarProps["direction"]} */
   export let direction = undefined;
 
@@ -26,6 +23,9 @@
 
   /** @type {ProgressBarProps["motionDuration"]} */
   export let motionDuration = undefined;
+
+  /** @type {ProgressBarProps["value"]} */
+  export let value = undefined;
 
   /** @type {HTMLDivElement} */
   let rootElement;
@@ -43,10 +43,10 @@
     `dusk-progress-bar--${dir}`,
     className,
   ]);
-  $: if (currentPercentage === undefined) {
+  $: if (value === undefined) {
     progress.set(0);
   } else {
-    progress.set(clamp(currentPercentage, 0, 100), {
+    progress.set(clamp(value, 0, 100), {
       duration: motionDuration ?? DEFAULT_PROGRESS_BAR_MOTION_DURATION,
       easing: easing ?? expoOut,
     });
@@ -55,7 +55,7 @@
   // separate statement as it depends on $progress
   // which is set in the previous one
   $: ariaProps =
-    currentPercentage === undefined
+    value === undefined
       ? null
       : {
           "aria-valuemax": 100,
@@ -74,8 +74,7 @@
 >
   <div
     class="dusk-progress-bar__filler"
-    class:dusk-progress-bar__filler--undetermined={currentPercentage ===
-      undefined}
-    style={currentPercentage !== undefined ? `width: ${$progress}%` : undefined}
+    class:dusk-progress-bar__filler--undetermined={value === undefined}
+    style={value !== undefined ? `width: ${$progress}%` : undefined}
   ></div>
 </div>

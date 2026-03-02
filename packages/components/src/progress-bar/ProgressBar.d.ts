@@ -7,10 +7,10 @@ export interface ProgressBarProps extends OmitSvelteSpecificProps<
   SvelteHTMLElements["div"]
 > {
   className?: string;
-  currentPercentage?: number;
   direction?: "ltr" | "rtl";
   easing?: (t: number) => number;
   motionDuration?: number;
+  value?: number;
 }
 
 export default class ProgressBar extends SvelteComponent<
