@@ -68,6 +68,13 @@
   --control-tertiary-text-color: var(--smokey-black);
   --control-tertiary-text-color-hover: var(--granite-grey);
 
+  /* Anchors */
+
+  --anchor-color: var(--on-background-color);
+  --anchor-color-visited: var(--on-background-color);
+  --anchor-color-hover: var(--secondary-color-variant-dark);
+  --anchor-color-active: var(--secondary-color-variant-dark);
+
   /* Progress-related components (Stepper, Progress Bar, etc */
 
   --progress-bar-height: 0.3125em;

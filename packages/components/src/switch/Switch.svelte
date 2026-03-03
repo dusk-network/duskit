@@ -18,9 +18,6 @@
   /** @type {SwitchProps["disabled"]} */
   export let disabled = false;
 
-  /** @type {SwitchProps["onSurface"]} */
-  export let onSurface = false;
-
   /** @type {SwitchProps["tabindex"]} */
   export let tabindex = 0;
 
@@ -52,11 +49,7 @@
     dispatch("change", active);
   }
 
-  $: classes = makeClassName([
-    "dusk-switch",
-    className,
-    onSurface ? "dxusk-switch--on-surface" : "",
-  ]);
+  $: classes = makeClassName(["dusk-switch", className]);
 </script>
 
 <div

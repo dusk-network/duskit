@@ -16,9 +16,6 @@
   /** @type {CardProps["gap"]} */
   export let gap = "default";
 
-  /** @type {CardProps["onSurface"]} */
-  export let onSurface = false;
-
   /** @type {CardProps["showBody"]} */
   export let showBody = true;
 
@@ -27,12 +24,7 @@
 
   export const getRootElement = () => rootElement;
 
-  $: classes = makeClassName([
-    "dusk-card",
-    `dusk-card--gap-${gap}`,
-    `dusk-card--${onSurface ? "on-surface" : "off-surface"}`,
-    className,
-  ]);
+  $: classes = makeClassName(["dusk-card", `dusk-card--gap-${gap}`, className]);
 </script>
 
 <svelte:element

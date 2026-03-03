@@ -13,19 +13,12 @@
   /** @type {AnchorProps["href"]} */
   export let href;
 
-  /** @type {AnchorProps["onSurface"]} */
-  export let onSurface = true;
-
   /** @type {HTMLAnchorElement} */
   let rootElement;
 
   export const getRootElement = () => rootElement;
 
-  $: classes = makeClassName([
-    "dusk-anchor",
-    `dusk-anchor--${onSurface ? "on-surface" : "off-surface"}`,
-    className,
-  ]);
+  $: classes = makeClassName(["dusk-anchor", className]);
 </script>
 
 <a bind:this={rootElement} {...$$restProps} class={classes} {href} on:click>

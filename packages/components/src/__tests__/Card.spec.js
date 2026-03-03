@@ -36,23 +36,6 @@ describe("Card", () => {
     expect(element.nodeName.toLowerCase()).toBe("header");
   });
 
-  it("should update a specific class when its `onSurface` property changes", async () => {
-    /**
-     * `rerender` returned by `renderWithSimpleContent` doesn't
-     * trigger a rerender of the underlying component.
-     */
-    const { component, rerender } = render(Card, baseOptions);
-    const element = component.getRootElement();
-
-    expect(element).toHaveClass("dusk-card--off-surface");
-    expect(element).not.toHaveClass("dusk-card--on-surface");
-
-    await rerender({ onSurface: true });
-
-    expect(element).toHaveClass("dusk-card--on-surface");
-    expect(element).not.toHaveClass("dusk-card--off-surface");
-  });
-
   it.each(gaps)(
     'should render the component applying the desired "%s" gap',
     (gap) => {

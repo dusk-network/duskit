@@ -12,10 +12,6 @@
   border-radius: var(--control-border-radius-size);
 }
 
-.dusk-switch--on-surface {
-  background-color: var(--on-primary-color);
-}
-
 .dusk-switch::after {
   display: inline-block;
   width: 1.5rem;

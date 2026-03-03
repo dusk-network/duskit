@@ -2,7 +2,7 @@
 
 exports[`Anchor > should render the Anchor component 1`] = `
 <a
-  class="dusk-anchor dusk-anchor--on-surface"
+  class="dusk-anchor"
   href="https://example.com"
 >
   <span>

@@ -9,7 +9,6 @@ export interface SwitchProps extends OmitSvelteSpecificProps<
   active?: boolean;
   className?: string;
   disabled?: boolean;
-  onSurface?: boolean;
   tabindex?: number;
 }
 
