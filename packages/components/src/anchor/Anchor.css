@@ -1,34 +1,15 @@
 .dusk-anchor {
-  text-decoration: none;
-}
-
-.dusk-anchor.dusk-anchor__disabled {
-  pointer-events: none;
-}
-
-.dusk-anchor--off-surface {
   color: var(--anchor-color);
 }
 
-.dusk-anchor--off-surface:visited {
+.dusk-anchor:visited {
   color: var(--anchor-color-visited);
 }
 
-.dusk-anchor--off-surface:hover {
+.dusk-anchor:hover {
   color: var(--anchor-color-hover);
 }
 
-.dusk-anchor--off-surface:active {
+.dusk-anchor:active {
   color: var(--anchor-color-active);
-}
-
-.dusk-anchor--on-surface,
-.dusk-anchor--on-surface:visited,
-.dusk-anchor--on-surface:hover,
-.dusk-anchor--on-surface:active {
-  color: var(--anchor-color-on-surface);
-}
-
-.dusk-anchor--on-surface:not(.dusk-anchor-button):hover {
-  text-decoration: underline;
 }

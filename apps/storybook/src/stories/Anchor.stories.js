@@ -5,7 +5,6 @@ export default {
   component: AnchorExample,
   argTypes: {
     href: { control: "text" },
-    onSurface: { control: "boolean" },
     text: { control: "text" },
   },
 };
@@ -13,15 +12,6 @@ export default {
 export const Default = {
   args: {
     href: "https://dusk.network",
-    onSurface: true,
     text: "Visit dusk.network",
   },
 };
-
-export const OffSurface = {
-  args: {
-    ...Default.args,
-    onSurface: false,
-  },
-};
-

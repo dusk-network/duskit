@@ -4,24 +4,20 @@ export default {
   title: "Components/Card",
   component: CardExample,
   argTypes: {
-    gap: { control: "select", options: ["small", "default", "medium", "large"] },
-    onSurface: { control: "boolean" },
+    as: { control: "text" },
+    gap: {
+      control: "select",
+      options: ["small", "default", "medium", "large"],
+    },
     showBody: { control: "boolean" },
   },
 };
 
 export const Default = {
   args: {
+    as: "div",
     gap: "default",
-    onSurface: false,
     showBody: true,
-  },
-};
-
-export const OnSurface = {
-  args: {
-    ...Default.args,
-    onSurface: true,
   },
 };
 
@@ -31,4 +27,3 @@ export const NoBody = {
     showBody: false,
   },
 };
-

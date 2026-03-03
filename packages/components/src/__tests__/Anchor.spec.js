@@ -23,23 +23,6 @@ describe("Anchor", () => {
     expect(container.firstElementChild).toMatchSnapshot();
   });
 
-  it("should update a specific class when its `onSurface` property changes", async () => {
-    /**
-     * `rerender` returned by `renderWithSimpleContent` doesn't
-     * trigger a rerender of the underlying component.
-     */
-    const { component, rerender } = render(Anchor, baseOptions);
-    const element = component.getRootElement();
-
-    expect(element).toHaveClass("dusk-anchor--on-surface");
-    expect(element).not.toHaveClass("dusk-anchor--off-surface");
-
-    await rerender({ onSurface: false });
-
-    expect(element).toHaveClass("dusk-anchor--off-surface");
-    expect(element).not.toHaveClass("dusk-anchor--on-surface");
-  });
-
   it("should forward the `on:click` handler", async () => {
     const handleClick = vi.fn((evt) => evt.preventDefault());
     const { component } = render(Anchor, {

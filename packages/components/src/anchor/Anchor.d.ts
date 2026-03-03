@@ -8,7 +8,6 @@ export interface AnchorProps extends OmitSvelteSpecificProps<
 > {
   className?: string;
   href: string;
-  onSurface?: boolean;
 }
 
 interface AnchorEvents {

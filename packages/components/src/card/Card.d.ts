@@ -8,7 +8,6 @@ export type CardProps<T extends keyof HTMLElementTagNameMap = "div"> =
     as?: T;
     className?: string;
     gap?: GapSize;
-    onSurface?: boolean;
     showBody?: boolean;
   };
 
