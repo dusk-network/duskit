@@ -9,8 +9,8 @@
 
   import "./Switch.css";
 
-  /** @type {SwitchProps["active"]} */
-  export let active = false;
+  /** @type {SwitchProps["checked"]} */
+  export let checked = false;
 
   /** @type {SwitchProps["className"]} */
   export let className = undefined;
@@ -44,18 +44,23 @@
   }
 
   function toggleSwitch() {
-    active = !active;
+    checked = !checked;
 
-    dispatch("change", active);
+    dispatch("change", checked);
   }
 
-  $: classes = makeClassName(["dusk-switch", className]);
+  $: classes = makeClassName([
+    "dusk-switch",
+    checked ? "dusk-switch--checked" : "",
+    disabled ? "dusk-switch--disabled" : "",
+    className,
+  ]);
 </script>
 
 <div
   bind:this={rootElement}
   {...$$restProps}
-  aria-checked={active}
+  aria-checked={checked}
   aria-disabled={disabled}
   class={classes}
   on:click={handleClick}

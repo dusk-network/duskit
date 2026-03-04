@@ -1,14 +1,14 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
-import type { OmitSvelteSpecificProps } from "../dusk.components";
+import type { OmitSvelteSpecificProps, StatusType } from "../dusk.components";
 
 export interface BadgeProps extends OmitSvelteSpecificProps<
   SvelteHTMLElements["span"]
 > {
   className?: string;
   text?: string;
-  variant?: "neutral" | "success" | "warning" | "error";
+  variant?: "neutral" | StatusType;
 }
 
 export default class Badge extends SvelteComponent<BadgeProps, {}, {}> {

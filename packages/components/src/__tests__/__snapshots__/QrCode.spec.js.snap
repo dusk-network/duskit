@@ -2,7 +2,7 @@
 
 exports[`QrCode > should render the \`QrCode\` component and update it when any of the QR code related props change 1`] = `
 <div
-  class="dusk-suspense dusk-suspense--default-gap dusk-qr-code"
+  class="dusk-suspense dusk-suspense--gap--default dusk-qr-code"
 >
   <!---->
   <!---->
@@ -43,7 +43,7 @@ exports[`QrCode > should render the \`QrCode\` component and update it when any 
 
 exports[`QrCode > should render the \`QrCode\` component and update it when any of the QR code related props change 2`] = `
 <div
-  class="dusk-suspense dusk-suspense--default-gap dusk-qr-code"
+  class="dusk-suspense dusk-suspense--gap--default dusk-qr-code"
 >
   <!---->
   <!---->

@@ -10,6 +10,7 @@ export interface ProgressBarProps extends OmitSvelteSpecificProps<
   direction?: "ltr" | "rtl";
   easing?: (t: number) => number;
   motionDuration?: number;
+  size?: "default" | "small";
   value?: number;
 }
 

@@ -2,14 +2,14 @@
 
 exports[`Suspense > should accept a custom message for the failure state 1`] = `
 <div
-  class="dusk-suspense dusk-suspense--default-gap"
+  class="dusk-suspense dusk-suspense--gap--default"
 >
   <!---->
   <!---->
   <!---->
   <!---->
   <div
-    class="dusk-error-alert dusk-error-alert--default-gap dusk-suspense__error"
+    class="dusk-error-alert dusk-error-alert--gap--default dusk-suspense__error"
   >
     <!---->
     <svg
@@ -59,7 +59,7 @@ exports[`Suspense > should accept a custom message for the failure state 1`] = `
 
 exports[`Suspense > should accept a custom message for the pending state 1`] = `
 <div
-  class="dusk-suspense dusk-suspense--default-gap"
+  class="dusk-suspense dusk-suspense--gap--default"
 >
   <!---->
   <!---->
@@ -100,7 +100,7 @@ exports[`Suspense > should accept a custom message for the pending state 1`] = `
 
 exports[`Suspense > should allow to specify the preferred tag for the rendered element 1`] = `
 <section
-  class="dusk-suspense dusk-suspense--default-gap"
+  class="dusk-suspense dusk-suspense--gap--default"
 >
   <!---->
   <!---->
@@ -141,7 +141,7 @@ exports[`Suspense > should allow to specify the preferred tag for the rendered e
 
 exports[`Suspense > should be able to render the \`Suspense\` component in a pending state 1`] = `
 <div
-  class="dusk-suspense dusk-suspense--default-gap"
+  class="dusk-suspense dusk-suspense--gap--default"
 >
   <!---->
   <!---->
@@ -182,14 +182,14 @@ exports[`Suspense > should be able to render the \`Suspense\` component in a pen
 
 exports[`Suspense > should be able to render the \`Suspense\` in a failure state with the "alert" variant as a default 1`] = `
 <div
-  class="dusk-suspense dusk-suspense--default-gap"
+  class="dusk-suspense dusk-suspense--gap--default"
 >
   <!---->
   <!---->
   <!---->
   <!---->
   <div
-    class="dusk-error-alert dusk-error-alert--default-gap dusk-suspense__error"
+    class="dusk-error-alert dusk-error-alert--gap--default dusk-suspense__error"
   >
     <!---->
     <svg
@@ -239,17 +239,17 @@ exports[`Suspense > should be able to render the \`Suspense\` in a failure state
 
 exports[`Suspense > should be able to render the \`Suspense\` in a failure state with the "banner" error variant 1`] = `
 <div
-  class="dusk-suspense dusk-suspense--default-gap"
+  class="dusk-suspense dusk-suspense--gap--default"
 >
   <!---->
   <!---->
   <!---->
   <div
-    class="dusk-banner dusk-banner--error"
+    class="dusk-banner dusk-banner--variant--error"
   >
     <!---->
     <svg
-      class="dusk-icon dusk-icon--size--large dusk-banner__icon banner__icon--error"
+      class="dusk-icon dusk-icon--size--large dusk-banner__icon"
       role="graphics-symbol"
       viewBox="0 0 24 24"
     >
@@ -302,7 +302,7 @@ exports[`Suspense > should be able to render the \`Suspense\` in a failure state
 
 exports[`Suspense > should be able to render the \`Suspense\` in a failure state with the "details" error variant 1`] = `
 <div
-  class="dusk-suspense dusk-suspense--default-gap"
+  class="dusk-suspense dusk-suspense--gap--default"
 >
   <!---->
   <!---->
@@ -341,7 +341,7 @@ exports[`Suspense > should be able to render the \`Suspense\` in a failure state
 
 exports[`Suspense > should be able to render the \`Suspense\` in a successful state 1`] = `
 <div
-  class="dusk-suspense dusk-suspense--default-gap"
+  class="dusk-suspense dusk-suspense--gap--default"
 >
   <!---->
   <!---->
@@ -353,7 +353,7 @@ exports[`Suspense > should be able to render the \`Suspense\` in a successful st
 
 exports[`Suspense > should pass additional class names and attributes to the rendered element 1`] = `
 <div
-  class="dusk-suspense dusk-suspense--default-gap foo bar"
+  class="dusk-suspense dusk-suspense--gap--default foo bar"
   data-baz="baz"
   id="some-id"
 >

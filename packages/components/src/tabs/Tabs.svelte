@@ -170,15 +170,18 @@
     return () => resizeObserver.disconnect();
   });
 
-  $: classes = makeClassName(["dusk-tabs", className]);
   $: ({ canScroll, canScrollLeft, canScrollRight } = $scrollStatus);
+  $: classes = makeClassName(["dusk-tabs", className]);
+  $: scrollBtnsClasses = makeClassName({
+    "dusk-tab-scroll-button": true,
+    "dusk-tab-scroll-button--hidden": !canScroll,
+  });
 </script>
 
 <div bind:this={rootElement} {...$$restProps} class={classes}>
   <Button
-    className="dusk-tab-scroll-button"
+    className={scrollBtnsClasses}
     disabled={!canScrollLeft}
-    hidden={!canScroll}
     icon={{ path: mdiChevronLeft }}
     on:click={handleScrollButtonClick}
     on:mousedown={handleScrollButtonMouseDown}
@@ -196,7 +199,8 @@
       {@const { icon, id, label } = item}
       <li
         aria-selected={id === selectedTab}
-        class={`dusk-tab-item${id === selectedTab ? " dusk-tab-item__selected" : ""}`}
+        class="dusk-tab-item"
+        class:dusk-tab-item--selected={id === selectedTab}
         data-tabid={id}
         on:click={handleTabClick}
         on:focusin={handleTabFocusin}
@@ -221,9 +225,8 @@
     {/each}
   </ul>
   <Button
-    className="dusk-tab-scroll-button"
+    className={scrollBtnsClasses}
     disabled={!canScrollRight}
-    hidden={!canScroll}
     icon={{ path: mdiChevronRight }}
     on:click={handleScrollButtonClick}
     on:mousedown={handleScrollButtonMouseDown}

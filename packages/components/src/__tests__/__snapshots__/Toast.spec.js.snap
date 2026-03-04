@@ -5,10 +5,10 @@ exports[`Toast > should render and dismiss 2 Toasts 1`] = `
   class="dusk-toast"
 >
   <li
-    class="dusk-toast__item"
+    class="dusk-toast__item dusk-toast__item--type--success"
   >
     <span
-      class="dusk-toast__item-icon-wrapper dusk-toast__item-icon-wrapper--success"
+      class="dusk-toast__item-icon-wrapper"
     >
       <!---->
       <svg
@@ -32,10 +32,10 @@ exports[`Toast > should render and dismiss 2 Toasts 1`] = `
     </span>
   </li>
   <li
-    class="dusk-toast__item"
+    class="dusk-toast__item dusk-toast__item--type--info"
   >
     <span
-      class="dusk-toast__item-icon-wrapper dusk-toast__item-icon-wrapper--info"
+      class="dusk-toast__item-icon-wrapper"
     >
       <!---->
       <svg
@@ -67,10 +67,10 @@ exports[`Toast > should render and dismiss the Toast component with the correct 
   class="dusk-toast"
 >
   <li
-    class="dusk-toast__item"
+    class="dusk-toast__item dusk-toast__item--type--success"
   >
     <span
-      class="dusk-toast__item-icon-wrapper dusk-toast__item-icon-wrapper--success"
+      class="dusk-toast__item-icon-wrapper"
     >
       <!---->
       <svg

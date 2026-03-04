@@ -24,6 +24,9 @@
   /** @type {ProgressBarProps["motionDuration"]} */
   export let motionDuration = undefined;
 
+  /** @type {ProgressBarProps["size"]} */
+  export let size = "default";
+
   /** @type {ProgressBarProps["value"]} */
   export let value = undefined;
 
@@ -41,6 +44,7 @@
   $: classes = makeClassName([
     "dusk-progress-bar",
     `dusk-progress-bar--${dir}`,
+    `dusk-progress-bar--size--${size}`,
     className,
   ]);
   $: if (value === undefined) {

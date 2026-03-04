@@ -251,9 +251,15 @@ describe("Tabs", () => {
       ".dusk-tab-scroll-button:last-of-type"
     );
 
-    expect(leftBtn.hidden).toBe(true);
+    expect(leftBtn).toHaveClass(
+      "dusk-tab-scroll-button",
+      "dusk-tab-scroll-button--hidden"
+    );
     expect(leftBtn.getAttribute("disabled")).toBe("");
-    expect(rightBtn.hidden).toBe(true);
+    expect(rightBtn).toHaveClass(
+      "dusk-tab-scroll-button",
+      "dusk-tab-scroll-button--hidden"
+    );
     expect(rightBtn.getAttribute("disabled")).toBe("");
   });
 
@@ -270,9 +276,9 @@ describe("Tabs", () => {
       ".dusk-tab-scroll-button:last-of-type"
     );
 
-    expect(leftBtn.hidden).toBe(false);
+    expect(leftBtn).not.toHaveClass("dusk-tab-scroll-button--hidden");
     expect(leftBtn.getAttribute("disabled")).toBe("");
-    expect(rightBtn.hidden).toBe(false);
+    expect(rightBtn).not.toHaveClass("dusk-tab-scroll-button--hidden");
     expect(rightBtn.getAttribute("disabled")).toBeNull();
 
     await fireEvent.mouseDown(rightBtn, { buttons: 1 });
@@ -301,9 +307,9 @@ describe("Tabs", () => {
       ".dusk-tab-scroll-button:last-of-type"
     );
 
-    expect(leftBtn.hidden).toBe(false);
+    expect(leftBtn).not.toHaveClass("dusk-tab-scroll-button--hidden");
     expect(leftBtn.getAttribute("disabled")).toBeNull();
-    expect(rightBtn.hidden).toBe(false);
+    expect(rightBtn).not.toHaveClass("dusk-tab-scroll-button--hidden");
     expect(rightBtn.getAttribute("disabled")).toBe("");
 
     scrollBySpy.mockClear();
@@ -326,7 +332,7 @@ describe("Tabs", () => {
       ".dusk-tab-scroll-button:last-of-type"
     );
 
-    expect(rightBtn.hidden).toBe(false);
+    expect(rightBtn).not.toHaveClass("dusk-tab-scroll-button--hidden");
     expect(rightBtn.getAttribute("disabled")).toBeNull();
 
     await fireEvent.mouseDown(rightBtn, { buttons: 1 });

@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Badge > should render the Badge component using the type "neutral" as a default 1`] = `
+exports[`Badge > should render the Badge component using the "neutral" variant as a default 1`] = `
 <span
-  class="dusk-badge dusk-badge--variant-neutral"
+  class="dusk-badge dusk-badge--variant--neutral"
 >
   Badge
 </span>

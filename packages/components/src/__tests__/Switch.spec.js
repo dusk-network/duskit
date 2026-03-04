@@ -14,13 +14,18 @@ describe("Switch", () => {
   afterEach(cleanup);
 
   it('should render the "Switch" component with a default tab index of `0`', async () => {
-    const { container, rerender } = render(Switch, baseOptions);
+    const { component, rerender } = render(Switch, baseOptions);
+    const rootElement = component.getRootElement();
 
-    expect(container.firstElementChild).toMatchSnapshot();
+    expect(rootElement).toHaveAttribute("aria-checked", "false");
+    expect(rootElement).not.toHaveClass("dusk-switch--checked");
+    expect(rootElement).toMatchSnapshot();
 
-    await rerender({ ...baseProps, active: true });
+    await rerender({ ...baseProps, checked: true });
 
-    expect(container.firstElementChild).toMatchSnapshot();
+    expect(rootElement).toHaveAttribute("aria-checked", "true");
+    expect(rootElement).toHaveClass("dusk-switch--checked");
+    expect(rootElement).toMatchSnapshot();
   });
 
   it("should use the received tab index", () => {
@@ -39,13 +44,24 @@ describe("Switch", () => {
       disabled: true,
       tabindex: 5,
     };
-    const { container, rerender } = render(Switch, { ...baseOptions, props });
+    const { component, rerender } = render(Switch, { ...baseOptions, props });
+    const rootElement = component.getRootElement();
 
-    expect(container.firstElementChild).toMatchSnapshot();
+    expect(rootElement).toHaveAttribute("aria-checked", "false");
+    expect(rootElement).toHaveAttribute("aria-disabled", "true");
+    expect(rootElement).toHaveAttribute("tabindex", "-1");
+    expect(rootElement).toHaveClass("dusk-switch--disabled");
+    expect(rootElement).not.toHaveClass("dusk-switch--checked");
+    expect(rootElement).toMatchSnapshot();
 
-    await rerender({ ...props, active: true });
+    await rerender({ ...props, checked: true });
 
-    expect(container.firstElementChild).toMatchSnapshot();
+    expect(rootElement).toHaveAttribute("aria-checked", "true");
+    expect(rootElement).toHaveAttribute("aria-disabled", "true");
+    expect(rootElement).toHaveAttribute("tabindex", "-1");
+    expect(rootElement).toHaveClass("dusk-switch--disabled");
+    expect(rootElement).toHaveClass("dusk-switch--checked");
+    expect(rootElement).toMatchSnapshot();
   });
 
   it("should pass additional class names and attributes to the root element", () => {

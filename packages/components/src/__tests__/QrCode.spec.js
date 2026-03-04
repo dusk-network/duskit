@@ -54,7 +54,7 @@ describe("QrCode", () => {
 
     // Loading state
     expect(element).toMatchSnapshot();
-    expect(element).toHaveClass("dusk-qr-code", "dusk-suspense--default-gap");
+    expect(element).toHaveClass("dusk-qr-code", "dusk-suspense--gap--default");
     expect(element.querySelector("dusk-throbber")).toBeDefined();
 
     await vi.runAllTimersAsync();
@@ -178,7 +178,7 @@ describe("QrCode", () => {
 
         expect(element).toHaveClass(
           "dusk-suspense",
-          `dusk-suspense--${gap}-gap`,
+          `dusk-suspense--gap--${gap}`,
           "dusk-qr-code"
         );
       }
@@ -215,7 +215,7 @@ describe("QrCode", () => {
 
     expect(dispatchMock).toHaveBeenCalledTimes(1);
     expect(dispatchMock).toHaveBeenCalledWith("error", "some error message");
-    expect(banner).toHaveClass("dusk-banner--error");
+    expect(banner).toHaveClass("dusk-banner--variant--error");
     expect(
       getAsHTMLElement(banner, ".dusk-error-details__summary")
     ).toHaveTextContent("Unable to generate QR code");

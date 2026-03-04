@@ -45,17 +45,13 @@
 
   $: classes = makeClassName([
     "dusk-banner",
-    `dusk-banner--${variant}`,
+    `dusk-banner--variant--${variant}`,
     className,
   ]);
 </script>
 
 <div bind:this={rootElement} {...$$restProps} class={classes}>
-  <Icon
-    path={getBannerIconPath()}
-    size="large"
-    className="dusk-banner__icon banner__icon--{variant}"
-  />
+  <Icon path={getBannerIconPath()} size="large" className="dusk-banner__icon" />
   <div>
     <strong class="dusk-banner__title">{title}</strong>
     <slot>

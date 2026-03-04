@@ -23,7 +23,7 @@
 
   $: classes = makeClassName([
     "dusk-badge",
-    `dusk-badge--variant-${variant}`,
+    `dusk-badge--variant--${variant}`,
     className,
   ]);
 </script>

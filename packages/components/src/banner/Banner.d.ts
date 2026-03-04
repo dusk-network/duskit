@@ -1,16 +1,14 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
-import type { OmitSvelteSpecificProps } from "../dusk.components";
-
-export type BannerVariant = "error" | "info" | "success" | "warning";
+import type { OmitSvelteSpecificProps, StatusType } from "../dusk.components";
 
 export interface BannerProps extends OmitSvelteSpecificProps<
   SvelteHTMLElements["div"]
 > {
   className?: string;
   title: string;
-  variant: BannerVariant;
+  variant: StatusType;
 }
 
 interface BannerSlots {
