@@ -1,5 +1,17 @@
 # @duskit/test-helpers
 
+## 0.2.0
+
+### Minor Changes
+
+- [#212](https://github.com/dusk-network/duskit/pull/212) [`e5443b4`](https://github.com/dusk-network/duskit/commit/e5443b4070ee6dabf569c2cbbe21d10e9bab5cc8) Thanks [@HDauven](https://github.com/HDauven)! - Improve Svelte 5 compatibility and CI stability after dependency upgrades.
+
+  For `@duskit/components`, this tightens QR code error handling, aligns tests with current runtime behavior, and updates test coverage globs to avoid non-source files being included.
+
+  For `@duskit/svelte-stores`, this publishes the peer dependency compatibility updates introduced in this upgrade cycle.
+
+  For `@duskit/test-helpers`, `IntersectionObserverMock` now uses an event-driven trigger model (`trigger`/`reset`) instead of relying on mutable shared instance lists.
+
 ## 0.1.0
 
 ### Minor Changes

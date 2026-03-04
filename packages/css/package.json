@@ -27,7 +27,7 @@
     "lint:fix": "stylelint --quiet --rd 'src/**/*.css' --fix"
   },
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "devDependencies": {
     "@dusk-network/prettier-config": "1.1.0",
     "@dusk-network/stylelint-config": "1.0.6",
