@@ -11,6 +11,7 @@
   --secondary-color-variant-dark: var(--cornflower-dark);
   --secondary-color-variant-light: var(--cornflower-light);
   --surface-color: var(--magnolia);
+  --surface-alt-color: var(--wisteria);
   --error-color: var(--error-500);
   --error-color-variant-dark: var(--error-700);
   --info-color: var(--info-500);
@@ -94,6 +95,13 @@
   --anchor-color-visited: var(--on-background-color);
   --anchor-color-hover: var(--secondary-color-variant-dark);
   --anchor-color-active: var(--secondary-color-variant-dark);
+
+  /* Content switches */
+
+  --content-switch-rail: var(--surface-alt-color);
+  --content-switch-hover-background-color: var(--secondary-color-variant-light);
+  --content-switch-selected-background-color: var(--secondary-color);
+  --content-switch-selected-color: var(--on-secondary-color);
 
   /* Progress bars */
 

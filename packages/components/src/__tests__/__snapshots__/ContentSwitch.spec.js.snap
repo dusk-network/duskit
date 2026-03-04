@@ -1,0 +1,134 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ContentSwitch > should render the \`ContentSwitch\` component 1`] = `
+<ul
+  class="dusk-content-switch"
+  role="tablist"
+>
+  <li
+    aria-selected="true"
+    class="dusk-content-switch__tab-item dusk-content-switch__tab-item--expanded dusk-content-switch__tab-item--selected"
+    data-tabid="overview"
+    role="tab"
+    tabindex="0"
+  >
+    <span
+      class="dusk-content-switch__tab-label"
+    >
+      Overview
+    </span>
+    <!---->
+  </li>
+  <li
+    aria-selected="false"
+    class="dusk-content-switch__tab-item"
+    data-tabid="details"
+    role="tab"
+    tabindex="-1"
+  >
+    <span
+      class="dusk-content-switch__tab-label"
+    >
+      Details
+    </span>
+    <!---->
+  </li>
+  <li
+    aria-selected="false"
+    class="dusk-content-switch__tab-item"
+    data-tabid="icon-before"
+    role="tab"
+    tabindex="-1"
+  >
+    <!---->
+    <!---->
+    <svg
+      class="dusk-icon dusk-icon--size--default dusk-content-switch__tab-icon"
+      role="graphics-symbol"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
+      />
+    </svg>
+    
+    <!---->
+     
+    <span
+      class="dusk-content-switch__tab-label"
+    >
+      Icon before
+    </span>
+    <!---->
+    <!---->
+  </li>
+  <li
+    aria-selected="false"
+    class="dusk-content-switch__tab-item"
+    data-tabid="icon-after"
+    role="tab"
+    tabindex="-1"
+  >
+    <!---->
+    <span
+      class="dusk-content-switch__tab-label"
+    >
+      Icon after
+    </span>
+    <!---->
+     
+    <!---->
+    <svg
+      class="dusk-icon dusk-icon--size--default dusk-content-switch__tab-icon"
+      role="graphics-symbol"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"
+      />
+    </svg>
+    
+    <!---->
+    <!---->
+  </li>
+  <li
+    aria-selected="false"
+    class="dusk-content-switch__tab-item"
+    data-tabid="icon-only"
+    role="tab"
+    tabindex="-1"
+  >
+    <!---->
+    <!---->
+    <svg
+      class="dusk-icon dusk-icon--size--default dusk-content-switch__tab-icon"
+      role="graphics-symbol"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
+      />
+    </svg>
+    
+    <!---->
+     
+    <!---->
+    <!---->
+  </li>
+  <li
+    aria-selected="false"
+    class="dusk-content-switch__tab-item"
+    data-tabid="id-only"
+    role="tab"
+    tabindex="-1"
+  >
+    <span
+      class="dusk-content-switch__tab-label"
+    >
+      id-only
+    </span>
+    <!---->
+  </li>
+  
+</ul>
+`;
