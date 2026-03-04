@@ -11,16 +11,22 @@
   --secondary-color-variant-dark: var(--cornflower-dark);
   --secondary-color-variant-light: var(--cornflower-light);
   --surface-color: var(--magnolia);
-  --success-color: var(--success);
-  --warning-color: var(--warning);
-  --error-color: var(--error);
-  --info-color: var(--info);
-  --danger-color: var(--error);
+  --error-color: var(--error-500);
+  --error-color-variant-dark: var(--error-700);
+  --info-color: var(--info-500);
+  --info-color-variant-dark: var(--info-700);
+  --success-color: var(--success-500);
+  --success-color-variant-dark: var(--success-700);
+  --warning-color: var(--warning-500);
+  --warning-color-variant-dark: var(--warning-700);
   --on-background-color: var(--smokey-black);
   --on-primary-color: var(--light-grey);
   --on-secondary-color: var(--smokey-black);
   --on-surface-color: var(--smokey-black);
   --on-error-color: white;
+  --on-info-color: var(--smokey-black);
+  --on-success-color: var(--smokey-black);
+  --on-warning-color: var(--smokey-black);
 
   /* Typography */
 
@@ -30,9 +36,17 @@
 
   /* Layout */
 
-  --small-gap: 0.5em;
-  --default-gap: 1em;
-  --large-gap: 2em;
+  --small-gap: 0.5rem;
+  --default-gap: 1rem;
+  --medium-gap: 1.25rem;
+  --large-gap: 2rem;
+
+  /* Focus ring */
+
+  --focus-ring-color: blue;
+  --focus-ring-offset: -0.125rem;
+  --focus-ring-style: solid;
+  --focus-ring-width: 0.125rem;
 
   /* Grid */
 
@@ -42,13 +56,19 @@
 
   /* Controls */
 
-  --control-border-radius-size: 1.5em;
-  --control-border-size: 0.0625em;
-  --control-font-size: 1em;
-  --control-icon-size: 2em;
-  --control-padding: 0.9em 1.25em;
-  --control-small-font-size: 0.875em;
-  --control-small-padding: 0.625em 0.875em;
+  --control-border-radius-size: 1.5rem;
+  --control-border-size: 0.125rem;
+  --control-font-size: 1rem;
+  --control-icon-size: 2rem;
+  --control-padding-block: 0.9rem;
+  --control-padding-inline: 1.25rem;
+  --control-padding: var(--control-padding-block) var(--control-padding-inline);
+  --control-small-padding-block: 0.65rem;
+  --control-small-padding-inline: 0.875rem;
+  --control-small-padding: var(--control-small-padding-block)
+    var(--control-small-padding-inline);
+  --non-button-control-bg-color: white;
+  --non-button-control-text-color: var(--smokey-black);
   --control-bg-color: white;
   --control-bg-color-hover: var(--cornflower);
   --control-border-color: transparent;
@@ -75,33 +95,34 @@
   --anchor-color-hover: var(--secondary-color-variant-dark);
   --anchor-color-active: var(--secondary-color-variant-dark);
 
-  /* Progress-related components (Stepper, Progress Bar, etc */
+  /* Progress bars */
 
-  --progress-bar-height: 0.3125em;
+  --progress-bar-default-height: 0.6125rem;
+  --progress-bar-small-height: calc(var(--progress-bar-default-height) / 2);
   --progress-bg-color: var(--primary-color);
   --progress-filler-color: var(--success-color);
 
+  /* Stepper */
+
+  --stepper-bar-height: 0.3125rem;
+  --stepper-rail-color: var(--background-color);
+  --stepper-rail-color-variant-secondary: var(--primary-color);
+  --stepper-filler-color: var(--success-color);
+  --stepper-on-filler-color: var(--on-success-color);
+  --stepper-on-rail-color: var(--on-background-color);
+  --stepper-on-rail-variant-secondary-color: var(--on-primary-color);
+
   /* Checkbox control */
 
-  --checkbox-control-size: 1.2em;
+  --checkbox-control-size: 1.2rem;
   --checkbox-control-border-radius: 20%;
-  --checkbox-control-border-width: 0.2em;
+  --checkbox-control-border-width: 0.2rem;
   --checkbox-control-border-color: var(--smokey-black);
   --checkbox-control-checked-bg-color: var(--smokey-black);
 
   /* Dividers */
 
   --divider-color-primary: var(--taupe-grey);
-
-  /* Footer icon */
-
-  --footer-icon-color: var(--smokey-black);
-  --footer-icon-error-color: white;
-
-  /* Home animation */
-
-  --home-box-color: var(--silver-metallic);
-  --home-grid-color: var(--light-gray);
 
   /* Ribbon */
 

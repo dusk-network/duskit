@@ -37,13 +37,13 @@
   />
 
   <Button
-    active={darkMode}
     data-tooltip-id={id}
     data-tooltip-text={`Switch to ${darkMode ? "light" : "dark"} mode`}
     icon={{ path: darkMode ? mdiWeatherSunny : mdiWeatherNight }}
     on:click={() => {
       darkMode = !darkMode;
     }}
+    pressed={darkMode}
     text="Toggle button"
     type="toggle"
     variant="tertiary"

@@ -15,6 +15,27 @@
   background-color: var(--background-color-alt);
   border-radius: calc(var(--control-border-radius-size) / 2);
   gap: var(--small-gap);
+  align-items: center;
+}
+
+.dusk-toast__item--type--info .dusk-toast__item-icon-wrapper {
+  color: var(--on-info-color);
+  background-color: var(--info-color);
+}
+
+.dusk-toast__item--type--success .dusk-toast__item-icon-wrapper {
+  color: var(--on-success-color);
+  background-color: var(--success-color);
+}
+
+.dusk-toast__item--type--warning .dusk-toast__item-icon-wrapper {
+  color: var(--on-warning-color);
+  background-color: var(--warning-color);
+}
+
+.dusk-toast__item--type--error .dusk-toast__item-icon-wrapper {
+  color: var(--on-error-color);
+  background-color: var(--error-color);
 }
 
 .dusk-toast__item-icon-wrapper {
@@ -25,24 +46,4 @@
   height: 1.625rem;
   border-radius: 100%;
   flex-shrink: 0;
-}
-
-.dusk-toast__item-icon-wrapper--info {
-  background-color: var(--info-color);
-}
-
-.dusk-toast__item-icon-wrapper--success {
-  background-color: var(--success-color);
-}
-
-.dusk-toast__item-icon-wrapper--warning {
-  background-color: var(--warning-color);
-}
-
-.dusk-toast__item-icon-wrapper--error {
-  background-color: var(--error-color);
-}
-
-.dusk-toast__item-icon-wrapper--error .dusk-toast__item-icon {
-  color: white;
 }

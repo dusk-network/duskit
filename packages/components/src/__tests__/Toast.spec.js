@@ -54,12 +54,13 @@ describe("Toast", () => {
     });
     expect(items.length).toBe(1);
     expect(items[0]).toHaveTextContent("Render Toast 1");
-    expect(
-      items[0].querySelector(".dusk-toast__item-icon-wrapper--success")
-    ).toBeDefined();
+    expect(items[0]).toHaveClass(
+      "dusk-toast__item",
+      "dusk-toast__item--type--success"
+    );
     expect(
       items[0].querySelector(`path[d="${mdiAlertOutline}"]`)
-    ).toBeDefined();
+    ).toBeInTheDocument();
     expect(fly).toHaveBeenCalledTimes(1);
     expect(fly).toHaveBeenCalledWith(
       items[0],
@@ -130,20 +131,22 @@ describe("Toast", () => {
     });
     expect(items.length).toBe(2);
     expect(items[0]).toHaveTextContent("Render Toast 1");
-    expect(
-      items[0].querySelector(".dusk-toast__item-icon-wrapper--success")
-    ).toBeDefined();
+    expect(items[0]).toHaveClass(
+      "dusk-toast__item",
+      "dusk-toast__item--type--success"
+    );
     expect(
       items[0].querySelector(`path[d="${mdiAlertOutline}"]`)
-    ).toBeDefined();
+    ).toBeInTheDocument();
 
     expect(items[1]).toHaveTextContent("Render Toast 2");
-    expect(
-      items[1].querySelector(".dusk-toast__item-icon-wrapper--info")
-    ).toBeDefined();
+    expect(items[1]).toHaveClass(
+      "dusk-toast__item",
+      "dusk-toast__item--type--info"
+    );
     expect(
       items[1].querySelector(`path[d="${mdiAlertOutline}"]`)
-    ).toBeDefined();
+    ).toBeInTheDocument();
 
     expect(fly).toHaveBeenCalledTimes(2);
     expect(fly).toHaveBeenCalledWith(

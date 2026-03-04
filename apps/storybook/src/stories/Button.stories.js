@@ -6,12 +6,18 @@ export default {
   title: "Components/Button",
   component: Button,
   argTypes: {
-    active: { control: "boolean" },
     icon: { control: "object" },
+    pressed: { control: "boolean" },
     size: { control: "select", options: ["small", "default"] },
     text: { control: "text" },
-    type: { control: "select", options: ["button", "submit", "reset", "toggle"] },
-    variant: { control: "select", options: ["primary", "secondary", "tertiary"] },
+    type: {
+      control: "select",
+      options: ["button", "submit", "reset", "toggle"],
+    },
+    variant: {
+      control: "select",
+      options: ["primary", "secondary", "tertiary"],
+    },
   },
 };
 
@@ -56,12 +62,11 @@ export const WithIcon = {
   },
 };
 
-export const ToggleActive = {
+export const TogglePressed = {
   args: {
+    pressed: true,
     text: "Toggle",
     type: "toggle",
-    active: true,
     variant: "secondary",
   },
 };
-

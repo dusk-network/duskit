@@ -33,7 +33,7 @@ describe("ErrorAlert", () => {
 
     expect(element).toHaveClass(
       "dusk-error-alert",
-      "dusk-error-alert--default-gap",
+      "dusk-error-alert--gap--default",
       "foo",
       "bar"
     );
@@ -50,7 +50,7 @@ describe("ErrorAlert", () => {
       });
       const element = component.getRootElement();
 
-      expect(element).toHaveClass(`dusk-error-alert--${gap}-gap`);
+      expect(element).toHaveClass(`dusk-error-alert--gap--${gap}`);
     }
   );
 
@@ -65,7 +65,7 @@ describe("ErrorAlert", () => {
       summary: "new error summary",
     });
 
-    expect(element).toHaveClass("baz", `dusk-error-alert--${gaps[1]}-gap`);
+    expect(element).toHaveClass("baz", `dusk-error-alert--gap--${gaps[1]}`);
     expect(
       element.querySelector(".dusk-error-details__summary")
     ).toHaveTextContent("new error summary");

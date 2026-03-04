@@ -5,35 +5,16 @@ export default {
   component: Badge,
   argTypes: {
     text: { control: "text" },
-    variant: { control: "select", options: ["neutral", "success", "warning", "error"] },
+    variant: {
+      control: "select",
+      options: ["neutral", "info", "success", "warning", "error"],
+    },
   },
 };
 
-export const Neutral = {
+export const Default = {
   args: {
-    text: "Neutral",
+    text: "Badge text",
     variant: "neutral",
   },
 };
-
-export const Success = {
-  args: {
-    text: "Success",
-    variant: "success",
-  },
-};
-
-export const Warning = {
-  args: {
-    text: "Warning",
-    variant: "warning",
-  },
-};
-
-export const Error = {
-  args: {
-    text: "Error",
-    variant: "error",
-  },
-};
-

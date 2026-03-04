@@ -12,9 +12,9 @@ export type ButtonVariant = "primary" | "secondary" | "tertiary";
 export interface ButtonProps extends OmitSvelteSpecificProps<
   Omit<HTMLButtonAttributes, "type">
 > {
-  active?: boolean;
   className?: string;
   icon?: IconProp;
+  pressed?: boolean;
   size?: ButtonSize;
   text?: string;
   type?: ButtonType;

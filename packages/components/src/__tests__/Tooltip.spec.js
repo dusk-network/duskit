@@ -424,7 +424,7 @@ describe("Tooltip", () => {
         );
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
-        expect(tooltip).toHaveClass("dusk-tooltip-error");
+        expect(tooltip).toHaveClass("dusk-tooltip--type--error");
         expect(target.getAttribute("aria-describedby")).toBe(baseProps.id);
         expect(prevTooltipElement.getAttribute("aria-describedby")).toBeNull();
       });
@@ -456,7 +456,9 @@ describe("Tooltip", () => {
         await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
-        expect(tooltip).toHaveClass(`dusk-tooltip-${baseProps.defaultType}`);
+        expect(tooltip).toHaveClass(
+          `dusk-tooltip--type--${baseProps.defaultType}`
+        );
       });
 
       it("should fallback to internal defaults when dataset and props are invalid or `undefined`", async () => {
@@ -500,7 +502,7 @@ describe("Tooltip", () => {
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
 
         // Expect internal DEFAULT_TYPE ("info")
-        expect(tooltip).toHaveClass("dusk-tooltip-info");
+        expect(tooltip).toHaveClass("dusk-tooltip--type--info");
       });
 
       it("should not wait for a delay before showing if the value is zero", async () => {
@@ -919,7 +921,7 @@ describe("Tooltip", () => {
 
       expect(tooltip.getAttribute("aria-hidden")).toBe("false");
       expect(tooltip).toHaveTextContent("Initial text");
-      expect(tooltip).toHaveClass("dusk-tooltip-info");
+      expect(tooltip).toHaveClass("dusk-tooltip--type--info");
       expect(moObserveSpy).toHaveBeenCalledTimes(1);
       expect(moObserveSpy).toHaveBeenCalledWith(dynamicTarget, {
         attributeFilter: [
@@ -939,7 +941,7 @@ describe("Tooltip", () => {
 
       expect(tooltip.getAttribute("aria-hidden")).toBe("false");
       expect(tooltip).toHaveTextContent("Updated text");
-      expect(tooltip).toHaveClass("dusk-tooltip-error");
+      expect(tooltip).toHaveClass("dusk-tooltip--type--error");
       expect(moDisconnectSpy).not.toHaveBeenCalled();
     });
 
@@ -994,7 +996,7 @@ describe("Tooltip", () => {
       await fireEvent.mouseEnter(dynamicTarget);
       await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
 
-      expect(tooltip).toHaveClass("dusk-tooltip-warning");
+      expect(tooltip).toHaveClass("dusk-tooltip--type--warning");
       expect(moObserveSpy).toHaveBeenCalledTimes(1);
       expect(moObserveSpy).toHaveBeenCalledWith(dynamicTarget, {
         attributeFilter: [
@@ -1011,8 +1013,8 @@ describe("Tooltip", () => {
       await tick();
 
       // Should fallback to the prop's defaultType ("success" in baseOptions)
-      expect(tooltip).not.toHaveClass("dusk-tooltip-warning");
-      expect(tooltip).toHaveClass("dusk-tooltip-success");
+      expect(tooltip).not.toHaveClass("dusk-tooltip--type--warning");
+      expect(tooltip).toHaveClass("dusk-tooltip--type--success");
     });
 
     it("should fallback to the internal system default type if both dataset and prop are invalid or `undefined`", async () => {
@@ -1033,7 +1035,7 @@ describe("Tooltip", () => {
       await fireEvent.mouseEnter(dynamicTarget);
       await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
 
-      expect(tooltip).toHaveClass("dusk-tooltip-success");
+      expect(tooltip).toHaveClass("dusk-tooltip--type--success");
       expect(moObserveSpy).toHaveBeenCalledTimes(1);
       expect(moObserveSpy).toHaveBeenCalledWith(dynamicTarget, {
         attributeFilter: [
@@ -1050,8 +1052,8 @@ describe("Tooltip", () => {
       await tick();
 
       // Should fallback to internal DEFAULT_TYPE ("info")
-      expect(tooltip).not.toHaveClass("dusk-tooltip-success");
-      expect(tooltip).toHaveClass("dusk-tooltip-info");
+      expect(tooltip).not.toHaveClass("dusk-tooltip--type--success");
+      expect(tooltip).toHaveClass("dusk-tooltip--type--info");
     });
 
     it("should force hide the tooltip and disconnect both observers if the target is mutated after being detached from the DOM", async () => {

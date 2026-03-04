@@ -22,7 +22,7 @@
 
 .dusk-button:enabled:active,
 .dusk-anchor-button:active,
-.dusk-button--active {
+.dusk-button--pressed {
   scale: 0.98;
 }
 
@@ -53,7 +53,7 @@
 
 .dusk-button.dusk-icon-button:enabled:active,
 .dusk-anchor-button.dusk-icon-button:active,
-.dusk-button.dusk-icon-button.dusk-button--active {
+.dusk-button.dusk-icon-button.dusk-button--pressed {
   scale: 0.9;
 }
 
@@ -71,7 +71,7 @@
 .dusk-button--variant--primary:enabled:active,
 .dusk-anchor-button--variant--primary:hover,
 .dusk-anchor-button--variant--primary:active,
-.dusk-anchor-button--variant--primary.dusk-button--active {
+.dusk-anchor-button--variant--primary.dusk-button--pressed {
   color: var(--control-text-color-hover);
   background-color: var(--control-bg-color-hover);
   border-color: var(--control-border-color-hover);
@@ -91,7 +91,7 @@
 .dusk-button--variant--secondary:enabled:active,
 .dusk-anchor-button--variant--secondary:hover,
 .dusk-anchor-button--variant--secondary:active,
-.dusk-anchor-button--variant--secondary.dusk-button--active {
+.dusk-anchor-button--variant--secondary.dusk-button--pressed {
   color: var(--control-secondary-text-color-hover);
   background-color: var(--control-secondary-bg-color-hover);
   border-color: var(--control-secondary-border-color-hover);
@@ -111,7 +111,7 @@
 .dusk-button--variant--tertiary:enabled:active,
 .dusk-anchor-button--variant--tertiary:hover,
 .dusk-anchor-button--variant--tertiary:active,
-.dusk-anchor-button--variant--tertiary.dusk-button--active {
+.dusk-anchor-button--variant--tertiary.dusk-button--pressed {
   color: var(--control-tertiary-text-color-hover);
   background-color: var(--control-tertiary-bg-color-hover);
   border-color: var(--control-tertiary-border-color-hover);

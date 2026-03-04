@@ -335,8 +335,8 @@
   $: ({ place, text, type, visible, x, y } = $state);
   $: classes = makeClassName([
     "dusk-tooltip",
-    `dusk-tooltip-${place}`,
-    `dusk-tooltip-${type}`,
+    `dusk-tooltip--place--${place}`,
+    `dusk-tooltip--type--${type}`,
     className,
   ]);
 </script>

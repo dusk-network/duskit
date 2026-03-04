@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`ProgressBar > should render the \`ProgressBar\` component with no current percentage set 1`] = `
+exports[`ProgressBar > should render the \`ProgressBar\` component with no current percentage set and using "default" as its size 1`] = `
 <div
-  class="dusk-progress-bar dusk-progress-bar--ltr"
+  class="dusk-progress-bar dusk-progress-bar--ltr dusk-progress-bar--size--default"
   dir="ltr"
   role="progressbar"
 >

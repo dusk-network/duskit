@@ -2,7 +2,7 @@
 
 exports[`Card > should render the \`Card\` component in a \`div\` with a standard gap by default 1`] = `
 <div
-  class="dusk-card dusk-card--gap-default"
+  class="dusk-card dusk-card--gap--default"
 >
   <!---->
   <!---->

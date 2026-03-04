@@ -9,14 +9,14 @@
 
   import "./Button.css";
 
-  /** @type {ButtonProps["active"]} */
-  export let active = false;
-
   /** @type {ButtonProps["className"]} */
   export let className = undefined;
 
   /** @type {ButtonProps["icon"]} */
   export let icon = undefined;
+
+  /** @type {ButtonProps["pressed"]} */
+  export let pressed = false;
 
   /** @type {ButtonProps["size"]} */
   export let size = "default";
@@ -41,7 +41,7 @@
     `dusk-button--variant--${variant}`,
     `dusk-button--size--${size}`,
     icon && text ? "dusk-icon-button--labeled" : icon ? "dusk-icon-button" : "",
-    type === "toggle" && active ? "dusk-button--active" : "",
+    type === "toggle" && pressed ? "dusk-button--pressed" : "",
     className,
   ]);
 </script>
@@ -49,7 +49,7 @@
 <button
   bind:this={rootElement}
   {...$$restProps}
-  aria-pressed={type === "toggle" ? active : undefined}
+  aria-pressed={type === "toggle" ? pressed : undefined}
   class={classes}
   on:click
   on:mousedown

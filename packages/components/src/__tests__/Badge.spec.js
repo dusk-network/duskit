@@ -6,6 +6,7 @@ import { Badge } from "../..";
 describe("Badge", () => {
   const variants = /** @type {const} */ ([
     "error",
+    "info",
     "neutral",
     "success",
     "warning",
@@ -16,7 +17,7 @@ describe("Badge", () => {
 
   afterEach(cleanup);
 
-  it('should render the Badge component using the type "neutral" as a default', () => {
+  it('should render the Badge component using the "neutral" variant as a default', () => {
     const { container } = render(Badge, baseProps);
 
     expect(container.firstElementChild).toMatchSnapshot();
@@ -34,7 +35,7 @@ describe("Badge", () => {
       const { component } = render(Badge, { ...baseProps, variant });
 
       expect(component.getRootElement()).toHaveClass(
-        `dusk-badge--variant-${variant}`
+        `dusk-badge--variant--${variant}`
       );
     }
   );
@@ -46,7 +47,7 @@ describe("Badge", () => {
 
     expect(element).toHaveClass(
       "dusk-badge",
-      "dusk-badge--variant-neutral",
+      "dusk-badge--variant--neutral",
       "foo",
       "bar"
     );
@@ -63,7 +64,7 @@ describe("Badge", () => {
       variant: "error",
     });
 
-    expect(element).toHaveClass("dusk-badge--variant-error", "baz");
+    expect(element).toHaveClass("dusk-badge--variant--error", "baz");
     expect(element).toHaveTextContent("modified text");
   });
 });

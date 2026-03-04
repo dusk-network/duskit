@@ -38,12 +38,10 @@
       in:fly|global={{ duration: flyDuration, x: 200 }}
       out:fly|global={{ duration: flyDuration, x: 200 }}
       animate:flip={{ duration: 200 }}
-      class="dusk-toast__item"
+      class={`dusk-toast__item dusk-toast__item--type--${type}`}
     >
       {#if icon}
-        <span
-          class={`dusk-toast__item-icon-wrapper dusk-toast__item-icon-wrapper--${type}`}
-        >
+        <span class="dusk-toast__item-icon-wrapper">
           <Icon className="dusk-toast__item-icon" path={icon} size="default" />
         </span>
       {/if}

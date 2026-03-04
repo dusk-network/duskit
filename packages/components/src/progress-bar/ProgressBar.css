@@ -1,9 +1,16 @@
 .dusk-progress-bar {
   width: 100%;
-  height: var(--progress-bar-height);
   overflow-x: hidden;
   background-color: var(--progress-bg-color);
   border-radius: var(--control-border-radius-size);
+}
+
+.dusk-progress-bar--size--default {
+  height: var(--progress-bar-default-height);
+}
+
+.dusk-progress-bar--size--small {
+  height: var(--progress-bar-small-height);
 }
 
 .dusk-progress-bar__filler {

@@ -4,14 +4,14 @@
   align-items: center;
 }
 
-.dusk-error-alert.dusk-error-alert--default-gap {
+.dusk-error-alert.dusk-error-alert--gap--default {
   gap: var(--default-gap);
 }
 
-.dusk-error-alert.dusk-error-alert--large-gap {
+.dusk-error-alert.dusk-error-alert--gap--large {
   gap: var(--large-gap);
 }
 
-.dusk-error-alert.dusk-error-alert--small-gap {
+.dusk-error-alert.dusk-error-alert--gap--small {
   gap: var(--small-gap);
 }

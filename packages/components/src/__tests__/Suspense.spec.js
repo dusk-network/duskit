@@ -8,6 +8,7 @@ import { Suspense } from "../..";
 vi.useFakeTimers();
 
 describe("Suspense", () => {
+  const gaps = /** @type {const} */ (["default", "large", "medium", "small"]);
   const delay = 1000;
 
   const baseProps = {
@@ -49,20 +50,19 @@ describe("Suspense", () => {
     expect(container.firstElementChild).toMatchSnapshot();
   });
 
-  it("should add appropriate class names for gap variants", async () => {
-    /** @type {import("svelte").ComponentProps<Suspense<string, "div">>} */
-    const props = {
-      ...baseProps,
-      gap: "small",
-    };
-    const { container, rerender } = render(Suspense, { ...baseOptions, props });
+  it.each(gaps)(
+    'should render the component applying the desired "%s" gap',
+    (gap) => {
+      const props = { ...baseProps, gap };
+      const { component } = render(Suspense, {
+        ...baseOptions,
+        props,
+      });
+      const element = component.getRootElement();
 
-    expect(container.firstElementChild).toHaveClass("dusk-suspense--small-gap");
-
-    await rerender({ ...props, gap: "large" });
-
-    expect(container.firstElementChild).toHaveClass("dusk-suspense--large-gap");
-  });
+      expect(element).toHaveClass(`dusk-suspense--gap--${gap}`);
+    }
+  );
 
   it("should accept a custom message for the pending state", () => {
     const props = {

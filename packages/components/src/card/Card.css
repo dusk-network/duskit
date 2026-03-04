@@ -16,18 +16,18 @@
   flex-direction: column;
 }
 
-.dusk-card--gap-small > .dusk-card__body-container {
+.dusk-card--gap--small > .dusk-card__body-container {
   gap: var(--small-gap);
 }
 
-.dusk-card--gap-default > .dusk-card__body-container {
+.dusk-card--gap--default > .dusk-card__body-container {
   gap: var(--default-gap);
 }
 
-.dusk-card--gap-medium > .dusk-card__body-container {
+.dusk-card--gap--medium > .dusk-card__body-container {
   gap: var(--medium-gap);
 }
 
-.dusk-card--gap-large > .dusk-card__body-container {
+.dusk-card--gap--large > .dusk-card__body-container {
   gap: var(--large-gap);
 }

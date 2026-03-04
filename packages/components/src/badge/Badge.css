@@ -9,25 +9,31 @@
   border-radius: var(--control-border-radius-size);
 }
 
-.dusk-badge--variant-neutral {
+.dusk-badge--variant--neutral {
   color: var(--on-background-color);
   background-color: transparent;
   border-color: var(--on-background-color);
 }
 
-.dusk-badge--variant-warning {
+.dusk-badge--variant--info {
+  color: var(--on-info-color);
+  background-color: var(--info-color);
+  border-color: var(--info-color);
+}
+
+.dusk-badge--variant--warning {
   color: var(--on-warning-color);
   background-color: var(--warning-color);
   border-color: var(--warning-color);
 }
 
-.dusk-badge--variant-error {
+.dusk-badge--variant--error {
   color: var(--on-error-color);
   background-color: var(--error-color);
   border-color: var(--error-color);
 }
 
-.dusk-badge--variant-success {
+.dusk-badge--variant--success {
   color: var(--on-success-color);
   background-color: var(--success-color);
   border-color: var(--success-color);

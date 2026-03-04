@@ -5,18 +5,18 @@
   justify-content: center;
 }
 
-.dusk-suspense.dusk-suspense--default-gap {
+.dusk-suspense.dusk-suspense--gap--default {
   gap: var(--default-gap);
 }
 
-.dusk-suspense.dusk-suspense--large-gap {
+.dusk-suspense.dusk-suspense--gap--large {
   gap: var(--large-gap);
 }
 
-.dusk-suspense.dusk-suspense--medium-gap {
+.dusk-suspense.dusk-suspense--gap--medium {
   gap: var(--medium-gap);
 }
 
-.dusk-suspense.dusk-suspense--small-gap {
+.dusk-suspense.dusk-suspense--gap--small {
   gap: var(--small-gap);
 }

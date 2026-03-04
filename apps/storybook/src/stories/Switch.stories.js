@@ -4,14 +4,14 @@ export default {
   title: "Components/Switch",
   component: Switch,
   argTypes: {
-    active: { control: "boolean" },
+    checked: { control: "boolean" },
     disabled: { control: "boolean" },
   },
 };
 
 export const Default = {
   args: {
-    active: false,
+    checked: false,
     disabled: false,
   },
 };

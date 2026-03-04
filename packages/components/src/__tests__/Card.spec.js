@@ -21,7 +21,7 @@ describe("Card", () => {
     const element = component.getRootElement().getRootElement();
 
     expect(element.nodeName.toLowerCase()).toBe("div");
-    expect(element).toHaveClass("dusk-card", "dusk-card--gap-default");
+    expect(element).toHaveClass("dusk-card", "dusk-card--gap--default");
     expect(element).toMatchSnapshot();
   });
 
@@ -46,7 +46,7 @@ describe("Card", () => {
       });
       const element = component.getRootElement().getRootElement();
 
-      expect(element).toHaveClass("dusk-card", `dusk-card--gap-${gap}`);
+      expect(element).toHaveClass("dusk-card", `dusk-card--gap--${gap}`);
     }
   );
 

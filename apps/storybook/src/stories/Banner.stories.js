@@ -6,7 +6,10 @@ export default {
   argTypes: {
     content: { control: "text" },
     title: { control: "text" },
-    variant: { control: "select", options: ["info", "success", "warning", "error"] },
+    variant: {
+      control: "select",
+      options: ["info", "success", "warning", "error"],
+    },
   },
 };
 
@@ -44,4 +47,3 @@ export const Error = {
     content: "Something went wrong.",
   },
 };
-

@@ -2,7 +2,7 @@
 
 exports[`ErrorAlert > should render the \`ErrorAlert\` component 1`] = `
 <div
-  class="dusk-error-alert dusk-error-alert--default-gap"
+  class="dusk-error-alert dusk-error-alert--gap--default"
 >
   <!---->
   <svg

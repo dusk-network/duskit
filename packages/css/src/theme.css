@@ -1,2 +1,18 @@
 @import url("colors.css");
 @import url("language.css");
+
+:is(.dusk-textbox:read-write:enabled, *[role="menuitem"]):focus,
+:is(
+  .dusk-anchor,
+  .dusk-anchor-button:not(.dusk-anchor-button--disabled),
+  .dusk-button:enabled,
+  .dusk-checkbox:enabled,
+  .dusk-select:enabled,
+  .dusk-switch[aria-disabled="false"],
+  .dusk-content-switch__tab-item
+):focus-visible,
+:is(.dusk-exclusive-choice):focus-within {
+  outline: var(--focus-ring-width) var(--focus-ring-style)
+    var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}

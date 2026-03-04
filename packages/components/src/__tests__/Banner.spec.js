@@ -46,7 +46,7 @@ describe("Banner", () => {
 
     expect(element).toHaveClass(
       "dusk-banner",
-      "dusk-banner--info",
+      "dusk-banner--variant--info",
       "foo",
       "bar"
     );
@@ -63,7 +63,7 @@ describe("Banner", () => {
       });
       const element = component.getRootElement().getRootElement();
 
-      expect(element).toHaveClass(`dusk-banner--${variant}`);
+      expect(element).toHaveClass(`dusk-banner--variant--${variant}`);
 
       // we use snapshots here as other than the class name
       // the component uses a different icon for each variant
@@ -81,7 +81,7 @@ describe("Banner", () => {
       variant: "error",
     });
 
-    expect(element).toHaveClass("dusk-banner--error", "baz");
+    expect(element).toHaveClass("dusk-banner--variant--error", "baz");
     expect(getAsHTMLElement(element, ".dusk-banner__title")).toHaveTextContent(
       "new title"
     );

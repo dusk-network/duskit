@@ -34,6 +34,8 @@ function getRoundedBarPercentage(element) {
 }
 
 describe("ProgressBar", () => {
+  const sizes = /** @type {const} */ (["default", "small"]);
+
   vi.useFakeTimers();
 
   afterEach(() => {
@@ -45,7 +47,7 @@ describe("ProgressBar", () => {
     vi.useRealTimers();
   });
 
-  it("should render the `ProgressBar` component with no current percentage set", async () => {
+  it('should render the `ProgressBar` component with no current percentage set and using "default" as its size', async () => {
     const { component } = render(ProgressBar);
     const element = component.getRootElement();
     const barElement = getBarElement(element);
@@ -54,6 +56,7 @@ describe("ProgressBar", () => {
     expect(element).not.toHaveAttribute("aria-valuemax");
     expect(element).not.toHaveAttribute("aria-valuemin");
     expect(element).not.toHaveAttribute("aria-valuenow");
+    expect(element).toHaveClass("dusk-progress-bar--size--default");
     expect(barElement).toHaveClass("dusk-progress-bar__filler--undetermined");
     expect(getComputedStyle(barElement).width).toBe("");
   });
@@ -78,6 +81,16 @@ describe("ProgressBar", () => {
     expect(element).toHaveClass("dusk-progress-bar--ltr");
     expect(element).not.toHaveClass("dusk-progress-bar--rtl");
   });
+
+  it.each(sizes)(
+    'should allow to pick the "%s" size and add the correct CSS class for it',
+    (size) => {
+      const { component } = render(ProgressBar, { props: { size } });
+      const element = component.getRootElement();
+
+      expect(element).toHaveClass(`dusk-progress-bar--size--${size}`);
+    }
+  );
 
   it("should render the `ProgressBar` component with a set percentage", async () => {
     const { component } = render(ProgressBar, { value: 33 });

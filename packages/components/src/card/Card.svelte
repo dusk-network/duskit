@@ -24,7 +24,11 @@
 
   export const getRootElement = () => rootElement;
 
-  $: classes = makeClassName(["dusk-card", `dusk-card--gap-${gap}`, className]);
+  $: classes = makeClassName([
+    "dusk-card",
+    `dusk-card--gap--${gap}`,
+    className,
+  ]);
 </script>
 
 <svelte:element

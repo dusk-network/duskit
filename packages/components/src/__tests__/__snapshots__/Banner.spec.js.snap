@@ -2,11 +2,11 @@
 
 exports[`Banner > should be able to render the component using the "error" variant 1`] = `
 <div
-  class="dusk-banner dusk-banner--error"
+  class="dusk-banner dusk-banner--variant--error"
 >
   <!---->
   <svg
-    class="dusk-icon dusk-icon--size--large dusk-banner__icon banner__icon--error"
+    class="dusk-icon dusk-icon--size--large dusk-banner__icon"
     role="graphics-symbol"
     viewBox="0 0 24 24"
   >
@@ -34,11 +34,11 @@ exports[`Banner > should be able to render the component using the "error" varia
 
 exports[`Banner > should be able to render the component using the "info" variant 1`] = `
 <div
-  class="dusk-banner dusk-banner--info"
+  class="dusk-banner dusk-banner--variant--info"
 >
   <!---->
   <svg
-    class="dusk-icon dusk-icon--size--large dusk-banner__icon banner__icon--info"
+    class="dusk-icon dusk-icon--size--large dusk-banner__icon"
     role="graphics-symbol"
     viewBox="0 0 24 24"
   >
@@ -66,11 +66,11 @@ exports[`Banner > should be able to render the component using the "info" varian
 
 exports[`Banner > should be able to render the component using the "success" variant 1`] = `
 <div
-  class="dusk-banner dusk-banner--success"
+  class="dusk-banner dusk-banner--variant--success"
 >
   <!---->
   <svg
-    class="dusk-icon dusk-icon--size--large dusk-banner__icon banner__icon--success"
+    class="dusk-icon dusk-icon--size--large dusk-banner__icon"
     role="graphics-symbol"
     viewBox="0 0 24 24"
   >
@@ -98,11 +98,11 @@ exports[`Banner > should be able to render the component using the "success" var
 
 exports[`Banner > should be able to render the component using the "warning" variant 1`] = `
 <div
-  class="dusk-banner dusk-banner--warning"
+  class="dusk-banner dusk-banner--variant--warning"
 >
   <!---->
   <svg
-    class="dusk-icon dusk-icon--size--large dusk-banner__icon banner__icon--warning"
+    class="dusk-icon dusk-icon--size--large dusk-banner__icon"
     role="graphics-symbol"
     viewBox="0 0 24 24"
   >
@@ -130,11 +130,11 @@ exports[`Banner > should be able to render the component using the "warning" var
 
 exports[`Banner > should render a warning message if no content is provided for the default slot 1`] = `
 <div
-  class="dusk-banner dusk-banner--info"
+  class="dusk-banner dusk-banner--variant--info"
 >
   <!---->
   <svg
-    class="dusk-icon dusk-icon--size--large dusk-banner__icon banner__icon--info"
+    class="dusk-icon dusk-icon--size--large dusk-banner__icon"
     role="graphics-symbol"
     viewBox="0 0 24 24"
   >
@@ -162,11 +162,11 @@ exports[`Banner > should render a warning message if no content is provided for 
 
 exports[`Banner > should render the \`Banner\` component 1`] = `
 <div
-  class="dusk-banner dusk-banner--info"
+  class="dusk-banner dusk-banner--variant--info"
 >
   <!---->
   <svg
-    class="dusk-icon dusk-icon--size--large dusk-banner__icon banner__icon--info"
+    class="dusk-icon dusk-icon--size--large dusk-banner__icon"
     role="graphics-symbol"
     viewBox="0 0 24 24"
   >

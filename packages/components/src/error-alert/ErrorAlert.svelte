@@ -29,7 +29,7 @@
 
   $: classes = makeClassName([
     "dusk-error-alert",
-    `dusk-error-alert--${gap}-gap`,
+    `dusk-error-alert--gap--${gap}`,
     className,
   ]);
 </script>
