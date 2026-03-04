@@ -7,6 +7,7 @@ export { default as Banner } from "./src/banner/Banner";
 export { default as Button } from "./src/button/Button";
 export { default as Card } from "./src/card/Card";
 export { default as Checkbox } from "./src/checkbox/Checkbox";
+export { default as ContentSwitch } from "./src/content-switch/ContentSwitch";
 export { default as CopyField } from "./src/copy-field/CopyField";
 export { default as Drawer } from "./src/drawer/Drawer";
 export { default as ErrorAlert } from "./src/error-alert/ErrorAlert";
