@@ -4,6 +4,10 @@
   gap: var(--default-gap);
 }
 
+.dusk-copy-field--disabled .dusk-copy-field__button {
+  pointer-events: none;
+}
+
 .dusk-copy-field__content {
   flex: 1;
 }
