@@ -52,7 +52,11 @@
       });
   }
 
-  $: classes = makeClassName(["dusk-copy-field", className]);
+  $: classes = makeClassName([
+    "dusk-copy-field",
+    disabled ? "dusk-copy-field--disabled" : undefined,
+    className,
+  ]);
 </script>
 
 <div bind:this={rootElement} class={classes} {...$$restProps}>

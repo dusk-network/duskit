@@ -75,11 +75,13 @@ describe("CopyField", () => {
       ...baseOptions,
       props: { ...baseProps, disabled: true },
     });
+    const rootElement = component.getRootElement();
     const copyButton = getAsHTMLElement(
-      component.getRootElement(),
+      rootElement,
       ".dusk-copy-field__button"
     );
 
+    expect(rootElement).toHaveClass("dusk-copy-field--disabled");
     expect(copyButton).toBeDisabled();
   });
 
