@@ -1,7 +1,7 @@
 import type { SvelteComponent, ComponentProps } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
-import { OmitSvelteSpecificProps } from "../dusk.components";
+import type { OmitSvelteSpecificProps } from "../dusk.components";
 
 type SvelteComponentConstructor = new (...args: any) => SvelteComponent;
 
