@@ -32,7 +32,7 @@
     "@dusk-network/prettier-config": "1.1.0",
     "@dusk-network/stylelint-config": "1.0.6",
     "prettier": "3.8.1",
-    "rimraf": "6.1.2",
+    "rimraf": "6.1.3",
     "stylelint": "16.26.1",
     "stylelint-config-standard": "39.0.1",
     "stylelint-no-unsupported-browser-features": "8.1.1",

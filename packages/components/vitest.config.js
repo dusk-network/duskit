@@ -2,7 +2,7 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
-  plugins: [svelte({ hot: !process.env.VITEST })],
+  plugins: [svelte()],
   resolve: {
     // Vitest runs in Node, but these are DOM tests (jsdom). Prefer browser export
     // conditions so Svelte resolves to the client runtime (where `mount()` exists).
