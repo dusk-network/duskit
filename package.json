@@ -61,6 +61,7 @@
     "packages/math",
     "packages/promise",
     "packages/string",
+    "packages/svelte-actions",
     "packages/svelte-stores",
     "packages/test-helpers"
   ],
