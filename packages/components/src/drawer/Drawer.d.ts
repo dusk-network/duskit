@@ -2,6 +2,7 @@ import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
 import { OmitSvelteSpecificProps } from "@duskit/components";
+import type { OutsideClickEvent } from "@duskit/svelte-actions";
 
 type DrawerProps = OmitSvelteSpecificProps<SvelteHTMLElements["aside"]> & {
   className?: string;
@@ -15,6 +16,7 @@ interface DrawerEvents {
   closing: CustomEvent<void>;
   open: CustomEvent<void>;
   opening: CustomEvent<void>;
+  outsideclick: OutsideClickEvent<HTMLElementTagNameMap["aside"]>;
 }
 
 interface DrawerSlots {
