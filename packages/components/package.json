@@ -43,6 +43,7 @@
     "@duskit/date": "0.1.0",
     "@duskit/error": "0.0.2",
     "@duskit/string": "0.0.1",
+    "@duskit/svelte-actions": "0.0.0",
     "@floating-ui/dom": "1.7.5",
     "@mdi/js": "7.4.47",
     "lamb": "0.61.1",

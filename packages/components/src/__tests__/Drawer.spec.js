@@ -289,6 +289,58 @@ describe("Drawer", () => {
     });
   });
 
+  describe("Click Outside Behavior", () => {
+    it("should emit the `outsideclick` event when the drawer is open and a click occurs outside", () => {
+      const outsideclickHandler = vi.fn();
+
+      render(Drawer, {
+        events: { outsideclick: outsideclickHandler },
+        props: { ...baseProps, open: true },
+      });
+
+      // Simulate a click on the document body (outside the drawer)
+      document.body.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, cancelable: true })
+      );
+
+      expect(outsideclickHandler).toHaveBeenCalledTimes(1);
+    });
+
+    it("should mount and unmount the action dynamically based on the `open` state to prevent memory leaks", async () => {
+      const outsideclickHandler = vi.fn();
+      const { rerender } = render(Drawer, {
+        events: { outsideclick: outsideclickHandler },
+        props: { ...baseProps, open: false },
+      });
+
+      // 1. Initial state: closed. The action should not be active.
+      document.body.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, cancelable: true })
+      );
+
+      expect(outsideclickHandler).not.toHaveBeenCalled();
+
+      // 2. State change: open. The action should be mounted and listen to clicks.
+      await rerender({ open: true });
+
+      document.body.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, cancelable: true })
+      );
+
+      expect(outsideclickHandler).toHaveBeenCalledTimes(1);
+
+      // 3. State change: closed again. The action should be destroyed.
+      await rerender({ open: false });
+
+      document.body.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, cancelable: true })
+      );
+
+      // The call count remains 1, confirming no new event was intercepted
+      expect(outsideclickHandler).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe("Slot Content", () => {
     it("should always keep slotted content in the DOM", async () => {
       const { queryByTestId, rerender } = render(DrawerWithContent, {

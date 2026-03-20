@@ -4,6 +4,7 @@
   /** @typedef {import("./Drawer").DrawerProps} DrawerProps */
 
   import { makeClassName } from "@duskit/string";
+  import { outsideClick } from "@duskit/svelte-actions";
   import { createEventDispatcher } from "svelte";
 
   import "./Drawer.css";
@@ -24,6 +25,25 @@
   let rootElement;
 
   export const getRootElement = () => rootElement;
+
+  /** @type {import("svelte/action").Action<HTMLElement, boolean>} */
+  function dynamicOutsideClick(node, isOpen) {
+    let actionInstance = isOpen ? outsideClick(node) : null;
+
+    return {
+      destroy() {
+        actionInstance?.destroy();
+      },
+      update(newIsOpen) {
+        if (newIsOpen) {
+          actionInstance = outsideClick(node);
+        } else {
+          actionInstance?.destroy();
+          actionInstance = null;
+        }
+      },
+    };
+  }
 
   /** @type {(isOpening: boolean) => Keyframe[]} */
   function getKeyFrames(isOpening) {
@@ -106,10 +126,12 @@
 
 <aside
   bind:this={rootElement}
+  use:dynamicOutsideClick={open}
   {...$$restProps}
   aria-hidden={!open}
   class={classes}
   inert={!open}
+  on:outsideclick
 >
   <slot visible={isContentVisible} />
 </aside>
