@@ -13,10 +13,11 @@
 </script>
 
 {#each options as option (isString(option) ? option : option.value)}
+  {@const isStringOption = isString(option)}
   <option
-    disabled={isString(option) ? false : option.disabled}
-    value={isString(option) ? option : option.value}
+    disabled={isStringOption ? false : option.disabled}
+    value={isStringOption ? option : option.value}
   >
-    {isString(option) ? option : (option.label ?? option.value)}
+    {isStringOption ? option : (option.label ?? option.value)}
   </option>
 {/each}
