@@ -123,10 +123,12 @@
   /* Checkbox control */
 
   --checkbox-control-size: 1.2rem;
+  --checkbox-control-bg-color: transparent;
   --checkbox-control-border-radius: 20%;
-  --checkbox-control-border-width: 0.2rem;
-  --checkbox-control-border-color: var(--smokey-black);
-  --checkbox-control-checked-bg-color: var(--smokey-black);
+  --checkbox-control-border-width: 0.125rem;
+  --checkbox-control-border-color: var(--primary-color);
+  --checkbox-control-check-color: var(--on-secondary-color);
+  --checkbox-control-checked-bg-color: var(--secondary-color);
 
   /* Dividers */
 
