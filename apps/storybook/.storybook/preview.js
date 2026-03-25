@@ -11,8 +11,10 @@ const preview = {
       context.parameters?.disableGlobalOverlays ? Story() : WithOverlays,
   ],
   parameters: {
+    actions: { argTypesRegex: "^on[A-Z].*" },
     layout: "padded",
     controls: {
+      expanded: true,
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,

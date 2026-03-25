@@ -2,6 +2,11 @@ import { afterEach, describe, expect, it } from "vitest";
 import { cleanup, render } from "@testing-library/svelte";
 import { mdiAbTesting } from "@mdi/js";
 
+/**
+ * @template {"g" | "svg"} T
+ * @typedef {import("../icon/Icon").IconProps<T>} IconProps<T>
+ */
+
 import { Icon } from "../..";
 
 describe("Icon", () => {
@@ -32,10 +37,11 @@ describe("Icon", () => {
     expect(component.getRootElement()).toHaveRole(props.role);
   });
 
-  it("should render the icon inside a `g` element if it's part of a stack", () => {
+  it('should render the icon inside a `g` element when the `as` prop is "g"', () => {
+    /** @type {IconProps<"g">} */
     const props = {
       ...baseProps,
-      isInStack: true,
+      as: "g",
     };
     const { component } = render(Icon, { ...baseOptions, props });
 
@@ -77,8 +83,8 @@ describe("Icon", () => {
     expect(component.getRootElement()).toHaveAttribute("role", "img");
 
     await rerender({
+      as: "g",
       className: "baz",
-      isInStack: true,
       path: mdiAbTesting,
       role: "img",
       size: "small",
