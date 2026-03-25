@@ -1,17 +1,17 @@
 <svelte:options immutable={true} />
 
 <script>
-  /** @typedef {import("./Icon").IconProps} IconProps */
+  /** @typedef {import("./Icon").IconProps<"g" | "svg">} IconProps */
 
   import { makeClassName } from "@duskit/string";
 
   import "./Icon.css";
 
+  /** @type {IconProps["as"]} */
+  export let as = "svg";
+
   /** @type {IconProps["className"]} */
   export let className = undefined;
-
-  /** @type {IconProps["isInStack"]} */
-  export let isInStack = false;
 
   /** @type {IconProps["path"]} */
   export let path;
@@ -33,7 +33,7 @@
   };
 </script>
 
-{#if isInStack}
+{#if as === "g"}
   <g bind:this={rootElement} {...commonAttributes}>
     <rect />
     <path d={path} />

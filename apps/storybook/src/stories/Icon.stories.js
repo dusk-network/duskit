@@ -6,9 +6,15 @@ export default {
   title: "Components/Icon",
   component: Icon,
   argTypes: {
+    as: {
+      control: false,
+      table: {
+        defaultValue: { summary: '"svg"' },
+        type: { summary: '"g" | "svg"' },
+      },
+    },
     path: { control: "text" },
     size: { control: "select", options: ["small", "default", "large"] },
-    isInStack: { control: "boolean" },
   },
 };
 
@@ -24,7 +30,7 @@ export const Large = {
   args: {
     path: mdiAlertCircleOutline,
     size: "large",
-    style: "color: var(--warning-color);",
+    style: "color: var(--success-color);",
   },
 };
 
@@ -35,4 +41,3 @@ export const Small = {
     style: "color: var(--info-color);",
   },
 };
-
