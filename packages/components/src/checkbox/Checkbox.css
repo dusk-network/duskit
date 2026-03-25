@@ -1,8 +1,10 @@
 .dusk-checkbox {
+  position: relative;
   display: inline-block;
   width: var(--checkbox-control-size);
   height: var(--checkbox-control-size);
-  background-color: transparent;
+  box-sizing: border-box;
+  background-color: var(--checkbox-control-bg-color);
   border-color: var(--checkbox-control-border-color);
   border-style: solid;
   border-width: var(--checkbox-control-border-width);
@@ -12,8 +14,49 @@
   flex-shrink: 0;
 }
 
+.dusk-checkbox::after {
+  position: absolute;
+  bottom: 53%;
+  left: 11%;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  box-sizing: content-box;
+  content: "";
+
+  /**
+   * 1/8 is an empirical ratio to keep the stroke proportionally
+   * thick without relying on complex CSS geometry
+   */
+  border-right: calc(var(--checkbox-control-size) / 8) solid
+    var(--checkbox-control-check-color);
+  border-bottom: calc(var(--checkbox-control-size) / 8) solid
+    var(--checkbox-control-check-color);
+  opacity: 0;
+
+  /* undraw sequence: hide long leg, then short leg, then fade out */
+  transition:
+    height 0.1s ease-out,
+    width 0.1s ease-out 0.1s,
+    opacity 0.2s ease-out;
+  transform: rotate(45deg);
+  transform-origin: bottom left;
+}
+
 .dusk-checkbox:checked {
   background-color: var(--checkbox-control-checked-bg-color);
+}
+
+.dusk-checkbox:checked::after {
+  width: 30%;
+  height: 55%;
+  opacity: 1;
+
+  /* draw sequence: show immediately, draw short leg, then draw long leg */
+  transition:
+    opacity 0s,
+    width 0.1s ease-out,
+    height 0.1s ease-out 0.1s;
 }
 
 .dusk-checkbox:disabled,
