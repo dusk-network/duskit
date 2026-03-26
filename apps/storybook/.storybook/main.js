@@ -16,7 +16,7 @@ const config = {
     name: "@storybook/svelte-vite",
     options: {},
   },
-  async viteFinal(viteConfig, { configType }) {
+  async viteFinal(viteConfig) {
     const [{ mergeConfig }, { svelte }] = await Promise.all([
       import("vite"),
       import("@sveltejs/vite-plugin-svelte"),
@@ -32,8 +32,7 @@ const config = {
       : [svelte(), ...existingPlugins];
 
     const merged = mergeConfig(viteConfig, {
-      // Make the static build deployable under GitHub Pages' subpath.
-      base: configType === "PRODUCTION" ? "./" : "/",
+      base: "./",
       resolve: {
         dedupe: ["svelte"],
       },
