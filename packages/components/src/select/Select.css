@@ -39,8 +39,3 @@
 .dusk-select:disabled {
   opacity: 0.5;
 }
-
-/* stylelint-disable-next-line selector-pseudo-element-no-unknown */
-.dusk-select::ms-expand {
-  display: none;
-}
