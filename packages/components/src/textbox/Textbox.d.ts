@@ -4,7 +4,7 @@ import type {
   HTMLTextareaAttributes,
 } from "svelte/elements";
 
-import type { OmitSvelteSpecificProps } from "../dusk.components";
+import type { ControlledHtmlAttributes } from "../dusk.components";
 
 export type TextboxType =
   | "email"
@@ -18,11 +18,9 @@ export type TextboxType =
   | "url";
 
 export type TextboxProps<T extends TextboxType = "text"> =
-  OmitSvelteSpecificProps<
-    T extends "multiline"
-      ? Omit<HTMLTextareaAttributes, "value">
-      : Omit<HTMLInputAttributes, "type" | "value">
-  > & {
+  (T extends "multiline"
+    ? ControlledHtmlAttributes<HTMLTextareaAttributes, "value">
+    : ControlledHtmlAttributes<HTMLInputAttributes, "type" | "value">) & {
     className?: string;
     type?: T;
     value?: T extends "number" ? number : string;

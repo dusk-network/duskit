@@ -36,12 +36,12 @@
 <input
   bind:this={rootElement}
   {...$$restProps}
-  type="checkbox"
-  {id}
-  {tabindex}
-  {name}
-  {disabled}
-  class={classes}
   bind:checked
+  class={classes}
+  {disabled}
+  {id}
+  {name}
   on:change
+  {tabindex}
+  type="checkbox"
 />

@@ -1,12 +1,14 @@
 import type { ComponentProps, SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
-import type { OmitSvelteSpecificProps, Tabs } from "@duskit/components";
+import type { ControlledHtmlAttributes } from "../dusk.components";
+import type Tabs from "../tabs/Tabs";
 
 type TabItem = ComponentProps<Tabs>["items"][number];
 
-export interface ContentSwitchProps extends OmitSvelteSpecificProps<
-  SvelteHTMLElements["ul"]
+export interface ContentSwitchProps extends ControlledHtmlAttributes<
+  SvelteHTMLElements["ul"],
+  "role"
 > {
   className?: string;
   items: TabItem[];

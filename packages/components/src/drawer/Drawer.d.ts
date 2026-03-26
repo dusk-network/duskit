@@ -1,10 +1,14 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
-import { OmitSvelteSpecificProps } from "@duskit/components";
 import type { OutsideClickEvent } from "@duskit/svelte-actions";
 
-type DrawerProps = OmitSvelteSpecificProps<SvelteHTMLElements["aside"]> & {
+import type { ControlledHtmlAttributes } from "../dusk.components";
+
+type DrawerProps = ControlledHtmlAttributes<
+  SvelteHTMLElements["aside"],
+  "aria-hidden" | "inert"
+> & {
   className?: string;
   from: "left" | "right" | "top" | "bottom";
   open: boolean;

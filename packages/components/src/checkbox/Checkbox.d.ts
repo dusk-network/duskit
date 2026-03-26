@@ -1,10 +1,11 @@
 import type { SvelteComponent } from "svelte";
 import type { HTMLInputAttributes } from "svelte/elements";
 
-import type { OmitSvelteSpecificProps } from "../dusk.components";
+import type { ControlledHtmlAttributes } from "../dusk.components";
 
-export interface CheckboxProps extends OmitSvelteSpecificProps<
-  Omit<HTMLInputAttributes, "checked" | "disabled" | "id" | "name" | "tabindex">
+export interface CheckboxProps extends ControlledHtmlAttributes<
+  HTMLInputAttributes,
+  "checked" | "disabled" | "id" | "name" | "tabindex" | "type"
 > {
   checked?: boolean;
   className?: string;

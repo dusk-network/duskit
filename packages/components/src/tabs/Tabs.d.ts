@@ -1,7 +1,7 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
-import type { IconProp, OmitSvelteSpecificProps } from "../dusk.components";
+import type { ControlledHtmlAttributes, IconProp } from "../dusk.components";
 
 type TabItem = {
   icon?: IconProp;
@@ -9,7 +9,7 @@ type TabItem = {
   label?: string;
 };
 
-export interface TabsProps extends OmitSvelteSpecificProps<
+export interface TabsProps extends ControlledHtmlAttributes<
   SvelteHTMLElements["div"]
 > {
   className?: string;

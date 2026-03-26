@@ -1,14 +1,14 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
-import type { OmitSvelteSpecificProps } from "../dusk.components";
+import type { ControlledHtmlAttributes } from "../dusk.components";
 
 type StepperStep = {
   iconPath?: string;
   label: string;
 };
 
-export interface StepperProps extends OmitSvelteSpecificProps<
+export interface StepperProps extends ControlledHtmlAttributes<
   SvelteHTMLElements["div"]
 > {
   activeStep: number;

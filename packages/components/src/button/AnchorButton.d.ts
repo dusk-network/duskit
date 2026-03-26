@@ -1,12 +1,13 @@
 import type { SvelteComponent } from "svelte";
 import type { HTMLAnchorAttributes } from "svelte/elements";
 
-import type { IconProp, OmitSvelteSpecificProps } from "../dusk.components";
+import type { ControlledHtmlAttributes, IconProp } from "../dusk.components";
 import type { Anchor } from "../..";
 import type { ButtonSize, ButtonVariant } from "./Button";
 
-export interface AnchorButtonProps extends OmitSvelteSpecificProps<
-  Omit<HTMLAnchorAttributes, "href">
+export interface AnchorButtonProps extends ControlledHtmlAttributes<
+  HTMLAnchorAttributes,
+  "aria-disabled" | "href" | "tabindex"
 > {
   className?: string;
   href: string;
