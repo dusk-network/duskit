@@ -1,12 +1,12 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
-import type { GapSize, OmitSvelteSpecificProps } from "../dusk.components";
+import type { GapSize, ControlledHtmlAttributes } from "../dusk.components";
 
 export type SuspenseProps<
   R = any,
   T extends keyof HTMLElementTagNameMap = "div",
-> = OmitSvelteSpecificProps<SvelteHTMLElements[T]> & {
+> = ControlledHtmlAttributes<SvelteHTMLElements[T]> & {
   as?: T;
   className?: string;
   errorMessage?: string;

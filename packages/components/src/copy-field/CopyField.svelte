@@ -59,7 +59,7 @@
   ]);
 </script>
 
-<div bind:this={rootElement} class={classes} {...$$restProps}>
+<div bind:this={rootElement} {...$$restProps} class={classes}>
   <Textbox
     className="dusk-copy-field__content"
     value={displayValue}

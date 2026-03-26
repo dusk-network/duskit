@@ -1,9 +1,9 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
-import type { OmitSvelteSpecificProps, StatusType } from "../dusk.components";
+import type { ControlledHtmlAttributes, StatusType } from "../dusk.components";
 
-export interface BannerProps extends OmitSvelteSpecificProps<
+export interface BannerProps extends ControlledHtmlAttributes<
   SvelteHTMLElements["div"]
 > {
   className?: string;

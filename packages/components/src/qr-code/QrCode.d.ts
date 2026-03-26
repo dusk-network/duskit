@@ -1,13 +1,14 @@
 import type { SvelteComponent } from "svelte";
 
-import type { OmitSvelteSpecificProps } from "../dusk.components";
 import type { default as Suspense, SuspenseProps } from "../suspense/Suspense";
 
-export interface QrCodeProps extends OmitSvelteSpecificProps<
-  Omit<
-    SuspenseProps<string, "div">,
-    "as" | "className" | "errorMessage" | "errorVariant" | "waitFor"
-  >
+/**
+ * We don't use `ControlledHtmlAttributes` here as
+ * `SuspenseProps` is already "clean".
+ */
+export interface QrCodeProps extends Omit<
+  SuspenseProps<string, "div">,
+  "as" | "className" | "errorMessage" | "errorVariant" | "waitFor"
 > {
   altText?: string;
   bgColor?: string;

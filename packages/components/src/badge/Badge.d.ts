@@ -1,9 +1,9 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
-import type { OmitSvelteSpecificProps, StatusType } from "../dusk.components";
+import type { ControlledHtmlAttributes, StatusType } from "../dusk.components";
 
-export interface BadgeProps extends OmitSvelteSpecificProps<
+export interface BadgeProps extends ControlledHtmlAttributes<
   SvelteHTMLElements["span"]
 > {
   className?: string;

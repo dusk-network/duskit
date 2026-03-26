@@ -1,11 +1,18 @@
-export type OmitSvelteSpecificProps<T> = {
-  [K in keyof T as K extends
-    | `on:${string}`
+type NativeEventKeys = Extract<keyof GlobalEventHandlers, `on${string}`>;
+
+export type ControlledHtmlAttributes<
+  SourceAttributes extends Record<string, any>,
+  ControlledKeys extends keyof SourceAttributes = never,
+> = {
+  [K in keyof SourceAttributes as K extends
     | `bind:${string}`
     | "class"
+    | ControlledKeys
+    | NativeEventKeys
+    | `on:${string}`
     | "style"
     ? never
-    : K]: T[K];
+    : K]: SourceAttributes[K];
 };
 
 export type GapSize = "small" | "default" | "medium" | "large";

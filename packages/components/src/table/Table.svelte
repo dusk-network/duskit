@@ -100,7 +100,7 @@
   $: classes = makeClassName(["duskit-table", className]);
 </script>
 
-<table bind:this={rootElement} class={classes} {...$$restProps}>
+<table bind:this={rootElement} {...$$restProps} class={classes}>
   {#if caption}
     <caption>{caption}</caption>
   {/if}

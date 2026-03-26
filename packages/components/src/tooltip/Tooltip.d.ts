@@ -2,10 +2,11 @@ import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 import type { Side } from "@floating-ui/dom";
 
-import type { OmitSvelteSpecificProps, StatusType } from "../dusk.components";
+import type { ControlledHtmlAttributes, StatusType } from "../dusk.components";
 
-export interface TooltipProps extends OmitSvelteSpecificProps<
-  Omit<SvelteHTMLElements["div"], "id">
+export interface TooltipProps extends ControlledHtmlAttributes<
+  SvelteHTMLElements["div"],
+  "aria-hidden" | "id" | "role"
 > {
   className?: string;
   defaultDelayHide?: number;

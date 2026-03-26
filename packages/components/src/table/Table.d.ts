@@ -1,7 +1,7 @@
 import type { SvelteComponent, ComponentProps } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
-import type { OmitSvelteSpecificProps } from "../dusk.components";
+import type { ControlledHtmlAttributes } from "../dusk.components";
 
 type SvelteComponentConstructor = new (...args: any) => SvelteComponent;
 
@@ -123,7 +123,7 @@ export type TableSortState = {
 
 export interface TableProps<
   T extends Record<string, any> = Record<string, any>,
-> extends OmitSvelteSpecificProps<SvelteHTMLElements["table"]> {
+> extends ControlledHtmlAttributes<SvelteHTMLElements["table"]> {
   caption?: string;
   className?: string;
   data: T[];

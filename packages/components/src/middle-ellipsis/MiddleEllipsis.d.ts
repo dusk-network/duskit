@@ -1,10 +1,10 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
-import type { OmitSvelteSpecificProps } from "../dusk.components";
+import type { ControlledHtmlAttributes } from "../dusk.components";
 
 export type MiddleEllipsisProps<T extends keyof HTMLElementTagNameMap = "pre"> =
-  OmitSvelteSpecificProps<SvelteHTMLElements[T]> & {
+  ControlledHtmlAttributes<SvelteHTMLElements[T]> & {
     as?: T;
     className?: string;
     text: string;

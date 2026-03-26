@@ -1,7 +1,7 @@
 import type { SvelteComponent } from "svelte";
 import type { HTMLButtonAttributes } from "svelte/elements";
 
-import type { IconProp, OmitSvelteSpecificProps } from "../dusk.components";
+import type { ControlledHtmlAttributes, IconProp } from "../dusk.components";
 
 export type ButtonSize = "default" | "small";
 
@@ -9,8 +9,9 @@ export type ButtonType = "button" | "reset" | "submit" | "toggle";
 
 export type ButtonVariant = "primary" | "secondary" | "tertiary";
 
-export interface ButtonProps extends OmitSvelteSpecificProps<
-  Omit<HTMLButtonAttributes, "type">
+export interface ButtonProps extends ControlledHtmlAttributes<
+  HTMLButtonAttributes,
+  "aria-pressed" | "type"
 > {
   className?: string;
   icon?: IconProp;

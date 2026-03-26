@@ -77,10 +77,10 @@
 {#if stepsAmount >= 2}
   <div
     bind:this={rootElement}
+    {...$$restProps}
     class={classes}
     style:--columns={stepsAmount}
     style:--progress-width={progressWidth}
-    {...$$restProps}
   >
     {#if Array.isArray(steps)}
       {#each steps as currentStep, idx (currentStep)}

@@ -1,7 +1,7 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
-import type { OmitSvelteSpecificProps, StatusType } from "../dusk.components";
+import type { ControlledHtmlAttributes, StatusType } from "../dusk.components";
 
 export type ToastItem = {
   icon?: string;
@@ -12,7 +12,7 @@ export type ToastItem = {
 
 export function toast(type: StatusType, message: string, icon: string): void;
 
-export interface ToastProps extends OmitSvelteSpecificProps<
+export interface ToastProps extends ControlledHtmlAttributes<
   SvelteHTMLElements["ul"]
 > {
   className?: string;
