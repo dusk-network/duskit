@@ -1,5 +1,31 @@
 # @duskit/components
 
+## 0.5.0
+
+### Minor Changes
+
+- [#275](https://github.com/dusk-network/duskit/pull/275) [`fe3ede7`](https://github.com/dusk-network/duskit/commit/fe3ede74c676af5974550ba158fb29e7799cb1e7) Thanks [@ascartabelli](https://github.com/ascartabelli)! - refactor(components)!: **BREAKING CHANGE** replace `isInStack` with `as` prop in `Icon` component
+
+- [#269](https://github.com/dusk-network/duskit/pull/269) [`8d07f99`](https://github.com/dusk-network/duskit/commit/8d07f99e77abc43818a196a3a2d0062cf645100d) Thanks [@ascartabelli](https://github.com/ascartabelli)! - feat(components): expose `outclick` event on `Drawer` via `@duskit/svelte-actions`
+
+### Patch Changes
+
+- [#265](https://github.com/dusk-network/duskit/pull/265) [`bd41f0d`](https://github.com/dusk-network/duskit/commit/bd41f0d96d6aaaa69b1565cc47bca6ebfed8d0bd) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fixed wrong import of `OmitSvelteSpecificProps` utility type in `Table.d.ts`
+
+- [#283](https://github.com/dusk-network/duskit/pull/283) [`1e5fd97`](https://github.com/dusk-network/duskit/commit/1e5fd97009c49216e01805fe1f1e64faa3a1932e) Thanks [@ascartabelli](https://github.com/ascartabelli)! - chore(components): remove obsolete `::-ms-expand` pseudo-element in `Select`'s CSS
+
+- [#284](https://github.com/dusk-network/duskit/pull/284) [`dcb4fcf`](https://github.com/dusk-network/duskit/commit/dcb4fcf00a27fc1cf401030ba3c742c6980fb2bb) Thanks [@ascartabelli](https://github.com/ascartabelli)! - refactor(components): standardize HTML attribute inheritance and internal overrides
+
+- [#277](https://github.com/dusk-network/duskit/pull/277) [`6cb3ada`](https://github.com/dusk-network/duskit/commit/6cb3ada1cfab944bfd5e1a957fff579edf862565) Thanks [@ascartabelli](https://github.com/ascartabelli)! - perf(components): optimize type checking inside `Options`' iteration block
+
+- [#255](https://github.com/dusk-network/duskit/pull/255) [`196d592`](https://github.com/dusk-network/duskit/commit/196d5926ce752652df6ac8aee6d8433c7d07fe24) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fix(components): fixed `CopyField` not disabling the tooltip when disabled
+  - Added CSS class `dusk-copy-field--disabled` to `CopyField` when disabled
+
+- [#279](https://github.com/dusk-network/duskit/pull/279) [`23bdb1c`](https://github.com/dusk-network/duskit/commit/23bdb1cd32e1b1352d1806c311b6aba4f18e3a28) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fix(components): improve visual clarity of `Checkbox`'s checked state
+
+- Updated dependencies [[`f050a03`](https://github.com/dusk-network/duskit/commit/f050a03e06115052843101adf6108a48187c1450)]:
+  - @duskit/svelte-actions@0.0.1
+
 ## 0.4.0
 
 ### Minor Changes
