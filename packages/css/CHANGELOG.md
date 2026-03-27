@@ -1,5 +1,11 @@
 # @duskit/css
 
+## 0.2.0
+
+### Minor Changes
+
+- [#279](https://github.com/dusk-network/duskit/pull/279) [`23bdb1c`](https://github.com/dusk-network/duskit/commit/23bdb1cd32e1b1352d1806c311b6aba4f18e3a28) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fix(components): improve visual clarity of `Checkbox`'s checked state
+
 ## 0.1.0
 
 ### Minor Changes
