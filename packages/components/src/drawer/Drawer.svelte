@@ -58,6 +58,14 @@
     return [{ transform: startTransform }, { transform: targetTransform }];
   }
 
+  /** @param {KeyboardEvent} event */
+  function handleKeyDown(event) {
+    if (open && event.key === "Escape") {
+      event.preventDefault();
+      dispatch("cancel");
+    }
+  }
+
   /** @param {boolean} isOpen */
   async function handleOpenChange(isOpen) {
     if (!rootElement) {
@@ -123,6 +131,8 @@
     className,
   ]);
 </script>
+
+<svelte:window on:keydown={handleKeyDown} />
 
 <aside
   bind:this={rootElement}

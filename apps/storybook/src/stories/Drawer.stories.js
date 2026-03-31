@@ -54,7 +54,7 @@ export const Interactive = {
     docs: {
       description: {
         story:
-          "An interactive drawer handling its own internal state. The `open` control is disabled here. Click the button to open it, and click anywhere outside to close it via the `outsideclick` event.",
+          "An interactive drawer handling its own internal state. The `open` control is disabled here. Click the button to open it, and click anywhere outside or press the `Ecape` key to close it.",
       },
     },
   },
