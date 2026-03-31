@@ -1,5 +1,11 @@
 # @duskit/components
 
+## 0.6.0
+
+### Minor Changes
+
+- [#287](https://github.com/dusk-network/duskit/pull/287) [`1df897c`](https://github.com/dusk-network/duskit/commit/1df897c082ef3e10b2a30d1889bcab0ddfb3c9ae) Thanks [@ascartabelli](https://github.com/ascartabelli)! - feat(components): add `Escape` key support in `Drawer` to emit a `cancel` event
+
 ## 0.5.0
 
 ### Minor Changes
