@@ -40,7 +40,7 @@
   },
   "type": "module",
   "types": "index.d.ts",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "dependencies": {
     "@duskit/date": "0.1.0",
     "@duskit/error": "0.0.2",
