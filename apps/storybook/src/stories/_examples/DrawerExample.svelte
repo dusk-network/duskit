@@ -28,8 +28,7 @@
   /** @type {DrawerProps["size"]} */
   export let size = "default";
 
-  /** @param {OutsideClickEvent<HTMLElementTagNameMap["aside"]>} evt */
-  function handleOutsideClick(evt) {
+  function handleClose() {
     if (!interactive) {
       return;
     }
@@ -43,7 +42,8 @@
 >
   {#if interactive && !open}
     <p style="margin-bottom: 1rem; color: var(--on-surface-color);">
-      Click the button below to open. Click outside the drawer to close it.
+      Click the button below to open. Click outside the drawer or press the
+      `Escape` key to close it.
     </p>
     <Button on:click={() => (open = true)} text="Open Drawer" type="button" />
   {:else if !interactive}
@@ -58,7 +58,8 @@
   {from}
   {open}
   {size}
-  on:outsideclick={handleOutsideClick}
+  on:cancel={handleClose}
+  on:outsideclick={handleClose}
   let:visible
 >
   {#if visible}

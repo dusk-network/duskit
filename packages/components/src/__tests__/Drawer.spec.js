@@ -341,6 +341,66 @@ describe("Drawer", () => {
     });
   });
 
+  describe("Keyboard Interactions", () => {
+    it("should emit the `cancel` event and prevent default behavior when the `Escape` key is pressed and the drawer is open", () => {
+      const cancelHandler = vi.fn();
+
+      render(Drawer, {
+        events: { cancel: cancelHandler },
+        props: { ...baseProps, open: true },
+      });
+
+      const event = new KeyboardEvent("keydown", {
+        bubbles: true,
+        cancelable: true,
+        key: "Escape",
+      });
+
+      window.dispatchEvent(event);
+
+      expect(cancelHandler).toHaveBeenCalledTimes(1);
+      expect(event.defaultPrevented).toBe(true);
+    });
+
+    it("should not emit the `cancel` event when the `Escape` key is pressed and the drawer is closed", () => {
+      const cancelHandler = vi.fn();
+
+      render(Drawer, {
+        events: { cancel: cancelHandler },
+        props: { ...baseProps, open: false },
+      });
+
+      const event = new KeyboardEvent("keydown", {
+        bubbles: true,
+        cancelable: true,
+        key: "Escape",
+      });
+
+      window.dispatchEvent(event);
+
+      expect(cancelHandler).not.toHaveBeenCalled();
+    });
+
+    it("should not emit the `cancel` event when a key other than `Escape` is pressed", () => {
+      const cancelHandler = vi.fn();
+
+      render(Drawer, {
+        events: { cancel: cancelHandler },
+        props: { ...baseProps, open: true },
+      });
+
+      window.dispatchEvent(
+        new KeyboardEvent("keydown", {
+          bubbles: true,
+          cancelable: true,
+          key: "Enter",
+        })
+      );
+
+      expect(cancelHandler).not.toHaveBeenCalled();
+    });
+  });
+
   describe("Slot Content", () => {
     it("should always keep slotted content in the DOM", async () => {
       const { queryByTestId, rerender } = render(DrawerWithContent, {
