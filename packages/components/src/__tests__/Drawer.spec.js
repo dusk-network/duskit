@@ -342,7 +342,7 @@ describe("Drawer", () => {
   });
 
   describe("Keyboard Interactions", () => {
-    it("should emit the `cancel` event and prevent default behavior when the `Escape` key is pressed and the drawer is open", () => {
+    it("should emit a cancelable `cancel` event containing the original event and prevent native default behavior when the `Escape` key is pressed and the drawer is open", () => {
       const cancelHandler = vi.fn();
 
       render(Drawer, {
@@ -358,7 +358,14 @@ describe("Drawer", () => {
 
       window.dispatchEvent(event);
 
-      expect(cancelHandler).toHaveBeenCalledTimes(1);
+      expect(cancelHandler).toHaveBeenCalledExactlyOnceWith(
+        expect.objectContaining({
+          cancelable: true,
+          detail: {
+            originalEvent: event,
+          },
+        })
+      );
       expect(event.defaultPrevented).toBe(true);
     });
 

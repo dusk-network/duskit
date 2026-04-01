@@ -61,8 +61,13 @@
   /** @param {KeyboardEvent} event */
   function handleKeyDown(event) {
     if (open && event.key === "Escape") {
+      // We must prevent the native default behavior of the escape key
       event.preventDefault();
-      dispatch("cancel");
+
+      // We emit our custom event with the original event as the payload
+      // and make it cancelable so consumer components can handle the
+      // `Drawer` state gracefully.
+      dispatch("cancel", { originalEvent: event }, { cancelable: true });
     }
   }
 
