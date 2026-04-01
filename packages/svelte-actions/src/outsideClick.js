@@ -5,7 +5,7 @@ function outsideClick(element) {
     if (
       element &&
       event.target instanceof Node &&
-      !element.contains(event.target)
+      !event.composedPath().includes(element)
     ) {
       element.dispatchEvent(
         new CustomEvent("outsideclick", {
