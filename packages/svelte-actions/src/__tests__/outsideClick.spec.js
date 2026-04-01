@@ -44,7 +44,7 @@ describe("outsideClick action", () => {
     vi.restoreAllMocks();
   });
 
-  it("should dispatch an `outsideclick` event when a click occurs outside the element", () => {
+  it("should dispatch an `outsideclick` event containing the original `MouseEvent` when a click occurs outside", () => {
     const handleOutclick = vi.fn();
     const action = outsideClick(insideElement);
 
@@ -55,7 +55,38 @@ describe("outsideClick action", () => {
     expect(handleOutclick).toHaveBeenCalledExactlyOnceWith(
       expect.objectContaining({
         detail: {
-          target: outsideElement,
+          originalEvent: mouseEvent,
+        },
+      })
+    );
+
+    action.destroy();
+  });
+
+  /**
+   * At runtime, `PointerEvent` is a subclass of `MouseEvent`, so this test might seem
+   * like it's just verifying basic JavaScript object assignment.
+   * However, this acts as a critical regression guard: it ensures that future maintainers
+   * do not accidentally break touch and stylus support by adding overly strict type
+   * checks (e.g., `if (!(event instanceof MouseEvent))`) inside the action's logic.
+   */
+  it("should correctly pass a `PointerEvent` as the `originalEvent` in the payload", () => {
+    const handleOutclick = vi.fn();
+    const action = outsideClick(insideElement);
+    const pointerEvent = new PointerEvent("click", {
+      bubbles: true,
+      cancelable: true,
+      pointerType: "touch",
+    });
+
+    insideElement.addEventListener("outsideclick", handleOutclick);
+
+    outsideElement.dispatchEvent(pointerEvent);
+
+    expect(handleOutclick).toHaveBeenCalledExactlyOnceWith(
+      expect.objectContaining({
+        detail: {
+          originalEvent: pointerEvent,
         },
       })
     );
