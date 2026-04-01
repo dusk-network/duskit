@@ -16,7 +16,7 @@ type DrawerProps = ControlledHtmlAttributes<
 };
 
 interface DrawerEvents {
-  cancel: CustomEvent<void>;
+  cancel: CustomEvent<{ originalEvent: KeyboardEvent }>;
   close: CustomEvent<void>;
   closing: CustomEvent<void>;
   open: CustomEvent<void>;
