@@ -1,5 +1,16 @@
 # @duskit/components
 
+## 0.7.0
+
+### Minor Changes
+
+- [#294](https://github.com/dusk-network/duskit/pull/294) [`b8fb4d1`](https://github.com/dusk-network/duskit/commit/b8fb4d19f38b7dd0a18d96f6f737d945dcfa12da) Thanks [@ascartabelli](https://github.com/ascartabelli)! - feat(components): enrich `Drawer`'s `cancel` event with native payloads and cancelability
+
+### Patch Changes
+
+- Updated dependencies [[`a9e846c`](https://github.com/dusk-network/duskit/commit/a9e846cf58e3816fa0b1c3ade572c44cd9dad223), [`e548670`](https://github.com/dusk-network/duskit/commit/e548670e9e4a0fbc6665a43b1c1636f18e174d12)]:
+  - @duskit/svelte-actions@0.1.0
+
 ## 0.6.0
 
 ### Minor Changes

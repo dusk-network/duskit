@@ -1,5 +1,15 @@
 # @duskit/svelte-actions
 
+## 0.1.0
+
+### Minor Changes
+
+- [#293](https://github.com/dusk-network/duskit/pull/293) [`a9e846c`](https://github.com/dusk-network/duskit/commit/a9e846cf58e3816fa0b1c3ade572c44cd9dad223) Thanks [@ascartabelli](https://github.com/ascartabelli)! - feat(svelte-actions)!: **BREAKING CHANGE** expose `originalEvent` in `outsideClick` payload
+
+### Patch Changes
+
+- [#292](https://github.com/dusk-network/duskit/pull/292) [`e548670`](https://github.com/dusk-network/duskit/commit/e548670e9e4a0fbc6665a43b1c1636f18e174d12) Thanks [@ascartabelli](https://github.com/ascartabelli)! - refactor(svelte-actions): adopt `composedPath` in `outsideClick` to support Shadow DOM and detached nodes
+
 ## 0.0.1
 
 ### Patch Changes
