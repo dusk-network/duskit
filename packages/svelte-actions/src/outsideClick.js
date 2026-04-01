@@ -11,7 +11,7 @@ function outsideClick(element) {
         new CustomEvent("outsideclick", {
           bubbles: true,
           cancelable: true,
-          detail: { target: event.target },
+          detail: { originalEvent: event },
         })
       );
     }

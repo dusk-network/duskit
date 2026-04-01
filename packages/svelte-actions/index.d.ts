@@ -1,7 +1,7 @@
 import type { ActionReturn } from "svelte/action";
 
 export type OutsideClickEvent<T extends Element = Element> = CustomEvent<{
-  target: EventTarget & Node;
+  originalEvent: MouseEvent | PointerEvent;
 }> & {
   currentTarget: T;
 };
