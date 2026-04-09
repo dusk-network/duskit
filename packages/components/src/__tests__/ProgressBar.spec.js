@@ -26,7 +26,7 @@ const getBarElement = (container) =>
 
 /** @type {(element: HTMLElement) => number} */
 function getRoundedBarPercentage(element) {
-  const percentage = getComputedStyle(element).width;
+  const percentage = element.style.width;
 
   // we return an impossible width if we don't
   // get a percentage to make tests fail
@@ -58,7 +58,7 @@ describe("ProgressBar", () => {
     expect(element).not.toHaveAttribute("aria-valuenow");
     expect(element).toHaveClass("dusk-progress-bar--size--default");
     expect(barElement).toHaveClass("dusk-progress-bar__filler--undetermined");
-    expect(getComputedStyle(barElement).width).toBe("");
+    expect(barElement.style.width).toBe("");
   });
 
   it('should allow to pick a direction for the progress bar using "ltr" as a default', async () => {
@@ -102,7 +102,7 @@ describe("ProgressBar", () => {
     expect(element).toHaveAttribute("aria-valuemax", "100");
     expect(element).toHaveAttribute("aria-valuemin", "0");
     expect(element).toHaveAttribute("aria-valuenow", "33");
-    expect(getComputedStyle(barElement).width).toBe("33%");
+    expect(barElement.style.width).toBe("33%");
   });
 
   it("should pass additional class names and attributes to the rendered element", async () => {
@@ -184,7 +184,7 @@ describe("ProgressBar", () => {
     expect(element).not.toHaveAttribute("aria-valuemin");
     expect(element).not.toHaveAttribute("aria-valuenow");
     expect(barElement).toHaveClass("dusk-progress-bar__filler--undetermined");
-    expect(getComputedStyle(barElement).width).toBe("");
+    expect(barElement.style.width).toBe("");
   });
 
   it("should allow for a custom easing function and react to its changes", async () => {
