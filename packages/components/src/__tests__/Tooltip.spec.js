@@ -29,7 +29,7 @@ function createEventTarget(dataset) {
 }
 
 describe("Tooltip", () => {
-  /** @type {import("svelte").ComponentProps<Tooltip>} */
+  /** @satisfies {import("svelte").ComponentProps<Tooltip>} */
   const baseProps = {
     defaultDelayHide: 300,
     defaultDelayShow: 500,
@@ -125,33 +125,39 @@ describe("Tooltip", () => {
     const { unmount } = render(Tooltip, baseOptions);
     const handlers = addListenerSpy.mock.calls.map((call) => call[1]);
 
-    expect(addListenerSpy).toHaveBeenCalledTimes(5);
+    expect(addListenerSpy).toHaveBeenCalledTimes(6);
     expect(addListenerSpy).toHaveBeenNthCalledWith(
       1,
-      "focusin",
+      "click",
       expect.any(Function),
       expect.objectContaining({ capture: true })
     );
     expect(addListenerSpy).toHaveBeenNthCalledWith(
       2,
-      "focusout",
+      "focusin",
       expect.any(Function),
       expect.objectContaining({ capture: true })
     );
     expect(addListenerSpy).toHaveBeenNthCalledWith(
       3,
-      "keydown",
+      "focusout",
       expect.any(Function),
       expect.objectContaining({ capture: true })
     );
     expect(addListenerSpy).toHaveBeenNthCalledWith(
       4,
-      "mouseenter",
+      "keydown",
       expect.any(Function),
       expect.objectContaining({ capture: true })
     );
     expect(addListenerSpy).toHaveBeenNthCalledWith(
       5,
+      "mouseenter",
+      expect.any(Function),
+      expect.objectContaining({ capture: true })
+    );
+    expect(addListenerSpy).toHaveBeenNthCalledWith(
+      6,
       "mouseleave",
       expect.any(Function),
       expect.objectContaining({ capture: true })
@@ -159,36 +165,42 @@ describe("Tooltip", () => {
 
     unmount();
 
-    expect(removeListenerSpy).toHaveBeenCalledTimes(5);
+    expect(removeListenerSpy).toHaveBeenCalledTimes(6);
 
     expect(removeListenerSpy).toHaveBeenNthCalledWith(
       1,
-      "focusin",
+      "click",
       handlers[0],
       expect.objectContaining({ capture: true })
     );
     expect(removeListenerSpy).toHaveBeenNthCalledWith(
       2,
-      "focusout",
+      "focusin",
       handlers[1],
       expect.objectContaining({ capture: true })
     );
     expect(removeListenerSpy).toHaveBeenNthCalledWith(
       3,
-      "keydown",
+      "focusout",
       handlers[2],
       expect.objectContaining({ capture: true })
     );
     expect(removeListenerSpy).toHaveBeenNthCalledWith(
       4,
-      "mouseenter",
+      "keydown",
       handlers[3],
       expect.objectContaining({ capture: true })
     );
     expect(removeListenerSpy).toHaveBeenNthCalledWith(
       5,
-      "mouseleave",
+      "mouseenter",
       handlers[4],
+      expect.objectContaining({ capture: true })
+    );
+    expect(removeListenerSpy).toHaveBeenNthCalledWith(
+      6,
+      "mouseleave",
+      handlers[5],
       expect.objectContaining({ capture: true })
     );
 
@@ -313,7 +325,7 @@ describe("Tooltip", () => {
           baseProps.id
         );
 
-        await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
+        await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
         expect(target.getAttribute("aria-describedby")).toBe(baseProps.id);
@@ -347,7 +359,7 @@ describe("Tooltip", () => {
           baseProps.id
         );
 
-        await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
+        await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
         expect(target.getAttribute("aria-describedby")).toBe(baseProps.id);
@@ -375,7 +387,7 @@ describe("Tooltip", () => {
         expect(computePosition).toHaveBeenCalledTimes(1);
         expect(tooltip).toHaveTextContent("Testo SVG");
 
-        await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
+        await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
 
@@ -410,7 +422,7 @@ describe("Tooltip", () => {
           baseProps.id
         );
 
-        await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
+        await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
 
         expect(tooltip).toHaveTextContent(dataset.tooltipText);
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
@@ -419,9 +431,7 @@ describe("Tooltip", () => {
           baseProps.id
         );
 
-        await vi.advanceTimersByTimeAsync(
-          700 - Number(baseProps.defaultDelayShow)
-        );
+        await vi.advanceTimersByTimeAsync(700 - baseProps.defaultDelayShow);
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
         expect(tooltip).toHaveClass("dusk-tooltip--type--error");
@@ -453,7 +463,7 @@ describe("Tooltip", () => {
           mainAxis: baseProps.defaultOffset,
         });
 
-        await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
+        await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
         expect(tooltip).toHaveClass(
@@ -534,7 +544,7 @@ describe("Tooltip", () => {
 
         target.remove();
 
-        await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
+        await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
         expect(target.getAttribute("aria-describedby")).toBeNull();
@@ -562,13 +572,159 @@ describe("Tooltip", () => {
         await tick();
 
         // Fast-forward the timers to ensure no delayed show logic is executed
-        await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
+        await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
 
         // Verify that the tooltip remained strictly hidden and the observers were disconnected
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
         expect(tooltip).toHaveTextContent("");
         expect(ioUnobserveSpy).toHaveBeenCalledWith(target);
         expect(moDisconnectSpy).toHaveBeenCalledTimes(1);
+      });
+
+      it("should not overwrite dynamically updated text if a show timer is pending (mobile race condition)", async () => {
+        const { getByRole } = render(Tooltip, baseOptions);
+        const tooltip = getByRole("tooltip", { hidden: true });
+
+        // Trigger the event that starts the async delay
+        await fireEvent.focusIn(target);
+
+        // Simulate the DOM mutation (e.g., toggle state change)
+        // while the tooltip timer is still running
+        target.dataset.tooltipText = "Dynamically updated text";
+
+        // Allow the MutationObserver to detect the change and update the store
+        await tick();
+
+        // Fast-forward the time to let the original setTimeout expire
+        await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
+
+        expect(tooltip.getAttribute("aria-hidden")).toBe("false");
+        expect(tooltip).toHaveTextContent("Dynamically updated text");
+      });
+
+      it("should cancel the show delay and hide the tooltip if the target receives a click (rapid tap)", async () => {
+        const { getByRole } = render(Tooltip, baseOptions);
+        const tooltip = getByRole("tooltip", { hidden: true });
+
+        // The mobile browser sends a synthetic focusin/mouseenter at the start of the tap
+        await fireEvent.focusIn(target);
+
+        // Assert the initial clear from the show handler
+        expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
+
+        // A fraction of a second later, the tap concludes with an actual click
+        await fireEvent.click(target);
+
+        // Allow Svelte to process the event
+        await tick();
+
+        // Fast-forward the time to see if the tooltip appears anyway
+        await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
+
+        // Assert the final state and the secondary clear from the teardown
+        expect(tooltip.getAttribute("aria-hidden")).toBe("true");
+        expect(clearTimeoutSpy).toHaveBeenCalledTimes(2);
+      });
+
+      it("should cancel the show delay if the click occurs on a child element of the target", async () => {
+        const { getByRole } = render(Tooltip, baseOptions);
+        const tooltip = getByRole("tooltip", { hidden: true });
+
+        // Add a child element to the target to simulate an inner icon or span
+        const childElement = document.createElement("span");
+
+        target.appendChild(childElement);
+
+        // Trigger the focus on the main target
+        await fireEvent.focusIn(target);
+
+        // Assert the initial clear from the show handler
+        expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
+
+        // Click the inner child element
+        await fireEvent.click(childElement);
+
+        await tick();
+
+        // Fast-forward the time
+        await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
+
+        // The tooltip should remain hidden because the click on the child was intercepted
+        expect(tooltip.getAttribute("aria-hidden")).toBe("true");
+        expect(clearTimeoutSpy).toHaveBeenCalledTimes(2);
+      });
+
+      it("should hide an already visible tooltip immediately if the target is clicked", async () => {
+        const { getByRole } = render(Tooltip, baseOptions);
+        const tooltip = getByRole("tooltip", { hidden: true });
+
+        // Fully show the tooltip (simulating desktop hover)
+        await fireEvent.mouseEnter(target);
+
+        // Assert the initial clear from the show handler
+        expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
+
+        await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
+
+        expect(tooltip.getAttribute("aria-hidden")).toBe("false");
+
+        // Click the target
+        await fireEvent.click(target);
+        await tick();
+
+        // The tooltip should be hidden instantly, ignoring any hide delay
+        expect(tooltip.getAttribute("aria-hidden")).toBe("true");
+        expect(target.getAttribute("aria-describedby")).toBeNull();
+        expect(clearTimeoutSpy).toHaveBeenCalledTimes(2);
+      });
+
+      it("should not cancel the show delay if the click occurs on an unrelated element", async () => {
+        const { getByRole } = render(Tooltip, baseOptions);
+        const tooltip = getByRole("tooltip", { hidden: true });
+        const unrelatedElement = document.createElement("div");
+
+        document.body.appendChild(unrelatedElement);
+
+        await fireEvent.focusIn(target);
+
+        // Assert the initial clear from the show handler
+        expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
+
+        clearTimeoutSpy.mockClear();
+
+        await fireEvent.click(unrelatedElement);
+        await tick();
+
+        // The teardown should not run, hence `clearTimeout` is not called again
+        expect(clearTimeoutSpy).not.toHaveBeenCalled();
+
+        // The tooltip should eventually show up
+        await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
+        expect(tooltip.getAttribute("aria-hidden")).toBe("false");
+
+        unrelatedElement.remove();
+      });
+
+      it("should ignore the click event if the target is not a valid node", async () => {
+        const textNode = document.createTextNode("just a text node");
+
+        document.body.appendChild(textNode);
+
+        render(Tooltip, baseOptions);
+
+        await fireEvent.focusIn(target);
+
+        // Assert the initial clear from the show handler
+        expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
+
+        clearTimeoutSpy.mockClear();
+
+        await fireEvent.click(textNode);
+        await tick();
+
+        expect(clearTimeoutSpy).not.toHaveBeenCalled();
+
+        textNode.remove();
       });
     });
 
@@ -630,7 +786,7 @@ describe("Tooltip", () => {
         expect(ioUnobserveSpy).toHaveBeenCalledWith(target);
         expect(moDisconnectSpy).toHaveBeenCalledTimes(1);
 
-        await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayHide));
+        await vi.advanceTimersByTimeAsync(baseProps.defaultDelayHide);
 
         expect(tooltip).toHaveTextContent("");
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
@@ -655,7 +811,7 @@ describe("Tooltip", () => {
         expect(ioUnobserveSpy).toHaveBeenCalledWith(target);
         expect(moDisconnectSpy).toHaveBeenCalledTimes(1);
 
-        await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayHide));
+        await vi.advanceTimersByTimeAsync(baseProps.defaultDelayHide);
 
         expect(tooltip).toHaveTextContent("");
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
@@ -682,13 +838,11 @@ describe("Tooltip", () => {
         expect(ioUnobserveSpy).toHaveBeenCalledWith(target);
         expect(moDisconnectSpy).toHaveBeenCalledTimes(1);
 
-        await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayHide));
+        await vi.advanceTimersByTimeAsync(baseProps.defaultDelayHide);
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
 
-        await vi.advanceTimersByTimeAsync(
-          700 - Number(baseProps.defaultDelayHide)
-        );
+        await vi.advanceTimersByTimeAsync(700 - baseProps.defaultDelayHide);
 
         expect(tooltip).toHaveTextContent("");
         expect(tooltip.getAttribute("aria-hidden")).toBe("true");
@@ -917,7 +1071,7 @@ describe("Tooltip", () => {
       const tooltip = getByRole("tooltip", { hidden: true });
 
       await fireEvent.focusIn(dynamicTarget);
-      await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
+      await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
 
       expect(tooltip.getAttribute("aria-hidden")).toBe("false");
       expect(tooltip).toHaveTextContent("Initial text");
@@ -955,7 +1109,7 @@ describe("Tooltip", () => {
       const tooltip = getByRole("tooltip", { hidden: true });
 
       await fireEvent.mouseEnter(dynamicTarget);
-      await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
+      await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
 
       expect(tooltip.getAttribute("aria-hidden")).toBe("false");
       expect(moObserveSpy).toHaveBeenCalledTimes(1);
@@ -994,7 +1148,7 @@ describe("Tooltip", () => {
       const tooltip = getByRole("tooltip", { hidden: true });
 
       await fireEvent.mouseEnter(dynamicTarget);
-      await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
+      await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
 
       expect(tooltip).toHaveClass("dusk-tooltip--type--warning");
       expect(moObserveSpy).toHaveBeenCalledTimes(1);
@@ -1033,7 +1187,7 @@ describe("Tooltip", () => {
       const tooltip = getByRole("tooltip", { hidden: true });
 
       await fireEvent.mouseEnter(dynamicTarget);
-      await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
+      await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
 
       expect(tooltip).toHaveClass("dusk-tooltip--type--success");
       expect(moObserveSpy).toHaveBeenCalledTimes(1);
@@ -1066,7 +1220,7 @@ describe("Tooltip", () => {
       const tooltip = getByRole("tooltip", { hidden: true });
 
       await fireEvent.mouseEnter(dynamicTarget);
-      await vi.advanceTimersByTimeAsync(Number(baseProps.defaultDelayShow));
+      await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
 
       expect(tooltip.getAttribute("aria-hidden")).toBe("false");
       expect(dynamicTarget.getAttribute("aria-describedby")).toBe(baseProps.id);
