@@ -194,6 +194,16 @@
     });
   });
 
+  /** @param {MouseEvent} event */
+  function handleBodyClick(event) {
+    if (
+      isValidTarget(event.target) &&
+      activeTargetNode?.contains(event.target)
+    ) {
+      teardown(activeTargetNode);
+    }
+  }
+
   /** @param {KeyboardEvent} event */
   function handleKeydown(event) {
     if (event.key === "Escape") {
@@ -202,7 +212,6 @@
   }
 
   /** @param {FocusEvent | KeyboardEvent | MouseEvent} event */
-  // eslint-disable-next-line max-statements
   function handleTooltipHide(event) {
     if (!isValidTarget(event.target)) {
       return;
@@ -218,11 +227,6 @@
     clearTimeout(timeoutID);
 
     const delayHide = parseDelayHide(tooltipDelayHide);
-    const newState = {
-      ...$state,
-      text: "",
-      visible: false,
-    };
 
     intersectionObserver.unobserve(targetNode);
     mutationObserver.disconnect();
@@ -231,11 +235,11 @@
     if (delayHide) {
       timeoutID = window.setTimeout(() => {
         targetNode.removeAttribute("aria-describedby");
-        state.set(newState);
+        state.update((current) => ({ ...current, text: "", visible: false }));
       }, delayHide);
     } else {
       targetNode.removeAttribute("aria-describedby");
-      state.set(newState);
+      state.update((current) => ({ ...current, text: "", visible: false }));
     }
   }
 
@@ -294,28 +298,19 @@
     const place = /** @type {import("@floating-ui/dom").Side} */ (
       placement.replace(/-.+$/, "")
     );
-
-    const newState = {
-      ...$state,
-      place,
-      type: parseType(tooltipType),
-      visible: true,
-      x,
-      y,
-    };
-
+    const type = parseType(tooltipType);
     const delayShow = parseDelayShow(tooltipDelayShow);
 
     if (delayShow) {
       timeoutID = window.setTimeout(() => {
         if (targetNode && targetNode.isConnected) {
           setAriaDescription(targetNode);
-          state.set(newState);
+          state.update((s) => ({ ...s, place, type, visible: true, x, y }));
         }
       }, delayShow);
     } else {
       setAriaDescription(targetNode);
-      state.set(newState);
+      state.update((s) => ({ ...s, place, type, visible: true, x, y }));
     }
   }
 
@@ -342,6 +337,7 @@
 </script>
 
 <svelte:body
+  on:click|capture={handleBodyClick}
   on:focusin|capture={handleTooltipShow}
   on:focusout|capture={handleTooltipHide}
   on:keydown|capture={handleKeydown}
