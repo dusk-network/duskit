@@ -6,9 +6,17 @@ export type OutsideClickEvent<T extends Element = Element> = CustomEvent<{
   currentTarget: T;
 };
 
+export interface OutsideClickOptions {
+  enabled: boolean;
+}
+
 export declare function outsideClick<T extends Element = Element>(
-  node: T
+  node: T,
+  options: OutsideClickOptions
 ): ActionReturn<
-  undefined,
+  OutsideClickOptions,
   { "on:outsideclick": (evt: OutsideClickEvent<T>) => void }
-> & { destroy: () => void };
+> & {
+  destroy: () => void;
+  update: (newOptions: OutsideClickOptions) => void;
+};
