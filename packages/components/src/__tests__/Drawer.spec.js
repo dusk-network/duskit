@@ -306,7 +306,7 @@ describe("Drawer", () => {
       expect(outsideclickHandler).toHaveBeenCalledTimes(1);
     });
 
-    it("should mount and unmount the action dynamically based on the `open` state to prevent memory leaks", async () => {
+    it("should enable and disable the outside click listeners dynamically based on the `open` state to prevent memory leaks", async () => {
       const outsideclickHandler = vi.fn();
       const { rerender } = render(Drawer, {
         events: { outsideclick: outsideclickHandler },

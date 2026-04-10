@@ -26,25 +26,6 @@
 
   export const getRootElement = () => rootElement;
 
-  /** @type {import("svelte/action").Action<HTMLElement, boolean>} */
-  function dynamicOutsideClick(node, isOpen) {
-    let actionInstance = isOpen ? outsideClick(node) : null;
-
-    return {
-      destroy() {
-        actionInstance?.destroy();
-      },
-      update(newIsOpen) {
-        if (newIsOpen) {
-          actionInstance = outsideClick(node);
-        } else {
-          actionInstance?.destroy();
-          actionInstance = null;
-        }
-      },
-    };
-  }
-
   /** @type {(isOpening: boolean) => Keyframe[]} */
   function getKeyFrames(isOpening) {
     const axis = from === "left" || from === "right" ? "X" : "Y";
@@ -141,7 +122,7 @@
 
 <aside
   bind:this={rootElement}
-  use:dynamicOutsideClick={open}
+  use:outsideClick={{ enabled: open }}
   {...$$restProps}
   aria-hidden={!open}
   class={classes}

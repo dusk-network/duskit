@@ -46,7 +46,7 @@ describe("outsideClick action", () => {
 
   it("should dispatch an `outsideclick` event containing the original `MouseEvent` when a click occurs outside", () => {
     const handleOutclick = vi.fn();
-    const action = outsideClick(insideElement);
+    const action = outsideClick(insideElement, { enabled: true });
 
     insideElement.addEventListener("outsideclick", handleOutclick);
 
@@ -72,7 +72,7 @@ describe("outsideClick action", () => {
    */
   it("should correctly pass a `PointerEvent` as the `originalEvent` in the payload", () => {
     const handleOutclick = vi.fn();
-    const action = outsideClick(insideElement);
+    const action = outsideClick(insideElement, { enabled: true });
     const pointerEvent = new PointerEvent("click", {
       bubbles: true,
       cancelable: true,
@@ -96,7 +96,7 @@ describe("outsideClick action", () => {
 
   it("should not dispatch an `outsideclick` event when a click occurs inside the element", () => {
     const handleOutclick = vi.fn();
-    const action = outsideClick(insideElement);
+    const action = outsideClick(insideElement, { enabled: true });
 
     insideElement.addEventListener("outsideclick", handleOutclick);
 
@@ -109,7 +109,7 @@ describe("outsideClick action", () => {
 
   it('should not dispatch an `outsideclick` event if the bound element is "falsy"', () => {
     // @ts-expect-error we are explicitely testing this edge case
-    const action = outsideClick(null);
+    const action = outsideClick(null, { enabled: true });
 
     expect(() => outsideElement.dispatchEvent(mouseEvent)).not.toThrow();
 
@@ -122,7 +122,7 @@ describe("outsideClick action", () => {
       cancelable: true,
     });
     const handleOutclick = vi.fn();
-    const action = outsideClick(insideElement);
+    const action = outsideClick(insideElement, { enabled: true });
 
     insideElement.addEventListener("outsideclick", handleOutclick);
 
@@ -134,14 +134,22 @@ describe("outsideClick action", () => {
     action.destroy();
   });
 
-  it("should use the capture phase for the document listener and remove it when destroyed", () => {
+  it("should use the capture phase for both document listeners and remove them when destroyed", () => {
     const addEventListenerSpy = vi.spyOn(document, "addEventListener");
     const removeEventListenerSpy = vi.spyOn(document, "removeEventListener");
     const handleOutclick = vi.fn();
-    const action = outsideClick(insideElement);
+    const action = outsideClick(insideElement, { enabled: true });
 
-    expect(addEventListenerSpy).toHaveBeenCalledExactlyOnceWith(
+    expect(addEventListenerSpy).toHaveBeenCalledTimes(2);
+    expect(addEventListenerSpy).toHaveBeenNthCalledWith(
+      1,
       "click",
+      expect.any(Function),
+      true
+    );
+    expect(addEventListenerSpy).toHaveBeenNthCalledWith(
+      2,
+      "pointerdown",
       expect.any(Function),
       true
     );
@@ -151,8 +159,16 @@ describe("outsideClick action", () => {
     // Trigger the cleanup mechanism explicitly
     action.destroy();
 
-    expect(removeEventListenerSpy).toHaveBeenCalledExactlyOnceWith(
+    expect(removeEventListenerSpy).toHaveBeenCalledTimes(2);
+    expect(removeEventListenerSpy).toHaveBeenNthCalledWith(
+      1,
       "click",
+      expect.any(Function),
+      true
+    );
+    expect(removeEventListenerSpy).toHaveBeenNthCalledWith(
+      2,
+      "pointerdown",
       expect.any(Function),
       true
     );
@@ -160,9 +176,6 @@ describe("outsideClick action", () => {
     outsideElement.dispatchEvent(mouseEvent);
 
     expect(handleOutclick).not.toHaveBeenCalled();
-    expect(addEventListenerSpy.mock.calls[0][1]).toBe(
-      removeEventListenerSpy.mock.calls[0][1]
-    );
 
     addEventListenerSpy.mockRestore();
     removeEventListenerSpy.mockRestore();
@@ -181,7 +194,7 @@ describe("outsideClick action", () => {
     shadowRoot.appendChild(insideElement);
     container.appendChild(host);
 
-    const action = outsideClick(insideElement);
+    const action = outsideClick(insideElement, { enabled: true });
 
     insideElement.addEventListener("outsideclick", handleOutclick);
 
@@ -218,7 +231,7 @@ describe("outsideClick action", () => {
     });
 
     // Initialize the action after the aggressive listener.
-    const action = outsideClick(insideElement);
+    const action = outsideClick(insideElement, { enabled: true });
 
     transientChild.dispatchEvent(mouseEvent);
 
@@ -247,7 +260,7 @@ describe("outsideClick action", () => {
 
     // Initialize the action after the aggressive listener
     // to ensure it runs later in the capture phase
-    const action = outsideClick(insideElement);
+    const action = outsideClick(insideElement, { enabled: true });
 
     movingChild.dispatchEvent(mouseEvent);
 
@@ -256,6 +269,109 @@ describe("outsideClick action", () => {
     expect(handleOutclick).not.toHaveBeenCalled();
 
     movingChild.remove();
+    action.destroy();
+  });
+
+  it("should attach and detach listeners based on the `enabled` option via the `update` lifecycle method", () => {
+    const addEventListenerSpy = vi.spyOn(document, "addEventListener");
+    const removeEventListenerSpy = vi.spyOn(document, "removeEventListener");
+
+    // Initialize silently without attaching listeners
+    const action = outsideClick(insideElement, { enabled: false });
+
+    expect(addEventListenerSpy).not.toHaveBeenCalled();
+
+    // Enable the action, triggering the attachments
+    action.update({ enabled: true });
+
+    expect(addEventListenerSpy).toHaveBeenCalledTimes(2);
+
+    // Disable the action, triggering the detachments
+    action.update({ enabled: false });
+
+    expect(removeEventListenerSpy).toHaveBeenCalledTimes(2);
+
+    addEventListenerSpy.mockRestore();
+    removeEventListenerSpy.mockRestore();
+    action.destroy();
+  });
+
+  it("should prevent false positive outside clicks if the interaction started inside the element (drag-out protection)", () => {
+    const handleOutclick = vi.fn();
+    const action = outsideClick(insideElement, { enabled: true });
+
+    insideElement.addEventListener("outsideclick", handleOutclick);
+
+    // Simulate the user pressing the pointer inside the element
+    insideElement.dispatchEvent(
+      new PointerEvent("pointerdown", { bubbles: true, cancelable: true })
+    );
+
+    // Simulate the user releasing the pointer outside the element
+    outsideElement.dispatchEvent(mouseEvent);
+
+    // The action must recognize this as a single continuous interaction
+    // that originated inside, hence avoiding dispatch.
+    expect(handleOutclick).not.toHaveBeenCalled();
+
+    action.destroy();
+  });
+
+  it("should correctly dispatch an `outsideclick` event if both the start and end of the interaction occur outside", () => {
+    const handleOutclick = vi.fn();
+    const action = outsideClick(insideElement, { enabled: true });
+
+    insideElement.addEventListener("outsideclick", handleOutclick);
+
+    // Clean outside interaction
+    outsideElement.dispatchEvent(
+      new PointerEvent("pointerdown", { bubbles: true, cancelable: true })
+    );
+    outsideElement.dispatchEvent(mouseEvent);
+
+    expect(handleOutclick).toHaveBeenCalledExactlyOnceWith(
+      expect.objectContaining({
+        detail: {
+          originalEvent: mouseEvent,
+        },
+      })
+    );
+
+    action.destroy();
+  });
+
+  it("should reset the internal pointer state when detached to prevent stale state bugs upon re-enabling", () => {
+    const handleOutclick = vi.fn();
+    const action = outsideClick(insideElement, { enabled: true });
+
+    insideElement.addEventListener("outsideclick", handleOutclick);
+
+    // Simulate an interaction starting inside.
+    // This sets the internal `isPointerDownInside` flag to `true`.
+    insideElement.dispatchEvent(
+      new PointerEvent("pointerdown", { bubbles: true, cancelable: true })
+    );
+
+    // Disable the action before the interaction completes.
+    // This calls `detach` and must purge the internal state.
+    action.update({ enabled: false });
+
+    // Re-enable the action at a later time.
+    action.update({ enabled: true });
+
+    // Fire an isolated click outside (e.g., a synthetic click or a new clean interaction).
+    outsideElement.dispatchEvent(mouseEvent);
+
+    // If the state was not reset during detach, the action would still believe
+    // it's in the middle of a drag-out from the previous interaction and ignore this click.
+    expect(handleOutclick).toHaveBeenCalledExactlyOnceWith(
+      expect.objectContaining({
+        detail: {
+          originalEvent: mouseEvent,
+        },
+      })
+    );
+
     action.destroy();
   });
 });
