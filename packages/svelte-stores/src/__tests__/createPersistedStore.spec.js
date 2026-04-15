@@ -1,6 +1,17 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { get } from "svelte/store";
 
+/**
+ * Safely retrieves and parses a JSON value from local storage.
+ * Prevents syntax errors during tests if the key is missing.
+ *
+ * @param {string} key - The local storage key to read.
+ * @returns {any} The parsed value, or null if the key does not exist.
+ */
+function getStoredValue(key) {
+  return JSON.parse(localStorage.getItem(key) ?? "null");
+}
+
 describe("createPersistedStore", () => {
   const initialValue = { count: 0, text: "initial" };
   const testKey = "test-store";
@@ -21,6 +32,29 @@ describe("createPersistedStore", () => {
       const { createPersistedStore } = await import("../..");
 
       const store = createPersistedStore(testKey, initialValue);
+
+      expect(get(store)).toStrictEqual(initialValue);
+
+      globalThis.localStorage = realLocalStorage;
+
+      vi.resetModules();
+    });
+
+    it("should safely ignore rebind calls without breaking or accessing `localStorage`", async () => {
+      vi.resetModules();
+
+      const realLocalStorage = globalThis.localStorage;
+
+      // @ts-ignore we need to do it to test the case
+      delete globalThis.localStorage;
+
+      const { createPersistedStore } = await import("../..");
+
+      const store = createPersistedStore(testKey, initialValue);
+
+      // This should not throw as no attempt to clear local
+      // storage has been made.
+      store.rebind("some-new-key", { clearOldKey: true });
 
       expect(get(store)).toStrictEqual(initialValue);
 
@@ -151,9 +185,7 @@ describe("createPersistedStore", () => {
 
         store.set(newValue);
 
-        expect(JSON.parse(localStorage.getItem(testKey) ?? "")).toStrictEqual(
-          newValue
-        );
+        expect(getStoredValue(testKey)).toStrictEqual(newValue);
       });
 
       it("should persist the new value to localStorage on update", () => {
@@ -161,7 +193,7 @@ describe("createPersistedStore", () => {
 
         store.update((current) => ({ ...current, count: current.count + 1 }));
 
-        expect(JSON.parse(localStorage.getItem(testKey) ?? "")).toStrictEqual({
+        expect(getStoredValue(testKey)).toStrictEqual({
           ...initialValue,
           count: 1,
         });
@@ -315,6 +347,158 @@ describe("createPersistedStore", () => {
           `Error while serializing store "${testKey}":`,
           expect.any(TypeError)
         );
+      });
+    });
+
+    describe("rebinding", () => {
+      const newKey = "new-test-store";
+
+      beforeEach(() => {
+        localStorage.clear();
+      });
+
+      it("should safely ignore the operation if the new key matches the current key", () => {
+        const store = createPersistedStore(testKey, initialValue);
+
+        // Spying on the prototype prevents jsdom from bypassing the mock,
+        // which happens when targeting the global `localStorage` instance directly.
+        const getItemSpy = vi.spyOn(Storage.prototype, "getItem");
+
+        store.rebind(testKey);
+
+        expect(getItemSpy).not.toHaveBeenCalled();
+      });
+
+      it("should immediately adopt the existing value of the new key from local storage", () => {
+        const storedNewValue = { count: 42, text: "new-stored" };
+
+        localStorage.setItem(newKey, JSON.stringify(storedNewValue));
+
+        const store = createPersistedStore(testKey, initialValue);
+
+        store.rebind(newKey);
+
+        expect(get(store)).toStrictEqual(storedNewValue);
+      });
+
+      it("should adopt the initial value if the new key does not exist in local storage and persist it immediately", () => {
+        const store = createPersistedStore(testKey, initialValue);
+
+        // Changing the store value for the current key
+        store.set({ count: 99, text: "mutated" });
+
+        store.rebind(newKey);
+
+        // The store memory should fall back to initialValue since newKey is empty
+        expect(get(store)).toStrictEqual(initialValue);
+
+        // The reactive update must immediately create the new key in local storage
+        expect(getStoredValue(newKey)).toStrictEqual(initialValue);
+      });
+
+      it("should maintain the reactive subscription active across rebinds", () => {
+        const store = createPersistedStore(testKey, initialValue);
+        const subscriberSpy = vi.fn();
+
+        store.subscribe(subscriberSpy);
+
+        // Clear initial subscription call
+        subscriberSpy.mockClear();
+
+        store.rebind(newKey);
+
+        // Subscriber should be called with initialValue (since `newKey` is empty)
+        expect(subscriberSpy).toHaveBeenNthCalledWith(1, initialValue);
+
+        const updatedValue = { count: 1, text: "updated" };
+
+        store.set(updatedValue);
+
+        expect(subscriberSpy).toHaveBeenNthCalledWith(2, updatedValue);
+      });
+
+      it("should redirect subsequent state updates to the new key in local storage", () => {
+        const store = createPersistedStore(testKey, initialValue);
+
+        store.rebind(newKey);
+
+        const updatedValue = { count: 5, text: "redirected" };
+
+        store.set(updatedValue);
+
+        // The old key contains the value written by Svelte's first subscribe.
+        // The important thing is that it remains unchanged.
+        expect(getStoredValue(testKey)).toStrictEqual(initialValue);
+
+        expect(getStoredValue(newKey)).toStrictEqual(updatedValue);
+      });
+
+      it("should permanently remove the old key from local storage if `clearOldKey` is true", () => {
+        localStorage.setItem(testKey, JSON.stringify(initialValue));
+
+        const store = createPersistedStore(testKey, initialValue);
+
+        store.rebind(newKey, { clearOldKey: true });
+
+        expect(localStorage.getItem(testKey)).toBeNull();
+        expect(getStoredValue(newKey)).toStrictEqual(initialValue);
+      });
+
+      it("should safely keep the old key if writing to the new key fails during rebind with `clearOldKey`", () => {
+        localStorage.setItem(testKey, JSON.stringify(initialValue));
+
+        const store = createPersistedStore(testKey, initialValue);
+
+        // Spying on the prototype prevents jsdom from bypassing the mock,
+        // which happens when targeting the global `localStorage` instance directly.
+        const setItemSpy = vi
+          .spyOn(Storage.prototype, "setItem")
+          .mockThrowOnce(new Error("Mocked storage failure"));
+        const consoleErrorSpy = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+
+        // We create a rebind that will throw, while asking to clear the old key
+        store.rebind(newKey, { clearOldKey: true });
+
+        expect(getStoredValue(testKey)).toStrictEqual(initialValue);
+
+        setItemSpy.mockRestore();
+        consoleErrorSpy.mockRestore();
+      });
+
+      it("should leave the old key in local storage if `clearOldKey` is omitted or false", () => {
+        localStorage.setItem(testKey, JSON.stringify(initialValue));
+
+        const store = createPersistedStore(testKey, initialValue);
+
+        store.rebind(newKey);
+
+        expect(getStoredValue(testKey)).toStrictEqual(initialValue);
+      });
+
+      it("should use the provided `merger` strategy to resolve the final state", () => {
+        const storedOldValue = { count: 10, text: "old" };
+        const storedNewValue = { count: 20, text: "new" };
+        const merger = vi.fn((oldVal, newVal) => ({
+          count: oldVal.count + newVal.count,
+          text: newVal.text,
+        }));
+
+        localStorage.setItem(testKey, JSON.stringify(storedOldValue));
+        localStorage.setItem(newKey, JSON.stringify(storedNewValue));
+
+        const store = createPersistedStore(testKey, initialValue);
+
+        store.rebind(newKey, { merger });
+
+        const expectedMergedValue = { count: 30, text: "new" };
+
+        expect(merger).toHaveBeenCalledExactlyOnceWith(
+          storedOldValue,
+          storedNewValue
+        );
+        expect(get(store)).toStrictEqual(expectedMergedValue);
       });
     });
   });
