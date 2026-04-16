@@ -1,5 +1,11 @@
 # @duskit/svelte-actions
 
+## 0.2.0
+
+### Minor Changes
+
+- [#304](https://github.com/dusk-network/duskit/pull/304) [`b07a638`](https://github.com/dusk-network/duskit/commit/b07a6389b6e403b13b6ec7e2f4fd53c307032ef5) Thanks [@ascartabelli](https://github.com/ascartabelli)! - feat(svelte-actions)!: **BREAKING CHANGE** support conditional enablement for `outsideClick`
+
 ## 0.1.0
 
 ### Minor Changes

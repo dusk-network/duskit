@@ -1,5 +1,16 @@
 # @duskit/components
 
+## 0.7.1
+
+### Patch Changes
+
+- [#304](https://github.com/dusk-network/duskit/pull/304) [`b07a638`](https://github.com/dusk-network/duskit/commit/b07a6389b6e403b13b6ec7e2f4fd53c307032ef5) Thanks [@ascartabelli](https://github.com/ascartabelli)! - refactored `Drawer` internal architecture to use the new `outsideClick` API
+
+- [#300](https://github.com/dusk-network/duskit/pull/300) [`bf87775`](https://github.com/dusk-network/duskit/commit/bf87775f36ca0f8dac961b745535e155d898397d) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fix(components): resolve stale text race condition on mobile tap on `Tooltip`s
+
+- Updated dependencies [[`b07a638`](https://github.com/dusk-network/duskit/commit/b07a6389b6e403b13b6ec7e2f4fd53c307032ef5)]:
+  - @duskit/svelte-actions@0.2.0
+
 ## 0.7.0
 
 ### Minor Changes
