@@ -1,5 +1,13 @@
 # @duskit/svelte-stores
 
+## 0.3.0
+
+### Minor Changes
+
+- [#307](https://github.com/dusk-network/duskit/pull/307) [`6bc2de3`](https://github.com/dusk-network/duskit/commit/6bc2de3f2cf7fc2e9d3f7b3f47e0b8d021fa4ec5) Thanks [@ascartabelli](https://github.com/ascartabelli)! - refactor(svelte-stores): introduce rebind capability for dynamic storage keys in `createPersistedStore`
+
+  docs(svelte-stores): comprehensively update and refine JSDoc comments across API definitions
+
 ## 0.2.2
 
 ### Patch Changes
