@@ -1,41 +1,42 @@
-:root {
+:root,
+:root.light {
   /* Theme colours */
 
-  --page-background-color: var(--smokey-black);
-  --background-color: var(--smokey-black);
-  --background-color-alt: var(--night);
-  --primary-color: var(--light-grey);
-  --primary-color-variant-dark: white;
-  --primary-color-variant-light: var(--silver-metallic);
+  --page-background-color: var(--light-grey);
+  --background-color: var(--magnolia);
+  --background-color-alt: white;
+  --primary-color: var(--smokey-black);
+  --primary-color-variant-dark: var(--black);
+  --primary-color-variant-light: var(--jet);
   --secondary-color: var(--cornflower);
   --secondary-color-variant-dark: var(--cornflower-dark);
   --secondary-color-variant-light: var(--cornflower-light);
-  --surface-color: var(--night);
-  --surface-alt-color: var(--charcoal);
-  --surface-border-color: var(--border-grey);
-  --surface-border-color-hover: var(--granite-grey);
-  --muted-color: var(--silver-metallic);
+  --surface-color: white;
+  --surface-alt-color: var(--magnolia);
+  --surface-border-color: var(--wisteria);
+  --surface-border-color-hover: var(--taupe-grey);
+  --muted-color: var(--granite-grey);
   --muted-color-variant-dark: var(--taupe-grey);
   --error-color: var(--error-500);
   --error-color-variant-dark: var(--error-700);
-  --error-color-subtle: #31151f;
-  --error-color-border: #693044;
+  --error-color-subtle: #fbe6ec;
+  --error-color-border: #f4bdca;
   --info-color: var(--info-500);
   --info-color-variant-dark: var(--info-700);
-  --info-color-subtle: #142438;
-  --info-color-border: #2f5d91;
+  --info-color-subtle: #e8f3ff;
+  --info-color-border: #b6d1fc;
   --success-color: var(--success-500);
   --success-color-variant-dark: var(--success-700);
-  --success-color-subtle: #102a20;
-  --success-color-border: #226f52;
+  --success-color-subtle: #e0fff2;
+  --success-color-border: #9ff0d0;
   --warning-color: var(--warning-500);
   --warning-color-variant-dark: var(--warning-700);
-  --warning-color-subtle: #332810;
-  --warning-color-border: #806b22;
-  --on-background-color: var(--light-grey);
-  --on-primary-color: var(--smokey-black);
+  --warning-color-subtle: #fff5ca;
+  --warning-color-border: #ffdc58;
+  --on-background-color: var(--smokey-black);
+  --on-primary-color: var(--light-grey);
   --on-secondary-color: var(--smokey-black);
-  --on-surface-color: var(--light-grey);
+  --on-surface-color: var(--smokey-black);
   --on-error-color: white;
   --on-info-color: var(--smokey-black);
   --on-success-color: var(--smokey-black);
@@ -80,26 +81,26 @@
   --control-small-padding-inline: 0.75rem;
   --control-small-padding: var(--control-small-padding-block)
     var(--control-small-padding-inline);
-  --non-button-control-bg-color: var(--surface-alt-color);
-  --non-button-control-text-color: var(--on-surface-color);
+  --non-button-control-bg-color: white;
+  --non-button-control-text-color: var(--smokey-black);
   --control-bg-color: var(--cornflower);
   --control-bg-color-hover: var(--cornflower-light);
   --control-border-color: transparent;
   --control-border-color-hover: transparent;
   --control-text-color: var(--smokey-black);
   --control-text-color-hover: var(--smokey-black);
-  --control-secondary-bg-color: var(--surface-alt-color);
-  --control-secondary-bg-color-hover: var(--graphite);
+  --control-secondary-bg-color: white;
+  --control-secondary-bg-color-hover: var(--magnolia);
   --control-secondary-border-color: var(--surface-border-color);
   --control-secondary-border-color-hover: var(--cornflower);
-  --control-secondary-text-color: var(--on-surface-color);
-  --control-secondary-text-color-hover: var(--cornflower-light);
+  --control-secondary-text-color: var(--smokey-black);
+  --control-secondary-text-color-hover: var(--smokey-black);
   --control-tertiary-bg-color: transparent;
-  --control-tertiary-bg-color-hover: var(--surface-alt-color);
+  --control-tertiary-bg-color-hover: var(--magnolia);
   --control-tertiary-border-color: var(--surface-border-color);
   --control-tertiary-border-color-hover: var(--surface-border-color-hover);
-  --control-tertiary-text-color: var(--on-background-color);
-  --control-tertiary-text-color-hover: var(--on-background-color);
+  --control-tertiary-text-color: var(--smokey-black);
+  --control-tertiary-text-color-hover: var(--smokey-black);
 
   /* Anchors */
 
@@ -110,10 +111,10 @@
 
   /* Content switches */
 
-  --content-switch-rail: var(--surface-color);
-  --content-switch-hover-background-color: var(--surface-alt-color);
-  --content-switch-selected-background-color: var(--graphite);
-  --content-switch-selected-color: var(--on-surface-color);
+  --content-switch-rail: white;
+  --content-switch-hover-background-color: var(--magnolia);
+  --content-switch-selected-background-color: var(--light-grey);
+  --content-switch-selected-color: var(--smokey-black);
 
   /* Progress bars */
 
@@ -152,41 +153,41 @@
   --ribbon-bg-color: var(--cornflower);
 }
 
-:root.light {
-  --page-background-color: var(--light-grey);
-  --background-color: var(--magnolia);
-  --background-color-alt: white;
-  --primary-color: var(--smokey-black);
-  --primary-color-variant-dark: var(--black);
-  --primary-color-variant-light: var(--jet);
-  --surface-color: white;
-  --surface-alt-color: var(--magnolia);
-  --surface-border-color: var(--wisteria);
-  --surface-border-color-hover: var(--taupe-grey);
-  --error-color-subtle: #fbe6ec;
-  --error-color-border: #f4bdca;
-  --info-color-subtle: #e8f3ff;
-  --info-color-border: #b6d1fc;
-  --success-color-subtle: #e0fff2;
-  --success-color-border: #9ff0d0;
-  --warning-color-subtle: #fff5ca;
-  --warning-color-border: #ffdc58;
-  --muted-color: var(--granite-grey);
+:root.dark {
+  --page-background-color: var(--smokey-black);
+  --background-color: var(--smokey-black);
+  --background-color-alt: var(--night);
+  --primary-color: var(--light-grey);
+  --primary-color-variant-dark: white;
+  --primary-color-variant-light: var(--silver-metallic);
+  --surface-color: var(--night);
+  --surface-alt-color: var(--charcoal);
+  --surface-border-color: var(--border-grey);
+  --surface-border-color-hover: var(--granite-grey);
+  --muted-color: var(--silver-metallic);
   --muted-color-variant-dark: var(--taupe-grey);
-  --on-background-color: var(--smokey-black);
-  --on-primary-color: var(--light-grey);
-  --on-surface-color: var(--smokey-black);
-  --non-button-control-bg-color: white;
-  --non-button-control-text-color: var(--smokey-black);
-  --control-secondary-bg-color: white;
-  --control-secondary-bg-color-hover: var(--magnolia);
-  --control-secondary-text-color: var(--smokey-black);
-  --control-secondary-text-color-hover: var(--smokey-black);
-  --control-tertiary-bg-color-hover: var(--magnolia);
-  --control-tertiary-text-color: var(--smokey-black);
-  --control-tertiary-text-color-hover: var(--smokey-black);
-  --content-switch-rail: white;
-  --content-switch-hover-background-color: var(--magnolia);
-  --content-switch-selected-background-color: var(--light-grey);
-  --content-switch-selected-color: var(--smokey-black);
+  --error-color-subtle: #31151f;
+  --error-color-border: #693044;
+  --info-color-subtle: #142438;
+  --info-color-border: #2f5d91;
+  --success-color-subtle: #102a20;
+  --success-color-border: #226f52;
+  --warning-color-subtle: #332810;
+  --warning-color-border: #806b22;
+  --on-background-color: var(--light-grey);
+  --on-primary-color: var(--smokey-black);
+  --on-surface-color: var(--light-grey);
+  --non-button-control-bg-color: var(--surface-alt-color);
+  --non-button-control-text-color: var(--on-surface-color);
+  --control-secondary-bg-color: var(--surface-alt-color);
+  --control-secondary-bg-color-hover: var(--graphite);
+  --control-secondary-text-color: var(--on-surface-color);
+  --control-secondary-text-color-hover: var(--cornflower-light);
+  --control-tertiary-bg-color-hover: var(--surface-alt-color);
+  --control-tertiary-text-color: var(--on-background-color);
+  --control-tertiary-text-color-hover: var(--on-background-color);
+  --content-switch-rail: var(--surface-color);
+  --content-switch-hover-background-color: var(--surface-alt-color);
+  --content-switch-selected-background-color: var(--graphite);
+  --content-switch-selected-color: var(--on-surface-color);
 }
