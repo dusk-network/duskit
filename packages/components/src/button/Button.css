@@ -125,7 +125,13 @@
 .dusk-anchor-button.dusk-anchor-button--disabled,
 .dusk-anchor-button.dusk-anchor-button--disabled:hover,
 .dusk-anchor-button.dusk-anchor-button--disabled:visited {
-  opacity: 0.45;
+  color: var(--control-disabled-text-color, var(--muted-color));
+  cursor: default;
+  background-color: var(--control-disabled-bg-color, var(--surface-alt-color));
+  border-color: var(
+    --control-disabled-border-color,
+    var(--surface-border-color)
+  );
 }
 
 /* Sizes */

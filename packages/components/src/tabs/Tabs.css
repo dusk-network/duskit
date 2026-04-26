@@ -77,7 +77,7 @@
 }
 
 .dusk-tab-item:focus-visible {
-  color: var(--cornflower-light);
+  color: var(--secondary-color-variant-light);
   outline: 0 none;
 }
 
@@ -86,7 +86,7 @@
 }
 
 .dusk-tab-item--selected {
-  color: var(--cornflower-light);
+  color: var(--secondary-color-variant-light);
   background-color: var(--graphite);
 }
 

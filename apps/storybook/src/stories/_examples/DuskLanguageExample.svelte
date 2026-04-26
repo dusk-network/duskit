@@ -254,7 +254,7 @@
     font-family: var(--mono-font-family);
     font-size: 0.6875rem;
     line-height: 1;
-    color: var(--cornflower-light);
+    color: var(--secondary-color-variant-light);
     text-transform: uppercase;
     letter-spacing: 0.12em;
   }
@@ -376,7 +376,7 @@
     display: grid;
     width: 2.25rem;
     height: 2.25rem;
-    color: var(--cornflower-light);
+    color: var(--secondary-color-variant-light);
     background-color: var(--surface-alt-color);
     border-radius: var(--control-border-radius-size);
     flex: 0 0 auto;
@@ -384,7 +384,7 @@
   }
 
   .dsl-activity-icon.positive {
-    color: var(--success-color);
+    color: var(--success-color-variant-dark);
   }
 
   .dsl-activity-copy {

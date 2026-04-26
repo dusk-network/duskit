@@ -22,25 +22,25 @@
 }
 
 .dusk-badge--variant--info {
-  color: var(--cornflower-light);
+  color: var(--secondary-color-variant-light);
   background-color: var(--info-color-subtle);
   border-color: var(--info-color-border);
 }
 
 .dusk-badge--variant--warning {
-  color: var(--warning-color);
+  color: var(--warning-color-variant-dark);
   background-color: var(--warning-color-subtle);
   border-color: var(--warning-color-border);
 }
 
 .dusk-badge--variant--error {
-  color: var(--error-color);
+  color: var(--error-color-variant-dark);
   background-color: var(--error-color-subtle);
   border-color: var(--error-color-border);
 }
 
 .dusk-badge--variant--success {
-  color: var(--success-color);
+  color: var(--success-color-variant-dark);
   background-color: var(--success-color-subtle);
   border-color: var(--success-color-border);
 }

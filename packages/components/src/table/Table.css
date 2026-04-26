@@ -81,6 +81,6 @@
 
 .duskit-table__sort-button:enabled:hover,
 .duskit-table__sort-button:enabled:active {
-  color: var(--cornflower-light);
+  color: var(--secondary-color-variant-light);
   transform: unset;
 }
