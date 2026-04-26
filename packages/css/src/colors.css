@@ -1,9 +1,14 @@
 :root {
   /* Dark Greys */
 
+  --black: black;
   --granite-grey: #636167;
   --jet: #2e2d30;
   --smokey-black: #101010;
+  --night: #151519;
+  --charcoal: #1d1d22;
+  --graphite: #26262b;
+  --border-grey: #34333a;
 
   /* Greys */
 

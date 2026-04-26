@@ -5,16 +5,18 @@
 .dusk-anchor-button:visited {
   display: inline-flex;
   font-family: inherit;
+  font-weight: 500;
   line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: inherit;
+  text-transform: none;
+  letter-spacing: 0;
   border-style: solid;
   border-width: var(--control-border-size);
   border-radius: var(--control-border-radius-size);
   transition-delay: 0s;
   transition-timing-function: ease-in-out;
   transition-duration: 0.2s;
-  transition-property: background-color, border-color, color, scale;
+  transition-property:
+    background-color, border-color, color, opacity, transform;
   transform-origin: center center;
   align-items: center;
   justify-content: center;
@@ -23,7 +25,7 @@
 .dusk-button:enabled:active,
 .dusk-anchor-button:active,
 .dusk-button--pressed {
-  scale: 0.98;
+  transform: translateY(0.0625rem);
 }
 
 /* Anchor Button specifics */
@@ -42,19 +44,19 @@
 /* Icon Button specifics */
 
 .dusk-icon-button:not(.dusk-icon-button--labeled) {
-  padding: 0.2rem;
-  border-radius: 50%;
+  padding: 0.4375rem;
+  border-radius: var(--control-border-radius-size);
 }
 
 .dusk-button.dusk-icon-button:enabled:hover,
 .dusk-anchor-button.dusk-icon-button:hover {
-  scale: 1.1;
+  transform: translateY(-0.0625rem);
 }
 
 .dusk-button.dusk-icon-button:enabled:active,
 .dusk-anchor-button.dusk-icon-button:active,
 .dusk-button.dusk-icon-button.dusk-button--pressed {
-  scale: 0.9;
+  transform: translateY(0.0625rem);
 }
 
 /* Primary Variant */
@@ -123,7 +125,7 @@
 .dusk-anchor-button.dusk-anchor-button--disabled,
 .dusk-anchor-button.dusk-anchor-button--disabled:hover,
 .dusk-anchor-button.dusk-anchor-button--disabled:visited {
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
 /* Sizes */

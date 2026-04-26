@@ -2,28 +2,40 @@
   /* Theme colours */
 
   --page-background-color: var(--smokey-black);
-  --background-color: var(--light-grey);
-  --background-color-alt: white;
-  --primary-color: var(--smokey-black);
-  --primary-color-variant-dark: black;
-  --primary-color-variant-light: var(--jet);
+  --background-color: var(--smokey-black);
+  --background-color-alt: var(--night);
+  --primary-color: var(--light-grey);
+  --primary-color-variant-dark: white;
+  --primary-color-variant-light: var(--silver-metallic);
   --secondary-color: var(--cornflower);
   --secondary-color-variant-dark: var(--cornflower-dark);
   --secondary-color-variant-light: var(--cornflower-light);
-  --surface-color: var(--magnolia);
-  --surface-alt-color: var(--wisteria);
+  --surface-color: var(--night);
+  --surface-alt-color: var(--charcoal);
+  --surface-border-color: var(--border-grey);
+  --surface-border-color-hover: var(--granite-grey);
+  --muted-color: var(--silver-metallic);
+  --muted-color-variant-dark: var(--taupe-grey);
   --error-color: var(--error-500);
   --error-color-variant-dark: var(--error-700);
+  --error-color-subtle: #31151f;
+  --error-color-border: #693044;
   --info-color: var(--info-500);
   --info-color-variant-dark: var(--info-700);
+  --info-color-subtle: #142438;
+  --info-color-border: #2f5d91;
   --success-color: var(--success-500);
   --success-color-variant-dark: var(--success-700);
+  --success-color-subtle: #102a20;
+  --success-color-border: #226f52;
   --warning-color: var(--warning-500);
   --warning-color-variant-dark: var(--warning-700);
-  --on-background-color: var(--smokey-black);
-  --on-primary-color: var(--light-grey);
+  --warning-color-subtle: #332810;
+  --warning-color-border: #806b22;
+  --on-background-color: var(--light-grey);
+  --on-primary-color: var(--smokey-black);
   --on-secondary-color: var(--smokey-black);
-  --on-surface-color: var(--smokey-black);
+  --on-surface-color: var(--light-grey);
   --on-error-color: white;
   --on-info-color: var(--smokey-black);
   --on-success-color: var(--smokey-black);
@@ -44,8 +56,8 @@
 
   /* Focus ring */
 
-  --focus-ring-color: blue;
-  --focus-ring-offset: -0.125rem;
+  --focus-ring-color: var(--cornflower);
+  --focus-ring-offset: 0.125rem;
   --focus-ring-style: solid;
   --focus-ring-width: 0.125rem;
 
@@ -57,37 +69,37 @@
 
   /* Controls */
 
-  --control-border-radius-size: 1.5rem;
-  --control-border-size: 0.125rem;
-  --control-font-size: 1rem;
-  --control-icon-size: 2rem;
-  --control-padding-block: 0.9rem;
-  --control-padding-inline: 1.25rem;
+  --control-border-radius-size: 0.5rem;
+  --control-border-size: 0.0625rem;
+  --control-font-size: 0.875rem;
+  --control-icon-size: 1.5rem;
+  --control-padding-block: 0.75rem;
+  --control-padding-inline: 1rem;
   --control-padding: var(--control-padding-block) var(--control-padding-inline);
-  --control-small-padding-block: 0.65rem;
-  --control-small-padding-inline: 0.875rem;
+  --control-small-padding-block: 0.5rem;
+  --control-small-padding-inline: 0.75rem;
   --control-small-padding: var(--control-small-padding-block)
     var(--control-small-padding-inline);
-  --non-button-control-bg-color: white;
-  --non-button-control-text-color: var(--smokey-black);
-  --control-bg-color: white;
-  --control-bg-color-hover: var(--cornflower);
+  --non-button-control-bg-color: var(--surface-alt-color);
+  --non-button-control-text-color: var(--on-surface-color);
+  --control-bg-color: var(--cornflower);
+  --control-bg-color-hover: var(--cornflower-light);
   --control-border-color: transparent;
   --control-border-color-hover: transparent;
   --control-text-color: var(--smokey-black);
   --control-text-color-hover: var(--smokey-black);
-  --control-secondary-bg-color: var(--smokey-black);
-  --control-secondary-bg-color-hover: var(--cornflower);
-  --control-secondary-border-color: transparent;
-  --control-secondary-border-color-hover: transparent;
-  --control-secondary-text-color: white;
-  --control-secondary-text-color-hover: var(--smokey-black);
+  --control-secondary-bg-color: var(--surface-alt-color);
+  --control-secondary-bg-color-hover: var(--graphite);
+  --control-secondary-border-color: var(--surface-border-color);
+  --control-secondary-border-color-hover: var(--cornflower);
+  --control-secondary-text-color: var(--on-surface-color);
+  --control-secondary-text-color-hover: var(--cornflower-light);
   --control-tertiary-bg-color: transparent;
-  --control-tertiary-bg-color-hover: transparent;
-  --control-tertiary-border-color: var(--smokey-black);
-  --control-tertiary-border-color-hover: var(--granite-grey);
-  --control-tertiary-text-color: var(--smokey-black);
-  --control-tertiary-text-color-hover: var(--granite-grey);
+  --control-tertiary-bg-color-hover: var(--surface-alt-color);
+  --control-tertiary-border-color: var(--surface-border-color);
+  --control-tertiary-border-color-hover: var(--surface-border-color-hover);
+  --control-tertiary-text-color: var(--on-background-color);
+  --control-tertiary-text-color-hover: var(--on-background-color);
 
   /* Anchors */
 
@@ -98,17 +110,17 @@
 
   /* Content switches */
 
-  --content-switch-rail: var(--surface-alt-color);
-  --content-switch-hover-background-color: var(--secondary-color-variant-light);
-  --content-switch-selected-background-color: var(--secondary-color);
-  --content-switch-selected-color: var(--on-secondary-color);
+  --content-switch-rail: var(--surface-color);
+  --content-switch-hover-background-color: var(--surface-alt-color);
+  --content-switch-selected-background-color: var(--graphite);
+  --content-switch-selected-color: var(--on-surface-color);
 
   /* Progress bars */
 
   --progress-bar-default-height: 0.6125rem;
   --progress-bar-small-height: calc(var(--progress-bar-default-height) / 2);
-  --progress-bg-color: var(--primary-color);
-  --progress-filler-color: var(--success-color);
+  --progress-bg-color: var(--surface-alt-color);
+  --progress-filler-color: var(--secondary-color);
 
   /* Stepper */
 
@@ -123,10 +135,10 @@
   /* Checkbox control */
 
   --checkbox-control-size: 1.2rem;
-  --checkbox-control-bg-color: transparent;
-  --checkbox-control-border-radius: 20%;
-  --checkbox-control-border-width: 0.125rem;
-  --checkbox-control-border-color: var(--primary-color);
+  --checkbox-control-bg-color: var(--surface-alt-color);
+  --checkbox-control-border-radius: 0.25rem;
+  --checkbox-control-border-width: var(--control-border-size);
+  --checkbox-control-border-color: var(--surface-border-color);
   --checkbox-control-check-color: var(--on-secondary-color);
   --checkbox-control-checked-bg-color: var(--secondary-color);
 
@@ -138,4 +150,43 @@
 
   --ribbon-color: var(--magnolia);
   --ribbon-bg-color: var(--cornflower);
+}
+
+:root.light {
+  --page-background-color: var(--light-grey);
+  --background-color: var(--magnolia);
+  --background-color-alt: white;
+  --primary-color: var(--smokey-black);
+  --primary-color-variant-dark: var(--black);
+  --primary-color-variant-light: var(--jet);
+  --surface-color: white;
+  --surface-alt-color: var(--magnolia);
+  --surface-border-color: var(--wisteria);
+  --surface-border-color-hover: var(--taupe-grey);
+  --error-color-subtle: #fbe6ec;
+  --error-color-border: #f4bdca;
+  --info-color-subtle: #e8f3ff;
+  --info-color-border: #b6d1fc;
+  --success-color-subtle: #e0fff2;
+  --success-color-border: #9ff0d0;
+  --warning-color-subtle: #fff5ca;
+  --warning-color-border: #ffdc58;
+  --muted-color: var(--granite-grey);
+  --muted-color-variant-dark: var(--taupe-grey);
+  --on-background-color: var(--smokey-black);
+  --on-primary-color: var(--light-grey);
+  --on-surface-color: var(--smokey-black);
+  --non-button-control-bg-color: white;
+  --non-button-control-text-color: var(--smokey-black);
+  --control-secondary-bg-color: white;
+  --control-secondary-bg-color-hover: var(--magnolia);
+  --control-secondary-text-color: var(--smokey-black);
+  --control-secondary-text-color-hover: var(--smokey-black);
+  --control-tertiary-bg-color-hover: var(--magnolia);
+  --control-tertiary-text-color: var(--smokey-black);
+  --control-tertiary-text-color-hover: var(--smokey-black);
+  --content-switch-rail: white;
+  --content-switch-hover-background-color: var(--magnolia);
+  --content-switch-selected-background-color: var(--light-grey);
+  --content-switch-selected-color: var(--smokey-black);
 }

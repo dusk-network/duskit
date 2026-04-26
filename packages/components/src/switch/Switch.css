@@ -1,29 +1,30 @@
 .dusk-switch {
-  --hover-scale: 1.1;
-
-  width: 3rem;
-  height: 1.5rem;
+  width: 2.75rem;
+  height: 1.375rem;
   box-sizing: content-box;
-  padding: 0.25rem;
-  background-color: var(--surface-color);
-  border-color: var(--control-border-color);
+  padding: 0.1875rem;
+  background-color: var(--surface-alt-color);
+  border-color: var(--surface-border-color);
   border-style: solid;
   border-width: var(--control-border-size);
-  border-radius: var(--control-border-radius-size);
+  border-radius: 999px;
+  transition:
+    background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out;
 }
 
 .dusk-switch::after {
   display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.375rem;
+  height: 1.375rem;
   content: "";
-  background-color: var(--primary-color);
-  border-radius: var(--control-border-radius-size);
+  background-color: var(--muted-color);
+  border-radius: 999px;
   transition: transform 0.3s ease-in-out 0s;
 }
 
-.dusk-switch:hover::after {
-  transform: scale(var(--hover-scale));
+.dusk-switch:hover {
+  border-color: var(--surface-border-color-hover);
 }
 
 .dusk-switch--checked::after {
@@ -31,8 +32,9 @@
   transform: translateX(100%);
 }
 
-.dusk-switch--checked:hover::after {
-  transform: translateX(100%) scale(var(--hover-scale));
+.dusk-switch--checked {
+  background-color: var(--info-color-subtle);
+  border-color: var(--info-color-border);
 }
 
 .dusk-switch--disabled {

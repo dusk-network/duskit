@@ -9,7 +9,9 @@
   border-style: solid;
   border-width: var(--checkbox-control-border-width);
   border-radius: var(--checkbox-control-border-radius);
-  transition: background-color 0.2s ease-in-out 0s;
+  transition:
+    background-color 0.2s ease-in-out 0s,
+    border-color 0.2s ease-in-out 0s;
   appearance: none;
   flex-shrink: 0;
 }
@@ -45,6 +47,11 @@
 
 .dusk-checkbox:checked {
   background-color: var(--checkbox-control-checked-bg-color);
+  border-color: var(--checkbox-control-checked-bg-color);
+}
+
+.dusk-checkbox:enabled:hover {
+  border-color: var(--surface-border-color-hover);
 }
 
 .dusk-checkbox:checked::after {

@@ -1,6 +1,12 @@
 .dusk-error-alert {
   display: flex;
+  width: 100%;
+  padding: var(--default-gap);
+  color: var(--on-surface-color);
   flex-direction: column;
+  background-color: var(--surface-color);
+  border: var(--control-border-size) solid var(--surface-border-color);
+  border-radius: var(--control-border-radius-size);
   align-items: center;
 }
 

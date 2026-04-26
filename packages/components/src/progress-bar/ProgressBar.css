@@ -2,6 +2,7 @@
   width: 100%;
   overflow-x: hidden;
   background-color: var(--progress-bg-color);
+  border: var(--control-border-size) solid var(--surface-border-color);
   border-radius: var(--control-border-radius-size);
 }
 

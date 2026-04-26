@@ -1,12 +1,15 @@
 .dusk-content-switch {
   display: flex;
-  overflow-x: hidden;
+  padding: 0.1875rem;
+  overflow: hidden;
   list-style-type: none;
   cursor: default;
   user-select: none;
   background-color: var(--content-switch-rail);
+  border: var(--control-border-size) solid var(--surface-border-color);
   border-radius: var(--control-border-radius-size);
   align-items: center;
+  gap: 0.1875rem;
 }
 
 .dusk-content-switch__tab-item {
@@ -14,25 +17,15 @@
   align-items: center;
   gap: var(--small-gap);
   min-width: 3rem;
-  padding: var(--control-padding);
-  font-size: 1.125rem;
+  padding: var(--control-small-padding);
+  font-size: var(--control-font-size);
+  font-weight: 500;
   line-height: 1;
-  transition: flex-shrink 0.3s ease-in-out 0s;
+  border-radius: calc(var(--control-border-radius-size) - 0.1875rem);
+  transition:
+    flex-shrink 0.3s ease-in-out 0s,
+    background-color 0.2s ease-in-out;
   flex: 0 2 auto;
-}
-
-.dusk-content-switch__tab-item:first-of-type {
-  border-top-left-radius: inherit;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: inherit;
-}
-
-.dusk-content-switch__tab-item:last-of-type {
-  border-top-left-radius: 0;
-  border-top-right-radius: inherit;
-  border-bottom-right-radius: inherit;
-  border-bottom-left-radius: 0;
 }
 
 .dusk-content-switch__tab-item:hover:not(

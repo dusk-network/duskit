@@ -4,6 +4,10 @@
   color: var(--on-surface-color);
   pointer-events: none;
   background-color: var(--surface-color);
+  border-color: var(--surface-border-color);
+  border-style: solid;
+  border-width: 0;
+  transition: transform 0.24s ease-in-out;
 
   &.dusk-drawer--size--full {
     --drawer-size: 100%;
@@ -41,11 +45,13 @@
 
 .dusk-drawer--from--left {
   left: 0;
+  border-right-width: var(--control-border-size);
   transform: translateX(-100%);
 }
 
 .dusk-drawer--from--right {
   right: 0;
+  border-left-width: var(--control-border-size);
   transform: translateX(100%);
 }
 
@@ -76,10 +82,12 @@
 
 .dusk-drawer--from--top {
   top: 0;
+  border-bottom-width: var(--control-border-size);
   transform: translateY(-100%);
 }
 
 .dusk-drawer--from--bottom {
   bottom: 0;
+  border-top-width: var(--control-border-size);
   transform: translateY(100%);
 }

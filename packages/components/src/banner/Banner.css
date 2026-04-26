@@ -1,12 +1,14 @@
 .dusk-banner {
   display: flex;
   width: 100%;
-  padding: 1rem 1.25rem;
+  padding: 0.875rem 1rem;
   font-size: 0.875rem;
   line-height: 1.5;
+  color: var(--on-surface-color);
+  background-color: var(--surface-color);
   border-style: solid;
   border-width: var(--control-border-size);
-  border-radius: calc(var(--control-border-radius-size) / 2);
+  border-radius: var(--control-border-radius-size);
   align-items: center;
 }
 
@@ -44,8 +46,9 @@
 
 .dusk-banner__title {
   display: block;
-  font-size: 1.1rem;
+  font-size: 0.875rem;
   font-weight: 500;
+  line-height: 1.35;
 }
 
 .dusk-banner__icon {

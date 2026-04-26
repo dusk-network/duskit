@@ -128,7 +128,7 @@
           "$type": "color"
         },
         "700": {
-          "$value": "##D1A300",
+          "$value": "#D1A300",
           "$type": "color"
         },
         "600": {
@@ -216,7 +216,7 @@
           "$type": "color"
         },
         "400": {
-          "$value": "##9AC3FF",
+          "$value": "#9AC3FF",
           "$type": "color"
         },
         "300": {
