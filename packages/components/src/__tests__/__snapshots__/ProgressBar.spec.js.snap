@@ -2,7 +2,7 @@
 
 exports[`ProgressBar > should render the \`ProgressBar\` component with no current percentage set and using "default" as its size 1`] = `
 <div
-  class="dusk-progress-bar dusk-progress-bar--ltr dusk-progress-bar--size--default"
+  class="dusk-progress-bar dusk-progress-bar--size--default"
   dir="ltr"
   role="progressbar"
 >

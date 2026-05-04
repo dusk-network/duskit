@@ -1,15 +1,36 @@
 .dusk-anchor {
-  color: var(--anchor-color);
+  --_anchor-decoration-color: var(--interactive-anchor-decoration-color);
+  --_anchor-decoration-line: var(--interactive-anchor-decoration-line);
+  --_anchor-decoration-offset: var(--interactive-anchor-decoration-offset);
+  --_anchor-text-color: var(--interactive-anchor-text-color);
+  --_anchor-thickness: var(--interactive-anchor-decoration-thickness);
+
+  color: var(--_anchor-text-color);
+  text-decoration-color: var(--_anchor-decoration-color);
+  text-decoration-line: var(--_anchor-decoration-line);
+  text-decoration-thickness: var(--_anchor-thickness);
+  text-underline-offset: var(--_anchor-decoration-offset);
+}
+
+.dusk-anchor:hover,
+.dusk-anchor:focus-visible {
+  --_anchor-decoration-line: var(--interactive-anchor-decoration-hover-line);
+  --_anchor-decoration-offset: var(
+    --interactive-anchor-decoration-hover-offset,
+    var(--interactive-anchor-decoration-offset)
+  );
+  --_anchor-text-color: var(--interactive-anchor-text-hover-color);
 }
 
 .dusk-anchor:visited {
-  color: var(--anchor-color-visited);
-}
-
-.dusk-anchor:hover {
-  color: var(--anchor-color-hover);
+  --_anchor-text-color: var(--interactive-anchor-text-visited-color);
 }
 
 .dusk-anchor:active {
-  color: var(--anchor-color-active);
+  --_anchor-text-color: var(--interactive-anchor-text-active-color);
+}
+
+.dusk-anchor:focus-visible {
+  outline: var(--interactive-control-focus-ring-outline);
+  outline-offset: var(--interactive-control-focus-ring-outline-offset);
 }

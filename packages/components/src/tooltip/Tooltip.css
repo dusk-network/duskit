@@ -1,91 +1,116 @@
 .dusk-tooltip {
-  --tip-size: 0.625rem;
-  --half-tip-size: calc(var(--tip-size) / 2);
-  --tip-main-axis-offset: -0.0625rem;
+  --_tooltip-opacity: 1;
+  --_tooltip-visibility: visible;
+  --_tooltip-tip-size: var(--display-box-compact-gap);
+  --_tooltip-half-tip-size: calc(var(--_tooltip-tip-size) / 2);
+  --_tooltip-tip-main-axis-offset: -0.0625rem;
 
   position: fixed;
-  z-index: 1;
+  z-index: var(--viewport-plane-topmost);
   display: inline-block;
-  width: max-content;
-  max-width: 40%;
-  padding: var(--control-padding);
+  font-family: var(--display-label-text-family);
+  font-size: var(--display-label-text-size);
   line-height: 1.5;
+  color: var(--_tooltip-text-color);
+  letter-spacing: var(--display-label-text-letter-spacing);
   white-space: break-spaces;
-  border-radius: var(--control-border-radius-size);
-  opacity: 1;
+  visibility: var(--_tooltip-visibility);
+  background-color: var(--_tooltip-bg-color);
+  border-radius: var(--display-box-radius-slight-size);
+  opacity: var(--_tooltip-opacity);
   transition: opacity 0.2s ease-in-out 0s;
+  max-inline-size: min(20rem, 90dvi);
+  padding-block: var(--display-box-compact-padding-block);
+  padding-inline: var(--display-box-compact-padding-inline);
 }
 
 .dusk-tooltip[aria-hidden="true"] {
-  visibility: hidden;
-  opacity: 0;
+  --_tooltip-opacity: 0;
+  --_tooltip-visibility: hidden;
 }
 
+/*
+ * Semantically, the Tooltip is a "display" component and should not
+ * communicate system states.
+ * These overrides temporarily consume solid feedback surfaces until
+ * the Svelte API is refactored to remove the 'data-tooltip-type'
+ * and the proper `surface-inverse` token is introduced  in the design
+ * system.
+ */
+
 .dusk-tooltip.dusk-tooltip--type--error {
-  color: var(--on-error-color);
-  background-color: var(--error-color);
+  --_tooltip-bg-color: var(--feedback-surface-solid-error-bg-color);
+  --_tooltip-text-color: var(--feedback-surface-solid-error-text-color);
 }
 
 .dusk-tooltip.dusk-tooltip--type--info {
-  color: var(--on-info-color);
-  background-color: var(--info-color);
+  --_tooltip-bg-color: var(--feedback-surface-solid-info-bg-color);
+  --_tooltip-text-color: var(--feedback-surface-solid-info-text-color);
 }
 
 .dusk-tooltip.dusk-tooltip--type--success {
-  color: var(--on-success-color);
-  background-color: var(--success-color);
+  --_tooltip-bg-color: var(--feedback-surface-solid-success-bg-color);
+  --_tooltip-text-color: var(--feedback-surface-solid-success-text-color);
 }
 
 .dusk-tooltip.dusk-tooltip--type--warning {
-  color: var(--on-warning-color);
-  background-color: var(--warning-color);
+  --_tooltip-bg-color: var(--feedback-surface-solid-warning-bg-color);
+  --_tooltip-text-color: var(--feedback-surface-solid-warning-text-color);
 }
 
 .dusk-tooltip::after {
   position: absolute;
   display: inline-block;
-  width: var(--tip-size);
-  height: var(--tip-size);
   pointer-events: none;
   content: "";
   background-color: inherit;
   border: inherit;
   transform: rotate(45deg);
   transform-origin: center;
+  inline-size: var(--_tooltip-tip-size);
+  block-size: var(--_tooltip-tip-size);
 }
 
 .dusk-tooltip.dusk-tooltip--place--bottom::after {
-  bottom: 100%;
-  left: 50%;
-  margin-bottom: calc(var(--half-tip-size) * -1 + var(--tip-main-axis-offset));
-  margin-left: calc(var(--half-tip-size) * -1);
-  border-right-color: transparent;
-  border-bottom-color: transparent;
+  inset-block-end: 100%;
+  inset-inline-start: 50%;
+  margin-block-end: calc(
+    var(--_tooltip-half-tip-size) * -1 + var(--_tooltip-tip-main-axis-offset)
+  );
+  margin-inline-start: calc(var(--_tooltip-half-tip-size) * -1);
+  border-block-end-color: transparent;
+  border-inline-end-color: transparent;
 }
 
 .dusk-tooltip.dusk-tooltip--place--left::after {
-  top: 50%;
-  left: 100%;
-  margin-top: calc(var(--half-tip-size) * -1);
-  margin-left: calc(var(--half-tip-size) * -1 + var(--tip-main-axis-offset));
-  border-bottom-color: transparent;
-  border-left-color: transparent;
+  inset-block-start: 50%;
+  inset-inline-start: 100%;
+  margin-block-start: calc(var(--_tooltip-half-tip-size) * -1);
+  margin-inline-start: calc(
+    var(--_tooltip-half-tip-size) * -1 + var(--_tooltip-tip-main-axis-offset)
+  );
+  border-block-end-color: transparent;
+  border-inline-start-color: transparent;
 }
 
 .dusk-tooltip.dusk-tooltip--place--right::after {
-  top: 50%;
-  right: 100%;
-  margin-top: calc(var(--half-tip-size) * -1);
-  margin-right: calc(var(--half-tip-size) * -1 + var(--tip-main-axis-offset));
-  border-top-color: transparent;
-  border-right-color: transparent;
+  inset-block-start: 50%;
+  inset-inline-end: 100%;
+  margin-block-start: calc(var(--_tooltip-half-tip-size) * -1);
+  margin-inline-end: calc(
+    var(--_tooltip-half-tip-size) * -1 + var(--_tooltip-tip-main-axis-offset)
+  );
+  border-block-start-color: transparent;
+  border-inline-end-color: transparent;
 }
 
 .dusk-tooltip.dusk-tooltip--place--top::after {
-  top: 100%;
-  left: 50%;
-  margin-top: calc(var(--half-tip-size) * -1 + var(--tip-main-axis-offset));
-  margin-left: calc(var(--half-tip-size) * -1);
-  border-top-color: transparent;
-  border-left-color: transparent;
+  inset-block-start: 100%;
+  inset-inline-start: 50%;
+  margin-block-start: calc(
+    var(--_tooltip-half-tip-size) * -1 + var(--_tooltip-tip-main-axis-offset)
+  );
+  margin-inline-start: calc(var(--_tooltip-half-tip-size) * -1);
+  border-block-start-color: transparent;
+  border-inline-start-color: transparent;
 }

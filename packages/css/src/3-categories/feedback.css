@@ -1,0 +1,113 @@
+:root {
+  /* --- Feedback box anatomy (generic) --- */
+  --feedback-box-radius-pill-size: var(--border-radius-pill);
+  --feedback-box-radius-rounded-size: var(--border-radius-md);
+  --feedback-box-radius-slight-size: var(--border-radius-sm);
+  --feedback-box-border-width: var(--border-width-sm);
+
+  /* Compact padding: for labels, badges, and tags */
+  --feedback-box-compact-padding-block: var(--space-xxs);
+  --feedback-box-compact-padding-inline: var(--space-sm);
+
+  /* Standard padding: for structural containers like banners or alerts */
+  --feedback-box-standard-padding-block: var(--space-xs);
+  --feedback-box-standard-padding-inline: var(--space-md);
+
+  /* Large padding: if you need a very airy banner variant */
+  --feedback-box-padding-block-relaxed: var(--space-md);
+  --feedback-box-padding-inline-relaxed: var(--space-lg);
+
+  /* Inner spacing (e.g., gap between icon and text content) */
+  --feedback-box-compact-gap: var(--space-sm);
+  --feedback-box-relaxed-gap: var(--space-lg);
+  --feedback-box-standard-gap: var(--space-md);
+
+  /* Headings inside feedback boxes (e.g., banner titles) */
+  --feedback-heading-text-family: var(--sans-font-family);
+  --feedback-heading-text-size: var(--text-heading-sm);
+  --feedback-heading-text-letter-spacing: normal;
+
+  /*
+   * Short, human-readable prose and descriptive text within feedback components
+   * (e.g., alert messages, toast descriptions, inline status text)
+   */
+  --feedback-label-text-family: var(--sans-font-family);
+  --feedback-label-text-size: var(--text-body-sm);
+  --feedback-label-text-letter-spacing: normal;
+
+  /* Descriptive messages (e.g. banners and toasts) */
+  --feedback-message-text-family: var(--sans-font-family);
+  --feedback-message-text-size: var(--text-body-md);
+  --feedback-message-text-letter-spacing: normal;
+
+  /*
+   * Technical output, system data, or stylized indicators within feedback
+   * components (e.g., console logs, stack traces, monospace badges)
+   */
+  --feedback-raw-text-family: var(--mono-font-family);
+  --feedback-raw-text-size: var(--text-body-sm);
+  --feedback-raw-text-letter-spacing: 0.05em;
+
+  /* Titles for compact elements (e.g. toasts, notifications) */
+  --feedback-title-text-family: var(--sans-font-family);
+  --feedback-title-text-size: var(--text-heading-xs);
+  --feedback-title-text-letter-spacing: normal;
+
+  /* --- Indicators (e.g. notification counters, dot badges) --- */
+  --feedback-indicator-alert-bg-color: var(--status-error-strong-color);
+  --feedback-indicator-alert-text-color: var(--on-status-error-strong-color);
+
+  /* --- Meter (e.g. progress bars, capacity indicators) --- */
+  --feedback-meter-track-compact-block-size: var(--space-xxs);
+  --feedback-meter-track-standard-block-size: var(--space-xs);
+  --feedback-meter-filler-bg-color: var(--action-primary-color);
+  --feedback-meter-track-bg-color: var(--surface-embedded-color);
+  --feedback-meter-filler-text-color: var(--on-action-primary-color);
+  --feedback-meter-track-text-color: var(--on-surface-embedded-color);
+
+  /* --- Soft Surfaces (e.g. badges and banners) --- */
+  --feedback-surface-soft-error-bg-color: var(--status-error-subtle-color);
+  --feedback-surface-soft-error-border-color: var(--status-error-strong-color);
+  --feedback-surface-soft-error-text-color: var(--on-status-error-subtle-color);
+  --feedback-surface-soft-info-bg-color: var(--status-info-subtle-color);
+  --feedback-surface-soft-info-border-color: var(--status-info-strong-color);
+  --feedback-surface-soft-info-text-color: var(--on-status-info-subtle-color);
+  --feedback-surface-soft-neutral-bg-color: var(--neutral-subtle-color);
+  --feedback-surface-soft-neutral-border-color: var(--neutral-strong-color);
+  --feedback-surface-soft-neutral-text-color: var(--on-neutral-subtle-color);
+  --feedback-surface-soft-success-bg-color: var(--status-success-subtle-color);
+  --feedback-surface-soft-success-border-color: var(
+    --status-success-strong-color
+  );
+  --feedback-surface-soft-success-text-color: var(
+    --on-status-success-subtle-color
+  );
+  --feedback-surface-soft-warning-bg-color: var(--status-warning-subtle-color);
+  --feedback-surface-soft-warning-border-color: var(
+    --status-warning-strong-color
+  );
+  --feedback-surface-soft-warning-text-color: var(
+    --on-status-warning-subtle-color
+  );
+
+  /* --- Solid surfaces (e.g. dialog headers, emphasized sections) --- */
+  --feedback-surface-solid-error-bg-color: var(--status-error-color);
+  --feedback-surface-solid-error-border-color: var(--status-error-strong-color);
+  --feedback-surface-solid-error-text-color: var(--on-status-error-color);
+  --feedback-surface-solid-info-bg-color: var(--status-info-color);
+  --feedback-surface-solid-info-border-color: var(--status-info-strong-color);
+  --feedback-surface-solid-info-text-color: var(--on-status-info-color);
+  --feedback-surface-solid-neutral-bg-color: var(--neutral-color);
+  --feedback-surface-solid-neutral-border-color: var(--neutral-strong-color);
+  --feedback-surface-solid-neutral-text-color: var(--on-neutral-color);
+  --feedback-surface-solid-success-bg-color: var(--status-success-color);
+  --feedback-surface-solid-success-border-color: var(
+    --status-success-strong-color
+  );
+  --feedback-surface-solid-success-text-color: var(--on-status-success-color);
+  --feedback-surface-solid-warning-bg-color: var(--status-warning-color);
+  --feedback-surface-solid-warning-border-color: var(
+    --status-warning-strong-color
+  );
+  --feedback-surface-solid-warning-text-color: var(--on-status-warning-color);
+}

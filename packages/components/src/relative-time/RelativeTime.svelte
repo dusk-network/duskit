@@ -8,6 +8,8 @@
 
   import { Rerender } from "../..";
 
+  import "./RelativeTime.css";
+
   /** @type {RelativeTimeProps["autoRefresh"]} */
   export let autoRefresh = false;
 

@@ -11,6 +11,8 @@
 
   import { Suspense } from "../..";
 
+  import "./QrCode.css";
+
   const defaultAltText = "QR Code";
   const defaultBgColor = "#fff";
   const defaultQrColor = "#101";

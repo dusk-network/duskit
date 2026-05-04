@@ -4,7 +4,7 @@ import { cleanup, render } from "@testing-library/svelte";
 import { ErrorAlert } from "../..";
 
 describe("ErrorAlert", () => {
-  const gaps = /** @type {const} */ (["default", "large", "medium", "small"]);
+  const gaps = /** @type {const} */ (["large", "medium", "small"]);
   const baseProps = {
     error: new Error("some error message"),
     summary: "Some error summary",
@@ -33,7 +33,7 @@ describe("ErrorAlert", () => {
 
     expect(element).toHaveClass(
       "dusk-error-alert",
-      "dusk-error-alert--gap--default",
+      "dusk-error-alert--gap--medium",
       "foo",
       "bar"
     );

@@ -21,6 +21,8 @@
   import { clampWithin, findIndex, isGTE, last } from "lamb";
   import { tweened } from "svelte/motion";
 
+  import { Icon } from "../..";
+
   import "./CounterIcon.css";
 
   /** @type {CounterIconProps["baseIconPath"]} */
@@ -35,10 +37,10 @@
   /** @type {CounterIconProps["size"]} */
   export let size = "default";
 
-  /** @type {SVGSVGElement} */
-  let rootElement;
+  /** @type {Icon<"svg">} */
+  let rootComponent;
 
-  export const getRootElement = () => rootElement;
+  export const getRootElement = () => rootComponent.getRootElement();
 
   const numberIcons = [
     mdiNumeric9PlusCircle,
@@ -111,8 +113,6 @@
   $: classes = makeClassName([
     "dusk-counter-icon",
     `dusk-counter-icon--size--${size}`,
-    "dusk-icon",
-    `dusk-icon--size--${size}`,
     className,
   ]);
   $: numericPath =
@@ -122,18 +122,17 @@
   $: count && triggerAnimation();
 </script>
 
-<svg
-  bind:this={rootElement}
+<Icon
+  bind:this={rootComponent}
   {...$$restProps}
-  class={classes}
-  role="graphics-symbol"
-  viewBox="0 0 24 24"
+  className={classes}
+  path={baseIconPath}
+  {size}
 >
-  <path d={baseIconPath} />
   {#if numericPath}
     <g class="dusk-counter-icon__counter" style:transform={transformString}>
       <path class="dusk-counter-icon__foreground" d={mdiCircle} />
       <path class="dusk-counter-icon__background" d={numericPath} />
     </g>
   {/if}
-</svg>
+</Icon>

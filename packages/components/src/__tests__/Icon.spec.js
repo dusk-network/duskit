@@ -7,6 +7,8 @@ import { mdiAbTesting } from "@mdi/js";
  * @typedef {import("../icon/Icon").IconProps<T>} IconProps<T>
  */
 
+import IconWithSlot from "./test-components/IconWithSlot.svelte";
+
 import { Icon } from "../..";
 
 describe("Icon", () => {
@@ -44,8 +46,10 @@ describe("Icon", () => {
       as: "g",
     };
     const { component } = render(Icon, { ...baseOptions, props });
+    const rootElement = component.getRootElement();
 
-    expect(component.getRootElement().nodeName.toLowerCase()).toBe("g");
+    expect(rootElement).toMatchSnapshot();
+    expect(rootElement.nodeName.toLowerCase()).toBe("g");
   });
 
   it.each(sizes)('should render the `Icon` of the "%s" size', (size) => {
@@ -69,6 +73,31 @@ describe("Icon", () => {
     expect(icon).toHaveClass("foo bar");
     expect(icon).toHaveAttribute("data-baz", "baz");
     expect(icon.querySelector("path")).toHaveAttribute("d", baseProps.path);
+  });
+
+  it('should be able to render slotted content when the `as` prop is `"svg"`', () => {
+    const { component, getByTestId } = render(IconWithSlot, baseOptions);
+    const iconElement = component.getRootElement();
+    const slottedCircle = getByTestId("slotted-circle");
+
+    expect(iconElement.nodeName.toLowerCase()).toBe("svg");
+    expect(iconElement).toContainElement(slottedCircle);
+  });
+
+  it('should be able to render slotted content when the `as` prop is `"g"`', () => {
+    const props = {
+      ...baseProps,
+      as: "g",
+    };
+    const { component, getByTestId } = render(IconWithSlot, {
+      ...baseOptions,
+      props,
+    });
+    const iconElement = component.getRootElement();
+    const slottedCircle = getByTestId("slotted-circle");
+
+    expect(iconElement.nodeName.toLowerCase()).toBe("g");
+    expect(iconElement).toContainElement(slottedCircle);
   });
 
   it("should react to prop changes", async () => {

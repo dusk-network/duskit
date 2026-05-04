@@ -49,10 +49,23 @@
       return;
     }
 
-    context.font = getComputedStyle(rootElement).font;
+    const computedStyle = getComputedStyle(rootElement);
 
-    const availableWidth = rootElement.getBoundingClientRect().width;
+    context.font = computedStyle.font;
+
+    if ("letterSpacing" in context) {
+      context.letterSpacing = computedStyle.letterSpacing;
+    }
+
     const ellipsis = "…";
+    const paddingInline =
+      (parseFloat(computedStyle.paddingLeft) || 0) +
+      (parseFloat(computedStyle.paddingRight) || 0);
+    const borderInline =
+      (parseFloat(computedStyle.borderLeftWidth) || 0) +
+      (parseFloat(computedStyle.borderRightWidth) || 0);
+    const rawWidth = rootElement.getBoundingClientRect().width;
+    const availableWidth = rawWidth - paddingInline - borderInline;
 
     if (context.measureText(text).width <= availableWidth) {
       displayText = text;

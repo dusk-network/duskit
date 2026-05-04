@@ -17,7 +17,7 @@ vi.mock("qrcode", () => ({
 describe("QrCode", () => {
   vi.useFakeTimers();
 
-  const gaps = /** @type {const} */ (["default", "large", "medium", "small"]);
+  const gaps = /** @type {const} */ (["large", "medium", "small"]);
   const defaultQROptions = {
     color: {
       dark: "#101",
@@ -54,7 +54,7 @@ describe("QrCode", () => {
 
     // Loading state
     expect(element).toMatchSnapshot();
-    expect(element).toHaveClass("dusk-qr-code", "dusk-suspense--gap--default");
+    expect(element).toHaveClass("dusk-qr-code", "dusk-suspense--gap--medium");
     expect(element.querySelector("dusk-throbber")).toBeDefined();
 
     await vi.runAllTimersAsync();

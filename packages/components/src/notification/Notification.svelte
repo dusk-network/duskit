@@ -112,9 +112,10 @@
         className="dusk-notification__btn-mark-as-read"
         data-tooltip-id={tooltipId}
         data-tooltip-text="Mark as read"
-        icon={{ path: mdiMessageTextOutline, size: "small" }}
+        icon={{ path: mdiMessageTextOutline }}
         on:click={() => dispatch("markasread")}
-        variant="secondary"
+        size="small"
+        variant="naked"
       />
     {/if}
     {#if dismissable}
@@ -124,9 +125,10 @@
         data-tooltip-delay-show={mode === "toast" ? "200" : undefined}
         data-tooltip-id={tooltipId}
         data-tooltip-text="Dismiss"
-        icon={{ path: mdiClose, size: "small" }}
+        icon={{ path: mdiClose }}
         on:click={() => dispatch("dismiss")}
-        variant="secondary"
+        size="small"
+        variant="naked"
       />
     {/if}
   </header>

@@ -8,7 +8,7 @@ const repoRoot = path.resolve(__dirname, "../../..");
 const config = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|svelte)"],
   // Actions/controls are part of Storybook core (v9+). Only keep real addons here.
-  addons: ["@storybook/addon-docs"],
+  addons: ["@storybook/addon-docs", "@storybook/addon-themes"],
   core: {
     disableTelemetry: true,
   },

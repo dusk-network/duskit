@@ -1,10 +1,10 @@
 import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 
-import type { ControlledHtmlAttributes, IconProp } from "../dusk.components";
+import type { ControlledHtmlAttributes, IconOptions } from "../dusk.components";
 
 type TabItem = {
-  icon?: IconProp;
+  icon?: IconOptions;
   id: string;
   label?: string;
 };

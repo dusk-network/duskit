@@ -1,5 +1,10 @@
 import { CounterIcon } from "@duskit/components";
-import { mdiBell, mdiEmail, mdiAccount, mdiMessage } from "@mdi/js";
+import {
+  mdiBellOutline,
+  mdiEmailOutline,
+  mdiAccountOutline,
+  mdiMessageOutline,
+} from "@mdi/js";
 
 export default {
   title: "Components/CounterIcon",
@@ -9,10 +14,10 @@ export default {
       control: "select",
       options: ["Bell", "Email", "Account", "Message"],
       mapping: {
-        Bell: mdiBell,
-        Email: mdiEmail,
-        Account: mdiAccount,
-        Message: mdiMessage,
+        Bell: mdiBellOutline,
+        Email: mdiEmailOutline,
+        Account: mdiAccountOutline,
+        Message: mdiMessageOutline,
       },
       description: "The main SVG path of the icon",
     },

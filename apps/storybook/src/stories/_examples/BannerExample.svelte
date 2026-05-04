@@ -8,6 +8,5 @@
 </script>
 
 <Banner {className} {title} {variant}>
-  <p style="margin: 0.25rem 0 0;">{content}</p>
+  <p>{content}</p>
 </Banner>
-

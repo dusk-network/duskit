@@ -9,6 +9,7 @@ describe("MiddleEllipsis", () => {
 
   vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
     font: "",
+    letterSpacing: "",
 
     // we return a fixed predictable width as 10px per char
     // @ts-expect-error
@@ -27,6 +28,7 @@ describe("MiddleEllipsis", () => {
 
   vi.spyOn(window, "ResizeObserver").mockImplementation(function (callback) {
     resizeObserverCallback = callback;
+
     return {
       disconnect: vi.fn(),
       observe: vi.fn(),
@@ -72,6 +74,59 @@ describe("MiddleEllipsis", () => {
 
     expect(element).toHaveClass("dusk-middle-ellipsis", "foo", "bar");
     expect(element).toHaveAttribute("id", "some-id");
+  });
+
+  describe("Box model and typography options", () => {
+    it("should subtract padding and borders from the available width", async () => {
+      const computedStyleSpy = vi
+        .spyOn(window, "getComputedStyle")
+        // @ts-expect-error We don't need to mock the full return value
+        .mockReturnValue({
+          borderLeftWidth: "5px",
+          borderRightWidth: "5px",
+          display: "block",
+          font: "16px monospace",
+          letterSpacing: "normal",
+          paddingLeft: "20px",
+          paddingRight: "20px",
+        });
+      const { component } = render(MiddleEllipsis, {
+        text: "This is a very, very long string",
+      });
+      const element = component.getRootElement();
+
+      // Trigger calculation: Total width 200px - 40px (padding) - 10px (border) = 150px available
+      // At 10px per character, it should accommodate exactly 15 characters (including ellipsis)
+      // @ts-expect-error
+      resizeObserverCallback();
+
+      await new Promise(requestAnimationFrame);
+
+      expect(element.textContent).toBe("This is… string");
+
+      computedStyleSpy.mockRestore();
+    });
+
+    it("should fallback gracefully if context.letterSpacing is not supported by the browser", async () => {
+      // Override the context mock to simulate an older browser without letterSpacing support
+      vi.mocked(HTMLCanvasElement.prototype.getContext).mockReturnValueOnce({
+        font: "",
+        // @ts-expect-error
+        measureText: (text) => ({ width: text.length * 10 }),
+      });
+
+      const { component } = render(MiddleEllipsis, {
+        text: "This is a very, very long string",
+      });
+      const element = component.getRootElement();
+
+      // @ts-expect-error
+      resizeObserverCallback();
+
+      await new Promise(requestAnimationFrame);
+
+      expect(element.textContent).toBe("This is a…ong string");
+    });
   });
 
   describe("Developer Warnings", () => {

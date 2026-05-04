@@ -1,20 +1,26 @@
 .dusk-checkbox {
+  --_checkbox-bg-color: var(--interactive-toggle-off-color);
+  --_checkbox-border-color: var(--interactive-toggle-off-border-color);
+  --_checkbox-size: var(--interactive-toggle-standard-indicator-size);
+
   position: relative;
   display: inline-block;
-  width: var(--checkbox-control-size);
-  height: var(--checkbox-control-size);
+  width: var(--_checkbox-size);
+  height: var(--_checkbox-size);
   box-sizing: border-box;
-  background-color: var(--checkbox-control-bg-color);
-  border-color: var(--checkbox-control-border-color);
+  background-color: var(--_checkbox-bg-color);
+  border-color: var(--_checkbox-border-color);
   border-style: solid;
-  border-width: var(--checkbox-control-border-width);
-  border-radius: var(--checkbox-control-border-radius);
+  border-width: var(--interactive-control-border-width);
+  border-radius: var(--interactive-control-border-radius-slight-size);
   transition: background-color 0.2s ease-in-out 0s;
   appearance: none;
   flex-shrink: 0;
 }
 
 .dusk-checkbox::after {
+  --_checkbox-mark-color: var(--interactive-toggle-on-mark-color);
+
   position: absolute;
   bottom: 53%;
   left: 11%;
@@ -28,10 +34,10 @@
    * 1/8 is an empirical ratio to keep the stroke proportionally
    * thick without relying on complex CSS geometry
    */
-  border-right: calc(var(--checkbox-control-size) / 8) solid
-    var(--checkbox-control-check-color);
-  border-bottom: calc(var(--checkbox-control-size) / 8) solid
-    var(--checkbox-control-check-color);
+  border-right: calc(var(--_checkbox-size) / 8) solid
+    var(--_checkbox-mark-color);
+  border-bottom: calc(var(--_checkbox-size) / 8) solid
+    var(--_checkbox-mark-color);
   opacity: 0;
 
   /* undraw sequence: hide long leg, then short leg, then fade out */
@@ -44,7 +50,8 @@
 }
 
 .dusk-checkbox:checked {
-  background-color: var(--checkbox-control-checked-bg-color);
+  --_checkbox-bg-color: var(--interactive-toggle-on-color);
+  --_checkbox-border-color: var(--interactive-toggle-on-border-color);
 }
 
 .dusk-checkbox:checked::after {
@@ -64,4 +71,9 @@
   /* workaround for Safari */
   pointer-events: none;
   opacity: 0.5;
+}
+
+.dusk-checkbox:enabled:focus-visible {
+  outline: var(--interactive-control-focus-ring-outline);
+  outline-offset: var(--interactive-control-focus-ring-outline-offset);
 }

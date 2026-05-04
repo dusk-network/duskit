@@ -1,5 +1,7 @@
-import "@duskit/css/src/base/index.css";
-import "@duskit/css/src/theme.css";
+import { withThemeByClassName } from "@storybook/addon-themes";
+
+import "@duskit/css/main.css";
+
 import "../src/storybook.css";
 
 import WithOverlays from "./WithOverlays.svelte";
@@ -9,6 +11,14 @@ const preview = {
   decorators: [
     (Story, context) =>
       context.parameters?.disableGlobalOverlays ? Story() : WithOverlays,
+    withThemeByClassName({
+      defaultTheme: "light",
+      parentSelector: "html",
+      themes: {
+        dark: "dark",
+        light: "",
+      },
+    }),
   ],
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },

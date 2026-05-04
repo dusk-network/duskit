@@ -20,5 +20,5 @@ export default {
 };
 
 export const Default = {
-  args: { items: tabs, selectedTab: "tab-2", style: "max-width: 520px" },
+  args: { items: tabs, selectedTab: "tab-2" },
 };

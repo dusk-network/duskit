@@ -1,20 +1,19 @@
 .dusk-toast-container {
   position: fixed;
-  z-index: var(--z-toast);
+  z-index: var(--viewport-plane-ephemeral);
   display: flex;
-  width: 20rem;
-  max-width: calc(100dvw - (var(--small-gap) * 2));
-  max-height: 100dvh;
+  inline-size: min(
+    20rem,
+    calc(100dvi - (var(--display-box-compact-padding-inline) * 2))
+  );
   overflow: visible;
   list-style-type: none;
   pointer-events: none;
   flex-direction: column;
-  inset-block-start: 0;
-  inset-inline-end: 0;
-  gap: var(--default-gap);
-  padding-block-end: var(--small-gap);
-  padding-block-start: var(--small-gap);
-  padding-inline-end: var(--small-gap);
+  gap: var(--display-box-standard-gap);
+  inset-block-start: var(--display-box-compact-padding-block);
+  inset-inline-end: var(--display-box-compact-padding-inline);
+  max-block-size: calc(100dvb - (var(--display-box-compact-padding-block) * 2));
 }
 
 .dusk-toast-container__item {

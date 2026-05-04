@@ -1,0 +1,70 @@
+:root {
+  font-family: var(--sans-font-family);
+  font-size: var(--text-body-md);
+  color: var(--on-background-color);
+  background-color: var(--page-background-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: var(--text-heading-xl);
+}
+
+h2 {
+  font-size: var(--text-heading-lg);
+}
+
+h3 {
+  font-size: var(--text-heading-md);
+}
+
+h4 {
+  font-size: var(--text-heading-sm);
+}
+
+h5 {
+  font-size: var(--text-heading-xs);
+}
+
+h6 {
+  font-size: var(--text-body-md);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+p {
+  line-height: 1.5;
+}
+
+hr {
+  inline-size: 100%;
+  block-size: 0;
+  padding: 0;
+  margin-block: var(--space-md);
+  overflow: visible;
+  border: 0;
+  border-block-start: var(--border-width-sm) solid var(--neutral-strong-color);
+}
+
+mark {
+  color: var(--on-status-warning-subtle-color);
+  background-color: var(--status-warning-subtle-color);
+  border-radius: var(--border-radius-xs);
+  padding-inline: var(--space-xxs);
+}
+
+pre,
+code,
+kbd,
+samp {
+  font-family: var(--mono-font-family);
+  letter-spacing: 0.05em;
+}

@@ -28,7 +28,12 @@ describe("AnchorButton", () => {
   };
   const iconPositions = /** @type {const} */ (["after", "before", undefined]);
   const sizes = /** @type {const} */ (["default", "small"]);
-  const variants = /** @type {const} */ (["primary", "secondary", "tertiary"]);
+  const variants = /** @type {const} */ ([
+    "naked",
+    "primary",
+    "secondary",
+    "tertiary",
+  ]);
 
   afterEach(cleanup);
 
@@ -87,17 +92,22 @@ describe("AnchorButton", () => {
   );
 
   it.each(sizes)(
-    'should render the `AnchorButton` of the "%s" size',
+    'should render the `AnchorButton` of the "%s" size, passing the correct size to the underlying icon',
     (size) => {
-      const props = { ...baseProps, size };
-      const { component } = render(AnchorButton, { ...baseOptions, props });
+      const props = { ...baseProps, icon: { path: mdiFolderOutline }, size };
+      const { component, getByRole } = render(AnchorButton, {
+        ...baseOptions,
+        props,
+      });
       const element = component.getRootElement().getRootElement();
+      const icon = getByRole("graphics-symbol");
 
       expect(element).toHaveClass(
         "dusk-anchor-button",
         "dusk-anchor-button--variant--primary",
         `dusk-anchor-button--size--${size}`
       );
+      expect(icon).toHaveClass(`dusk-icon--size--${size}`);
     }
   );
 
@@ -258,7 +268,7 @@ describe("AnchorButton", () => {
 
       await rerender({
         ...propsIconAfter,
-        icon: { ...propsIconAfter.icon, path: mdiAbTesting, size: "small" },
+        icon: { ...propsIconAfter.icon, path: mdiAbTesting },
         text: "Updated After",
       });
 
@@ -267,10 +277,10 @@ describe("AnchorButton", () => {
       ).toHaveTextContent("Updated After");
       expect(element.querySelector("path")).toHaveAttribute("d", mdiAbTesting);
 
-      // with undefined icon position and size
+      // with undefined icon position
       await rerender({
         ...propsIconAfter,
-        icon: { path: mdiFolderOutline, size: "large" },
+        icon: { path: mdiFolderOutline },
         text: "",
       });
 

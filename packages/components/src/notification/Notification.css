@@ -1,87 +1,109 @@
 .dusk-notification {
+  --_inline-padding: var(--feedback-box-compact-padding-inline);
+
   &.dusk-notification--type--error {
-    --btn-dismiss-bg-color-hover: var(--error-color);
-    --notification-bg-color: var(--error-color);
-    --notification-text-color: var(--on-error-color);
+    --_header-bg: var(--feedback-surface-solid-error-bg-color);
+    --_header-text: var(--feedback-surface-solid-error-text-color);
+    --_body-bg: var(--feedback-surface-soft-error-bg-color);
+    --_body-text: var(--feedback-surface-soft-error-text-color);
+    --_border-color: var(--feedback-surface-solid-error-border-color);
   }
 
   &.dusk-notification--type--info {
-    --btn-dismiss-bg-color-hover: var(--info-color);
-    --notification-bg-color: var(--info-color);
-    --notification-text-color: var(--on-info-color);
+    --_header-bg: var(--feedback-surface-solid-info-bg-color);
+    --_header-text: var(--feedback-surface-solid-info-text-color);
+    --_body-bg: var(--feedback-surface-soft-info-bg-color);
+    --_body-text: var(--feedback-surface-soft-info-text-color);
+    --_border-color: var(--feedback-surface-solid-info-border-color);
   }
 
   &.dusk-notification--type--success {
-    --btn-dismiss-bg-color-hover: var(--success-color);
-    --notification-bg-color: var(--success-color);
-    --notification-text-color: var(--on-success-color);
+    --_header-bg: var(--feedback-surface-solid-success-bg-color);
+    --_header-text: var(--feedback-surface-solid-success-text-color);
+    --_body-bg: var(--feedback-surface-soft-success-bg-color);
+    --_body-text: var(--feedback-surface-soft-success-text-color);
+    --_border-color: var(--feedback-surface-solid-success-border-color);
   }
 
   &.dusk-notification--type--warning {
-    --btn-dismiss-bg-color-hover: var(--warning-color);
-    --notification-bg-color: var(--warning-color);
-    --notification-text-color: var(--on-warning-color);
+    --_header-bg: var(--feedback-surface-solid-warning-bg-color);
+    --_header-text: var(--feedback-surface-solid-warning-text-color);
+    --_body-bg: var(--feedback-surface-soft-warning-bg-color);
+    --_body-text: var(--feedback-surface-soft-warning-text-color);
+    --_border-color: var(--feedback-surface-solid-warning-border-color);
   }
-
-  --notification-bg-color-darker: oklch(
-    from var(--notification-bg-color) calc(l - 0.1) c h
-  );
 
   display: flex;
   max-width: 100%;
   overflow: hidden;
   flex-direction: column;
-  background-color: var(--notification-bg-color);
-  border-radius: calc(var(--control-border-radius-size) / 2);
+  background-color: var(--_body-bg);
+  border-radius: var(--feedback-box-radius-rounded-size);
 
   /* for the unread border anim */
-  border-inline-start-style: solid;
-  border-inline-start-color: var(--notification-bg-color-darker);
-  border-inline-start-width: 0;
+  border-inline: 0 solid var(--_border-color);
   transition: border-inline-start-width 0.2s ease-in-out;
 }
 
 .dusk-notification--unread {
-  border-inline-start-width: 1rem;
+  border-inline-start-width: var(--feedback-box-standard-gap);
   animation: unread-border-pulse 1.5s ease-in-out infinite alternate;
 }
 
 .dusk-notification__header,
 .dusk-notification__footer,
 .dusk-notification__body {
-  padding: var(--control-small-padding);
-  color: var(--notification-text-color);
+  padding-inline: var(--_inline-padding);
+}
+
+.dusk-notification__header,
+.dusk-notification__footer {
+  padding-block: var(--feedback-box-compact-padding-block);
 }
 
 .dusk-notification__header {
   display: flex;
-  background-color: var(--notification-bg-color-darker);
+  color: var(--_header-text);
+  background-color: var(--_header-bg);
   align-items: center;
   justify-content: space-between;
-  gap: var(--small-gap);
 }
 
 .dusk-notification__header-text {
   display: inline-block;
   overflow: hidden;
+  font-family: var(--feedback-title-text-family);
+  font-size: var(--feedback-title-text-size);
   text-overflow: ellipsis;
+  letter-spacing: var(--feedback-title-text-letter-spacing);
   white-space: nowrap;
   flex: 1;
 }
 
-.dusk-button:is(
-    .dusk-notification__btn-mark-as-read,
-    .dusk-notification__btn-dismiss
-  ):is(:hover, :active) {
-  background-color: var(--btn-dismiss-bg-color-hover);
-  border-color: var(--btn-dismiss-bg-color-hover);
+.dusk-notification__header .dusk-button--variant--naked {
+  --interactive-action-naked-text-color: var(--_header-text);
+  --interactive-action-naked-bg-hover-color: color-mix(
+    in srgb,
+    var(--_header-text) 15%,
+    transparent
+  );
+  --interactive-action-naked-text-hover-color: var(--_header-text);
+
+  padding: 0;
+  border: 0;
+  aspect-ratio: 1;
 }
 
 .dusk-notification__body {
   display: flex;
+  font-family: var(--feedback-message-text-family);
+  font-size: var(--feedback-message-text-size);
+  color: var(--_body-text);
+  letter-spacing: var(--feedback-message-text-letter-spacing);
   flex-direction: row;
-  gap: var(--default-gap);
   align-items: center;
+  gap: var(--feedback-box-standard-gap);
+  padding-block: var(--feedback-box-standard-padding-block);
 }
 
 .dusk-notification__content {
@@ -89,39 +111,40 @@
 }
 
 .dusk-notification__footer {
-  font-size: 0.825rem;
-  line-height: 1;
-  text-align: right;
+  display: flex;
+  font-family: var(--feedback-raw-text-family);
+  font-size: var(--feedback-raw-text-size);
+  color: var(--_body-text);
+  letter-spacing: var(--feedback-raw-text-letter-spacing);
+  justify-content: flex-end;
 }
 
 .dusk-notification--mode--panel .dusk-notification__footer {
-  border-block-start: 1px solid var(--notification-bg-color-darker);
+  border-block-start: var(--feedback-box-border-width) solid
+    var(--_border-color);
   padding-inline: 0;
-  margin-inline: var(--control-small-padding-inline);
+  margin-inline: var(--_inline-padding);
 }
 
 .dusk-notification--unread.dusk-notification--mode--panel
   .dusk-notification__footer {
-  display: flex;
   justify-content: space-between;
 }
 
 .dusk-notification__footer .dusk-progress-bar {
-  background-color: var(--notification-bg-color);
+  background-color: var(--_body-bg);
 }
 
 .dusk-notification__footer .dusk-progress-bar__filler {
-  background-color: var(--notification-bg-color-darker);
+  background-color: currentcolor;
 }
 
 @keyframes unread-border-pulse {
   from {
-    border-inline-start-color: var(--notification-bg-color-darker);
+    border-inline-start-color: var(--_border-color);
   }
 
   to {
-    border-inline-start-color: oklch(
-      from var(--notification-bg-color-darker) calc(l - 0.1) c h
-    );
+    border-inline-start-color: var(--_header-bg);
   }
 }

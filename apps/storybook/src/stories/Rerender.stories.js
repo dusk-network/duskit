@@ -14,7 +14,6 @@ export const Clock = {
     interval: 1000,
     generateValue: () => new Date().toLocaleTimeString(),
     style:
-      "display: inline-block; font-family: var(--mono-font-family); padding: 0.5rem 0.75rem; border: 1px dashed var(--divider-color-primary); border-radius: 0.75rem;",
+      "display: inline-block; font-family: var(--mono-font-family); padding: 0.5rem 0.75rem; border: 1px dashed currentcolor; border-radius: 0.75rem;",
   },
 };
-

@@ -97,29 +97,29 @@
           sortable: false,
         }))
       : []);
-  $: classes = makeClassName(["duskit-table", className]);
+  $: classes = makeClassName(["dusk-table", className]);
 </script>
 
 <table bind:this={rootElement} {...$$restProps} class={classes}>
   {#if caption}
     <caption>{caption}</caption>
   {/if}
-  <thead class="duskit-table__head">
-    <tr class="duskit-table__row">
+  <thead class="dusk-table__head">
+    <tr class="dusk-table__row">
       {#each tableDescriptors as descriptor (descriptor.name)}
         {@const columnText = descriptor.label ?? descriptor.name}
         {@const ariaSort =
           sortState?.column === descriptor.name ? sortState.direction : "none"}
         <th
           aria-sort={ariaSort}
-          class="duskit-table__head-cell"
-          class:duskit-table__head-cell--hidden={descriptor.hidden ?? false}
+          class="dusk-table__head-cell"
+          class:dusk-table__head-cell--hidden={descriptor.hidden ?? false}
           data-column={descriptor.name}
           scope="col"
         >
           {#if descriptor.sortable}
             <Button
-              className="duskit-table__sort-button"
+              className="dusk-table__sort-button"
               icon={{
                 path:
                   ariaSort === "none"
@@ -128,27 +128,28 @@
                       ? mdiArrowUpBold
                       : mdiArrowDownBold,
                 position: "after",
-                size: "small",
               }}
               on:click={handleSortButtonClick}
+              size="small"
               text={columnText}
+              variant="naked"
             />
           {:else}
-            <span class="duskit-table__head-cell-text">{columnText}</span>
+            <span class="dusk-table__head-cell-text">{columnText}</span>
           {/if}
         </th>
       {/each}
     </tr>
   </thead>
-  <tbody class="duskit-table__body">
+  <tbody class="dusk-table__body">
     {#each sortedData as row (row)}
-      <tr class="duskit-table__row">
+      <tr class="dusk-table__row">
         {#each tableDescriptors as descriptor (descriptor.name)}
           {@const columnName = descriptor.name}
           {#if isCustomDescriptor(row, descriptor)}
             <td
-              class="duskit-table__cell"
-              class:duskit-table__cell--hidden={descriptor.hidden ?? false}
+              class="dusk-table__cell"
+              class:dusk-table__cell--hidden={descriptor.hidden ?? false}
               data-column={columnName}
             >
               {#if typeof descriptor.renderer === "function"}
@@ -163,8 +164,8 @@
           {:else}
             {@const renderer = descriptor.renderer}
             <td
-              class="duskit-table__cell"
-              class:duskit-table__cell--hidden={descriptor.hidden ?? false}
+              class="dusk-table__cell"
+              class:dusk-table__cell--hidden={descriptor.hidden ?? false}
               data-column={columnName}
             >
               {#if renderer}

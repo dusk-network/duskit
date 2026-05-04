@@ -16,7 +16,6 @@ export interface StepperProps extends ControlledHtmlAttributes<
   showStepLabelWhenInactive?: boolean;
   showStepNumbers?: boolean;
   steps: StepperStep[] | number;
-  variant?: "primary" | "secondary";
 }
 
 export default class Stepper extends SvelteComponent<StepperProps, {}, {}> {

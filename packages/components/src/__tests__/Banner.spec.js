@@ -71,6 +71,19 @@ describe("Banner", () => {
     }
   );
 
+  it("should remove the title node and apply a fallback class when the title is empty", async () => {
+    const { component, rerender } = render(Banner, baseOptions);
+    const element = component.getRootElement();
+
+    expect(element).not.toHaveClass("dusk-banner--no-title");
+    expect(element.querySelector(".dusk-banner__title")).not.toBeNull();
+
+    await rerender({ title: "" });
+
+    expect(element).toHaveClass("dusk-banner--no-title");
+    expect(element.querySelector(".dusk-banner__title")).toBeNull();
+  });
+
   it("should react to prop changes", async () => {
     const { component, rerender } = render(Banner, baseOptions);
     const element = component.getRootElement();

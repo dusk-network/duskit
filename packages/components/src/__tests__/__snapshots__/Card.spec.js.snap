@@ -1,14 +1,60 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Card > should render the \`Card\` component in a \`div\` with a standard gap by default 1`] = `
+exports[`Card > should render all slot containers when header, default, and footer slots are provided 1`] = `
 <div
-  class="dusk-card dusk-card--gap--default"
+  class="dusk-card dusk-card--variant--surface"
+>
+  <!---->
+  <header
+    class="dusk-card__header"
+  >
+    <span
+      data-testid="header-content"
+      slot="header"
+    >
+      Header Content
+    </span>
+    <!---->
+  </header>
+  <!---->
+   
+  <div
+    class="dusk-card__body"
+  >
+    <span
+      data-testid="body-content"
+    >
+      Body Content
+    </span>
+    <!---->
+  </div>
+  <!---->
+   
+  <footer
+    class="dusk-card__footer"
+  >
+    <span
+      data-testid="footer-content"
+      slot="footer"
+    >
+      Footer Content
+    </span>
+    <!---->
+  </footer>
+  <!---->
+  
+</div>
+`;
+
+exports[`Card > should render the \`Card\` component in a \`div\` with the surface variant by default 1`] = `
+<div
+  class="dusk-card dusk-card--variant--surface"
 >
   <!---->
   <!---->
    
   <div
-    class="dusk-card__body-container"
+    class="dusk-card__body"
   >
     <span>
       some text

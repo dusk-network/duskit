@@ -6,7 +6,7 @@
 </script>
 
 <div
-  style={`width: ${initialWidth}px; height: ${initialHeight}px; resize: both; overflow: auto; border: 1px dashed var(--divider-color-primary); padding: 0.5rem;`}
+  style={`width: ${initialWidth}px; height: ${initialHeight}px; resize: both; overflow: auto; border: 1px dashed currentcolor; padding: 0.5rem;`}
 >
   <ResizeAware let:width let:height>
     <div style="font-family: var(--mono-font-family); font-size: 12px;">
@@ -16,4 +16,3 @@
     </div>
   </ResizeAware>
 </div>
-

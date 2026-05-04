@@ -1,7 +1,7 @@
 .dusk-copy-field {
   display: flex;
   align-items: center;
-  gap: var(--default-gap);
+  gap: var(--interactive-control-standard-gap);
 }
 
 .dusk-copy-field--disabled .dusk-copy-field__button {

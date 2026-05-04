@@ -1,0 +1,306 @@
+:root {
+  /* ----------------------------------------
+   1. COLOR SYSTEM
+  ---------------------------------------- */
+
+  /* Theme colours */
+  --page-background-color: var(--grey-950);
+  --background-color: var(--slate-300);
+  --surface-color: var(--slate-100);
+  --surface-layer-color: var(--slate-300);
+  --on-background-color: var(--grey-950);
+  --on-surface-color: var(--grey-950);
+  --on-surface-layer-color: var(--grey-950);
+
+  /*
+   * Embedded Surface:
+   * Used for embedded structural zones and interaction areas that must remain
+   * perceptually distinct from their surrounding container (e.g. input fields,
+   * toggle/meter tracks, alternating table rows).
+   *
+   * This surface represents an isolated, nested zone within a parent, rather
+   * than dictating a strict physical z-axis direction. Its physical implementation
+   * (lightening or darkening) adapts across luminance environments to preserve
+   * perceptual separation and structural clarity.
+   *
+   * The color must maintain sufficient local contrast against
+   * `--background-color`, `--surface-color`, and `--surface-layer-color`
+   * to ensure these embedded regions remain visually identifiable regardless
+   * of nesting depth or theme environment.
+   */
+  --surface-embedded-color: white;
+  --on-surface-embedded-color: var(--grey-950);
+
+  /* Actions: primary  */
+  --action-primary-color: var(--cornflower-500);
+  --action-primary-strong-color: var(--cornflower-800);
+  --action-primary-subtle-color: var(--cornflower-300);
+  --on-action-primary-color: var(--grey-950);
+  --on-action-primary-strong-color: black;
+  --on-action-primary-subtle-color: var(--grey-950);
+
+  /* Actions: secondary */
+  --action-secondary-color: white;
+  --action-secondary-strong-color: var(--slate-400);
+  --action-secondary-subtle-color: var(--slate-100);
+  --on-action-secondary-color: var(--grey-950);
+  --on-action-secondary-strong-color: var(--grey-950);
+  --on-action-secondary-subtle-color: var(--grey-950);
+
+  /* Actions: tertiary */
+  --action-tertiary-color: var(--slate-200);
+  --action-tertiary-strong-color: var(--slate-400);
+  --action-tertiary-subtle-color: white;
+  --on-action-tertiary-color: var(--grey-950);
+  --on-action-tertiary-strong-color: var(--grey-950);
+  --on-action-tertiary-subtle-color: var(--grey-950);
+
+  /* Statuses: error */
+  --status-error-color: var(--error-500);
+  --status-error-strong-color: var(--error-700);
+  --status-error-subtle-color: var(--error-100);
+  --on-status-error-color: white;
+  --on-status-error-strong-color: white;
+  --on-status-error-subtle-color: var(--error-700);
+
+  /* Statuses: info */
+  --status-info-color: var(--info-500);
+  --status-info-strong-color: var(--info-700);
+  --status-info-subtle-color: var(--info-100);
+  --on-status-info-color: var(--grey-950);
+  --on-status-info-strong-color: white;
+  --on-status-info-subtle-color: var(--info-800);
+
+  /* Statuses: success */
+  --status-success-color: var(--success-500);
+  --status-success-strong-color: var(--success-700);
+  --status-success-subtle-color: var(--success-100);
+  --on-status-success-color: var(--grey-950);
+  --on-status-success-strong-color: white;
+  --on-status-success-subtle-color: var(--success-800);
+
+  /* Statuses: warning */
+  --status-warning-color: var(--warning-500);
+  --status-warning-strong-color: var(--warning-700);
+  --status-warning-subtle-color: var(--warning-100);
+  --on-status-warning-color: var(--grey-950);
+  --on-status-warning-strong-color: var(--grey-950);
+  --on-status-warning-subtle-color: var(--warning-800);
+
+  /* Common states (neutral / dormant) */
+  --neutral-color: var(--slate-400);
+  --neutral-subtle-color: var(--slate-50);
+  --neutral-strong-color: var(--grey-700);
+  --on-neutral-color: var(--grey-950);
+  --on-neutral-subtle-color: var(--grey-700);
+  --on-neutral-strong-color: white;
+
+  /*
+   * Semantic text accent.
+   * Used for high-contrast indicators, titles, anchors or emphasis
+   * that require a 4.5:1 contrast ratio against surfaces.
+   */
+  --text-accent-primary-color: var(--cornflower-900);
+  --text-accent-secondary-color: navy;
+
+  /* ----------------------------------------
+   2. TYPOGRAPHY
+  ---------------------------------------- */
+
+  /* Font families */
+  --mono-font-family: "Soehne Mono", monospace;
+  --sans-font-family: "Soehne", "Helvetica Neue", helvetica, arial, sans-serif;
+
+  /* Semantic heading sizes */
+  --text-heading-xs: var(--size-optical-16);
+  --text-heading-sm: var(--size-optical-20);
+  --text-heading-md: var(--size-optical-24);
+  --text-heading-lg: var(--size-optical-32);
+  --text-heading-xl: var(--size-optical-40);
+  --text-heading-xxl: var(--size-optical-48);
+
+  /* Semantic body sizes */
+  --text-body-sm: var(--size-optical-14);
+  --text-body-md: var(--size-optical-16);
+  --text-body-lg: var(--size-optical-18);
+
+  /* ----------------------------------------
+   3. GEOMETRY & LAYOUT
+  ---------------------------------------- */
+
+  /* Semantic spacing (paddings, margins, gaps) */
+  --space-xxs: var(--size-4);
+  --space-xs: var(--size-8);
+  --space-sm: var(--size-12);
+  --space-md: var(--size-16);
+  --space-lg: var(--size-20);
+  --space-xl: var(--size-24);
+  --space-xxl: var(--size-32);
+
+  /*
+   * Offsets (Micro-spacing for component
+   * internal anatomy): DO NOT use for
+   * macro-layout, gaps, or page margins.
+   */
+  --offset-sm: var(--size-micro-2);
+  --offset-md: var(--size-micro-4);
+  --offset-lg: var(--size-micro-6);
+
+  /* Semantic border radii */
+  --border-radius-sm: var(--size-4);
+  --border-radius-md: var(--size-8);
+  --border-radius-lg: var(--size-12);
+  --border-radius-xl: var(--size-16);
+  --border-radius-pill: 9999rem;
+
+  /* Semantic border thicknesses */
+  --border-width-sm: var(--size-micro-1);
+  --border-width-md: var(--size-micro-2);
+  --border-width-lg: var(--size-micro-3);
+
+  /* Density and touch targets */
+  --density-target-sm: var(--size-32);
+  --density-target-md: var(--size-40);
+  --density-target-lg: var(--size-48);
+
+  /* Semantic icon sizes */
+  --icon-size-sm: var(--size-16);
+  --icon-size-md: var(--size-20);
+  --icon-size-lg: var(--size-24);
+
+  /* ----------------------------------------
+   4. ELEVATION
+  ---------------------------------------- */
+
+  /* z-index */
+  --z-dropdown: 1000; /* Custom dropdowns, select menus */
+  --z-sticky: 2000; /* Sticky headers, navbars, modeless drawers */
+  --z-backdrop: 3000; /* Semi-transparent overlays */
+  --z-modal: 4000; /* Dialogs, modal drawers, panels */
+  --z-popover: 5000; /* Context menus, floating elements */
+  --z-toast: 6000; /* Ephemeral global alerts (toasts) */
+  --z-tooltip: 7000; /* Hover tooltips (always topmost) */
+
+  /* ----------------------------------------
+   5. INTERACTION & A11Y
+  ---------------------------------------- */
+
+  /* Focus ring */
+  --focus-ring-color: blue;
+  --focus-ring-offset: calc(var(--border-width-md) * -1);
+  --focus-ring-style: solid;
+  --focus-ring-width: var(--border-width-md);
+}
+
+:root.dark {
+  /* ----------------------------------------
+   6. DARK MODE COLOR SYSTEM
+  ---------------------------------------- */
+
+  /* Theme colours */
+  --page-background-color: var(--grey-900);
+  --background-color: var(--grey-950);
+  --surface-color: var(--grey-900);
+  --surface-layer-color: var(--grey-800);
+  --on-background-color: var(--slate-200);
+  --on-surface-color: var(--slate-200);
+  --on-surface-layer-color: var(--slate-200);
+
+  /*
+   * Embedded Surface:
+   * Used for embedded structural zones and interaction areas that must remain
+   * perceptually distinct from their surrounding container (e.g. input fields,
+   * toggle/meter tracks, alternating table rows).
+   *
+   * This surface represents an isolated, nested zone within a parent, rather
+   * than dictating a strict physical z-axis direction. Its physical implementation
+   * (lightening or darkening) adapts across luminance environments to preserve
+   * perceptual separation and structural clarity.
+   *
+   * The color must maintain sufficient local contrast against
+   * `--background-color`, `--surface-color`, and `--surface-layer-color`
+   * to ensure these embedded regions remain visually identifiable regardless
+   * of nesting depth or theme environment.
+   */
+  --surface-embedded-color: var(--grey-700);
+  --on-surface-embedded-color: var(--slate-200);
+
+  /* Actions: primary  */
+  --action-primary-color: var(--cornflower-500);
+  --action-primary-strong-color: var(--cornflower-300);
+  --action-primary-subtle-color: var(--cornflower-700);
+  --on-action-primary-color: var(--grey-950);
+  --on-action-primary-strong-color: var(--grey-950);
+  --on-action-primary-subtle-color: var(--grey-950);
+
+  /* Actions: secondary */
+  --action-secondary-color: var(--grey-700);
+  --action-secondary-strong-color: var(--grey-600);
+  --action-secondary-subtle-color: var(--grey-800);
+  --on-action-secondary-color: var(--slate-50);
+  --on-action-secondary-strong-color: white;
+  --on-action-secondary-subtle-color: var(--slate-300);
+
+  /* Actions: tertiary */
+  --action-tertiary-color: var(--slate-800);
+  --action-tertiary-strong-color: var(--grey-800);
+  --action-tertiary-subtle-color: var(--grey-950);
+  --on-action-tertiary-color: var(--slate-200);
+  --on-action-tertiary-strong-color: white;
+  --on-action-tertiary-subtle-color: var(--slate-200);
+
+  /* Statuses: error */
+  --status-error-color: var(--error-400);
+  --status-error-strong-color: var(--error-300);
+  --status-error-subtle-color: var(--error-900);
+  --on-status-error-color: var(--grey-950);
+  --on-status-error-strong-color: var(--grey-950);
+  --on-status-error-subtle-color: var(--error-300);
+
+  /* Statuses: info */
+  --status-info-color: var(--info-500);
+  --status-info-strong-color: var(--info-300);
+  --status-info-subtle-color: var(--info-900);
+  --on-status-info-color: var(--grey-950);
+  --on-status-info-strong-color: var(--grey-950);
+  --on-status-info-subtle-color: var(--info-300);
+
+  /* Statuses: success */
+  --status-success-color: var(--success-600);
+  --status-success-strong-color: var(--success-300);
+  --status-success-subtle-color: var(--success-900);
+  --on-status-success-color: var(--grey-950);
+  --on-status-success-strong-color: var(--grey-950);
+  --on-status-success-subtle-color: var(--success-300);
+
+  /* Statuses: warning */
+  --status-warning-color: var(--warning-600);
+  --status-warning-strong-color: var(--warning-300);
+  --status-warning-subtle-color: var(--warning-900);
+  --on-status-warning-color: var(--grey-950);
+  --on-status-warning-strong-color: var(--grey-950);
+  --on-status-warning-subtle-color: var(--warning-300);
+
+  /* Common states (neutral / dormant) */
+  --neutral-color: var(--grey-600);
+  --neutral-strong-color: var(--slate-300);
+  --neutral-subtle-color: black;
+  --on-neutral-color: black;
+  --on-neutral-strong-color: var(--grey-950);
+  --on-neutral-subtle-color: var(--slate-300);
+
+  /*
+   * Semantic text accent.
+   * Used for high-contrast indicators, titles, anchors or emphasis
+   * that require a 4.5:1 contrast ratio against surfaces.
+   */
+  --text-accent-primary-color: var(--cornflower-400);
+  --text-accent-secondary-color: var(--cornflower-200);
+
+  /* ----------------------------------------
+   5. INTERACTION & A11Y
+  ---------------------------------------- */
+
+  /* Focus ring */
+  --focus-ring-color: aqua;
+}

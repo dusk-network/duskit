@@ -1,54 +1,84 @@
 .dusk-banner {
+  --_banner-line-height: 1.5;
+  --_banner-icon-ref-size: var(--feedback-heading-text-size);
+
   display: flex;
-  width: 100%;
-  padding: 1rem 1.25rem;
-  font-size: 0.875rem;
-  line-height: 1.5;
+  font-family: var(--feedback-message-text-family);
+  font-size: var(--feedback-message-text-size);
+  line-height: var(--_banner-line-height);
+  color: var(--_banner-text-color);
+  letter-spacing: var(--feedback-message-text-letter-spacing);
+  background-color: var(--_banner-bg-color);
+  border-color: var(--_banner-border-color);
   border-style: solid;
-  border-width: var(--control-border-size);
-  border-radius: calc(var(--control-border-radius-size) / 2);
-  align-items: center;
+  border-width: var(--feedback-box-border-width);
+  border-radius: var(--feedback-box-radius-rounded-size);
+  gap: var(--feedback-box-standard-gap);
+  inline-size: 100%;
+  align-items: flex-start;
+  padding-block: var(--feedback-box-standard-padding-block);
+  padding-inline: var(--feedback-box-standard-padding-inline);
 }
 
-.dusk-banner--variant--error {
-  border-color: var(--error-color-variant-dark);
-}
-
-.dusk-banner--variant--error .dusk-banner__icon {
-  fill: var(--error-color-variant-dark);
-}
-
-.dusk-banner--variant--info {
-  border-color: var(--info-color-variant-dark);
-}
-
-.dusk-banner--variant--info .dusk-banner__icon {
-  fill: var(--info-color-variant-dark);
-}
-
-.dusk-banner--variant--success {
-  border-color: var(--success-color-variant-dark);
-}
-
-.dusk-banner--variant--success .dusk-banner__icon {
-  fill: var(--success-color-variant-dark);
-}
-
-.dusk-banner--variant--warning {
-  border-color: var(--warning-color-variant-dark);
-}
-
-.dusk-banner--variant--warning .dusk-banner__icon {
-  fill: var(--warning-color-variant-dark);
+.dusk-banner__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--feedback-box-compact-gap);
 }
 
 .dusk-banner__title {
-  display: block;
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-family: var(--feedback-heading-text-family);
+  font-size: var(--feedback-heading-text-size);
+  letter-spacing: var(--feedback-heading-text-letter-spacing);
+}
+
+.dusk-banner--no-title {
+  --_banner-icon-ref-size: var(--feedback-message-text-size);
 }
 
 .dusk-banner__icon {
-  margin-right: var(--default-gap);
   flex-shrink: 0;
+  fill: currentcolor;
+
+  /*
+   * Optical alignment: vertically centers the icon relative
+   * to the first line of text. The reference size defaults to the heading
+   * but switches to the standard message size if the title is missing.
+   * Formula: (reference text size * line-height - icon size) / 2.
+   * This compensates for the font's half-leading, ensuring
+   * a stable visual balance.
+   */
+  transform: translateY(
+    calc(
+      (
+          var(--_banner-icon-ref-size) * var(--_banner-line-height) -
+            var(--display-icon-size-lg)
+        ) /
+        2
+    )
+  );
+}
+
+.dusk-banner--variant--error {
+  --_banner-bg-color: var(--feedback-surface-soft-error-bg-color);
+  --_banner-border-color: var(--feedback-surface-soft-error-border-color);
+  --_banner-text-color: var(--feedback-surface-soft-error-text-color);
+}
+
+.dusk-banner--variant--info {
+  --_banner-bg-color: var(--feedback-surface-soft-info-bg-color);
+  --_banner-border-color: var(--feedback-surface-soft-info-border-color);
+  --_banner-text-color: var(--feedback-surface-soft-info-text-color);
+}
+
+.dusk-banner--variant--success {
+  --_banner-bg-color: var(--feedback-surface-soft-success-bg-color);
+  --_banner-border-color: var(--feedback-surface-soft-success-border-color);
+  --_banner-text-color: var(--feedback-surface-soft-success-text-color);
+}
+
+.dusk-banner--variant--warning {
+  --_banner-bg-color: var(--feedback-surface-soft-warning-bg-color);
+  --_banner-border-color: var(--feedback-surface-soft-warning-border-color);
+  --_banner-text-color: var(--feedback-surface-soft-warning-text-color);
 }

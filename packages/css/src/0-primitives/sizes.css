@@ -1,0 +1,67 @@
+:root {
+  /* ----------------------------------------------------
+   PHYSICAL SCALE (px)
+   Exceptions for strict hardware rendering.
+   Used exclusively for box-shadows, canvas coordinates,
+   SVG strokes, and transform: translate() to prevent
+   subpixel stuttering and maintain pixel-perfection.
+  ---------------------------------------------------- */
+  --size-px-1: 1px;
+  --size-px-2: 2px;
+  --size-px-3: 3px;
+  --size-px-4: 4px;
+  --size-px-8: 8px;
+  --size-px-16: 16px;
+
+  /* ----------------------------------------------------
+   MICRO SCALE (rem)
+   Linear progression for component anatomy.
+   Maintained in rem for proportional scaling of
+   borders and micro-offsets, accepting known
+   browser anti-aliasing compromises.
+  ---------------------------------------------------- */
+  --size-micro-1: 0.0625rem;
+  --size-micro-2: 0.125rem;
+  --size-micro-3: 0.1875rem;
+  --size-micro-4: 0.25rem;
+  --size-micro-5: 0.3125rem;
+  --size-micro-6: 0.375rem;
+
+  /* ----------------------------------------------------
+   MACRO SCALE (rem)
+   Strict 4-point grid progression.
+   Used exclusively for layout, gaps, margins,
+   paddings, and border radii. No optical
+   typography steps allowed here.
+  ---------------------------------------------------- */
+  --size-4: 0.25rem;
+  --size-8: 0.5rem;
+  --size-12: 0.75rem;
+  --size-16: 1rem;
+  --size-20: 1.25rem;
+  --size-24: 1.5rem;
+  --size-28: 1.75rem;
+  --size-32: 2rem;
+  --size-36: 2.25rem;
+  --size-40: 2.5rem;
+  --size-44: 2.75rem;
+  --size-48: 3rem;
+
+  /* ----------------------------------------------------
+   OPTICAL SCALE (rem)
+   Optical steps mapped for optimal human perception
+   and legibility. Used exclusively for font sizes
+   and line heights. Free from rigid layout grid
+   constraints.
+  ---------------------------------------------------- */
+  --size-optical-12: 0.75rem;
+  --size-optical-14: 0.875rem;
+  --size-optical-16: 1rem;
+  --size-optical-18: 1.125rem;
+  --size-optical-20: 1.25rem;
+  --size-optical-24: 1.5rem;
+  --size-optical-28: 1.75rem;
+  --size-optical-32: 2rem;
+  --size-optical-40: 2.5rem;
+  --size-optical-48: 3rem;
+}

@@ -1,20 +1,36 @@
+.dusk-error-details {
+  --_error-details-summary-hover-bg-color: var(
+    --feedback-surface-soft-neutral-bg-color
+  );
+
+  font-family: var(--feedback-message-text-family);
+  font-size: var(--feedback-message-text-size);
+}
+
 .dusk-error-details__summary {
   cursor: default;
+  border-radius: var(--feedback-box-radius-rounded-size);
   outline: none;
+  transition: background-color 0.2s ease-in-out;
+
+  /*
+   * The negative margin-inline-start perfectly offsets the padding-inline.
+   * This technique creates a visual "bleed" for the hover background (the pill effect)
+   * while keeping the text strictly aligned with the original grid and the sibling elements.
+   */
+  margin-inline-start: calc(var(--feedback-box-compact-padding-inline) * -1);
+  padding-inline: var(--feedback-box-compact-padding-inline);
 }
 
-.dusk-error-details__summary::marker {
-  font-size: 1.2rem;
-  transition: color 0.2s ease-in-out 0s;
-}
-
-.dusk-error-details__summary:hover::marker {
-  color: var(--secondary-color);
+.dusk-error-details__summary:hover {
+  background-color: var(--_error-details-summary-hover-bg-color);
 }
 
 .dusk-error-details__error {
-  margin-top: var(--default-gap);
-  font-size: 0.875rem;
-  overflow-wrap: break-word;
+  font-family: var(--feedback-raw-text-family);
+  font-size: var(--feedback-raw-text-size);
+  line-height: 1.5;
+  letter-spacing: var(--feedback-raw-text-letter-spacing);
   white-space: pre-line;
+  overflow-wrap: break-word;
 }

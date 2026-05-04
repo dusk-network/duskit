@@ -16,7 +16,7 @@ export default {
     },
     variant: {
       control: "select",
-      options: ["primary", "secondary", "tertiary"],
+      options: ["naked", "primary", "secondary", "tertiary"],
     },
   },
 };
@@ -42,6 +42,13 @@ export const Tertiary = {
   },
 };
 
+export const Naked = {
+  args: {
+    text: "Naked",
+    variant: "naked",
+  },
+};
+
 export const Small = {
   args: {
     text: "Small",
@@ -53,12 +60,23 @@ export const Small = {
 export const WithIcon = {
   args: {
     text: "Profile",
-    variant: "primary",
     icon: {
       path: mdiAccount,
       position: "before",
       size: "default",
     },
+    variant: "primary",
+  },
+};
+
+export const IconOnly = {
+  args: {
+    icon: {
+      path: mdiAccount,
+      position: "before",
+      size: "default",
+    },
+    variant: "primary",
   },
 };
 

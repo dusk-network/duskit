@@ -8,7 +8,7 @@ import { Suspense } from "../..";
 vi.useFakeTimers();
 
 describe("Suspense", () => {
-  const gaps = /** @type {const} */ (["default", "large", "medium", "small"]);
+  const gaps = /** @type {const} */ (["large", "medium", "small"]);
   const delay = 1000;
 
   const baseProps = {
@@ -63,6 +63,14 @@ describe("Suspense", () => {
       expect(element).toHaveClass(`dusk-suspense--gap--${gap}`);
     }
   );
+
+  it("should use the medium gap by default", () => {
+    const { component } = render(Suspense, baseOptions);
+
+    expect(component.getRootElement()).toHaveClass(
+      "dusk-suspense--gap--medium"
+    );
+  });
 
   it("should accept a custom message for the pending state", () => {
     const props = {

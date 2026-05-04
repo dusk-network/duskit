@@ -13,8 +13,7 @@ export const Default = {
   args: {
     as: "pre",
     style:
-      "width: 240px; display: block; border: 1px dashed var(--divider-color-primary); padding: 0.5rem; border-radius: 0.75rem;",
-    text: "dusk1qz6f8m3y2q0m2w7v6k5c4b3n2m1qz6f8m3y2q0m2w7v6k5c4b3n2m1",
+      "width: 100%;max-width: 240px; display: block; border: 1px dashed currentcolor; padding: 0.5rem; border-radius: 0.75rem;",
+    text: "dusk1qz6f8m3y2q0m2w7v6k5c4b3n2m1qz6f8m3y2q0m2w7v6k5c4b3n2m1a",
   },
 };
-

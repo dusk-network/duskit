@@ -1,18 +1,24 @@
 .dusk-textbox {
-  padding: var(--control-small-padding);
+  --_textbox-bg-color: var(--interactive-field-bg-color);
+  --_textbox-border-color: var(--interactive-field-border-color);
+  --_textbox-text-color: var(--interactive-field-text-color);
+
+  min-block-size: var(--interactive-control-standard-min-block-size);
+  padding-block: var(--interactive-control-standard-padding-block);
+  padding-inline: var(--interactive-control-standard-padding-inline);
   font-family: inherit;
-  font-size: var(--control-font-size);
-  color: var(--non-button-control-text-color);
+  font-size: var(--interactive-control-standard-text-size);
+  line-height: inherit;
+  color: var(--_textbox-text-color);
   letter-spacing: inherit;
-  background-color: var(--non-button-control-bg-color);
-  border-color: var(--control-border-color);
-  border-style: solid;
-  border-width: var(--control-border-size);
-  border-radius: var(--control-border-radius-size);
+  background-color: var(--_textbox-bg-color);
+  border: var(--interactive-control-border-width) solid
+    var(--_textbox-border-color);
+  border-radius: var(--interactive-control-border-radius-rounded-size);
 }
 
 .dusk-textbox::placeholder {
-  color: var(--non-button-control-text-color);
+  color: var(--_textbox-text-color);
 }
 
 .dusk-textbox:disabled,
@@ -20,13 +26,20 @@
   opacity: 0.5;
 }
 
-.dusk-textbox:not(:focus):invalid {
-  color: var(--error-color);
+.dusk-textbox:invalid {
+  --_textbox-bg-color: var(--interactive-field-invalid-bg-color);
+  --_textbox-border-color: var(--interactive-field-invalid-border-color);
+  --_textbox-text-color: var(--interactive-field-invalid-text-color);
 }
 
 .dusk-textbox:read-only {
   outline: 0 none;
   opacity: 0.5;
+}
+
+.dusk-textbox:read-write:enabled:focus {
+  outline: var(--interactive-control-focus-ring-outline);
+  outline-offset: var(--interactive-control-focus-ring-outline-offset);
 }
 
 .dusk-textbox.dusk-textbox-multiline {

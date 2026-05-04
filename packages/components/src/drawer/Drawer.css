@@ -1,12 +1,20 @@
 .dusk-drawer {
+  /**
+   * We use the primary text color for a surface with a reduced
+   * opacity. This guarantees a contrasting border that automatically
+   * adapts to both light and dark themes without context awareness.
+   */
+  --_drawer-border: var(--layout-box-border-width) solid
+    oklch(from var(--on-surface-color) l c h / 0.4);
+
   position: fixed;
-  z-index: 1000;
+  z-index: var(--viewport-plane-anchored);
   color: var(--on-surface-color);
   pointer-events: none;
   background-color: var(--surface-color);
 
   &.dusk-drawer--size--full {
-    --drawer-size: 100%;
+    --_drawer-size: 100%;
   }
 }
 
@@ -14,11 +22,12 @@
   pointer-events: all;
 }
 
+/* Horizontal Drawers (Physical X Axis) */
 .dusk-drawer--from--left,
 .dusk-drawer--from--right {
   top: 0;
-  width: var(--drawer-size);
-  height: 100%;
+  bottom: 0;
+  width: var(--_drawer-size);
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -26,34 +35,37 @@
     transform: translateX(0);
   }
 
+  &.dusk-drawer--size--small {
+    --_drawer-size: min(18rem, 95dvw);
+  }
+
   &.dusk-drawer--size--default {
-    --drawer-size: min(24rem, 95dvw);
+    --_drawer-size: min(24rem, 95dvw);
   }
 
   &.dusk-drawer--size--large {
-    --drawer-size: min(36rem, 95dvw);
-  }
-
-  &.dusk-drawer--size--small {
-    --drawer-size: min(18rem, 95dvw);
+    --_drawer-size: min(36rem, 95dvw);
   }
 }
 
 .dusk-drawer--from--left {
   left: 0;
+  border-right: var(--_drawer-border);
   transform: translateX(-100%);
 }
 
 .dusk-drawer--from--right {
   right: 0;
+  border-left: var(--_drawer-border);
   transform: translateX(100%);
 }
 
+/* Vertical Drawers (Physical Y Axis) */
 .dusk-drawer--from--top,
 .dusk-drawer--from--bottom {
+  right: 0;
   left: 0;
-  width: 100%;
-  height: var(--drawer-size);
+  height: var(--_drawer-size);
   overflow-x: auto;
   overflow-y: hidden;
 
@@ -62,24 +74,26 @@
   }
 
   &.dusk-drawer--size--small {
-    --drawer-size: min(8rem, 90dvh);
+    --_drawer-size: min(8rem, 90dvh);
   }
 
   &.dusk-drawer--size--default {
-    --drawer-size: min(12rem, 90dvh);
+    --_drawer-size: min(12rem, 90dvh);
   }
 
   &.dusk-drawer--size--large {
-    --drawer-size: min(18rem, 90dvh);
+    --_drawer-size: min(18rem, 90dvh);
   }
 }
 
 .dusk-drawer--from--top {
   top: 0;
+  border-bottom: var(--_drawer-border);
   transform: translateY(-100%);
 }
 
 .dusk-drawer--from--bottom {
   bottom: 0;
+  border-top: var(--_drawer-border);
   transform: translateY(100%);
 }

@@ -89,7 +89,7 @@
     data-tooltip-text="Copy to clipboard"
     icon={{ path: mdiContentCopy }}
     on:click={copyToClipboard}
-    variant="primary"
+    variant="secondary"
     {disabled}
   />
 </div>

@@ -15,12 +15,11 @@ export type ControlledHtmlAttributes<
     : K]: SourceAttributes[K];
 };
 
-export type GapSize = "small" | "default" | "medium" | "large";
+export type GapSize = "small" | "medium" | "large";
 
-export type IconProp = {
+export type IconOptions = {
   path: string;
   position?: "after" | "before";
-  size?: IconSize;
 };
 
 export type IconSize = "small" | "default" | "large";
@@ -32,3 +31,5 @@ export type OptionItem = {
 };
 
 export type StatusType = "error" | "info" | "success" | "warning";
+
+export type SurfaceVariant = "layer" | "surface";

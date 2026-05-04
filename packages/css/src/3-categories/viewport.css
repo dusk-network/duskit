@@ -1,0 +1,55 @@
+/**
+ * Viewport Infrastructure Tokens
+ *
+ * This file defines the global three-dimensional stacking context
+ * (z-axis) of the application canvas.
+ * These tokens represent abstract spatial planes and are shared
+ * across all architectural layers (Layout, Display, Interactive,
+ * Feedback) to orchestrate a conflict-free layering hierarchy,
+ * keeping the core infrastructure strictly separated from specific
+ * component payloads.
+ */
+
+:root {
+  /*
+   * 1000 - Contextual elements emerging inline from the document
+   * flow (e.g., inline dropdowns)
+   */
+  --viewport-plane-raised: var(--z-dropdown);
+
+  /*
+   * 2000 - Structural elements anchored to viewport edges outside
+   * the standard flow (e.g., sticky headers, modeless drawers)
+   */
+  --viewport-plane-anchored: var(--z-sticky);
+
+  /*
+   * 3000 - Semi-transparent dimming layers isolating the background
+   * context (e.g., dialog backdrops)
+   */
+  --viewport-plane-scrim: var(--z-backdrop);
+
+  /*
+   * 4000 - Heavy interaction containers demanding immediate resolution
+   * and blocking underlying inputs (e.g., modal dialogs)
+   */
+  --viewport-plane-modal: var(--z-modal);
+
+  /*
+   * 5000 - Volatile floating elements absolute-positioned relative to
+   * specific coordinates (e.g., popovers, context menus)
+   */
+  --viewport-plane-floating: var(--z-popover);
+
+  /*
+   * 6000 - Ephemeral global notifications overlaying the interface
+   * without stopping interaction (e.g., system toasts)
+   */
+  --viewport-plane-ephemeral: var(--z-toast);
+
+  /*
+   * 7000 - Absolute topmost contextual disclosures bound to the active
+   * pointer or focus state (e.g., tooltips)
+   */
+  --viewport-plane-topmost: var(--z-tooltip);
+}

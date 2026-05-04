@@ -29,6 +29,15 @@ Install it with your favourite package manager:
 npm install @duskit/components --save
 ```
 
+### Peer Requirements
+
+This package relies on the consumer application hosting the core execution runtime and the styling framework.
+
+- **Svelte:** fully compatible with both **Svelte v4** and **Svelte v5** (`^4.2.0 || ^5.0.0`).
+- **`@duskit/css` (optional):** the components are structurally encapsulated and function independently, but installing `@duskit/css` is highly recommended to automatically inherit the official theme, semantic tokens, and interaction physics of the Dusk design language.
+
+### Usage
+
 Import the components you need in your Svelte files:
 
 ```svelte

@@ -20,6 +20,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
       <path
         d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"
       />
+      <!---->
     </svg>
     
     <!---->
@@ -50,6 +51,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -86,6 +88,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -108,6 +111,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -144,6 +148,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -166,6 +171,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -202,6 +208,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -224,6 +231,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -260,6 +268,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -282,6 +291,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -318,6 +328,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -341,6 +352,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
       <path
         d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
       />
+      <!---->
     </svg>
     
     <!---->
@@ -372,6 +384,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
       <path
         d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"
       />
+      <!---->
     </svg>
     
     <!---->
@@ -402,6 +415,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -428,6 +442,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -450,6 +465,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -476,6 +492,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -498,6 +515,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -524,6 +542,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -546,6 +565,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -572,6 +592,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -594,6 +615,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -620,6 +642,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
         <path
           d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
         />
+        <!---->
       </svg>
       
       <!---->
@@ -643,6 +666,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
       <path
         d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
       />
+      <!---->
     </svg>
     
     <!---->
@@ -675,6 +699,7 @@ exports[`Tabs > should pass additional class names and attributes to the root el
       <path
         d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"
       />
+      <!---->
     </svg>
     
     <!---->
@@ -846,6 +871,7 @@ exports[`Tabs > should pass additional class names and attributes to the root el
       <path
         d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
       />
+      <!---->
     </svg>
     
     <!---->
@@ -877,6 +903,7 @@ exports[`Tabs > should render a "Tabs" component and reset its scroll status if 
       <path
         d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"
       />
+      <!---->
     </svg>
     
     <!---->
@@ -1048,6 +1075,7 @@ exports[`Tabs > should render a "Tabs" component and reset its scroll status if 
       <path
         d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
       />
+      <!---->
     </svg>
     
     <!---->
@@ -1079,6 +1107,7 @@ exports[`Tabs > should use the id as label if the tab hasn't one and is without 
       <path
         d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"
       />
+      <!---->
     </svg>
     
     <!---->
@@ -1250,6 +1279,7 @@ exports[`Tabs > should use the id as label if the tab hasn't one and is without 
       <path
         d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
       />
+      <!---->
     </svg>
     
     <!---->

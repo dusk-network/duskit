@@ -1,22 +1,21 @@
 .dusk-suspense {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
-.dusk-suspense.dusk-suspense--gap--default {
-  gap: var(--default-gap);
+.dusk-suspense--gap--large {
+  gap: var(--layout-box-relaxed-gap);
 }
 
-.dusk-suspense.dusk-suspense--gap--large {
-  gap: var(--large-gap);
+.dusk-suspense--gap--medium {
+  gap: var(--layout-box-standard-gap);
 }
 
-.dusk-suspense.dusk-suspense--gap--medium {
-  gap: var(--medium-gap);
+.dusk-suspense--gap--small {
+  gap: var(--layout-box-compact-gap);
 }
 
-.dusk-suspense.dusk-suspense--gap--small {
-  gap: var(--small-gap);
+.dusk-suspense__throbber,
+.dusk-suspense__pending-message {
+  align-self: center;
 }
