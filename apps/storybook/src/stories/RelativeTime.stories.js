@@ -18,8 +18,8 @@ export const Static = {
 
 export const AutoRefresh = {
   args: {
-    date: new Date(Date.now() - 2 * 60 * 1000),
+    // date: new Date(Date.now() - 2 * 60 * 1000),
+    date: new Date(),
     autoRefresh: true,
   },
 };
-

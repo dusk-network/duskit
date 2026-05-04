@@ -10,13 +10,11 @@
 
   export let className = undefined;
 
-  /** @type {CardProps["gap"]} */
-  export let gap = "default";
-
-  export let showBody = true;
+  /** @type {CardProps["variant"]} */
+  export let variant = "surface";
 </script>
 
-<Card {as} {className} {gap} {showBody}>
+<Card {as} {className} {variant}>
   <svelte:fragment slot="header">
     <strong>Card header</strong>
   </svelte:fragment>

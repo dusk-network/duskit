@@ -5,8 +5,11 @@ export default {
   component: SuspenseExample,
   argTypes: {
     errorMessage: { control: "text" },
-    errorVariant: { control: "select", options: ["alert", "banner", "details"] },
-    gap: { control: "select", options: ["small", "default", "medium", "large"] },
+    errorVariant: {
+      control: "select",
+      options: ["alert", "banner", "details"],
+    },
+    gap: { control: "select", options: ["small", "medium", "large"] },
     ms: { control: "number" },
     pendingMessage: { control: "text" },
     shouldReject: { control: "boolean" },
@@ -22,7 +25,7 @@ export const Resolves = {
     pendingMessage: "Loading...",
     errorMessage: "Error",
     errorVariant: "alert",
-    gap: "default",
+    gap: "medium",
   },
 };
 
@@ -33,4 +36,3 @@ export const Rejects = {
     errorVariant: "banner",
   },
 };
-

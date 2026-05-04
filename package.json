@@ -27,7 +27,6 @@
   "scripts": {
     "build": "turbo run build",
     "build:storybook": "turbo run build --filter=@duskit/storybook",
-    "build:tokens": "turbo run build --filter=@duskit/design-tokens",
     "changeset": "changeset",
     "checks": "turbo run checks",
     "clean": "turbo run clean && rimraf package-lock.json && rimraf node_modules && rimraf docs",
@@ -53,7 +52,6 @@
     "packages/components",
     "packages/css",
     "packages/date",
-    "packages/design-tokens",
     "packages/encoding",
     "packages/error",
     "packages/http",

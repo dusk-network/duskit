@@ -4,11 +4,9 @@
   --color-attention-subtle: #fff4c2;
   --color-fg-default: var(--on-background-color);
 
+  /**
+   * We override this as the root will act as
+   * the usual main container
+   */
   background-color: var(--background-color);
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }

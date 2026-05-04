@@ -46,14 +46,17 @@
   $: classes = makeClassName([
     "dusk-banner",
     `dusk-banner--variant--${variant}`,
+    title ? "" : "dusk-banner--no-title",
     className,
   ]);
 </script>
 
 <div bind:this={rootElement} {...$$restProps} class={classes}>
   <Icon path={getBannerIconPath()} size="large" className="dusk-banner__icon" />
-  <div>
-    <strong class="dusk-banner__title">{title}</strong>
+  <div class="dusk-banner__content">
+    {#if title}
+      <strong class="dusk-banner__title">{title}</strong>
+    {/if}
     <slot>
       <p>No banner content provided.</p>
     </slot>

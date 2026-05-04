@@ -1,25 +1,16 @@
 .dusk-tabs {
   display: flex;
-  max-width: 100%;
   overflow: hidden;
-  color: var(--on-surface-color);
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  max-inline-size: 100%;
+  gap: var(--interactive-control-compact-gap);
 }
 
 .dusk-button.dusk-icon-button.dusk-tab-scroll-button {
   padding: 0;
   border: 0;
-}
-
-.dusk-button.dusk-icon-button.dusk-tab-scroll-button:enabled:focus {
-  box-shadow: none;
-}
-
-.dusk-button.dusk-icon-button.dusk-tab-scroll-button > .dusk-icon {
-  width: var(--control-icon-size);
-  height: var(--control-icon-size);
 }
 
 .dusk-button.dusk-icon-button.dusk-tab-scroll-button--hidden {
@@ -28,15 +19,15 @@
 
 .dusk-tabs-list {
   display: flex;
-  width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
   white-space: nowrap;
   list-style-type: none;
   cursor: default;
   user-select: none;
-  -ms-overflow-style: none;
+  inline-size: 100%;
+  overscroll-behavior-x: contain;
   scrollbar-width: none;
-  overscroll-behavior: contain;
+  -ms-overflow-style: none;
 }
 
 .dusk-tabs-list::-webkit-scrollbar {
@@ -44,56 +35,45 @@
 }
 
 .dusk-tab-item {
+  --_tab-bg-color: var(--interactive-tab-bg-color);
+  --_tab-text-color: var(--interactive-tab-text-color);
+
   position: relative;
   display: inline-flex;
-  padding: var(--control-padding);
-  font-size: 1.125rem;
-  line-height: 1;
-  border-radius: var(--control-border-radius-size)
-    var(--control-border-radius-size) 0 0;
-  flex: 50%;
   align-items: center;
   justify-content: center;
-  gap: var(--small-gap);
-}
-
-.dusk-tab-item,
-.dusk-tab-item > * {
-  transition-delay: 0s;
-  transition-timing-function: ease-in-out;
-  transition-duration: 0.4s;
-  transition-property: background-color, border-color, color, transform;
-}
-
-.dusk-tab-item > .dusk-tab-label {
-  display: none;
-}
-
-.dusk-tab-item--selected > .dusk-tab-label,
-.dusk-tab-item > span:only-child {
-  display: block;
+  flex: 1 1 0%;
+  gap: var(--interactive-control-standard-gap);
+  padding-block: var(--interactive-control-standard-padding-block);
+  padding-inline: var(--interactive-control-standard-padding-inline);
+  font-size: var(--interactive-control-standard-text-size);
+  line-height: inherit;
+  color: var(--_tab-text-color);
+  background-color: var(--_tab-bg-color);
+  border-end-end-radius: 0;
+  border-end-start-radius: 0;
+  border-start-end-radius: var(
+    --interactive-control-border-radius-rounded-size
+  );
+  border-start-start-radius: var(
+    --interactive-control-border-radius-rounded-size
+  );
+  transition:
+    background-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
 }
 
 .dusk-tab-item:focus-visible {
-  color: var(--secondary-color);
-  outline: 0 none;
+  outline: var(--interactive-control-focus-ring-outline);
+  outline-offset: var(--interactive-control-focus-ring-outline-offset);
 }
 
-.dusk-tab-item:hover:not(.dusk-tab-item--selected),
-.dusk-tab-item:focus-visible > * {
-  transform: translateY(-0.3rem);
+.dusk-tab-item:hover:not(.dusk-tab-item--selected) {
+  --_tab-bg-color: var(--interactive-tab-hover-bg-color);
+  --_tab-text-color: var(--interactive-tab-hover-text-color);
 }
 
 .dusk-tab-item--selected {
-  color: var(--secondary-color);
-  background-color: var(--surface-color);
-}
-
-.dusk-tab-item--selected > .dusk-tab-label {
-  color: var(--primary-color);
-}
-
-.dusk-tab-item > .dusk-icon {
-  width: var(--control-icon-size);
-  height: var(--control-icon-size);
+  --_tab-bg-color: var(--interactive-tab-selected-bg-color);
+  --_tab-text-color: var(--interactive-tab-selected-text-color);
 }

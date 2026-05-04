@@ -1,42 +1,57 @@
 .dusk-switch {
-  --hover-scale: 1.1;
+  --_hover-scale: 1.1;
+  --_switch-bg-color: var(--interactive-toggle-off-color);
+  --_switch-border-color: var(--interactive-toggle-off-border-color);
+  --_switch-mark-color: var(--interactive-toggle-off-mark-color);
+  --_switch-mark-scale: 1;
+  --_switch-mark-translate: 0%;
+  --_switch-track-inner-size: calc(
+    var(--interactive-toggle-standard-indicator-size) -
+      (var(--interactive-toggle-track-offset) * 2) -
+      (var(--interactive-control-border-width) * 2)
+  );
 
-  width: 3rem;
-  height: 1.5rem;
+  block-size: var(--_switch-track-inner-size);
+  inline-size: calc(var(--_switch-track-inner-size) * 2);
   box-sizing: content-box;
-  padding: 0.25rem;
-  background-color: var(--surface-color);
-  border-color: var(--control-border-color);
+  padding: var(--interactive-toggle-track-offset);
+  background-color: var(--_switch-bg-color);
+  border-color: var(--_switch-border-color);
   border-style: solid;
-  border-width: var(--control-border-size);
-  border-radius: var(--control-border-radius-size);
+  border-width: var(--interactive-control-border-width);
+  border-radius: var(--interactive-control-border-radius-pill-size);
+}
+
+.dusk-switch--checked {
+  --_switch-border-color: var(--interactive-toggle-on-border-color);
+  --_switch-bg-color: var(--interactive-toggle-on-color);
+  --_switch-mark-color: var(--interactive-toggle-on-mark-color);
+  --_switch-mark-translate: 100%;
 }
 
 .dusk-switch::after {
-  display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
+  aspect-ratio: 1;
+  block-size: 100%;
+  display: block;
   content: "";
-  background-color: var(--primary-color);
-  border-radius: var(--control-border-radius-size);
+  background-color: var(--_switch-mark-color);
+  border-radius: var(--interactive-control-border-radius-pill-size);
   transition: transform 0.3s ease-in-out 0s;
+  transform: translateX(var(--_switch-mark-translate))
+    scale(var(--_switch-mark-scale));
+  transform-origin: center;
 }
 
-.dusk-switch:hover::after {
-  transform: scale(var(--hover-scale));
+.dusk-switch:hover {
+  --_switch-mark-scale: 1.1;
 }
 
-.dusk-switch--checked::after {
-  background-color: var(--secondary-color);
-  transform: translateX(100%);
-}
-
-.dusk-switch--checked:hover::after {
-  transform: translateX(100%) scale(var(--hover-scale));
-}
-
-.dusk-switch--disabled {
+.dusk-switch[aria-disabled="true"] {
   pointer-events: none;
-  cursor: not-allowed;
   opacity: 0.5;
+}
+
+.dusk-switch:not([aria-disabled="true"]):focus-visible {
+  outline: var(--interactive-control-focus-ring-outline);
+  outline-offset: var(--interactive-control-focus-ring-outline-offset);
 }

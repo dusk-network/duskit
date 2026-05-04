@@ -1,0 +1,160 @@
+:root {
+  /* ------------------------------------------------------------
+   Interactive Anatomy (shared physical metrics)
+  ------------------------------------------------------------ */
+
+  /* Heights */
+  --interactive-control-compact-min-block-size: var(--density-target-sm);
+  --interactive-control-standard-min-block-size: var(--density-target-md);
+
+  /* Paddings */
+  --interactive-control-compact-padding-block: var(--space-xs);
+  --interactive-control-standard-padding-block: var(--space-sm);
+  --interactive-control-compact-padding-inline: var(--space-sm);
+  --interactive-control-standard-padding-inline: var(--space-md);
+
+  /* Gaps */
+  --interactive-control-compact-gap: var(--space-xs);
+  --interactive-control-relaxed-gap: var(--space-lg);
+  --interactive-control-standard-gap: var(--space-sm);
+
+  /* Typography */
+  --interactive-control-compact-text-size: var(--text-body-sm);
+  --interactive-control-standard-text-size: var(--text-body-md);
+
+  /* Borders & Box */
+  --interactive-control-border-width: var(--border-width-sm);
+  --interactive-control-border-radius-rounded-size: var(--border-radius-md);
+  --interactive-control-border-radius-slight-size: var(--border-radius-sm);
+  --interactive-control-border-radius-pill-size: var(--border-radius-pill);
+
+  /* Focus ring */
+  --interactive-control-focus-ring-outline: var(--focus-ring-width)
+    var(--focus-ring-style) var(--focus-ring-color);
+  --interactive-control-focus-ring-outline-offset: var(--focus-ring-offset);
+
+  /* ------------------------------------------------------------
+   Interactive Actions (e.g. button)
+  ------------------------------------------------------------ */
+
+  /* Primary action  */
+  --interactive-action-primary-bg-color: var(--action-primary-color);
+  --interactive-action-primary-bg-hover-color: var(
+    --action-primary-strong-color
+  );
+  --interactive-action-primary-border-color: var(--action-primary-strong-color);
+  --interactive-action-primary-border-hover-color: transparent;
+  --interactive-action-primary-text-color: var(--on-action-primary-color);
+  --interactive-action-primary-text-hover-color: var(
+    --on-action-primary-strong-color
+  );
+
+  /* Secondary action  */
+  --interactive-action-secondary-bg-color: var(--action-secondary-color);
+  --interactive-action-secondary-bg-hover-color: var(
+    --action-secondary-strong-color
+  );
+  --interactive-action-secondary-border-color: var(
+    --action-secondary-strong-color
+  );
+  --interactive-action-secondary-border-hover-color: transparent;
+  --interactive-action-secondary-text-color: var(--on-action-secondary-color);
+  --interactive-action-secondary-text-hover-color: var(
+    --on-action-secondary-strong-color
+  );
+
+  /* Tertiary action  */
+  --interactive-action-tertiary-bg-color: var(--action-tertiary-color);
+  --interactive-action-tertiary-bg-hover-color: var(
+    --action-tertiary-strong-color
+  );
+  --interactive-action-tertiary-border-color: var(
+    --action-tertiary-strong-color
+  );
+  --interactive-action-tertiary-border-hover-color: transparent;
+  --interactive-action-tertiary-text-color: var(--on-action-tertiary-color);
+  --interactive-action-tertiary-text-hover-color: var(
+    --on-action-tertiary-strong-color
+  );
+
+  /* Naked action  */
+  --interactive-action-naked-bg-color: transparent;
+  --interactive-action-naked-bg-hover-color: transparent;
+  --interactive-action-naked-border-color: transparent;
+  --interactive-action-naked-border-hover-color: transparent;
+  --interactive-action-naked-text-color: currentcolor;
+  --interactive-action-naked-text-hover-color: var(--text-accent-primary-color);
+
+  /* ------------------------------------------------------------
+   Interactive Fields (e.g. select, textbox)
+  ------------------------------------------------------------ */
+
+  /* Resting */
+  --interactive-field-bg-color: var(--surface-embedded-color);
+  --interactive-field-border-color: var(--neutral-strong-color);
+  --interactive-field-text-color: var(--on-surface-embedded-color);
+
+  /* Invalid */
+  --interactive-field-invalid-bg-color: var(--status-error-subtle-color);
+  --interactive-field-invalid-border-color: var(--status-error-strong-color);
+  --interactive-field-invalid-text-color: var(--on-status-error-subtle-color);
+
+  /* ------------------------------------------------------------
+   Toggle Surfaces (e.g. checkbox, radio, switch)
+  ------------------------------------------------------------ */
+
+  /* Indicator Sizes */
+  --interactive-toggle-compact-indicator-size: var(--icon-size-md);
+  --interactive-toggle-standard-indicator-size: var(--icon-size-lg);
+
+  /* Offsets */
+  --interactive-toggle-track-offset: var(--offset-sm);
+
+  /* Colors */
+  --interactive-toggle-off-border-color: var(--neutral-strong-color);
+  --interactive-toggle-off-color: var(--surface-embedded-color);
+  --interactive-toggle-off-mark-color: var(--on-surface-embedded-color);
+  --interactive-toggle-on-border-color: var(--action-primary-strong-color);
+  --interactive-toggle-on-color: var(--action-primary-color);
+  --interactive-toggle-on-mark-color: var(--on-action-primary-color);
+
+  /* ------------------------------------------------------------
+   Selection states (e.g. segmented controls, active list items)
+  ------------------------------------------------------------ */
+
+  --interactive-selection-bg-color: var(--action-primary-color);
+  --interactive-selection-text-color: var(--on-action-primary-color);
+  --interactive-selection-hover-bg-color: var(--surface-color);
+  --interactive-selection-hover-text-color: var(--on-surface-color);
+
+  /* ------------------------------------------------------------
+   Tabs
+  ------------------------------------------------------------ */
+
+  --interactive-tab-bg-color: transparent;
+  --interactive-tab-text-color: inherit;
+  --interactive-tab-hover-bg-color: var(--action-primary-subtle-color);
+  --interactive-tab-hover-text-color: var(--on-action-primary-subtle-color);
+  --interactive-tab-selected-bg-color: var(--action-primary-color);
+  --interactive-tab-selected-text-color: var(--on-action-primary-color);
+
+  /* ------------------------------------------------------------
+   Anchors
+  ------------------------------------------------------------ */
+
+  /* Colors */
+  --interactive-anchor-text-active-color: var(--text-accent-secondary-color);
+  --interactive-anchor-text-color: var(--text-accent-primary-color);
+  --interactive-anchor-text-hover-color: var(--text-accent-primary-color);
+  --interactive-anchor-text-visited-color: var(--text-accent-secondary-color);
+
+  /* Decoration Geometry */
+  --interactive-anchor-decoration-color: currentcolor;
+  --interactive-anchor-decoration-offset: 0.15em;
+  --interactive-anchor-decoration-hover-offset: 0.3em;
+  --interactive-anchor-decoration-thickness: var(--border-width-sm);
+
+  /* Decoration Behavior */
+  --interactive-anchor-decoration-hover-line: underline;
+  --interactive-anchor-decoration-line: underline;
+}

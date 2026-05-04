@@ -48,6 +48,27 @@
     type="toggle"
     variant="tertiary"
   />
+  <Button
+    data-tooltip-id={id}
+    data-tooltip-text="Hello from a tooltip"
+    data-tooltip-type="warning"
+    text="Warning"
+    variant="secondary"
+  />
+  <Button
+    data-tooltip-id={id}
+    data-tooltip-text="Hello from a tooltip"
+    data-tooltip-type="success"
+    text="Success"
+    variant="secondary"
+  />
+  <Button
+    data-tooltip-id={id}
+    data-tooltip-text="A quite long text to verify word breaking and sundries. Really: this text is quite long and it shouldn't even be in a tooltip."
+    data-tooltip-type="success"
+    text="Long text"
+    variant="tertiary"
+  />
 </div>
 
 <Tooltip

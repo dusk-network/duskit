@@ -22,7 +22,7 @@ export const Default = {
   args: {
     path: mdiAlertCircleOutline,
     size: "default",
-    style: "color: var(--error-color);",
+    style: "color: var(--status-error-color);",
   },
 };
 
@@ -30,7 +30,7 @@ export const Large = {
   args: {
     path: mdiAlertCircleOutline,
     size: "large",
-    style: "color: var(--success-color);",
+    style: "color: var(--status-success-color);",
   },
 };
 
@@ -38,6 +38,6 @@ export const Small = {
   args: {
     path: mdiAlertCircleOutline,
     size: "small",
-    style: "color: var(--info-color);",
+    style: "color: var(--status-info-color);",
   },
 };

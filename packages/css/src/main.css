@@ -1,0 +1,49 @@
+@layer base, categories, utilities;
+
+/**
+ * 0 - PRIMITIVES
+ *
+ * Raw values, math, and hex codes. No semantic meaning yet.
+ */
+@import url("./0-primitives/colors.css");
+@import url("./0-primitives/sizes.css");
+
+/**
+ * 1 - THEME (SEMANTICS)
+ *
+ * Contextual tokens mapping to primitives (e.g., surface colors, spaces).
+ * Can safely consume tokens from "0 - PRIMITIVES".
+ */
+@import url("./1-theme/theme.css");
+
+/**
+ * 2 - BASE & RESET
+ *
+ * Naked HTML tag styling and browser normalization.
+ * Can safely consume tokens from "1 - THEME (SEMANTICS)".
+ */
+@import url("./2-base/fonts.css");
+@import url("./2-base/normalize.css") layer(base);
+@import url("./2-base/base.css") layer(base);
+
+/**
+ * 3 - CATEGORIES / COMPONENTS
+ *
+ * Specific UI patterns and state management.
+ * Can safely consume tokens from "1 - THEME (SEMANTICS)".
+ */
+@import url("./3-categories/display.css") layer(categories);
+@import url("./3-categories/interactive.css") layer(categories);
+@import url("./3-categories/layout.css") layer(categories);
+@import url("./3-categories/feedback.css") layer(categories);
+@import url("./3-categories/viewport.css") layer(categories);
+
+/**
+ * 4 - UTILITIES
+ *
+ * Strictly quarantined, high-specificity functional classes (e.g., a11y).
+ * This is NOT a utility-first toolkit for ad-hoc styling patches.
+ * Visual overrides and spatial hacks are explicitly forbidden here to
+ * prevent architectural decay.
+ */
+@import url("./4-utilities/a11y.css") layer(utilities);

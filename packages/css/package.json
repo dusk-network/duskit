@@ -7,6 +7,11 @@
   "bugs": {
     "url": "https://github.com/dusk-network/duskit/issues"
   },
+  "exports": {
+    "./main.css": "./src/main.css",
+    "./src/*": "./src/*",
+    "./fonts/*": "./fonts/*"
+  },
   "files": [
     "src/**/*.css",
     "fonts/**/*"
@@ -19,24 +24,41 @@
     "directory": "packages/css"
   },
   "scripts": {
-    "checks": "npm run format:check && npm run lint",
+    "checks": "npm run format:check && npm run lint && npm run typecheck && npm test",
     "clean": "rimraf node_modules",
-    "format:check": "prettier . --check",
     "format": "prettier . --write",
-    "lint": "stylelint --quiet --rd 'src/**/*.css'",
-    "lint:fix": "stylelint --quiet --rd 'src/**/*.css' --fix"
+    "format:check": "prettier . --check",
+    "lint": "npm run lint:code && npm run lint:styles",
+    "lint:code": "eslint .",
+    "lint:fix": "eslint . --fix && stylelint --quiet --rd 'src/**/*.css' --fix",
+    "lint:styles": "stylelint --quiet --rd 'src/**/*.css'",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --project tsconfig.json",
+    "typecheck:watch": "tsc --watch --project tsconfig.json"
   },
   "type": "module",
   "version": "0.2.0",
   "devDependencies": {
+    "@dusk-network/eslint-config": "4.0.1",
     "@dusk-network/prettier-config": "1.1.0",
     "@dusk-network/stylelint-config": "1.0.6",
+    "@eslint/js": "9.39.4",
+    "@vitest/eslint-plugin": "1.6.15",
+    "colorjs.io": "0.5.2",
+    "eslint": "9.39.4",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-import-resolver-typescript": "4.4.4",
+    "globals": "17.4.0",
+    "postcss": "8.5.14",
     "prettier": "3.8.1",
     "rimraf": "6.1.3",
     "stylelint": "16.26.1",
     "stylelint-config-standard": "39.0.1",
     "stylelint-no-unsupported-browser-features": "8.1.1",
     "stylelint-order": "8.1.1",
-    "stylelint-selector-bem-pattern": "4.0.1"
+    "stylelint-selector-bem-pattern": "4.0.1",
+    "typescript": "5.9.3",
+    "vitest": "4.1.3"
   }
 }

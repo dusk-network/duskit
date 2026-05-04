@@ -8,57 +8,57 @@
  * with `border: collapse` and the bottom border
  * applied to the `thead`.
  */
-.duskit-table {
+.dusk-table {
   width: 100%;
   border-spacing: 0;
   border-collapse: separate;
 }
 
-.duskit-table__head-cell {
-  border-bottom: 0.0625rem solid var(--on-background-color);
+.dusk-table__head-cell {
+  text-align: start;
+  border-bottom: var(--layout-box-border-width) solid currentcolor;
 }
 
-.duskit-table__row:nth-child(even) > .duskit-table__cell {
-  background-color: var(--background-color-alt);
+.dusk-table__row:nth-child(even) > .dusk-table__cell {
+  color: var(--on-surface-embedded-color);
+  background-color: var(--surface-embedded-color);
 }
 
-.duskit-table__head-cell--hidden,
-.duskit-table__cell--hidden {
+.dusk-table__head-cell--hidden,
+.dusk-table__cell--hidden {
   display: none;
 }
 
-.duskit-table__head-cell-text,
-.duskit-table__sort-button .dusk-button__text,
-.duskit-table__cell {
-  padding: var(--control-small-padding);
+.dusk-table__head-cell-text,
+.dusk-table__sort-button .dusk-button__text,
+.dusk-table__cell {
+  padding-block: var(--display-box-compact-padding-block);
+  padding-inline: var(--display-box-compact-padding-inline);
 }
 
-.duskit-table__head-cell-text {
-  display: inline-block;
+.dusk-table__head-cell-text,
+.dusk-table__sort-button .dusk-button__text {
+  font-family: var(--display-label-text-family);
+  font-size: var(--display-label-text-size);
+  font-weight: bold;
+  letter-spacing: var(--display-label-text-letter-spacing);
+}
+
+.dusk-table__cell {
+  font-family: var(--display-text-family);
+  font-size: var(--display-text-size);
+  letter-spacing: var(--display-text-letter-spacing);
+  font-variant-numeric: var(--display-font-variant-numeric);
+}
+
+.dusk-table__head-cell-text {
+  display: block;
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.duskit-table__sort-button {
-  width: 100%;
-  padding: 0;
-  font-weight: bold;
-  color: var(--on-background-color);
-  text-transform: none;
-  background-color: transparent;
-  border: 0;
-}
-
-.duskit-table__sort-button,
-.duskit-table__sort-button:enabled:hover,
-.duskit-table__sort-button:enabled:active {
-  background-color: transparent;
-}
-
-.duskit-table__sort-button:enabled:hover,
-.duskit-table__sort-button:enabled:active {
-  color: var(--secondary-color);
-  scale: unset;
+.dusk-table__sort-button:enabled:active {
+  --_button-scale: 1;
 }

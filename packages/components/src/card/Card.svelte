@@ -13,11 +13,8 @@
   /** @type {CardProps["className"]} */
   export let className = undefined;
 
-  /** @type {CardProps["gap"]} */
-  export let gap = "default";
-
-  /** @type {CardProps["showBody"]} */
-  export let showBody = true;
+  /** @type {CardProps["variant"]} */
+  export let variant = "surface";
 
   /** @type {HTMLElement} */
   let rootElement;
@@ -26,7 +23,7 @@
 
   $: classes = makeClassName([
     "dusk-card",
-    `dusk-card--gap--${gap}`,
+    `dusk-card--variant--${variant}`,
     className,
   ]);
 </script>
@@ -38,18 +35,20 @@
   class={classes}
 >
   {#if $$slots.header}
-    <div class="dusk-card__header-container">
+    <header class="dusk-card__header">
       <slot name="header" />
-    </div>
+    </header>
   {/if}
-  {#if showBody}
-    <div class="dusk-card__body-container">
+
+  {#if $$slots.default}
+    <div class="dusk-card__body">
       <slot />
     </div>
   {/if}
+
   {#if $$slots.footer}
-    <div class="dusk-card__footer-container">
+    <footer class="dusk-card__footer">
       <slot name="footer" />
-    </div>
+    </footer>
   {/if}
 </svelte:element>

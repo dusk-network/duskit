@@ -35,11 +35,13 @@
 
 {#if as === "g"}
   <g bind:this={rootElement} {...commonAttributes}>
-    <rect />
+    <rect class="dusk-icon__bounding-box" />
     <path d={path} />
+    <slot />
   </g>
 {:else}
   <svg bind:this={rootElement} {...commonAttributes} {role} viewBox="0 0 24 24">
     <path d={path} />
+    <slot />
   </svg>
 {/if}

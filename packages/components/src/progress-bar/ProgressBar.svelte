@@ -8,7 +8,6 @@
   import { tweened } from "svelte/motion";
 
   import { makeClassName } from "@duskit/string";
-  import { DEFAULT_PROGRESS_BAR_MOTION_DURATION } from "./motion";
 
   import "./ProgressBar.css";
 
@@ -35,6 +34,8 @@
 
   export const getRootElement = () => rootElement;
 
+  const DEFAULT_PROGRESS_BAR_MOTION_DURATION = 400;
+
   /** @type {Record<`aria-${string}`, number> | null} */
   let ariaProps;
 
@@ -43,7 +44,6 @@
   $: dir = direction ?? "ltr";
   $: classes = makeClassName([
     "dusk-progress-bar",
-    `dusk-progress-bar--${dir}`,
     `dusk-progress-bar--size--${size}`,
     className,
   ]);

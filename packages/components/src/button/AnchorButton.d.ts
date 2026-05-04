@@ -1,7 +1,7 @@
 import type { SvelteComponent } from "svelte";
 import type { HTMLAnchorAttributes } from "svelte/elements";
 
-import type { ControlledHtmlAttributes, IconProp } from "../dusk.components";
+import type { ControlledHtmlAttributes, IconOptions } from "../dusk.components";
 import type { Anchor } from "../..";
 import type { ButtonSize, ButtonVariant } from "./Button";
 
@@ -12,7 +12,7 @@ export interface AnchorButtonProps extends ControlledHtmlAttributes<
   className?: string;
   href: string;
   disabled?: boolean;
-  icon?: IconProp;
+  icon?: IconOptions;
   size?: ButtonSize;
   text?: string;
   variant?: ButtonVariant;

@@ -1,0 +1,59 @@
+:root {
+  /* --- Surfaces & Backgrounds --- */
+  --layout-surface-bg-color: var(--surface-color);
+  --layout-surface-text-color: var(--on-surface-color);
+  --layout-surface-layer-bg-color: var(--surface-layer-color);
+  --layout-surface-layer-text-color: var(--on-surface-layer-color);
+
+  /* --- Layout box anatomy (generic) --- */
+  --layout-box-radius-pill-size: var(--border-radius-pill);
+  --layout-box-radius-rounded-size: var(--border-radius-md);
+  --layout-box-radius-slight-size: var(--border-radius-sm);
+  --layout-box-border-width: var(--border-width-sm);
+
+  /* Compact padding (e.g. dense lists, toolbars) */
+  --layout-box-compact-padding-block: var(--space-xxs);
+  --layout-box-compact-padding-inline: var(--space-sm);
+
+  /* Standard padding (e.g. modals, drawers, feeds) */
+  --layout-box-standard-padding-block: var(--space-md);
+  --layout-box-standard-padding-inline: var(--space-md);
+
+  /* Inner spacing (e.g. gap between header and content) */
+  --layout-box-compact-gap: var(--space-sm);
+  --layout-box-relaxed-gap: var(--space-lg);
+  --layout-box-standard-gap: var(--space-md);
+
+  /* --- Typography --- */
+
+  /* Headings for large structural areas (e.g. modal headers) */
+  --layout-heading-text-family: var(--sans-font-family);
+  --layout-heading-text-size: var(--text-heading-sm);
+  --layout-heading-text-letter-spacing: normal;
+
+  /* Titles for secondary areas or sub-components */
+  --layout-title-text-family: var(--sans-font-family);
+  --layout-title-text-size: var(--text-heading-xs);
+  --layout-title-text-letter-spacing: normal;
+
+  /*
+   * Short structural captions and secondary descriptive text within
+   * layout containers (e.g., panel descriptions, generic layout helpers)
+   */
+  --layout-label-text-family: var(--sans-font-family);
+  --layout-label-text-size: var(--text-body-sm);
+  --layout-label-text-letter-spacing: normal;
+
+  /*
+   * Technical layout data, system counters, or inline technical fragments
+   * requiring monospace alignment (e.g., layout counters, timestamp metadata)
+   */
+  --layout-raw-text-family: var(--mono-font-family);
+  --layout-raw-text-size: var(--text-body-sm);
+  --layout-raw-text-letter-spacing: 0.05em;
+
+  /* Standard body text for content areas */
+  --layout-body-text-family: var(--sans-font-family);
+  --layout-body-text-size: var(--text-body-md);
+  --layout-body-text-letter-spacing: normal;
+}

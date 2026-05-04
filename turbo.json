@@ -7,14 +7,12 @@
       "outputs": ["dist/**", "storybook-static/**"]
     },
     "checks": {
-      "dependsOn": ["@duskit/design-tokens#build"],
       "outputLogs": "errors-only"
     },
     "clean": {
       "cache": false
     },
     "dev": {
-      "dependsOn": ["@duskit/design-tokens#build"],
       "cache": false,
       "persistent": true
     },

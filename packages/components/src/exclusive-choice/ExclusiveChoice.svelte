@@ -4,7 +4,6 @@
   /** @typedef {import("./ExclusiveChoice").ExclusiveChoiceProps} ExclusiveChoiceProps */
 
   import { isType } from "lamb";
-
   import { makeClassName, randomUUID } from "@duskit/string";
 
   import "./ExclusiveChoice.css";

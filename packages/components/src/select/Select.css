@@ -1,41 +1,72 @@
 .dusk-select {
+  --_select-bg-color: var(--interactive-field-bg-color);
+  --_select-border-color: var(--interactive-field-border-color);
+  --_select-text-color: var(--interactive-field-text-color);
+
+  /*
+   * SYSTEM EXCEPTION: 0.4rem is a hardcoded value chosen for the
+   * specific geometry of this chevron gradient. It deliberately
+   * bypasses the token scale purely for optical balance.
+   */
+  --_chevron-stroke: 0.4rem;
+  --_chevron-width: calc(var(--_chevron-stroke) * 2);
+  --_chevron-offset: var(--interactive-control-standard-padding-inline);
+
+  /* Reserved space is the icon width plus a logical gap from the text */
+  --_icon-reserved-space: calc(var(--_chevron-width) + var(--space-sm));
+
   display: inline-block;
-  padding: var(--control-padding);
-  padding-right: 2.25rem;
+  min-block-size: var(--interactive-control-standard-min-block-size);
+  padding-block: var(--interactive-control-standard-padding-block);
+  padding-inline-start: var(--interactive-control-standard-padding-inline);
+  padding-inline-end: calc(
+    var(--interactive-control-standard-padding-inline) +
+      var(--_icon-reserved-space)
+  );
   font-family: inherit;
-  font-size: var(--control-font-size);
+  font-size: var(--interactive-control-standard-text-size);
+  line-height: inherit;
   letter-spacing: inherit;
-  background-color: var(--non-button-control-bg-color);
+  background-color: var(--_select-bg-color);
   background-image:
-    linear-gradient(
-      45deg,
-      transparent 50%,
-      var(--non-button-control-text-color) 50%
-    ),
-    linear-gradient(
-      135deg,
-      var(--non-button-control-text-color) 50%,
-      transparent 50%
-    );
+    linear-gradient(45deg, transparent 50%, var(--_select-text-color) 50%),
+    linear-gradient(135deg, var(--_select-text-color) 50%, transparent 50%);
   background-repeat: no-repeat;
   background-position:
-    calc(100% - 1.4rem) 50%,
-    calc(100% - 1rem) 50%;
+    calc(100% - calc(var(--_chevron-offset) + var(--_chevron-stroke))) 50%,
+    calc(100% - var(--_chevron-offset)) 50%;
   background-size:
-    0.4rem 0.4rem,
-    0.4rem 0.4rem;
-  border-color: var(--control-border-color);
+    var(--_chevron-stroke) var(--_chevron-stroke),
+    var(--_chevron-stroke) var(--_chevron-stroke);
+  border-color: var(--_select-border-color);
   border-style: solid;
-  border-width: var(--control-border-size);
-  border-radius: var(--control-border-radius-size);
+  border-width: var(--interactive-control-border-width);
+  border-radius: var(--interactive-control-border-radius-rounded-size);
   appearance: none;
 }
 
 .dusk-select,
 .dusk-select option {
-  color: var(--non-button-control-text-color);
+  color: var(--_select-text-color);
 }
 
 .dusk-select:disabled {
   opacity: 0.5;
+}
+
+.dusk-select:enabled:focus-visible {
+  outline: var(--interactive-control-focus-ring-outline);
+  outline-offset: var(--interactive-control-focus-ring-outline-offset);
+}
+
+/*
+ * Fallback for RTL layouts.
+ * Background-position logical properties are not widely supported yet.
+ * This anchors the chevron to the left edge instead of the right.
+ */
+.dusk-select[dir="rtl"],
+[dir="rtl"] .dusk-select {
+  background-position:
+    var(--_chevron-offset) 50%,
+    calc(var(--_chevron-offset) + var(--_chevron-stroke)) 50%;
 }

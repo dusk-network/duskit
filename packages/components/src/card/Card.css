@@ -1,33 +1,38 @@
 .dusk-card {
-  padding: 0.5rem 0;
-  color: var(--on-surface-color);
-  background-color: var(--surface-color);
-  border-radius: var(--control-border-radius-size);
-}
-
-.dusk-card__header-container,
-.dusk-card__footer-container {
-  padding: 0.5rem 1.375rem;
-}
-
-.dusk-card__body-container {
   display: flex;
-  padding: 1rem 1.375rem;
+  color: var(--_card-text-color);
   flex-direction: column;
+  background-color: var(--_card-bg-color);
+  border-radius: var(--layout-box-radius-rounded-size);
+  gap: var(--layout-box-standard-gap);
+  padding-block: var(--layout-box-standard-padding-block);
+  padding-inline: var(--layout-box-standard-padding-inline);
 }
 
-.dusk-card--gap--small > .dusk-card__body-container {
-  gap: var(--small-gap);
+.dusk-card--variant--layer {
+  --_card-bg-color: var(--layout-surface-layer-bg-color);
+  --_card-text-color: var(--layout-surface-layer-text-color);
 }
 
-.dusk-card--gap--default > .dusk-card__body-container {
-  gap: var(--default-gap);
+.dusk-card--variant--surface {
+  --_card-bg-color: var(--layout-surface-bg-color);
+  --_card-text-color: var(--layout-surface-text-color);
 }
 
-.dusk-card--gap--medium > .dusk-card__body-container {
-  gap: var(--medium-gap);
+.dusk-card__header {
+  font-family: var(--layout-heading-text-family);
+  font-size: var(--layout-heading-text-size);
+  letter-spacing: var(--layout-heading-text-letter-spacing);
 }
 
-.dusk-card--gap--large > .dusk-card__body-container {
-  gap: var(--large-gap);
+.dusk-card__body {
+  font-family: var(--layout-body-text-family);
+  font-size: var(--layout-body-text-size);
+  letter-spacing: var(--layout-body-text-letter-spacing);
+}
+
+.dusk-card__footer {
+  font-family: var(--layout-label-text-family);
+  font-size: var(--layout-label-text-size);
+  letter-spacing: var(--layout-label-text-letter-spacing);
 }

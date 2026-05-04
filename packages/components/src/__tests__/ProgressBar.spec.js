@@ -2,13 +2,14 @@ import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render } from "@testing-library/svelte";
 
 import { getAsHTMLElement } from "@duskit/test-helpers";
-import { DEFAULT_PROGRESS_BAR_MOTION_DURATION } from "../progress-bar/motion";
 
 import { ProgressBar } from "../..";
 
 /** @type {(x: number) => (n: number) => number} */
 const nextMultipleOf = (x) => (n) => Math.ceil(n / x) * x;
 const nextMultipleOf16 = nextMultipleOf(16);
+
+const DEFAULT_PROGRESS_BAR_MOTION_DURATION = 400;
 
 /**
  * Vitest's fake timers simulate requestAnimationFrame at exactly 60fps (every 16ms).
@@ -66,20 +67,14 @@ describe("ProgressBar", () => {
     const element = component.getRootElement();
 
     expect(element).toHaveAttribute("dir", "ltr");
-    expect(element).toHaveClass("dusk-progress-bar--ltr");
-    expect(element).not.toHaveClass("dusk-progress-bar--rtl");
 
     await rerender({ direction: "rtl" });
 
     expect(element).toHaveAttribute("dir", "rtl");
-    expect(element).not.toHaveClass("dusk-progress-bar--ltr");
-    expect(element).toHaveClass("dusk-progress-bar--rtl");
 
     await rerender({ direction: "ltr" });
 
     expect(element).toHaveAttribute("dir", "ltr");
-    expect(element).toHaveClass("dusk-progress-bar--ltr");
-    expect(element).not.toHaveClass("dusk-progress-bar--rtl");
   });
 
   it.each(sizes)(

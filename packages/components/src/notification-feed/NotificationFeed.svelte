@@ -56,7 +56,7 @@
       data-tooltip-id={tooltipId}
       data-tooltip-text="Clear all notifications"
       disabled={!hasNotifications}
-      icon={{ path: mdiMessageOffOutline, size: "default" }}
+      icon={{ path: mdiMessageOffOutline }}
       on:click={() => notificationStore.clearPanels()}
       size="small"
       variant="secondary"
@@ -68,7 +68,7 @@
       data-tooltip-id={tooltipId}
       data-tooltip-text="Mark all as read"
       disabled={!hasNotifications}
-      icon={{ path: mdiMessageTextFastOutline, size: "default" }}
+      icon={{ path: mdiMessageTextFastOutline }}
       on:click={() => notificationStore.markAllAsRead()}
       size="small"
       variant="secondary"
@@ -82,7 +82,7 @@
           data-tooltip-id={tooltipId}
           data-tooltip-text={action.label}
           {disabled}
-          icon={{ path: action.iconPath, size: "default" }}
+          icon={{ path: action.iconPath }}
           on:click={action.onClick}
           size="small"
           variant="secondary"

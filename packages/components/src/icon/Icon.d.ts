@@ -14,8 +14,12 @@ export type IconProps<T extends "g" | "svg" = "svg"> = ControlledHtmlAttributes<
   size?: IconSize;
 };
 
+interface IconSlots {
+  default: {};
+}
+
 export default class Icon<
   T extends "g" | "svg" = "svg",
-> extends SvelteComponent<IconProps<T>, {}, {}> {
+> extends SvelteComponent<IconProps<T>, {}, IconSlots> {
   getRootElement(): SVGElementTagNameMap[T];
 }

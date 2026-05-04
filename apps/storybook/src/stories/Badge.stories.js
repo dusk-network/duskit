@@ -15,6 +15,6 @@ export default {
 export const Default = {
   args: {
     text: "Badge text",
-    variant: "neutral",
+    variant: "info",
   },
 };

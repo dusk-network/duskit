@@ -1,20 +1,20 @@
 import type { SvelteComponent } from "svelte";
 import type { HTMLButtonAttributes } from "svelte/elements";
 
-import type { ControlledHtmlAttributes, IconProp } from "../dusk.components";
+import type { ControlledHtmlAttributes, IconOptions } from "../dusk.components";
 
 export type ButtonSize = "default" | "small";
 
 export type ButtonType = "button" | "reset" | "submit" | "toggle";
 
-export type ButtonVariant = "primary" | "secondary" | "tertiary";
+export type ButtonVariant = "naked" | "primary" | "secondary" | "tertiary";
 
 export interface ButtonProps extends ControlledHtmlAttributes<
   HTMLButtonAttributes,
   "aria-pressed" | "type"
 > {
   className?: string;
-  icon?: IconProp;
+  icon?: IconOptions;
   pressed?: boolean;
   size?: ButtonSize;
   text?: string;

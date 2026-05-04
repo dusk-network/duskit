@@ -24,7 +24,7 @@
   export let errorVariant = "alert";
 
   /** @type {SuspenseProps["gap"]} */
-  export let gap = "default";
+  export let gap = "medium";
 
   /** @type {SuspenseProps["pendingMessage"]} */
   export let pendingMessage = "";

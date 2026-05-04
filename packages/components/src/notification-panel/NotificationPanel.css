@@ -1,20 +1,3 @@
-.dusk-notification-panel {
-  /**
-   * We use the primary text color for a surface with a reduced
-   * opacity. This guarantees a contrasting border that automatically
-   * adapts to both light and dark themes without context awareness.
-   */
-  --_border-color: oklch(from var(--on-surface-color) l c h / 0.4);
-}
-
-.dusk-notification-panel.dusk-drawer--from--right {
-  border-inline-start: 0.0625rem solid var(--_border-color);
-}
-
-.dusk-notification-panel.dusk-drawer--from--left {
-  border-inline-end: 0.0625rem solid var(--_border-color);
-}
-
 .dusk-notification-panel__announcer {
   position: absolute;
   width: 1px;

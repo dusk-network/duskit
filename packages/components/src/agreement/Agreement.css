@@ -1,11 +1,13 @@
 .dusk-agreement {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  gap: var(--small-gap);
+  align-items: center;
+  gap: var(--interactive-control-standard-gap);
 }
 
 .dusk-agreement__label {
-  margin-top: -0.2rem;
-  line-height: 1.5;
+  font-family: inherit;
+  font-size: var(--interactive-control-standard-text-size);
+  line-height: inherit;
+  letter-spacing: inherit;
 }

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config@3.1.1/schema.json",
+  "$schema": "../node_modules/@changesets/config/schema.json",
   "access": "public",
   "baseBranch": "main",
   "changelog": [
@@ -10,5 +10,8 @@
   "fixed": [],
   "ignore": ["@duskit/storybook"],
   "linked": [],
-  "updateInternalDependencies": "minor"
+  "updateInternalDependencies": "minor",
+  "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
+    "onlyUpdatePeerDependentsWhenOutOfRange": true
+  }
 }

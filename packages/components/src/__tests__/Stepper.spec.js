@@ -75,16 +75,6 @@ describe("Stepper", () => {
     expect(container.firstElementChild).toMatchSnapshot();
   });
 
-  it("should add the proper class name for the desired variant", () => {
-    const props = Object.freeze({
-      ...baseProps,
-      variant: "secondary",
-    });
-    const { container } = render(Stepper, { ...baseOptions, props });
-
-    expect(container.firstElementChild).toMatchSnapshot();
-  });
-
   it("should allow to hide the step numbers", () => {
     const props = {
       ...baseProps,

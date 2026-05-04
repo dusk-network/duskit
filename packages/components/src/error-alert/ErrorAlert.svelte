@@ -17,7 +17,7 @@
   export let error;
 
   /** @type {ErrorAlertProps["gap"]} */
-  export let gap = "default";
+  export let gap = "medium";
 
   /** @type {ErrorAlertProps["summary"]} */
   export let summary;

@@ -132,7 +132,7 @@ describe("Table", () => {
     });
     const table = component.getRootElement();
 
-    expect(table).toHaveClass("duskit-table foo bar");
+    expect(table).toHaveClass("dusk-table foo bar");
     expect(table).toHaveAttribute("id", "my-table");
   });
 
@@ -200,21 +200,21 @@ describe("Table", () => {
     const postsCell = getAsHTMLElement(table, 'td[data-column="posts"]');
 
     expect(emailHeader).toHaveClass(
-      "duskit-table__head-cell",
-      "duskit-table__head-cell--hidden"
+      "dusk-table__head-cell",
+      "dusk-table__head-cell--hidden"
     );
-    expect(nameHeader).toHaveClass("duskit-table__head-cell");
-    expect(nameHeader).not.toHaveClass("duskit-table__head-cell--hidden");
-    expect(postsHeader).toHaveClass("duskit-table__head-cell");
-    expect(postsHeader).not.toHaveClass("duskit-table__head-cell--hidden");
+    expect(nameHeader).toHaveClass("dusk-table__head-cell");
+    expect(nameHeader).not.toHaveClass("dusk-table__head-cell--hidden");
+    expect(postsHeader).toHaveClass("dusk-table__head-cell");
+    expect(postsHeader).not.toHaveClass("dusk-table__head-cell--hidden");
     expect(emailCell).toHaveClass(
-      "duskit-table__cell",
-      "duskit-table__cell--hidden"
+      "dusk-table__cell",
+      "dusk-table__cell--hidden"
     );
-    expect(nameCell).toHaveClass("duskit-table__cell");
-    expect(nameCell).not.toHaveClass("duskit-table__cell--hidden");
-    expect(postsCell).toHaveClass("duskit-table__cell");
-    expect(postsCell).not.toHaveClass("duskit-table__cell--hidden");
+    expect(nameCell).toHaveClass("dusk-table__cell");
+    expect(nameCell).not.toHaveClass("dusk-table__cell--hidden");
+    expect(postsCell).toHaveClass("dusk-table__cell");
+    expect(postsCell).not.toHaveClass("dusk-table__cell--hidden");
   });
 
   it("should only show sort buttons for sortable columns", () => {

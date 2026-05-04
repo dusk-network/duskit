@@ -60,17 +60,9 @@
     {#if text}
       <span class="dusk-button__text">{text}</span>
     {/if}
-    <Icon
-      className="dusk-button__icon"
-      path={icon.path}
-      size={icon.size ?? "default"}
-    />
+    <Icon className="dusk-button__icon" path={icon.path} {size} />
   {:else if icon}
-    <Icon
-      className="dusk-button__icon"
-      path={icon.path}
-      size={icon.size ?? "default"}
-    />
+    <Icon className="dusk-button__icon" path={icon.path} {size} />
     {#if text}
       <span class="dusk-button__text">{text}</span>
     {/if}

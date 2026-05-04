@@ -3,19 +3,27 @@
 .dusk-button,
 .dusk-anchor-button,
 .dusk-anchor-button:visited {
+  --_button-bg-color: transparent;
+  --_button-border-color: transparent;
+  --_button-text-color: inherit;
+  --_button-scale: 1;
+
   display: inline-flex;
   font-family: inherit;
-  line-height: 1;
-  text-transform: uppercase;
+  line-height: inherit;
+  color: var(--_button-text-color);
   letter-spacing: inherit;
+  background-color: var(--_button-bg-color);
+  border-color: var(--_button-border-color);
   border-style: solid;
-  border-width: var(--control-border-size);
-  border-radius: var(--control-border-radius-size);
+  border-width: var(--interactive-control-border-width);
+  border-radius: var(--interactive-control-border-radius-rounded-size);
   transition-delay: 0s;
   transition-timing-function: ease-in-out;
   transition-duration: 0.2s;
   transition-property: background-color, border-color, color, scale;
   transform-origin: center center;
+  scale: var(--_button-scale);
   align-items: center;
   justify-content: center;
 }
@@ -23,7 +31,14 @@
 .dusk-button:enabled:active,
 .dusk-anchor-button:active,
 .dusk-button--pressed {
-  scale: 0.98;
+  --_button-scale: 0.98;
+}
+
+.dusk-button--variant--naked.dusk-icon-button:enabled:hover:not(:active),
+.dusk-anchor-button--variant--naked:not(
+    [aria-disabled="true"]
+  ).dusk-icon-button:hover:not(:active) {
+  --_button-scale: 1.1;
 }
 
 /* Anchor Button specifics */
@@ -41,30 +56,20 @@
 
 /* Icon Button specifics */
 
-.dusk-icon-button:not(.dusk-icon-button--labeled) {
-  padding: 0.2rem;
-  border-radius: 50%;
-}
-
-.dusk-button.dusk-icon-button:enabled:hover,
-.dusk-anchor-button.dusk-icon-button:hover {
-  scale: 1.1;
-}
-
 .dusk-button.dusk-icon-button:enabled:active,
 .dusk-anchor-button.dusk-icon-button:active,
 .dusk-button.dusk-icon-button.dusk-button--pressed {
-  scale: 0.9;
+  --_button-scale: 0.9;
 }
 
-/* Primary Variant */
+/* Primary variant */
 
 .dusk-button--variant--primary,
 .dusk-anchor-button--variant--primary,
 .dusk-anchor-button--variant--primary:visited {
-  color: var(--control-text-color);
-  background-color: var(--control-bg-color);
-  border-color: var(--control-border-color);
+  --_button-bg-color: var(--interactive-action-primary-bg-color);
+  --_button-border-color: var(--interactive-action-primary-border-color);
+  --_button-text-color: var(--interactive-action-primary-text-color);
 }
 
 .dusk-button--variant--primary:enabled:hover,
@@ -72,19 +77,19 @@
 .dusk-anchor-button--variant--primary:hover,
 .dusk-anchor-button--variant--primary:active,
 .dusk-anchor-button--variant--primary.dusk-button--pressed {
-  color: var(--control-text-color-hover);
-  background-color: var(--control-bg-color-hover);
-  border-color: var(--control-border-color-hover);
+  --_button-bg-color: var(--interactive-action-primary-bg-hover-color);
+  --_button-border-color: var(--interactive-action-primary-border-hover-color);
+  --_button-text-color: var(--interactive-action-primary-text-hover-color);
 }
 
-/* Secondary Variant */
+/* Secondary variant */
 
 .dusk-button--variant--secondary,
 .dusk-anchor-button--variant--secondary,
 .dusk-anchor-button--variant--secondary:visited {
-  color: var(--control-secondary-text-color);
-  background-color: var(--control-secondary-bg-color);
-  border-color: var(--control-secondary-border-color);
+  --_button-bg-color: var(--interactive-action-secondary-bg-color);
+  --_button-border-color: var(--interactive-action-secondary-border-color);
+  --_button-text-color: var(--interactive-action-secondary-text-color);
 }
 
 .dusk-button--variant--secondary:enabled:hover,
@@ -92,19 +97,21 @@
 .dusk-anchor-button--variant--secondary:hover,
 .dusk-anchor-button--variant--secondary:active,
 .dusk-anchor-button--variant--secondary.dusk-button--pressed {
-  color: var(--control-secondary-text-color-hover);
-  background-color: var(--control-secondary-bg-color-hover);
-  border-color: var(--control-secondary-border-color-hover);
+  --_button-bg-color: var(--interactive-action-secondary-bg-hover-color);
+  --_button-border-color: var(
+    --interactive-action-secondary-border-hover-color
+  );
+  --_button-text-color: var(--interactive-action-secondary-text-hover-color);
 }
 
-/* Tertiary Variant */
+/* Tertiary variant */
 
 .dusk-button--variant--tertiary,
 .dusk-anchor-button--variant--tertiary,
 .dusk-anchor-button--variant--tertiary:visited {
-  color: var(--control-tertiary-text-color);
-  background-color: var(--control-tertiary-bg-color);
-  border-color: var(--control-tertiary-border-color);
+  --_button-bg-color: var(--interactive-action-tertiary-bg-color);
+  --_button-border-color: var(--interactive-action-tertiary-border-color);
+  --_button-text-color: var(--interactive-action-tertiary-text-color);
 }
 
 .dusk-button--variant--tertiary:enabled:hover,
@@ -112,9 +119,29 @@
 .dusk-anchor-button--variant--tertiary:hover,
 .dusk-anchor-button--variant--tertiary:active,
 .dusk-anchor-button--variant--tertiary.dusk-button--pressed {
-  color: var(--control-tertiary-text-color-hover);
-  background-color: var(--control-tertiary-bg-color-hover);
-  border-color: var(--control-tertiary-border-color-hover);
+  --_button-bg-color: var(--interactive-action-tertiary-bg-hover-color);
+  --_button-border-color: var(--interactive-action-tertiary-border-hover-color);
+  --_button-text-color: var(--interactive-action-tertiary-text-hover-color);
+}
+
+/* Naked variant */
+
+.dusk-button--variant--naked,
+.dusk-anchor-button--variant--naked,
+.dusk-anchor-button--variant--naked:visited {
+  --_button-bg-color: var(--interactive-action-naked-bg-color);
+  --_button-border-color: var(--interactive-action-naked-border-color);
+  --_button-text-color: var(--interactive-action-naked-text-color);
+}
+
+.dusk-button--variant--naked:enabled:hover,
+.dusk-button--variant--naked:enabled:active,
+.dusk-anchor-button--variant--naked:hover,
+.dusk-anchor-button--variant--naked:active,
+.dusk-anchor-button--variant--naked.dusk-button--pressed {
+  --_button-bg-color: var(--interactive-action-naked-bg-hover-color);
+  --_button-border-color: var(--interactive-action-naked-border-hover-color);
+  --_button-text-color: var(--interactive-action-naked-text-hover-color);
 }
 
 /* Disabled status */
@@ -126,22 +153,65 @@
   opacity: 0.5;
 }
 
+/* Focus */
+
+:is(
+  .dusk-anchor-button:not(.dusk-anchor-button--disabled),
+  .dusk-button:enabled
+):focus-visible {
+  outline: var(--interactive-control-focus-ring-outline);
+  outline-offset: var(--interactive-control-focus-ring-outline-offset);
+}
+
 /* Sizes */
 
 .dusk-button--size--small,
 .dusk-anchor-button--size--small,
 .dusk-anchor-button--size--small:visited {
-  padding: var(--control-small-padding);
-  font-size: var(--control-font-size);
-  gap: calc(var(--control-font-size) / 2);
+  --_button-touch-target-size: var(
+    --interactive-control-compact-min-block-size
+  );
+
+  min-block-size: var(--interactive-control-compact-min-block-size);
+  padding-block: var(--interactive-control-compact-padding-block);
+  padding-inline: var(--interactive-control-compact-padding-inline);
+  font-size: var(--interactive-control-compact-text-size);
+  gap: var(--interactive-control-compact-gap);
 }
 
 .dusk-button--size--default,
 .dusk-anchor-button--size--default,
 .dusk-anchor-button--size--default:visited {
-  padding: var(--control-padding);
-  font-size: var(--control-font-size);
-  gap: calc(var(--control-font-size) / 2);
+  --_button-touch-target-size: var(
+    --interactive-control-standard-min-block-size
+  );
+
+  min-block-size: var(--interactive-control-standard-min-block-size);
+  padding-block: var(--interactive-control-standard-padding-block);
+  padding-inline: var(--interactive-control-standard-padding-inline);
+  font-size: var(--interactive-control-standard-text-size);
+  gap: var(--interactive-control-standard-gap);
+}
+
+/* Overrides for naked variant */
+.dusk-button--variant--naked,
+.dusk-anchor-button--variant--naked {
+  position: relative;
+  min-block-size: auto;
+  padding-block: 0;
+}
+
+.dusk-button--variant--naked::after,
+.dusk-anchor-button--variant--naked::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  content: "";
+  transform: translate(-50%, -50%);
+  inline-size: 100%;
+  min-inline-size: var(--_button-touch-target-size);
+  block-size: 100%;
+  min-block-size: var(--_button-touch-target-size);
 }
 
 /* Text */

@@ -1,3 +1,21 @@
+.dusk-counter-icon {
+  --_counter-bg-color: var(--feedback-indicator-alert-bg-color);
+  --_counter-fg-color: var(--feedback-indicator-alert-text-color);
+}
+
+.dusk-counter-icon__counter {
+  transform-origin: center;
+}
+
+.dusk-counter-icon__foreground {
+  fill: var(--_counter-fg-color);
+}
+
+.dusk-counter-icon__background {
+  fill: var(--_counter-bg-color);
+}
+
+/*
 .dusk-counter-icon__counter {
   transform-origin: center;
 }
@@ -9,3 +27,4 @@
 .dusk-counter-icon__background {
   fill: var(--error-color-variant-dark);
 }
+*/

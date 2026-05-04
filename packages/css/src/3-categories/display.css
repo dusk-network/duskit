@@ -1,0 +1,40 @@
+:root {
+  /* --- Display box anatomy (generic) --- */
+  --display-box-radius-pill-size: var(--border-radius-pill);
+  --display-box-radius-rounded-size: var(--border-radius-md);
+  --display-box-radius-slight-size: var(--border-radius-sm);
+  --display-box-border-width: var(--border-width-sm);
+
+  /* Compact padding */
+  --display-box-compact-padding-block: var(--space-sm);
+  --display-box-compact-padding-inline: var(--space-sm);
+
+  /* Standard padding */
+  --display-box-standard-padding-block: var(--space-md);
+  --display-box-standard-padding-inline: var(--space-md);
+
+  /* Inner spacing (e.g. gap between header and content) */
+  --display-box-compact-gap: var(--space-sm);
+  --display-box-relaxed-gap: var(--space-lg);
+  --display-box-standard-gap: var(--space-md);
+
+  /* --- Display Typography --- */
+
+  /* Labels for data structures (e.g., table column headers, stat labels) */
+  --display-label-text-family: var(--sans-font-family);
+  --display-label-text-size: var(--text-body-sm);
+  --display-label-text-letter-spacing: normal;
+
+  /* Content for data structures (e.g., table cells, stat values) */
+  --display-text-family: var(--sans-font-family);
+  --display-text-size: var(--text-body-md);
+  --display-text-letter-spacing: normal;
+
+  /* Data formatting for analytical display */
+  --display-font-variant-numeric: tabular-nums;
+
+  /* Display Icon Sizing */
+  --display-icon-size-sm: var(--icon-size-sm);
+  --display-icon-size-md: var(--icon-size-md);
+  --display-icon-size-lg: var(--icon-size-lg);
+}

@@ -11,7 +11,12 @@ describe("Button", () => {
   const types = /** @type {const} */ (["button", "reset", "submit", "toggle"]);
   const iconPositions = /** @type {const} */ (["after", "before"]);
   const sizes = /** @type {const} */ (["default", "small"]);
-  const variants = /** @type {const} */ (["primary", "secondary", "tertiary"]);
+  const variants = /** @type {const} */ ([
+    "naked",
+    "primary",
+    "secondary",
+    "tertiary",
+  ]);
 
   const baseProps = {
     text: "some text",
@@ -96,18 +101,26 @@ describe("Button", () => {
     }
   );
 
-  it.each(sizes)('should render the `Button` of the "%s" size', (size) => {
-    const props = { ...baseProps, size };
-    const { component } = render(Button, { ...baseOptions, props });
-    const element = component.getRootElement();
+  it.each(sizes)(
+    'should render the `Button` of the "%s" size, passing the correct size to the underlying icon',
+    (size) => {
+      const props = { ...baseProps, icon: { path: mdiFolderOutline }, size };
+      const { component, getByRole } = render(Button, {
+        ...baseOptions,
+        props,
+      });
+      const element = component.getRootElement();
+      const icon = getByRole("graphics-symbol");
 
-    expect(element).toHaveClass(
-      "dusk-button",
-      "dusk-button--type--button",
-      "dusk-button--variant--primary",
-      `dusk-button--size--${size}`
-    );
-  });
+      expect(element).toHaveClass(
+        "dusk-button",
+        "dusk-button--type--button",
+        "dusk-button--variant--primary",
+        `dusk-button--size--${size}`
+      );
+      expect(icon).toHaveClass(`dusk-icon--size--${size}`);
+    }
+  );
 
   it("should be able to render a `Button` without a text", () => {
     const propsA = { ...baseProps, text: "" };
@@ -268,7 +281,7 @@ describe("Button", () => {
 
       await rerender({
         ...propsIconAfter,
-        icon: { ...propsIconAfter.icon, path: mdiAbTesting, size: "small" },
+        icon: { ...propsIconAfter.icon, path: mdiAbTesting },
         text: "Updated After",
       });
 

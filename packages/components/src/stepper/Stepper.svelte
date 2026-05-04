@@ -40,38 +40,31 @@
    */
   export let steps;
 
-  /** @type {StepperProps["variant"]} */
-  export let variant = "primary";
-
   /** @type {HTMLDivElement} */
   let rootElement;
 
   export const getRootElement = () => (stepsAmount >= 2 ? rootElement : null);
 
-  $: classes = makeClassName([
-    "dusk-stepper",
-    `dusk-stepper--variant--${variant}`,
-    className,
-  ]);
+  $: classes = makeClassName(["dusk-stepper", className]);
   $: stepsAmount = Array.isArray(steps) ? steps.length : steps;
 
   /**
-   * The width of the bar connecting the steps, based on
+   * The size (percentage) of the bar connecting the steps, based on
    * the active step and on the amount of steps.
    * As the steps are in a grid and centered in the containing
-   * cell, the width doesn't represent the actual progress percentage.
+   * cell, the size doesn't represent the actual progress percentage.
    *
    * @type {string}
    *
    * @example
    *
-   * With 2 steps, if the active step is 1 the width will be 80%.
+   * With 2 steps, if the active step is 1 the size will be 80%.
    * The remaining 20% is the blank space before and after the steps.
    *
    * If there are 5 steps in total and the active step is 2,
-   * the width will be 40%.
+   * the size will be 40%.
    */
-  $: progressWidth = `${(100 * activeStep) / stepsAmount}%`;
+  $: progressSize = `${(100 * activeStep) / stepsAmount}%`;
 </script>
 
 {#if stepsAmount >= 2}
@@ -79,8 +72,8 @@
     bind:this={rootElement}
     {...$$restProps}
     class={classes}
-    style:--columns={stepsAmount}
-    style:--progress-width={progressWidth}
+    style:--_stepper-columns={stepsAmount}
+    style:--_stepper-progress-size={progressSize}
   >
     {#if Array.isArray(steps)}
       {#each steps as currentStep, idx (currentStep)}

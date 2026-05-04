@@ -5,25 +5,13 @@ export default {
   component: CardExample,
   argTypes: {
     as: { control: "text" },
-    gap: {
-      control: "select",
-      options: ["small", "default", "medium", "large"],
-    },
-    showBody: { control: "boolean" },
+    variant: { control: "select", options: ["layer", "surface"] },
   },
 };
 
 export const Default = {
   args: {
     as: "div",
-    gap: "default",
-    showBody: true,
-  },
-};
-
-export const NoBody = {
-  args: {
-    ...Default.args,
-    showBody: false,
+    variant: "surface",
   },
 };

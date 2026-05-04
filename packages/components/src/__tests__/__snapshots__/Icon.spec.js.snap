@@ -9,5 +9,20 @@ exports[`Icon > should render the Icon component 1`] = `
   <path
     d="M3,3H21V21H3V3M5,5V19H19V5H5Z"
   />
+  <!---->
 </svg>
+`;
+
+exports[`Icon > should render the icon inside a \`g\` element when the \`as\` prop is "g" 1`] = `
+<g
+  class="dusk-icon dusk-icon--size--default"
+>
+  <rect
+    class="dusk-icon__bounding-box"
+  />
+  <path
+    d="M3,3H21V21H3V3M5,5V19H19V5H5Z"
+  />
+  <!---->
+</g>
 `;
