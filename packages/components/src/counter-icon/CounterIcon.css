@@ -1,0 +1,11 @@
+.dusk-counter-icon__counter {
+  transform-origin: center;
+}
+
+.dusk-counter-icon__foreground {
+  fill: var(--on-error-color);
+}
+
+.dusk-counter-icon__background {
+  fill: var(--error-color-variant-dark);
+}

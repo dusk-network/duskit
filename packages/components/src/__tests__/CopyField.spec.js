@@ -1,13 +1,12 @@
 import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render } from "@testing-library/svelte";
-
+import { mdiContentCopy } from "@mdi/js";
 import { getAsHTMLElement } from "@duskit/test-helpers";
 
-import * as toastStore from "../toast/store";
-import { CopyField } from "../..";
+import { CopyField, notifier } from "../..";
 
 describe("CopyField", () => {
-  const toastSpy = vi.spyOn(toastStore, "toast");
+  const toastSpy = vi.spyOn(notifier, "toast").mockImplementation(() => {});
 
   let needsCleanup = false;
 
@@ -94,16 +93,17 @@ describe("CopyField", () => {
 
     await fireEvent.click(copyButton);
 
-    expect(navigator.clipboard.writeText).toHaveBeenCalledTimes(1);
-    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
+    expect(navigator.clipboard.writeText).toHaveBeenCalledExactlyOnceWith(
       baseProps.rawValue
     );
-    expect(toastSpy).toHaveBeenCalledTimes(1);
-    expect(toastSpy).toHaveBeenCalledWith(
-      "success",
-      expect.stringContaining(baseProps.name),
-      expect.any(String)
-    );
+    expect(toastSpy).toHaveBeenCalledExactlyOnceWith({
+      dismissable: false,
+      iconPath: mdiContentCopy,
+      text: `${baseProps.name} copied to clipboard`,
+      timeout: 2000,
+      title: expect.stringContaining("Success"),
+      type: "success",
+    });
   });
 
   it('should show a "toast" with an error message if the copy to clipboard fails', async () => {
@@ -119,16 +119,15 @@ describe("CopyField", () => {
 
     await fireEvent.click(copyButton);
 
-    expect(navigator.clipboard.writeText).toHaveBeenCalledTimes(1);
-    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
+    expect(navigator.clipboard.writeText).toHaveBeenCalledExactlyOnceWith(
       baseProps.rawValue
     );
-    expect(toastSpy).toHaveBeenCalledTimes(1);
-    expect(toastSpy).toHaveBeenCalledWith(
-      "error",
-      errorMessage,
-      expect.any(String)
-    );
+    expect(toastSpy).toHaveBeenCalledExactlyOnceWith({
+      dismissable: false,
+      text: errorMessage,
+      title: expect.stringMatching(/error/i),
+      type: "error",
+    });
   });
 
   it('should show a "toast" with an "not allowed" message if the copy to clipboard fails with a "NotAllowedError"', async () => {
@@ -144,16 +143,15 @@ describe("CopyField", () => {
 
     await fireEvent.click(copyButton);
 
-    expect(navigator.clipboard.writeText).toHaveBeenCalledTimes(1);
-    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
+    expect(navigator.clipboard.writeText).toHaveBeenCalledExactlyOnceWith(
       baseProps.rawValue
     );
-    expect(toastSpy).toHaveBeenCalledTimes(1);
-    expect(toastSpy).toHaveBeenCalledWith(
-      "error",
-      "Clipboard access denied",
-      expect.any(String)
-    );
+    expect(toastSpy).toHaveBeenCalledExactlyOnceWith({
+      dismissable: false,
+      text: "Clipboard access denied",
+      title: expect.stringMatching(/not allowed/i),
+      type: "error",
+    });
   });
 
   it("should react to prop changes", async () => {
@@ -187,13 +185,16 @@ describe("CopyField", () => {
 
     await fireEvent.click(copyButton);
 
-    expect(navigator.clipboard.writeText).toHaveBeenCalledTimes(1);
-    expect(navigator.clipboard.writeText).toHaveBeenCalledWith("5678900");
-    expect(toastSpy).toHaveBeenCalledTimes(1);
-    expect(toastSpy).toHaveBeenCalledWith(
-      "success",
-      expect.stringContaining("New data"),
-      expect.any(String)
+    expect(navigator.clipboard.writeText).toHaveBeenCalledExactlyOnceWith(
+      "5678900"
     );
+    expect(toastSpy).toHaveBeenCalledExactlyOnceWith({
+      dismissable: false,
+      iconPath: mdiContentCopy,
+      text: "New data copied to clipboard",
+      timeout: 2000,
+      title: expect.stringContaining("Success"),
+      type: "success",
+    });
   });
 });

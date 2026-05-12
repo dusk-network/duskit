@@ -44,6 +44,7 @@
   "dependencies": {
     "@duskit/date": "0.1.0",
     "@duskit/error": "0.0.2",
+    "@duskit/math": "0.0.1",
     "@duskit/string": "0.0.1",
     "@duskit/svelte-actions": "0.2.0",
     "@floating-ui/dom": "1.7.5",

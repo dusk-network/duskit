@@ -3,12 +3,11 @@
 <script>
   /** @typedef {import("./CopyField").CopyFieldProps} CopyFieldProps */
 
-  import { mdiAlertOutline, mdiContentCopy } from "@mdi/js";
-
+  import { mdiContentCopy } from "@mdi/js";
+  import { getErrorFrom } from "@duskit/error";
   import { makeClassName } from "@duskit/string";
 
-  import { Button, Textbox } from "../..";
-  import { toast } from "../toast/store";
+  import { Button, Textbox, notifier } from "../..";
 
   import "./CopyField.css";
 
@@ -39,16 +38,33 @@
     navigator.clipboard
       .writeText(rawValue)
       .then(() => {
-        toast("success", `${name} copied`, mdiContentCopy);
+        notifier.toast({
+          dismissable: false,
+          iconPath: mdiContentCopy,
+          text: `${name} copied to clipboard`,
+          timeout: 2000,
+          title: "Success",
+          type: "success",
+        });
       })
-      .catch((err) => {
-        toast(
-          "error",
-          err.name === "NotAllowedError"
-            ? "Clipboard access denied"
-            : err.message,
-          mdiAlertOutline
-        );
+      .catch((reason) => {
+        const error = getErrorFrom(reason);
+        const texts =
+          error.name === "NotAllowedError"
+            ? {
+                text: "Clipboard access denied",
+                title: "Not allowed",
+              }
+            : {
+                text: error.message,
+                title: "Error",
+              };
+
+        notifier.toast({
+          dismissable: false,
+          ...texts,
+          type: "error",
+        });
       });
   }
 
