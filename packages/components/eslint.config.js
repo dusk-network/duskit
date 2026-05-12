@@ -33,6 +33,14 @@ export default defineConfig([
   {
     extends: [svelteEsLintConfig],
     files: ["**/*.svelte"],
+
+    /**
+     * Until we migrate to proper Svelte 5 components
+     * we shouldn't be bothered by things we cannot use.
+     */
+    rules: {
+      "svelte/prefer-svelte-reactivity": 0,
+    },
   },
   {
     extends: [vitestEsLintConfig],
@@ -46,9 +54,11 @@ export default defineConfig([
    */
   {
     files: [
-      "src/__tests__/Toast.spec.js",
+      "src/__tests__/ToastContainer.browser.spec.js",
+      "src/__tests__/ToastContainer.ssr.spec.js",
+      "src/notification-feed/NotificationFeed.svelte",
       "src/progress-bar/ProgressBar.svelte",
-      "src/toast/Toast.svelte",
+      "src/toast-container/ToastContainer.svelte",
     ],
     rules: {
       "import/no-duplicates": "off",

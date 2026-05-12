@@ -31,6 +31,8 @@ export default class IntersectionObserverMock {
 
   #rootMargin;
 
+  #scrollMargin;
+
   #thresholds;
 
   /**
@@ -43,6 +45,7 @@ export default class IntersectionObserverMock {
     this.#callback = callback;
     this.#root = options.root ?? null;
     this.#rootMargin = options.rootMargin ?? "0px 0px 0px 0px";
+    this.#scrollMargin = options.scrollMargin ?? "";
     this.#thresholds = Array.isArray(threshold) ? threshold : [threshold];
   }
 
@@ -52,6 +55,10 @@ export default class IntersectionObserverMock {
 
   get rootMargin() {
     return this.#rootMargin;
+  }
+
+  get scrollMargin() {
+    return this.#scrollMargin;
   }
 
   get thresholds() {

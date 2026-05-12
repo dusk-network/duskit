@@ -33,6 +33,9 @@ export const Default = {
     rawValue: "dusk1qz6f8m3y2q0m2w7v6k5c4b3n2m1qz6f8m3y2q0m2w7v",
     tooltipId: "main-tooltip",
     disabled: false,
+
+    // avoid overlapping with the toast
+    style: "margin-top: 8rem",
   },
 };
 
@@ -40,6 +43,6 @@ export const Disabled = {
   args: {
     ...Default.args,
     disabled: true,
+    style: "margin-top: 10rem",
   },
 };
-
