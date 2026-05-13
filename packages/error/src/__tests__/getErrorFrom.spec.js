@@ -38,6 +38,28 @@ describe("getErrorFrom", () => {
     expect(result).toStrictEqual(new Error(msg));
   });
 
+  it("should return an Error preserving the `name` property if the received argument is an object with both `message` and `name` string properties", () => {
+    const domException = new DOMException(
+      "Write permission denied.",
+      "NotAllowedError"
+    );
+
+    const genericErrorMock = {
+      message: "Something went wrong",
+      name: "CustomError",
+    };
+
+    const domError = getErrorFrom(domException);
+    const genericError = getErrorFrom(genericErrorMock);
+
+    expect(domError).toBeInstanceOf(Error);
+    expect(domError.message).toBe(domException.message);
+    expect(domError.name).toBe(domException.name);
+    expect(genericError).toBeInstanceOf(Error);
+    expect(genericError.message).toBe(genericErrorMock.message);
+    expect(genericError.name).toBe(genericErrorMock.name);
+  });
+
   it("should return an Error if the received argument is an object with a message string property, and use it as the error message", () => {
     const err = { message: "Some error message" };
     const result = getErrorFrom(err);
