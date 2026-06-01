@@ -231,14 +231,10 @@
 </main>
 
 <style>
-  /* * MISSING CONTRACTS PROTOCOL
-   * These tokens should be added to Layer 3 (e.g., layout.css).
-   * Mapped here temporarily to avoid polluting the component with Layer 1.
-   */
   .dashboard {
     --_local-eyebrow-text-color: var(--text-accent-primary-color);
-    --_local-border-color: var(--surface-border-color);
-    --_local-muted-text-color: var(--muted-color);
+    --_local-border-color: oklch(from currentcolor l c h / 0.5);
+    --_local-muted-text-color: oklch(from currentcolor l c h / 0.7);
   }
 
   /* ==========================================================================
