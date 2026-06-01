@@ -1,5 +1,45 @@
 # @duskit/components
 
+## 1.0.0
+
+### Minor Changes
+
+- [#312](https://github.com/dusk-network/duskit/pull/312) [`0055357`](https://github.com/dusk-network/duskit/commit/00553577f3c21320d912d62fa98df59986a264e8) Thanks [@ascartabelli](https://github.com/ascartabelli)! - refactor(components)!: **BREAKING CHANGE** update all components to use the new design tokens
+  - **BREAKING CHANGE** removed `"default"` value from `GapSize` type
+  - **BREAKING CHANGE** removed props `gap` and `showBody` from `Card`. Added `variant` (`"layer" | "surface"`).
+  - **BREAKING CHANGE** renamed `IconProp` type to `IconOptions` and removed its `size` property
+  - **BREAKING CHANGE** removed `dusk-progress-bar--${dir}` class from `ProgressBar` as consumers can rely on logical properties (and, eventually, on the `dir` attribute)
+  - **BREAKING CHANGE** removed variant prop from `Stepper`
+  - **BREAKING CHANGE** fixed `Table` using `.duskit-*` instead of `.dusk-*` as a CSS class name prefix.
+  - fixed `MiddleEllipsis` not accounting for padding, borders and letter spacing
+  - added "naked" variant for `Button`s
+  - added a `dusk-icon__bounding-box` CSS class to the bounding box `rect` in `Icon`
+  - added the option to pass slotted content to `Icon`
+
+- [#315](https://github.com/dusk-network/duskit/pull/315) [`181ad7a`](https://github.com/dusk-network/duskit/commit/181ad7a384d92d240426ae284333fc497a92099e) Thanks [@ascartabelli](https://github.com/ascartabelli)! - feat(components)!: **BREAKING CHANGE** implement complete notification and toast ecosystem and replace legacy toast
+
+  Key additions:
+  - Core logic: Event-driven emitter and a store factory to handle state, deduplication, and atomic namespace transitions.
+  - Context management: A provider component to manage the application context and synchronize persistent storage.
+  - Base UI: The core Notification component supporting both inline panels and floating toasts with distinct status types.
+  - Toast controller: A dedicated container managing the lifecycle of floating notifications, utilizing a highly optimized requestAnimationFrame loop with visibility change detection to handle decay animations and automatic dismissal gracefully.
+  - Notification Feed & Panel: A list view to display, read, and dismiss panel notifications, alongside a Drawer-based wrapper (NotificationPanel) with ARIA live region announcements for unread counts, providing a complete sliding sidebar experience.
+  - Counter Icon: A reactive icon component featuring a custom bounce animation, ideal for displaying unread notification badges.
+
+  **BREAKING CHANGE**: The legacy toast system has been completely removed and replaced by the new notification ecosystem.
+
+### Patch Changes
+
+- [#312](https://github.com/dusk-network/duskit/pull/312) [`7747e96`](https://github.com/dusk-network/duskit/commit/7747e96a8805573cf08ed450cd97908730fe959e) Thanks [@ascartabelli](https://github.com/ascartabelli)! - chore(license): relicense to MIT
+
+- Updated dependencies [[`0055357`](https://github.com/dusk-network/duskit/commit/00553577f3c21320d912d62fa98df59986a264e8), [`7747e96`](https://github.com/dusk-network/duskit/commit/7747e96a8805573cf08ed450cd97908730fe959e), [`effbc9b`](https://github.com/dusk-network/duskit/commit/effbc9b87a0bb39aed406019a9224328c4c183e7)]:
+  - @duskit/css@0.3.0
+  - @duskit/svelte-actions@0.2.1
+  - @duskit/string@0.0.2
+  - @duskit/error@0.0.3
+  - @duskit/date@0.1.1
+  - @duskit/math@0.0.2
+
 ## 0.7.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @duskit/http
 
+## 0.0.4
+
+### Patch Changes
+
+- [#312](https://github.com/dusk-network/duskit/pull/312) [`7747e96`](https://github.com/dusk-network/duskit/commit/7747e96a8805573cf08ed450cd97908730fe959e) Thanks [@ascartabelli](https://github.com/ascartabelli)! - chore(license): relicense to MIT
+
 ## 0.0.3
 
 ### Patch Changes
