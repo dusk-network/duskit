@@ -16,7 +16,7 @@
     "src/**/*.css",
     "fonts/**/*"
   ],
-  "license": "MPL-2.0",
+  "license": "MIT",
   "name": "@duskit/css",
   "repository": {
     "type": "git",

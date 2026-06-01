@@ -14,7 +14,7 @@
     "!src/**/__{mocks,tests}__",
     "!src/**/.DS_Store"
   ],
-  "license": "MPL-2.0",
+  "license": "MIT",
   "main": "index.js",
   "module": "index.js",
   "name": "@duskit/svelte-stores",

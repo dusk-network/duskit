@@ -19,7 +19,7 @@
     "npm": ">=10.9.2"
   },
   "homepage": "https://dusk-network.github.io/duskit/",
-  "license": "MPL-2.0",
+  "license": "MIT",
   "name": "duskit",
   "packageManager": "npm@10.9.2",
   "private": true,
