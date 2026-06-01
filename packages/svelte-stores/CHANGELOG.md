@@ -1,5 +1,15 @@
 # @duskit/svelte-stores
 
+## 0.3.1
+
+### Patch Changes
+
+- [#312](https://github.com/dusk-network/duskit/pull/312) [`7747e96`](https://github.com/dusk-network/duskit/commit/7747e96a8805573cf08ed450cd97908730fe959e) Thanks [@ascartabelli](https://github.com/ascartabelli)! - chore(license): relicense to MIT
+
+- Updated dependencies [[`7747e96`](https://github.com/dusk-network/duskit/commit/7747e96a8805573cf08ed450cd97908730fe959e), [`effbc9b`](https://github.com/dusk-network/duskit/commit/effbc9b87a0bb39aed406019a9224328c4c183e7)]:
+  - @duskit/promise@0.0.2
+  - @duskit/error@0.0.3
+
 ## 0.3.0
 
 ### Minor Changes

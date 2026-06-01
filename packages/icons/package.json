@@ -33,7 +33,7 @@
   },
   "type": "module",
   "types": "index.d.ts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "devDependencies": {
     "@dusk-network/eslint-config": "4.0.1",
     "@dusk-network/prettier-config": "1.1.0",

@@ -1,5 +1,13 @@
 # @duskit/test-helpers
 
+## 0.2.1
+
+### Patch Changes
+
+- [#312](https://github.com/dusk-network/duskit/pull/312) [`7747e96`](https://github.com/dusk-network/duskit/commit/7747e96a8805573cf08ed450cd97908730fe959e) Thanks [@ascartabelli](https://github.com/ascartabelli)! - chore(license): relicense to MIT
+
+- [#315](https://github.com/dusk-network/duskit/pull/315) [`181ad7a`](https://github.com/dusk-network/duskit/commit/181ad7a384d92d240426ae284333fc497a92099e) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fix(test-helpers): add `scrollMargin` to `IntersectionObserverMock` to comply with updated `lib.dom.d.ts` definition
+
 ## 0.2.0
 
 ### Minor Changes

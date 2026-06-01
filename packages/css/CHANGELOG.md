@@ -1,5 +1,15 @@
 # @duskit/css
 
+## 0.3.0
+
+### Minor Changes
+
+- [#312](https://github.com/dusk-network/duskit/pull/312) [`0055357`](https://github.com/dusk-network/duskit/commit/00553577f3c21320d912d62fa98df59986a264e8) Thanks [@ascartabelli](https://github.com/ascartabelli)! - refactor(css)!: **BREAKING CHANGE** introduce the new design tokens and CSS architecture
+
+### Patch Changes
+
+- [#312](https://github.com/dusk-network/duskit/pull/312) [`7747e96`](https://github.com/dusk-network/duskit/commit/7747e96a8805573cf08ed450cd97908730fe959e) Thanks [@ascartabelli](https://github.com/ascartabelli)! - chore(license): relicense to MIT
+
 ## 0.2.0
 
 ### Minor Changes

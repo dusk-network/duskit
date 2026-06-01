@@ -40,20 +40,20 @@
   },
   "type": "module",
   "types": "index.d.ts",
-  "version": "0.7.1",
+  "version": "1.0.0",
   "dependencies": {
-    "@duskit/date": "0.1.0",
-    "@duskit/error": "0.0.2",
-    "@duskit/math": "0.0.1",
-    "@duskit/string": "0.0.1",
-    "@duskit/svelte-actions": "0.2.0",
+    "@duskit/date": "0.1.1",
+    "@duskit/error": "0.0.3",
+    "@duskit/math": "0.0.2",
+    "@duskit/string": "0.0.2",
+    "@duskit/svelte-actions": "0.2.1",
     "@floating-ui/dom": "1.7.5",
     "@mdi/js": "7.4.47",
     "lamb": "0.61.1",
     "qrcode": "1.5.4"
   },
   "peerDependencies": {
-    "@duskit/css": "^0.2.0",
+    "@duskit/css": "^0.3.0",
     "svelte": "^4.2.0 || ^5.0.0"
   },
   "peerDependenciesMeta": {
@@ -65,7 +65,7 @@
     "@dusk-network/eslint-config": "4.0.1",
     "@dusk-network/prettier-config": "1.1.0",
     "@dusk-network/stylelint-config": "1.0.6",
-    "@duskit/test-helpers": "0.2.0",
+    "@duskit/test-helpers": "0.2.1",
     "@eslint/js": "9.39.4",
     "@juggle/resize-observer": "3.4.0",
     "@sveltejs/vite-plugin-svelte": "7.0.0",
