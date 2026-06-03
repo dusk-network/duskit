@@ -5,13 +5,13 @@
    * adapts to both light and dark themes without context awareness.
    */
   --_drawer-border: var(--layout-box-border-width) solid
-    oklch(from var(--on-surface-color) l c h / 0.4);
+    oklch(from var(--layout-surface-text-color) l c h / 0.4);
 
   position: fixed;
   z-index: var(--viewport-plane-anchored);
-  color: var(--on-surface-color);
+  color: var(--layout-surface-text-color);
   pointer-events: none;
-  background-color: var(--surface-color);
+  background-color: var(--layout-surface-bg-color);
 
   &.dusk-drawer--size--full {
     --_drawer-size: 100%;
