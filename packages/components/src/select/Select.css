@@ -13,7 +13,9 @@
   --_chevron-offset: var(--interactive-control-standard-padding-inline);
 
   /* Reserved space is the icon width plus a logical gap from the text */
-  --_icon-reserved-space: calc(var(--_chevron-width) + var(--space-sm));
+  --_icon-reserved-space: calc(
+    var(--_chevron-width) + var(--interactive-control-standard-gap)
+  );
 
   display: inline-block;
   min-block-size: var(--interactive-control-standard-min-block-size);

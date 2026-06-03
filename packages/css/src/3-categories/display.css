@@ -37,4 +37,8 @@
   --display-icon-size-sm: var(--icon-size-sm);
   --display-icon-size-md: var(--icon-size-md);
   --display-icon-size-lg: var(--icon-size-lg);
+
+  /* --- Display Table --- */
+  --display-table-row-striped-bg-color: var(--surface-embedded-color);
+  --display-table-row-striped-text-color: var(--on-surface-embedded-color);
 }

@@ -16,12 +16,12 @@
 
 .dusk-table__head-cell {
   text-align: start;
-  border-bottom: var(--layout-box-border-width) solid currentcolor;
+  border-bottom: var(--display-box-border-width) solid currentcolor;
 }
 
 .dusk-table__row:nth-child(even) > .dusk-table__cell {
-  color: var(--on-surface-embedded-color);
-  background-color: var(--surface-embedded-color);
+  color: var(--display-table-row-striped-text-color);
+  background-color: var(--display-table-row-striped-bg-color);
 }
 
 .dusk-table__head-cell--hidden,
