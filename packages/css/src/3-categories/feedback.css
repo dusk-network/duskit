@@ -14,8 +14,8 @@
   --feedback-box-standard-padding-inline: var(--space-md);
 
   /* Large padding: if you need a very airy banner variant */
-  --feedback-box-padding-block-relaxed: var(--space-md);
-  --feedback-box-padding-inline-relaxed: var(--space-lg);
+  --feedback-box-relaxed-padding-block: var(--space-md);
+  --feedback-box-relaxed-padding-inline: var(--space-lg);
 
   /* Inner spacing (e.g., gap between icon and text content) */
   --feedback-box-compact-gap: var(--space-sm);
