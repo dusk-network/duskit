@@ -80,18 +80,18 @@
   flex: 1;
 }
 
-.dusk-notification__header .dusk-button--variant--naked {
-  --interactive-action-naked-text-color: var(--_header-text);
-  --interactive-action-naked-bg-hover-color: color-mix(
-    in srgb,
-    var(--_header-text) 15%,
-    transparent
+.dusk-notification__btn-mark-as-read,
+.dusk-notification__btn-dismiss {
+  padding: min(
+    var(--feedback-box-compact-padding-block),
+    var(--feedback-box-compact-padding-inline)
   );
-  --interactive-action-naked-text-hover-color: var(--_header-text);
-
-  padding: 0;
-  border: 0;
   aspect-ratio: 1;
+
+  &,
+  &:is(:enabled:hover, :enabled:active) {
+    color: var(--_header-text);
+  }
 }
 
 .dusk-notification__body {
