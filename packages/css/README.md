@@ -31,7 +31,7 @@ Install it with your favourite package manager:
 npm install @duskit/css --save
 ```
 
-This package exposes a single CSS file that includes the full Duskit styling stack: design tokens, reset rules, component styles, and utilities.
+This package exposes a single CSS entry point that includes the full Duskit styling stack: primitives, theme tokens, base / reset rules, component category contracts, and utilities.
 
 Depending on your bundler and application setup, you can import it in two ways:
 

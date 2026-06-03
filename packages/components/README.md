@@ -33,8 +33,8 @@ npm install @duskit/components --save
 
 This package relies on the consumer application hosting the core execution runtime and the styling framework.
 
-- **Svelte:** fully compatible with both **Svelte v4** and **Svelte v5** (`^4.2.0 || ^5.0.0`).
-- **`@duskit/css` (optional):** the components are structurally encapsulated and function independently, but installing `@duskit/css` is highly recommended to automatically inherit the official theme, semantic tokens, and interaction physics of the Dusk design language.
+- **Svelte:** Fully compatible with both **Svelte v4** and **Svelte v5** (`^4.2.0 || ^5.0.0`).
+- **`@duskit/css` (Optional):** The components are structurally encapsulated and function independently, but they blindly consume the framework's "Layer 3" design tokens. Installing `@duskit/css` is highly recommended to automatically inherit the official theme, semantic tokens, and interaction physics. If you choose to omit this dependency, your application should manually define the required CSS Custom Properties (layout, interactive, and display contracts) within your global stylesheets to prevent visual degradation.
 
 ### Usage
 

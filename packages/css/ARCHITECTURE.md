@@ -153,7 +153,7 @@ We reject relative "T-shirt" sizing (`-sm`, `-md`, `-lg`) in component anatomy. 
 
 ### 2.5 Layer 4: Utilities
 
-This layer is strictly quarantined and intentionally kept minimal. It contains only high-specificity, single-purpose functional classes that must transcend component boundaries. It's currently limited to essential accessibility behaviors (e.g., `.sr-only`).
+This layer is strictly quarantined and intentionally kept minimal. It contains only single-purpose functional classes that must transcend component boundaries. It's currently limited to essential accessibility behaviors (e.g., `.sr-only`).
 
 Any addition to this layer must pass a strict architectural test: utility classes must govern invisible behavior or pure structural flow. They are forbidden from carrying any visual payload (such as colors, typographic overrides, or hardcoded margins). If a UI element requires a visual override, the solution must be engineered within the Layer 3 component API, never patched here.
 
