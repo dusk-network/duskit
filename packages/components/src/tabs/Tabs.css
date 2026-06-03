@@ -8,8 +8,11 @@
   gap: var(--interactive-control-compact-gap);
 }
 
-.dusk-button.dusk-icon-button.dusk-tab-scroll-button {
-  padding: 0;
+.dusk-tab-scroll-button {
+  padding: min(
+    var(--interactive-control-compact-padding-block),
+    var(--interactive-control-compact-padding-inline)
+  );
   border: 0;
 }
 

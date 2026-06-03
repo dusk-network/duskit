@@ -79,7 +79,11 @@
 
   /* Naked action  */
   --interactive-action-naked-bg-color: transparent;
-  --interactive-action-naked-bg-hover-color: transparent;
+  --interactive-action-naked-bg-hover-color: color-mix(
+    in srgb,
+    currentcolor 15%,
+    transparent
+  );
   --interactive-action-naked-border-color: transparent;
   --interactive-action-naked-border-hover-color: transparent;
   --interactive-action-naked-text-color: currentcolor;
