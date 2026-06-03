@@ -1,5 +1,21 @@
 # @duskit/css
 
+## 0.4.0
+
+### Minor Changes
+
+- [#329](https://github.com/dusk-network/duskit/pull/329) [`d774107`](https://github.com/dusk-network/duskit/commit/d7741073e51d1f84e2eda748dd09499c24d3b766) Thanks [@ascartabelli](https://github.com/ascartabelli)! - Added missing contracts for table's striped colours in `display.css`
+
+### Patch Changes
+
+- [#331](https://github.com/dusk-network/duskit/pull/331) [`6e2f280`](https://github.com/dusk-network/duskit/commit/6e2f280a7e92fe7cf1648b1243873200e9562121) Thanks [@ascartabelli](https://github.com/ascartabelli)! - Updated the `--interactive-action-naked-bg-hover-color` contract to use a non-transparent colour.
+
+- [#324](https://github.com/dusk-network/duskit/pull/324) [`2115865`](https://github.com/dusk-network/duskit/commit/21158658564ac28b40bcf77854b3e59ef82e230f) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fix(css): fixed `base.css` using a non-existent token
+
+- [#326](https://github.com/dusk-network/duskit/pull/326) [`4272efa`](https://github.com/dusk-network/duskit/commit/4272efa2fd1db42e8f7e3821bdd34a799ff1cbaa) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fix(css): fixed feedback padding tokens not following naming conventions
+
+- [#333](https://github.com/dusk-network/duskit/pull/333) [`06863a3`](https://github.com/dusk-network/duskit/commit/06863a35d066e6bc3c086c39b364c3b5e64419df) Thanks [@ascartabelli](https://github.com/ascartabelli)! - chore: update dependencies
+
 ## 0.3.0
 
 ### Minor Changes

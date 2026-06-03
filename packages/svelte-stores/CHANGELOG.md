@@ -1,5 +1,15 @@
 # @duskit/svelte-stores
 
+## 0.3.2
+
+### Patch Changes
+
+- [#333](https://github.com/dusk-network/duskit/pull/333) [`06863a3`](https://github.com/dusk-network/duskit/commit/06863a35d066e6bc3c086c39b364c3b5e64419df) Thanks [@ascartabelli](https://github.com/ascartabelli)! - chore: update dependencies
+
+- Updated dependencies [[`06863a3`](https://github.com/dusk-network/duskit/commit/06863a35d066e6bc3c086c39b364c3b5e64419df)]:
+  - @duskit/promise@0.0.3
+  - @duskit/error@0.0.4
+
 ## 0.3.1
 
 ### Patch Changes
