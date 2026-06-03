@@ -1,5 +1,11 @@
 # @duskit/encoding
 
+## 0.0.3
+
+### Patch Changes
+
+- [#333](https://github.com/dusk-network/duskit/pull/333) [`06863a3`](https://github.com/dusk-network/duskit/commit/06863a35d066e6bc3c086c39b364c3b5e64419df) Thanks [@ascartabelli](https://github.com/ascartabelli)! - chore: update dependencies
+
 ## 0.0.2
 
 ### Patch Changes
