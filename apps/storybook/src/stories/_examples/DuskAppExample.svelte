@@ -16,9 +16,16 @@
     Button,
     Card,
     ContentSwitch,
+    Icon,
     Table,
     Textbox,
   } from "@duskit/components";
+  import { logo } from "@duskit/icons";
+
+  /** @typedef {import("@duskit/components").StatusType} StatusType */
+  /** @typedef {{ asset: string, change: string, liquidity: string, status: string, volume: string }} Market */
+  /** @typedef {import("@duskit/components").TableDescriptor<Market>} MarketDescriptor */
+  /** @typedef {{ amount: string, detail: string, status: string, title: string, tone: StatusType }} Activity */
 
   const tabs = [
     { id: "positions", label: "Positions" },
@@ -49,6 +56,7 @@
     },
   ];
 
+  /** @type {MarketDescriptor[]} */
   const descriptors = [
     { name: "asset", label: "Market", sortable: true },
     { name: "volume", label: "24h volume", sortable: true },
@@ -57,6 +65,7 @@
     { name: "status", label: "Status" },
   ];
 
+  /** @type {Activity[]} */
   const activity = [
     {
       amount: "+500 DUSK",
@@ -92,7 +101,7 @@
 <main class="dashboard">
   <header class="dashboard__header">
     <div class="dashboard__brand">
-      <span class="brand-mark" aria-hidden="true"></span>
+      <Icon aria-hidden="true" className="brand-logo" path={logo} />
       <div class="brand-text">
         <span class="eyebrow-heading">Duskit</span>
         <h1 class="brand-title">Dusk app example</h1>
@@ -283,18 +292,9 @@
     gap: var(--layout-box-compact-gap);
   }
 
-  .brand-mark {
-    width: 2rem;
-    height: 2rem;
-    background:
-      linear-gradient(
-        90deg,
-        transparent 42%,
-        var(--smokey-black) 42% 58%,
-        transparent 58%
-      ),
-      var(--cornflower); /* Exception for direct brand logo colors */
-    border-radius: var(--layout-box-radius-slight-size);
+  :global(.brand-logo) {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
   .brand-title {

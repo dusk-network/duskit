@@ -41,7 +41,7 @@
 /**
  * 4 - UTILITIES
  *
- * Strictly quarantined, high-specificity functional classes (e.g., a11y).
+ * Strictly quarantined, functional classes (e.g., a11y).
  * This is NOT a utility-first toolkit for ad-hoc styling patches.
  * Visual overrides and spatial hacks are explicitly forbidden here to
  * prevent architectural decay.
