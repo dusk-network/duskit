@@ -57,7 +57,7 @@ hr {
 mark {
   color: var(--on-status-warning-subtle-color);
   background-color: var(--status-warning-subtle-color);
-  border-radius: var(--border-radius-xs);
+  border-radius: var(--border-radius-sm);
   padding-inline: var(--space-xxs);
 }
 
