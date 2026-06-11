@@ -6,6 +6,7 @@ export default {
     date: new Date(),
     dismissable: true,
     locale: "en-US",
+    style: "inline-size: 23rem",
     text: "This is an example notification message.",
     title: "Notification Title",
   },
@@ -64,7 +65,7 @@ export default {
     },
   },
   component: Notification,
-  title: "Components/Notification",
+  title: "Components/Feedback/Notification",
 };
 
 // --- TOAST MODE ---

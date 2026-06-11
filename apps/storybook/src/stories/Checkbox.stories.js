@@ -1,7 +1,7 @@
 import { Checkbox } from "@duskit/components";
 
 export default {
-  title: "Components/Checkbox",
+  title: "Components/Interactive/Checkbox",
   component: Checkbox,
   argTypes: {
     checked: { control: "boolean" },
@@ -28,4 +28,3 @@ export const Disabled = {
     disabled: true,
   },
 };
-

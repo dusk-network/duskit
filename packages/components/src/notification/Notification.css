@@ -67,6 +67,17 @@
   background-color: var(--_header-bg);
   align-items: center;
   justify-content: space-between;
+
+  /**
+   * Ensure consistent structural height regardless of interactive
+   * payload (dismiss button).
+   * Derived from the interactive density target plus vertical
+   * clearance padding to prevent layout shifts.
+   */
+  min-block-size: calc(
+    var(--interactive-control-compact-min-block-size) +
+      var(--feedback-box-compact-padding-block) * 2
+  );
 }
 
 .dusk-notification__header-text {
@@ -82,12 +93,6 @@
 
 .dusk-notification__btn-mark-as-read,
 .dusk-notification__btn-dismiss {
-  padding: min(
-    var(--feedback-box-compact-padding-block),
-    var(--feedback-box-compact-padding-inline)
-  );
-  aspect-ratio: 1;
-
   &,
   &:is(:enabled:hover, :enabled:active) {
     color: var(--_header-text);

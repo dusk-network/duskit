@@ -20,7 +20,7 @@ export default {
     },
   },
   component: DrawerExample,
-  title: "Components/Drawer",
+  title: "Components/Layout/Drawer",
 };
 
 export const Default = {

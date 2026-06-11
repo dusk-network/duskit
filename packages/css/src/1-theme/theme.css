@@ -107,17 +107,70 @@
    2. TYPOGRAPHY
   ---------------------------------------- */
 
+  --text-fluid-optical-step: 0.1852vw;
+  --text-fluid-optical-double-step: 0.3704vw;
+
+  /* Font weights for headings */
+  --text-heading-large-text-weight: 500;
+  --text-heading-small-text-weight: 600;
+
   /* Font families */
   --mono-font-family: "Soehne Mono", monospace;
   --sans-font-family: "Soehne", "Helvetica Neue", helvetica, arial, sans-serif;
 
-  /* Semantic heading sizes */
-  --text-heading-xs: var(--size-optical-16);
-  --text-heading-sm: var(--size-optical-20);
-  --text-heading-md: var(--size-optical-24);
-  --text-heading-lg: var(--size-optical-32);
-  --text-heading-xl: var(--size-optical-40);
-  --text-heading-xxl: var(--size-optical-48);
+  /**
+   * Fluid heading scale.
+   *
+   * Each heading interpolates linearly between a mobile size and a desktop size
+   * using `clamp()`, assuming a viewport range from 360px to 1440px.
+   *
+   * The desktop values are considered the canonical optical sizes.
+   * On smaller viewports, headings are reduced to preserve visual balance:
+   *
+   * - `text-heading-xs` scales down by one optical step (14px → 16px).
+   * - All other heading tokens scale down by two optical steps
+   *   (16→20, 20→24, 24→28, 28→32, 32→36).
+   *
+   * This keeps the typographic hierarchy compact on mobile while preserving
+   * the intended desktop proportions.
+   *
+   * Architectural Note (Linear Interpolation):
+   * The `calc(intercept + slope)` structure implements `y = mx + q` directly in CSS.
+   * Since native CSS lacks a fluid interpolation function, the y-intercept (the `rem` value)
+   * is statically precalculated for the 360px lower bound. This is an intentional
+   * architectural compromise to achieve dynamic scaling without a build step or preprocessor,
+   * while keeping the variables clean.
+   */
+  --text-heading-xs: clamp(
+    var(--size-optical-14),
+    calc(0.8333rem + var(--text-fluid-optical-step)),
+    var(--size-optical-16)
+  );
+  --text-heading-sm: clamp(
+    var(--size-optical-16),
+    calc(0.9167rem + var(--text-fluid-optical-double-step)),
+    var(--size-optical-20)
+  );
+  --text-heading-md: clamp(
+    var(--size-optical-20),
+    calc(1.1667rem + var(--text-fluid-optical-double-step)),
+    var(--size-optical-24)
+  );
+  --text-heading-lg: clamp(
+    var(--size-optical-24),
+    calc(1.4167rem + var(--text-fluid-optical-double-step)),
+    var(--size-optical-28)
+  );
+  --text-heading-xl: clamp(
+    var(--size-optical-28),
+    calc(1.6667rem + var(--text-fluid-optical-double-step)),
+    var(--size-optical-32)
+  );
+  --text-heading-xxl: clamp(
+    var(--size-optical-32),
+    calc(1.9167rem + var(--text-fluid-optical-double-step)),
+    var(--size-optical-36)
+  );
 
   /* Semantic body sizes */
   --text-body-sm: var(--size-optical-14);
@@ -164,9 +217,13 @@
   --density-target-lg: var(--size-48);
 
   /* Semantic icon sizes */
-  --icon-size-sm: var(--size-16);
-  --icon-size-md: var(--size-20);
-  --icon-size-lg: var(--size-24);
+  --icon-size-xxs: var(--size-optical-12);
+  --icon-size-xs: var(--size-optical-16);
+  --icon-size-sm: var(--size-optical-20);
+  --icon-size-md: var(--size-optical-24);
+  --icon-size-lg: var(--size-optical-28);
+  --icon-size-xl: var(--size-optical-32);
+  --icon-size-xxl: var(--size-optical-36);
 
   /* ----------------------------------------
    4. ELEVATION

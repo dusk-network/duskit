@@ -20,6 +20,30 @@
 
   /* --- Display Typography --- */
 
+  /* Headings scale (Mapped to the 6 prominence levels) */
+  --display-heading-hero-text-size: var(--text-heading-xxl);
+  --display-heading-major-text-size: var(--text-heading-xl);
+  --display-heading-strong-text-size: var(--text-heading-lg);
+  --display-heading-standard-text-size: var(--text-heading-md);
+  --display-heading-minor-text-size: var(--text-heading-sm);
+  --display-heading-subtle-text-size: var(--text-heading-xs);
+
+  /* Headings weight contracts */
+  --display-heading-hero-text-weight: var(--text-heading-large-text-weight);
+  --display-heading-major-text-weight: var(--text-heading-large-text-weight);
+  --display-heading-strong-text-weight: var(--text-heading-large-text-weight);
+  --display-heading-standard-text-weight: var(--text-heading-small-text-weight);
+  --display-heading-minor-text-weight: var(--text-heading-small-text-weight);
+  --display-heading-subtle-text-weight: var(--text-heading-small-text-weight);
+
+  /* Sans-serif typography option */
+  --display-heading-sans-text-family: var(--sans-font-family);
+  --display-heading-sans-text-letter-spacing: normal;
+
+  /* Monospace typography option */
+  --display-heading-mono-text-family: var(--mono-font-family);
+  --display-heading-mono-text-letter-spacing: 0.05em;
+
   /* Labels for data structures (e.g., table column headers, stat labels) */
   --display-label-text-family: var(--sans-font-family);
   --display-label-text-size: var(--text-body-sm);
@@ -33,10 +57,17 @@
   /* Data formatting for analytical display */
   --display-font-variant-numeric: tabular-nums;
 
-  /* Display Icon Sizing */
-  --display-icon-size-sm: var(--icon-size-sm);
-  --display-icon-size-md: var(--icon-size-md);
-  --display-icon-size-lg: var(--icon-size-lg);
+  /* --- Display Ornaments --- */
+
+  /* High-contrast semantic accent colors for heading decorations */
+  --display-decoration-primary-color: var(--text-accent-primary-color);
+  --display-decoration-secondary-color: var(--text-accent-secondary-color);
+  --display-decoration-neutral-color: currentcolor;
+
+  /* --- Display Icon Sizing --- */
+  --display-icon-compact-size: var(--icon-size-sm);
+  --display-icon-standard-size: var(--icon-size-md);
+  --display-icon-prominent-size: var(--icon-size-lg);
 
   /* --- Display Table --- */
   --display-table-row-striped-bg-color: var(--surface-embedded-color);

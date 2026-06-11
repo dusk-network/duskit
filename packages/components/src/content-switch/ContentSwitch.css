@@ -21,11 +21,12 @@
   align-items: center;
   gap: var(--interactive-control-standard-gap);
   flex: 0 2 auto;
-  min-width: 3em;
-  padding-block: var(--interactive-control-compact-padding-block);
+  min-inline-size: 3em;
+  min-block-size: var(--interactive-control-standard-min-block-size);
+  padding-block: var(--interactive-control-standard-padding-block);
   padding-inline: var(--interactive-control-standard-padding-inline);
-  font-size: var(--interactive-control-compact-text-size);
-  line-height: inherit;
+  font-size: var(--interactive-control-standard-text-size);
+  line-height: 1.5;
   color: var(--_item-text-color);
   background-color: var(--_item-bg-color);
   border-radius: var(--interactive-control-border-radius-rounded-size);

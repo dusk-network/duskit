@@ -15,29 +15,34 @@ h6 {
 }
 
 h1 {
-  font-size: var(--text-heading-xl);
+  font-size: var(--text-heading-xxl);
+  font-weight: var(--text-heading-large-text-weight);
 }
 
 h2 {
-  font-size: var(--text-heading-lg);
+  font-size: var(--text-heading-xl);
+  font-weight: var(--text-heading-large-text-weight);
 }
 
 h3 {
-  font-size: var(--text-heading-md);
+  font-size: var(--text-heading-lg);
+  font-weight: var(--text-heading-large-text-weight);
 }
 
 h4 {
-  font-size: var(--text-heading-sm);
+  font-size: var(--text-heading-md);
+  font-weight: var(--text-heading-small-text-weight);
 }
 
 h5 {
-  font-size: var(--text-heading-xs);
+  font-size: var(--text-heading-sm);
+  font-weight: var(--text-heading-small-text-weight);
 }
 
 h6 {
-  font-size: var(--text-body-md);
+  font-size: var(--text-heading-xs);
+  font-weight: var(--text-heading-small-text-weight);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 p {
@@ -48,7 +53,7 @@ hr {
   inline-size: 100%;
   block-size: 0;
   padding: 0;
-  margin-block: var(--space-md);
+  margin-block: var(--space-sm);
   overflow: visible;
   border: 0;
   border-block-start: var(--border-width-sm) solid var(--neutral-strong-color);

@@ -1,7 +1,7 @@
 import CardExample from "./_examples/CardExample.svelte";
 
 export default {
-  title: "Components/Card",
+  title: "Components/Layout/Card",
   component: CardExample,
   argTypes: {
     as: { control: "text" },

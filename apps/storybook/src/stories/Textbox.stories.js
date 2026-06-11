@@ -1,7 +1,7 @@
 import { Textbox } from "@duskit/components";
 
 export default {
-  title: "Components/Textbox",
+  title: "Components/Interactive/Textbox",
   component: Textbox,
   argTypes: {
     type: {
@@ -34,4 +34,3 @@ export const Multiline = {
     value: "First line\nSecond line",
   },
 };
-

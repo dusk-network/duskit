@@ -19,6 +19,20 @@
   --_card-text-color: var(--layout-surface-text-color);
 }
 
+/**
+ * Preserve the card anatomy by forcing its structural slots
+ * to stretch across the available width, regardless of the
+ * parent flex alignment.
+ * This isolates the component from its external layout context
+ * and prevents alignment-related side effects, such as those
+ * caused by parent container rules (e.g. `align-items: center`).
+ */
+.dusk-card__header,
+.dusk-card__body,
+.dusk-card__footer {
+  align-self: stretch;
+}
+
 .dusk-card__header {
   font-family: var(--layout-heading-text-family);
   font-size: var(--layout-heading-text-size);

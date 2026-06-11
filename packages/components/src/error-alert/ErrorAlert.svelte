@@ -35,6 +35,6 @@
 </script>
 
 <div bind:this={rootElement} {...$$restProps} class={classes}>
-  <Icon className="dusk-error-alert__icon" path={mdiCloseThick} size="large" />
+  <Icon className="dusk-error-alert__icon" path={mdiCloseThick} />
   <ErrorDetails className="dusk-error-alert__error-details" {error} {summary} />
 </div>

@@ -1,7 +1,7 @@
 import { RelativeTime } from "@duskit/components";
 
 export default {
-  title: "Components/RelativeTime",
+  title: "Components/Display/RelativeTime",
   component: RelativeTime,
   argTypes: {
     autoRefresh: { control: "boolean" },

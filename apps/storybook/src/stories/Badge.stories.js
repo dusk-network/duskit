@@ -1,7 +1,7 @@
 import { Badge } from "@duskit/components";
 
 export default {
-  title: "Components/Badge",
+  title: "Components/Feedback/Badge",
   component: Badge,
   argTypes: {
     text: { control: "text" },

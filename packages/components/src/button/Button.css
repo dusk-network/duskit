@@ -10,7 +10,7 @@
 
   display: inline-flex;
   font-family: inherit;
-  line-height: inherit;
+  line-height: 1.5;
   color: var(--_button-text-color);
   letter-spacing: inherit;
   background-color: var(--_button-bg-color);
@@ -21,7 +21,7 @@
   transition-delay: 0s;
   transition-timing-function: ease-in-out;
   transition-duration: 0.2s;
-  transition-property: background-color, border-color, color, scale;
+  transition-property: background-color, border-color, box-shadow, color, scale;
   transform-origin: center center;
   scale: var(--_button-scale);
   align-items: center;
@@ -60,6 +60,19 @@
 .dusk-anchor-button.dusk-icon-button:active,
 .dusk-button.dusk-icon-button.dusk-button--pressed {
   --_button-scale: 0.9;
+}
+
+:is(
+  .dusk-button--variant--primary,
+  .dusk-button--variant--secondary,
+  .dusk-button--variant--tertiary,
+  .dusk-button--variant--naked
+).dusk-button--pressed {
+  box-shadow: inset 0 1px 1px var(--_button-text-color);
+
+  &:hover {
+    --_button-scale: 1;
+  }
 }
 
 /* Primary variant */
@@ -193,25 +206,18 @@
   gap: var(--interactive-control-standard-gap);
 }
 
-/* Overrides for naked variant */
-.dusk-button--variant--naked,
-.dusk-anchor-button--variant--naked {
-  position: relative;
-  min-block-size: auto;
-  padding-block: 0;
+.dusk-icon-button.dusk-button--size--small,
+.dusk-icon-button.dusk-anchor-button--size--small,
+.dusk-icon-button.dusk-anchor-button--size--small:visited {
+  aspect-ratio: 1;
+  padding-inline: var(--interactive-control-compact-padding-block);
 }
 
-.dusk-button--variant--naked::after,
-.dusk-anchor-button--variant--naked::after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  content: "";
-  transform: translate(-50%, -50%);
-  inline-size: 100%;
-  min-inline-size: var(--_button-touch-target-size);
-  block-size: 100%;
-  min-block-size: var(--_button-touch-target-size);
+.dusk-icon-button.dusk-button--size--default,
+.dusk-icon-button.dusk-anchor-button--size--default,
+.dusk-icon-button.dusk-anchor-button--size--default:visited {
+  aspect-ratio: 1;
+  padding-inline: var(--interactive-control-standard-padding-block);
 }
 
 /* Text */

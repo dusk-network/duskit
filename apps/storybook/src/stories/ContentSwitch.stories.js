@@ -1,4 +1,5 @@
 import { ContentSwitch } from "@duskit/components";
+import { mdiAccountOutline, mdiCogOutline, mdiHomeOutline } from "@mdi/js";
 
 /** @param {CustomEvent} event */
 function handleTabChange(event) {
@@ -14,11 +15,27 @@ const tabs = [
   { id: "tab-5", label: "Tab label 5" },
 ];
 
+const tabsWithIcons = [
+  { icon: { path: mdiHomeOutline }, id: "home", label: "Home" },
+  { icon: { path: mdiAccountOutline }, id: "profile", label: "Profile" },
+  { icon: { path: mdiCogOutline }, id: "settings", label: "Settings" },
+];
+
 export default {
-  title: "Components/ContentSwitch",
   component: ContentSwitch,
+  title: "Components/Interactive/ContentSwitch",
 };
 
 export const Default = {
-  args: { items: tabs, selectedTab: "tab-2" },
+  args: {
+    items: tabs,
+    selectedTab: "tab-2",
+  },
+};
+
+export const WithIcons = {
+  args: {
+    items: tabsWithIcons,
+    selectedTab: "home",
+  },
 };

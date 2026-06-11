@@ -5,7 +5,7 @@
    * adapts to both light and dark themes without context awareness.
    */
   --_drawer-border: var(--layout-box-border-width) solid
-    oklch(from var(--layout-surface-text-color) l c h / 0.4);
+    var(--layout-boundary-context-color);
 
   position: fixed;
   z-index: var(--viewport-plane-anchored);

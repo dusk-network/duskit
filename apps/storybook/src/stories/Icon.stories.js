@@ -3,7 +3,7 @@ import { mdiAlertCircleOutline } from "@mdi/js";
 import { Icon } from "@duskit/components";
 
 export default {
-  title: "Components/Icon",
+  title: "Components/Display/Icon",
   component: Icon,
   argTypes: {
     as: {

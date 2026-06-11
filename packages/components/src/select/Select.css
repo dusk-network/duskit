@@ -27,7 +27,7 @@
   );
   font-family: inherit;
   font-size: var(--interactive-control-standard-text-size);
-  line-height: inherit;
+  line-height: 1.5;
   letter-spacing: inherit;
   background-color: var(--_select-bg-color);
   background-image:

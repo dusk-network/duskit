@@ -26,7 +26,7 @@
 .dusk-notification-feed__header {
   display: flex;
   border-bottom: var(--layout-box-border-width) solid
-    oklch(from var(--layout-surface-text-color) l c h / 0.2);
+    var(--layout-boundary-context-color);
   justify-content: flex-end;
   align-items: center;
   gap: var(--layout-box-compact-gap);

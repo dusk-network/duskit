@@ -1,0 +1,110 @@
+.dusk-heading {
+  --_heading-font-family: var(--display-heading-sans-text-family);
+  --_heading-letter-spacing: var(--display-heading-sans-text-letter-spacing);
+  --_heading-transform: none;
+  --_heading-align: start;
+
+  font-family: var(--_heading-font-family);
+  font-size: var(--_heading-size);
+  font-weight: var(--_heading-weight);
+  text-align: var(--_heading-align);
+  text-transform: var(--_heading-transform);
+  letter-spacing: var(--_heading-letter-spacing);
+}
+
+/* ----------------------------------------
+   PROMINENCE
+---------------------------------------- */
+
+/* .dusk-heading--prominence--hero */
+
+.dusk-heading--prominence--hero {
+  --_heading-size: var(--display-heading-hero-text-size);
+  --_heading-weight: var(--display-heading-hero-text-weight);
+}
+
+.dusk-heading--prominence--major {
+  --_heading-size: var(--display-heading-major-text-size);
+  --_heading-weight: var(--display-heading-major-text-weight);
+}
+
+.dusk-heading--prominence--strong {
+  --_heading-size: var(--display-heading-strong-text-size);
+  --_heading-weight: var(--display-heading-strong-text-weight);
+}
+
+.dusk-heading--prominence--standard {
+  --_heading-size: var(--display-heading-standard-text-size);
+  --_heading-weight: var(--display-heading-standard-text-weight);
+}
+
+.dusk-heading--prominence--minor {
+  --_heading-size: var(--display-heading-minor-text-size);
+  --_heading-weight: var(--display-heading-minor-text-weight);
+}
+
+.dusk-heading--prominence--subtle {
+  --_heading-size: var(--display-heading-subtle-text-size);
+  --_heading-weight: var(--display-heading-subtle-text-weight);
+}
+
+/* ----------------------------------------
+   TYPOGRAPHY MODIFIERS
+---------------------------------------- */
+
+.dusk-heading--mono {
+  --_heading-font-family: var(--display-heading-mono-text-family);
+  --_heading-letter-spacing: var(--display-heading-mono-text-letter-spacing);
+}
+
+.dusk-heading--uppercase {
+  --_heading-transform: uppercase;
+}
+
+/* ----------------------------------------
+   ALIGNMENT
+---------------------------------------- */
+
+.dusk-heading--align--end {
+  --_heading-align: end;
+}
+
+.dusk-heading--align--center {
+  --_heading-align: center;
+}
+
+.dusk-heading--align--start {
+  --_heading-align: start;
+}
+
+/* ----------------------------------------
+   VARIANTS
+---------------------------------------- */
+
+.dusk-heading--variant--bracketed-primary {
+  --_heading-decoration-color: var(--display-decoration-primary-color);
+}
+
+.dusk-heading--variant--bracketed-secondary {
+  --_heading-decoration-color: var(--display-decoration-secondary-color);
+}
+
+.dusk-heading--variant--bracketed-neutral {
+  --_heading-decoration-color: var(--display-decoration-neutral-color);
+}
+
+/* ----------------------------------------
+   CHILD ELEMENTS
+---------------------------------------- */
+
+.dusk-heading__decoration {
+  color: var(--_heading-decoration-color);
+}
+
+.dusk-heading__decoration:first-child {
+  margin-inline-end: 0.2em;
+}
+
+.dusk-heading__decoration:last-child {
+  margin-inline-start: 0.2em;
+}

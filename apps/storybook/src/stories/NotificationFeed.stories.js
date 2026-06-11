@@ -14,7 +14,7 @@ export default {
       },
     },
   },
-  title: "Components/NotificationFeed",
+  title: "Components/Layout/NotificationFeed",
 };
 
 export const Default = {};

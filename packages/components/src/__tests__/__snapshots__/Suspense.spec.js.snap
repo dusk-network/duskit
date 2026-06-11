@@ -13,7 +13,7 @@ exports[`Suspense > should accept a custom message for the failure state 1`] = `
   >
     <!---->
     <svg
-      class="dusk-icon dusk-icon--size--large dusk-error-alert__icon"
+      class="dusk-icon dusk-icon--size--default dusk-error-alert__icon"
       role="graphics-symbol"
       viewBox="0 0 24 24"
     >
@@ -194,7 +194,7 @@ exports[`Suspense > should be able to render the \`Suspense\` in a failure state
   >
     <!---->
     <svg
-      class="dusk-icon dusk-icon--size--large dusk-error-alert__icon"
+      class="dusk-icon dusk-icon--size--default dusk-error-alert__icon"
       role="graphics-symbol"
       viewBox="0 0 24 24"
     >

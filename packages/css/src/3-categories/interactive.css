@@ -8,8 +8,8 @@
   --interactive-control-standard-min-block-size: var(--density-target-md);
 
   /* Paddings */
-  --interactive-control-compact-padding-block: var(--space-xs);
-  --interactive-control-standard-padding-block: var(--space-sm);
+  --interactive-control-compact-padding-block: var(--space-xxs);
+  --interactive-control-standard-padding-block: var(--space-xs);
   --interactive-control-compact-padding-inline: var(--space-sm);
   --interactive-control-standard-padding-inline: var(--space-md);
 
@@ -108,8 +108,8 @@
   ------------------------------------------------------------ */
 
   /* Indicator Sizes */
-  --interactive-toggle-compact-indicator-size: var(--icon-size-md);
-  --interactive-toggle-standard-indicator-size: var(--icon-size-lg);
+  --interactive-toggle-compact-indicator-size: var(--icon-size-sm);
+  --interactive-toggle-standard-indicator-size: var(--icon-size-md);
 
   /* Offsets */
   --interactive-toggle-track-offset: var(--offset-sm);

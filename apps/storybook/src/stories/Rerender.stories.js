@@ -1,7 +1,7 @@
 import { Rerender } from "@duskit/components";
 
 export default {
-  title: "Components/Rerender",
+  title: "Components/Layout/Rerender",
   component: Rerender,
   argTypes: {
     generateValue: { control: false },

@@ -8,6 +8,6 @@
 .dusk-agreement__label {
   font-family: inherit;
   font-size: var(--interactive-control-standard-text-size);
-  line-height: inherit;
+  line-height: 1.5;
   letter-spacing: inherit;
 }

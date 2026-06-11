@@ -1,7 +1,7 @@
 import { QrCode } from "@duskit/components";
 
 export default {
-  title: "Components/QrCode",
+  title: "Components/Display/QrCode",
   component: QrCode,
   argTypes: {
     altText: { control: "text" },
@@ -21,4 +21,3 @@ export const Default = {
     altText: "Dusk QR",
   },
 };
-

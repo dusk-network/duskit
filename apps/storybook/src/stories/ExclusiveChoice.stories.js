@@ -1,7 +1,7 @@
 import { ExclusiveChoice } from "@duskit/components";
 
 export default {
-  title: "Components/ExclusiveChoice",
+  title: "Components/Interactive/ExclusiveChoice",
   component: ExclusiveChoice,
   argTypes: {
     name: { control: "text" },
@@ -29,4 +29,3 @@ export const Objects = {
     value: "pro",
   },
 };
-

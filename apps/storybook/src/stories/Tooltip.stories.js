@@ -1,7 +1,7 @@
 import TooltipExample from "./_examples/TooltipExample.svelte";
 
 export default {
-  title: "Components/Tooltip",
+  title: "Components/Display/Tooltip",
   component: TooltipExample,
   argTypes: {
     defaultDelayHide: { control: "number" },
@@ -29,4 +29,3 @@ export const Default = {
     defaultType: "info",
   },
 };
-

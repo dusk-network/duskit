@@ -20,7 +20,7 @@
   overflow: hidden;
   font-family: inherit;
   font-size: var(--interactive-control-compact-text-size);
-  line-height: inherit;
+  line-height: 1.5;
   color: var(--_label-text-color);
   text-align: center;
   text-overflow: ellipsis;
@@ -29,7 +29,7 @@
   transition:
     background-color 0.2s ease-in-out,
     color 0.2s ease-in-out;
-  padding-block: var(--interactive-control-compact-padding-block);
+  padding-block: var(--interactive-control-standard-padding-block);
   padding-inline: var(--interactive-control-standard-padding-inline);
 }
 

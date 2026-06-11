@@ -1,7 +1,7 @@
 import { MiddleEllipsis } from "@duskit/components";
 
 export default {
-  title: "Components/MiddleEllipsis",
+  title: "Components/Display/MiddleEllipsis",
   component: MiddleEllipsis,
   argTypes: {
     as: { control: "select", options: ["pre", "div", "code"] },

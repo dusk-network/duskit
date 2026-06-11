@@ -66,26 +66,31 @@
     />
     <Button
       bind:this={btnToggle}
+      data-ignore-outside-click=""
       on:click={() => setPanelStatus(!open)}
       size="small"
       text={`${open ? "Close" : "Open"} Panel`}
     />
     <Button
+      data-ignore-outside-click=""
       on:click={addNotification("error")}
       size="small"
       text="Add Error Notification"
     />
     <Button
+      data-ignore-outside-click=""
       on:click={addNotification("info")}
       size="small"
       text="Add Info Notification"
     />
     <Button
+      data-ignore-outside-click=""
       on:click={addNotification("success")}
       size="small"
       text="Add Success Notification"
     />
     <Button
+      data-ignore-outside-click=""
       on:click={addNotification("warning")}
       size="small"
       text="Add Warning Notification"
@@ -97,11 +102,17 @@
       from="right"
       on:closerequest={(event) => {
         const { originalEvent, reason } = event.detail;
-        const isClickOnToggle =
+        const ignoreOutsideClick =
           reason === "outsideclick" &&
-          originalEvent.composedPath().includes(btnToggle.getRootElement());
+          originalEvent
+            .composedPath()
+            .filter(
+              (el) =>
+                el instanceof HTMLElement &&
+                el.hasAttribute("data-ignore-outside-click")
+            ).length !== 0;
 
-        if (!isClickOnToggle) {
+        if (!ignoreOutsideClick) {
           setPanelStatus(false);
         }
       }}

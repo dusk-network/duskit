@@ -10,16 +10,16 @@
 }
 
 .dusk-icon--size--default {
-  width: var(--display-icon-size-md);
-  height: var(--display-icon-size-md);
+  width: var(--display-icon-standard-size);
+  height: var(--display-icon-standard-size);
 }
 
 .dusk-icon--size--large {
-  width: var(--display-icon-size-lg);
-  height: var(--display-icon-size-lg);
+  width: var(--display-icon-prominent-size);
+  height: var(--display-icon-prominent-size);
 }
 
 .dusk-icon--size--small {
-  width: var(--display-icon-size-sm);
-  height: var(--display-icon-size-sm);
+  width: var(--display-icon-compact-size);
+  height: var(--display-icon-compact-size);
 }

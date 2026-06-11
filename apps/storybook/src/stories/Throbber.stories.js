@@ -1,7 +1,7 @@
 import { Throbber } from "@duskit/components";
 
 export default {
-  title: "Components/Throbber",
+  title: "Components/Feedback/Throbber",
   component: Throbber,
   argTypes: {
     duration: { control: "number" },
@@ -22,4 +22,3 @@ export const Small = {
     duration: 1200,
   },
 };
-
