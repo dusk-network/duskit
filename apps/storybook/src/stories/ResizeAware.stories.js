@@ -1,7 +1,7 @@
 import ResizeAwareExample from "./_examples/ResizeAwareExample.svelte";
 
 export default {
-  title: "Components/ResizeAware",
+  title: "Components/Layout/ResizeAware",
   component: ResizeAwareExample,
   argTypes: {
     initialHeight: { control: "number" },
@@ -15,4 +15,3 @@ export const Default = {
     initialHeight: 200,
   },
 };
-

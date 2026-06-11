@@ -3,7 +3,7 @@ import { ErrorAlert } from "@duskit/components";
 const exampleError = new Error("Request failed (500)");
 
 export default {
-  title: "Components/ErrorAlert",
+  title: "Components/Feedback/ErrorAlert",
   component: ErrorAlert,
   argTypes: {
     error: { control: false },

@@ -1,7 +1,7 @@
 import { Switch } from "@duskit/components";
 
 export default {
-  title: "Components/Switch",
+  title: "Components/Interactive/Switch",
   component: Switch,
   argTypes: {
     checked: { control: "boolean" },

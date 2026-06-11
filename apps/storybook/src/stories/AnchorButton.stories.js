@@ -3,7 +3,7 @@ import { mdiArrowRight } from "@mdi/js";
 import { AnchorButton } from "@duskit/components";
 
 export default {
-  title: "Components/AnchorButton",
+  title: "Components/Interactive/AnchorButton",
   component: AnchorButton,
   argTypes: {
     disabled: { control: "boolean" },
@@ -11,7 +11,10 @@ export default {
     icon: { control: "object" },
     size: { control: "select", options: ["small", "default"] },
     text: { control: "text" },
-    variant: { control: "select", options: ["primary", "secondary", "tertiary"] },
+    variant: {
+      control: "select",
+      options: ["primary", "secondary", "tertiary"],
+    },
   },
 };
 
@@ -37,4 +40,3 @@ export const Disabled = {
     disabled: true,
   },
 };
-

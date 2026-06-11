@@ -7,7 +7,7 @@ import {
 } from "@mdi/js";
 
 export default {
-  title: "Components/CounterIcon",
+  title: "Components/Feedback/CounterIcon",
   component: CounterIcon,
   argTypes: {
     baseIconPath: {

@@ -2,7 +2,7 @@ import { ProgressBar } from "@duskit/components";
 import { bounceIn, expoOut, linear } from "svelte/easing";
 
 export default {
-  title: "Components/ProgressBar",
+  title: "Components/Feedback/ProgressBar",
   component: ProgressBar,
   parameters: {
     controls: { expanded: true },

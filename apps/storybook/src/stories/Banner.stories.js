@@ -1,7 +1,7 @@
 import BannerExample from "./_examples/BannerExample.svelte";
 
 export default {
-  title: "Components/Banner",
+  title: "Components/Feedback/Banner",
   component: BannerExample,
   argTypes: {
     content: { control: "text" },
@@ -17,7 +17,8 @@ export const Info = {
   args: {
     title: "Info",
     variant: "info",
-    content: "This is an informational banner.",
+    content:
+      "https://api.duskit.dev/v2/fallback/logs/errors/transaction_failed_critical_exception_stacktrace_node_modules",
   },
 };
 

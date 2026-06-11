@@ -187,7 +187,7 @@
     on:mousedown={handleScrollButtonMouseDown}
     on:mouseup={handleScrollButtonMouseUp}
     tabindex={-1}
-    variant="tertiary"
+    variant="naked"
   />
   <ul
     bind:this={tabsList}
@@ -232,6 +232,6 @@
     on:mousedown={handleScrollButtonMouseDown}
     on:mouseup={handleScrollButtonMouseUp}
     tabindex={-1}
-    variant="tertiary"
+    variant="naked"
   />
 </div>

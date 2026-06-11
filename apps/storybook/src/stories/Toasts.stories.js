@@ -13,7 +13,7 @@ export default {
       },
     },
   },
-  title: "Components/Toasts",
+  title: "Components/Display/ToastContainer",
 };
 
 export const Default = {};

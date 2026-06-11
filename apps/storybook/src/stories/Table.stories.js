@@ -24,7 +24,7 @@ const descriptors = [
 ];
 
 export default {
-  title: "Components/Table",
+  title: "Components/Display/Table",
   component: Table,
   argTypes: {
     caption: { control: "text" },
@@ -49,4 +49,3 @@ export const WithDescriptors = {
     style: "max-width: 720px;",
   },
 };
-

@@ -15,7 +15,7 @@ const groupedOptions = {
 };
 
 export default {
-  title: "Components/Select",
+  title: "Components/Interactive/Select",
   component: Select,
   argTypes: {
     options: { control: "object" },
@@ -36,4 +36,3 @@ export const Grouped = {
     value: "carrot",
   },
 };
-

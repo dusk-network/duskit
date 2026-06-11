@@ -1,7 +1,7 @@
 import { Agreement } from "@duskit/components";
 
 export default {
-  title: "Components/Agreement",
+  title: "Components/Interactive/Agreement",
   component: Agreement,
   argTypes: {
     checked: { control: "boolean" },
@@ -33,4 +33,3 @@ export const Disabled = {
     disabled: true,
   },
 };
-

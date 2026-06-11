@@ -1,7 +1,7 @@
 import SuspenseExample from "./_examples/SuspenseExample.svelte";
 
 export default {
-  title: "Components/Suspense",
+  title: "Components/Layout/Suspense",
   component: SuspenseExample,
   argTypes: {
     errorMessage: { control: "text" },

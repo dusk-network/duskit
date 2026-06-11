@@ -3,7 +3,7 @@ import { ErrorDetails } from "@duskit/components";
 const exampleError = new Error("Something went wrong while loading data.");
 
 export default {
-  title: "Components/ErrorDetails",
+  title: "Components/Feedback/ErrorDetails",
   component: ErrorDetails,
   argTypes: {
     error: { control: false },
@@ -17,4 +17,3 @@ export const Default = {
     error: exampleError,
   },
 };
-

@@ -15,7 +15,7 @@ try {
 }
 
 export default {
-  title: "Components/CopyField",
+  title: "Components/Interactive/CopyField",
   component: CopyField,
   argTypes: {
     disabled: { control: "boolean" },

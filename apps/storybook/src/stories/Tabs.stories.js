@@ -14,7 +14,7 @@ const items = [
 ];
 
 export default {
-  title: "Components/Tabs",
+  title: "Components/Interactive/Tabs",
   component: Tabs,
   argTypes: {
     items: { control: false },
@@ -29,4 +29,3 @@ export const Default = {
     style: "max-width: 520px;",
   },
 };
-

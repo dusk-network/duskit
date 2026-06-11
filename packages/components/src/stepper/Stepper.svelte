@@ -85,7 +85,7 @@
           aria-labelledby={id}
         >
           {#if currentStep.iconPath}
-            <Icon path={currentStep.iconPath} />
+            <Icon path={currentStep.iconPath} size="small" />
           {:else}
             {showStepNumbers ? idx + 1 : ""}
           {/if}

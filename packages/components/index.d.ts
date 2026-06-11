@@ -20,6 +20,7 @@ export { default as Drawer } from "./src/drawer/Drawer";
 export { default as ErrorAlert } from "./src/error-alert/ErrorAlert";
 export { default as ErrorDetails } from "./src/error-details/ErrorDetails";
 export { default as ExclusiveChoice } from "./src/exclusive-choice/ExclusiveChoice";
+export { default as Heading } from "./src/heading/Heading";
 export { default as Icon } from "./src/icon/Icon";
 export { default as MiddleEllipsis } from "./src/middle-ellipsis/MiddleEllipsis";
 export { default as Notification } from "./src/notification/Notification";

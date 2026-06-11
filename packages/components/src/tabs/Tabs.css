@@ -8,12 +8,8 @@
   gap: var(--interactive-control-compact-gap);
 }
 
-.dusk-tab-scroll-button {
-  padding: min(
-    var(--interactive-control-compact-padding-block),
-    var(--interactive-control-compact-padding-inline)
-  );
-  border: 0;
+.dusk-tab-scroll-button:enabled:hover:not(:active) {
+  scale: 1;
 }
 
 .dusk-button.dusk-icon-button.dusk-tab-scroll-button--hidden {
@@ -46,11 +42,12 @@
   align-items: center;
   justify-content: center;
   flex: 1 1 0%;
+  min-block-size: var(--interactive-control-standard-min-block-size);
   gap: var(--interactive-control-standard-gap);
   padding-block: var(--interactive-control-standard-padding-block);
   padding-inline: var(--interactive-control-standard-padding-inline);
   font-size: var(--interactive-control-standard-text-size);
-  line-height: inherit;
+  line-height: 1.5;
   color: var(--_tab-text-color);
   background-color: var(--_tab-bg-color);
   border-end-end-radius: 0;

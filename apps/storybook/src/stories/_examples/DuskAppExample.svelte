@@ -16,6 +16,7 @@
     Button,
     Card,
     ContentSwitch,
+    Heading,
     Icon,
     Table,
     Textbox,
@@ -101,11 +102,19 @@
 <main class="dashboard">
   <header class="dashboard__header">
     <div class="dashboard__brand">
-      <Icon aria-hidden="true" className="brand-logo" path={logo} />
-      <div class="brand-text">
-        <span class="eyebrow-heading">Duskit</span>
-        <h1 class="brand-title">Dusk app example</h1>
-      </div>
+      <Icon
+        aria-hidden="true"
+        className="brand-logo"
+        path={logo}
+        size="large"
+      />
+      <Heading
+        as="h1"
+        mono={true}
+        prominence="major"
+        uppercase={true}
+        variant="bracketed-primary">Duskit</Heading
+      >
     </div>
 
     <nav class="dashboard__actions" aria-label="Global actions">
@@ -120,7 +129,13 @@
       <article class="dashboard__card-balance">
         <Card>
           <svelte:fragment slot="header">
-            <h2 class="eyebrow-heading">Total Balance</h2>
+            <Heading
+              as="h3"
+              mono={true}
+              prominence="minor"
+              uppercase={true}
+              variant="bracketed-primary">Total Balance</Heading
+            >
             <Badge text="Testnet" variant="success" />
           </svelte:fragment>
 
@@ -168,7 +183,13 @@
       <article class="dashboard__card-order">
         <Card>
           <svelte:fragment slot="header">
-            <h2 class="eyebrow-heading">Order</h2>
+            <Heading
+              as="h3"
+              mono={true}
+              prominence="minor"
+              uppercase={true}
+              variant="bracketed-primary">Order</Heading
+            >
             <div class="order-badges">
               <Badge text="Ready" variant="info" />
             </div>
@@ -200,7 +221,13 @@
     <article class="dashboard__card-markets">
       <Card>
         <svelte:fragment slot="header">
-          <h2 class="eyebrow-heading">Markets</h2>
+          <Heading
+            as="h3"
+            mono={true}
+            prominence="minor"
+            uppercase={true}
+            variant="bracketed-primary">Markets</Heading
+          >
           <ContentSwitch items={tabs} selectedTab="positions" />
         </svelte:fragment>
 
@@ -211,7 +238,14 @@
     <article class="dashboard__card-activity">
       <Card>
         <svelte:fragment slot="header">
-          <h2 class="eyebrow-heading">Recent Transactions</h2>
+          <Heading
+            as="h3"
+            mono={true}
+            prominence="minor"
+            uppercase={true}
+            variant="bracketed-primary">Recent Transactions</Heading
+          >
+
           <Button text="View all" variant="tertiary" size="small" />
         </svelte:fragment>
 
@@ -241,8 +275,6 @@
 
 <style>
   .dashboard {
-    --_local-eyebrow-text-color: var(--text-accent-primary-color);
-    --_local-border-color: oklch(from currentcolor l c h / 0.5);
     --_local-muted-text-color: oklch(from currentcolor l c h / 0.7);
   }
 
@@ -253,9 +285,9 @@
     display: flex;
     flex-direction: column;
     gap: var(--layout-box-relaxed-gap);
-    width: min(72rem, calc(100vw - 3rem));
-    margin-inline: auto;
+    max-width: 72rem;
     padding-block: var(--layout-box-standard-padding-block);
+    padding-inline: var(--layout-box-standard-padding-inline);
   }
 
   .dashboard__header {
@@ -286,22 +318,8 @@
     gap: var(--layout-box-compact-gap);
   }
 
-  .brand-text {
-    display: flex;
-    flex-direction: column;
-    gap: var(--layout-box-compact-gap);
-  }
-
-  :global(.brand-logo) {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-
-  .brand-title {
-    margin: 0;
-    font-family: var(--layout-heading-text-family);
-    font-size: var(--layout-heading-text-size);
-    line-height: 1.1;
+  .dashboard__brand :global(.dusk-heading) {
+    transform: translateY(-0.08em);
   }
 
   .dashboard__actions {
@@ -309,26 +327,6 @@
     align-items: center;
     gap: var(--layout-box-compact-gap);
     flex-wrap: wrap;
-  }
-
-  /* ==========================================================================
-     TYPOGRAPHY & EYEBROWS (The Brackets Trick)
-     ========================================================================== */
-  .eyebrow-heading {
-    margin: 0;
-    font-family: var(--layout-raw-text-family);
-    font-size: var(--layout-title-text-size);
-    color: var(--_local-eyebrow-text-color);
-    text-transform: uppercase;
-    letter-spacing: var(--layout-raw-text-letter-spacing);
-  }
-
-  /* Adds decorative brackets without polluting the HTML/Screen readers */
-  .eyebrow-heading::before {
-    content: "[ ";
-  }
-  .eyebrow-heading::after {
-    content: " ]";
   }
 
   /* ==========================================================================
@@ -372,7 +370,7 @@
     margin-block-start: var(--layout-box-standard-padding-block);
     padding-block-start: var(--layout-box-standard-padding-block);
     border-block-start: var(--layout-box-border-width) solid
-      var(--_local-border-color);
+      var(--layout-boundary-context-color);
   }
 
   .balance-split-item {
@@ -456,7 +454,7 @@
     min-width: 0;
     padding-block: var(--layout-box-standard-padding-block);
     border-block-end: var(--layout-box-border-width) solid
-      var(--_local-border-color);
+      var(--layout-boundary-context-color);
   }
 
   .activity-item:first-child {
@@ -515,13 +513,8 @@
 
   @media (max-width: 760px) {
     .dashboard {
-      width: min(100%, calc(100vw - 1rem));
       padding-block: var(--layout-box-compact-padding-block);
-    }
-
-    .dashboard__header {
-      flex-direction: column;
-      align-items: stretch;
+      padding-inline: var(--layout-box-compact-padding-inline);
     }
 
     .dashboard__grid-top {

@@ -22,6 +22,7 @@ export { default as Drawer } from "./src/drawer/Drawer.svelte";
 export { default as ErrorAlert } from "./src/error-alert/ErrorAlert.svelte";
 export { default as ErrorDetails } from "./src/error-details/ErrorDetails.svelte";
 export { default as ExclusiveChoice } from "./src/exclusive-choice/ExclusiveChoice.svelte";
+export { default as Heading } from "./src/heading/Heading.svelte";
 export { default as Icon } from "./src/icon/Icon.svelte";
 export { default as MiddleEllipsis } from "./src/middle-ellipsis/MiddleEllipsis.svelte";
 export { default as Notification } from "./src/notification/Notification.svelte";

@@ -3,7 +3,7 @@ import { mdiAccount } from "@mdi/js";
 import { Button } from "@duskit/components";
 
 export default {
-  title: "Components/Button",
+  title: "Components/Interactive/Button",
   component: Button,
   argTypes: {
     icon: { control: "object" },

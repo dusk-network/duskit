@@ -1,9 +1,18 @@
 :root {
   /* --- Surfaces & Backgrounds --- */
+  --layout-main-bg-color: var(--background-color);
+  --layout-main-text-color: var(--on-background-color);
   --layout-surface-bg-color: var(--surface-color);
   --layout-surface-text-color: var(--on-surface-color);
   --layout-surface-layer-bg-color: var(--surface-layer-color);
   --layout-surface-layer-text-color: var(--on-surface-layer-color);
+
+  /* --- Boundaries --- */
+  --layout-boundary-subtle-color: var(--neutral-subtle-color);
+  --layout-boundary-strong-color: var(--neutral-strong-color);
+  --layout-boundary-context-color: oklch(from currentcolor l c h / 0.3);
+  --layout-boundary-accent-primary-color: var(--text-accent-primary-color);
+  --layout-boundary-accent-secondary-color: var(--text-accent-secondary-color);
 
   /* --- Layout box anatomy (generic) --- */
   --layout-box-radius-pill-size: var(--border-radius-pill);
@@ -28,12 +37,12 @@
 
   /* Headings for large structural areas (e.g. modal headers) */
   --layout-heading-text-family: var(--sans-font-family);
-  --layout-heading-text-size: var(--text-heading-sm);
+  --layout-heading-text-size: var(--text-heading-md);
   --layout-heading-text-letter-spacing: normal;
 
   /* Titles for secondary areas or sub-components */
   --layout-title-text-family: var(--sans-font-family);
-  --layout-title-text-size: var(--text-heading-xs);
+  --layout-title-text-size: var(--text-heading-sm);
   --layout-title-text-letter-spacing: normal;
 
   /*

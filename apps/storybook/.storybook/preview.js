@@ -22,12 +22,18 @@ const preview = {
   ],
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
-    layout: "padded",
     controls: {
       expanded: true,
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
+      },
+    },
+    layout: "padded",
+    options: {
+      storySort: {
+        method: "alphabetical",
+        order: ["Docs", "Components", "Examples"],
       },
     },
   },

@@ -1,7 +1,7 @@
 import AnchorExample from "./_examples/AnchorExample.svelte";
 
 export default {
-  title: "Components/Anchor",
+  title: "Components/Interactive/Anchor",
   component: AnchorExample,
   argTypes: {
     href: { control: "text" },
