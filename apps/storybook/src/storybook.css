@@ -10,3 +10,16 @@
    */
   background-color: var(--background-color);
 }
+
+/* quick override of the main font size for docs */
+.sbdocs-content :is(a, blockquote, li, p, span, td, th) {
+  font-size: 1rem;
+}
+
+.sbdocs-content :is(code, pre) {
+  font-size: 0.9rem;
+}
+
+.prismjs span {
+  font-size: inherit;
+}
