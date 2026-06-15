@@ -1,5 +1,22 @@
 # @duskit/css
 
+## 1.0.0
+
+### Major Changes
+
+- [#334](https://github.com/dusk-network/duskit/pull/334) [`ce7c9d3`](https://github.com/dusk-network/duskit/commit/ce7c9d334bf1a69c095a78422419b5f70774c7a6) Thanks [@ascartabelli](https://github.com/ascartabelli)! - refactor(css / components)!: stabilize token contracts, layout mechanics and component anatomy
+  - **BREAKING CHANGE**: renamed icon size contracts in `display.css` as they weren't following the naming rules
+  - tweaked icon sizing
+  - made icon sizes follow the optical scale instead of the macro one
+  - tweaked headings scale
+  - added fluid typography for all headings
+  - added new contracts in `display.css` for headings
+  - tweaked paddings of interactive components
+  - tweaked sizes of toggle indicators
+  - added missing contracts for main background and text colors in `layout.css`
+  - tweaked text size of headings and titles in `layout.css`
+  - added contracts for boundary colours in `layout.css`
+
 ## 0.4.0
 
 ### Minor Changes
