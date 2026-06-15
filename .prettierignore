@@ -1,3 +1,4 @@
 apps/*/coverage/**
 packages/*/coverage/**
 **/.turbo/**
+**/*.mdx

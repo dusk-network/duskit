@@ -1,0 +1,486 @@
+import { Meta, Title, Subtitle } from "@storybook/addon-docs/blocks";
+
+<Meta title="Docs/Notification System" />
+
+<Title>Notification System Architecture</Title>
+<Subtitle>
+  A decoupled approach to state management, event dispatching, and UI
+  presentation
+</Subtitle>
+
+The notification ecosystem is built on a strictly decoupled architecture. It separates the domain logic (state management and persistence) from the global event dispatching system, and completely isolates both from the presentation layer (the UI components).
+
+While the system provides a zero-configuration, "batteries-included" approach via the `NotificationProvider`, this is merely the most common implementation path. The underlying architecture is highly modular, allowing developers to bypass the default provider entirely to inject custom persistence logic or synchronize state with remote backends.
+
+## TOC
+
+- [1. Setup and Quick Start (The "Fire & Forget" Provider)](#1-setup-and-quick-start-the-fire--forget-provider)
+- [2. The Dispatcher (notifier)](#2-the-dispatcher-notifier)
+- [3. Presentation Layer Roles](#3-presentation-layer-roles)
+- [4. Inversion of Control (Store Factory)](#4-inversion-of-control-store-factory)
+- [5. Atomic Namespace Management](#5-atomic-namespace-management)
+
+---
+
+## 1. Setup and Quick Start (The "Fire & Forget" Provider)
+
+For the vast majority of applications, the notification system is designed to be a "fire & forget" integration. You do not need to manually instantiate stores, manage local storage keys, or wire up event listeners.
+
+This automatic orchestration is handled by the `NotificationProvider`.
+
+By wrapping your application root in this provider, the system autonomously sets up the persistent store, listens for global dispatch events, and manages namespace transitions. Once the provider is in place, you only need to mount the visual containers (`ToastContainer` for ephemeral alerts and `NotificationPanel` or `NotificationFeed` for persistent history) anywhere within the application tree.
+
+### Integration Example
+
+```html
+<script>
+  import {
+    NotificationPanel,
+    NotificationProvider,
+    ToastContainer,
+  } from "@duskit/components";
+
+  let isPanelOpen = false;
+</script>
+
+<NotificationProvider>
+  <slot />
+
+  <ToastContainer tooltipId="main-tooltip" />
+
+  <NotificationPanel
+    bind:open="{isPanelOpen}"
+    from="right"
+    tooltipId="main-tooltip"
+  />
+</NotificationProvider>
+```
+
+> **Interactive Examples:** You can explore the visual behaviors and configuration options directly in the component stories:
+>
+> - [View `ToastContainer` stories](/story/components-display-toastcontainer--default)
+> - [View `NotificationPanel` stories](/story/components-layout-notificationpanel--default)
+> - [View `NotificationFeed` stories](/story/components-layout-notificationfeed--default)
+> - [View `Notification` stories](/story/components-feedback-notification--panel-read)
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 2. The Dispatcher (notifier)
+
+The `notifier` is the execution mechanism of the system. It is a completely UI-agnostic event emitter. It has zero knowledge of the DOM, the `NotificationProvider`, or the Svelte component lifecycle. Its sole responsibility is to broadcast standardized payloads.
+
+This decoupling provides a massive architectural advantage: you are not restricted to triggering notifications from within `.svelte` files or UI event handlers. You can safely import and execute the `notifier` from anywhere in your codebase, including plain TypeScript utilities, global error handlers, or network interceptors.
+
+### Available Dispatch Methods and Payloads
+
+The dispatcher exposes dedicated methods mapped to the target presentation layers. Below are the methods and their respective TypeScript interfaces.
+
+```typescript
+type StatusType = "error" | "info" | "success" | "warning";
+
+interface NotificationNamespaceOptions {
+  clearPrevious: boolean;
+  merge: boolean;
+}
+
+interface NotificationPanelPayload {
+  iconPath?: string;
+  text?: string;
+  title?: string;
+  type: StatusType;
+}
+
+interface NotificationToastPayload {
+  dismissable: boolean;
+  iconPath?: string;
+  text?: string;
+  timeout?: number;
+  title?: string;
+  type: StatusType;
+}
+```
+
+- **`notifier.bounded(getIdentity: () => unknown)`**: Returns a scoped dispatcher that validates the context via the [`SameValueZero` algorithm](https://262.ecma-international.org/#sec-samevaluezero) before emitting events, discarding them if the identity has changed.
+- **`notifier.toast(payload: NotificationToastPayload)`**: Dispatches an ephemeral notification intended for the `ToastContainer`. The optional `dismissable` flag allows the user to manually close the toast before its automatic decay.
+- **`notifier.panel(payload: NotificationPanelPayload)`**: Dispatches a persistent notification intended for the `NotificationFeed` and `NotificationPanel`. These notifications are stored in the history until explicitly read or cleared.
+- **`notifier.namespace(name: string, options?: NamespaceOptions)`**: Broadcasts a directive to switch the active storage namespace. Passing an empty string as the `name` resets the store to its default base namespace. (This mechanic is covered in detail in [Chapter 5](#5-atomic-namespace-management)).
+
+### Usage Example (Vanilla JavaScript/TypeScript)
+
+This example demonstrates how to dispatch a toast notification directly from a standard fetch utility when a network error occurs, completely bypassing the UI layer.
+
+```javascript
+import { notifier } from "@duskit/components";
+
+export async function fetchUserData(url) {
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    notifier.toast({
+      dismissable: true,
+      text: error.message,
+      title: "Fetch Failed",
+      type: "error",
+    });
+
+    throw error;
+  }
+}
+```
+
+### Bounded Dispatch (Preventing Race Conditions)
+
+When dealing with asynchronous operations (e.g., network requests), there is a risk of race conditions where a user changes their context (such as logging out or switching workspaces) before the operation completes. If the operation fails, dispatching an error notification in the new context would be factually incorrect and confusing.
+
+To solve this, the `notifier` exposes the `bounded(getIdentity)` method. This method accepts a callback function that returns a snapshot of the current identity or context. It returns a scoped dispatcher containing only the `panel` and `toast` methods.
+
+When a method on this scoped dispatcher is called, it evaluates whether the current identity still matches the initial snapshot by applying the [`SameValueZero` comparison algorithm](https://262.ecma-international.org/#sec-samevaluezero). If the identity has changed in the meantime, the notification is silently discarded.
+
+#### Bounded Usage Example
+
+```javascript
+import { notifier } from "@duskit/components";
+
+export async function fetchUserData(url, getCurrentUserId) {
+  // Create a dispatcher strictly bound to the user ID at the time of the call
+  const boundNotifier = notifier.bounded(getCurrentUserId);
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    // This will only trigger if getCurrentUserId() still returns the
+    // exact same value it did when bounded() was initially invoked.
+    boundNotifier.toast({
+      dismissable: true,
+      text: error.message,
+      title: "Fetch Failed",
+      type: "error",
+    });
+
+    throw error;
+  }
+}
+```
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 3. Presentation Layer Roles
+
+The presentation layer in this architecture is strictly declarative and completely passive. The visual components do not mutate the core state, intercept global DOM events, or handle namespace transitions. They merely subscribe to the context provided by the `NotificationProvider` and render the data accordingly.
+
+The system divides the visual representation into two distinct categories based on the notification's lifecycle: ephemeral and persistent.
+
+### Ephemeral Feedback (ToastContainer)
+
+Toasts are designed for immediate, non-blocking feedback that disappears automatically. The `ToastContainer` component subscribes exclusively to the "toast" segment of the notification store.
+
+**Performance & Visibility Architecture:** Managing multiple decaying UI elements simultaneously can introduce performance bottlenecks if handled via standard `setInterval` / `setTimeout` timers. To guarantee a consistent 60fps experience, the `ToastContainer` utilizes a high-performance `requestAnimationFrame` (rAF) loop. This loop manages the high-frequency computation of the temporal progress for each active notification and reactively propagates these values as properties (`decayProgress`) to the individual visual components.
+
+Furthermore, it actively monitors the `document.visibilityState`. If the user switches to another tab, the loop is entirely paused. This prevents unnecessary CPU usage and ensures that notifications do not expire in the background, avoiding an unexpected mass-deletion event when the user returns.
+
+```typescript
+interface ToastContainerProps {
+  className?: string;
+  store?: NotificationStore;
+  tooltipId?: string;
+}
+
+```
+
+### Persistent History (NotificationFeed and NotificationPanel)
+
+Unlike toasts, notifications dispatched as "panel" payloads are persistent. They remain in the history until the user explicitly interacts with them (e.g., marks them as read or clears the list).
+
+The system splits this responsibility into two distinct components to maximize reusability:
+
+#### NotificationFeed
+
+This is the core data-display component. It renders the scrollable list of persistent notifications, handles the "empty" visual states, and provides the interactive elements (buttons to mark as read or delete items). It is completely decoupled from the page layout and can be mounted anywhere (e.g., inside a custom dropdown menu or a dedicated user settings page).
+
+```typescript
+interface NotificationFeedAction {
+  disabled?: boolean;
+  iconPath: string;
+  label: string;
+  onClick: (event: MouseEvent) => void;
+}
+
+interface NotificationFeedProps {
+  className?: string;
+  extraActions?: NotificationFeedAction[];
+  locale?: string;
+  store?: NotificationStore;
+  tooltipId?: string;
+}
+
+```
+
+#### NotificationPanel
+
+This is a specialized layout wrapper. It encapsulates the `NotificationFeed` inside an off-canvas drawer. It manages the physical slide-in animation, the open/close state binding, and the focus trapping for accessibility, while fully delegating the actual list rendering to the feed inside it. It does not manage any backdrop overlay, keeping its structural footprint minimal.
+
+```typescript
+interface NotificationPanelCloseDetails {
+  originalEvent: KeyboardEvent | MouseEvent | PointerEvent;
+  reason: "cancel" | "closebutton" | "outsideclick";
+}
+
+interface NotificationPanelEvents {
+  closerequest: CustomEvent<NotificationPanelCloseDetails>;
+}
+
+interface NotificationPanelProps {
+  className?: string;
+  from?: "left" | "right";
+  locale?: string;
+  open: boolean;
+  store?: NotificationStore;
+  tooltipId?: string;
+}
+
+```
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 4. Inversion of Control (Store Factory)
+
+While the `NotificationProvider` is convenient, it is not mandatory. Under the hood, the system's state logic is completely decoupled from its persistence mechanism through an Inversion of Control (IoC) pattern.
+
+The core of this architecture is the `createNotificationStore` factory. Instead of instantiating its own internal state, this factory requires you to pass an existing Svelte `Writable` store as its first argument.
+
+### The Domain Decorator
+
+By accepting a generic `Writable` from the outside, the factory acts as a pure domain decorator. It wraps the raw array of notifications and attaches all the domain-specific methods (like `add`, `changeNamespace`, `markAsRead`, and `merge`) and reactive derivations (such as `panels`, `toasts`, and `unreadCount`).
+
+This design makes the system fully agnostic. The standard provider injects a store tied to local storage, but you can easily bypass the provider to inject a standard in-memory store (ideal for unit testing) or a highly complex store that synchronizes state with a remote database.
+
+```typescript
+import type { Writable } from "svelte/store";
+
+import type {
+  NamespaceTransitionStrategy,
+  NotificationItem,
+  NotificationStore,
+} from "@duskit/components";
+
+/**
+ * Creates a specialized store to manage the notification state.
+ */
+export function createNotificationStore(
+  store: Writable<NotificationItem[]>,
+  transitionStrategy?: NamespaceTransitionStrategy
+): NotificationStore;
+
+```
+
+### Custom Implementation Example
+
+If your application requires custom persistence logic, you can initialize the store manually and pass it directly to the presentation components, entirely omitting the `NotificationProvider`.
+
+Since the visual components accept an explicit `store` property, they will seamlessly subscribe to your custom implementation.
+
+```html
+<script>
+  import {
+    createNotificationStore,
+    ToastContainer,
+  } from "@duskit/components";
+  import { writable } from "svelte/store";
+
+  // 1. Create a raw writable store (e.g., backed by a custom DB sync logic)
+  const rawStore = writable([]);
+
+  // 2. Decorate it with the notification domain logic
+  const customStore = createNotificationStore(rawStore);
+</script>
+
+<ToastContainer store={customStore} />
+
+```
+
+#### In-Memory Namespace Fallback
+
+When utilizing a standalone in-memory store without providing a custom `NamespaceTransitionStrategy` to the factory, calling `changeNamespace` triggers a built-in fallback mechanism. If the transition options specify that no data merge is requested (`merge: false`), the store automatically invokes its internal `clear()` method to safely purge the current in-memory state. This ensures that moving to a new namespace cleanly resets the memory footprint when no persistence orchestrator is present.
+
+### Technical API Reference
+
+Since this factory acts as a pure domain decorator, below are the fully resolved TypeScript types and the operational contract exposed by the generated store.
+
+```typescript
+import type { Readable } from "svelte/store";
+
+type StatusType = "error" | "info" | "success" | "warning";
+
+interface NamespaceTransitionStrategy {
+  (
+    name: string,
+    options: {
+      clearOldKey?: boolean;
+      merger?: (
+        current: NotificationItem[],
+        incoming: NotificationItem[]
+      ) => NotificationItem[];
+    }
+  ): void;
+}
+
+interface NotificationPanelItem {
+  date: Date;
+  dismissable: true;
+  iconPath?: string;
+  id: string;
+  mode: "panel";
+  read: boolean;
+  text?: string;
+  title?: string;
+  type: StatusType;
+}
+
+interface NotificationToastItem {
+  date: Date;
+  dismissable: boolean;
+  iconPath?: string;
+  id: string;
+  mode: "toast";
+  text?: string;
+  timeout?: number;
+  title?: string;
+  type: StatusType;
+}
+
+type NotificationItem = NotificationPanelItem | NotificationToastItem;
+
+interface NotificationPanelInput {
+  iconPath?: string;
+  mode: "panel";
+  text?: string;
+  title?: string;
+  type: StatusType;
+}
+
+interface NotificationToastInput {
+  dismissable: boolean;
+  iconPath?: string;
+  mode: "toast";
+  text?: string;
+  timeout?: number;
+  title?: string;
+  type: StatusType;
+}
+
+type NotificationInput = NotificationPanelInput | NotificationToastInput;
+
+interface NotificationStore extends Readable<NotificationItem[]> {
+  add: (data: NotificationInput) => NotificationItem;
+  changeNamespace: (name: string, options: NotificationNamespaceOptions) => void;
+  clear: () => void;
+  clearPanels: () => void;
+  clearToasts: () => void;
+  get: (id: string) => NotificationItem | undefined;
+  markAllAsRead: () => void;
+  markAsRead: (id: string) => void;
+  merge: (
+    items: NotificationItem[],
+    merger?: (current: NotificationItem[], incoming: NotificationItem[]) => NotificationItem[]
+  ) => void;
+  panelCount: Readable<number>;
+  panels: Readable<NotificationPanelItem[]>;
+  remove: (id: string) => void;
+  toasts: Readable<NotificationToastItem[]>;
+  unreadCount: Readable<number>;
+}
+
+```
+
+#### Store Methods and Properties
+
+* **`add(data)`**: Appends a new notification to the store. It automatically generates a unique identifier using `crypto.randomUUID()` and assigns the current `date`. Returns the newly created notification object.
+* **`changeNamespace(name, options)`**: Triggers an atomic transition of the underlying persistence namespace by delegating the operation to the configured strategy. If no strategy is provided and `merge` is set to `false`, it automatically falls back to purging the in-memory state via `clear()`. For an in-depth explanation of its parameters, refer to [Chapter 5](#5-atomic-namespace-management).
+* **`clear()`**: Empties the entire store, instantly clearing both the persistent panel history and active toasts.
+* **`clearPanels()`**: Selectively removes all persistent notifications (`mode: "panel"`) from the store.
+* **`clearToasts()`**: Selectively removes all ephemeral notifications (`mode: "toast"`) from the store.
+* **`get(id)`**: Performs a synchronous lookup in the store and returns the notification item matching the specified ID, or `undefined` if no match is found.
+* **`markAllAsRead()`**: Iterates through the current persistent notifications and sets their `read` property to `true`. Ephemeral toast notifications remain unaffected.
+* **`markAsRead(id)`**: Updates the state of a single persistent notification by setting `read: true` based on the provided ID.
+* **`merge(items, merger)`**: Synchronizes an array of external notifications into the local state. If no custom `merger` function is provided, it applies a default algorithm that sorts items in descending chronological order and deduplicates them based on their unique ID.
+* **`panelCount`**: A Svelte `Readable` store that reactively exposes the total number of persistent notifications currently stored.
+* **`panels`**: A Svelte `Readable` store that returns the filtered list of notifications dedicated to the persistent history layer.
+* **`remove(id)`**: Permanently deletes a specific notification from the store by its ID, also interrupting the lifecycle of active toasts if the removed element was ephemeral.
+* **`toasts`**: A Svelte `Readable` store that returns the filtered list of toast notifications currently active in the application.
+* **`unreadCount`**: A Svelte `Readable` store that reactively exposes the total count of unread messages within the persistent history layer.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 5. Atomic Namespace Management
+
+The most sophisticated feature of this architecture is its ability to seamlessly transition between different storage namespaces. This is crucial for applications that need to segregate data logically—for example, separating notifications between different user accounts or distinct application workspaces—without requiring the UI components to unmount or reload.
+
+### The Anchor (`initialNamespace`)
+
+The `NotificationProvider` acts as the orchestrator for these transitions. When you mount the provider, it initializes the local storage using a default base key. You can override this starting point by providing the `initialNamespace` prop.
+
+This property acts as your system's anchor. If you ever need to reset the system to its original state, you do not need to memorize the initial key; you simply dispatch an empty string to the notifier (`notifier.namespace("")`), and the provider will automatically revert to this base namespace.
+
+### Transition Mechanics and Deduplication
+
+When you dispatch a namespace transition via `notifier.namespace(name, options)`, the underlying store performs an atomic rebind. The `NotificationNamespaceOptions` dictate exactly how the data should flow during this transition:
+
+* **`merge`**: If `true`, the notifications from the current namespace are carried over into the new one. The store's internal engine guarantees that this process is safe by running a deduplication algorithm based on the unique `id` of each notification, preventing duplicate entries if the states overlap.
+* **`clearPrevious`**: If `true`, the storage key of the old namespace is permanently deleted from the browser's storage once the transition is complete. This is essential for data hygiene.
+
+### Real-World Scenario: The Authentication Flow
+
+To understand why these options exist, consider a standard e-commerce application with a login flow:
+
+1.  **Anonymous State:** A guest user adds an item to their cart. The system dispatches a toast notification: *"Item added to cart"*. This notification lives in the default anonymous namespace.
+2.  **The Login Transition:** The user logs in. The application must now switch to a persistent namespace tied to that specific user (e.g., `notifications_user_123`) to load their historical data.
+3.  **The Goal:** We want the user to see their past notifications, but we *also* want the ephemeral "Item added to cart" toast to survive the transition so it doesn't suddenly disappear from the screen. Furthermore, we don't want to leave the anonymous storage key lingering in the browser.
+
+We achieve this flawlessly by passing `merge: true` and `clearPrevious: true`.
+
+When the user logs out, we want to return to the anonymous state, but this time we do *not* merge (to avoid leaking private notifications to the guest state) and we do *not* clear the previous storage (so the user's history is waiting for them upon their next login).
+
+### Usage Example
+
+```javascript
+import { notifier } from "@duskit/components";
+
+export async function loginUser(credentials) {
+  const user = await api.authenticate(credentials);
+
+  // Transition to the user's specific namespace.
+  // Carry over any active anonymous toasts (merge) and
+  // destroy the temporary anonymous storage key (clearPrevious).
+  notifier.namespace(`notifications_${user.id}`, {
+    clearPrevious: true,
+    merge: true,
+  });
+
+  return user;
+}
+
+export function logoutUser() {
+  api.clearSession();
+
+  // Revert to the default initialNamespace provided to the NotificationProvider.
+  // Do not merge private data, and do not destroy the user's storage key.
+  notifier.namespace("", {
+    clearPrevious: false,
+    merge: false,
+  });
+}
+```
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
