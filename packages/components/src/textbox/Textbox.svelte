@@ -58,8 +58,7 @@
     on:focus
     on:input
     on:keydown
-    on:paste
-  ></textarea>
+    on:paste></textarea>
 {:else}
   <input
     {...$$restProps}

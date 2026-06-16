@@ -1,0 +1,125 @@
+import { Meta, Title, Subtitle } from "@storybook/addon-docs/blocks";
+
+<Meta title="Docs/Tooltip System" />
+
+<Title>Tooltip System</Title>
+<Subtitle>
+  A high-performance, strictly declarative Singleton pattern for global UI hints.
+</Subtitle>
+
+The Tooltip component completely abandons the traditional, component-bound rendering approach in favor of a strictly centralized Singleton architecture. In standard implementations, wrapping individual target elements with their own tooltip instances forces the browser to render hundreds of hidden DOM nodes and attach thousands of individual event listeners. This not only bloats the DOM and degrades rendering performance but inevitably leads to `z-index` wars and stacking context clipping when tooltips become trapped inside `overflow: hidden` containers.
+
+By relying on a single global node and DOM event delegation, the system's performance footprint remains statically flat at O(1), regardless of whether there are ten or ten thousand tooltips on the screen.
+
+This approach is driven by two fundamental design principles:
+1. **Tooltips are strictly informative and non-interactive:** They exist solely to display plain text. If an interface requires interactive content (like buttons, links, or forms) inside an overlay, a distinct Popover or Toggletip component must be used instead.
+2. **Strict uniqueness:** Only one tooltip can logically exist on the screen at any given time.
+
+## TOC
+
+* [1. Global Setup & Defaults](#1-global-setup--defaults)
+* [2. The Dataset API (Target Activation)](#2-the-dataset-api-target-activation)
+* [3. Accessibility (A11y) Guarantee](#3-accessibility-a11y-guarantee)
+* [4. Reactivity and Safety Mechanisms](#4-reactivity-and-safety-mechanisms)
+* [5. Visual Presentation & Variants](#5-visual-presentation--variants)
+
+---
+
+## 1. Global Setup & Defaults
+
+To utilize the tooltip system, a single `<Tooltip />` instance must be mounted at the root of the application (or the main layout layer).
+
+This central instance binds a single set of event listeners to the global document layout. It listens for interactions (`hover`, `focus`, `click`) during the DOM **capture phase** rather than relying on event bubbling. This is a crucial architectural decision: it ensures the tooltip functions reliably even if a target child component invokes `event.stopPropagation()`, while avoiding the need to attach listeners to individual nodes.
+
+### Component Properties
+
+You can configure baseline behaviors on this root instance using global properties. Individual targets can then selectively override these defaults when necessary.
+
+```typescript
+interface TooltipProps {
+  className?: string;
+  defaultDelayHide?: number;
+  defaultDelayShow?: number;
+  defaultOffset?: number;
+  defaultPlace?: "bottom" | "left" | "right" | "top";
+  defaultType?: "error" | "info" | "success" | "warning";
+  id: string;
+}
+
+```
+
+### Usage Example
+
+```html
+<script>
+  import { Tooltip } from "@duskit/components";
+</script>
+
+<Tooltip
+  defaultDelayShow={500}
+  defaultPlace="top"
+  id="global-tooltip"
+/>
+
+```
+
+> **Architectural Note on Positioning:** The component currently relies on `@floating-ui/dom` for spatial calculations. The system utilizes advanced positioning middlewares (`flip` and `shift`): if there is insufficient space in the preferred placement (e.g., "top"), the tooltip intelligently flips to the opposite axis or shifts along its main axis to remain strictly visible within the viewport.
+> This external dependency is a deliberate choice due to the lack of baseline support for native CSS Anchor Positioning (as of June 2026), and will be phased out once the native API matures.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 2. The Dataset API (Target Activation)
+
+Target elements do not need any framework-specific bindings to trigger the tooltip. They communicate with the global instance purely through standard HTML `data-*` attributes.
+
+To activate the tooltip, a target element must, at minimum, share the same `data-tooltip-id` as the root component and provide a `data-tooltip-text`.
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `data-tooltip-delay-hide` | `numeric string` | Overrides the default hide delay (in milliseconds). |
+| `data-tooltip-delay-show` | `numeric string` | Overrides the default show delay (in milliseconds). |
+| `data-tooltip-disabled` | `"true" \| "false"` | If `"true"`, the target is ignored by interaction listeners, preventing the tooltip from rendering. If changed dynamically while open, the tooltip is instantly dismissed. |
+| `data-tooltip-id` | `string` | **Required.** Must match the `id` of the global Tooltip instance. |
+| `data-tooltip-offset` | `numeric string` | Overrides the default spatial offset from the target (in pixels). |
+| `data-tooltip-place` | `"top" \| "right" \| "bottom" \| "left"` | Overrides the default placement. |
+| `data-tooltip-text` | `string` | **Required.** The plain text content to display. |
+| `data-tooltip-type` | `"error" \| "info" \| "success" \| "warning"` | Visual variant override. |
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 3. Accessibility (A11y) Guarantee
+
+The centralized architecture does not compromise on accessibility. The system autonomously manages the relationships and keyboard interactions required by WCAG guidelines:
+
+* **Keyboard Navigation:** The tooltip listens to `focusin` and `focusout` events, ensuring it is fully functional for users navigating via keyboard.
+* **Intentional Dismissal:** If the user presses the `Escape` key while a target has focus, the active tooltip is immediately dismissed.
+* **Dynamic ARIA Linking:** When the tooltip becomes visible, it automatically injects an `aria-describedby` attribute into the active target node, linking it to the tooltip's ID. This attribute is cleanly removed upon dismissal.
+* **Click-to-Dismiss:** If the user clicks on or inside the active target element (for example, clicking a button after reading its tooltip), the tooltip is instantly dismissed to prevent visual obstruction.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 4. Reactivity and Safety Mechanisms
+
+To ensure stability across highly dynamic interfaces, the singleton utilizes native browser APIs to monitor its targets without tying into the framework's reactivity loop:
+
+* **`MutationObserver`:** Actively watches the target element's data attributes. If the application dynamically translates the text or changes the disabled state while the tooltip is open, the tooltip updates its content instantly without needing a manual re-trigger.
+* **`IntersectionObserver`:** If the target element is scrolled completely out of the viewport or is abruptly unmounted from the DOM, the tooltip intercepts this intersection loss and safely tears down its state, preventing "ghost" tooltips from lingering on the screen.
+* **Race Condition Protection:** Spatial calculations are asynchronous. If a user moves their cursor rapidly across multiple targets, the component validates that the original target is still active before finalizing the render, safely discarding obsolete positioning updates.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 5. Visual Presentation & Variants
+
+### Anatomy and Text Constraints
+
+To guarantee visual consistency and prevent layout breakage:
+* **Directional Arrow:** The component automatically renders a directional arrow (tip) pointing toward the target element, ensuring the relationship is visually clear regardless of the applied offset.
+* **Text Constraints:** The container is restricted to a strict maximum width of `min(20rem, 90dvi)`. Long strings automatically wrap (`white-space: break-spaces`), ensuring the tooltip never overflows the viewport boundaries on small screens or high zoom levels.
+
+### Semantic State Types
+
+While the tooltip exposes a `type` attribute (`error`, `info`, `success`, `warning`) to map distinct visual backgrounds, it is fundamentally a "display" component and should not be treated as a primary feedback mechanism (like a Toast or an Alert).
+
+> **Note on System Tokens:** The current semantic coloring of these variants temporarily consumes solid feedback surfaces. This is a relic of previous iterations. These overrides serve as a transitional bridge and will be refactored once the dedicated `surface-inverse` tokens are fully integrated into the design system layers.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
