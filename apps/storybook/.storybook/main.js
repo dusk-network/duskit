@@ -1,5 +1,6 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import remarkGfm from "remark-gfm";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "../../..");
@@ -8,7 +9,19 @@ const repoRoot = path.resolve(__dirname, "../../..");
 const config = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|svelte)"],
   // Actions/controls are part of Storybook core (v9+). Only keep real addons here.
-  addons: ["@storybook/addon-docs", "@storybook/addon-themes"],
+  addons: [
+    {
+      name: "@storybook/addon-docs",
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
+    "@storybook/addon-themes",
+  ],
   core: {
     disableTelemetry: true,
   },
