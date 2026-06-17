@@ -18,11 +18,11 @@ For a transparent ledger of these structural and packaging choices, see the para
 
 ## TOC
 
-- [1. Core Principles](#1-core-principles)
+- [1\. Core Principles](#1-core-principles)
   - [1.1 The Amnesia Heuristic (Structure vs. Payload)](#11-the-amnesia-heuristic-structure-vs-payload)
   - [1.2 Logical-First Properties](#12-logical-first-properties)
   - [1.3 Semantic Abstraction (Cognitive Emphasis)](#13-semantic-abstraction-cognitive-emphasis)
-- [2. The Layered Architecture](#2-the-layered-architecture)
+- [2\. The Layered Architecture](#2-the-layered-architecture)
   - [2.1 Layer 0: Primitives](#21-layer-0-primitives)
   - [2.2 Layer 1: Theme](#22-layer-1-theme)
   - [2.3 Layer 2: Base & Reset](#23-layer-2-base--reset)
@@ -30,19 +30,19 @@ For a transparent ledger of these structural and packaging choices, see the para
     - [2.4.1 Strict Taxonomy and Property Sovereignty](#241-strict-taxonomy-and-property-sovereignty)
     - [2.4.2 Density over T-Shirt Sizes](#242-density-over-t-shirt-sizes)
   - [2.5 Layer 4: Utilities](#25-layer-4-utilities)
-- [3. The Contract Boundary](#3-the-contract-boundary)
+- [3\. The Contract Boundary](#3-the-contract-boundary)
   - [3.1 The Semantic Pipeline and the Prism Analogy](#31-the-semantic-pipeline-and-the-prism-analogy)
   - [3.2 Domain Pollution vs. Composition over Mirroring](#32-domain-pollution-vs-composition-over-mirroring)
   - [3.3 Roles, Sovereignty, and the Contract Definition](#33-roles-sovereignty-and-the-contract-definition)
     - [3.3.1 The Missing Contract Protocol](#331-the-missing-contract-protocol)
   - [3.4 Mathematical Validation](#34-mathematical-validation)
   - [3.5 Systemic Resilience](#35-systemic-resilience)
-- [4. Dimensional & Spatial Physics](#4-dimensional--spatial-physics)
+- [4\. Dimensional & Spatial Physics](#4-dimensional--spatial-physics)
   - [4.1 Intent-Driven Unit Selection](#41-intent-driven-unit-selection)
   - [4.2 The Hardware Boundary (Physical Pixels)](#42-the-hardware-boundary-physical-pixels)
   - [4.3 The Border Compromise](#43-the-border-compromise)
   - [4.4 Dimensional Scales & Taxonomy (Layer 0)](#44-dimensional-scales--taxonomy-layer-0)
-- [5. Environment Physics & Ergonomics](#5-environment-physics--ergonomics)
+- [5\. Environment Physics & Ergonomics](#5-environment-physics--ergonomics)
   - [5.1 The Luminance Environment (Light vs. Dark Physics)](#51-the-luminance-environment-light-vs-dark-physics)
   - [5.2 Interaction Physics](#52-interaction-physics)
   - [5.3 Topography of Surfaces (The Layering Rules)](#53-topography-of-surfaces-the-layering-rules)
@@ -54,15 +54,15 @@ For a transparent ledger of these structural and packaging choices, see the para
     - [5.5.1 Passive Overlays (Tooltips)](#551-passive-overlays-tooltips)
     - [5.5.2 Active Feedback (Toasts and Notifications)](#552-active-feedback-toasts-and-notifications)
   - [5.6 The 3D Topography (Viewport Orchestration)](#56-the-3d-topography-viewport-orchestration)
-- [6. Component Anatomy & Conventions](#6-component-anatomy--conventions)
+- [6\. Component Anatomy & Conventions](#6-component-anatomy--conventions)
   - [6.1 Spatial Sovereignty (Intrinsic vs. Extrinsic Space)](#61-spatial-sovereignty-intrinsic-vs-extrinsic-space)
   - [6.2 Dimensional Independence (The Size Prop)](#62-dimensional-independence-the-size-prop)
   - [6.3 State Encapsulation (Private Tokens)](#63-state-encapsulation-private-tokens)
   - [6.4 Touch Targets and Interactive Ergonomics](#64-touch-targets-and-interactive-ergonomics)
   - [6.5 Shared Anatomy vs. Semantic Species](#65-shared-anatomy-vs-semantic-species)
-- [7. Future Scope & Roadmap](#7-future-scope--roadmap)
-- [8. Technical Limitations](#8-technical-limitations)
-- [9. Architectural Compromises](#9-architectural-compromises)
+- [7\. Future Scope & Roadmap](#7-future-scope--roadmap)
+- [8\. Technical Limitations](#8-technical-limitations)
+- [9\. Architectural Compromises](#9-architectural-compromises)
   - [9.1 The Token Coupling Debt](#91-the-token-coupling-debt)
   - [9.2 The Legacy of @duskit/design-tokens](#92-the-legacy-of-duskitdesign-tokens)
 
@@ -274,7 +274,7 @@ To prevent the collapse of layout integrity, primitive dimensions (`sizes.css`) 
 - **Macro Scale (`--size-*`):** A rigid 4-point geometric progression. Used exclusively for structural layouts, grid gaps, margins, paddings, and large border radii.
 - **Optical Scale (`--size-optical-*`):** A non-linear scale featuring specific optical steps calibrated for human visual perception. Used strictly for typography (font sizes and line heights) to ensure maximum legibility. Never apply optical steps to layout dimensions.
 - **Micro Scale (`--size-micro-*`):** A linear progression of fractional `rem` values dedicated to fine component anatomy, such as borders and internal micro-offsets, accepting the subpixel rendering compromise discussed above.
-- **Physical Scale (`--size-px-*`):** Absolute pixel values reserved entirely for the hardware rendering exceptions detailed in section 4.2.
+- **Physical Scale (`--size-px-*`):** Absolute pixel values reserved entirely for the hardware rendering exceptions detailed in [section 4.2](#42-the-hardware-boundary-physical-pixels).
 
 <p align="right"><a href="#toc">[back to TOC]</a></p>
 
