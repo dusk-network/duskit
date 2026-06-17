@@ -1,6 +1,8 @@
 import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render } from "@testing-library/svelte";
 
+import { Rerender } from "../..";
+
 import RerenderCounter from "./test-components/RerenderCounter.svelte";
 import RerenderGenerateValue1 from "./test-components/RerenderGenerateValue1.svelte";
 import RerenderGenerateValue2 from "./test-components/RerenderGenerateValue2.svelte";
@@ -101,6 +103,38 @@ describe("Rerender", () => {
 
     expect(container.textContent).toBe("2");
     expect(domMutations).toBe(1);
+  });
+
+  it("should synchronously update the rendered value when the `generateValue` prop changes", async () => {
+    const { container, rerender } = renderAndObserveContainer(Rerender, {
+      ...baseOptions,
+      props: { generateValue: () => "first" },
+    });
+
+    expect(container.textContent).toBe("first");
+
+    await rerender({ generateValue: () => "second" });
+
+    expect(container.textContent).toBe("second");
+    expect(domMutations).toBe(1);
+  });
+
+  it("should not trigger a DOM mutation if the `generateValue` prop changes but the generated value remains the same", async () => {
+    const { container, rerender } = renderAndObserveContainer(Rerender, {
+      ...baseOptions,
+      props: { generateValue: () => "unchanged" },
+    });
+
+    expect(container.textContent).toBe("unchanged");
+    expect(domMutations).toBe(0);
+
+    // Injecting a completely new function reference that yields the exact same SVZ result
+    await rerender({ generateValue: () => "unchanged" });
+
+    expect(container.textContent).toBe("unchanged");
+
+    // The mutation observer should not have registered any DOM updates
+    expect(domMutations).toBe(0);
   });
 
   it("should not trigger a re-render if the generated value is equal to the previous one by the `SameValueZero` comparison", async () => {

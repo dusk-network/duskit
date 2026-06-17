@@ -27,8 +27,19 @@
   /** @type {RerenderProps["interval"]} */
   export let interval = 1000;
 
+  /** @param {RerenderProps["generateValue"]} generator */
+  function updateValueIfNeeded(generator) {
+    if (generator) {
+      const newValue = generator();
+
+      if (!areSVZ(value, newValue)) {
+        value = newValue;
+      }
+    }
+  }
+
   /** @type {undefined | ReturnType<Exclude<RerenderProps["generateValue"], undefined>>}*/
-  let value = generateValue && generateValue();
+  let value;
 
   /** @type {number | undefined} */
   let timeoutId;
@@ -37,18 +48,12 @@
 
   onDestroy(() => clearTimeout(timeoutId));
 
+  $: updateValueIfNeeded(generateValue);
   $: {
     clearTimeout(timeoutId);
 
     timeoutId = window.setTimeout(() => {
-      if (generateValue) {
-        const newValue = generateValue();
-
-        if (!areSVZ(value, newValue)) {
-          value = newValue;
-        }
-      }
-
+      updateValueIfNeeded(generateValue);
       updateFlag ^= 1;
     }, interval);
   }
