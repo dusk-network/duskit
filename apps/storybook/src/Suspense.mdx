@@ -1,0 +1,99 @@
+import { Meta, Title, Subtitle } from "@storybook/addon-docs/blocks";
+
+<Meta title="Docs/Suspense & Async States" />
+
+<Title>Suspense & Async States</Title>
+<Subtitle>
+  Standardizing asynchronous state representation across the UI.
+</Subtitle>
+
+The `Suspense` component is a standardized layout wrapper built on top of Svelte's native `{#await}` block. It enforces visual consistency across the application by providing pre-configured layouts for pending states (using the `Throbber` component) and failure states (automatically parsing exceptions and routing them to standardized error surfaces).
+
+## TOC
+
+* [1. Usage and API](#1-usage-and-api)
+* [2. Suspense vs. Native Await](#2-suspense-vs-native-await)
+* [3. Beyond the Template (Data Stores)](#3-beyond-the-template-data-stores)
+
+---
+
+## 1. Usage and API
+
+To use the component, pass a promise to the `waitFor` property and use the provided slots to define the resolved state. The component autonomously handles the fallback visuals for the pending and rejected states.
+
+### Type Inference
+
+The component automatically preserves the type inference of the underlying promise. When you pass a `Promise<R>` to the `waitFor` property, the component extracts the `R` type and strongly types the `result` exposed by the `success-content` slot. This provides full autocompletion without requiring manual type casting in the template.
+
+### Component Properties
+
+| Property | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `as` | `keyof HTMLElementTagNameMap` | `"div"` | The HTML tag used for the wrapping container. *Note: this container is intrinsically styled as a flexbox column (`display: flex; flex-direction: column;`).* |
+| `className` | `string` | `undefined` | Custom CSS classes for the container. |
+| `errorMessage` | `string` | `"Error"` | The summary text displayed in the error state. |
+| `errorVariant` | `"alert" \| "banner" \| "details"` | `"alert"` | Determines the visual surface used for the error. *Note: multiple variants are exposed primarily to maintain backward compatibility with legacy apps.* |
+| `gap` | `"large" \| "medium" \| "small"` | `"medium"` | The spacing between the internal layout elements. *Note: if `errorVariant` is `"alert"`, this property is also propagated down to the `ErrorAlert` component to scale its internal visual density.* |
+| `pendingMessage` | `string` | `""` | Optional text displayed alongside the loading throbber. |
+| `waitFor` | `Promise<R>` | **Required** | The asynchronous operation to monitor. |
+
+### Available Slots
+
+| Slot Name | Exposed Props | Description |
+| :--- | :--- | :--- |
+| `error-actions` | - | Appends interactive elements (like retry buttons) below the error surface. |
+| `error-content` | `{ error: Error }` | Completely overrides the default error visualization. |
+| `error-extra-content` | `{ error: Error }` | Appends custom content inside the default error surface. |
+| `pending-content` | - | Completely overrides the default `Throbber` loading visualization. |
+| `success-content` | `{ result: R }` | **Required.** The content to render when the promise resolves successfully. |
+
+### Usage Example
+
+```html
+<script>
+  import { Suspense } from "@duskit/components";
+
+  const userDataPromise = fetchUserData();
+</script>
+
+<Suspense gap="large" pendingMessage="Loading user profile..." waitFor={userDataPromise}>
+  <svelte:fragment slot="success-content" let:result>
+    <h1>{result.name}</h1>
+  </svelte:fragment>
+
+  <svelte:fragment slot="error-actions">
+    <button on:click={() => location.reload()}>Retry</button>
+  </svelte:fragment>
+</Suspense>
+
+```
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 2. Suspense vs. Native Await
+
+While `Suspense` is the standard for rendering asynchronous blocks, there are specific scenarios where falling back to Svelte's native `{#await}` block is the correct architectural choice.
+
+**When to use `<Suspense>`:**
+
+* **Macro-Layouts:** Loading entire views, complex panels, or data tables.
+* **Standardization:** When you want to guarantee that the loading spinner (`Throbber`) and the error parsing (`getErrorFrom`) strictly adhere to the design system without duplicating boilerplate code.
+
+**When to use `{#await}`:**
+
+* **Strict Layout Fragments:** `Suspense` always renders a single container element to wrap its content. If you need to conditionally render multiple sibling nodes directly inside a strict `display: grid` or `display: flex` container, the Suspense wrapper will break the layout hierarchy by grouping them. In these scenarios, where a pure "fragment" is needed, the native `{#await}` block is required.
+* **Micro-Interactions:** For highly localized async states, such as swapping an icon inside a button during a save operation, the structural overhead of `Suspense` is inappropriate.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 3. Beyond the Template (Data Stores)
+
+Both `<Suspense>` and `{#await}` are purely reactive, template-bound mechanisms. They respond to a promise but lack imperative control over the data flow. If your application requires advanced state management, the [`@duskit/svelte-stores`](https://github.com/dusk-network/duskit/blob/main/packages/svelte-stores/README.md) package provides the `createDataStore` utility.
+
+The data store should be preferred over template-level promises in the following scenarios:
+
+* **Anti-Flickering (Persistent UI):** When a raw promise is passed to a template, the UI instantly unmounts the previous data to show the loading state. A data store, instead, retains the previous `data` in memory while setting `isLoading` to `true` during a new fetch. This is essential for features like paginated tables or search bars, where the UI should not collapse during subsequent requests.
+* **Race Condition Prevention:** The data store utilizes an internal request tracking system (`retrieveId`). If multiple requests are triggered in rapid succession, it silently discards the resolutions or rejections of outdated promises, guaranteeing that the final state strictly reflects the last requested operation.
+* **Imperative Control:** It exposes a `getData(...args)` method to explicitly trigger fetches from any generic event handler. This method accepts dynamic arguments (e.g., `getData(2, "test")`) and passes them directly to the underlying `dataRetriever`, making it trivial to update queries or pagination without recreating the store. It also provides a `reset()` method to cleanly purge the data and error states back to their initial conditions on demand.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>

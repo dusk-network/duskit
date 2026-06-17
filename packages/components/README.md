@@ -9,7 +9,6 @@ Svelte components to build a Dusk web application.
 
 - [Dev environment](#dev-environment)
 - [Installation and usage](#installation-and-usage)
-- [Packages](#packages)
 - [NPM scripts](#npm-scripts)
 
 ## Dev environment
