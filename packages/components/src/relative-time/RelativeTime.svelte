@@ -24,8 +24,21 @@
 
   export const getRootElement = () => rootElement;
 
+  /** @param {Date} d */
+  const getGenerator = (d) =>
+    function () {
+      interval = getInterval();
+
+      return getRelativeTimeString(d, "long");
+    };
+
+  const getInterval = () =>
+    autoRefresh ? getRelativeTimeUnit(date.getTime() - Date.now()).factor : -1;
+
+  let interval = getInterval();
+
   $: classes = makeClassName(["dusk-relative-time", className]);
-  $: interval = getRelativeTimeUnit(date.getTime() - Date.now()).factor;
+  $: generator = getGenerator(date);
 </script>
 
 <time
@@ -35,11 +48,7 @@
   datetime={date.toISOString()}
 >
   {#if autoRefresh}
-    <Rerender
-      generateValue={() => getRelativeTimeString(date, "long")}
-      {interval}
-      let:value
-    >
+    <Rerender generateValue={generator} {interval} let:value>
       <slot relativeTime={value}>{value}</slot>
     </Rerender>
   {:else}
