@@ -9,7 +9,6 @@ Svelte stores and helpers.
 
 - [Dev environment](#dev-environment)
 - [Installation and usage](#installation-and-usage)
-- [Packages](#packages)
 - [NPM scripts](#npm-scripts)
 
 ## Dev environment
