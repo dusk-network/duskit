@@ -112,6 +112,30 @@ describe("RelativeTime", () => {
     expect(element.textContent).toMatchInlineSnapshot(`"3 minutes ago"`);
   });
 
+  it("should dynamically scale the interval as time passes without requiring the `date` prop to change", async () => {
+    const props = {
+      autoRefresh: true,
+      date: new Date(baseDate.getTime() - 59 * 60 * 1000),
+    };
+    const { component } = render(RelativeTime, { ...baseOptions, props });
+    const setTimeoutSpy = vi.spyOn(window, "setTimeout");
+
+    // Advance 1 minute to cross the threshold into hours
+    await vi.advanceTimersByTimeAsync(60 * 1000);
+
+    expect(component.getRootElement().textContent).toMatchInlineSnapshot(
+      `"1 hour ago"`
+    );
+
+    // The interval should have scaled up to 3600000ms (1 hour factor).
+    expect(setTimeoutSpy).toHaveBeenLastCalledWith(
+      expect.any(Function),
+      3600000
+    );
+
+    setTimeoutSpy.mockRestore();
+  });
+
   it("should allow to put custom content in the default slot", async () => {
     const { component, rerender } = render(RelativeTimeCustomContent, {
       ...baseOptions,
@@ -160,5 +184,35 @@ describe("RelativeTime", () => {
 
     expect(element).toHaveAttribute("datetime", date.toISOString());
     expect(element.textContent).toMatchInlineSnapshot(`"1 second ago"`);
+
+    // Verify that changing the date prop again triggers an immediate update
+    // even while the auto-refresh loop is active
+    const anotherDate = new Date(Date.now() - 5 * 60 * 1000);
+
+    await rerender({ date: anotherDate });
+
+    expect(element).toHaveAttribute("datetime", anotherDate.toISOString());
+    expect(element.textContent).toMatchInlineSnapshot(`"5 minutes ago"`);
+
+    // Verify that the auto-refresh timer is still running correctly
+    // with the newly provided date
+    await vi.advanceTimersByTimeAsync(60 * 1000);
+
+    expect(element.textContent).toMatchInlineSnapshot(`"6 minutes ago"`);
+  });
+
+  it("should react to date prop changes when `autoRefresh` is disabled", async () => {
+    const { component, rerender } = render(RelativeTime, {
+      ...baseOptions,
+      props: { ...baseProps, autoRefresh: false },
+    });
+    const element = component.getRootElement();
+
+    expect(element.textContent).toMatchInlineSnapshot(`"20 seconds ago"`);
+
+    const newDate = new Date(baseDate.getTime() - 60 * 1000);
+    await rerender({ date: newDate });
+
+    expect(element.textContent).toMatchInlineSnapshot(`"1 minute ago"`);
   });
 });
