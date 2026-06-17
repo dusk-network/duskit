@@ -1,0 +1,86 @@
+import { Meta, Title, Subtitle } from "@storybook/addon-docs/blocks";
+
+<Meta title="Docs/Time-Driven Rendering" />
+
+<Title>Time-Driven Rendering</Title>
+<Subtitle>
+  Declarative abstractions for scheduled UI updates.
+</Subtitle>
+
+The `Rerender` component is a utility wrapper designed to decouple the visual progression of time from the application's reactivity loop. It provides a declarative mechanism to force specific portions of the template to update at regular intervals, independent of any external state mutation.
+
+## TOC
+
+* [1\. Core Purpose (The Wrapper)](#1-core-purpose-the-wrapper)
+* [2\. Modes of Operation (The API)](#2-modes-of-operation-the-api)
+* [3\. Real-World Use Case (RelativeTime)](#3-real-world-use-case-relativetime)
+* [4\. Anti-Patterns (When NOT to use it)](#4-anti-patterns-when-not-to-use-it)
+
+---
+
+## 1. Core Purpose (The Wrapper)
+
+Svelte's reactivity is fundamentally state-driven: the DOM updates when the underlying data changes. However, certain UI elements—like countdowns, living timestamps, or visual timeouts—depend strictly on the passage of time.
+
+The `Rerender` component bridges this gap. By masking a native `{#key}` block behind a scheduled interval, it creates an autonomous "heartbeat" for isolated template fragments, allowing them to redraw themselves without requiring a global store or a parent component to tick artificially.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 2. Modes of Operation (The API)
+
+The component exposes two diametrically opposed behaviors depending on the provided properties.
+
+### Component Properties
+
+| Property | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `generateValue` | `() => T` | `undefined` | An optional pure function evaluated at every interval. |
+| `interval` | `number \| (() => number)` | `1000` | The execution interval in milliseconds. Can be a static number or a getter function evaluated at every tick for dynamic scaling. |
+
+### Exposed Slot Properties
+
+To consume the evaluated result in "Smart Mode" without wasting CPU cycles, the component exposes the result of `generateValue` directly to the default slot.
+
+| Slot Name | Exposed Props | Description |
+| :--- | :--- | :--- |
+| `default` | `{ value: T }` | Exposes the memoized output. You must use this variable (`let:value`) in your template instead of manually calling your logic again. |
+
+### Smart Mode (Value-Driven)
+
+If the `generateValue` function is provided, the component operates efficiently and lazily.
+Every `interval` milliseconds, it evaluates the function. It then compares the new result against the previous one using the ECMAScript [**SameValueZero** comparison](https://262.ecma-international.org/#sec-samevaluezero).
+
+The underlying `{#key}` block is destroyed and recreated **only** if the value is semantically different. This prevents layout thrashing and wasted CPU cycles if the derived value has not visually changed.
+
+### Tick Mode (Blind Render)
+
+If `generateValue` is omitted, the component falls back to a blind heartbeat. It opportunistically reuses its internal reactive engine flag (`updateFlag`) as the key for the `{#key}` block, forcing a DOM re-render indiscriminately at every single cycle.
+
+### The Reactive Engine (Under the Hood)
+
+Regardless of the active mode, the component's internal metronome is sustained by a deliberate reactive loop. The bitwise operation (`updateFlag ^= 1`) mutates a local variable at the end of every `setTimeout` callback. This intentional mutation forces the framework to continuously re-evaluate the reactive block, acting as the core engine that allows the component to dynamically re-evaluate the `interval` function at every single tick without breaking the heartbeat.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 3. Real-World Use Case (RelativeTime)
+
+The `RelativeTime` component is the quintessential example of the `Rerender` component's "Smart Mode".
+
+When rendering a string like "3 minutes ago", forcing a DOM update every second is computationally wasteful. `RelativeTime` optimizes this by:
+1. **Continuous Dynamic Scaling:** Instead of passing a static number, it passes a getter function to `interval`. The `Rerender` component evaluates this function at every tick, allowing the heartbeat to automatically relax its frequency (e.g., shifting from 1 -second updates to 60-second updates) as the relative time distance grows.
+2. **Memoized Outputs:** Passing the formatting function to `generateValue`.
+3. **Zero-Waste Rendering:** The string "3 minutes ago" is generated internally every cycle, but the DOM is strictly left untouched until the exact millisecond the output shifts to "4 minutes ago".
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 4. Anti-Patterns (When NOT to use it)
+
+The `Rerender` component is strictly a **presentational utility**.
+
+You must absolutely avoid using this component to:
+* **Perform Network Polling:** Never fetch data from APIs or endpoints inside the `generateValue` function or within the rendered slot.
+* **Mutate State:** Never use the re-render cycle to update global stores or trigger business logic side-effects.
+
+If your application requires data to be refreshed over time from a backend, this component is the wrong tool. In modern architectures, network-driven reactivity should be handled via **Server-Sent Events (SSE)**, **WebSockets**, or a dedicated architectural state management layer, rather than brute-forcing the DOM to ask for updates.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
