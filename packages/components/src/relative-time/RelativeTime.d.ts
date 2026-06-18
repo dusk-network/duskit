@@ -23,5 +23,5 @@ export default class RelativeTime extends SvelteComponent<
   {},
   RelativeTimeSlots
 > {
-  getRootElement(): HTMLDivElement;
+  getRootElement(): HTMLTimeElement;
 }
