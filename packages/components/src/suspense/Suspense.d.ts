@@ -17,7 +17,6 @@ export type SuspenseProps<
 };
 
 interface SuspenseSlots<R> {
-  default: {};
   "error-actions": {};
   "error-content": { error: Error };
   "error-extra-content": { error: Error };
