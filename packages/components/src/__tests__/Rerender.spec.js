@@ -50,15 +50,15 @@ describe("Rerender", () => {
       baseOptions
     );
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->0"`);
+    expect(container.textContent).toMatchInlineSnapshot(`"0"`);
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->1"`);
+    expect(container.textContent).toMatchInlineSnapshot(`"1"`);
 
     await vi.advanceTimersByTimeAsync(1000);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->2"`);
+    expect(container.textContent).toMatchInlineSnapshot(`"2"`);
 
     expect(domMutations).toBe(2);
   });
@@ -70,24 +70,120 @@ describe("Rerender", () => {
       props,
     });
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->0"`);
+    expect(container.textContent).toMatchInlineSnapshot(`"0"`);
 
     await vi.advanceTimersByTimeAsync(props.interval / 2);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->0"`);
+    expect(container.textContent).toMatchInlineSnapshot(`"0"`);
 
     await vi.advanceTimersByTimeAsync(props.interval / 2);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->1"`);
+    expect(container.textContent).toMatchInlineSnapshot(`"1"`);
 
     await vi.advanceTimersByTimeAsync(props.interval / 2);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->1"`);
+    expect(container.textContent).toMatchInlineSnapshot(`"1"`);
 
     await vi.advanceTimersByTimeAsync(props.interval / 2);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->2"`);
+    expect(container.textContent).toMatchInlineSnapshot(`"2"`);
     expect(domMutations).toBe(2);
+  });
+
+  it("should accept a function for the `interval` property and dynamically evaluate it to schedule the next update", async () => {
+    const intervalMock = vi
+      .fn()
+      .mockReturnValueOnce(1000)
+      .mockReturnValueOnce(2000)
+      .mockReturnValueOnce(3000);
+
+    const props = { interval: intervalMock };
+    const { container } = renderAndObserveContainer(RerenderCounter, {
+      ...baseOptions,
+      props,
+    });
+
+    // Initial render
+    expect(container.textContent).toMatchInlineSnapshot(`"0"`);
+    expect(intervalMock).toHaveBeenCalledTimes(1);
+
+    // Advance to 1ms before the first tick
+    await vi.advanceTimersByTimeAsync(999);
+
+    expect(container.textContent).toMatchInlineSnapshot(`"0"`);
+
+    // Complete the first tick (1000ms delay)
+    await vi.advanceTimersByTimeAsync(1);
+
+    expect(container.textContent).toMatchInlineSnapshot(`"1"`);
+    expect(intervalMock).toHaveBeenCalledTimes(2);
+
+    // Advance to 1ms before the second tick
+    await vi.advanceTimersByTimeAsync(1999);
+
+    expect(container.textContent).toMatchInlineSnapshot(`"1"`);
+
+    // Complete the second tick (2000ms delay)
+    await vi.advanceTimersByTimeAsync(1);
+
+    expect(container.textContent).toMatchInlineSnapshot(`"2"`);
+    expect(intervalMock).toHaveBeenCalledTimes(3);
+
+    // Advance to 1ms before the third tick
+    await vi.advanceTimersByTimeAsync(2999);
+
+    expect(container.textContent).toMatchInlineSnapshot(`"2"`);
+
+    // Complete the third tick (3000ms delay)
+    await vi.advanceTimersByTimeAsync(1);
+
+    expect(container.textContent).toMatchInlineSnapshot(`"3"`);
+    expect(intervalMock).toHaveBeenCalledTimes(4);
+
+    // Verify exactly 3 mutations occurred
+    expect(domMutations).toBe(3);
+  });
+
+  it("should clear the previous timeout and schedule a new one when the `interval` function reference changes", async () => {
+    const intervalMock1 = vi.fn().mockReturnValue(1000);
+    const intervalMock2 = vi.fn().mockReturnValue(2000);
+
+    const { container, rerender } = renderAndObserveContainer(RerenderCounter, {
+      ...baseOptions,
+      props: { interval: intervalMock1 },
+    });
+
+    // Initial render: schedules first tick at 1000ms
+    expect(container.textContent).toMatchInlineSnapshot(`"0"`);
+    expect(intervalMock1).toHaveBeenCalledTimes(1);
+
+    // Advance 500ms: halfway through the first interval
+    await vi.advanceTimersByTimeAsync(500);
+
+    expect(container.textContent).toMatchInlineSnapshot(`"0"`);
+    expect(domMutations).toBe(0);
+
+    // Rerender with a completely new function reference
+    await rerender({ interval: intervalMock2 });
+
+    // The reactive statement should have cleared the old timer
+    // and invoked the new function to schedule a fresh tick
+    expect(intervalMock2).toHaveBeenCalledTimes(1);
+    expect(intervalMock1).toHaveBeenCalledTimes(1);
+
+    // Advance 500ms. If the old 1000ms timer wasn't cleared, it would
+    // fire now (500 + 500 = 1000) causing an unwanted mutation.
+    await vi.advanceTimersByTimeAsync(500);
+
+    expect(container.textContent).toMatchInlineSnapshot(`"0"`);
+    expect(domMutations).toBe(0);
+
+    // Advance 1500ms more to complete the new 2000ms timer (500 + 1500 = 2000).
+    await vi.advanceTimersByTimeAsync(1500);
+
+    expect(container.textContent).toMatchInlineSnapshot(`"1"`);
+    expect(domMutations).toBe(1);
+    expect(intervalMock2).toHaveBeenCalledTimes(2);
   });
 
   it("should accept a custom `generateValue` function and use its result both as re-render key and as the default slot content", async () => {
@@ -218,7 +314,7 @@ describe("Rerender", () => {
     // Advance to 500ms. The first timer is halfway done.
     await vi.advanceTimersByTimeAsync(500);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->0"`);
+    expect(container.textContent).toMatchInlineSnapshot(`"0"`);
     expect(domMutations).toBe(0);
 
     // Change the interval to 2000ms. This should destroy the old 1000ms timer
@@ -229,13 +325,13 @@ describe("Rerender", () => {
     // (500 + 500 = 1000) causing a mutation. We check that the DOM is untouched.
     await vi.advanceTimersByTimeAsync(500);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->0"`);
+    expect(container.textContent).toMatchInlineSnapshot(`"0"`);
     expect(domMutations).toBe(0);
 
     // Advance 1500ms more to complete the new 2000ms timer (500 + 1500 = 2000).
     await vi.advanceTimersByTimeAsync(1500);
 
-    expect(container.innerHTML).toMatchInlineSnapshot(`"<!----><!---->1"`);
+    expect(container.textContent).toMatchInlineSnapshot(`"1"`);
     expect(domMutations).toBe(1);
   });
 

@@ -2,7 +2,7 @@ import type { SvelteComponent } from "svelte";
 
 export interface RerenderProps<T = any> {
   generateValue?: () => T;
-  interval?: number;
+  interval?: number | (() => number);
 }
 
 interface RerenderSlots<T> {

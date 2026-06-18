@@ -52,10 +52,24 @@
   $: {
     clearTimeout(timeoutId);
 
-    timeoutId = window.setTimeout(() => {
-      updateValueIfNeeded(generateValue);
-      updateFlag ^= 1;
-    }, interval);
+    timeoutId = window.setTimeout(
+      () => {
+        updateValueIfNeeded(generateValue);
+
+        /**
+         * We always mutate `updateFlag` to force Svelte to
+         * re-evaluate this reactive block.
+         * Since `setTimeout` only runs once, reading and
+         * writing this dependency creates a deliberate reactive
+         * infinite loop. This allows us to dynamically re-evaluate
+         * the `interval` function at every single tick, keeping the
+         * internal metronome alive without breaking reactivity when
+         * external prop references change.
+         */
+        updateFlag ^= 1;
+      },
+      typeof interval === "function" ? interval() : interval
+    );
   }
 </script>
 

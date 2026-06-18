@@ -25,20 +25,15 @@
   export const getRootElement = () => rootElement;
 
   /** @param {Date} d */
-  const getGenerator = (d) =>
-    function () {
-      interval = getInterval();
+  const getGenerator = (d) => () => getRelativeTimeString(d, "long");
 
-      return getRelativeTimeString(d, "long");
-    };
-
-  const getInterval = () =>
-    autoRefresh ? getRelativeTimeUnit(date.getTime() - Date.now()).factor : -1;
-
-  let interval = getInterval();
+  /** @param {Date} d */
+  const getInterval = (d) => () =>
+    getRelativeTimeUnit(d.getTime() - Date.now()).factor;
 
   $: classes = makeClassName(["dusk-relative-time", className]);
   $: generator = getGenerator(date);
+  $: interval = autoRefresh ? getInterval(date) : undefined;
 </script>
 
 <time
