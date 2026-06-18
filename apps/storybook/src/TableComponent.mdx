@@ -1,0 +1,179 @@
+import { Meta, Title, Subtitle } from "@storybook/addon-docs/blocks";
+
+<Meta title="Docs/The Table Component" />
+
+<Title>The Table Component</Title>
+<Subtitle>
+  A type-safe, extensible data table with built-in sorting and custom rendering capabilities.
+</Subtitle>
+
+The `Table` component maps an array of data objects to a tabular structure. By leveraging strict TypeScript definitions, it guarantees that column bindings and cell renderers always match the underlying data model.
+
+## TOC
+
+* [1\. Usage & Basic Data Binding](#1-usage--basic-data-binding)
+* [2\. Cell Renderers API](#2-cell-renderers-api)
+* [3\. The Descriptors API (Column Configuration)](#3-the-descriptors-api-column-configuration)
+* [4\. Interactive Sorting](#4-interactive-sorting)
+* [5\. Architectural Choices & Visual Defaults](#5-architectural-choices--visual-defaults)
+
+---
+
+## 1. Usage & Basic Data Binding
+
+At its core, the component only requires a `data` property containing an array of objects (`T[]`).
+
+If you do not provide a specific column configuration (the `descriptors` array), the component intelligently falls back to inferring the columns directly from the keys of the first object in the data array. This provides a fully functional, read-only table with zero boilerplate.
+
+### Component Properties
+
+| Property | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `caption` | `string` | `undefined` | The accessibility text for screen readers, rendered inside the `<caption>` tag. |
+| `className` | `string` | `undefined` | Custom CSS classes for the table container. |
+| `data` | `T[]` | **Required** | The array of data objects to display. |
+| `descriptors` | `Array<TableDescriptor<T>>` | `undefined` | The column configuration array. If omitted, columns are inferred from the first data object. |
+
+### Basic Example
+
+```html
+<script>
+  import { Table } from "@duskit/components";
+
+  const users = [
+    { age: 32, id: 1, name: "Alice" },
+    { age: 28, id: 2, name: "Bob" }
+  ];
+</script>
+
+<Table caption="Registered Users Directory" data={users} />
+```
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 2. Cell Renderers API
+
+The table provides highly extensible mechanisms for rendering the contents of a cell. Before diving into the specific types of renderers (Text or Component), it is crucial to understand the two distinct "contexts" in which a renderer can operate:
+
+* **Standard Context:** This applies when a column is directly bound to a specific key in your data object (e.g., a "price" column). In this context, the renderer automatically receives the specific `value` extracted from that key, along with the entire `row` object for secondary data access.
+* **Custom Context:** This applies to standalone columns that do not map to a single data key (e.g., an "Actions" column with buttons, or a computed "Full Name" column). In this context, there is no specific cell value to pass, so the renderer receives only the entire `row` object to derive its visual output.
+
+### Text Renderers
+
+A text renderer is a pure function that returns a string.
+* **Standard Context (`TableCellDataRenderer`):** Receives the specific cell `value` and the entire `row` object.
+* **Custom Context (`TableCellCustomRenderer`):** Receives only the entire `row` object, as the column is not bound to a specific key.
+
+```typescript
+type TableCellDataRenderer<T extends Record<string, any>, K extends keyof T> =
+  (value: T[K], row: T) => string;
+
+type TableCellCustomRenderer<T extends Record<string, any>> =
+  (row: T) => string;
+```
+
+### Component Renderers
+
+For complex UI requirements, you can provide an object specifying a Svelte `component` and a `getProps` mapping function. The table dynamically mounts this component inside the cell (`<svelte:component>`) and injects the mapped properties.
+
+* **Standard Context (`TableCellDataComponentRenderer`):** The `getProps` function receives both `value` and `row`.
+* **Custom Context (`TableCellDataCustomComponentRenderer`):** The `getProps` function receives only the `row`.
+
+```typescript
+type TableCellDataComponentRenderer<
+  T extends Record<string, any>,
+  K extends keyof T,
+  C extends SvelteComponentConstructor = SvelteComponentConstructor
+> = {
+  component: C;
+  getProps: (value: T[K], row: T) => ComponentProps<InstanceType<C>>;
+};
+
+type TableCellDataCustomComponentRenderer<
+  T extends Record<string, any>,
+  C extends SvelteComponentConstructor = SvelteComponentConstructor
+> = {
+  component: C;
+  getProps: (row: T) => ComponentProps<InstanceType<C>>;
+};
+```
+
+### Component Renderer Example
+
+```html
+<script>
+  import { Badge, Table } from "@duskit/components";
+
+  const descriptors = [
+    { label: "User Name", name: "name" },
+    {
+      name: "status",
+      renderer: {
+        component: Badge,
+        getProps: (value) => ({
+          text: value === "active" ? "Online" : "Offline",
+          variant: value === "active" ? "success" : "error",
+        }),
+      },
+    },
+  ];
+</script>
+```
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 3. The Descriptors API (Column Configuration)
+
+To gain full control over labels, visibility, ordering, and behavior, you must provide an array of descriptors to the `descriptors` property. The API is strictly typed and enforces two distinct column configurations, utilizing the renderers defined above.
+
+### Standard Descriptors (`TableDataDescriptor`)
+
+Columns directly bound to a key within your data object `T`. The compiler ensures that the `name` property matches an existing key. If no `renderer` is specified, the component defaults to wrapping the raw value in `String(row[name])`.
+
+```typescript
+type TableDataDescriptor<T extends Record<string, any>, K extends keyof T> = {
+  hidden?: boolean;
+  label?: string;
+  name: K;
+  renderer?: TableCellDataComponentRenderer<T, K> | TableCellDataRenderer<T, K>;
+  sortable?: boolean;
+};
+
+```
+
+### Custom Descriptors (`TableCustomDescriptor`)
+
+Standalone columns that do not map to the data model (e.g., an "Actions" column containing edit/delete buttons). These require a `name` that explicitly does *not* exist in `T` and strictly mandate a `renderer` to define their content.
+
+```typescript
+type TableCustomDescriptor<T extends Record<string, any>> = {
+  hidden?: boolean;
+  label?: string;
+  name: Exclude<string, keyof T>;
+  renderer: TableCellCustomRenderer<T> | TableCellDataCustomComponentRenderer<T>;
+  sortable?: boolean;
+};
+
+```
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 4. Interactive Sorting
+
+Sorting is enabled on a per-column basis by setting `sortable: true` in the column's descriptor.
+
+Clicking a sortable header button automatically cycles the column through three distinct states: **Ascending → Descending → Unsorted (null)**.
+
+When the state changes, the component immediately applies the sorting logic visually to the rendered rows. Simultaneously, it dispatches a custom `sort` event containing the active `column` and its `direction` (or `null`), allowing the parent component to react or synchronize the state with a backend.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 5. Architectural Choices & Visual Defaults
+
+The component applies several deliberate styling defaults via `Table.css`. These are architectural baseline decisions designed for the most common use cases and layout stability, but they can be easily overridden by targeting the exposed CSS classes.
+
+* **Border Collapse & Sticky Headers:** The table enforces `border-collapse: separate` with `border-spacing: 0`. If consumers place the table inside a scrollable container and apply `position: sticky` to the `thead`, standard CSS `border-collapse` causes the bottom borders of the header cells to vanish across several browser engines. By separating the borders and applying the `border-bottom` explicitly to the `.dusk-table__head-cell`, the visual hierarchy remains intact.
+* **Header Text Truncation:** To prevent layout breakage from unexpectedly long labels, header cells (`.dusk-table__head-cell-text`) strictly enforce `overflow: hidden`, `text-overflow: ellipsis`, and `white-space: nowrap`.
+* **Zebra Striping:** By default, the table applies a striped background color to alternating rows using the `.dusk-table__row:nth-child(even)` selector. This improves readability for dense horizontal datasets without requiring additional configuration.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
