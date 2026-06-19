@@ -1,11 +1,26 @@
 import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render } from "@testing-library/svelte";
 
+import observeResize from "../__shared__/observeResize";
+
 import { MiddleEllipsis } from "../..";
 
+vi.mock("../__shared__/observeResize", () => {
+  return {
+    default: vi.fn(),
+  };
+});
+
 describe("MiddleEllipsis", () => {
-  /** @type {ResizeObserverCallback} */
-  let resizeObserverCallback;
+  /** @type {import("../__shared__/observers").ObserveResizeCallback} */
+  let currentResizeCallback;
+
+  const unobserveMock = vi.fn();
+
+  vi.mocked(observeResize).mockImplementation((element, callback) => {
+    currentResizeCallback = callback;
+    return unobserveMock;
+  });
 
   vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
     font: "",
@@ -16,25 +31,11 @@ describe("MiddleEllipsis", () => {
     measureText: (text) => ({ width: text.length * 10 }),
   });
 
-  /**
-   * Just a shortcut to avoid creating the spy again and again
-   * in singular tests.
-   * This means that tests that involve calculations should be
-   * done only with the default `as` prop.
-   */
-  const getBCRectSpy = vi
-    .spyOn(HTMLPreElement.prototype, "getBoundingClientRect")
-    .mockReturnValue(DOMRect.fromRect({ width: 200 }));
-
-  vi.spyOn(window, "ResizeObserver").mockImplementation(function (callback) {
-    resizeObserverCallback = callback;
-
-    return {
-      disconnect: vi.fn(),
-      observe: vi.fn(),
-      unobserve: vi.fn(),
-    };
-  });
+  /** @param {number} width */
+  const triggerResize = (width) => {
+    // @ts-expect-error We just need the `contentRect`
+    currentResizeCallback({ contentRect: DOMRect.fromRect({ width }) });
+  };
 
   afterEach(() => {
     cleanup();
@@ -48,9 +49,8 @@ describe("MiddleEllipsis", () => {
   it("should render the full text when there is enough space", async () => {
     const { container } = render(MiddleEllipsis, { text: "Short text" });
 
-    // Trigger initial calculation as the mock doesn't call the callback
-    // @ts-expect-error
-    resizeObserverCallback();
+    // Triggers initial calculation
+    triggerResize(200);
 
     await new Promise(requestAnimationFrame);
 
@@ -74,59 +74,6 @@ describe("MiddleEllipsis", () => {
 
     expect(element).toHaveClass("dusk-middle-ellipsis", "foo", "bar");
     expect(element).toHaveAttribute("id", "some-id");
-  });
-
-  describe("Box model and typography options", () => {
-    it("should subtract padding and borders from the available width", async () => {
-      const computedStyleSpy = vi
-        .spyOn(window, "getComputedStyle")
-        // @ts-expect-error We don't need to mock the full return value
-        .mockReturnValue({
-          borderLeftWidth: "5px",
-          borderRightWidth: "5px",
-          display: "block",
-          font: "16px monospace",
-          letterSpacing: "normal",
-          paddingLeft: "20px",
-          paddingRight: "20px",
-        });
-      const { component } = render(MiddleEllipsis, {
-        text: "This is a very, very long string",
-      });
-      const element = component.getRootElement();
-
-      // Trigger calculation: Total width 200px - 40px (padding) - 10px (border) = 150px available
-      // At 10px per character, it should accommodate exactly 15 characters (including ellipsis)
-      // @ts-expect-error
-      resizeObserverCallback();
-
-      await new Promise(requestAnimationFrame);
-
-      expect(element.textContent).toBe("This is… string");
-
-      computedStyleSpy.mockRestore();
-    });
-
-    it("should fallback gracefully if context.letterSpacing is not supported by the browser", async () => {
-      // Override the context mock to simulate an older browser without letterSpacing support
-      vi.mocked(HTMLCanvasElement.prototype.getContext).mockReturnValueOnce({
-        font: "",
-        // @ts-expect-error
-        measureText: (text) => ({ width: text.length * 10 }),
-      });
-
-      const { component } = render(MiddleEllipsis, {
-        text: "This is a very, very long string",
-      });
-      const element = component.getRootElement();
-
-      // @ts-expect-error
-      resizeObserverCallback();
-
-      await new Promise(requestAnimationFrame);
-
-      expect(element.textContent).toBe("This is a…ong string");
-    });
   });
 
   describe("Developer Warnings", () => {
@@ -186,13 +133,13 @@ describe("MiddleEllipsis", () => {
       });
       const element = component.getRootElement();
 
-      // Trigger initial calculation as the mock doesn't call the callback
-      // @ts-expect-error
-      resizeObserverCallback();
+      // Trigger calculation for 150 available pixels
+      // At 10px per character, it should accommodate exactly 15 characters (including ellipsis)
+      triggerResize(150);
 
       await new Promise(requestAnimationFrame);
 
-      expect(element.textContent).toBe("This is a…ong string");
+      expect(element.textContent).toBe("This is… string");
     });
 
     it("should update the truncation when the element is resized", async () => {
@@ -201,41 +148,51 @@ describe("MiddleEllipsis", () => {
       });
       const element = component.getRootElement();
 
-      // Trigger initial calculation as the mock doesn't call the callback
-      // @ts-expect-error
-      resizeObserverCallback();
+      // Trigger initial calculation
+      triggerResize(200);
 
       await new Promise(requestAnimationFrame);
 
       expect(element.textContent).toBe("This is a…ong string");
 
-      getBCRectSpy.mockReturnValueOnce(DOMRect.fromRect({ width: 2000 }));
-
-      // @ts-expect-error
-      resizeObserverCallback();
+      triggerResize(2000);
 
       await new Promise(requestAnimationFrame);
 
       expect(element.textContent).toBe("This is a very, very long string");
 
-      getBCRectSpy.mockReturnValueOnce(DOMRect.fromRect({ width: 100 }));
-
-      // @ts-expect-error
-      resizeObserverCallback();
+      triggerResize(100);
 
       await new Promise(requestAnimationFrame);
 
       expect(element.textContent).toBe("This…tring");
 
-      getBCRectSpy.mockReturnValueOnce(DOMRect.fromRect({ width: 10 }));
-
-      // @ts-expect-error
-      resizeObserverCallback();
+      triggerResize(10);
 
       await new Promise(requestAnimationFrame);
 
       // not enough available space, only the ellipsis should be visible
       expect(element.textContent).toBe("…");
+    });
+
+    it("should fallback gracefully if context.letterSpacing is not supported by the browser", async () => {
+      // Override the context mock to simulate an older browser without letterSpacing support
+      vi.mocked(HTMLCanvasElement.prototype.getContext).mockReturnValueOnce({
+        font: "",
+        // @ts-expect-error
+        measureText: (text) => ({ width: text.length * 10 }),
+      });
+
+      const { component } = render(MiddleEllipsis, {
+        text: "This is a very, very long string",
+      });
+      const element = component.getRootElement();
+
+      triggerResize(200);
+
+      await new Promise(requestAnimationFrame);
+
+      expect(element.textContent).toBe("This is a…ong string");
     });
   });
 
@@ -246,9 +203,8 @@ describe("MiddleEllipsis", () => {
       });
       const element = component.getRootElement();
 
-      // Trigger initial calculation as the mock doesn't call the callback
-      // @ts-expect-error
-      resizeObserverCallback();
+      // Trigger initial calculation
+      triggerResize(200);
 
       await new Promise(requestAnimationFrame);
 

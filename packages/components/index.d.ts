@@ -1,5 +1,6 @@
 export * from "./src/dusk.components";
 export * from "./src/__shared__/notifications";
+export * from "./src/__shared__/observers";
 export declare const notifier: import("./src/__shared__/notifications").NotificationEmitter;
 export declare const NOTIFICATION_CONTEXT_KEY: string;
 export declare const NOTIFICATION_EVENT_KEY: string;

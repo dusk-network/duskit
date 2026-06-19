@@ -5,6 +5,8 @@
 
   import { makeClassName } from "@duskit/string";
 
+  import observeResize from "../__shared__/observeResize";
+
   import "./MiddleEllipsis.css";
 
   /** @type {MiddleEllipsisProps["as"]} */
@@ -21,8 +23,13 @@
 
   export const getRootElement = () => rootElement;
 
+  let availableWidth = 0;
+
   /** @type {HTMLCanvasElement} */
   let canvas;
+
+  /** @type {CSSStyleDeclaration} */
+  let computedStyle;
 
   /** @type {CanvasRenderingContext2D | null} */
   let context;
@@ -49,8 +56,6 @@
       return;
     }
 
-    const computedStyle = getComputedStyle(rootElement);
-
     context.font = computedStyle.font;
 
     if ("letterSpacing" in context) {
@@ -58,14 +63,6 @@
     }
 
     const ellipsis = "…";
-    const paddingInline =
-      (parseFloat(computedStyle.paddingLeft) || 0) +
-      (parseFloat(computedStyle.paddingRight) || 0);
-    const borderInline =
-      (parseFloat(computedStyle.borderLeftWidth) || 0) +
-      (parseFloat(computedStyle.borderRightWidth) || 0);
-    const rawWidth = rootElement.getBoundingClientRect().width;
-    const availableWidth = rawWidth - paddingInline - borderInline;
 
     if (context.measureText(text).width <= availableWidth) {
       displayText = text;
@@ -105,7 +102,9 @@
   }
 
   onMount(() => {
-    const { display: rootDisplay } = getComputedStyle(rootElement);
+    computedStyle = getComputedStyle(rootElement);
+
+    const { display: rootDisplay } = computedStyle;
 
     if (rootDisplay === "inline") {
       // eslint-disable-next-line no-console
@@ -127,18 +126,17 @@
     canvas = document.createElement("canvas");
     context = canvas.getContext("2d");
 
-    const resizeObserver = new ResizeObserver(() => {
+    const unobserve = observeResize(rootElement, (entry) => {
+      availableWidth = entry.contentRect.width;
       scheduleUpdate();
     });
-
-    resizeObserver.observe(rootElement);
 
     return () => {
       if (pendingFrameId !== null) {
         cancelAnimationFrame(pendingFrameId);
       }
 
-      resizeObserver.disconnect();
+      unobserve();
     };
   });
 
