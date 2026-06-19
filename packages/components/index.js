@@ -1,6 +1,7 @@
 export { default as createNotificationStore } from "./src/__shared__/createNotificationStore.js";
 export { default as getNotificationContext } from "./src/__shared__/getNotificationContext.js";
 export { default as notifier } from "./src/__shared__/notifier.js";
+export { default as observeResize } from "./src/__shared__/observeResize.js";
 export {
   NOTIFICATION_CONTEXT_KEY,
   NOTIFICATION_EVENT_KEY,
