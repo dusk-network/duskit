@@ -1,0 +1,67 @@
+import { Meta, Title, Subtitle } from "@storybook/addon-docs/blocks";
+
+<Meta title="Docs/Resize & Dimension Tracking" />
+
+<Title>Resize & Dimension Tracking</Title>
+<Subtitle>
+  Precise layout observation without reactive state pollution.
+</Subtitle>
+
+## TOC
+
+* [1\. The Architectural Context (Why ResizeAware?)](#1-the-architectural-context-why-resizeaware)
+* [2\. Layout Constraints (CSS Note)](#2-layout-constraints-css-note)
+* [3\. Exposed Slot Properties](#3-exposed-slot-properties)
+* [4\. Usage Example](#4-usage-example)
+
+---
+
+## 1. The Architectural Context (Why ResizeAware?)
+
+While modern frameworks offer native bindings for element dimensions, the `ResizeAware` component serves as our architectural standard for two main reasons:
+
+* **Sub-Pixel Precision:** Native bindings (like `bind:clientWidth` or `bind:clientHeight`) historically return rounded integers. `ResizeAware` utilizes the native `ResizeObserver` API to expose the complete `DOMRect` object, providing precise floating-point measurements. This is critical when passing dimensions to `<canvas>`, SVG charts, or specialized rendering libraries to prevent visual artifacts.
+* **Template Scoping:** Using native bindings forces developers to declare reactive state variables inside the `<script>` block, polluting the component's logic. `ResizeAware` isolates these dimensional state changes entirely within the presentation layer. By using the `let:` directive, you pass the measurements exactly where they are needed in the template without touching the business logic.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 2. Layout Constraints (CSS Note)
+
+It is vital to understand that the `ResizeAware` component adapts to its parent container, not its children.
+
+The component wraps your slot content inside a `<div>` element strictly styled with `height="100%"` and `width="100%"`. Therefore, you must ensure that the parent container wrapping `ResizeAware` has explicitly defined dimensions or a layout model (like Flexbox or Grid) that dictates its size. If the parent collapses, the `ResizeAware` wrapper will collapse with it.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 3. Exposed Slot Properties
+
+The component exposes the dimensional data directly to the default slot.
+
+| Slot Name | Exposed Props | Type | Description |
+| :--- | :--- | :--- | :--- |
+| `default` | `height` | `number` | The calculated height in pixels. |
+| | `rect` | `DOMRect` | The complete dimension object returned by the `ResizeObserver`. |
+| | `width` | `number` | The calculated width in pixels. |
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 4. Usage Example
+
+```html
+<script>
+  import { ResizeAware } from "@duskit/components";
+</script>
+
+<div
+  style="width: 360px; height: 200px; padding: 0.5rem; border: 1px dashed currentcolor; overflow: auto; resize: both;"
+>
+  <ResizeAware let:height let:width>
+    <div>
+      <strong>Available Space:</strong><br />
+      {Math.round(width)}px × {Math.round(height)}px
+    </div>
+  </ResizeAware>
+</div>
+```
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
