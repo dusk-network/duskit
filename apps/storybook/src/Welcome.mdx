@@ -5,10 +5,60 @@ import { Meta, Title, Subtitle } from "@storybook/addon-docs/blocks";
 <Title>Welcome</Title>
 <Subtitle>Duskit components in isolation</Subtitle>
 
-This Storybook lives in `apps/storybook` and is deployed to GitHub Pages via
-`.github/workflows/storybook-pages.yml`.
+## TOC
 
-Notes:
+* [1. The Scope](#1-the-scope)
+* [2. Design Principles](#2-design-principles)
+* [3. Architecture & Dependencies](#3-architecture--dependencies)
+* [4. Component API Conventions](#4-component-api-conventions)
+* [5. Sandbox Navigation](#5-sandbox-navigation)
 
-- Global overlays are mounted for most stories (Tooltip `id="main-tooltip"` and
-  Toast). You can opt out per-story with `parameters.disableGlobalOverlays`.
+---
+
+## 1. The Scope
+
+This Storybook is the isolated environment dedicated exclusively to the development, visual testing, and documentation of the `@duskit/components` library and its interactions. It serves as the primary sandbox for the presentation layer of the Duskit ecosystem.
+
+For the complete source code and to explore the other utility and functional packages that make up the full Duskit ecosystem, please visit the [official GitHub repository](https://github.com/dusk-network/duskit/).
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 2. Design Principles
+
+The development of these UI components is guided by a strict set of architectural rules to ensure predictability and encapsulation:
+
+* **Semantic HTML:** Components utilize the correct native HTML tags for their purpose, providing a solid structural baseline rather than relying on meaningless `<div>` elements.
+* **BEM Methodology:** We enforce a rigorous Block Element Modifier (BEM) convention for CSS classes. This provides a clear, predictable, and self-documenting anatomy for each component, ensuring long-term maintainability. As a highly beneficial side effect, it also guarantees that styles remain tightly encapsulated and will never leak or collide with the host application's global stylesheets.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 3. Architecture & Dependencies
+
+The library is designed to be as lightweight and unopinionated as possible regarding your build pipeline.
+
+* **No Build Step:** The library is distributed "raw". It deliberately delegates the compilation and optimization processes to the consuming application's bundler.
+* **Svelte Compatibility:** Fully compatible with both **Svelte v4** and **Svelte v5**.
+* **First-Class TypeScript:** The entire library is built with strict TypeScript definitions. This guarantees out-of-the-box editor autocompletion and ensures that component properties, custom events, and data models are always inherently type-safe.
+* **Optional CSS Framework:** The components are structurally encapsulated, but they blindly consume a set of specific CSS Custom Properties to define their layout and anatomy. Installing `@duskit/css` as a peer dependency is highly recommended to automatically inherit the official theme, semantic tokens, and interaction physics. If you choose to omit this dependency, your application must manually define the required CSS contracts within your global stylesheets to prevent visual degradation.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 4. Component API Conventions
+
+While architectural necessities occasionally require exceptions (e.g., specific wrapper components like `ResizeAware` isolating the DOM), the library generally follows these API conventions. When in doubt, the TypeScript interfaces remain the absolute source of truth.
+
+* **HTML Attributes Forwarding:** Components transparently forward standard HTML attributes to their root node using Svelte's `$$restProps` mechanics.
+* **Custom Classes:** Components accept a `className` prop to allow safe, scoped stylistic overrides from the consumer application.
+* **DOM Access:** Where applicable, components expose a `getRootElement()` method to allow direct interaction with the browser's native API.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 5. Sandbox Navigation
+
+The Storybook sidebar is organized to separate architectural concepts from raw component testing:
+
+* **Docs:** Contains narrative documentation covering systemic patterns (e.g., Notification System, Time-Driven Rendering) and overarching architectural decisions.
+* **Components:** The actual inventory of UI components. These are strictly categorized following the taxonomy of the CSS contracts: `display`, `feedback`, `interactive`, and `layout`.
+* **Examples:** Complex compositions demonstrating how individual components orchestrate together in real-world scenarios.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
