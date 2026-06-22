@@ -1,11 +1,11 @@
 import { mdiAccount, mdiCogOutline, mdiHome } from "@mdi/js";
 
-import { Tabs } from "@duskit/components";
+import TabsExample from "./_examples/TabsExample.svelte";
 
 const items = [
-  { id: "home", label: "Home", icon: { path: mdiHome } },
-  { id: "account", label: "Account", icon: { path: mdiAccount } },
-  { id: "settings", label: "Settings", icon: { path: mdiCogOutline } },
+  { icon: { path: mdiHome }, id: "home", label: "Home" },
+  { icon: { path: mdiAccount }, id: "account", label: "Account" },
+  { icon: { path: mdiCogOutline }, id: "settings", label: "Settings" },
   { id: "security", label: "Security" },
   { id: "billing", label: "Billing" },
   { id: "notifications", label: "Notifications" },
@@ -14,18 +14,17 @@ const items = [
 ];
 
 export default {
-  title: "Components/Interactive/Tabs",
-  component: Tabs,
   argTypes: {
     items: { control: false },
     selectedTab: { control: false },
   },
+  component: TabsExample,
+  title: "Components/Interactive/Tabs",
 };
 
 export const Default = {
   args: {
     items,
     selectedTab: "home",
-    style: "max-width: 520px;",
   },
 };
