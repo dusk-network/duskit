@@ -5,19 +5,18 @@ import { getAsHTMLElement } from "@duskit/test-helpers";
 
 /** @typedef {import("../tabs/Tabs").TabsProps} TabsProps */
 
+import observeResize from "../__shared__/observeResize";
+
 import { Tabs } from "../..";
 
+vi.mock("../__shared__/observeResize", () => {
+  return {
+    default: vi.fn(),
+  };
+});
+
 describe("Tabs", () => {
-  /**
-   * `@juggle/resize-observer` uses this to get the dimensions of
-   * the observed element and, by specs, the callback won't fire
-   * on the `observe` call if the dimensions are both `0`.
-   */
-  // @ts-ignore we don't need to mock the whole CSS declaration
-  const gcsSpy = vi.spyOn(window, "getComputedStyle").mockReturnValue({
-    height: "320px",
-    width: "320px",
-  });
+  const TEST_CLIENT_WIDTH = 320;
   const rafSpy = vi.spyOn(window, "requestAnimationFrame");
   const cafSpy = vi.spyOn(window, "cancelAnimationFrame");
   const scrollBySpy = vi.spyOn(HTMLUListElement.prototype, "scrollBy");
@@ -25,18 +24,14 @@ describe("Tabs", () => {
   const scrollLeftSpy = vi
     .spyOn(HTMLUListElement.prototype, "scrollLeft", "get")
     .mockReturnValue(0);
-  const scrollToSpy = vi.spyOn(HTMLUListElement.prototype, "scrollTo");
   const scrollWidthSpy = vi
     .spyOn(HTMLUListElement.prototype, "scrollWidth", "get")
-    .mockReturnValue(640);
-  const ulClientWidthSpy = vi
-    .spyOn(HTMLUListElement.prototype, "clientWidth", "get")
-    .mockReturnValue(320);
+    .mockReturnValue(TEST_CLIENT_WIDTH * 2);
 
-  // needed by `@juggle/resize-observer`
-  const ulOffsetWidthSpy = vi
-    .spyOn(HTMLUListElement.prototype, "offsetWidth", "get")
-    .mockReturnValue(320);
+  vi.spyOn(HTMLUListElement.prototype, "scrollTo");
+  vi.spyOn(HTMLUListElement.prototype, "clientWidth", "get").mockReturnValue(
+    TEST_CLIENT_WIDTH
+  );
 
   const items = [
     "Dashboard",
@@ -81,40 +76,36 @@ describe("Tabs", () => {
   const renderTabs = async (props, options = {}) => {
     const renderResult = render(Tabs, { ...baseOptions, ...options, props });
 
-    /**
-     * `@juggle/resize-observer` uses some scheduling, so we
-     * need to wait for the first observe to fire.
-     */
-    await vi.waitUntil(() => rafSpy.mock.calls.length > 0);
-
-    // clearing `requestAnimationFrame` calls made by `@juggle/resize-observer`
-    rafSpy.mockClear();
+    // @ts-expect-error We just need the `contentRect`
+    currentResizeCallback({
+      contentRect: DOMRect.fromRect({
+        height: TEST_CLIENT_WIDTH,
+        width: TEST_CLIENT_WIDTH,
+      }),
+    });
 
     return renderResult;
   };
 
+  /** @type {import("../__shared__/observeResize").ObserveResizeCallback} */
+  let currentResizeCallback;
+
+  const unobserveMock = vi.fn();
+
+  vi.mocked(observeResize).mockImplementation((element, callback) => {
+    currentResizeCallback = callback;
+
+    return unobserveMock;
+  });
+
   afterEach(() => {
     cleanup();
-    rafSpy.mockClear();
-    cafSpy.mockClear();
-    scrollBySpy.mockClear();
-    scrollIntoViewSpy.mockClear();
-    scrollLeftSpy.mockClear();
-    scrollToSpy.mockClear();
-    scrollWidthSpy.mockClear();
+    vi.clearAllMocks();
   });
 
   afterAll(() => {
-    gcsSpy.mockRestore();
-    rafSpy.mockRestore();
-    cafSpy.mockRestore();
-    scrollBySpy.mockRestore();
-    scrollIntoViewSpy.mockRestore();
-    scrollLeftSpy.mockRestore();
-    scrollToSpy.mockRestore();
-    scrollWidthSpy.mockRestore();
-    ulClientWidthSpy.mockRestore();
-    ulOffsetWidthSpy.mockRestore();
+    vi.restoreAllMocks();
+    vi.doUnmock("../__shared__/observeResize");
   });
 
   it('should render a "Tabs" component and reset its scroll status if no tab is selected', async () => {
@@ -167,35 +158,33 @@ describe("Tabs", () => {
   });
 
   it("should observe the tab list resize on mounting and stop observing when unmounting", async () => {
-    const observeSpy = vi.spyOn(ResizeObserver.prototype, "observe");
-    const disconnectSpy = vi.spyOn(ResizeObserver.prototype, "disconnect");
     const { container, unmount } = await renderTabs(baseProps);
     const tabsList = container.querySelector(".dusk-tabs-list");
 
-    expect(observeSpy).toHaveBeenCalledTimes(1);
-    expect(observeSpy).toHaveBeenCalledWith(tabsList);
+    expect(observeResize).toHaveBeenCalledExactlyOnceWith(
+      tabsList,
+      expect.any(Function)
+    );
 
     unmount();
 
-    expect(disconnectSpy).toHaveBeenCalledTimes(1);
-
-    observeSpy.mockRestore();
-    disconnectSpy.mockRestore();
+    expect(unobserveMock).toHaveBeenCalledTimes(1);
   });
 
   it("should pass additional class names and attributes to the root element", async () => {
-    const { container } = await renderTabs({
+    const { component } = await renderTabs({
       ...baseProps,
       className: "foo bar",
       id: "some-id",
     });
 
-    expect(container.firstElementChild).toMatchSnapshot();
+    expect(component.getRootElement()).toMatchSnapshot();
   });
 
   it("should fire a change event when a tab is selected and it's not the current selection", async () => {
     /** @type {HTMLElement | null} */
     let expectedTab = null;
+
     /** @param {CustomEvent<string>} event */
     const onChange = (event) => {
       expect(event.detail).toBe(expectedTab?.dataset.tabid ?? "");
@@ -294,7 +283,7 @@ describe("Tabs", () => {
 
     expect(cafSpy).toHaveBeenCalledTimes(1);
 
-    scrollLeftSpy.mockReturnValueOnce(320);
+    scrollLeftSpy.mockReturnValueOnce(TEST_CLIENT_WIDTH);
 
     await fireEvent.scroll(tabsList);
 

@@ -6,9 +6,10 @@
   import { mdiChevronLeft, mdiChevronRight } from "@mdi/js";
   import { createEventDispatcher, onMount } from "svelte";
   import { writable } from "svelte/store";
-  import { isGTE, isLTE } from "lamb";
 
   import { makeClassName } from "@duskit/string";
+
+  import observeResize from "../__shared__/observeResize";
 
   import { Button, Icon } from "../..";
 
@@ -53,13 +54,15 @@
   function isTabSideVisible(side) {
     const tabsListRect = tabsList.getBoundingClientRect();
     const tolerance = 5;
-    const checkSide =
-      side === "left"
-        ? isGTE(tabsListRect.left - tolerance)
-        : isLTE(tabsListRect.right + tolerance);
 
     /** @param {HTMLLIElement} tab */
-    return (tab) => checkSide(tab.getBoundingClientRect()[side]);
+    return (tab) => {
+      const tabRect = tab.getBoundingClientRect();
+
+      return side === "left"
+        ? tabRect.left >= tabsListRect.left - tolerance
+        : tabRect.right <= tabsListRect.right + tolerance;
+    };
   }
 
   /** @type {import("svelte/elements").MouseEventHandler<HTMLButtonElement>} */
@@ -151,7 +154,9 @@
   }
 
   onMount(() => {
-    const resizeObserver = new ResizeObserver(() => {
+    tabsList.scrollTo(0, 0);
+
+    return observeResize(tabsList, () => {
       const tab = tabsList.querySelector(`[data-tabid="${selectedTab}"]`);
 
       tab &&
@@ -163,11 +168,6 @@
 
       updateScrollStatus();
     });
-
-    tabsList.scrollTo(0, 0);
-    resizeObserver.observe(tabsList);
-
-    return () => resizeObserver.disconnect();
   });
 
   $: ({ canScroll, canScrollLeft, canScrollRight } = $scrollStatus);

@@ -3,6 +3,8 @@
 <script>
   import { onMount } from "svelte";
 
+  import observeResize from "../__shared__/observeResize";
+
   /** @type {HTMLDivElement} */
   let rootElement;
 
@@ -11,17 +13,13 @@
   let rect = new DOMRect();
   let { height, width } = rect;
 
-  onMount(() => {
-    const resizeObserver = new ResizeObserver((entries) => {
-      rect = entries[0].contentRect;
+  onMount(() =>
+    observeResize(rootElement, (entry) => {
+      rect = entry.contentRect;
       height = rect.height;
       width = rect.width;
-    });
-
-    resizeObserver.observe(rootElement);
-
-    return () => resizeObserver.disconnect();
-  });
+    })
+  );
 </script>
 
 <div bind:this={rootElement} style:height="100%" style:width="100%">
