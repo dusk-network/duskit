@@ -1,0 +1,88 @@
+import { Meta, Title, Subtitle } from "@storybook/addon-docs/blocks";
+
+<Meta title="Docs/Using SSR" />
+
+<Title>Using SSR</Title>
+<Subtitle>
+  Managing server-side rendering, hydration consistency, and deterministic identifiers.
+</Subtitle>
+
+To ensure robust accessibility without requiring manual configuration, many components within the library (such as form inputs, steppers, or layout containers) automatically generate internal identifiers for attributes like `id`, `for`, and `aria-labelledby`. By default, the library achieves this by using a `randomUUID` utility.
+
+While generating random strings on the fly works perfectly for standard Single Page Applications (SPAs), it becomes a severe liability in a Server-Side Rendering (SSR) environment. The server generates one set of random strings, and the browser generates a completely different set during hydration. Svelte detects this mismatch, throws a hydration error, and the accessibility links of your forms and layouts are immediately broken.
+
+To resolve this, the library provides an opt-in infrastructure to guarantee deterministic ID generation across both environments.
+
+## TOC
+
+* [1. The DeterministicIdProvider](#1-the-deterministicidprovider)
+* [2. Micro-Frontends and the Namespace Prop](#2-micro-frontends-and-the-namespace-prop)
+* [3. The Hydration Contract (Breaking the Sequence)](#3-the-hydration-contract-breaking-the-sequence)
+
+---
+
+## 1. The DeterministicIdProvider
+
+For SSR consumers, the library requires you to wrap your application tree with the `DeterministicIdProvider`.
+
+This component initializes a sequential counter at the root of the request. As Svelte traverses the component tree synchronously (top-down, depth-first), each library component that requires an ID requests the next number in the sequence. Because the server and the client traverse the identical component tree in the exact same order, the generated IDs match perfectly.
+
+### Integration Example
+
+Typically, this is placed in your root layout file.
+
+```html
+<script>
+  import { DeterministicIdProvider } from "@duskit/components";
+</script>
+
+<DeterministicIdProvider>
+  <slot />
+</DeterministicIdProvider>
+```
+
+> **Note for SPA consumers:** If your application is a pure SPA, you are not strictly required to use this provider; the components will safely fall back to generating random UUIDs. However, if you choose to include it anyway (e.g., for architectural consistency across different projects or anticipating a future migration to SSR), it is perfectly safe to do so. The components will seamlessly adapt to the sequential generator without any negative side effects.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 2. Micro-Frontends and the Namespace Prop
+
+In advanced usage scenarios, such as a micro-frontend architecture or a static page where multiple, independent Svelte widgets are mounted simultaneously, a simple sequential counter is not enough.
+
+If two separate widgets both utilize their own `DeterministicIdProvider`, both counters will start from zero. This will inevitably result in DOM collisions (e.g., both widgets generating a `dusk-checkbox-1`), breaking accessibility rules and CSS selectors.
+
+To prevent this, the provider accepts an optional `namespace` property. This string is prepended to all identifiers generated within its context, creating an isolated scope for the widget.
+
+```html
+<script>
+  import { DeterministicIdProvider } from "@duskit/components";
+</script>
+
+<DeterministicIdProvider namespace="myWidget">
+  <MyStandaloneApp />
+</DeterministicIdProvider>
+```
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
+
+## 3. The Hydration Contract (Breaking the Sequence)
+
+The determinism provided by the library is mathematically solid, but it relies on a strict fundamental contract: **the initial state and the component tree must be structurally identical on both the server and the client.**
+
+The generation sequence breaks down—and the counters misalign—when the consuming application introduces structural divergences. If you encounter hydration mismatches while using the provider, you have likely violated the contract in one of the following ways:
+
+### A. Environment Divergence (The `window` Trap)
+
+If you conditionally render a component based on a client-only object (e.g., checking if `window` is defined, or reading an initial value from `localStorage`), the server will evaluate the condition as false and skip the component. The counter will not advance. When the browser hydrates, the condition is true, the component is rendered, and it consumes a number from the sequence. From that specific DOM node downwards, every subsequent ID in the page will be shifted and mismatched.
+
+### B. Asynchronous Layouts and `{#await}` Blocks
+
+The Svelte 4 SSR engine does not pause execution to wait for promises inside template blocks; it synchronously renders the pending state. If a library component requesting an ID is placed inside a `{:then}` block, the server never evaluates it. When the client resolves the promise moments after hydration, the component requests an ID out of sequence, completely shattering the deterministic order.
+
+### C. Non-Deterministic Data Sources
+
+If you render a list of form controls by iterating over a data structure that does not guarantee insertion order, or if you alter the initial order using random functions or timestamps, the server and the client will traverse the loop in different sequences. The identifiers will be assigned chaotically.
+
+**The Bottom Line:** The `DeterministicIdProvider` does exactly what it promises—it counts sequentially. If the sequence differs between the server and the client, the application has provided two discordant trees. Maintaining absolute structural parity during the initial render is the developer's responsibility.
+
+<p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>

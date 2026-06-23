@@ -19,6 +19,7 @@ export { default as Checkbox } from "./src/checkbox/Checkbox.svelte";
 export { default as ContentSwitch } from "./src/content-switch/ContentSwitch.svelte";
 export { default as CopyField } from "./src/copy-field/CopyField.svelte";
 export { default as CounterIcon } from "./src/counter-icon/CounterIcon.svelte";
+export { default as DeterministicIdProvider } from "./src/deterministic-id-provider/DeterministicIdProvider.svelte";
 export { default as Drawer } from "./src/drawer/Drawer.svelte";
 export { default as ErrorAlert } from "./src/error-alert/ErrorAlert.svelte";
 export { default as ErrorDetails } from "./src/error-details/ErrorDetails.svelte";
