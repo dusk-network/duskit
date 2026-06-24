@@ -3,7 +3,9 @@
 <script>
   /** @typedef {import("./Agreement").AgreementProps} AgreementProps */
 
-  import { makeClassName, randomUUID } from "@duskit/string";
+  import { makeClassName } from "@duskit/string";
+
+  import getDeterministicId from "../__shared__/getDeterministicId";
 
   import { Checkbox } from "../..";
 
@@ -16,7 +18,7 @@
   export let className = undefined;
 
   /** @type {AgreementProps["controlId"]} */
-  export let controlId = `dusk-checkbox-${randomUUID()}`;
+  export let controlId = getDeterministicId("dusk-checkbox");
 
   /** @type {AgreementProps["disabled"]} */
   export let disabled = false;

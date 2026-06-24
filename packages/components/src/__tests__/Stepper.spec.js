@@ -4,15 +4,9 @@ import { mdiCheckDecagramOutline } from "@mdi/js";
 
 import { Stepper } from "../..";
 
-vi.mock("@duskit/string", async (importOriginal) => {
-  /** @type {typeof import("@duskit/string")} */
-  const original = await importOriginal();
-
-  return {
-    ...original,
-    randomUUID: () => "some-generated-id",
-  };
-});
+vi.mock("../__shared__/getDeterministicId", () => ({
+  default: vi.fn().mockReturnValue("dusk-stepper-some-generated-id"),
+}));
 
 describe("Stepper", () => {
   const baseProps = {
@@ -33,7 +27,7 @@ describe("Stepper", () => {
   afterEach(cleanup);
 
   afterAll(() => {
-    vi.doUnmock("@duskit/string");
+    vi.doUnmock("../__shared__/getDeterministicId");
   });
 
   it("should render the `Stepper` component accepting an array of `StepperStep` objects as steps", async () => {

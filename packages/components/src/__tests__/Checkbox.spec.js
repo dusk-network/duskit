@@ -1,18 +1,12 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render } from "@testing-library/svelte";
 import { skipIn } from "lamb";
 
 import { Checkbox } from "../..";
 
-vi.mock("@duskit/string", async (importOriginal) => {
-  /** @type {typeof import("@duskit/string")} */
-  const original = await importOriginal();
-
-  return {
-    ...original,
-    randomUUID: () => "some-generated-id",
-  };
-});
+vi.mock("../__shared__/getDeterministicId", () => ({
+  default: vi.fn().mockReturnValue("dusk-checkbox-some-generated-id"),
+}));
 
 describe("Checkbox", () => {
   const baseProps = {
@@ -21,6 +15,10 @@ describe("Checkbox", () => {
   };
 
   afterEach(cleanup);
+
+  afterAll(() => {
+    vi.doUnmock("../__shared__/getDeterministicId");
+  });
 
   it("renders the Checkbox component", () => {
     const { container } = render(Checkbox, baseProps);

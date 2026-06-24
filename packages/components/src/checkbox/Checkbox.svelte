@@ -3,7 +3,9 @@
 <script>
   /** @typedef {import("./Checkbox").CheckboxProps} CheckboxProps */
 
-  import { makeClassName, randomUUID } from "@duskit/string";
+  import { makeClassName } from "@duskit/string";
+
+  import getDeterministicId from "../__shared__/getDeterministicId";
 
   import "./Checkbox.css";
 
@@ -17,7 +19,7 @@
   export let disabled = false;
 
   /** @type {CheckboxProps["id"]} */
-  export let id = `dusk-checkbox-${randomUUID()}`;
+  export let id = getDeterministicId("dusk-checkbox");
 
   /** @type {CheckboxProps["name"]} */
   export let name;

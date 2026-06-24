@@ -7,7 +7,7 @@ exports[`Stepper > should allow to hide the step numbers 1`] = `
 >
   <!---->
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-0"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     
@@ -16,12 +16,12 @@ exports[`Stepper > should allow to hide the step numbers 1`] = `
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-0"
   >
     foo
   </span>
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-1"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     
@@ -30,13 +30,13 @@ exports[`Stepper > should allow to hide the step numbers 1`] = `
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-1"
   >
     bar
   </span>
   <span
     aria-current="step"
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-2"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     
@@ -45,12 +45,12 @@ exports[`Stepper > should allow to hide the step numbers 1`] = `
    
   <span
     class="dusk-stepper__step-label"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-2"
   >
     baz
   </span>
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-3"
     class="dusk-stepper__step"
   >
     
@@ -59,12 +59,12 @@ exports[`Stepper > should allow to hide the step numbers 1`] = `
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-3"
   >
     qux
   </span>
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-4"
     class="dusk-stepper__step"
   >
     <!---->
@@ -84,7 +84,7 @@ exports[`Stepper > should allow to hide the step numbers 1`] = `
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-4"
   >
     quux
   </span>
@@ -101,7 +101,7 @@ exports[`Stepper > should pass additional class names and attributes to the rend
 >
   <!---->
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-0"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     1
@@ -110,12 +110,12 @@ exports[`Stepper > should pass additional class names and attributes to the rend
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-0"
   >
     foo
   </span>
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-1"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     2
@@ -124,13 +124,13 @@ exports[`Stepper > should pass additional class names and attributes to the rend
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-1"
   >
     bar
   </span>
   <span
     aria-current="step"
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-2"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     3
@@ -139,12 +139,12 @@ exports[`Stepper > should pass additional class names and attributes to the rend
    
   <span
     class="dusk-stepper__step-label"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-2"
   >
     baz
   </span>
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-3"
     class="dusk-stepper__step"
   >
     4
@@ -153,12 +153,12 @@ exports[`Stepper > should pass additional class names and attributes to the rend
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-3"
   >
     qux
   </span>
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-4"
     class="dusk-stepper__step"
   >
     <!---->
@@ -178,7 +178,7 @@ exports[`Stepper > should pass additional class names and attributes to the rend
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-4"
   >
     quux
   </span>
@@ -231,7 +231,7 @@ exports[`Stepper > should render the \`Stepper\` component accepting a number as
 >
   <!---->
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-0"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     1
@@ -240,12 +240,12 @@ exports[`Stepper > should render the \`Stepper\` component accepting a number as
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-0"
   >
     foo
   </span>
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-1"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     2
@@ -254,12 +254,12 @@ exports[`Stepper > should render the \`Stepper\` component accepting a number as
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-1"
   >
     bar
   </span>
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-2"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     3
@@ -268,13 +268,13 @@ exports[`Stepper > should render the \`Stepper\` component accepting a number as
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-2"
   >
     baz
   </span>
   <span
     aria-current="step"
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-3"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     4
@@ -283,12 +283,12 @@ exports[`Stepper > should render the \`Stepper\` component accepting a number as
    
   <span
     class="dusk-stepper__step-label"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-3"
   >
     qux
   </span>
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-4"
     class="dusk-stepper__step"
   >
     <!---->
@@ -308,7 +308,7 @@ exports[`Stepper > should render the \`Stepper\` component accepting a number as
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-4"
   >
     quux
   </span>
@@ -324,7 +324,7 @@ exports[`Stepper > should render the \`Stepper\` component accepting an array of
 >
   <!---->
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-0"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     1
@@ -333,12 +333,12 @@ exports[`Stepper > should render the \`Stepper\` component accepting an array of
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-0"
   >
     foo
   </span>
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-1"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     2
@@ -347,13 +347,13 @@ exports[`Stepper > should render the \`Stepper\` component accepting an array of
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-1"
   >
     bar
   </span>
   <span
     aria-current="step"
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-2"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     3
@@ -362,12 +362,12 @@ exports[`Stepper > should render the \`Stepper\` component accepting an array of
    
   <span
     class="dusk-stepper__step-label"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-2"
   >
     baz
   </span>
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-3"
     class="dusk-stepper__step"
   >
     4
@@ -376,12 +376,12 @@ exports[`Stepper > should render the \`Stepper\` component accepting an array of
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-3"
   >
     qux
   </span>
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-4"
     class="dusk-stepper__step"
   >
     <!---->
@@ -401,7 +401,7 @@ exports[`Stepper > should render the \`Stepper\` component accepting an array of
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-4"
   >
     quux
   </span>
@@ -417,7 +417,7 @@ exports[`Stepper > should render the \`Stepper\` component accepting an array of
 >
   <!---->
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-0"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     1
@@ -426,12 +426,12 @@ exports[`Stepper > should render the \`Stepper\` component accepting an array of
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-0"
   >
     foo
   </span>
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-1"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     2
@@ -440,12 +440,12 @@ exports[`Stepper > should render the \`Stepper\` component accepting an array of
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-1"
   >
     bar
   </span>
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-2"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     3
@@ -454,13 +454,13 @@ exports[`Stepper > should render the \`Stepper\` component accepting an array of
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-2"
   >
     baz
   </span>
   <span
     aria-current="step"
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-3"
     class="dusk-stepper__step dusk-stepper__step--processed"
   >
     4
@@ -469,12 +469,12 @@ exports[`Stepper > should render the \`Stepper\` component accepting an array of
    
   <span
     class="dusk-stepper__step-label"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-3"
   >
     qux
   </span>
   <span
-    aria-labelledby="step-some-generated-id"
+    aria-labelledby="dusk-stepper-some-generated-id-step-4"
     class="dusk-stepper__step"
   >
     <!---->
@@ -494,7 +494,7 @@ exports[`Stepper > should render the \`Stepper\` component accepting an array of
    
   <span
     class="dusk-stepper__step-label dusk-stepper__step-label--invisible"
-    id="step-some-generated-id"
+    id="dusk-stepper-some-generated-id-step-4"
   >
     quux
   </span>

@@ -3,9 +3,11 @@
 <script>
   /** @typedef {import("./Stepper").StepperProps} StepperProps */
 
-  import { makeClassName, randomUUID } from "@duskit/string";
+  import { makeClassName } from "@duskit/string";
 
+  import getDeterministicId from "../__shared__/getDeterministicId";
   import { Icon } from "../..";
+
   import "./Stepper.css";
 
   /**
@@ -45,6 +47,8 @@
 
   export const getRootElement = () => (stepsAmount >= 2 ? rootElement : null);
 
+  const baseId = getDeterministicId("dusk-stepper");
+
   $: classes = makeClassName(["dusk-stepper", className]);
   $: stepsAmount = Array.isArray(steps) ? steps.length : steps;
 
@@ -77,7 +81,7 @@
   >
     {#if Array.isArray(steps)}
       {#each steps as currentStep, idx (currentStep)}
-        {@const id = `step-${randomUUID()}`}
+        {@const id = `${baseId}-step-${idx}`}
         <span
           class="dusk-stepper__step"
           class:dusk-stepper__step--processed={idx <= activeStep}
