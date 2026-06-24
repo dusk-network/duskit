@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from "vitest";
+import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render } from "@testing-library/svelte";
 
 import {
@@ -7,6 +7,10 @@ import {
 } from "@duskit/test-helpers";
 
 import { Banner } from "../..";
+
+vi.mock("../__shared__/getDeterministicId", () => ({
+  default: vi.fn().mockReturnValue("dusk-banner-title-mocked-id"),
+}));
 
 describe("Banner", () => {
   const variants = /** @type {const} */ ([
@@ -27,10 +31,23 @@ describe("Banner", () => {
 
   afterEach(cleanup);
 
-  it("should render the `Banner` component", () => {
-    const { container } = renderWithSimpleContent(Banner, baseOptions);
+  afterAll(() => {
+    vi.doUnmock("../__shared__/getDeterministicId");
+  });
 
-    expect(container.firstElementChild).toMatchSnapshot();
+  it("should render the `Banner` component", () => {
+    const { component } = renderWithSimpleContent(Banner, baseOptions);
+    const rootElement = component.getRootElement().getRootElement();
+    const titleElement = getAsHTMLElement(rootElement, ".dusk-banner__title");
+
+    expect(rootElement).toHaveClass("dusk-banner dusk-banner--variant--info");
+    expect(rootElement).toHaveAttribute(
+      "aria-labelledby",
+      "dusk-banner-title-mocked-id"
+    );
+    expect(rootElement).toHaveAttribute("role", "status");
+    expect(titleElement).toHaveAttribute("id", "dusk-banner-title-mocked-id");
+    expect(rootElement).toMatchSnapshot();
   });
 
   it("should render a warning message if no content is provided for the default slot", () => {
@@ -57,36 +74,62 @@ describe("Banner", () => {
     'should be able to render the component using the "%s" variant',
     (variant) => {
       const props = { ...baseProps, variant };
-      const { component, container } = renderWithSimpleContent(Banner, {
+      const { component } = renderWithSimpleContent(Banner, {
         ...baseOptions,
         props,
       });
-      const element = component.getRootElement().getRootElement();
+      const rootElement = component.getRootElement().getRootElement();
 
-      expect(element).toHaveClass(`dusk-banner--variant--${variant}`);
+      expect(rootElement).toHaveClass(`dusk-banner--variant--${variant}`);
+      expect(rootElement).toHaveAttribute(
+        "role",
+        variant === "error" || variant === "warning" ? "alert" : "status"
+      );
 
       // we use snapshots here as other than the class name
       // the component uses a different icon for each variant
-      expect(container.firstElementChild).toMatchSnapshot();
+      expect(rootElement).toMatchSnapshot();
+    }
+  );
+
+  it.each(variants)(
+    'should give priority to the received `role` prop and not assign a "%s variant" default `aria-role`',
+    (variant) => {
+      const props = { ...baseProps, role: "alertdialog", variant };
+      const { component } = renderWithSimpleContent(Banner, {
+        ...baseOptions,
+        props,
+      });
+      const rootElement = component.getRootElement().getRootElement();
+
+      expect(rootElement).toHaveClass(`dusk-banner--variant--${variant}`);
+      expect(rootElement).toHaveAttribute("role", props.role);
     }
   );
 
   it("should remove the title node and apply a fallback class when the title is empty", async () => {
     const { component, rerender } = render(Banner, baseOptions);
-    const element = component.getRootElement();
+    const rootElement = component.getRootElement();
 
-    expect(element).not.toHaveClass("dusk-banner--no-title");
-    expect(element.querySelector(".dusk-banner__title")).not.toBeNull();
+    expect(rootElement).not.toHaveClass("dusk-banner--no-title");
+    expect(rootElement).toHaveAttribute(
+      "aria-labelledby",
+      "dusk-banner-title-mocked-id"
+    );
+    expect(
+      getAsHTMLElement(rootElement, ".dusk-banner__title")
+    ).toHaveAttribute("id", "dusk-banner-title-mocked-id");
 
     await rerender({ title: "" });
 
-    expect(element).toHaveClass("dusk-banner--no-title");
-    expect(element.querySelector(".dusk-banner__title")).toBeNull();
+    expect(rootElement).toHaveClass("dusk-banner--no-title");
+    expect(rootElement).not.toHaveAttribute("aria-labelledby");
+    expect(rootElement.querySelector(".dusk-banner__title")).toBeNull();
   });
 
   it("should react to prop changes", async () => {
     const { component, rerender } = render(Banner, baseOptions);
-    const element = component.getRootElement();
+    const rootElement = component.getRootElement();
 
     await rerender({
       className: "baz",
@@ -94,9 +137,9 @@ describe("Banner", () => {
       variant: "error",
     });
 
-    expect(element).toHaveClass("dusk-banner--variant--error", "baz");
-    expect(getAsHTMLElement(element, ".dusk-banner__title")).toHaveTextContent(
-      "new title"
-    );
+    expect(rootElement).toHaveClass("dusk-banner--variant--error", "baz");
+    expect(
+      getAsHTMLElement(rootElement, ".dusk-banner__title")
+    ).toHaveTextContent("new title");
   });
 });

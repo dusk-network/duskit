@@ -1,12 +1,14 @@
 import type { SvelteComponent } from "svelte";
-import type { SvelteHTMLElements } from "svelte/elements";
+import type { AriaRole, SvelteHTMLElements } from "svelte/elements";
 
 import type { ControlledHtmlAttributes, StatusType } from "../dusk.components";
 
 export interface BannerProps extends ControlledHtmlAttributes<
-  SvelteHTMLElements["div"]
+  SvelteHTMLElements["div"],
+  "aria-labelledby"
 > {
   className?: string;
+  role?: AriaRole;
   title: string;
   variant: StatusType;
 }

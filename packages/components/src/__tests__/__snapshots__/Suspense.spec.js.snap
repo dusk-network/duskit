@@ -248,6 +248,7 @@ exports[`Suspense > should be able to render the \`Suspense\` in a failure state
   <!---->
   <div
     class="dusk-banner dusk-banner--variant--error dusk-banner--no-title"
+    role="alert"
   >
     <!---->
     <svg
