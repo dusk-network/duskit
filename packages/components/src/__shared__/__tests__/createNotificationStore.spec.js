@@ -2,6 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { get, writable } from "svelte/store";
 import { partition } from "lamb";
 
+import * as duskitString from "@duskit/string";
+
 import { createNotificationStore } from "../../..";
 
 /** @typedef {import("../../..").NotificationItem} NotificationItem */
@@ -124,6 +126,10 @@ describe("createNotificationStore", () => {
   });
 
   it("should expose a method to add a new notification, auto-generate its `id` and `date`, add panel and toast specific properties and place it at the top", () => {
+    const randomUUIDSpy = vi
+      .spyOn(duskitString, "randomUUID")
+      .mockReturnValueOnce("some-generated-id-1")
+      .mockReturnValueOnce("some-generated-id-2");
     const store = createNotificationStore(writable([]));
 
     /** @type {NotificationInput} */
@@ -140,7 +146,7 @@ describe("createNotificationStore", () => {
       ...newNotificationData,
       date: baseDate,
       dismissable: true,
-      id: expect.any(String),
+      id: "some-generated-id-1",
       read: false,
     });
 
@@ -157,11 +163,20 @@ describe("createNotificationStore", () => {
     };
 
     const secondResult = store.add(secondNotificationData);
+
+    expect(secondResult).toStrictEqual({
+      ...secondNotificationData,
+      date: baseDate,
+      id: "some-generated-id-2",
+    });
+
     const newState = get(store);
 
     expect(newState).toHaveLength(2);
     expect(newState[0]).toStrictEqual(secondResult);
     expect(newState[1]).toStrictEqual(result);
+
+    randomUUIDSpy.mockRestore();
   });
 
   it("should expose a method to clear all notifications", () => {

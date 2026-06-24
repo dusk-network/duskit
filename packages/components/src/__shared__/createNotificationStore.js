@@ -7,6 +7,7 @@ import {
   uniquesBy,
 } from "lamb";
 import { derived, get } from "svelte/store";
+import { randomUUID } from "@duskit/string";
 
 /** @typedef {import("./notifications").NotificationItem} NotificationItem */
 
@@ -43,7 +44,7 @@ function createNotificationStore(store, transitionStrategy) {
     add(data) {
       const base = {
         date: new Date(),
-        id: crypto.randomUUID(),
+        id: randomUUID(),
       };
 
       /** @type {NotificationItem} */
