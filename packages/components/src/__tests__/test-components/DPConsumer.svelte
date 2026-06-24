@@ -1,7 +1,7 @@
 <svelte:options immutable={true} />
 
 <script>
-  import { getDeterministicId } from "../../__shared__/getDeterministicId";
+  import getDeterministicId from "../../__shared__/getDeterministicId";
 
   export let prefix = "dummy";
 

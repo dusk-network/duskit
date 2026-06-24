@@ -4,7 +4,9 @@
   /** @typedef {import("./ExclusiveChoice").ExclusiveChoiceProps} ExclusiveChoiceProps */
 
   import { isType } from "lamb";
-  import { makeClassName, randomUUID } from "@duskit/string";
+  import { makeClassName } from "@duskit/string";
+
+  import getDeterministicId from "../__shared__/getDeterministicId";
 
   import "./ExclusiveChoice.css";
 
@@ -28,7 +30,7 @@
   /** @type {(v: any) => v is string} */
   const isString = isType("String");
 
-  const baseId = `dusk-exclusive-choice-${randomUUID()}`;
+  const baseId = getDeterministicId("dusk-exclusive-choice");
 
   $: classes = makeClassName(["dusk-exclusive-choice", className]);
 </script>

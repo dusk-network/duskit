@@ -12,7 +12,7 @@ import { DETERMINISTIC_ID_CONTEXT_KEY } from "./constants";
  * @param {string} componentPrefix
  * @returns {string}
  */
-export function getDeterministicId(componentPrefix) {
+function getDeterministicId(componentPrefix) {
   /** @type {DeterministicIdContextPayload | undefined} */
   const context = getContext(DETERMINISTIC_ID_CONTEXT_KEY);
 
@@ -20,3 +20,5 @@ export function getDeterministicId(componentPrefix) {
     ? context.generateId(componentPrefix)
     : `${componentPrefix}-${randomUUID()}`;
 }
+
+export default getDeterministicId;

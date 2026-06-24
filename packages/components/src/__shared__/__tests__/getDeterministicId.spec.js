@@ -4,7 +4,7 @@ import { getContext } from "svelte";
 import { randomUUID } from "@duskit/string";
 
 import { DETERMINISTIC_ID_CONTEXT_KEY } from "../constants";
-import { getDeterministicId } from "../getDeterministicId";
+import getDeterministicId from "../getDeterministicId";
 
 vi.mock("svelte", () => ({
   getContext: vi.fn(),

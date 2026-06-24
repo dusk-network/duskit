@@ -2,15 +2,14 @@ import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render } from "@testing-library/svelte";
 
 import { getAsHTMLElement } from "@duskit/test-helpers";
-import * as duskitString from "@duskit/string";
 
 import { Agreement } from "../..";
 
-describe("Agreement", () => {
-  const randomUUIDSpy = vi
-    .spyOn(duskitString, "randomUUID")
-    .mockReturnValue("some-generated-id");
+vi.mock("../__shared__/getDeterministicId", () => ({
+  default: vi.fn().mockReturnValue("dusk-checkbox-some-generated-id"),
+}));
 
+describe("Agreement", () => {
   const baseProps = {
     label: "I agree",
     name: "test",
@@ -23,7 +22,7 @@ describe("Agreement", () => {
   afterEach(cleanup);
 
   afterAll(() => {
-    randomUUIDSpy.mockRestore();
+    vi.doUnmock("../__shared__/getDeterministicId");
   });
 
   it("should render the `Agreement` component", () => {

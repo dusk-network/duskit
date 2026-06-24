@@ -6,15 +6,9 @@ import { ExclusiveChoice } from "../..";
 
 /** @typedef {import("../dusk.components").OptionItem} OptionItem */
 
-vi.mock("@duskit/string", async (importOriginal) => {
-  /** @type {typeof import("@duskit/string")} */
-  const original = await importOriginal();
-
-  return {
-    ...original,
-    randomUUID: () => "some-generated-id",
-  };
-});
+vi.mock("../__shared__/getDeterministicId", () => ({
+  default: vi.fn().mockReturnValue("dusk-exclusive-choice-some-generated-id"),
+}));
 
 describe("ExclusiveChoice", () => {
   const stringOptions = ["one", "two", "three", "four"];
@@ -47,7 +41,7 @@ describe("ExclusiveChoice", () => {
   afterEach(cleanup);
 
   afterAll(() => {
-    vi.doUnmock("@duskit/string");
+    vi.doUnmock("../__shared__/getDeterministicId");
   });
 
   it("should render the `ExclusiveChoice` component and assign a name to the radio inputs if it's not provided", () => {
