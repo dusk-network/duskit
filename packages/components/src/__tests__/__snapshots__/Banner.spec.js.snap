@@ -2,7 +2,9 @@
 
 exports[`Banner > should be able to render the component using the "error" variant 1`] = `
 <div
+  aria-labelledby="dusk-banner-title-mocked-id"
   class="dusk-banner dusk-banner--variant--error"
+  role="alert"
 >
   <!---->
   <svg
@@ -23,6 +25,7 @@ exports[`Banner > should be able to render the component using the "error" varia
   >
     <strong
       class="dusk-banner__title"
+      id="dusk-banner-title-mocked-id"
     >
       Some banner title
     </strong>
@@ -38,7 +41,9 @@ exports[`Banner > should be able to render the component using the "error" varia
 
 exports[`Banner > should be able to render the component using the "info" variant 1`] = `
 <div
+  aria-labelledby="dusk-banner-title-mocked-id"
   class="dusk-banner dusk-banner--variant--info"
+  role="status"
 >
   <!---->
   <svg
@@ -59,6 +64,7 @@ exports[`Banner > should be able to render the component using the "info" varian
   >
     <strong
       class="dusk-banner__title"
+      id="dusk-banner-title-mocked-id"
     >
       Some banner title
     </strong>
@@ -74,7 +80,9 @@ exports[`Banner > should be able to render the component using the "info" varian
 
 exports[`Banner > should be able to render the component using the "success" variant 1`] = `
 <div
+  aria-labelledby="dusk-banner-title-mocked-id"
   class="dusk-banner dusk-banner--variant--success"
+  role="status"
 >
   <!---->
   <svg
@@ -95,6 +103,7 @@ exports[`Banner > should be able to render the component using the "success" var
   >
     <strong
       class="dusk-banner__title"
+      id="dusk-banner-title-mocked-id"
     >
       Some banner title
     </strong>
@@ -110,7 +119,9 @@ exports[`Banner > should be able to render the component using the "success" var
 
 exports[`Banner > should be able to render the component using the "warning" variant 1`] = `
 <div
+  aria-labelledby="dusk-banner-title-mocked-id"
   class="dusk-banner dusk-banner--variant--warning"
+  role="alert"
 >
   <!---->
   <svg
@@ -131,6 +142,7 @@ exports[`Banner > should be able to render the component using the "warning" var
   >
     <strong
       class="dusk-banner__title"
+      id="dusk-banner-title-mocked-id"
     >
       Some banner title
     </strong>
@@ -146,7 +158,9 @@ exports[`Banner > should be able to render the component using the "warning" var
 
 exports[`Banner > should render a warning message if no content is provided for the default slot 1`] = `
 <div
+  aria-labelledby="dusk-banner-title-mocked-id"
   class="dusk-banner dusk-banner--variant--info"
+  role="status"
 >
   <!---->
   <svg
@@ -167,6 +181,7 @@ exports[`Banner > should render a warning message if no content is provided for 
   >
     <strong
       class="dusk-banner__title"
+      id="dusk-banner-title-mocked-id"
     >
       Some banner title
     </strong>
@@ -182,7 +197,9 @@ exports[`Banner > should render a warning message if no content is provided for 
 
 exports[`Banner > should render the \`Banner\` component 1`] = `
 <div
+  aria-labelledby="dusk-banner-title-mocked-id"
   class="dusk-banner dusk-banner--variant--info"
+  role="status"
 >
   <!---->
   <svg
@@ -203,6 +220,7 @@ exports[`Banner > should render the \`Banner\` component 1`] = `
   >
     <strong
       class="dusk-banner__title"
+      id="dusk-banner-title-mocked-id"
     >
       Some banner title
     </strong>
