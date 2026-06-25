@@ -1,5 +1,43 @@
 # @duskit/components
 
+## 3.1.0
+
+### Minor Changes
+
+- [#365](https://github.com/dusk-network/duskit/pull/365) [`6f64c0b`](https://github.com/dusk-network/duskit/commit/6f64c0b201810bf975bf30a59053c88ce8460b2a) Thanks [@ascartabelli](https://github.com/ascartabelli)! - feat(components): enhance `Banner` accessibility with dynamic ARIA roles and labels
+
+- [#363](https://github.com/dusk-network/duskit/pull/363) [`0845686`](https://github.com/dusk-network/duskit/commit/084568619416eb6e10b73bacb902e0c8f8929b1b) Thanks [@ascartabelli](https://github.com/ascartabelli)! - feat(components): implement SSR-safe deterministic ID provider and utility
+
+- [#351](https://github.com/dusk-network/duskit/pull/351) [`f7fb790`](https://github.com/dusk-network/duskit/commit/f7fb7909d723f9950074850036915d18345765c4) Thanks [@ascartabelli](https://github.com/ascartabelli)! - feat(components): allow `interval` prop to accept a function for dynamic scaling in `Rerender`
+
+- [#356](https://github.com/dusk-network/duskit/pull/356) [`0b5069a`](https://github.com/dusk-network/duskit/commit/0b5069a90e649e7872aa2593fd62fc8a1525448c) Thanks [@ascartabelli](https://github.com/ascartabelli)! - perf(components): centralize `ResizeObserver` and eliminate layout thrashing in `MiddleEllipsis`
+
+### Patch Changes
+
+- [#349](https://github.com/dusk-network/duskit/pull/349) [`1a4ccd2`](https://github.com/dusk-network/duskit/commit/1a4ccd2d03d3bfc2b3eaf11a405810144f7477fc) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fix(components): correct `getRootElement`'s return type to `HTMLTimeElement` in `RelativeTime`
+
+- [#344](https://github.com/dusk-network/duskit/pull/344) [`22a800d`](https://github.com/dusk-network/duskit/commit/22a800d89dd756bf5a6d49fd31cef700d421a196) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fix(components): dynamic scaling of refresh interval in `RelativeTime`
+
+- [#364](https://github.com/dusk-network/duskit/pull/364) [`c822590`](https://github.com/dusk-network/duskit/commit/c8225904b0146a65c973623d198ca76991612e7a) Thanks [@ascartabelli](https://github.com/ascartabelli)! - refactor(components): migrate form and layout components to deterministic ID utility
+
+- [#363](https://github.com/dusk-network/duskit/pull/363) [`0845686`](https://github.com/dusk-network/duskit/commit/084568619416eb6e10b73bacb902e0c8f8929b1b) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fix(components): fixed type of `NOTIFICATION_CONTEXT_KEY` in .d.ts barrel file (was `string` instead of `symbol`)
+
+- [#346](https://github.com/dusk-network/duskit/pull/346) [`69c779a`](https://github.com/dusk-network/duskit/commit/69c779a6ea251c4c0c75411c8e21e3c12293741c) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fix(components): sync value update on `generateValue` prop change in `Rerender`
+
+- [#370](https://github.com/dusk-network/duskit/pull/370) [`1b64686`](https://github.com/dusk-network/duskit/commit/1b646860982e7d89fac05b3b2203f36678849269) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fix(components): added missing class name and styles for `Table`'s caption
+
+- [#359](https://github.com/dusk-network/duskit/pull/359) [`d94d39a`](https://github.com/dusk-network/duskit/commit/d94d39a68fad28b68bd2dcf1cf2aa1e224cdbb70) Thanks [@ascartabelli](https://github.com/ascartabelli)! - refactor(components): migrate `ResizeAware` and `Tabs` to centralized `observeResize` utility
+
+- [#367](https://github.com/dusk-network/duskit/pull/367) [`0a1da75`](https://github.com/dusk-network/duskit/commit/0a1da7569fbed513d2b335d0484fb4b71e9a92c1) Thanks [@ascartabelli](https://github.com/ascartabelli)! - refactor(components): use internal `randomUUID` utility in `createNotificationStore`
+
+- [#371](https://github.com/dusk-network/duskit/pull/371) [`13cd0ff`](https://github.com/dusk-network/duskit/commit/13cd0ff2c3c59341be2614ea79912d23b26a5464) Thanks [@ascartabelli](https://github.com/ascartabelli)! - chore(components): updated `@floating-ui/dom` dependency to `1.7.6`
+
+- [#350](https://github.com/dusk-network/duskit/pull/350) [`fc165e3`](https://github.com/dusk-network/duskit/commit/fc165e33369aa8856c968efc152e1d1615449ed6) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fix(components): remove non-existent default slot from type definitions in `Suspense`
+
+- [#369](https://github.com/dusk-network/duskit/pull/369) [`319647b`](https://github.com/dusk-network/duskit/commit/319647b378b95fd35ebaabcf0d4fff82ee6acad7) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fix(components): added missing immutable option in `MiddleEllipsis` and `NotificationProvider`
+
+- [#370](https://github.com/dusk-network/duskit/pull/370) [`61cc90a`](https://github.com/dusk-network/duskit/commit/61cc90a70b3a7947892919f26a029e35c96bfed3) Thanks [@ascartabelli](https://github.com/ascartabelli)! - fix(components): fixed `Table` sort buttons using the wrong padding
+
 ## 3.0.0
 
 ### Major Changes
