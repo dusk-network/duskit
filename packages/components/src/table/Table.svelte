@@ -102,7 +102,7 @@
 
 <table bind:this={rootElement} {...$$restProps} class={classes}>
   {#if caption}
-    <caption>{caption}</caption>
+    <caption class="dusk-table__caption">{caption}</caption>
   {/if}
   <thead class="dusk-table__head">
     <tr class="dusk-table__row">
