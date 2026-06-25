@@ -4,7 +4,9 @@ exports[`Table > should react to prop changes 1`] = `
 <table
   class="dusk-table foo bar"
 >
-  <caption>
+  <caption
+    class="dusk-table__caption"
+  >
     List of users
   </caption>
   <!---->

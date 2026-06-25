@@ -9,9 +9,30 @@
  * applied to the `thead`.
  */
 .dusk-table {
-  width: 100%;
+  inline-size: 100%;
   border-spacing: 0;
   border-collapse: separate;
+}
+
+/**
+ * `contain: inline-size` isolates the caption from the table's intrinsic
+ * sizing context. This prevents non-wrapping text from expanding the table,
+ * enabling `text-overflow: ellipsis` natively.
+ * It safely replaces the brittle `width: 0` + `min-width: 100%` hack,
+ * which forces the caption to resolve against the parent container instead
+ * of the table's own sizing context, leading to unintended layout coupling.
+ */
+.dusk-table__caption {
+  overflow-x: hidden;
+  font-family: var(--display-heading-sans-text-family);
+  font-size: var(--display-heading-subtle-text-size);
+  font-weight: var(--display-heading-subtle-text-weight);
+  text-overflow: ellipsis;
+  letter-spacing: var(--display-heading-sans-text-letter-spacing);
+  white-space: nowrap;
+  padding-block: var(--display-box-compact-padding-block);
+  padding-inline: var(--display-box-compact-padding-inline);
+  contain: inline-size;
 }
 
 .dusk-table__head-cell {
@@ -52,7 +73,7 @@
 
 .dusk-table__head-cell-text {
   display: block;
-  width: 100%;
+  inline-size: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
