@@ -1,3 +1,5 @@
+<svelte:options immutable={true} />
+
 <script>
   import { createPersistedStore } from "@duskit/svelte-stores";
   import { onDestroy, onMount, setContext } from "svelte";
