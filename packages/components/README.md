@@ -5,6 +5,8 @@
 
 Svelte components to build a Dusk web application.
 
+To test, view, and interact with the components of this package in an isolated environment, visit our public [Storybook](https://dusk-network.github.io/duskit/).
+
 ## TOC
 
 - [Dev environment](#dev-environment)

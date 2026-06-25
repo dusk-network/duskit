@@ -18,6 +18,8 @@
 
 Duskit (Dusk Kit) contains Svelte components and JS utilities that can help you quickly build a Dusk web app.
 
+The interactive documentation and visual playground for all components is available on our public [Storybook](https://dusk-network.github.io/duskit/).
+
 ## TOC
 
 - [Dev environment](#dev-environment)
