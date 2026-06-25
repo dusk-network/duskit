@@ -30,7 +30,6 @@
 }
 
 .dusk-table__head-cell-text,
-.dusk-table__sort-button .dusk-button__text,
 .dusk-table__cell {
   padding-block: var(--display-box-compact-padding-block);
   padding-inline: var(--display-box-compact-padding-inline);
