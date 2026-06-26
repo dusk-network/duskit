@@ -25,7 +25,7 @@
 
   export const getRootElement = () => rootElement;
 
-  let availableWidth = 0;
+  let availableWidth = -1;
 
   /** @type {HTMLCanvasElement} */
   let canvas;
@@ -38,23 +38,9 @@
 
   let displayText = text;
 
-  /** @type {number | null} */
-  let pendingFrameId = null;
-
-  function scheduleUpdate() {
-    if (pendingFrameId !== null) {
-      return;
-    }
-
-    pendingFrameId = requestAnimationFrame(() => {
-      pendingFrameId = null;
-      update();
-    });
-  }
-
   // eslint-disable-next-line max-statements
   function update() {
-    if (!context) {
+    if (!context || availableWidth < 0) {
       return;
     }
 
@@ -128,25 +114,17 @@
     canvas = document.createElement("canvas");
     context = canvas.getContext("2d");
 
-    const unobserve = observeResize(rootElement, (entry) => {
+    return observeResize(rootElement, (entry) => {
       availableWidth = entry.contentRect.width;
-      scheduleUpdate();
+      update();
     });
-
-    return () => {
-      if (pendingFrameId !== null) {
-        cancelAnimationFrame(pendingFrameId);
-      }
-
-      unobserve();
-    };
   });
 
   $: classes = makeClassName(["dusk-middle-ellipsis", className]);
   $: {
     // eslint-disable-next-line no-unused-expressions
     text; // We need to be reactive when text changes
-    rootElement && scheduleUpdate();
+    rootElement && update();
   }
 </script>
 
