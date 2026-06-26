@@ -1,5 +1,11 @@
 # @duskit/components
 
+## 3.1.1
+
+### Patch Changes
+
+- [#373](https://github.com/dusk-network/duskit/pull/373) [`9e3a5c1`](https://github.com/dusk-network/duskit/commit/9e3a5c1733d32cf9cdf580d1c3021449d82fe1c9) Thanks [@ascartabelli](https://github.com/ascartabelli)! - perf(components): eliminate one frame delay in text truncation calculations in `MiddleEllipsis`
+
 ## 3.1.0
 
 ### Minor Changes
