@@ -1,5 +1,6 @@
 import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render } from "@testing-library/svelte";
+import { tick } from "svelte";
 
 import observeResize from "../__shared__/observeResize";
 
@@ -22,13 +23,15 @@ describe("MiddleEllipsis", () => {
     return unobserveMock;
   });
 
+  // we return a fixed predictable width as 10px per char
+  const measureTextMock = vi.fn((text) => ({ width: text.length * 10 }));
+
   vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
     font: "",
     letterSpacing: "",
 
-    // we return a fixed predictable width as 10px per char
     // @ts-expect-error
-    measureText: (text) => ({ width: text.length * 10 }),
+    measureText: measureTextMock,
   });
 
   /** @param {number} width */
@@ -52,7 +55,7 @@ describe("MiddleEllipsis", () => {
     // Triggers initial calculation
     triggerResize(200);
 
-    await new Promise(requestAnimationFrame);
+    await tick();
 
     expect(container.firstElementChild?.textContent).toBe("Short text");
     expect(container.firstElementChild).toMatchSnapshot();
@@ -127,6 +130,28 @@ describe("MiddleEllipsis", () => {
   });
 
   describe("Truncation and resizing", () => {
+    it("should defer calculation until the first actual measurement from the observer", async () => {
+      const { component } = render(MiddleEllipsis, {
+        text: "This is a very, very long string",
+      });
+      const element = component.getRootElement();
+
+      // The early return blocked the execution: canvas measurement must not have occurred
+      expect(measureTextMock).not.toHaveBeenCalled();
+
+      // Since availableWidth is still < 0, the original text is rendered intact
+      expect(element.textContent).toBe("This is a very, very long string");
+
+      // Provide the actual dimensions via the observer mock
+      triggerResize(150);
+
+      await tick();
+
+      // The calculation is now safely executed
+      expect(measureTextMock).toHaveBeenCalled();
+      expect(element.textContent).toBe("This is… string");
+    });
+
     it("should truncate text when the container is too small", async () => {
       const { component } = render(MiddleEllipsis, {
         text: "This is a very, very long string",
@@ -137,7 +162,7 @@ describe("MiddleEllipsis", () => {
       // At 10px per character, it should accommodate exactly 15 characters (including ellipsis)
       triggerResize(150);
 
-      await new Promise(requestAnimationFrame);
+      await tick();
 
       expect(element.textContent).toBe("This is… string");
     });
@@ -151,25 +176,25 @@ describe("MiddleEllipsis", () => {
       // Trigger initial calculation
       triggerResize(200);
 
-      await new Promise(requestAnimationFrame);
+      await tick();
 
       expect(element.textContent).toBe("This is a…ong string");
 
       triggerResize(2000);
 
-      await new Promise(requestAnimationFrame);
+      await tick();
 
       expect(element.textContent).toBe("This is a very, very long string");
 
       triggerResize(100);
 
-      await new Promise(requestAnimationFrame);
+      await tick();
 
       expect(element.textContent).toBe("This…tring");
 
       triggerResize(10);
 
-      await new Promise(requestAnimationFrame);
+      await tick();
 
       // not enough available space, only the ellipsis should be visible
       expect(element.textContent).toBe("…");
@@ -190,7 +215,7 @@ describe("MiddleEllipsis", () => {
 
       triggerResize(200);
 
-      await new Promise(requestAnimationFrame);
+      await tick();
 
       expect(element.textContent).toBe("This is a…ong string");
     });
@@ -206,19 +231,19 @@ describe("MiddleEllipsis", () => {
       // Trigger initial calculation
       triggerResize(200);
 
-      await new Promise(requestAnimationFrame);
+      await tick();
 
       expect(element.textContent).toBe("short");
 
       await rerender({ text: "this is now a long text to display" });
 
-      await new Promise(requestAnimationFrame);
+      await tick();
 
       expect(element.textContent).toBe("this is n…to display");
 
       await rerender({ text: "short again" });
 
-      await new Promise(requestAnimationFrame);
+      await tick();
 
       expect(element.textContent).toBe("short again");
     });
