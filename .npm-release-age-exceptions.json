@@ -1,0 +1,17 @@
+{
+  "_comment": "Emergency exceptions require package, version, reason, and an ISO-8601 expires timestamp.",
+  "exceptions": [
+    {
+      "package": "brace-expansion",
+      "version": "1.1.18",
+      "reason": "Patched 1.x backport for GHSA-mh99-v99m-4gvg while the release is inside the seven-day cooling-off period.",
+      "expires": "2026-08-07T00:00:00.000Z"
+    },
+    {
+      "package": "postcss",
+      "version": "8.5.25",
+      "reason": "Urgent fix for GHSA-r28c-9q8g-f849 while the release is inside the seven-day cooling-off period.",
+      "expires": "2026-08-07T00:00:00.000Z"
+    }
+  ]
+}

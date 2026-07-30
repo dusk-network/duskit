@@ -16,5 +16,4 @@ coverage
 docs
 pnpm-global
 lefthook.yml
-.nvmrc
 *.code-workspace
