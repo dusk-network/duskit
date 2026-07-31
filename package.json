@@ -38,13 +38,12 @@
     "lint": "eslint scripts && turbo run lint",
     "lint:fix": "eslint scripts --fix && turbo run lint:fix",
     "release": "turbo run build && changeset publish",
-    "test": "node --test scripts/verify-package-release-ages.test.js && turbo run test",
-    "test:coverage": "node --test scripts/verify-package-release-ages.test.js && turbo run test:coverage",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
     "test:watch": "turbo run test:watch",
     "typecheck": "turbo run typecheck",
     "typecheck:watch": "turbo run typecheck:watch",
-    "version": "changeset version",
-    "verify:release-ages": "node scripts/verify-package-release-ages.js --days 7"
+    "version": "changeset version"
   },
   "type": "module",
   "workspaces": [

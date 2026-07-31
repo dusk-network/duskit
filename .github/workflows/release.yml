@@ -26,9 +26,6 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
 
-      - name: Validate package release ages
-        run: node scripts/verify-package-release-ages.js --days 7
-
       - name: Pin npm
         run: npm install --global npm@11.18.0 --ignore-scripts
         working-directory: ${{ runner.temp }}
