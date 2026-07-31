@@ -8,6 +8,7 @@ type ToastContainerProps = ControlledHtmlAttributes<
   SvelteHTMLElements["ul"]
 > & {
   className?: string;
+  /** Physical viewport corner; left and right do not mirror in RTL. */
   placement?: "bottom-left" | "bottom-right" | "top-left" | "top-right";
   store?: NotificationStore;
   tooltipId?: string;

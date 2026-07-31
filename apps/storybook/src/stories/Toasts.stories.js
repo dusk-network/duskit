@@ -16,7 +16,7 @@ export default {
     docs: {
       description: {
         component:
-          "Click the buttons below to trigger the `notifier` and spawn floating toasts. Use the placement control to anchor the container to a viewport corner.",
+          "Click the buttons below to trigger the `notifier` and spawn floating toasts. Use the placement control to anchor the container to a physical viewport corner.",
       },
     },
   },

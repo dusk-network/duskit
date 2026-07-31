@@ -235,6 +235,13 @@ describe("ToastContainer", () => {
     expect(rootElement).toHaveAttribute("data-testid", "toast-root");
   });
 
+  it("should keep the container and its gaps hit-testable", () => {
+    const { component } = render(ToastContainer, baseOptions);
+    const rootElement = component.getRootElement();
+
+    expect(getComputedStyle(rootElement).pointerEvents).toBe("auto");
+  });
+
   it.each(
     /** @type {Exclude<import("../toast-container/ToastContainer").ToastContainerProps["placement"], undefined>[]} */ ([
       "bottom-left",
@@ -255,6 +262,15 @@ describe("ToastContainer", () => {
     expect(rootElement).toHaveClass(
       `dusk-toast-container--placement--${placement}`
     );
+
+    rootElement.dir = "rtl";
+
+    const styles = getComputedStyle(rootElement);
+    const physicalSide = placement.endsWith("left") ? "left" : "right";
+    const oppositeSide = physicalSide === "left" ? "right" : "left";
+
+    expect(styles.getPropertyValue(physicalSide)).not.toBe("");
+    expect(["", "auto"]).toContain(styles.getPropertyValue(oppositeSide));
   });
 
   it("should skip already expired notifications in the loop", async () => {
