@@ -1,26 +1,51 @@
 import { get, writable } from "svelte/store";
 import { getErrorFrom } from "@duskit/error";
-import { isNil, type } from "lamb";
+import { type } from "lamb";
 
 /**
  * @template T
  * @typedef {import("..").PersistedStoreOptions<T>} PersistedStoreOptions<T>
  */
 
-const isBrowser = "localStorage" in globalThis;
-
 /**
- * Safely serializes and saves a value to local storage.
+ * Resolves the storage used by a persisted store without accessing browser
+ * globals during module evaluation.
  *
  * @template T
+ * @param {PersistedStoreOptions<T>} options
+ * @returns {Storage | undefined}
+ */
+function getStorage(options) {
+  if (!options.getStorage && !("localStorage" in globalThis)) {
+    return undefined;
+  }
+
+  try {
+    return options.getStorage ? options.getStorage() : globalThis.localStorage;
+  } catch (reason) {
+    // eslint-disable-next-line no-console
+    console.error(
+      "Error while accessing persisted store storage:",
+      getErrorFrom(reason)
+    );
+
+    return undefined;
+  }
+}
+
+/**
+ * Safely serializes and saves a value to storage.
+ *
+ * @template T
+ * @param {Storage} storage
  * @param {string} key
  * @param {any} value
  * @param {PersistedStoreOptions<T>} options
  * @returns {boolean} True if the save was successful, false otherwise.
  */
-function safeSaveToStorage(key, value, options) {
+function safeSaveToStorage(storage, key, value, options) {
   try {
-    localStorage.setItem(key, JSON.stringify(value, options.replacer));
+    storage.setItem(key, JSON.stringify(value, options.replacer));
 
     return true;
   } catch (reason) {
@@ -39,18 +64,33 @@ function safeSaveToStorage(key, value, options) {
 }
 
 /**
+ * Removes a value from storage without allowing a storage error to interrupt
+ * a successful rebind.
+ *
+ * @param {Storage} storage
+ * @param {string} key
+ * @returns {void}
+ */
+function safeRemoveFromStorage(storage, key) {
+  try {
+    storage.removeItem(key);
+  } catch (reason) {
+    // eslint-disable-next-line no-console
+    console.error(`Error while removing store "${key}":`, getErrorFrom(reason));
+  }
+}
+
+/**
  * @template T
  * @param {import("svelte/store").Writable<T>} store
- * @param {{ isRebinding: boolean, key: string }} context
+ * @param {{ isRebinding: boolean, key: string, storage: Storage | undefined }} context
  * @param {T} initialValue
  * @param {PersistedStoreOptions<T>} options
  * @returns {import("..").PersistedStore<T>["rebind"]}
  */
 function bindStorageContext(store, context, initialValue, options) {
-  const { getLoadErrorFallback, reviver } = options;
-
   return (newKey, rebindOptions = {}) => {
-    if (!isBrowser || context.key === newKey) {
+    if (!context.storage || context.key === newKey) {
       return;
     }
 
@@ -58,24 +98,29 @@ function bindStorageContext(store, context, initialValue, options) {
     const oldKey = context.key;
     const currentValue = get(store);
     const newValueFromStorage = loadFromStorage(
+      context.storage,
       newKey,
       initialValue,
-      reviver,
-      getLoadErrorFallback
+      options
     );
 
     const nextValue = merger
       ? merger(currentValue, newValueFromStorage)
       : newValueFromStorage;
 
-    const isSaveSuccessful = safeSaveToStorage(newKey, nextValue, options);
+    const isSaveSuccessful = safeSaveToStorage(
+      context.storage,
+      newKey,
+      nextValue,
+      options
+    );
 
     if (isSaveSuccessful) {
       context.isRebinding = true;
       context.key = newKey;
 
       if (clearOldKey) {
-        localStorage.removeItem(oldKey);
+        safeRemoveFromStorage(context.storage, oldKey);
       }
 
       store.set(nextValue);
@@ -84,7 +129,7 @@ function bindStorageContext(store, context, initialValue, options) {
 }
 
 /**
- * Creates a writable store that persists its value to `localStorage`.
+ * Creates a writable store that persists its value to a synchronous `Storage`.
  * If a `reviver` is provided in the options, it will be used during
  * parsing to transform the stored value (e.g. to restore complex types like
  * `BigInt` or `Date`) before the merge takes place.
@@ -97,36 +142,41 @@ function bindStorageContext(store, context, initialValue, options) {
  * overwrite the corresponding nested objects in the `initialValue`.
  *
  * @template T
+ * @param {Storage} storage
  * @param {string} key
  * @param {T} initialValue
- * @param {PersistedStoreOptions<T>["reviver"]} reviver
- * @param {PersistedStoreOptions<T>["getLoadErrorFallback"]} getLoadErrorFallback
+ * @param {PersistedStoreOptions<T>} options
  * @returns {T}
  */
 // eslint-disable-next-line max-statements
-function loadFromStorage(key, initialValue, reviver, getLoadErrorFallback) {
-  const storedValue = localStorage.getItem(key);
+function loadFromStorage(storage, key, initialValue, options) {
+  const { getLoadErrorFallback, reviver, validate } = options;
+  /** @type {string | null} */
+  let storedValue = null;
 
   try {
-    if (storedValue) {
+    storedValue = storage.getItem(key);
+
+    if (storedValue !== null) {
       const parsed = JSON.parse(storedValue, reviver);
       const expectedType = type(initialValue);
       const parsedType = type(parsed);
+      const isValid = validate
+        ? validate(parsed, initialValue)
+        : parsedType === expectedType;
 
-      if (isNil(initialValue) || isNil(parsed)) {
-        return parsed;
-      }
-
-      if (parsedType !== expectedType) {
+      if (!isValid) {
         // eslint-disable-next-line no-console
         console.warn(
-          `Type mismatch for key "${key}": expected "${expectedType}", but got "${parsedType}". Reverting to initial value.`
+          validate
+            ? `Validation failed for key "${key}". Reverting to initial value.`
+            : `Type mismatch for key "${key}": expected "${expectedType}", but got "${parsedType}". Reverting to initial value.`
         );
 
         return initialValue;
       }
 
-      if (expectedType === "Object") {
+      if (expectedType === "Object" && parsedType === "Object") {
         return { ...initialValue, ...parsed };
       }
 
@@ -156,6 +206,7 @@ function loadFromStorage(key, initialValue, reviver, getLoadErrorFallback) {
 
 /** @type {import("..").createPersistedStore} */
 function createPersistedStore(initialKey, initialValue, options = {}) {
+  const storage = getStorage(options);
   const context = {
     /**
      * Flag used to prevent the subscriber from performing a double I/O
@@ -164,21 +215,16 @@ function createPersistedStore(initialKey, initialValue, options = {}) {
      */
     isRebinding: false,
     key: initialKey,
+    storage,
   };
-  const { getLoadErrorFallback, reviver } = options;
 
   const store = writable(
-    isBrowser
-      ? loadFromStorage(
-          context.key,
-          initialValue,
-          reviver,
-          getLoadErrorFallback
-        )
+    storage
+      ? loadFromStorage(storage, context.key, initialValue, options)
       : initialValue
   );
 
-  if (isBrowser) {
+  if (storage) {
     store.subscribe((value) => {
       if (context.isRebinding) {
         // Resetting the flag to ensure the bypass only affects
@@ -189,7 +235,7 @@ function createPersistedStore(initialKey, initialValue, options = {}) {
         return;
       }
 
-      safeSaveToStorage(context.key, value, options);
+      safeSaveToStorage(storage, context.key, value, options);
     });
   }
 
