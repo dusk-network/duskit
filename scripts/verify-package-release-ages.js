@@ -1,5 +1,6 @@
 /* eslint-disable complexity, max-depth, max-statements, no-console */
 import fs from "node:fs/promises";
+import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -12,6 +13,7 @@ const parseArguments = (args) => {
     days: undefined,
     exceptions: ".npm-release-age-exceptions.json",
     lockfile: "package-lock.json",
+    packageFile: "package.json",
   };
 
   for (let index = 0; index < args.length; index += 1) {
@@ -24,6 +26,8 @@ const parseArguments = (args) => {
       options.exceptions = value;
     } else if (argument === "--lockfile") {
       options.lockfile = value;
+    } else if (argument === "--package-file") {
+      options.packageFile = value;
     } else if (argument === "--concurrency") {
       options.concurrency = Number(value);
     } else {
@@ -62,6 +66,144 @@ const packageNameFromPath = (packagePath) => {
   return pathParts[0].startsWith("@")
     ? pathParts.slice(0, 2).join("/")
     : pathParts[0];
+};
+
+const canonicalizeWorkspacePath = (workspace, context) => {
+  if (
+    typeof workspace !== "string" ||
+    workspace.trim() === "" ||
+    workspace.includes("\\") ||
+    path.posix.isAbsolute(workspace) ||
+    path.win32.isAbsolute(workspace)
+  ) {
+    throw new Error(`Invalid workspace path in ${context}: ${workspace}`);
+  }
+
+  const canonical = path.posix.normalize(workspace);
+
+  if (
+    canonical === "." ||
+    canonical === ".." ||
+    canonical.startsWith("../") ||
+    /[*?[\]{}!]/.test(canonical)
+  ) {
+    throw new Error(`Invalid workspace path in ${context}: ${workspace}`);
+  }
+
+  return canonical;
+};
+
+const canonicalizeWorkspaceList = (workspaceList, context) => {
+  if (!Array.isArray(workspaceList)) {
+    throw new Error(`${context} does not contain a workspaces array`);
+  }
+
+  const workspaces = new Set();
+
+  for (const workspace of workspaceList) {
+    const canonical = canonicalizeWorkspacePath(workspace, context);
+
+    if (workspaces.has(canonical)) {
+      throw new Error(`Duplicate workspace path in ${context}: ${canonical}`);
+    }
+
+    workspaces.add(canonical);
+  }
+
+  return workspaces;
+};
+
+const isContainedPath = (root, candidate) => {
+  const relative = path.relative(root, candidate);
+
+  return (
+    relative !== "" &&
+    relative !== ".." &&
+    !relative.startsWith(`..${path.sep}`) &&
+    !path.isAbsolute(relative)
+  );
+};
+
+export const readAuthoritativeWorkspaces = async (packageFile) => {
+  const packageFilePath = path.resolve(packageFile);
+  const repositoryRoot = await fs.realpath(path.dirname(packageFilePath));
+  const realPackageFile = await fs.realpath(packageFilePath);
+  const expectedPackageFile = path.join(
+    repositoryRoot,
+    path.basename(packageFilePath)
+  );
+
+  if (realPackageFile !== expectedPackageFile) {
+    throw new Error(`Root package file must not be a symlink: ${packageFile}`);
+  }
+
+  const packageDocument = JSON.parse(
+    await fs.readFile(realPackageFile, "utf8")
+  );
+  const workspacePaths = canonicalizeWorkspaceList(
+    packageDocument.workspaces,
+    packageFile
+  );
+  const workspaces = new Map();
+  const packageNames = new Set();
+
+  for (const workspacePath of workspacePaths) {
+    const absolutePath = path.resolve(
+      repositoryRoot,
+      ...workspacePath.split("/")
+    );
+
+    if (!isContainedPath(repositoryRoot, absolutePath)) {
+      throw new Error(
+        `Workspace escapes repository in ${packageFile}: ${workspacePath}`
+      );
+    }
+
+    const realWorkspacePath = await fs.realpath(absolutePath);
+
+    if (!isContainedPath(repositoryRoot, realWorkspacePath)) {
+      throw new Error(
+        `Workspace symlink escapes repository in ${packageFile}: ${workspacePath}`
+      );
+    }
+
+    const workspacePackageFile = path.join(realWorkspacePath, "package.json");
+    const realWorkspacePackageFile = await fs.realpath(workspacePackageFile);
+
+    if (realWorkspacePackageFile !== workspacePackageFile) {
+      throw new Error(
+        `Workspace package file must not be a symlink: ${workspacePath}`
+      );
+    }
+
+    const workspacePackage = JSON.parse(
+      await fs.readFile(realWorkspacePackageFile, "utf8")
+    );
+    const { name, version } = workspacePackage;
+
+    if (
+      typeof name !== "string" ||
+      name === "" ||
+      typeof version !== "string" ||
+      version === ""
+    ) {
+      throw new Error(
+        `Workspace package requires an exact name and version: ${workspacePath}`
+      );
+    }
+
+    if (packageNames.has(name)) {
+      throw new Error(`Duplicate workspace package name: ${name}`);
+    }
+
+    packageNames.add(name);
+    workspaces.set(workspacePath, {
+      name,
+      version,
+    });
+  }
+
+  return workspaces;
 };
 
 const parseRegistryTarballUrl = (resolved, packagePath) => {
@@ -137,25 +279,36 @@ const normalizeIntegrity = (integrity, context) => {
   return [...new Set(normalized)].sort().join(" ");
 };
 
-export const collectRegistryPackages = (lockfile) => {
+export const collectRegistryPackages = (lockfile, workspaces) => {
   if (!lockfile.packages || typeof lockfile.packages !== "object") {
     throw new Error("Lockfile does not contain a packages map");
   }
 
-  const workspaceList = lockfile.packages[""]?.workspaces;
-
-  if (!Array.isArray(workspaceList)) {
-    throw new Error("Root lockfile entry does not contain a workspaces array");
-  }
-
   const packages = new Map();
-  const workspaces = new Set(workspaceList);
+  const lockfileWorkspaces = canonicalizeWorkspaceList(
+    lockfile.packages[""]?.workspaces,
+    "root lockfile entry"
+  );
   let entryCount = 0;
 
-  for (const workspace of workspaces) {
-    if (typeof workspace !== "string" || !lockfile.packages[workspace]) {
+  if (
+    lockfileWorkspaces.size !== workspaces.size ||
+    [...lockfileWorkspaces].some((workspace) => !workspaces.has(workspace))
+  ) {
+    throw new Error("Root lockfile workspace list does not match package.json");
+  }
+
+  for (const [workspacePath, workspace] of workspaces) {
+    const workspaceEntry = lockfile.packages[workspacePath];
+
+    if (
+      !workspaceEntry ||
+      workspaceEntry.link ||
+      workspaceEntry.name !== workspace.name ||
+      workspaceEntry.version !== workspace.version
+    ) {
       throw new Error(
-        `Invalid or missing workspace lockfile entry: ${workspace}`
+        `Workspace lockfile entry does not match package.json: ${workspacePath}`
       );
     }
   }
@@ -166,9 +319,23 @@ export const collectRegistryPackages = (lockfile) => {
     }
 
     if (entry.link) {
-      if (!workspaces.has(entry.resolved)) {
+      const workspacePath = canonicalizeWorkspacePath(
+        entry.resolved,
+        packagePath
+      );
+      const workspace = workspaces.get(workspacePath);
+
+      if (!workspace) {
         throw new Error(
           `Undeclared directory dependency in ${packagePath}: ${entry.resolved}`
+        );
+      }
+
+      const linkName = packageNameFromPath(packagePath);
+
+      if (linkName !== workspace.name) {
+        throw new Error(
+          `Workspace link name mismatch in ${packagePath}: expected ${linkName}, workspace declares ${workspace.name}`
         );
       }
 
@@ -176,7 +343,12 @@ export const collectRegistryPackages = (lockfile) => {
     }
 
     if (!packagePath.includes("node_modules/")) {
-      if (!workspaces.has(packagePath)) {
+      const workspacePath = canonicalizeWorkspacePath(
+        packagePath,
+        "lockfile packages"
+      );
+
+      if (!workspaces.has(workspacePath)) {
         throw new Error(`Unexpected local lockfile entry: ${packagePath}`);
       }
 
@@ -428,7 +600,11 @@ const main = async () => {
   const cutoff = now - options.days * DAY_MS;
   const lockfile = JSON.parse(await fs.readFile(options.lockfile, "utf8"));
   const exceptions = await readExceptions(options.exceptions, now);
-  const { entryCount, packages } = collectRegistryPackages(lockfile);
+  const workspaces = await readAuthoritativeWorkspaces(options.packageFile);
+  const { entryCount, packages } = collectRegistryPackages(
+    lockfile,
+    workspaces
+  );
   const failures = await verifyReleaseAges({
     concurrency: options.concurrency,
     cutoff,
