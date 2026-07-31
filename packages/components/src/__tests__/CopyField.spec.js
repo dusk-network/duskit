@@ -80,7 +80,7 @@ describe("CopyField", () => {
       ".dusk-copy-field__button"
     );
 
-    expect(rootElement).toHaveClass("dusk-copy-field--disabled");
+    expect(rootElement).toHaveAttribute("aria-disabled", "true");
     expect(copyButton).toBeDisabled();
   });
 

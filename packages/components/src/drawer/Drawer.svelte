@@ -112,7 +112,6 @@
     "dusk-drawer",
     `dusk-drawer--from--${from}`,
     `dusk-drawer--size--${size}`,
-    open ? "dusk-drawer--open" : "",
     areEventsEnabled ? "dusk-drawer--events-enabled" : "",
     className,
   ]);

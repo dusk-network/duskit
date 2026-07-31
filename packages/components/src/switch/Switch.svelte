@@ -49,12 +49,7 @@
     dispatch("change", checked);
   }
 
-  $: classes = makeClassName([
-    "dusk-switch",
-    checked ? "dusk-switch--checked" : "",
-    disabled ? "dusk-switch--disabled" : "",
-    className,
-  ]);
+  $: classes = makeClassName(["dusk-switch", className]);
 </script>
 
 <div

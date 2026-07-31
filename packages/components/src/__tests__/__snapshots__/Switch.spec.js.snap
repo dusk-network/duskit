@@ -25,7 +25,7 @@ exports[`Switch > should render the "Switch" component with a default tab index 
 <div
   aria-checked="true"
   aria-disabled="false"
-  class="dusk-switch dusk-switch--checked"
+  class="dusk-switch"
   role="switch"
   tabindex="0"
 />
@@ -35,7 +35,7 @@ exports[`Switch > should render the component in a disabled status with a tabind
 <div
   aria-checked="false"
   aria-disabled="true"
-  class="dusk-switch dusk-switch--disabled"
+  class="dusk-switch"
   role="switch"
   tabindex="-1"
 />
@@ -45,7 +45,7 @@ exports[`Switch > should render the component in a disabled status with a tabind
 <div
   aria-checked="true"
   aria-disabled="true"
-  class="dusk-switch dusk-switch--checked dusk-switch--disabled"
+  class="dusk-switch"
   role="switch"
   tabindex="-1"
 />

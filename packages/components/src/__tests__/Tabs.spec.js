@@ -227,6 +227,55 @@ describe("Tabs", () => {
     expect(tabs[0].scrollIntoView).toHaveBeenCalledTimes(1);
   });
 
+  it("should expose one focusable tab and follow external selection changes", async () => {
+    const { getAllByRole, rerender } = await renderTabs(baseProps);
+    const tabs = getAllByRole("tab");
+
+    expect(tabs.map((tab) => tab.getAttribute("tabindex"))).toStrictEqual([
+      "-1",
+      "0",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+    ]);
+
+    await rerender({ selectedTab: items[2].id });
+
+    expect(tabs[1]).toHaveAttribute("tabindex", "-1");
+    expect(tabs[2]).toHaveAttribute("tabindex", "0");
+  });
+
+  it("should move focus with arrow, Home, and End keys without changing selection", async () => {
+    const { getAllByRole } = await renderTabs(baseProps);
+    const tabs = getAllByRole("tab");
+    const lastTab = tabs[tabs.length - 1];
+
+    tabs[1].focus();
+    await fireEvent.keyDown(tabs[1], { key: "ArrowRight" });
+
+    expect(document.activeElement).toBe(tabs[2]);
+    expect(tabs[1]).toHaveAttribute("aria-selected", "true");
+    expect(tabs[1]).toHaveAttribute("tabindex", "-1");
+    expect(tabs[2]).toHaveAttribute("tabindex", "0");
+
+    await fireEvent.keyDown(tabs[2], { key: "End" });
+    expect(document.activeElement).toBe(lastTab);
+
+    await fireEvent.keyDown(lastTab, { key: "ArrowRight" });
+    expect(document.activeElement).toBe(tabs[0]);
+
+    await fireEvent.keyDown(tabs[0], { key: "ArrowLeft" });
+    expect(document.activeElement).toBe(lastTab);
+
+    await fireEvent.keyDown(lastTab, { key: "Home" });
+    expect(document.activeElement).toBe(tabs[0]);
+  });
+
   it("should hide and disable the scroll buttons if there is enough horizontal space", async () => {
     scrollWidthSpy.mockReturnValueOnce(0);
 

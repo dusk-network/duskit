@@ -39,7 +39,6 @@
     "dusk-anchor-button",
     `dusk-anchor-button--variant--${variant}`,
     `dusk-anchor-button--size--${size}`,
-    disabled ? "dusk-anchor-button--disabled" : "",
     icon && text ? "dusk-icon-button--labeled" : icon ? "dusk-icon-button" : "",
     className,
   ]);

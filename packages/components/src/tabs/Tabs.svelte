@@ -12,6 +12,7 @@
   import observeResize from "../__shared__/observeResize";
 
   import { Button, Icon } from "../..";
+  import getTabNavigationIndex from "../__shared__/getTabNavigationIndex";
 
   import "./Tabs.css";
 
@@ -34,6 +35,12 @@
 
   /** @type {HTMLUListElement} */
   let tabsList;
+
+  /** @type {string | undefined} */
+  let focusableTab;
+
+  /** @type {string | undefined} */
+  let internalSelectedTab;
 
   const dispatch = createEventDispatcher();
 
@@ -117,6 +124,7 @@
 
   /** @type {import("svelte/elements").FocusEventHandler<HTMLLIElement>} */
   function handleTabFocusin(event) {
+    focusableTab = event.currentTarget.dataset.tabid;
     event.currentTarget.scrollIntoView(smoothScrollOptions);
   }
 
@@ -126,6 +134,29 @@
       event.preventDefault();
 
       handleTabClick(event);
+
+      return;
+    }
+
+    const currentIndex = items.findIndex((item) => item.id === focusableTab);
+    const newIndex = getTabNavigationIndex(
+      event.key,
+      currentIndex,
+      items.length
+    );
+
+    if (newIndex === undefined) {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (newIndex !== currentIndex) {
+      focusableTab = items[newIndex].id;
+
+      /** @type {HTMLLIElement | null} */ (
+        tabsList.querySelector(`[data-tabid="${focusableTab}"]`)
+      )?.focus();
     }
   }
 
@@ -171,6 +202,18 @@
   });
 
   $: ({ canScroll, canScrollLeft, canScrollRight } = $scrollStatus);
+  $: {
+    const isValidSelectedTab =
+      selectedTab && items.some((item) => item.id === selectedTab);
+    const fallbackTabId = items[0]?.id;
+
+    if (selectedTab !== internalSelectedTab) {
+      internalSelectedTab = selectedTab;
+      focusableTab = isValidSelectedTab ? selectedTab : fallbackTabId;
+    } else if (!items.some((item) => item.id === focusableTab)) {
+      focusableTab = fallbackTabId;
+    }
+  }
   $: classes = makeClassName(["dusk-tabs", className]);
   $: scrollBtnsClasses = makeClassName({
     "dusk-tab-scroll-button": true,
@@ -200,13 +243,12 @@
       <li
         aria-selected={id === selectedTab}
         class="dusk-tab-item"
-        class:dusk-tab-item--selected={id === selectedTab}
         data-tabid={id}
         on:click={handleTabClick}
         on:focusin={handleTabFocusin}
         on:keydown={handleTabKeyDown}
         role="tab"
-        tabindex={0}
+        tabindex={id === focusableTab ? 0 : -1}
       >
         {#if icon?.position === "after"}
           {#if label}

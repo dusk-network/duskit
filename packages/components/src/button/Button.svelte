@@ -41,7 +41,6 @@
     `dusk-button--variant--${variant}`,
     `dusk-button--size--${size}`,
     icon && text ? "dusk-icon-button--labeled" : icon ? "dusk-icon-button" : "",
-    type === "toggle" && pressed ? "dusk-button--pressed" : "",
     className,
   ]);
 </script>

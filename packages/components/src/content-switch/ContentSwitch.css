@@ -41,9 +41,7 @@
   outline-offset: var(--interactive-control-focus-ring-outline-offset);
 }
 
-.dusk-content-switch__tab-item:hover:not(
-    .dusk-content-switch__tab-item--selected
-  ) {
+.dusk-content-switch__tab-item:hover:not([aria-selected="true"]) {
   --_item-bg-color: var(--interactive-selection-hover-bg-color);
   --_item-text-color: var(--interactive-selection-hover-text-color);
 }
@@ -52,7 +50,7 @@
   flex-shrink: 0;
 }
 
-.dusk-content-switch__tab-item--selected {
+.dusk-content-switch__tab-item[aria-selected="true"] {
   --_item-bg-color: var(--interactive-selection-bg-color);
   --_item-text-color: var(--interactive-selection-text-color);
 }

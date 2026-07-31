@@ -7,7 +7,7 @@ exports[`ContentSwitch > should render the \`ContentSwitch\` component 1`] = `
 >
   <li
     aria-selected="true"
-    class="dusk-content-switch__tab-item dusk-content-switch__tab-item--expanded dusk-content-switch__tab-item--selected"
+    class="dusk-content-switch__tab-item dusk-content-switch__tab-item--expanded"
     data-tabid="overview"
     role="tab"
     tabindex="0"

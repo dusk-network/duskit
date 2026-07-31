@@ -179,7 +179,7 @@ describe("Table", () => {
     expect(table).toMatchSnapshot();
   });
 
-  it("should add a specific `*--hidden` class to headers and cells marked as hidden", () => {
+  it("should use the native hidden attribute on hidden headers and cells", () => {
     /** @type {UserDescriptor[]} */
     const testDescriptors = [
       { name: "name" },
@@ -199,22 +199,18 @@ describe("Table", () => {
     const nameCell = getAsHTMLElement(table, 'td[data-column="name"]');
     const postsCell = getAsHTMLElement(table, 'td[data-column="posts"]');
 
-    expect(emailHeader).toHaveClass(
-      "dusk-table__head-cell",
-      "dusk-table__head-cell--hidden"
-    );
+    expect(emailHeader).toHaveClass("dusk-table__head-cell");
+    expect(emailHeader).toHaveAttribute("hidden");
     expect(nameHeader).toHaveClass("dusk-table__head-cell");
-    expect(nameHeader).not.toHaveClass("dusk-table__head-cell--hidden");
+    expect(nameHeader).not.toHaveAttribute("hidden");
     expect(postsHeader).toHaveClass("dusk-table__head-cell");
-    expect(postsHeader).not.toHaveClass("dusk-table__head-cell--hidden");
-    expect(emailCell).toHaveClass(
-      "dusk-table__cell",
-      "dusk-table__cell--hidden"
-    );
+    expect(postsHeader).not.toHaveAttribute("hidden");
+    expect(emailCell).toHaveClass("dusk-table__cell");
+    expect(emailCell).toHaveAttribute("hidden");
     expect(nameCell).toHaveClass("dusk-table__cell");
-    expect(nameCell).not.toHaveClass("dusk-table__cell--hidden");
+    expect(nameCell).not.toHaveAttribute("hidden");
     expect(postsCell).toHaveClass("dusk-table__cell");
-    expect(postsCell).not.toHaveClass("dusk-table__cell--hidden");
+    expect(postsCell).not.toHaveAttribute("hidden");
   });
 
   it("should only show sort buttons for sortable columns", () => {

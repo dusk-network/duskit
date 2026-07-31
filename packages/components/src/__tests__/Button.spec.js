@@ -48,20 +48,18 @@ describe("Button", () => {
     );
   });
 
-  it('should add a "pressed" class when the pressed property of a toggle button changes', async () => {
+  it("should reflect a toggle button's pressed state through aria-pressed", async () => {
     /** @type {import("svelte").ComponentProps<Button>} */
     const props = { ...baseProps, type: "toggle" };
     const { component, rerender } = render(Button, { ...baseOptions, props });
     const element = component.getRootElement();
 
     expect(element).toHaveClass("dusk-button--type--toggle");
-    expect(element).not.toHaveClass("dusk-button--pressed");
     expect(element).toHaveAttribute("type", "button");
     expect(element).toHaveAttribute("aria-pressed", "false");
 
     await rerender({ pressed: true });
 
-    expect(element).toHaveClass("dusk-button--pressed");
     expect(element).toHaveAttribute("aria-pressed", "true");
   });
 

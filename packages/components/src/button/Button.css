@@ -30,7 +30,7 @@
 
 .dusk-button:enabled:active,
 .dusk-anchor-button:active,
-.dusk-button--pressed {
+.dusk-button[aria-pressed="true"] {
   --_button-scale: 0.98;
 }
 
@@ -49,7 +49,7 @@
   appearance: auto;
 }
 
-.dusk-anchor-button.dusk-anchor-button--disabled {
+.dusk-anchor-button[aria-disabled="true"] {
   pointer-events: none;
   cursor: default;
 }
@@ -58,7 +58,7 @@
 
 .dusk-button.dusk-icon-button:enabled:active,
 .dusk-anchor-button.dusk-icon-button:active,
-.dusk-button.dusk-icon-button.dusk-button--pressed {
+.dusk-button.dusk-icon-button[aria-pressed="true"] {
   --_button-scale: 0.9;
 }
 
@@ -67,7 +67,7 @@
   .dusk-button--variant--secondary,
   .dusk-button--variant--tertiary,
   .dusk-button--variant--naked
-).dusk-button--pressed {
+)[aria-pressed="true"] {
   box-shadow: inset 0 1px 1px var(--_button-text-color);
 
   &:hover {
@@ -89,7 +89,7 @@
 .dusk-button--variant--primary:enabled:active,
 .dusk-anchor-button--variant--primary:hover,
 .dusk-anchor-button--variant--primary:active,
-.dusk-anchor-button--variant--primary.dusk-button--pressed {
+.dusk-button--variant--primary[aria-pressed="true"] {
   --_button-bg-color: var(--interactive-action-primary-bg-hover-color);
   --_button-border-color: var(--interactive-action-primary-border-hover-color);
   --_button-text-color: var(--interactive-action-primary-text-hover-color);
@@ -109,7 +109,7 @@
 .dusk-button--variant--secondary:enabled:active,
 .dusk-anchor-button--variant--secondary:hover,
 .dusk-anchor-button--variant--secondary:active,
-.dusk-anchor-button--variant--secondary.dusk-button--pressed {
+.dusk-button--variant--secondary[aria-pressed="true"] {
   --_button-bg-color: var(--interactive-action-secondary-bg-hover-color);
   --_button-border-color: var(
     --interactive-action-secondary-border-hover-color
@@ -131,7 +131,7 @@
 .dusk-button--variant--tertiary:enabled:active,
 .dusk-anchor-button--variant--tertiary:hover,
 .dusk-anchor-button--variant--tertiary:active,
-.dusk-anchor-button--variant--tertiary.dusk-button--pressed {
+.dusk-button--variant--tertiary[aria-pressed="true"] {
   --_button-bg-color: var(--interactive-action-tertiary-bg-hover-color);
   --_button-border-color: var(--interactive-action-tertiary-border-hover-color);
   --_button-text-color: var(--interactive-action-tertiary-text-hover-color);
@@ -151,7 +151,7 @@
 .dusk-button--variant--naked:enabled:active,
 .dusk-anchor-button--variant--naked:hover,
 .dusk-anchor-button--variant--naked:active,
-.dusk-anchor-button--variant--naked.dusk-button--pressed {
+.dusk-button--variant--naked[aria-pressed="true"] {
   --_button-bg-color: var(--interactive-action-naked-bg-hover-color);
   --_button-border-color: var(--interactive-action-naked-border-hover-color);
   --_button-text-color: var(--interactive-action-naked-text-hover-color);
@@ -160,16 +160,16 @@
 /* Disabled status */
 
 .dusk-button:disabled,
-.dusk-anchor-button.dusk-anchor-button--disabled,
-.dusk-anchor-button.dusk-anchor-button--disabled:hover,
-.dusk-anchor-button.dusk-anchor-button--disabled:visited {
+.dusk-anchor-button[aria-disabled="true"],
+.dusk-anchor-button[aria-disabled="true"]:hover,
+.dusk-anchor-button[aria-disabled="true"]:visited {
   opacity: 0.5;
 }
 
 /* Focus */
 
 :is(
-  .dusk-anchor-button:not(.dusk-anchor-button--disabled),
+  .dusk-anchor-button:not([aria-disabled="true"]),
   .dusk-button:enabled
 ):focus-visible {
   outline: var(--interactive-control-focus-ring-outline);

@@ -74,17 +74,12 @@ describe("ContentSwitch", () => {
     expect(element).toHaveAttribute("id", props.id);
   });
 
-  it("should correctly apply selection classes and aria-selected", () => {
+  it("should expose the selection through aria-selected", () => {
     const { getByRole } = render(ContentSwitch, baseOptions);
     const selected = getByRole("tab", { name: "Overview" });
     const notSelected = getByRole("tab", { name: "Details" });
 
-    expect(selected).toHaveClass("dusk-content-switch__tab-item--selected");
     expect(selected).toHaveAttribute("aria-selected", "true");
-
-    expect(notSelected).not.toHaveClass(
-      "dusk-content-switch__tab-item--selected"
-    );
     expect(notSelected).toHaveAttribute("aria-selected", "false");
   });
 

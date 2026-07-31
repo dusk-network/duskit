@@ -39,7 +39,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
       class="dusk-tab-item"
       data-tabid="dashboard"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <!---->
@@ -66,7 +66,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
     </li>
     <li
       aria-selected="true"
-      class="dusk-tab-item dusk-tab-item--selected"
+      class="dusk-tab-item"
       data-tabid="user-settings"
       role="tab"
       tabindex="0"
@@ -99,7 +99,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
       class="dusk-tab-item"
       data-tabid="user-profile"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <!---->
@@ -129,7 +129,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
       class="dusk-tab-item"
       data-tabid="notifications"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <span
@@ -159,7 +159,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
       class="dusk-tab-item"
       data-tabid="direct-messaging"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <!---->
@@ -189,7 +189,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
       class="dusk-tab-item"
       data-tabid="task-manager"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <span
@@ -219,7 +219,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
       class="dusk-tab-item"
       data-tabid="event-calendar"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <!---->
@@ -249,7 +249,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
       class="dusk-tab-item"
       data-tabid="analytics"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <span
@@ -279,7 +279,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
       class="dusk-tab-item"
       data-tabid="team-management"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <!---->
@@ -309,7 +309,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
       class="dusk-tab-item"
       data-tabid="help"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <span
@@ -403,7 +403,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
       class="dusk-tab-item"
       data-tabid="dashboard"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <!---->
@@ -425,7 +425,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
     </li>
     <li
       aria-selected="true"
-      class="dusk-tab-item dusk-tab-item--selected"
+      class="dusk-tab-item"
       data-tabid="user-settings"
       role="tab"
       tabindex="0"
@@ -453,7 +453,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
       class="dusk-tab-item"
       data-tabid="user-profile"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <!---->
@@ -478,7 +478,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
       class="dusk-tab-item"
       data-tabid="notifications"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <!---->
@@ -503,7 +503,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
       class="dusk-tab-item"
       data-tabid="direct-messaging"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <!---->
@@ -528,7 +528,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
       class="dusk-tab-item"
       data-tabid="task-manager"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <!---->
@@ -553,7 +553,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
       class="dusk-tab-item"
       data-tabid="event-calendar"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <!---->
@@ -578,7 +578,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
       class="dusk-tab-item"
       data-tabid="analytics"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <!---->
@@ -603,7 +603,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
       class="dusk-tab-item"
       data-tabid="team-management"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <!---->
@@ -628,7 +628,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
       class="dusk-tab-item"
       data-tabid="help"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <!---->
       <!---->
@@ -718,7 +718,7 @@ exports[`Tabs > should pass additional class names and attributes to the root el
       class="dusk-tab-item"
       data-tabid="dashboard"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -729,7 +729,7 @@ exports[`Tabs > should pass additional class names and attributes to the root el
     </li>
     <li
       aria-selected="true"
-      class="dusk-tab-item dusk-tab-item--selected"
+      class="dusk-tab-item"
       data-tabid="user-settings"
       role="tab"
       tabindex="0"
@@ -746,7 +746,7 @@ exports[`Tabs > should pass additional class names and attributes to the root el
       class="dusk-tab-item"
       data-tabid="user-profile"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -760,7 +760,7 @@ exports[`Tabs > should pass additional class names and attributes to the root el
       class="dusk-tab-item"
       data-tabid="notifications"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -774,7 +774,7 @@ exports[`Tabs > should pass additional class names and attributes to the root el
       class="dusk-tab-item"
       data-tabid="direct-messaging"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -788,7 +788,7 @@ exports[`Tabs > should pass additional class names and attributes to the root el
       class="dusk-tab-item"
       data-tabid="task-manager"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -802,7 +802,7 @@ exports[`Tabs > should pass additional class names and attributes to the root el
       class="dusk-tab-item"
       data-tabid="event-calendar"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -816,7 +816,7 @@ exports[`Tabs > should pass additional class names and attributes to the root el
       class="dusk-tab-item"
       data-tabid="analytics"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -830,7 +830,7 @@ exports[`Tabs > should pass additional class names and attributes to the root el
       class="dusk-tab-item"
       data-tabid="team-management"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -844,7 +844,7 @@ exports[`Tabs > should pass additional class names and attributes to the root el
       class="dusk-tab-item"
       data-tabid="help"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -936,7 +936,7 @@ exports[`Tabs > should render a "Tabs" component and reset its scroll status if 
       class="dusk-tab-item"
       data-tabid="user-settings"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -950,7 +950,7 @@ exports[`Tabs > should render a "Tabs" component and reset its scroll status if 
       class="dusk-tab-item"
       data-tabid="user-profile"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -964,7 +964,7 @@ exports[`Tabs > should render a "Tabs" component and reset its scroll status if 
       class="dusk-tab-item"
       data-tabid="notifications"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -978,7 +978,7 @@ exports[`Tabs > should render a "Tabs" component and reset its scroll status if 
       class="dusk-tab-item"
       data-tabid="direct-messaging"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -992,7 +992,7 @@ exports[`Tabs > should render a "Tabs" component and reset its scroll status if 
       class="dusk-tab-item"
       data-tabid="task-manager"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -1006,7 +1006,7 @@ exports[`Tabs > should render a "Tabs" component and reset its scroll status if 
       class="dusk-tab-item"
       data-tabid="event-calendar"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -1020,7 +1020,7 @@ exports[`Tabs > should render a "Tabs" component and reset its scroll status if 
       class="dusk-tab-item"
       data-tabid="analytics"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -1034,7 +1034,7 @@ exports[`Tabs > should render a "Tabs" component and reset its scroll status if 
       class="dusk-tab-item"
       data-tabid="team-management"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -1048,7 +1048,7 @@ exports[`Tabs > should render a "Tabs" component and reset its scroll status if 
       class="dusk-tab-item"
       data-tabid="help"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -1126,7 +1126,7 @@ exports[`Tabs > should use the id as label if the tab hasn't one and is without 
       class="dusk-tab-item"
       data-tabid="dashboard"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -1137,7 +1137,7 @@ exports[`Tabs > should use the id as label if the tab hasn't one and is without 
     </li>
     <li
       aria-selected="true"
-      class="dusk-tab-item dusk-tab-item--selected"
+      class="dusk-tab-item"
       data-tabid="user-settings"
       role="tab"
       tabindex="0"
@@ -1154,7 +1154,7 @@ exports[`Tabs > should use the id as label if the tab hasn't one and is without 
       class="dusk-tab-item"
       data-tabid="user-profile"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -1168,7 +1168,7 @@ exports[`Tabs > should use the id as label if the tab hasn't one and is without 
       class="dusk-tab-item"
       data-tabid="notifications"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -1182,7 +1182,7 @@ exports[`Tabs > should use the id as label if the tab hasn't one and is without 
       class="dusk-tab-item"
       data-tabid="direct-messaging"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -1196,7 +1196,7 @@ exports[`Tabs > should use the id as label if the tab hasn't one and is without 
       class="dusk-tab-item"
       data-tabid="task-manager"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -1210,7 +1210,7 @@ exports[`Tabs > should use the id as label if the tab hasn't one and is without 
       class="dusk-tab-item"
       data-tabid="event-calendar"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -1224,7 +1224,7 @@ exports[`Tabs > should use the id as label if the tab hasn't one and is without 
       class="dusk-tab-item"
       data-tabid="analytics"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -1238,7 +1238,7 @@ exports[`Tabs > should use the id as label if the tab hasn't one and is without 
       class="dusk-tab-item"
       data-tabid="team-management"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"
@@ -1252,7 +1252,7 @@ exports[`Tabs > should use the id as label if the tab hasn't one and is without 
       class="dusk-tab-item"
       data-tabid="help"
       role="tab"
-      tabindex="0"
+      tabindex="-1"
     >
       <span
         class="dusk-tab-label"

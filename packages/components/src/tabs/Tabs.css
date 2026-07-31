@@ -68,12 +68,12 @@
   outline-offset: var(--interactive-control-focus-ring-outline-offset);
 }
 
-.dusk-tab-item:hover:not(.dusk-tab-item--selected) {
+.dusk-tab-item:hover:not([aria-selected="true"]) {
   --_tab-bg-color: var(--interactive-tab-hover-bg-color);
   --_tab-text-color: var(--interactive-tab-hover-text-color);
 }
 
-.dusk-tab-item--selected {
+.dusk-tab-item[aria-selected="true"] {
   --_tab-bg-color: var(--interactive-tab-selected-bg-color);
   --_tab-text-color: var(--interactive-tab-selected-text-color);
 }
