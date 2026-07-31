@@ -41,7 +41,11 @@ interface TooltipProps {
   defaultDelayHide?: number;
   defaultDelayShow?: number;
   defaultOffset?: number;
-  defaultPlace?: "bottom" | "left" | "right" | "top";
+  defaultPlace?:
+    | "bottom" | "bottom-start" | "bottom-end"
+    | "left" | "left-start" | "left-end"
+    | "right" | "right-start" | "right-end"
+    | "top" | "top-start" | "top-end";
   defaultType?: "error" | "info" | "success" | "warning";
   id: string;
 }
@@ -81,7 +85,7 @@ To activate the tooltip, a target element must, at minimum, share the same `data
 | `data-tooltip-disabled` | `"true" \| "false"` | If `"true"`, the target is ignored by interaction listeners, preventing the tooltip from rendering. If changed dynamically while open, the tooltip is instantly dismissed. |
 | `data-tooltip-id` | `string` | **Required.** Must match the `id` of the global Tooltip instance. |
 | `data-tooltip-offset` | `numeric string` | Overrides the default spatial offset from the target (in pixels). |
-| `data-tooltip-place` | `"top" \| "right" \| "bottom" \| "left"` | Overrides the default placement. |
+| `data-tooltip-place` | `Placement` | Overrides the default placement, including `-start` and `-end` alignment variants. |
 | `data-tooltip-text` | `string` | **Required.** The plain text content to display. |
 | `data-tooltip-type` | `"error" \| "info" \| "success" \| "warning"` | Visual variant override. |
 

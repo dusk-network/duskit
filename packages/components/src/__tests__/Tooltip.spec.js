@@ -7,7 +7,11 @@ import {
   it,
   vi,
 } from "vitest";
-import { computePosition, offset as setOffset } from "@floating-ui/dom";
+import {
+  computePosition,
+  arrow as setArrow,
+  offset as setOffset,
+} from "@floating-ui/dom";
 import { cleanup, fireEvent, render } from "@testing-library/svelte";
 import { tick } from "svelte";
 import { IntersectionObserverMock } from "@duskit/test-helpers";
@@ -397,7 +401,7 @@ describe("Tooltip", () => {
       it("should use attributes defined on the target element, if they are present, rather than the defaults", async () => {
         target.setAttribute("data-tooltip-delay-show", "700");
         target.setAttribute("data-tooltip-offset", "0");
-        target.setAttribute("data-tooltip-place", "top");
+        target.setAttribute("data-tooltip-place", "top-start");
         target.setAttribute("data-tooltip-type", "error");
 
         const { getByRole } = render(Tooltip, baseOptions);
@@ -410,7 +414,7 @@ describe("Tooltip", () => {
         expect(computePosition).toHaveBeenCalledWith(
           target,
           tooltip,
-          expect.objectContaining({ placement: "top" })
+          expect.objectContaining({ placement: "top-start" })
         );
         expect(setOffset).toHaveBeenCalledTimes(1);
         expect(setOffset).toHaveBeenCalledWith({ mainAxis: 0 });
@@ -437,6 +441,38 @@ describe("Tooltip", () => {
         expect(tooltip).toHaveClass("dusk-tooltip--type--error");
         expect(target.getAttribute("aria-describedby")).toBe(baseProps.id);
         expect(prevTooltipElement.getAttribute("aria-describedby")).toBeNull();
+      });
+
+      it("should position the tip for an aligned placement using Floating UI arrow data", async () => {
+        vi.mocked(computePosition).mockResolvedValueOnce({
+          ...defaultComputedPosition,
+          middlewareData: {
+            arrow: { centerOffset: 0, x: 23, y: undefined },
+          },
+          placement: "bottom-end",
+        });
+        target.dataset.tooltipDelayShow = "0";
+        target.dataset.tooltipPlace = "bottom-end";
+
+        const { getByRole } = render(Tooltip, baseOptions);
+        const tooltip = getByRole("tooltip", { hidden: true });
+        const tip = /** @type {HTMLElement} */ (
+          tooltip.querySelector(".dusk-tooltip__tip")
+        );
+
+        await fireEvent.mouseEnter(target);
+        await tick();
+
+        expect(computePosition).toHaveBeenCalledWith(
+          target,
+          tooltip,
+          expect.objectContaining({ placement: "bottom-end" })
+        );
+        expect(setArrow).toHaveBeenCalledWith({ element: tip, padding: 8 });
+        expect(tooltip).toHaveClass("dusk-tooltip--place--bottom-end");
+        expect(tooltip).toHaveAttribute("data-side", "bottom");
+        expect(tip.style.left).toBe("23px");
+        expect(tip.style.top).toBe("");
       });
 
       it("should use the tooltip's component defaults if it receives invalid dataset attributes", async () => {

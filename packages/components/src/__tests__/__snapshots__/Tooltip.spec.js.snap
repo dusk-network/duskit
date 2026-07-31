@@ -5,11 +5,16 @@ exports[`Tooltip > should pass additional class names and attributes to the rend
   aria-hidden="true"
   class="dusk-tooltip dusk-tooltip--place--bottom dusk-tooltip--type--success foo bar"
   data-baz="baz"
+  data-side="bottom"
   id="tooltip-id"
   role="tooltip"
   style="left: 0px; top: 0px;"
 >
   
+  <span
+    aria-hidden="true"
+    class="dusk-tooltip__tip"
+  />
 </div>
 `;
 
@@ -17,10 +22,15 @@ exports[`Tooltip > should render the Tooltip component 1`] = `
 <div
   aria-hidden="true"
   class="dusk-tooltip dusk-tooltip--place--bottom dusk-tooltip--type--success"
+  data-side="bottom"
   id="tooltip-id"
   role="tooltip"
   style="left: 0px; top: 0px;"
 >
   
+  <span
+    aria-hidden="true"
+    class="dusk-tooltip__tip"
+  />
 </div>
 `;

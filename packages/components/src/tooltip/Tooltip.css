@@ -58,11 +58,10 @@
   --_tooltip-text-color: var(--feedback-surface-solid-warning-text-color);
 }
 
-.dusk-tooltip::after {
+.dusk-tooltip__tip {
   position: absolute;
   display: inline-block;
   pointer-events: none;
-  content: "";
   background-color: inherit;
   border: inherit;
   transform: rotate(45deg);
@@ -71,7 +70,7 @@
   block-size: var(--_tooltip-tip-size);
 }
 
-.dusk-tooltip.dusk-tooltip--place--bottom::after {
+.dusk-tooltip[data-side="bottom"] .dusk-tooltip__tip {
   inset-block-end: 100%;
   inset-inline-start: 50%;
   margin-block-end: calc(
@@ -82,7 +81,7 @@
   border-inline-end-color: transparent;
 }
 
-.dusk-tooltip.dusk-tooltip--place--left::after {
+.dusk-tooltip[data-side="left"] .dusk-tooltip__tip {
   inset-block-start: 50%;
   inset-inline-start: 100%;
   margin-block-start: calc(var(--_tooltip-half-tip-size) * -1);
@@ -93,7 +92,7 @@
   border-inline-start-color: transparent;
 }
 
-.dusk-tooltip.dusk-tooltip--place--right::after {
+.dusk-tooltip[data-side="right"] .dusk-tooltip__tip {
   inset-block-start: 50%;
   inset-inline-end: 100%;
   margin-block-start: calc(var(--_tooltip-half-tip-size) * -1);
@@ -104,7 +103,7 @@
   border-inline-end-color: transparent;
 }
 
-.dusk-tooltip.dusk-tooltip--place--top::after {
+.dusk-tooltip[data-side="top"] .dusk-tooltip__tip {
   inset-block-start: 100%;
   inset-inline-start: 50%;
   margin-block-start: calc(
