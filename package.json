@@ -15,13 +15,13 @@
   ],
   "description": "Component and utility library for building Dusk user interfaces",
   "engines": {
-    "node": ">=22.15.0",
-    "npm": ">=10.9.2"
+    "node": ">=24.0.0",
+    "npm": "11.18.0"
   },
   "homepage": "https://dusk-network.github.io/duskit/",
   "license": "MIT",
   "name": "duskit",
-  "packageManager": "npm@10.9.2",
+  "packageManager": "npm@11.18.0",
   "private": true,
   "repository": "https://github.com/dusk-network/duskit",
   "scripts": {
@@ -29,14 +29,14 @@
     "build:storybook": "turbo run build --filter=@duskit/storybook",
     "changeset": "changeset",
     "checks": "turbo run checks",
-    "clean": "turbo run clean && rimraf package-lock.json && rimraf node_modules && rimraf docs",
+    "clean": "turbo run clean && node scripts/clean.js package-lock.json node_modules docs",
     "dev": "turbo run dev --no-cache --continue",
     "dev:storybook": "turbo run dev --no-cache --continue --filter=@duskit/storybook",
     "docs": "typedoc",
-    "format": "turbo run format",
-    "format:check": "turbo run format:check",
-    "lint": "turbo run lint",
-    "lint:fix": "turbo run lint:fix",
+    "format": "prettier .github scripts eslint.config.js package.json typedoc.config.js vitest.config.js --write && turbo run format",
+    "format:check": "prettier .github scripts eslint.config.js package.json typedoc.config.js vitest.config.js --check && turbo run format:check",
+    "lint": "eslint scripts && turbo run lint",
+    "lint:fix": "eslint scripts --fix && turbo run lint:fix",
     "release": "turbo run build && changeset publish",
     "test": "turbo run test",
     "test:coverage": "turbo run test:coverage",
@@ -75,7 +75,6 @@
     "eslint-import-resolver-typescript": "4.4.5",
     "globals": "17.7.0",
     "prettier": "3.8.4",
-    "rimraf": "6.1.3",
     "svelte": "5.56.4",
     "turbo": "2.10.0",
     "typedoc": "0.28.19",
@@ -83,5 +82,14 @@
     "typedoc-plugin-mdn-links": "5.1.1",
     "vite": "8.1.0",
     "vitest": "4.1.9"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true,
+    "fsevents@2.3.3": true,
+    "unrs-resolver@1.12.2": true
+  },
+  "overrides": {
+    "brace-expansion@<2": "1.1.18",
+    "brace-expansion@>=5 <6": "5.0.9"
   }
 }

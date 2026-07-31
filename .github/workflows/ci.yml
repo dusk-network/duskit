@@ -7,6 +7,10 @@ on:
       - synchronize
       - reopened
       - ready_for_review
+
+permissions:
+  contents: read
+
 jobs:
   # Job to run change detection
   changes:
@@ -19,7 +23,7 @@ jobs:
       run-ci: ${{ steps.filter.outputs.run-ci }}
     steps:
       # For pull requests it's not necessary to checkout the code
-      - uses: dorny/paths-filter@v3
+      - uses: dorny/paths-filter@7b450fff21473bca461d4b92ce414b9d0420d706 # v4.0.2
         id: filter
         with:
           filters: |
@@ -31,20 +35,32 @@ jobs:
     if: needs.changes.outputs.run-ci == 'true' && (github.event.pull_request.draft == false || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
 
-    name: Node 22.15.0
+    name: Node 24
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setting up Node 22.15.0
-        uses: actions/setup-node@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          node-version: 22.15.0
+          persist-credentials: false
+
+      - name: Setting up Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: ".nvmrc"
           scope: "@duskit"
 
-      - name: Installing dependencies
-        run: npm ci
+      - name: Pin npm
+        run: npm install --global npm@11.18.0 --ignore-scripts
+        working-directory: ${{ runner.temp }}
+
+      - name: Install dependencies without lifecycle scripts
+        run: npm ci --ignore-scripts
+
+      - name: Verify registry signatures
+        run: npm audit signatures
+
+      - name: Run approved dependency scripts
+        run: npm rebuild esbuild unrs-resolver
 
       - name: Code formatting check
         run: npm run format:check
