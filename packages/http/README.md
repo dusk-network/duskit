@@ -38,6 +38,16 @@ const response = new Response("", { status: 404 });
 failureToRejection(response); // => Promise { <state>: "rejected", <reason>: Error }
 ```
 
+`HttpTransport` accepts a custom `fetch` implementation. This is useful for
+framework-provided request functions and isolated tests:
+
+```js
+const transport = new HttpTransport({
+  baseURL: "https://api.example.com",
+  fetch: event.fetch,
+});
+```
+
 <p align="right"><a href="#toc">[back to TOC]</a></p>
 
 ## NPM scripts

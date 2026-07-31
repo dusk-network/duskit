@@ -10,7 +10,6 @@ export type ControlledHtmlAttributes<
     | ControlledKeys
     | NativeEventKeys
     | `on:${string}`
-    | "style"
     ? never
     : K]: SourceAttributes[K];
 };

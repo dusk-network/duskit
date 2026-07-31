@@ -159,6 +159,7 @@ export declare type HttpTransportOptions<
 > = {
   baseURL: string;
   errorTransformer?: ETransformer;
+  fetch?: typeof globalThis.fetch;
   headers?: HeadersInit;
   responseTransformer?: Transfomer;
 };

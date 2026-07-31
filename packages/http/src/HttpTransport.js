@@ -46,11 +46,18 @@ function mergeHeaders(commonHeaders, userHeaders) {
 class HttpTransport {
   /** @param {import("..").HttpTransportOptions<T>} options */
   constructor(options) {
-    const { baseURL, headers, errorTransformer, responseTransformer } = options;
+    const {
+      baseURL,
+      headers,
+      errorTransformer,
+      fetch: fetchImplementation,
+      responseTransformer,
+    } = options;
 
     this.#baseURL = baseURL.endsWith("/") ? baseURL : `${baseURL}/`;
     this.#headers = new Headers(headers);
     this.#errorTransformer = errorTransformer;
+    this.#fetchImplementation = fetchImplementation ?? globalThis.fetch;
     this.#responseTransformer = responseTransformer ?? identity;
   }
 
@@ -59,6 +66,9 @@ class HttpTransport {
 
   /** @type {HttpTransportErrorTransformer | undefined} */
   #errorTransformer;
+
+  /** @type {typeof globalThis.fetch} */
+  #fetchImplementation;
 
   /** @type {Headers} */
   #headers;
@@ -83,7 +93,7 @@ class HttpTransport {
       url.search = new URLSearchParams(params).toString();
     }
 
-    const result = fetch(
+    const result = this.#fetchImplementation(
       url,
       skipUndefineds({
         body: isObject(body) ? JSON.stringify(body) : body,

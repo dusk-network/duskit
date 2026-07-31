@@ -97,6 +97,25 @@ describe("HttpTransport", () => {
         expect(requestHeaders.get("X-Api-Key")).toBe(headers["X-Api-Key"]);
       }
     );
+
+    it("should use a custom fetch implementation when provided", async () => {
+      const customFetch = vi.fn(async () => Response.json(data));
+      const transport = new HttpTransport({
+        ...baseOptions,
+        fetch: customFetch,
+      });
+
+      const result = await transport
+        .get("users")
+        .then((response) => response.json());
+
+      expect(result).toStrictEqual(data);
+      expect(customFetch).toHaveBeenCalledExactlyOnceWith(
+        new URL("https://api.example.com/users"),
+        expect.objectContaining({ method: "GET" })
+      );
+      expect(fetchSpy).not.toHaveBeenCalled();
+    });
   });
 
   describe("Request Methods", () => {
