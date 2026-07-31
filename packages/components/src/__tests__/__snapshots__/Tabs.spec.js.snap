@@ -66,7 +66,7 @@ exports[`Tabs > should be able to render tabs with icon and text 1`] = `
     </li>
     <li
       aria-selected="true"
-      class="dusk-tab-item"
+      class="dusk-tab-item dusk-tab-item--selected"
       data-tabid="user-settings"
       role="tab"
       tabindex="0"
@@ -425,7 +425,7 @@ exports[`Tabs > should be able to render tabs with icons only 1`] = `
     </li>
     <li
       aria-selected="true"
-      class="dusk-tab-item"
+      class="dusk-tab-item dusk-tab-item--selected"
       data-tabid="user-settings"
       role="tab"
       tabindex="0"
@@ -729,7 +729,7 @@ exports[`Tabs > should pass additional class names and attributes to the root el
     </li>
     <li
       aria-selected="true"
-      class="dusk-tab-item"
+      class="dusk-tab-item dusk-tab-item--selected"
       data-tabid="user-settings"
       role="tab"
       tabindex="0"
@@ -1137,7 +1137,7 @@ exports[`Tabs > should use the id as label if the tab hasn't one and is without 
     </li>
     <li
       aria-selected="true"
-      class="dusk-tab-item"
+      class="dusk-tab-item dusk-tab-item--selected"
       data-tabid="user-settings"
       role="tab"
       tabindex="0"

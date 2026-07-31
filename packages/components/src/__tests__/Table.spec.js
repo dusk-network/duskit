@@ -200,16 +200,22 @@ describe("Table", () => {
     const postsCell = getAsHTMLElement(table, 'td[data-column="posts"]');
 
     expect(emailHeader).toHaveClass("dusk-table__head-cell");
+    expect(emailHeader).toHaveClass("dusk-table__head-cell--hidden");
     expect(emailHeader).toHaveAttribute("hidden");
     expect(nameHeader).toHaveClass("dusk-table__head-cell");
+    expect(nameHeader).not.toHaveClass("dusk-table__head-cell--hidden");
     expect(nameHeader).not.toHaveAttribute("hidden");
     expect(postsHeader).toHaveClass("dusk-table__head-cell");
+    expect(postsHeader).not.toHaveClass("dusk-table__head-cell--hidden");
     expect(postsHeader).not.toHaveAttribute("hidden");
     expect(emailCell).toHaveClass("dusk-table__cell");
+    expect(emailCell).toHaveClass("dusk-table__cell--hidden");
     expect(emailCell).toHaveAttribute("hidden");
     expect(nameCell).toHaveClass("dusk-table__cell");
+    expect(nameCell).not.toHaveClass("dusk-table__cell--hidden");
     expect(nameCell).not.toHaveAttribute("hidden");
     expect(postsCell).toHaveClass("dusk-table__cell");
+    expect(postsCell).not.toHaveClass("dusk-table__cell--hidden");
     expect(postsCell).not.toHaveAttribute("hidden");
   });
 

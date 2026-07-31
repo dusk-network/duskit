@@ -79,7 +79,11 @@ describe("ContentSwitch", () => {
     const selected = getByRole("tab", { name: "Overview" });
     const notSelected = getByRole("tab", { name: "Details" });
 
+    expect(selected).toHaveClass("dusk-content-switch__tab-item--selected");
     expect(selected).toHaveAttribute("aria-selected", "true");
+    expect(notSelected).not.toHaveClass(
+      "dusk-content-switch__tab-item--selected"
+    );
     expect(notSelected).toHaveAttribute("aria-selected", "false");
   });
 
@@ -259,6 +263,36 @@ describe("ContentSwitch", () => {
       const tabIndices = tabs.map((tab) => tab.getAttribute("tabindex"));
 
       expect(tabIndices).toStrictEqual(["0", "-1", "-1", "-1", "-1", "-1"]);
+    });
+
+    it("should navigate from the tab that owns focus after an external selection change", async () => {
+      const { getAllByRole, rerender } = render(ContentSwitch, baseOptions);
+      const tabs = getAllByRole("tab");
+
+      tabs[2].focus();
+      await rerender({ selectedTab: items[3].id });
+
+      expect(document.activeElement).toBe(tabs[2]);
+
+      await fireEvent.keyDown(tabs[2], { key: "ArrowRight" });
+
+      expect(document.activeElement).toBe(tabs[3]);
+    });
+
+    it("should navigate tab IDs containing selector-significant characters", async () => {
+      const specialItems = [
+        { id: 'quote"id', label: "Quoted" },
+        { id: "plain", label: "Plain" },
+      ];
+      const { getAllByRole } = render(ContentSwitch, {
+        props: { items: specialItems, selectedTab: specialItems[0].id },
+      });
+      const tabs = getAllByRole("tab");
+
+      tabs[0].focus();
+      await fireEvent.keyDown(tabs[0], { key: "ArrowRight" });
+
+      expect(document.activeElement).toBe(tabs[1]);
     });
 
     it("should move the focus and the `tabindex`, but not the selection, when the right arrow key is pressed, wrapping to start", async () => {

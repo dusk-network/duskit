@@ -68,15 +68,14 @@
       });
   }
 
-  $: classes = makeClassName(["dusk-copy-field", className]);
+  $: classes = makeClassName([
+    "dusk-copy-field",
+    disabled ? "dusk-copy-field--disabled" : undefined,
+    className,
+  ]);
 </script>
 
-<div
-  bind:this={rootElement}
-  {...$$restProps}
-  aria-disabled={disabled}
-  class={classes}
->
+<div bind:this={rootElement} {...$$restProps} class={classes}>
   <Textbox
     className="dusk-copy-field__content"
     value={displayValue}

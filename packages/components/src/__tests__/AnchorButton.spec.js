@@ -43,7 +43,7 @@ describe("AnchorButton", () => {
     expect(container.firstElementChild).toMatchSnapshot();
   });
 
-  it("should expose disabled semantics and set its `tabindex` to `-1`", () => {
+  it("should expose disabled semantics and preserve its state class", () => {
     const props = {
       ...baseProps,
       disabled: true,
@@ -52,6 +52,7 @@ describe("AnchorButton", () => {
     const element = component.getRootElement().getRootElement();
 
     expect(element).toHaveAttribute("aria-disabled", "true");
+    expect(element).toHaveClass("dusk-anchor-button--disabled");
     expect(element).toHaveAttribute("tabindex", "-1");
   });
 
@@ -215,6 +216,7 @@ describe("AnchorButton", () => {
 
       expect(element).toHaveClass("dusk-anchor-button--variant--secondary");
       expect(element).toHaveClass("dusk-anchor-button--size--small");
+      expect(element).toHaveClass("dusk-anchor-button--disabled");
       expect(element).toHaveAttribute("aria-disabled", "true");
       expect(element).toHaveAttribute("tabindex", "-1");
     });

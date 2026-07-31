@@ -113,6 +113,7 @@
         <th
           aria-sort={ariaSort}
           class="dusk-table__head-cell"
+          class:dusk-table__head-cell--hidden={descriptor.hidden ?? false}
           data-column={descriptor.name}
           hidden={descriptor.hidden ?? false}
           scope="col"
@@ -149,6 +150,7 @@
           {#if isCustomDescriptor(row, descriptor)}
             <td
               class="dusk-table__cell"
+              class:dusk-table__cell--hidden={descriptor.hidden ?? false}
               data-column={columnName}
               hidden={descriptor.hidden ?? false}
             >
@@ -165,6 +167,7 @@
             {@const renderer = descriptor.renderer}
             <td
               class="dusk-table__cell"
+              class:dusk-table__cell--hidden={descriptor.hidden ?? false}
               data-column={columnName}
               hidden={descriptor.hidden ?? false}
             >

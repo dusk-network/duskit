@@ -2,7 +2,6 @@
 
 exports[`CopyField > should render the \`CopyField\` component 1`] = `
 <div
-  aria-disabled="false"
   class="dusk-copy-field"
 >
   <!---->

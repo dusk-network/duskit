@@ -174,11 +174,13 @@ describe("Drawer", () => {
 
     expect(drawer).toHaveAttribute("aria-hidden", "true");
     expect(drawer).toHaveAttribute("inert", "true");
+    expect(drawer).not.toHaveClass("dusk-drawer--open");
 
     await rerender({ open: true });
 
     expect(drawer).toHaveAttribute("aria-hidden", "false");
     expect(drawer).toHaveAttribute("inert", "false");
+    expect(drawer).toHaveClass("dusk-drawer--open");
   });
 
   describe("Animation and Events", () => {
@@ -203,11 +205,13 @@ describe("Drawer", () => {
       const drawer = container.firstChild;
 
       expect(drawer).toHaveAttribute("aria-hidden", "true");
+      expect(drawer).not.toHaveClass("dusk-drawer--open");
       expect(drawer).not.toHaveClass("dusk-drawer--events-enabled");
 
       await rerender({ open: true });
 
       expect(drawer).toHaveAttribute("aria-hidden", "false");
+      expect(drawer).toHaveClass("dusk-drawer--open");
       expect(drawer).not.toHaveClass("dusk-drawer--events-enabled");
       expect(openingHandler).toHaveBeenCalledTimes(1);
       expect(animateSpy).toHaveBeenCalledTimes(1);
@@ -219,11 +223,13 @@ describe("Drawer", () => {
       });
 
       expect(drawer).toHaveAttribute("aria-hidden", "false");
+      expect(drawer).toHaveClass("dusk-drawer--open");
       expect(drawer).toHaveClass("dusk-drawer--events-enabled");
 
       await rerender({ open: false });
 
       expect(drawer).toHaveAttribute("aria-hidden", "true");
+      expect(drawer).not.toHaveClass("dusk-drawer--open");
       expect(drawer).not.toHaveClass("dusk-drawer--events-enabled");
       expect(closingHandler).toHaveBeenCalledTimes(1);
       expect(animateSpy).toHaveBeenCalledTimes(2);

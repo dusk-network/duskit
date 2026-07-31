@@ -128,6 +128,20 @@
     event.currentTarget.scrollIntoView(smoothScrollOptions);
   }
 
+  /** @type {import("svelte/elements").FocusEventHandler<HTMLUListElement>} */
+  function handleTabsFocusout(event) {
+    if (
+      event.relatedTarget instanceof Node &&
+      event.currentTarget.contains(event.relatedTarget)
+    ) {
+      return;
+    }
+
+    focusableTab = items.some((item) => item.id === selectedTab)
+      ? selectedTab
+      : items[0]?.id;
+  }
+
   /** @type {import("svelte/elements").KeyboardEventHandler<HTMLLIElement>} */
   function handleTabKeyDown(event) {
     if (event.key === "Enter" || event.key === " ") {
@@ -138,7 +152,9 @@
       return;
     }
 
-    const currentIndex = items.findIndex((item) => item.id === focusableTab);
+    const currentIndex = items.findIndex(
+      (item) => item.id === event.currentTarget.dataset.tabid
+    );
     const newIndex = getTabNavigationIndex(
       event.key,
       currentIndex,
@@ -153,9 +169,8 @@
 
     if (newIndex !== currentIndex) {
       focusableTab = items[newIndex].id;
-
-      /** @type {HTMLLIElement | null} */ (
-        tabsList.querySelector(`[data-tabid="${focusableTab}"]`)
+      /** @type {HTMLLIElement | undefined} */ (
+        tabsList.children[newIndex]
       )?.focus();
     }
   }
@@ -188,7 +203,10 @@
     tabsList.scrollTo(0, 0);
 
     return observeResize(tabsList, () => {
-      const tab = tabsList.querySelector(`[data-tabid="${selectedTab}"]`);
+      const selectedIndex = items.findIndex((item) => item.id === selectedTab);
+      const tab = /** @type {HTMLLIElement | undefined} */ (
+        tabsList.children[selectedIndex]
+      );
 
       tab &&
         tab.scrollIntoView({
@@ -235,6 +253,7 @@
   <ul
     bind:this={tabsList}
     class="dusk-tabs-list"
+    on:focusout={handleTabsFocusout}
     on:scroll={updateScrollStatus}
     role="tablist"
   >
@@ -243,6 +262,7 @@
       <li
         aria-selected={id === selectedTab}
         class="dusk-tab-item"
+        class:dusk-tab-item--selected={id === selectedTab}
         data-tabid={id}
         on:click={handleTabClick}
         on:focusin={handleTabFocusin}

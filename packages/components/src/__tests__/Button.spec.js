@@ -55,11 +55,13 @@ describe("Button", () => {
     const element = component.getRootElement();
 
     expect(element).toHaveClass("dusk-button--type--toggle");
+    expect(element).not.toHaveClass("dusk-button--pressed");
     expect(element).toHaveAttribute("type", "button");
     expect(element).toHaveAttribute("aria-pressed", "false");
 
     await rerender({ pressed: true });
 
+    expect(element).toHaveClass("dusk-button--pressed");
     expect(element).toHaveAttribute("aria-pressed", "true");
   });
 

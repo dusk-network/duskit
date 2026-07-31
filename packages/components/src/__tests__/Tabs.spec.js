@@ -250,6 +250,58 @@ describe("Tabs", () => {
     expect(tabs[2]).toHaveAttribute("tabindex", "0");
   });
 
+  it("should navigate from the tab that owns focus after an external selection change", async () => {
+    const { getAllByRole, rerender } = await renderTabs(baseProps);
+    const tabs = getAllByRole("tab");
+
+    tabs[2].focus();
+    await rerender({ selectedTab: items[3].id });
+
+    expect(document.activeElement).toBe(tabs[2]);
+
+    await fireEvent.keyDown(tabs[2], { key: "ArrowRight" });
+
+    expect(document.activeElement).toBe(tabs[3]);
+  });
+
+  it("should restore the selected tab as the tab stop after focus leaves", async () => {
+    const { getAllByRole } = await renderTabs(baseProps);
+    const tabs = getAllByRole("tab");
+    const outsideButton = document.createElement("button");
+
+    document.body.append(outsideButton);
+    tabs[1].focus();
+    await fireEvent.keyDown(tabs[1], { key: "ArrowRight" });
+
+    expect(document.activeElement).toBe(tabs[2]);
+
+    outsideButton.focus();
+
+    await vi.waitFor(() => {
+      expect(tabs[1]).toHaveAttribute("tabindex", "0");
+      expect(tabs[2]).toHaveAttribute("tabindex", "-1");
+    });
+
+    outsideButton.remove();
+  });
+
+  it("should navigate tab IDs containing selector-significant characters", async () => {
+    const specialItems = [
+      { id: 'quote"id', label: "Quoted" },
+      { id: "plain", label: "Plain" },
+    ];
+    const { getAllByRole } = await renderTabs({
+      items: specialItems,
+      selectedTab: specialItems[0].id,
+    });
+    const tabs = getAllByRole("tab");
+
+    tabs[0].focus();
+    await fireEvent.keyDown(tabs[0], { key: "ArrowRight" });
+
+    expect(document.activeElement).toBe(tabs[1]);
+  });
+
   it("should move focus with arrow, Home, and End keys without changing selection", async () => {
     const { getAllByRole } = await renderTabs(baseProps);
     const tabs = getAllByRole("tab");
@@ -260,6 +312,7 @@ describe("Tabs", () => {
 
     expect(document.activeElement).toBe(tabs[2]);
     expect(tabs[1]).toHaveAttribute("aria-selected", "true");
+    expect(tabs[1]).toHaveClass("dusk-tab-item--selected");
     expect(tabs[1]).toHaveAttribute("tabindex", "-1");
     expect(tabs[2]).toHaveAttribute("tabindex", "0");
 

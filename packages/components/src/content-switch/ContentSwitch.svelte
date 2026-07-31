@@ -72,7 +72,9 @@
       return;
     }
 
-    const currentIndex = items.findIndex((item) => item.id === focusableTab);
+    const currentIndex = items.findIndex(
+      (item) => item.id === event.currentTarget.dataset.tabid
+    );
     const newIndex = getTabNavigationIndex(
       event.key,
       currentIndex,
@@ -87,9 +89,8 @@
 
     if (newIndex !== currentIndex) {
       focusableTab = items[newIndex].id;
-
-      /** @type {HTMLLIElement | null} */ (
-        rootElement.querySelector(`[data-tabid="${focusableTab}"]`)
+      /** @type {HTMLLIElement | undefined} */ (
+        rootElement.children[newIndex]
       )?.focus();
     }
   }
@@ -129,6 +130,7 @@
       aria-selected={id === selectedTab}
       class="dusk-content-switch__tab-item"
       class:dusk-content-switch__tab-item--expanded={id === expandedTab}
+      class:dusk-content-switch__tab-item--selected={id === selectedTab}
       data-tabid={id}
       on:blur={handleTabBlur}
       on:click={handleTabClick}

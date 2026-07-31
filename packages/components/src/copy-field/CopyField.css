@@ -4,7 +4,7 @@
   gap: var(--interactive-control-standard-gap);
 }
 
-.dusk-copy-field[aria-disabled="true"] .dusk-copy-field__button {
+.dusk-copy-field__button:disabled {
   pointer-events: none;
 }
 
