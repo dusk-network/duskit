@@ -48,7 +48,8 @@
   export let defaultPlace = undefined;
 
   /**
-   * Tooltip's default type.
+   * @deprecated Tooltip status variants are ignored and will be removed in the
+   * next major release.
    * @type {TooltipProps["defaultType"]}
    */
   export let defaultType = undefined;

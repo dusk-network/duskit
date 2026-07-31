@@ -31,6 +31,10 @@
   --surface-embedded-color: white;
   --on-surface-embedded-color: var(--grey-950);
 
+  /* Inverse Surface: high-contrast neutral overlays (e.g. tooltips) */
+  --surface-inverse-color: var(--grey-950);
+  --on-surface-inverse-color: white;
+
   /* Actions: primary  */
   --action-primary-color: var(--cornflower-500);
   --action-primary-strong-color: var(--cornflower-800);
@@ -281,6 +285,10 @@
    */
   --surface-embedded-color: var(--grey-700);
   --on-surface-embedded-color: var(--slate-200);
+
+  /* Inverse Surface: high-contrast neutral overlays (e.g. tooltips) */
+  --surface-inverse-color: var(--slate-100);
+  --on-surface-inverse-color: var(--grey-950);
 
   /* Actions: primary  */
   --action-primary-color: var(--cornflower-500);

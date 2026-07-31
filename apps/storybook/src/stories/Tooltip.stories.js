@@ -11,10 +11,6 @@ export default {
       control: "select",
       options: ["top", "right", "bottom", "left"],
     },
-    defaultType: {
-      control: "select",
-      options: ["info", "success", "warning", "error"],
-    },
     id: { control: "text" },
   },
 };
@@ -26,6 +22,5 @@ export const Default = {
     defaultDelayShow: 250,
     defaultOffset: 10,
     defaultPlace: "top",
-    defaultType: "info",
   },
 };

@@ -12,9 +12,6 @@
   /** @type {import("@floating-ui/dom").Side} */
   export let defaultPlace = "top";
 
-  /** @type {import("@duskit/components").StatusType} */
-  export let defaultType = "info";
-
   let darkMode = false;
 </script>
 
@@ -23,16 +20,15 @@
     data-tooltip-id={id}
     data-tooltip-place="bottom"
     data-tooltip-text="Hello from a tooltip"
-    text="Bottom + info"
+    text="Bottom"
     variant="primary"
   />
 
   <Button
     data-tooltip-id={id}
     data-tooltip-place="right"
-    data-tooltip-text="Error tooltip on the right"
-    data-tooltip-type="error"
-    text="Right + error"
+    data-tooltip-text="Tooltip on the right"
+    text="Right"
     variant="secondary"
   />
 
@@ -51,21 +47,18 @@
   <Button
     data-tooltip-id={id}
     data-tooltip-text="Hello from a tooltip"
-    data-tooltip-type="warning"
-    text="Warning"
+    text="Neutral"
     variant="secondary"
   />
   <Button
     data-tooltip-id={id}
     data-tooltip-text="Hello from a tooltip"
-    data-tooltip-type="success"
-    text="Success"
+    text="Also neutral"
     variant="secondary"
   />
   <Button
     data-tooltip-id={id}
     data-tooltip-text="A quite long text to verify word breaking and sundries. Really: this text is quite long and it shouldn't even be in a tooltip."
-    data-tooltip-type="success"
     text="Long text"
     variant="tertiary"
   />
@@ -76,6 +69,5 @@
   {defaultDelayShow}
   {defaultOffset}
   {defaultPlace}
-  {defaultType}
   {id}
 />

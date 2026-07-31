@@ -13,6 +13,10 @@ export interface TooltipProps extends ControlledHtmlAttributes<
   defaultDelayShow?: number;
   defaultOffset?: number;
   defaultPlace?: Side;
+  /**
+   * @deprecated Tooltip status variants are ignored and will be removed in the
+   * next major release.
+   */
   defaultType?: StatusType;
   id: string;
 }

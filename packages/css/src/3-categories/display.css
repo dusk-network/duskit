@@ -72,4 +72,8 @@
   /* --- Display Table --- */
   --display-table-row-striped-bg-color: var(--surface-embedded-color);
   --display-table-row-striped-text-color: var(--on-surface-embedded-color);
+
+  /* --- Display Tooltip --- */
+  --display-tooltip-bg-color: var(--surface-inverse-color);
+  --display-tooltip-text-color: var(--on-surface-inverse-color);
 }
