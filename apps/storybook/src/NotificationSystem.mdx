@@ -193,11 +193,18 @@ Furthermore, it actively monitors the `document.visibilityState`. If the user sw
 ```typescript
 interface ToastContainerProps {
   className?: string;
+  placement?: "bottom-left" | "bottom-right" | "top-left" | "top-right";
   store?: NotificationStore;
   tooltipId?: string;
 }
 
 ```
+
+The container defaults to `top-right`. Mouse hover pauses every visible toast
+at once, preventing timer changes from moving content away from the pointer.
+Touch interactions pause decay from `pointerdown` until `pointerup` or
+`pointercancel`, so users can hold a toast to read it without leaving its timer
+permanently suspended.
 
 ### Persistent History (NotificationFeed and NotificationPanel)
 

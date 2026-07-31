@@ -102,6 +102,11 @@
   class={classes}
   on:mouseenter
   on:mouseleave
+  on:pointercancel
+  on:pointerdown
+  on:pointerenter
+  on:pointerleave
+  on:pointerup
   {role}
 >
   <header class="dusk-notification__header">

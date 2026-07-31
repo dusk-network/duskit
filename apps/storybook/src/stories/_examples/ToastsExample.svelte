@@ -1,7 +1,13 @@
 <svelte:options immutable={true} />
 
 <script>
-  import { Button, notifier } from "@duskit/components";
+  import {
+    Button,
+    NotificationProvider,
+    ToastContainer,
+    Tooltip,
+    notifier,
+  } from "@duskit/components";
   import {
     mdiAlertCircleOutline,
     mdiAlertOutline,
@@ -10,6 +16,10 @@
   } from "@mdi/js";
 
   /** @typedef {import("@duskit/components").StatusType} StatusType */
+  /** @typedef {import("svelte").ComponentProps<ToastContainer>} ToastContainerProps */
+
+  /** @type {ToastContainerProps["placement"]} */
+  export let placement = "top-right";
 
   /** @type {Record<StatusType, string>} */
   const icons = {
@@ -42,23 +52,28 @@
       });
 </script>
 
-<section
-  style="display: flex; flex-direction: column; gap: 1rem; max-width: 14rem;"
->
-  <Button on:click={triggerToast("error")} size="small" text="Error Toast" />
-  <Button
-    on:click={triggerToast("info", true)}
-    size="small"
-    text="Info Toast"
-  />
-  <Button
-    on:click={triggerToast("success", true)}
-    size="small"
-    text="Success Toast"
-  />
-  <Button
-    on:click={triggerToast("warning")}
-    size="small"
-    text="Warning Toast"
-  />
-</section>
+<NotificationProvider>
+  <section
+    style="display: flex; flex-direction: column; gap: 1rem; max-width: 14rem;"
+  >
+    <Button on:click={triggerToast("error")} size="small" text="Error Toast" />
+    <Button
+      on:click={triggerToast("info", true)}
+      size="small"
+      text="Info Toast"
+    />
+    <Button
+      on:click={triggerToast("success", true)}
+      size="small"
+      text="Success Toast"
+    />
+    <Button
+      on:click={triggerToast("warning")}
+      size="small"
+      text="Warning Toast"
+    />
+  </section>
+
+  <Tooltip id="toast-tooltip" />
+  <ToastContainer {placement} tooltipId="toast-tooltip" />
+</NotificationProvider>

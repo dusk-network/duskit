@@ -35,6 +35,11 @@ interface NotificationEvents {
   markasread: CustomEvent<void>;
   mouseenter: CustomEvent<void>;
   mouseleave: CustomEvent<void>;
+  pointercancel: PointerEvent;
+  pointerdown: PointerEvent;
+  pointerenter: PointerEvent;
+  pointerleave: PointerEvent;
+  pointerup: PointerEvent;
 }
 
 interface NotificationSlots {

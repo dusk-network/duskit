@@ -9,11 +9,30 @@
   overflow: visible;
   list-style-type: none;
   pointer-events: none;
-  flex-direction: column;
   gap: var(--display-box-standard-gap);
-  inset-block-start: var(--display-box-compact-padding-block);
-  inset-inline-end: var(--display-box-compact-padding-inline);
   max-block-size: calc(100dvb - (var(--display-box-compact-padding-block) * 2));
+}
+
+.dusk-toast-container--placement--top-left,
+.dusk-toast-container--placement--top-right {
+  flex-direction: column;
+  inset-block-start: var(--display-box-compact-padding-block);
+}
+
+.dusk-toast-container--placement--bottom-left,
+.dusk-toast-container--placement--bottom-right {
+  flex-direction: column-reverse;
+  inset-block-end: var(--display-box-compact-padding-block);
+}
+
+.dusk-toast-container--placement--bottom-left,
+.dusk-toast-container--placement--top-left {
+  inset-inline-start: var(--display-box-compact-padding-inline);
+}
+
+.dusk-toast-container--placement--bottom-right,
+.dusk-toast-container--placement--top-right {
+  inset-inline-end: var(--display-box-compact-padding-inline);
 }
 
 .dusk-toast-container__item {

@@ -1,15 +1,22 @@
 import ToastsExample from "./_examples/ToastsExample.svelte";
 
 export default {
+  argTypes: {
+    placement: {
+      control: "select",
+      options: ["top-left", "top-right", "bottom-left", "bottom-right"],
+    },
+  },
+  args: {
+    placement: "top-right",
+  },
   component: ToastsExample,
   parameters: {
-    controls: {
-      hideNoControlsWarning: true,
-    },
+    disableGlobalOverlays: true,
     docs: {
       description: {
         component:
-          "The `ToastContainer` is globally mounted in the Storybook decorator. Click the buttons below to trigger the `notifier` and spawn floating toasts.",
+          "Click the buttons below to trigger the `notifier` and spawn floating toasts. Use the placement control to anchor the container to a viewport corner.",
       },
     },
   },

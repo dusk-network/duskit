@@ -245,6 +245,24 @@ describe("Notification", () => {
     expect(mouseLeaveHandler).toHaveBeenCalledOnce();
   });
 
+  it.each([
+    "pointercancel",
+    "pointerdown",
+    "pointerenter",
+    "pointerleave",
+    "pointerup",
+  ])("should forward the %s event from the root element", async (eventName) => {
+    const handler = vi.fn();
+    const { component } = render(Notification, {
+      ...baseOptions,
+      events: { [eventName]: handler },
+    });
+
+    await fireEvent(component.getRootElement(), new Event(eventName));
+
+    expect(handler).toHaveBeenCalledOnce();
+  });
+
   it("should render custom text, title, and icon path when provided", () => {
     const props = {
       ...basePanelProps,
