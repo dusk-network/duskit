@@ -1,5 +1,6 @@
 /* eslint-disable complexity, max-depth, max-statements, no-console */
 import fs from "node:fs/promises";
+import { pathToFileURL } from "node:url";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const REGISTRY_ORIGIN = "https://registry.npmjs.org";
@@ -63,7 +64,7 @@ const packageNameFromPath = (packagePath) => {
     : pathParts[0];
 };
 
-const packageNameFromResolvedUrl = (resolved, packagePath) => {
+const parseRegistryTarballUrl = (resolved, packagePath) => {
   let url;
 
   try {
@@ -78,11 +79,65 @@ const packageNameFromResolvedUrl = (resolved, packagePath) => {
     throw new Error(`Non-registry dependency in ${packagePath}: ${resolved}`);
   }
 
-  const packagePathname = url.pathname.split("/-/")[0].replace(/^\//, "");
-  return decodeURIComponent(packagePathname);
+  if (url.username || url.password || url.search || url.hash) {
+    throw new Error(
+      `Unsupported registry tarball URL in ${packagePath}: ${resolved}`
+    );
+  }
+
+  const separator = "/-/";
+  const separatorIndex = url.pathname.indexOf(separator);
+
+  if (
+    separatorIndex <= 1 ||
+    separatorIndex !== url.pathname.lastIndexOf(separator)
+  ) {
+    throw new Error(
+      `Invalid registry tarball URL in ${packagePath}: ${resolved}`
+    );
+  }
+
+  let name;
+
+  try {
+    name = decodeURIComponent(url.pathname.slice(1, separatorIndex));
+  } catch {
+    throw new Error(
+      `Invalid package name in registry tarball URL for ${packagePath}: ${resolved}`
+    );
+  }
+
+  return { name, url: url.href };
 };
 
-const collectRegistryPackages = (lockfile) => {
+const normalizeIntegrity = (integrity, context) => {
+  if (typeof integrity !== "string" || integrity.trim() === "") {
+    throw new Error(`Missing registry integrity for ${context}`);
+  }
+
+  const normalized = integrity
+    .trim()
+    .split(/\s+/)
+    .map((token) => {
+      const match = /^([a-z0-9]+)-([A-Za-z0-9+/]+={0,2})$/.exec(token);
+
+      if (!match) {
+        throw new Error(`Invalid registry integrity for ${context}: ${token}`);
+      }
+
+      const digest = Buffer.from(match[2], "base64");
+
+      if (digest.length === 0) {
+        throw new Error(`Invalid registry integrity for ${context}: ${token}`);
+      }
+
+      return `${match[1]}-${digest.toString("base64")}`;
+    });
+
+  return [...new Set(normalized)].sort().join(" ");
+};
+
+export const collectRegistryPackages = (lockfile) => {
   if (!lockfile.packages || typeof lockfile.packages !== "object") {
     throw new Error("Lockfile does not contain a packages map");
   }
@@ -132,15 +187,37 @@ const collectRegistryPackages = (lockfile) => {
       throw new Error(`Lockfile entry has no exact version: ${packagePath}`);
     }
 
-    const name = entry.resolved
-      ? packageNameFromResolvedUrl(entry.resolved, packagePath)
-      : packageNameFromPath(packagePath);
+    const name = packageNameFromPath(packagePath);
 
-    if (!packages.has(name)) {
-      packages.set(name, new Set());
+    if (!entry.resolved || typeof entry.resolved !== "string") {
+      throw new Error(`Lockfile entry has no resolved tarball: ${packagePath}`);
     }
 
-    packages.get(name).add(entry.version);
+    const resolved = parseRegistryTarballUrl(entry.resolved, packagePath);
+
+    if (resolved.name !== name) {
+      if (entry.name === resolved.name) {
+        throw new Error(
+          `Unsupported npm alias in ${packagePath}: ${name} -> ${resolved.name}`
+        );
+      }
+
+      throw new Error(
+        `Package name mismatch in ${packagePath}: expected ${name}, resolved ${resolved.name}`
+      );
+    }
+
+    if (!packages.has(name)) {
+      packages.set(name, []);
+    }
+
+    packages.get(name).push({
+      integrity: normalizeIntegrity(entry.integrity, packagePath),
+      name,
+      packagePath,
+      resolved: resolved.url,
+      version: entry.version,
+    });
     entryCount += 1;
   }
 
@@ -230,10 +307,11 @@ const fetchPackageMetadata = async (name) => {
   throw lastError;
 };
 
-const verifyReleaseAges = async ({
+export const verifyReleaseAges = async ({
   concurrency,
   cutoff,
   exceptions,
+  fetchMetadata = fetchPackageMetadata,
   packages,
   now,
 }) => {
@@ -244,19 +322,64 @@ const verifyReleaseAges = async ({
 
   const worker = async () => {
     while (queueIndex < queue.length) {
-      const [name, versions] = queue[queueIndex];
+      const [name, entries] = queue[queueIndex];
       queueIndex += 1;
 
       let metadata;
 
       try {
-        metadata = await fetchPackageMetadata(name);
+        metadata = await fetchMetadata(name);
       } catch (error) {
         failures.push(`${name}: ${error.message}`);
         continue;
       }
 
-      for (const version of versions) {
+      for (const entry of entries) {
+        const { packagePath, version } = entry;
+        const versionMetadata = metadata.versions?.[version];
+
+        if (!versionMetadata || typeof versionMetadata !== "object") {
+          failures.push(
+            `${name}@${version} (${packagePath}): registry version metadata is unavailable`
+          );
+          continue;
+        }
+
+        let registryTarball;
+        let registryIntegrity;
+
+        try {
+          registryTarball = parseRegistryTarballUrl(
+            versionMetadata.dist?.tarball,
+            `${name}@${version}`
+          );
+          registryIntegrity = normalizeIntegrity(
+            versionMetadata.dist?.integrity,
+            `${name}@${version}`
+          );
+        } catch (error) {
+          failures.push(error.message);
+          continue;
+        }
+
+        if (registryTarball.name !== name) {
+          failures.push(
+            `${name}@${version} (${packagePath}): registry tarball names ${registryTarball.name}`
+          );
+        }
+
+        if (entry.resolved !== registryTarball.url) {
+          failures.push(
+            `${name}@${version} (${packagePath}): resolved tarball does not match registry metadata`
+          );
+        }
+
+        if (entry.integrity !== registryIntegrity) {
+          failures.push(
+            `${name}@${version} (${packagePath}): integrity does not match registry metadata`
+          );
+        }
+
         const published = metadata.time?.[version];
         const publishedAt = Date.parse(published);
 
@@ -327,7 +450,12 @@ const main = async () => {
   );
 };
 
-main().catch((error) => {
-  console.error(error.message);
-  process.exitCode = 1;
-});
+if (
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(process.argv[1]).href
+) {
+  main().catch((error) => {
+    console.error(error.message);
+    process.exitCode = 1;
+  });
+}
