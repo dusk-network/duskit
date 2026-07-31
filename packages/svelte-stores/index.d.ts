@@ -93,7 +93,7 @@ export interface PersistedStoreOptions<T> {
    * @param initialValue - The store's configured initial value.
    * @returns Whether the parsed value is valid for this store.
    */
-  validate?: (value: unknown, initialValue: T) => boolean;
+  validate?: (value: unknown, initialValue: T) => value is T;
 }
 
 /**

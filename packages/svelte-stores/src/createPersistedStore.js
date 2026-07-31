@@ -89,6 +89,7 @@ function safeRemoveFromStorage(storage, key) {
  * @returns {import("..").PersistedStore<T>["rebind"]}
  */
 function bindStorageContext(store, context, initialValue, options) {
+  // eslint-disable-next-line max-statements
   return (newKey, rebindOptions = {}) => {
     if (!context.storage || context.key === newKey) {
       return;
@@ -97,12 +98,18 @@ function bindStorageContext(store, context, initialValue, options) {
     const { clearOldKey, merger } = rebindOptions;
     const oldKey = context.key;
     const currentValue = get(store);
-    const newValueFromStorage = loadFromStorage(
+    const loadResult = loadFromStorage(
       context.storage,
       newKey,
       initialValue,
       options
     );
+
+    if (!loadResult.didRead) {
+      return;
+    }
+
+    const newValueFromStorage = loadResult.value;
 
     const nextValue = merger
       ? merger(currentValue, newValueFromStorage)
@@ -123,7 +130,11 @@ function bindStorageContext(store, context, initialValue, options) {
         safeRemoveFromStorage(context.storage, oldKey);
       }
 
-      store.set(nextValue);
+      try {
+        store.set(nextValue);
+      } finally {
+        context.isRebinding = false;
+      }
     }
   };
 }
@@ -146,16 +157,18 @@ function bindStorageContext(store, context, initialValue, options) {
  * @param {string} key
  * @param {T} initialValue
  * @param {PersistedStoreOptions<T>} options
- * @returns {T}
+ * @returns {{ didRead: boolean, value: T }}
  */
 // eslint-disable-next-line max-statements
 function loadFromStorage(storage, key, initialValue, options) {
   const { getLoadErrorFallback, reviver, validate } = options;
+  let didRead = false;
   /** @type {string | null} */
   let storedValue = null;
 
   try {
     storedValue = storage.getItem(key);
+    didRead = true;
 
     if (storedValue !== null) {
       const parsed = JSON.parse(storedValue, reviver);
@@ -173,14 +186,14 @@ function loadFromStorage(storage, key, initialValue, options) {
             : `Type mismatch for key "${key}": expected "${expectedType}", but got "${parsedType}". Reverting to initial value.`
         );
 
-        return initialValue;
+        return { didRead, value: initialValue };
       }
 
       if (expectedType === "Object" && parsedType === "Object") {
-        return { ...initialValue, ...parsed };
+        return { didRead, value: { ...initialValue, ...parsed } };
       }
 
-      return parsed;
+      return { didRead, value: parsed };
     }
   } catch (reason) {
     const error = getErrorFrom(reason);
@@ -193,7 +206,7 @@ function loadFromStorage(storage, key, initialValue, options) {
         // eslint-disable-next-line no-console
         console.warn(message, error);
 
-        return fallbackValue;
+        return { didRead, value: fallbackValue };
       }
     }
 
@@ -201,7 +214,7 @@ function loadFromStorage(storage, key, initialValue, options) {
     console.error(message, error);
   }
 
-  return initialValue;
+  return { didRead, value: initialValue };
 }
 
 /** @type {import("..").createPersistedStore} */
@@ -218,20 +231,21 @@ function createPersistedStore(initialKey, initialValue, options = {}) {
     storage,
   };
 
-  const store = writable(
-    storage
-      ? loadFromStorage(storage, context.key, initialValue, options)
-      : initialValue
-  );
+  const loadResult = storage
+    ? loadFromStorage(storage, context.key, initialValue, options)
+    : { didRead: false, value: initialValue };
+  const store = writable(loadResult.value);
+  let skipInitialSave = storage ? !loadResult.didRead : false;
 
   if (storage) {
     store.subscribe((value) => {
-      if (context.isRebinding) {
-        // Resetting the flag to ensure the bypass only affects
-        // this specific update, restoring standard persistence
-        // for all subsequent changes.
-        context.isRebinding = false;
+      if (skipInitialSave) {
+        skipInitialSave = false;
 
+        return;
+      }
+
+      if (context.isRebinding) {
         return;
       }
 

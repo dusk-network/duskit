@@ -46,12 +46,22 @@ Stored values must have the same runtime type as the initial value. Use
 `validate` when the store accepts a more specific shape or an intentional
 alternative type such as `null`:
 
-```js
-const store = createPersistedStore("selection", initialSelection, {
-  validate: (value) =>
-    value === null ||
-    (typeof value === "object" && typeof value?.id === "string"),
-});
+```ts
+type Selection = { id: string };
+
+const initialSelection: Selection | null = getInitialSelection();
+const store = createPersistedStore<Selection | null>(
+  "selection",
+  initialSelection,
+  {
+    validate: (value): value is Selection | null =>
+      value === null ||
+      (typeof value === "object" &&
+        value !== null &&
+        "id" in value &&
+        typeof value.id === "string"),
+  }
+);
 ```
 
 Storage is resolved when the store is created, so importing the package during

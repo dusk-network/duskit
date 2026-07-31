@@ -195,16 +195,32 @@ describe("createPersistedStore", () => {
       });
 
       it("should use a custom validator for intentionally nullable values", () => {
-        const validate = vi.fn((value) => value === null);
+        /** @typedef {typeof initialValue | null} NullableValue */
+        /** @type {NullableValue} */
+        const nullableInitialValue = initialValue;
+        const validateSpy = vi.fn();
+        const validate =
+          /** @type {(value: unknown, configuredValue: NullableValue) => value is NullableValue} */ (
+            (value, configuredValue) => {
+              validateSpy(value, configuredValue);
+
+              return value === null;
+            }
+          );
 
         localStorage.setItem(testKey, JSON.stringify(null));
 
-        const store = createPersistedStore(testKey, initialValue, {
-          validate,
-        });
+        const store = createPersistedStore(
+          testKey,
+          /** @type {NullableValue} */ (nullableInitialValue),
+          { validate }
+        );
 
         expect(get(store)).toBeNull();
-        expect(validate).toHaveBeenCalledExactlyOnceWith(null, initialValue);
+        expect(validateSpy).toHaveBeenCalledExactlyOnceWith(
+          null,
+          nullableInitialValue
+        );
       });
 
       it("should reject a stored value that fails custom validation", () => {
@@ -216,12 +232,15 @@ describe("createPersistedStore", () => {
         localStorage.setItem(testKey, JSON.stringify(storedValue));
 
         const store = createPersistedStore(testKey, initialValue, {
-          validate: (value) =>
-            typeof value === "object" &&
-            value !== null &&
-            "count" in value &&
-            typeof value.count === "number" &&
-            value.count >= 0,
+          validate:
+            /** @type {(value: unknown) => value is typeof initialValue} */ (
+              (value) =>
+                typeof value === "object" &&
+                value !== null &&
+                "count" in value &&
+                typeof value.count === "number" &&
+                value.count >= 0
+            ),
         });
 
         expect(get(store)).toStrictEqual(initialValue);
@@ -334,11 +353,16 @@ describe("createPersistedStore", () => {
         const storedString = '{"balance": "100n", "id": "user-1"}';
         localStorage.setItem(testKey, storedString);
 
+        /** @typedef {{ balance: bigint, id: string } | null} RevivedValue */
+        /** @type {RevivedValue} */
+        const initialRevivedValue = null;
         /** @type {import("svelte/store").Writable<{ balance: bigint, id: string } | null>} */
-        const store = createPersistedStore(testKey, null, {
+        const store = createPersistedStore(testKey, initialRevivedValue, {
           replacer,
           reviver,
-          validate: (value) => typeof value === "object" && value !== null,
+          validate: /** @type {(value: unknown) => value is RevivedValue} */ (
+            (value) => typeof value === "object" && value !== null
+          ),
         });
 
         expect(get(store)?.balance).toBe(100n);
@@ -428,6 +452,7 @@ describe("createPersistedStore", () => {
 
         expect(get(store)).toStrictEqual(fallbackValue);
         expect(getLoadErrorFallback).toHaveBeenCalledWith(readError, null);
+        expect(storage.setItem).not.toHaveBeenCalled();
         expect(consoleWarnSpy).toHaveBeenCalledWith(
           `Error while parsing store "${testKey}":`,
           readError
@@ -628,6 +653,40 @@ describe("createPersistedStore", () => {
         consoleErrorSpy.mockRestore();
       });
 
+      it("should abort a rebind if reading the new key fails", () => {
+        const readError = new Error("Storage read failed");
+        const storage = {
+          getItem: vi
+            .fn()
+            .mockReturnValueOnce(JSON.stringify(initialValue))
+            .mockImplementationOnce(() => {
+              throw readError;
+            }),
+          removeItem: vi.fn(),
+          setItem: vi.fn(),
+        };
+        const consoleErrorSpy = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        const store = createPersistedStore(testKey, initialValue, {
+          // @ts-expect-error only the exercised Storage methods are needed here
+          getStorage: () => storage,
+        });
+
+        storage.setItem.mockClear();
+        store.rebind(newKey, { clearOldKey: true });
+
+        expect(get(store)).toStrictEqual(initialValue);
+        expect(storage.setItem).not.toHaveBeenCalled();
+        expect(storage.removeItem).not.toHaveBeenCalled();
+        expect(consoleErrorSpy).toHaveBeenCalledWith(
+          `Error while parsing store "${newKey}":`,
+          readError
+        );
+
+        consoleErrorSpy.mockRestore();
+      });
+
       it("should leave the old key in local storage if `clearOldKey` is omitted or false", () => {
         localStorage.setItem(testKey, JSON.stringify(initialValue));
 
@@ -660,6 +719,18 @@ describe("createPersistedStore", () => {
           storedNewValue
         );
         expect(get(store)).toStrictEqual(expectedMergedValue);
+      });
+
+      it("should persist the next update after rebinding to an identical primitive value", () => {
+        localStorage.setItem(testKey, JSON.stringify("same"));
+        localStorage.setItem(newKey, JSON.stringify("same"));
+
+        const store = createPersistedStore(testKey, "same");
+
+        store.rebind(newKey);
+        store.set("updated");
+
+        expect(getStoredValue(newKey)).toBe("updated");
       });
     });
   });
