@@ -57,7 +57,7 @@ class HttpTransport {
     this.#baseURL = baseURL.endsWith("/") ? baseURL : `${baseURL}/`;
     this.#headers = new Headers(headers);
     this.#errorTransformer = errorTransformer;
-    this.#fetchImplementation = fetchImplementation ?? globalThis.fetch;
+    this.#fetchImplementation = fetchImplementation;
     this.#responseTransformer = responseTransformer ?? identity;
   }
 
@@ -67,7 +67,7 @@ class HttpTransport {
   /** @type {HttpTransportErrorTransformer | undefined} */
   #errorTransformer;
 
-  /** @type {typeof globalThis.fetch} */
+  /** @type {typeof globalThis.fetch | undefined} */
   #fetchImplementation;
 
   /** @type {Headers} */
@@ -93,7 +93,8 @@ class HttpTransport {
       url.search = new URLSearchParams(params).toString();
     }
 
-    const result = this.#fetchImplementation(
+    const fetchImplementation = this.#fetchImplementation ?? globalThis.fetch;
+    const result = fetchImplementation(
       url,
       skipUndefineds({
         body: isObject(body) ? JSON.stringify(body) : body,
