@@ -246,6 +246,8 @@ function createPersistedStore(initialKey, initialValue, options = {}) {
       }
 
       if (context.isRebinding) {
+        context.isRebinding = false;
+
         return;
       }
 

@@ -732,6 +732,24 @@ describe("createPersistedStore", () => {
 
         expect(getStoredValue(newKey)).toBe("updated");
       });
+
+      it("should persist an update triggered by a subscriber during rebind", () => {
+        localStorage.setItem(testKey, JSON.stringify("old"));
+        localStorage.setItem(newKey, JSON.stringify("rebound"));
+
+        const store = createPersistedStore(testKey, "old");
+
+        store.subscribe((value) => {
+          if (value === "rebound") {
+            store.set("normalized");
+          }
+        });
+
+        store.rebind(newKey);
+
+        expect(get(store)).toBe("normalized");
+        expect(getStoredValue(newKey)).toBe("normalized");
+      });
     });
   });
 });
