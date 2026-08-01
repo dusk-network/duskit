@@ -23,6 +23,7 @@
   inline-size: var(--interactive-control-standard-min-block-size);
   block-size: var(--interactive-control-standard-min-block-size);
   box-sizing: border-box;
+  flex-shrink: 0;
   place-items: center;
 }
 
