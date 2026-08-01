@@ -7,6 +7,7 @@ import {
   it,
   vi,
 } from "vitest";
+import { readFileSync } from "node:fs";
 import {
   computePosition,
   arrow as setArrow,
@@ -473,6 +474,67 @@ describe("Tooltip", () => {
         expect(tooltip).toHaveAttribute("data-side", "bottom");
         expect(tip.style.left).toBe("23px");
         expect(tip.style.top).toBe("");
+      });
+
+      it("should leave the arrow cross axis to Floating UI", () => {
+        const styleElement = document.createElement("style");
+        styleElement.textContent = readFileSync(
+          "src/tooltip/Tooltip.css",
+          "utf8"
+        );
+        document.head.append(styleElement);
+
+        const rules = Array.from(styleElement.sheet?.cssRules ?? []);
+        const cases = [
+          { crossAxis: ["left", "right"], side: "bottom" },
+          { crossAxis: ["top", "bottom"], side: "left" },
+          { crossAxis: ["top", "bottom"], side: "right" },
+          { crossAxis: ["left", "right"], side: "top" },
+        ];
+
+        for (const { crossAxis, side } of cases) {
+          const selector = `.dusk-tooltip[data-side="${side}"] .dusk-tooltip__tip`;
+          let rule;
+
+          for (const candidate of rules) {
+            if (
+              "selectorText" in candidate &&
+              candidate.selectorText === selector
+            ) {
+              rule = candidate;
+              break;
+            }
+          }
+
+          expect(rule).toBeDefined();
+
+          if (!rule || !("style" in rule)) {
+            continue;
+          }
+
+          const declaration = /** @type {CSSStyleRule} */ (rule).style;
+
+          expect(declaration.getPropertyValue(side)).toBe("100%");
+          expect(declaration.getPropertyValue(`margin-${side}`)).not.toBe("");
+
+          for (const property of crossAxis) {
+            expect(declaration.getPropertyValue(property)).toBe("");
+            expect(declaration.getPropertyValue(`margin-${property}`)).toBe("");
+          }
+
+          const logicalInsets = [
+            "inset-block-end",
+            "inset-block-start",
+            "inset-inline-end",
+            "inset-inline-start",
+          ];
+
+          for (const property of logicalInsets) {
+            expect(declaration.getPropertyValue(property)).toBe("");
+          }
+        }
+
+        styleElement.remove();
       });
 
       it("should use the tooltip's component defaults if it receives invalid dataset attributes", async () => {

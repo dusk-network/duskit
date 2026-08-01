@@ -71,45 +71,37 @@
 }
 
 .dusk-tooltip[data-side="bottom"] .dusk-tooltip__tip {
-  inset-block-end: 100%;
-  inset-inline-start: 50%;
-  margin-block-end: calc(
+  bottom: 100%;
+  margin-bottom: calc(
     var(--_tooltip-half-tip-size) * -1 + var(--_tooltip-tip-main-axis-offset)
   );
-  margin-inline-start: calc(var(--_tooltip-half-tip-size) * -1);
-  border-block-end-color: transparent;
-  border-inline-end-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
 }
 
 .dusk-tooltip[data-side="left"] .dusk-tooltip__tip {
-  inset-block-start: 50%;
-  inset-inline-start: 100%;
-  margin-block-start: calc(var(--_tooltip-half-tip-size) * -1);
-  margin-inline-start: calc(
+  left: 100%;
+  margin-left: calc(
     var(--_tooltip-half-tip-size) * -1 + var(--_tooltip-tip-main-axis-offset)
   );
-  border-block-end-color: transparent;
-  border-inline-start-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
 }
 
 .dusk-tooltip[data-side="right"] .dusk-tooltip__tip {
-  inset-block-start: 50%;
-  inset-inline-end: 100%;
-  margin-block-start: calc(var(--_tooltip-half-tip-size) * -1);
-  margin-inline-end: calc(
+  right: 100%;
+  margin-right: calc(
     var(--_tooltip-half-tip-size) * -1 + var(--_tooltip-tip-main-axis-offset)
   );
-  border-block-start-color: transparent;
-  border-inline-end-color: transparent;
+  border-top-color: transparent;
+  border-right-color: transparent;
 }
 
 .dusk-tooltip[data-side="top"] .dusk-tooltip__tip {
-  inset-block-start: 100%;
-  inset-inline-start: 50%;
-  margin-block-start: calc(
+  top: 100%;
+  margin-top: calc(
     var(--_tooltip-half-tip-size) * -1 + var(--_tooltip-tip-main-axis-offset)
   );
-  margin-inline-start: calc(var(--_tooltip-half-tip-size) * -1);
-  border-block-start-color: transparent;
-  border-inline-start-color: transparent;
+  border-top-color: transparent;
+  border-left-color: transparent;
 }
