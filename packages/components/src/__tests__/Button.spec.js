@@ -5,6 +5,8 @@ import { skipIn } from "lamb";
 
 import { getAsHTMLElement } from "@duskit/test-helpers";
 
+import StyledButton from "./test-components/StyledButton.svelte";
+
 import { Button } from "../..";
 
 describe("Button", () => {
@@ -83,6 +85,15 @@ describe("Button", () => {
       "bar"
     );
     expect(element).toHaveAttribute("id", props.id);
+  });
+
+  it("should accept and forward a dynamic style attribute", () => {
+    const { getByRole } = render(StyledButton, {
+      props: { opacity: 0.5 },
+      target: document.body,
+    });
+
+    expect(getByRole("button")).toHaveStyle({ opacity: "0.5" });
   });
 
   it.each(variants)(

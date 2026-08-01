@@ -97,6 +97,52 @@ describe("HttpTransport", () => {
         expect(requestHeaders.get("X-Api-Key")).toBe(headers["X-Api-Key"]);
       }
     );
+
+    it("should use a custom fetch implementation when provided", async () => {
+      /** @type {unknown[]} */
+      const receivers = [];
+      const customFetch = vi.fn(
+        /** @this {unknown} */
+        function () {
+          receivers.push(this);
+
+          return Promise.resolve(Response.json(data));
+        }
+      );
+      const transport = new HttpTransport({
+        ...baseOptions,
+        fetch: customFetch,
+      });
+
+      const result = await transport
+        .get("users")
+        .then((response) => response.json());
+
+      expect(result).toStrictEqual(data);
+      expect(receivers).toStrictEqual([undefined]);
+      expect(customFetch).toHaveBeenCalledExactlyOnceWith(
+        new URL("https://api.example.com/users"),
+        expect.objectContaining({ method: "GET" })
+      );
+      expect(fetchSpy).not.toHaveBeenCalled();
+    });
+
+    it("should resolve the default fetch implementation at request time", async () => {
+      const transport = new HttpTransport(baseOptions);
+      const originalFetch = globalThis.fetch;
+      const lateFetch = vi.fn(async () => Response.json(data));
+
+      globalThis.fetch = lateFetch;
+
+      try {
+        await transport.get("users");
+      } finally {
+        globalThis.fetch = originalFetch;
+      }
+
+      expect(lateFetch).toHaveBeenCalledOnce();
+      expect(fetchSpy).not.toHaveBeenCalled();
+    });
   });
 
   describe("Request Methods", () => {
