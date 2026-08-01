@@ -1,5 +1,11 @@
 # @duskit/svelte-stores
 
+## 0.4.0
+
+### Minor Changes
+
+- [#377](https://github.com/dusk-network/duskit/pull/377) [`2867af9`](https://github.com/dusk-network/duskit/commit/2867af9b1f6f2e2e63d15edeaeabdac67e9d907b) Thanks [@HDauven](https://github.com/HDauven)! - Add injectable synchronous storage and strict persisted-value validation to `createPersistedStore`.
+
 ## 0.3.2
 
 ### Patch Changes
