@@ -9,6 +9,7 @@ Svelte stores and helpers.
 
 - [Dev environment](#dev-environment)
 - [Installation and usage](#installation-and-usage)
+- [Persisted stores](#persisted-stores)
 - [NPM scripts](#npm-scripts)
 
 ## Dev environment
@@ -27,6 +28,45 @@ Install it with your favourite package manager:
 ```bash
 npm install @duskit/svelte-stores --save
 ```
+
+<p align="right"><a href="#toc">[back to TOC]</a></p>
+
+## Persisted stores
+
+`createPersistedStore` uses `localStorage` by default. Supply a synchronous
+Web Storage implementation when the data should live elsewhere:
+
+```js
+const store = createPersistedStore("draft", initialDraft, {
+  getStorage: () => window.sessionStorage,
+});
+```
+
+Stored values must have the same runtime type as the initial value. Use
+`validate` when the store accepts a more specific shape or an intentional
+alternative type such as `null`:
+
+```ts
+type Selection = { id: string };
+
+const initialSelection: Selection | null = getInitialSelection();
+const store = createPersistedStore<Selection | null>(
+  "selection",
+  initialSelection,
+  {
+    validate: (value): value is Selection | null =>
+      value === null ||
+      (typeof value === "object" &&
+        value !== null &&
+        "id" in value &&
+        typeof value.id === "string"),
+  }
+);
+```
+
+Storage is resolved when the store is created, so importing the package during
+server-side rendering does not access browser globals. Asynchronous storage is
+not supported.
 
 <p align="right"><a href="#toc">[back to TOC]</a></p>
 

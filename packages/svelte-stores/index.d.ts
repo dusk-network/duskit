@@ -38,6 +38,13 @@ type DataStore<A extends any[], R> = Readable<DataStoreContent<R>> & {
  */
 export interface PersistedStoreOptions<T> {
   /**
+   * Returns the synchronous storage used by the store. The function is called
+   * when the store is created, avoiding browser-global access during module loading.
+   * Defaults to `globalThis.localStorage` when available.
+   */
+  getStorage?: () => Storage;
+
+  /**
    * A fallback function invoked when parsing the stored value fails.
    * It provides the parsing error and the raw string retrieved from storage.
    *
@@ -77,6 +84,16 @@ export interface PersistedStoreOptions<T> {
    * @returns The transformed value.
    */
   reviver?: (key: string, value: any) => any;
+
+  /**
+   * Validates a parsed value before it is used. By default, the parsed value
+   * must have the same runtime type as the initial value.
+   *
+   * @param value - The parsed value retrieved from storage.
+   * @param initialValue - The store's configured initial value.
+   * @returns Whether the parsed value is valid for this store.
+   */
+  validate?: (value: unknown, initialValue: T) => value is T;
 }
 
 /**
@@ -148,13 +165,15 @@ export declare function createDataStore<
 >(dataRetriever: F): DataStore<Parameters<F>, Awaited<ReturnType<F>>>;
 
 /**
- * Creates a writable store that automatically persists its state to `localStorage`.
+ * Creates a writable store that automatically persists its state to a synchronous
+ * `Storage`, using `localStorage` by default.
  * It handles serialization, basic schema merging for objects, and supports
  * dynamic key rebinding.
  *
- * @param key - The initial `localStorage` key.
+ * @param key - The initial storage key.
  * @param initialValue - The default value used if no data is found in storage.
- * @param options - Optional configuration for serialization and error handling.
+ * @param options - Optional configuration for storage, validation, serialization,
+ * and error handling.
  */
 export declare function createPersistedStore<T>(
   key: string,
