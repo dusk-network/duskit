@@ -2,7 +2,7 @@ import type { SvelteComponent } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
 import type { Side } from "@floating-ui/dom";
 
-import type { ControlledHtmlAttributes, StatusType } from "../dusk.components";
+import type { ControlledHtmlAttributes } from "../dusk.components";
 
 export interface TooltipProps extends ControlledHtmlAttributes<
   SvelteHTMLElements["div"],
@@ -13,7 +13,6 @@ export interface TooltipProps extends ControlledHtmlAttributes<
   defaultDelayShow?: number;
   defaultOffset?: number;
   defaultPlace?: Side;
-  defaultType?: StatusType;
   id: string;
 }
 

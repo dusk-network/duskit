@@ -11,11 +11,11 @@
   font-family: var(--display-label-text-family);
   font-size: var(--display-label-text-size);
   line-height: 1.5;
-  color: var(--_tooltip-text-color);
+  color: var(--display-tooltip-text-color);
   letter-spacing: var(--display-label-text-letter-spacing);
   white-space: break-spaces;
   visibility: var(--_tooltip-visibility);
-  background-color: var(--_tooltip-bg-color);
+  background-color: var(--display-tooltip-bg-color);
   border-radius: var(--display-box-radius-slight-size);
   opacity: var(--_tooltip-opacity);
   transition: opacity 0.2s ease-in-out 0s;
@@ -27,35 +27,6 @@
 .dusk-tooltip[aria-hidden="true"] {
   --_tooltip-opacity: 0;
   --_tooltip-visibility: hidden;
-}
-
-/*
- * Semantically, the Tooltip is a "display" component and should not
- * communicate system states.
- * These overrides temporarily consume solid feedback surfaces until
- * the Svelte API is refactored to remove the 'data-tooltip-type'
- * and the proper `surface-inverse` token is introduced  in the design
- * system.
- */
-
-.dusk-tooltip.dusk-tooltip--type--error {
-  --_tooltip-bg-color: var(--feedback-surface-solid-error-bg-color);
-  --_tooltip-text-color: var(--feedback-surface-solid-error-text-color);
-}
-
-.dusk-tooltip.dusk-tooltip--type--info {
-  --_tooltip-bg-color: var(--feedback-surface-solid-info-bg-color);
-  --_tooltip-text-color: var(--feedback-surface-solid-info-text-color);
-}
-
-.dusk-tooltip.dusk-tooltip--type--success {
-  --_tooltip-bg-color: var(--feedback-surface-solid-success-bg-color);
-  --_tooltip-text-color: var(--feedback-surface-solid-success-text-color);
-}
-
-.dusk-tooltip.dusk-tooltip--type--warning {
-  --_tooltip-bg-color: var(--feedback-surface-solid-warning-bg-color);
-  --_tooltip-text-color: var(--feedback-surface-solid-warning-text-color);
 }
 
 .dusk-tooltip::after {

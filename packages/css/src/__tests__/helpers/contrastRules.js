@@ -396,6 +396,19 @@ export default {
     {
       algorithm: "Lstar",
       description:
+        "Inverse surfaces must remain strongly distinct from every standard surface layer.",
+      minimumRatio: 14,
+      testAgainst: [
+        "--background-color",
+        "--surface-color",
+        "--surface-layer-color",
+        "--surface-embedded-color",
+      ],
+      tokens: ["--surface-inverse-color"],
+    },
+    {
+      algorithm: "Lstar",
+      description:
         "The primary surface must have a perceptible structural lightness distance from the application background.",
       minimumRatio: 3.5,
       testAgainst: ["--surface-color"],
