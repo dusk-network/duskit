@@ -3,7 +3,6 @@
 <script>
   /** @typedef {import("./Tooltip").TooltipProps} TooltipProps */
   /** @typedef {Exclude<TooltipProps["defaultPlace"], undefined>} ValidPlacement */
-  /** @typedef {Exclude<TooltipProps["defaultType"], undefined>} ValidType */
   /** @typedef {HTMLElement | SVGElement} ValidTarget */
 
   import { onDestroy } from "svelte";
@@ -48,13 +47,6 @@
   export let defaultPlace = undefined;
 
   /**
-   * @deprecated Tooltip status variants are ignored and will be removed in the
-   * next major release.
-   * @type {TooltipProps["defaultType"]}
-   */
-  export let defaultType = undefined;
-
-  /**
    * ID of the tooltip element.
    * @type {TooltipProps["id"]}
    */
@@ -72,14 +64,8 @@
   /** @type {ValidPlacement} */
   const DEFAULT_PLACE = "top";
 
-  /** @type {ValidType} */
-  const DEFAULT_TYPE = "info";
-
   /** @type {ValidPlacement[]} */
   const validPlacements = ["top", "right", "bottom", "left"];
-
-  /** @type {ValidType[]}*/
-  const validTypes = ["error", "info", "success", "warning"];
 
   /** @type {(value: string | undefined) => value is ValidPlacement} */
   const isValidPlacement = (value) =>
@@ -90,11 +76,6 @@
   const isValidTarget = (target) =>
     target !== null &&
     (target instanceof HTMLElement || target instanceof SVGElement);
-
-  /** @type {(value: string | undefined) => value is ValidType} */
-  const isValidType = (value) =>
-    value !== undefined &&
-    validTypes.includes(/** @type {ValidType} */ (value));
 
   /** @type {(fallback: number) => (value: string | undefined) => number} */
   function parseNumericAttribute(fallback) {
@@ -116,10 +97,6 @@
   /** @type {(value: string | undefined) => ValidPlacement} */
   const parsePlacement = (value) =>
     isValidPlacement(value) ? value : (defaultPlace ?? DEFAULT_PLACE);
-
-  /** @type {(value: string | undefined) => ValidType} */
-  const parseType = (value) =>
-    isValidType(value) ? value : (defaultType ?? DEFAULT_TYPE);
 
   /** @param {Element} targetNode */
   function teardown(targetNode) {
@@ -148,7 +125,6 @@
     offset: defaultOffset ?? DEFAULT_OFFSET,
     place: defaultPlace ?? DEFAULT_PLACE,
     text: "",
-    type: defaultType ?? DEFAULT_TYPE,
     visible: false,
     x: 0,
     y: 0,
@@ -175,11 +151,7 @@
         return;
       }
 
-      const {
-        tooltipDisabled,
-        tooltipText = "",
-        tooltipType,
-      } = mutation.target.dataset;
+      const { tooltipDisabled, tooltipText = "" } = mutation.target.dataset;
 
       if (tooltipDisabled === "true") {
         teardown(mutation.target);
@@ -187,11 +159,7 @@
         return;
       }
 
-      state.update((current) => ({
-        ...current,
-        text: tooltipText,
-        type: parseType(tooltipType),
-      }));
+      state.update((current) => ({ ...current, text: tooltipText }));
     });
   });
 
@@ -259,7 +227,6 @@
       tooltipOffset,
       tooltipPlace,
       tooltipText = "",
-      tooltipType,
     } = targetNode.dataset;
 
     if (tooltipId !== id || tooltipDisabled === "true") {
@@ -271,11 +238,7 @@
     state.update((current) => ({ ...current, text: tooltipText }));
     intersectionObserver.observe(targetNode);
     mutationObserver.observe(targetNode, {
-      attributeFilter: [
-        "data-tooltip-disabled",
-        "data-tooltip-text",
-        "data-tooltip-type",
-      ],
+      attributeFilter: ["data-tooltip-disabled", "data-tooltip-text"],
       attributes: true,
     });
 
@@ -299,19 +262,18 @@
     const place = /** @type {import("@floating-ui/dom").Side} */ (
       placement.replace(/-.+$/, "")
     );
-    const type = parseType(tooltipType);
     const delayShow = parseDelayShow(tooltipDelayShow);
 
     if (delayShow) {
       timeoutID = window.setTimeout(() => {
         if (targetNode && targetNode.isConnected) {
           setAriaDescription(targetNode);
-          state.update((s) => ({ ...s, place, type, visible: true, x, y }));
+          state.update((s) => ({ ...s, place, visible: true, x, y }));
         }
       }, delayShow);
     } else {
       setAriaDescription(targetNode);
-      state.update((s) => ({ ...s, place, type, visible: true, x, y }));
+      state.update((s) => ({ ...s, place, visible: true, x, y }));
     }
   }
 
@@ -328,11 +290,10 @@
     mutationObserver.disconnect();
   });
 
-  $: ({ place, text, type, visible, x, y } = $state);
+  $: ({ place, text, visible, x, y } = $state);
   $: classes = makeClassName([
     "dusk-tooltip",
     `dusk-tooltip--place--${place}`,
-    `dusk-tooltip--type--${type}`,
     className,
   ]);
 </script>

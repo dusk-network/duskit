@@ -42,8 +42,6 @@ interface TooltipProps {
   defaultDelayShow?: number;
   defaultOffset?: number;
   defaultPlace?: "bottom" | "left" | "right" | "top";
-  /** @deprecated Ignored; scheduled for removal in the next major release. */
-  defaultType?: "error" | "info" | "success" | "warning";
   id: string;
 }
 
@@ -84,7 +82,6 @@ To activate the tooltip, a target element must, at minimum, share the same `data
 | `data-tooltip-offset` | `numeric string` | Overrides the default spatial offset from the target (in pixels). |
 | `data-tooltip-place` | `"top" \| "right" \| "bottom" \| "left"` | Overrides the default placement. |
 | `data-tooltip-text` | `string` | **Required.** The plain text content to display. |
-| `data-tooltip-type` | `"error" \| "info" \| "success" \| "warning"` | Deprecated compatibility attribute. It is ignored and will be removed in the next major release. |
 
 <p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>
 
@@ -121,6 +118,6 @@ To guarantee visual consistency and prevent layout breakage:
 
 Tooltips are passive display elements and always use the neutral inverse-surface tokens. Status colors are reserved for feedback components such as Toast and Banner.
 
-The legacy `defaultType` property and `data-tooltip-type` attribute are retained as ignored compatibility inputs and are scheduled for removal in the next major release.
+The former status variants were removed in `@duskit/components` 4.0. Use a feedback component such as `Notification` when status color communicates meaning.
 
 <p style={{ textAlign: "right" }}><a href="#toc" target="_self">[back to TOC]</a></p>

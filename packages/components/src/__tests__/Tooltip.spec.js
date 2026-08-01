@@ -7,6 +7,7 @@ import {
   it,
   vi,
 } from "vitest";
+import { readFileSync } from "node:fs";
 import { computePosition, offset as setOffset } from "@floating-ui/dom";
 import { cleanup, fireEvent, render } from "@testing-library/svelte";
 import { tick } from "svelte";
@@ -35,7 +36,6 @@ describe("Tooltip", () => {
     defaultDelayShow: 500,
     defaultOffset: 12,
     defaultPlace: "bottom",
-    defaultType: "success",
     id: "tooltip-id",
   };
   const baseOptions = {
@@ -63,6 +63,13 @@ describe("Tooltip", () => {
   const moObserveSpy = vi.spyOn(MutationObserver.prototype, "observe");
 
   vi.mocked(computePosition).mockResolvedValue(defaultComputedPosition);
+
+  it("should retain color fallbacks for the minimum supported CSS peer", () => {
+    const styles = readFileSync("src/tooltip/Tooltip.css", "utf8");
+
+    expect(styles).toContain("var(--feedback-surface-solid-info-bg-color)");
+    expect(styles).toContain("var(--feedback-surface-solid-info-text-color)");
+  });
 
   afterEach(() => {
     cleanup();
@@ -398,7 +405,6 @@ describe("Tooltip", () => {
         target.setAttribute("data-tooltip-delay-show", "700");
         target.setAttribute("data-tooltip-offset", "0");
         target.setAttribute("data-tooltip-place", "top");
-        target.setAttribute("data-tooltip-type", "error");
 
         const { getByRole } = render(Tooltip, baseOptions);
         const tooltip = getByRole("tooltip", { hidden: true });
@@ -434,10 +440,26 @@ describe("Tooltip", () => {
         await vi.advanceTimersByTimeAsync(700 - baseProps.defaultDelayShow);
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
-        expect(tooltip).toHaveClass("dusk-tooltip--type--error");
         expect(target.getAttribute("aria-describedby")).toBe(baseProps.id);
         expect(prevTooltipElement.getAttribute("aria-describedby")).toBeNull();
       });
+
+      it.each(["error", "info", "success", "warning"])(
+        "should ignore the removed data-tooltip-type=%s attribute",
+        async (type) => {
+          target.dataset.tooltipType = type;
+
+          const { getByRole } = render(Tooltip, baseOptions);
+          const tooltip = getByRole("tooltip", { hidden: true });
+
+          await fireEvent.mouseEnter(target);
+          await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
+
+          expect(tooltip.className).toBe(
+            "dusk-tooltip dusk-tooltip--place--left"
+          );
+        }
+      );
 
       it("should use the tooltip's component defaults if it receives invalid dataset attributes", async () => {
         const invalidTarget = createEventTarget({
@@ -446,7 +468,6 @@ describe("Tooltip", () => {
           tooltipOffset: "invalid offset",
           tooltipPlace: "invalid placement",
           tooltipText: "some text",
-          tooltipType: "invalid type",
         });
 
         const { getByRole } = render(Tooltip, baseOptions);
@@ -466,9 +487,6 @@ describe("Tooltip", () => {
         await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
-        expect(tooltip).toHaveClass(
-          `dusk-tooltip--type--${baseProps.defaultType}`
-        );
       });
 
       it("should fallback to internal defaults when dataset and props are invalid or `undefined`", async () => {
@@ -478,7 +496,6 @@ describe("Tooltip", () => {
           tooltipOffset: "invalid offset",
           tooltipPlace: "invalid placement",
           tooltipText: "some text",
-          tooltipType: "invalid type",
         });
 
         const props = {
@@ -486,7 +503,6 @@ describe("Tooltip", () => {
           defaultDelayShow: undefined,
           defaultOffset: undefined,
           defaultPlace: undefined,
-          defaultType: undefined,
         };
 
         const { getByRole } = render(Tooltip, { ...baseOptions, props });
@@ -510,9 +526,6 @@ describe("Tooltip", () => {
         await vi.advanceTimersByTimeAsync(500);
 
         expect(tooltip.getAttribute("aria-hidden")).toBe("false");
-
-        // Expect internal DEFAULT_TYPE ("info")
-        expect(tooltip).toHaveClass("dusk-tooltip--type--info");
       });
 
       it("should not wait for a delay before showing if the value is zero", async () => {
@@ -1060,11 +1073,10 @@ describe("Tooltip", () => {
   });
 
   describe("Tooltip dynamic attribute updates (mutation observer)", () => {
-    it("should update tooltip text and type dynamically when dataset changes while visible", async () => {
+    it("should update tooltip text dynamically when the dataset changes while visible", async () => {
       const dynamicTarget = createEventTarget({
         tooltipId: baseProps.id,
         tooltipText: "Initial text",
-        tooltipType: "info",
       });
 
       const { getByRole } = render(Tooltip, baseOptions);
@@ -1075,27 +1087,20 @@ describe("Tooltip", () => {
 
       expect(tooltip.getAttribute("aria-hidden")).toBe("false");
       expect(tooltip).toHaveTextContent("Initial text");
-      expect(tooltip).toHaveClass("dusk-tooltip--type--info");
       expect(moObserveSpy).toHaveBeenCalledTimes(1);
       expect(moObserveSpy).toHaveBeenCalledWith(dynamicTarget, {
-        attributeFilter: [
-          "data-tooltip-disabled",
-          "data-tooltip-text",
-          "data-tooltip-type",
-        ],
+        attributeFilter: ["data-tooltip-disabled", "data-tooltip-text"],
         attributes: true,
       });
 
       // Mutate the dataset
       dynamicTarget.dataset.tooltipText = "Updated text";
-      dynamicTarget.dataset.tooltipType = "error";
 
       // Flush the MutationObserver microtask queue
       await tick();
 
       expect(tooltip.getAttribute("aria-hidden")).toBe("false");
       expect(tooltip).toHaveTextContent("Updated text");
-      expect(tooltip).toHaveClass("dusk-tooltip--type--error");
       expect(moDisconnectSpy).not.toHaveBeenCalled();
     });
 
@@ -1114,11 +1119,7 @@ describe("Tooltip", () => {
       expect(tooltip.getAttribute("aria-hidden")).toBe("false");
       expect(moObserveSpy).toHaveBeenCalledTimes(1);
       expect(moObserveSpy).toHaveBeenCalledWith(dynamicTarget, {
-        attributeFilter: [
-          "data-tooltip-disabled",
-          "data-tooltip-text",
-          "data-tooltip-type",
-        ],
+        attributeFilter: ["data-tooltip-disabled", "data-tooltip-text"],
         attributes: true,
       });
       expect(dynamicTarget.getAttribute("aria-describedby")).toBe(baseProps.id);
@@ -1136,78 +1137,6 @@ describe("Tooltip", () => {
       expect(dynamicTarget.getAttribute("aria-describedby")).toBeNull();
       expect(ioDisconnectSpy).toHaveBeenCalledTimes(1);
       expect(moDisconnectSpy).toHaveBeenCalledTimes(1);
-    });
-
-    it("should fallback to the prop's default type if dynamically mutated to an invalid type", async () => {
-      const dynamicTarget = createEventTarget({
-        tooltipId: baseProps.id,
-        tooltipType: "warning",
-      });
-
-      const { getByRole } = render(Tooltip, baseOptions);
-      const tooltip = getByRole("tooltip", { hidden: true });
-
-      await fireEvent.mouseEnter(dynamicTarget);
-      await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
-
-      expect(tooltip).toHaveClass("dusk-tooltip--type--warning");
-      expect(moObserveSpy).toHaveBeenCalledTimes(1);
-      expect(moObserveSpy).toHaveBeenCalledWith(dynamicTarget, {
-        attributeFilter: [
-          "data-tooltip-disabled",
-          "data-tooltip-text",
-          "data-tooltip-type",
-        ],
-        attributes: true,
-      });
-
-      // Mutate to nonsense
-      dynamicTarget.dataset.tooltipType = "absolute-nonsense";
-
-      await tick();
-
-      // Should fallback to the prop's defaultType ("success" in baseOptions)
-      expect(tooltip).not.toHaveClass("dusk-tooltip--type--warning");
-      expect(tooltip).toHaveClass("dusk-tooltip--type--success");
-    });
-
-    it("should fallback to the internal system default type if both dataset and prop are invalid or `undefined`", async () => {
-      const dynamicTarget = createEventTarget({
-        tooltipId: baseProps.id,
-        tooltipText: "Testing system default",
-        tooltipType: "success",
-      });
-
-      const props = {
-        ...baseProps,
-        defaultType: undefined,
-      };
-
-      const { getByRole } = render(Tooltip, { ...baseOptions, props });
-      const tooltip = getByRole("tooltip", { hidden: true });
-
-      await fireEvent.mouseEnter(dynamicTarget);
-      await vi.advanceTimersByTimeAsync(baseProps.defaultDelayShow);
-
-      expect(tooltip).toHaveClass("dusk-tooltip--type--success");
-      expect(moObserveSpy).toHaveBeenCalledTimes(1);
-      expect(moObserveSpy).toHaveBeenCalledWith(dynamicTarget, {
-        attributeFilter: [
-          "data-tooltip-disabled",
-          "data-tooltip-text",
-          "data-tooltip-type",
-        ],
-        attributes: true,
-      });
-
-      // Mutate to nonsense
-      dynamicTarget.dataset.tooltipType = "absolute-nonsense";
-
-      await tick();
-
-      // Should fallback to internal DEFAULT_TYPE ("info")
-      expect(tooltip).not.toHaveClass("dusk-tooltip--type--success");
-      expect(tooltip).toHaveClass("dusk-tooltip--type--info");
     });
 
     it("should force hide the tooltip and disconnect both observers if the target is mutated after being detached from the DOM", async () => {
