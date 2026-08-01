@@ -258,10 +258,34 @@ describe("Tabs", () => {
     await rerender({ selectedTab: items[3].id });
 
     expect(document.activeElement).toBe(tabs[2]);
+    expect(tabs[2]).toHaveAttribute("tabindex", "0");
+    expect(tabs[3]).toHaveAttribute("tabindex", "-1");
 
     await fireEvent.keyDown(tabs[2], { key: "ArrowRight" });
 
     expect(document.activeElement).toBe(tabs[3]);
+  });
+
+  it("should adopt an external selection as the tab stop after focus leaves", async () => {
+    const { getAllByRole, rerender } = await renderTabs(baseProps);
+    const tabs = getAllByRole("tab");
+    const outsideButton = document.createElement("button");
+
+    document.body.append(outsideButton);
+    tabs[2].focus();
+    await rerender({ selectedTab: items[3].id });
+
+    expect(tabs[2]).toHaveAttribute("tabindex", "0");
+    expect(tabs[3]).toHaveAttribute("tabindex", "-1");
+
+    outsideButton.focus();
+
+    await vi.waitFor(() => {
+      expect(tabs[2]).toHaveAttribute("tabindex", "-1");
+      expect(tabs[3]).toHaveAttribute("tabindex", "0");
+    });
+
+    outsideButton.remove();
   });
 
   it("should restore the selected tab as the tab stop after focus leaves", async () => {

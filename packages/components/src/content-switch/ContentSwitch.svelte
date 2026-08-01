@@ -36,10 +36,25 @@
 
   const dispatch = createEventDispatcher();
 
-  /** @type {import("svelte/elements").EventHandler<Event, HTMLLIElement>} */
   function handleTabBlur() {
     expandedTab = internalSelectedTab;
-    focusableTab = internalSelectedTab;
+  }
+
+  /** @type {import("svelte/elements").FocusEventHandler<HTMLUListElement>} */
+  function handleTabsFocusout(event) {
+    if (
+      event.relatedTarget instanceof Node &&
+      event.currentTarget.contains(event.relatedTarget)
+    ) {
+      return;
+    }
+
+    const fallbackTabId = items[0]?.id;
+
+    expandedTab = internalSelectedTab;
+    focusableTab = items.some((item) => item.id === selectedTab)
+      ? selectedTab
+      : fallbackTabId;
   }
 
   /** @type {import("svelte/elements").EventHandler<Event, HTMLLIElement>} */
@@ -108,12 +123,18 @@
   $: {
     const isValidSelectedTab =
       selectedTab && items.some((item) => item.id === selectedTab);
+    const hasFocusWithin =
+      rootElement?.contains(document.activeElement) ?? false;
     const fallbackTabId = items[0]?.id;
 
     // React to external `selectedTab` changes
     if (selectedTab !== internalSelectedTab) {
       internalSelectedTab = selectedTab;
-      focusableTab = isValidSelectedTab ? selectedTab : fallbackTabId;
+
+      if (!hasFocusWithin || !items.some((item) => item.id === focusableTab)) {
+        focusableTab = isValidSelectedTab ? selectedTab : fallbackTabId;
+      }
+
       expandedTab = selectedTab;
     } else if (!items.some((item) => item.id === focusableTab)) {
       focusableTab = fallbackTabId;
@@ -123,7 +144,13 @@
   $: classes = makeClassName(["dusk-content-switch", className]);
 </script>
 
-<ul bind:this={rootElement} {...$$restProps} class={classes} role="tablist">
+<ul
+  bind:this={rootElement}
+  {...$$restProps}
+  class={classes}
+  on:focusout={handleTabsFocusout}
+  role="tablist"
+>
   {#each items as item (item.id)}
     {@const { icon, id, label } = item}
     <li

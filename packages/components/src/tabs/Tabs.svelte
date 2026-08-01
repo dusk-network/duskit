@@ -223,11 +223,15 @@
   $: {
     const isValidSelectedTab =
       selectedTab && items.some((item) => item.id === selectedTab);
+    const hasFocusWithin = tabsList?.contains(document.activeElement) ?? false;
     const fallbackTabId = items[0]?.id;
 
     if (selectedTab !== internalSelectedTab) {
       internalSelectedTab = selectedTab;
-      focusableTab = isValidSelectedTab ? selectedTab : fallbackTabId;
+
+      if (!hasFocusWithin || !items.some((item) => item.id === focusableTab)) {
+        focusableTab = isValidSelectedTab ? selectedTab : fallbackTabId;
+      }
     } else if (!items.some((item) => item.id === focusableTab)) {
       focusableTab = fallbackTabId;
     }
