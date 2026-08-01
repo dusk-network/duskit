@@ -24,6 +24,21 @@ function changeVisibilityStateTo(value) {
   document.dispatchEvent(new Event("visibilitychange"));
 }
 
+/**
+ * @param {Element | Window} target
+ * @param {string} type
+ * @param {{ pointerId: number, pointerType: string }} init
+ */
+function dispatchPointerEvent(target, type, init) {
+  const event = new Event(type, { bubbles: true });
+
+  Object.defineProperties(event, {
+    pointerId: { value: init.pointerId },
+    pointerType: { value: init.pointerType },
+  });
+  target.dispatchEvent(event);
+}
+
 const getMinAndMaxTimeouts = compose(
   collect([apply(Math.min), apply(Math.max)]),
   pluck("timeout")
@@ -220,6 +235,44 @@ describe("ToastContainer", () => {
     expect(rootElement).toHaveAttribute("data-testid", "toast-root");
   });
 
+  it("should keep the container and its gaps hit-testable", () => {
+    const { component } = render(ToastContainer, baseOptions);
+    const rootElement = component.getRootElement();
+
+    expect(getComputedStyle(rootElement).pointerEvents).toBe("auto");
+  });
+
+  it.each(
+    /** @type {Exclude<import("../toast-container/ToastContainer").ToastContainerProps["placement"], undefined>[]} */ ([
+      "bottom-left",
+      "bottom-right",
+      "top-left",
+      "top-right",
+    ])
+  )("should support the %s placement", async (placement) => {
+    const { component, rerender } = render(ToastContainer, baseOptions);
+    const rootElement = component.getRootElement();
+
+    expect(rootElement).toHaveClass(
+      "dusk-toast-container--placement--top-right"
+    );
+
+    await rerender({ placement });
+
+    expect(rootElement).toHaveClass(
+      `dusk-toast-container--placement--${placement}`
+    );
+
+    rootElement.dir = "rtl";
+
+    const styles = getComputedStyle(rootElement);
+    const physicalSide = placement.endsWith("left") ? "left" : "right";
+    const oppositeSide = physicalSide === "left" ? "right" : "left";
+
+    expect(styles.getPropertyValue(physicalSide)).not.toBe("");
+    expect(["", "auto"]).toContain(styles.getPropertyValue(oppositeSide));
+  });
+
   it("should skip already expired notifications in the loop", async () => {
     render(ToastContainer, baseOptions);
 
@@ -285,34 +338,80 @@ describe("ToastContainer", () => {
     expect(toasts[1]).toBeInTheDocument();
   });
 
-  it("should pause the decay timer when the cursor enters the notification", async () => {
+  it("should pause every decay timer while the mouse is inside the container", async () => {
     const { component } = render(ToastContainer, baseOptions);
     const rootElement = component.getRootElement();
     const toasts = rootElement.querySelectorAll(".dusk-toast-container__toast");
 
-    // Trigger mouse entrance to pause the timer
-    await fireEvent.mouseEnter(toasts[0]);
+    dispatchPointerEvent(rootElement, "pointerenter", {
+      pointerId: 1,
+      pointerType: "mouse",
+    });
 
-    // Advance timers beyond the expected duration
-    await vi.advanceTimersByTimeAsync(
-      (toastsInBaseData[0].timeout + toastsInBaseData[1].timeout) * 10
-    );
+    await vi.advanceTimersByTimeAsync(maxTimeout * 10);
 
-    expect(removeSpy).toHaveBeenCalledTimes(1);
-    expect(removeSpy).toHaveBeenCalledWith(toastsInBaseData[1].id);
-    expect(toasts[0]).toBeInTheDocument();
-    expect(toasts[1]).not.toBeInTheDocument();
+    expect(removeSpy).not.toHaveBeenCalled();
 
-    // Resume the timer
-    await fireEvent.mouseLeave(toasts[0]);
-    await vi.advanceTimersByTimeAsync(
-      toastsInBaseData[0].timeout + DEFAULT_ANIM_DURATION
-    );
+    for (const toast of toasts) {
+      expect(toast).toBeInTheDocument();
+    }
 
-    expect(removeSpy).toHaveBeenCalledTimes(2);
-    expect(removeSpy).toHaveBeenNthCalledWith(2, toastsInBaseData[0].id);
-    expect(toasts[0]).not.toBeInTheDocument();
-    expect(rootElement.childElementCount).toBe(toastsInBaseData.length - 2);
+    dispatchPointerEvent(rootElement, "pointerleave", {
+      pointerId: 1,
+      pointerType: "mouse",
+    });
+    await vi.advanceTimersByTimeAsync(maxTimeout + DEFAULT_ANIM_DURATION);
+
+    expect(removeSpy).toHaveBeenCalledTimes(toastsInBaseData.length);
+    expect(rootElement.childElementCount).toBe(0);
+  });
+
+  it.each(["pointercancel", "pointerup"])(
+    "should pause decay during a touch and resume on %s",
+    async (releaseEvent) => {
+      const { component } = render(ToastContainer, baseOptions);
+      const rootElement = component.getRootElement();
+
+      dispatchPointerEvent(rootElement, "pointerdown", {
+        pointerId: 7,
+        pointerType: "touch",
+      });
+      await vi.advanceTimersByTimeAsync(maxTimeout * 10);
+
+      expect(removeSpy).not.toHaveBeenCalled();
+
+      dispatchPointerEvent(window, releaseEvent, {
+        pointerId: 7,
+        pointerType: "touch",
+      });
+      await vi.advanceTimersByTimeAsync(maxTimeout + DEFAULT_ANIM_DURATION);
+
+      expect(removeSpy).toHaveBeenCalledTimes(toastsInBaseData.length);
+      expect(rootElement.childElementCount).toBe(0);
+    }
+  );
+
+  it("should initialize incoming toasts in the paused state", async () => {
+    const { component } = render(ToastContainer, baseOptions);
+    const rootElement = component.getRootElement();
+
+    dispatchPointerEvent(rootElement, "pointerenter", {
+      pointerId: 1,
+      pointerType: "mouse",
+    });
+
+    // @ts-expect-error we know that we have passed a store
+    baseProps.store.add({
+      dismissable: false,
+      mode: "toast",
+      text: "Added while paused",
+      timeout: 100,
+      type: "info",
+    });
+    await vi.advanceTimersByTimeAsync(maxTimeout * 10);
+
+    expect(removeSpy).not.toHaveBeenCalled();
+    expect(rootElement.childElementCount).toBe(toastsInBaseData.length + 1);
   });
 
   it("should remove the notifications when their timer expires", async () => {

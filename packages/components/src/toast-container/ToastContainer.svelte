@@ -30,6 +30,9 @@
   /** @type {ToastContainerProps["store"]} */
   export let store = undefined;
 
+  /** @type {ToastContainerProps["placement"]} */
+  export let placement = "top-right";
+
   /** @type {ToastContainerProps["tooltipId"]} */
   export let tooltipId = undefined;
 
@@ -49,29 +52,61 @@
   /** @type {boolean} */
   let isLoopRunning = false;
 
+  /** @type {boolean} */
+  let isMouseInside = false;
+
+  /** @type {Set<number>} */
+  const activeTouchPointers = new Set();
+
   /** @type {Map<string, ToastState>} */
   const timeMap = new Map();
 
   const getNotificationProps = skip(["id", "timeout"]);
 
-  /** @param {string} id */
-  const handlePause = (id) => {
-    const state = timeMap.get(id);
+  /** @param {boolean} isPaused */
+  const setPaused = (isPaused) => {
+    const now = performance.now();
 
-    // istanbul ignore else: not worth testing this defensive code
-    if (state) {
-      state.isPaused = true;
+    for (const state of timeMap.values()) {
+      state.isPaused = isPaused;
+
+      if (!isPaused) {
+        state.lastTick = now;
+      }
     }
   };
 
-  /** @param {string} id */
-  const handleResume = (id) => {
-    const state = timeMap.get(id);
+  const syncPausedState = () =>
+    setPaused(isMouseInside || activeTouchPointers.size > 0);
 
-    // istanbul ignore else: not worth testing this defensive code
-    if (state) {
-      state.isPaused = false;
-      state.lastTick = performance.now();
+  /** @param {PointerEvent} event */
+  const handlePointerEnter = (event) => {
+    if (event.pointerType === "mouse") {
+      isMouseInside = true;
+      syncPausedState();
+    }
+  };
+
+  /** @param {PointerEvent} event */
+  const handlePointerLeave = (event) => {
+    if (event.pointerType === "mouse") {
+      isMouseInside = false;
+      syncPausedState();
+    }
+  };
+
+  /** @param {PointerEvent} event */
+  const handlePointerDown = (event) => {
+    if (event.pointerType === "touch") {
+      activeTouchPointers.add(event.pointerId);
+      syncPausedState();
+    }
+  };
+
+  /** @param {PointerEvent} event */
+  const handlePointerRelease = (event) => {
+    if (activeTouchPointers.delete(event.pointerId)) {
+      syncPausedState();
     }
   };
 
@@ -141,7 +176,13 @@
 
   $: notificationStore = store ?? getNotificationContext();
   $: ({ toasts } = notificationStore);
-  $: classes = makeClassName(["dusk-toast-container", className]);
+  $: effectivePlacement = placement ?? "top-right";
+  $: classes = makeClassName([
+    "dusk-toast-container",
+    `dusk-toast-container--placement--${effectivePlacement}`,
+    className,
+  ]);
+  $: transitionOffset = effectivePlacement.endsWith("left") ? "-100%" : "100%";
   $: {
     const currentIds = new Set();
 
@@ -153,7 +194,7 @@
           duration: toast.timeout ?? DEFAULT_TIMEOUT,
           elapsed: 0,
           isExpired: false,
-          isPaused: false,
+          isPaused: isMouseInside || activeTouchPointers.size > 0,
           lastTick: performance.now(),
         });
       }
@@ -181,22 +222,31 @@
 </script>
 
 <svelte:document on:visibilitychange={handleVisibilityChange} />
+<svelte:window
+  on:pointercancel={handlePointerRelease}
+  on:pointerup={handlePointerRelease}
+/>
 
-<ul bind:this={rootElement} {...$$restProps} class={classes}>
+<ul
+  bind:this={rootElement}
+  {...$$restProps}
+  class={classes}
+  on:pointerdown={handlePointerDown}
+  on:pointerenter={handlePointerEnter}
+  on:pointerleave={handlePointerLeave}
+>
   {#each $toasts as toast (toast.id)}
     <li
       animate:flip={{ duration: DEFAULT_ANIM_DURATION }}
       class="dusk-toast-container__item"
-      in:fly|global={{ duration: DEFAULT_ANIM_DURATION, x: "100%" }}
-      out:fly|global={{ duration: DEFAULT_ANIM_DURATION, x: "100%" }}
+      in:fly|global={{ duration: DEFAULT_ANIM_DURATION, x: transitionOffset }}
+      out:fly|global={{ duration: DEFAULT_ANIM_DURATION, x: transitionOffset }}
     >
       <Notification
         {...getNotificationProps(toast)}
         className="dusk-toast-container__toast"
         decayProgress={decayProgresses[toast.id] ?? 0}
         on:dismiss={() => notificationStore.remove(toast.id)}
-        on:mouseenter={() => handlePause(toast.id)}
-        on:mouseleave={() => handleResume(toast.id)}
         {tooltipId}
       />
     </li>
