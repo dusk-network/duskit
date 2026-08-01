@@ -4,26 +4,31 @@
   --_switch-border-color: var(--interactive-toggle-off-border-color);
   --_switch-mark-color: var(--interactive-toggle-off-mark-color);
   --_switch-mark-scale: 1;
-  --_switch-mark-translate: 0%;
+  --_switch-mark-translate: 0px;
   --_switch-mark-size: calc(
     var(--interactive-toggle-standard-indicator-size) -
       (var(--interactive-toggle-track-offset) * 2) -
       (var(--interactive-control-border-width) * 2)
   );
   --_switch-track-block-size: var(--interactive-toggle-standard-indicator-size);
-  --_switch-track-inline-size: calc(
-    (var(--_switch-mark-size) * 2) +
-      (var(--interactive-toggle-track-offset) * 2) +
-      (var(--interactive-control-border-width) * 2)
+  --_switch-track-inline-size: var(
+    --interactive-control-standard-min-block-size
+  );
+  --_switch-mark-travel: calc(
+    var(--_switch-track-inline-size) - var(--_switch-mark-size) -
+      (
+        (
+            var(--interactive-control-border-width) +
+              var(--interactive-toggle-track-offset)
+          ) *
+          2
+      )
   );
 
   position: relative;
   display: inline-grid;
-  min-inline-size: max(
-    var(--interactive-control-standard-min-block-size),
-    var(--_switch-track-inline-size)
-  );
-  min-block-size: var(--interactive-control-standard-min-block-size);
+  inline-size: var(--interactive-control-standard-min-block-size);
+  block-size: var(--interactive-control-standard-min-block-size);
   box-sizing: border-box;
   place-items: center;
 }
@@ -45,7 +50,11 @@
   --_switch-border-color: var(--interactive-toggle-on-border-color);
   --_switch-bg-color: var(--interactive-toggle-on-color);
   --_switch-mark-color: var(--interactive-toggle-on-mark-color);
-  --_switch-mark-translate: 100%;
+  --_switch-mark-translate: var(--_switch-mark-travel);
+}
+
+.dusk-switch--checked:dir(rtl) {
+  --_switch-mark-translate: calc(var(--_switch-mark-travel) * -1);
 }
 
 .dusk-switch::after {
@@ -53,8 +62,7 @@
   position: absolute;
   inset-block-start: 50%;
   inset-inline-start: calc(
-    (100% - var(--_switch-track-inline-size)) / 2 +
-      var(--interactive-control-border-width) +
+    var(--interactive-control-border-width) +
       var(--interactive-toggle-track-offset)
   );
   block-size: var(--_switch-mark-size);
