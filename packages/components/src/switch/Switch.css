@@ -11,19 +11,12 @@
       (var(--interactive-control-border-width) * 2)
   );
   --_switch-track-block-size: var(--interactive-toggle-standard-indicator-size);
-  --_switch-track-inline-size: var(
-    --interactive-control-standard-min-block-size
+  --_switch-track-inline-size: calc(
+    (var(--_switch-mark-size) * 2) +
+      (var(--interactive-toggle-track-offset) * 2) +
+      (var(--interactive-control-border-width) * 2)
   );
-  --_switch-mark-travel: calc(
-    var(--_switch-track-inline-size) - var(--_switch-mark-size) -
-      (
-        (
-            var(--interactive-control-border-width) +
-              var(--interactive-toggle-track-offset)
-          ) *
-          2
-      )
-  );
+  --_switch-mark-travel: var(--_switch-mark-size);
 
   position: relative;
   display: inline-grid;
@@ -62,7 +55,8 @@
   position: absolute;
   inset-block-start: 50%;
   inset-inline-start: calc(
-    var(--interactive-control-border-width) +
+    (100% - var(--_switch-track-inline-size)) / 2 +
+      var(--interactive-control-border-width) +
       var(--interactive-toggle-track-offset)
   );
   block-size: var(--_switch-mark-size);
