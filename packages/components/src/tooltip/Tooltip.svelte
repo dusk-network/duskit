@@ -12,6 +12,7 @@
     computePosition,
     flip,
     inline,
+    arrow as setArrow,
     offset as setOffset,
     shift,
   } from "@floating-ui/dom";
@@ -62,6 +63,9 @@
   /** @type {HTMLDivElement} */
   let rootElement;
 
+  /** @type {HTMLSpanElement} */
+  let tipElement;
+
   export const getRootElement = () => rootElement;
 
   const DEFAULT_DELAY_HIDE = 0;
@@ -75,7 +79,20 @@
   const DEFAULT_TYPE = "info";
 
   /** @type {ValidPlacement[]} */
-  const validPlacements = ["top", "right", "bottom", "left"];
+  const validPlacements = [
+    "top",
+    "top-start",
+    "top-end",
+    "right",
+    "right-start",
+    "right-end",
+    "bottom",
+    "bottom-start",
+    "bottom-end",
+    "left",
+    "left-start",
+    "left-end",
+  ];
 
   /** @type {ValidType[]}*/
   const validTypes = ["error", "info", "success", "warning"];
@@ -116,6 +133,15 @@
   const parsePlacement = (value) =>
     isValidPlacement(value) ? value : (defaultPlace ?? DEFAULT_PLACE);
 
+  /**
+   * @param {import("@floating-ui/dom").MiddlewareData["arrow"]} arrowData
+   */
+  function updateTipPosition(arrowData) {
+    tipElement.style.left =
+      arrowData?.x === undefined ? "" : `${arrowData.x}px`;
+    tipElement.style.top = arrowData?.y === undefined ? "" : `${arrowData.y}px`;
+  }
+
   /** @type {(value: string | undefined) => ValidType} */
   const parseType = (value) =>
     isValidType(value) ? value : (defaultType ?? DEFAULT_TYPE);
@@ -146,6 +172,9 @@
     delayShow: defaultDelayShow ?? DEFAULT_DELAY_SHOW,
     offset: defaultOffset ?? DEFAULT_OFFSET,
     place: defaultPlace ?? DEFAULT_PLACE,
+    side: /** @type {import("@floating-ui/dom").Side} */ (
+      (defaultPlace ?? DEFAULT_PLACE).split("-")[0]
+    ),
     text: "",
     type: defaultType ?? DEFAULT_TYPE,
     visible: false,
@@ -278,39 +307,61 @@
       attributes: true,
     });
 
-    const { placement, x, y } = await computePosition(targetNode, rootElement, {
-      middleware: [
-        setOffset({ mainAxis: parseOffset(tooltipOffset) }),
-        inline(),
-        flip({ fallbackAxisSideDirection: "start" }),
-        shift(),
-      ],
-      placement: parsePlacement(tooltipPlace),
-      strategy: "fixed",
-    });
+    const { middlewareData, placement, x, y } = await computePosition(
+      targetNode,
+      rootElement,
+      {
+        middleware: [
+          setOffset({ mainAxis: parseOffset(tooltipOffset) }),
+          inline(),
+          flip({ fallbackAxisSideDirection: "start" }),
+          shift(),
+          setArrow({ element: tipElement, padding: 8 }),
+        ],
+        placement: parsePlacement(tooltipPlace),
+        strategy: "fixed",
+      }
+    );
 
     // Abort if the target changed or was cleared (e.g., by a hide event) during async positioning.
     if (activeTargetNode !== targetNode) {
       return;
     }
 
-    // We consider only "top", "right", "bottom" and "left" for now.
-    const place = /** @type {import("@floating-ui/dom").Side} */ (
-      placement.replace(/-.+$/, "")
+    const side = /** @type {import("@floating-ui/dom").Side} */ (
+      placement.split("-")[0]
     );
     const type = parseType(tooltipType);
     const delayShow = parseDelayShow(tooltipDelayShow);
+
+    updateTipPosition(middlewareData.arrow);
 
     if (delayShow) {
       timeoutID = window.setTimeout(() => {
         if (targetNode && targetNode.isConnected) {
           setAriaDescription(targetNode);
-          state.update((s) => ({ ...s, place, type, visible: true, x, y }));
+          state.update((s) => ({
+            ...s,
+            place: placement,
+            side,
+            type,
+            visible: true,
+            x,
+            y,
+          }));
         }
       }, delayShow);
     } else {
       setAriaDescription(targetNode);
-      state.update((s) => ({ ...s, place, type, visible: true, x, y }));
+      state.update((s) => ({
+        ...s,
+        place: placement,
+        side,
+        type,
+        visible: true,
+        x,
+        y,
+      }));
     }
   }
 
@@ -327,7 +378,7 @@
     mutationObserver.disconnect();
   });
 
-  $: ({ place, text, type, visible, x, y } = $state);
+  $: ({ place, side, text, type, visible, x, y } = $state);
   $: classes = makeClassName([
     "dusk-tooltip",
     `dusk-tooltip--place--${place}`,
@@ -349,10 +400,15 @@
   bind:this={rootElement}
   aria-hidden={!visible}
   class={classes}
+  data-side={side}
   {id}
   role="tooltip"
   style:left={`${x}px`}
   style:top={`${y}px`}
 >
-  {text}
+  {text}<span
+    bind:this={tipElement}
+    aria-hidden="true"
+    class="dusk-tooltip__tip"
+  ></span>
 </div>

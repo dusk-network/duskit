@@ -9,7 +9,7 @@
   export let defaultDelayShow = 250;
   export let defaultOffset = 10;
 
-  /** @type {import("@floating-ui/dom").Side} */
+  /** @type {import("@floating-ui/dom").Placement} */
   export let defaultPlace = "top";
 
   /** @type {import("@duskit/components").StatusType} */

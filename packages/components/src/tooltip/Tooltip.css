@@ -58,11 +58,10 @@
   --_tooltip-text-color: var(--feedback-surface-solid-warning-text-color);
 }
 
-.dusk-tooltip::after {
+.dusk-tooltip__tip {
   position: absolute;
   display: inline-block;
   pointer-events: none;
-  content: "";
   background-color: inherit;
   border: inherit;
   transform: rotate(45deg);
@@ -71,46 +70,38 @@
   block-size: var(--_tooltip-tip-size);
 }
 
-.dusk-tooltip.dusk-tooltip--place--bottom::after {
-  inset-block-end: 100%;
-  inset-inline-start: 50%;
-  margin-block-end: calc(
+.dusk-tooltip[data-side="bottom"] .dusk-tooltip__tip {
+  bottom: 100%;
+  margin-bottom: calc(
     var(--_tooltip-half-tip-size) * -1 + var(--_tooltip-tip-main-axis-offset)
   );
-  margin-inline-start: calc(var(--_tooltip-half-tip-size) * -1);
-  border-block-end-color: transparent;
-  border-inline-end-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
 }
 
-.dusk-tooltip.dusk-tooltip--place--left::after {
-  inset-block-start: 50%;
-  inset-inline-start: 100%;
-  margin-block-start: calc(var(--_tooltip-half-tip-size) * -1);
-  margin-inline-start: calc(
+.dusk-tooltip[data-side="left"] .dusk-tooltip__tip {
+  left: 100%;
+  margin-left: calc(
     var(--_tooltip-half-tip-size) * -1 + var(--_tooltip-tip-main-axis-offset)
   );
-  border-block-end-color: transparent;
-  border-inline-start-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
 }
 
-.dusk-tooltip.dusk-tooltip--place--right::after {
-  inset-block-start: 50%;
-  inset-inline-end: 100%;
-  margin-block-start: calc(var(--_tooltip-half-tip-size) * -1);
-  margin-inline-end: calc(
+.dusk-tooltip[data-side="right"] .dusk-tooltip__tip {
+  right: 100%;
+  margin-right: calc(
     var(--_tooltip-half-tip-size) * -1 + var(--_tooltip-tip-main-axis-offset)
   );
-  border-block-start-color: transparent;
-  border-inline-end-color: transparent;
+  border-top-color: transparent;
+  border-right-color: transparent;
 }
 
-.dusk-tooltip.dusk-tooltip--place--top::after {
-  inset-block-start: 100%;
-  inset-inline-start: 50%;
-  margin-block-start: calc(
+.dusk-tooltip[data-side="top"] .dusk-tooltip__tip {
+  top: 100%;
+  margin-top: calc(
     var(--_tooltip-half-tip-size) * -1 + var(--_tooltip-tip-main-axis-offset)
   );
-  margin-inline-start: calc(var(--_tooltip-half-tip-size) * -1);
-  border-block-start-color: transparent;
-  border-inline-start-color: transparent;
+  border-top-color: transparent;
+  border-left-color: transparent;
 }
