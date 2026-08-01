@@ -1,5 +1,11 @@
 # @duskit/css
 
+## 1.1.0
+
+### Minor Changes
+
+- [#381](https://github.com/dusk-network/duskit/pull/381) [`2bf999f`](https://github.com/dusk-network/duskit/commit/2bf999f5f7763f190958a318ffa6eb39615e5923) Thanks [@HDauven](https://github.com/HDauven)! - Add inverse surface tokens and use them for neutral tooltip presentation. Tooltip status variants have been removed; use a feedback component when status color communicates meaning.
+
 ## 1.0.0
 
 ### Major Changes

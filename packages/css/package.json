@@ -38,7 +38,7 @@
     "typecheck:watch": "tsc --watch --project tsconfig.json"
   },
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "devDependencies": {
     "@dusk-network/eslint-config": "4.0.1",
     "@dusk-network/prettier-config": "1.1.0",
