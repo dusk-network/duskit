@@ -64,11 +64,10 @@ describe("Tooltip", () => {
 
   vi.mocked(computePosition).mockResolvedValue(defaultComputedPosition);
 
-  it("should retain color fallbacks for the minimum supported CSS peer", () => {
-    const styles = readFileSync("src/tooltip/Tooltip.css", "utf8");
+  it("should require the CSS release that provides neutral tooltip tokens", () => {
+    const manifest = JSON.parse(readFileSync("package.json", "utf8"));
 
-    expect(styles).toContain("var(--feedback-surface-solid-info-bg-color)");
-    expect(styles).toContain("var(--feedback-surface-solid-info-text-color)");
+    expect(manifest.peerDependencies["@duskit/css"]).toBe("^1.1.0");
   });
 
   afterEach(() => {
