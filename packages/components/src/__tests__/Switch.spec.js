@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { readFileSync } from "node:fs";
 import { cleanup, fireEvent, render } from "@testing-library/svelte";
 
 import { Switch } from "../..";
@@ -12,6 +13,17 @@ describe("Switch", () => {
   };
 
   afterEach(cleanup);
+
+  it("should preserve its footprint along either flex axis", () => {
+    const { getByRole } = render(Switch, baseOptions);
+    const styleElement = document.createElement("style");
+    styleElement.textContent = readFileSync("src/switch/Switch.css", "utf8");
+    document.head.append(styleElement);
+
+    expect(getComputedStyle(getByRole("switch")).flexShrink).toBe("0");
+
+    styleElement.remove();
+  });
 
   it('should render the "Switch" component with a default tab index of `0`', async () => {
     const { component, rerender } = render(Switch, baseOptions);

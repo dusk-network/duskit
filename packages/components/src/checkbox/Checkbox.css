@@ -4,29 +4,43 @@
   --_checkbox-size: var(--interactive-toggle-standard-indicator-size);
 
   position: relative;
-  display: inline-block;
-  width: var(--_checkbox-size);
-  height: var(--_checkbox-size);
+  display: inline-grid;
+  inline-size: var(--interactive-control-standard-min-block-size);
+  block-size: var(--interactive-control-standard-min-block-size);
   box-sizing: border-box;
+  margin: 0;
+  appearance: none;
+  flex-shrink: 0;
+  place-items: center;
+}
+
+.dusk-checkbox::before {
+  position: absolute;
+  inline-size: var(--_checkbox-size);
+  block-size: var(--_checkbox-size);
+  box-sizing: border-box;
+  content: "";
   background-color: var(--_checkbox-bg-color);
   border-color: var(--_checkbox-border-color);
   border-style: solid;
   border-width: var(--interactive-control-border-width);
   border-radius: var(--interactive-control-border-radius-slight-size);
   transition: background-color 0.2s ease-in-out 0s;
-  appearance: none;
-  flex-shrink: 0;
 }
 
 .dusk-checkbox::after {
   --_checkbox-mark-color: var(--interactive-toggle-on-mark-color);
 
   position: absolute;
-  bottom: 53%;
-  left: 11%;
+  bottom: calc(
+    (100% - var(--_checkbox-size)) / 2 + (var(--_checkbox-size) * 0.53)
+  );
+  left: calc(
+    (100% - var(--_checkbox-size)) / 2 + (var(--_checkbox-size) * 0.11)
+  );
   display: inline-block;
-  width: 0;
-  height: 0;
+  inline-size: 0;
+  block-size: 0;
   box-sizing: content-box;
   content: "";
 
@@ -39,11 +53,9 @@
   border-bottom: calc(var(--_checkbox-size) / 8) solid
     var(--_checkbox-mark-color);
   opacity: 0;
-
-  /* undraw sequence: hide long leg, then short leg, then fade out */
   transition:
-    height 0.1s ease-out,
-    width 0.1s ease-out 0.1s,
+    block-size 0.1s ease-out,
+    inline-size 0.1s ease-out 0.1s,
     opacity 0.2s ease-out;
   transform: rotate(45deg);
   transform-origin: bottom left;
@@ -55,15 +67,13 @@
 }
 
 .dusk-checkbox:checked::after {
-  width: 30%;
-  height: 55%;
+  inline-size: calc(var(--_checkbox-size) * 0.3);
+  block-size: calc(var(--_checkbox-size) * 0.55);
   opacity: 1;
-
-  /* draw sequence: show immediately, draw short leg, then draw long leg */
   transition:
     opacity 0s,
-    width 0.1s ease-out,
-    height 0.1s ease-out 0.1s;
+    inline-size 0.1s ease-out,
+    block-size 0.1s ease-out 0.1s;
 }
 
 .dusk-checkbox:disabled,
