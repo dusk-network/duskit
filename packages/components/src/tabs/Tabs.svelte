@@ -12,6 +12,7 @@
   import observeResize from "../__shared__/observeResize";
 
   import { Button, Icon } from "../..";
+  import getTabNavigationIndex from "../__shared__/getTabNavigationIndex";
 
   import "./Tabs.css";
 
@@ -34,6 +35,12 @@
 
   /** @type {HTMLUListElement} */
   let tabsList;
+
+  /** @type {string | undefined} */
+  let focusableTab;
+
+  /** @type {string | undefined} */
+  let internalSelectedTab;
 
   const dispatch = createEventDispatcher();
 
@@ -117,7 +124,22 @@
 
   /** @type {import("svelte/elements").FocusEventHandler<HTMLLIElement>} */
   function handleTabFocusin(event) {
+    focusableTab = event.currentTarget.dataset.tabid;
     event.currentTarget.scrollIntoView(smoothScrollOptions);
+  }
+
+  /** @type {import("svelte/elements").FocusEventHandler<HTMLUListElement>} */
+  function handleTabsFocusout(event) {
+    if (
+      event.relatedTarget instanceof Node &&
+      event.currentTarget.contains(event.relatedTarget)
+    ) {
+      return;
+    }
+
+    focusableTab = items.some((item) => item.id === selectedTab)
+      ? selectedTab
+      : items[0]?.id;
   }
 
   /** @type {import("svelte/elements").KeyboardEventHandler<HTMLLIElement>} */
@@ -126,6 +148,30 @@
       event.preventDefault();
 
       handleTabClick(event);
+
+      return;
+    }
+
+    const currentIndex = items.findIndex(
+      (item) => item.id === event.currentTarget.dataset.tabid
+    );
+    const newIndex = getTabNavigationIndex(
+      event.key,
+      currentIndex,
+      items.length
+    );
+
+    if (newIndex === undefined) {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (newIndex !== currentIndex) {
+      focusableTab = items[newIndex].id;
+      /** @type {HTMLLIElement | undefined} */ (
+        tabsList.children[newIndex]
+      )?.focus();
     }
   }
 
@@ -157,7 +203,10 @@
     tabsList.scrollTo(0, 0);
 
     return observeResize(tabsList, () => {
-      const tab = tabsList.querySelector(`[data-tabid="${selectedTab}"]`);
+      const selectedIndex = items.findIndex((item) => item.id === selectedTab);
+      const tab = /** @type {HTMLLIElement | undefined} */ (
+        tabsList.children[selectedIndex]
+      );
 
       tab &&
         tab.scrollIntoView({
@@ -171,6 +220,22 @@
   });
 
   $: ({ canScroll, canScrollLeft, canScrollRight } = $scrollStatus);
+  $: {
+    const isValidSelectedTab =
+      selectedTab && items.some((item) => item.id === selectedTab);
+    const hasFocusWithin = tabsList?.contains(document.activeElement) ?? false;
+    const fallbackTabId = items[0]?.id;
+
+    if (selectedTab !== internalSelectedTab) {
+      internalSelectedTab = selectedTab;
+
+      if (!hasFocusWithin || !items.some((item) => item.id === focusableTab)) {
+        focusableTab = isValidSelectedTab ? selectedTab : fallbackTabId;
+      }
+    } else if (!items.some((item) => item.id === focusableTab)) {
+      focusableTab = fallbackTabId;
+    }
+  }
   $: classes = makeClassName(["dusk-tabs", className]);
   $: scrollBtnsClasses = makeClassName({
     "dusk-tab-scroll-button": true,
@@ -192,6 +257,7 @@
   <ul
     bind:this={tabsList}
     class="dusk-tabs-list"
+    on:focusout={handleTabsFocusout}
     on:scroll={updateScrollStatus}
     role="tablist"
   >
@@ -206,7 +272,7 @@
         on:focusin={handleTabFocusin}
         on:keydown={handleTabKeyDown}
         role="tab"
-        tabindex={0}
+        tabindex={id === focusableTab ? 0 : -1}
       >
         {#if icon?.position === "after"}
           {#if label}

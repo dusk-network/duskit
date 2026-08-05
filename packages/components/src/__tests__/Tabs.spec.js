@@ -227,6 +227,132 @@ describe("Tabs", () => {
     expect(tabs[0].scrollIntoView).toHaveBeenCalledTimes(1);
   });
 
+  it("should expose one focusable tab and follow external selection changes", async () => {
+    const { getAllByRole, rerender } = await renderTabs(baseProps);
+    const tabs = getAllByRole("tab");
+
+    expect(tabs.map((tab) => tab.getAttribute("tabindex"))).toStrictEqual([
+      "-1",
+      "0",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+    ]);
+
+    await rerender({ selectedTab: items[2].id });
+
+    expect(tabs[1]).toHaveAttribute("tabindex", "-1");
+    expect(tabs[2]).toHaveAttribute("tabindex", "0");
+  });
+
+  it("should navigate from the tab that owns focus after an external selection change", async () => {
+    const { getAllByRole, rerender } = await renderTabs(baseProps);
+    const tabs = getAllByRole("tab");
+
+    tabs[2].focus();
+    await rerender({ selectedTab: items[3].id });
+
+    expect(document.activeElement).toBe(tabs[2]);
+    expect(tabs[2]).toHaveAttribute("tabindex", "0");
+    expect(tabs[3]).toHaveAttribute("tabindex", "-1");
+
+    await fireEvent.keyDown(tabs[2], { key: "ArrowRight" });
+
+    expect(document.activeElement).toBe(tabs[3]);
+  });
+
+  it("should adopt an external selection as the tab stop after focus leaves", async () => {
+    const { getAllByRole, rerender } = await renderTabs(baseProps);
+    const tabs = getAllByRole("tab");
+    const outsideButton = document.createElement("button");
+
+    document.body.append(outsideButton);
+    tabs[2].focus();
+    await rerender({ selectedTab: items[3].id });
+
+    expect(tabs[2]).toHaveAttribute("tabindex", "0");
+    expect(tabs[3]).toHaveAttribute("tabindex", "-1");
+
+    outsideButton.focus();
+
+    await vi.waitFor(() => {
+      expect(tabs[2]).toHaveAttribute("tabindex", "-1");
+      expect(tabs[3]).toHaveAttribute("tabindex", "0");
+    });
+
+    outsideButton.remove();
+  });
+
+  it("should restore the selected tab as the tab stop after focus leaves", async () => {
+    const { getAllByRole } = await renderTabs(baseProps);
+    const tabs = getAllByRole("tab");
+    const outsideButton = document.createElement("button");
+
+    document.body.append(outsideButton);
+    tabs[1].focus();
+    await fireEvent.keyDown(tabs[1], { key: "ArrowRight" });
+
+    expect(document.activeElement).toBe(tabs[2]);
+
+    outsideButton.focus();
+
+    await vi.waitFor(() => {
+      expect(tabs[1]).toHaveAttribute("tabindex", "0");
+      expect(tabs[2]).toHaveAttribute("tabindex", "-1");
+    });
+
+    outsideButton.remove();
+  });
+
+  it("should navigate tab IDs containing selector-significant characters", async () => {
+    const specialItems = [
+      { id: 'quote"id', label: "Quoted" },
+      { id: "plain", label: "Plain" },
+    ];
+    const { getAllByRole } = await renderTabs({
+      items: specialItems,
+      selectedTab: specialItems[0].id,
+    });
+    const tabs = getAllByRole("tab");
+
+    tabs[0].focus();
+    await fireEvent.keyDown(tabs[0], { key: "ArrowRight" });
+
+    expect(document.activeElement).toBe(tabs[1]);
+  });
+
+  it("should move focus with arrow, Home, and End keys without changing selection", async () => {
+    const { getAllByRole } = await renderTabs(baseProps);
+    const tabs = getAllByRole("tab");
+    const lastTab = tabs[tabs.length - 1];
+
+    tabs[1].focus();
+    await fireEvent.keyDown(tabs[1], { key: "ArrowRight" });
+
+    expect(document.activeElement).toBe(tabs[2]);
+    expect(tabs[1]).toHaveAttribute("aria-selected", "true");
+    expect(tabs[1]).toHaveClass("dusk-tab-item--selected");
+    expect(tabs[1]).toHaveAttribute("tabindex", "-1");
+    expect(tabs[2]).toHaveAttribute("tabindex", "0");
+
+    await fireEvent.keyDown(tabs[2], { key: "End" });
+    expect(document.activeElement).toBe(lastTab);
+
+    await fireEvent.keyDown(lastTab, { key: "ArrowRight" });
+    expect(document.activeElement).toBe(tabs[0]);
+
+    await fireEvent.keyDown(tabs[0], { key: "ArrowLeft" });
+    expect(document.activeElement).toBe(lastTab);
+
+    await fireEvent.keyDown(lastTab, { key: "Home" });
+    expect(document.activeElement).toBe(tabs[0]);
+  });
+
   it("should hide and disable the scroll buttons if there is enough horizontal space", async () => {
     scrollWidthSpy.mockReturnValueOnce(0);
 

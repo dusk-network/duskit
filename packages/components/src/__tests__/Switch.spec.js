@@ -49,18 +49,20 @@ describe("Switch", () => {
 
     expect(rootElement).toHaveAttribute("aria-checked", "false");
     expect(rootElement).toHaveAttribute("aria-disabled", "true");
-    expect(rootElement).toHaveAttribute("tabindex", "-1");
     expect(rootElement).toHaveClass("dusk-switch--disabled");
     expect(rootElement).not.toHaveClass("dusk-switch--checked");
+    expect(rootElement).toHaveAttribute("tabindex", "-1");
     expect(rootElement).toMatchSnapshot();
 
     await rerender({ ...props, checked: true });
 
     expect(rootElement).toHaveAttribute("aria-checked", "true");
     expect(rootElement).toHaveAttribute("aria-disabled", "true");
+    expect(rootElement).toHaveClass(
+      "dusk-switch--checked",
+      "dusk-switch--disabled"
+    );
     expect(rootElement).toHaveAttribute("tabindex", "-1");
-    expect(rootElement).toHaveClass("dusk-switch--disabled");
-    expect(rootElement).toHaveClass("dusk-switch--checked");
     expect(rootElement).toMatchSnapshot();
   });
 

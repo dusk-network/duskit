@@ -74,14 +74,13 @@ describe("ContentSwitch", () => {
     expect(element).toHaveAttribute("id", props.id);
   });
 
-  it("should correctly apply selection classes and aria-selected", () => {
+  it("should expose the selection through aria-selected", () => {
     const { getByRole } = render(ContentSwitch, baseOptions);
     const selected = getByRole("tab", { name: "Overview" });
     const notSelected = getByRole("tab", { name: "Details" });
 
     expect(selected).toHaveClass("dusk-content-switch__tab-item--selected");
     expect(selected).toHaveAttribute("aria-selected", "true");
-
     expect(notSelected).not.toHaveClass(
       "dusk-content-switch__tab-item--selected"
     );
@@ -264,6 +263,60 @@ describe("ContentSwitch", () => {
       const tabIndices = tabs.map((tab) => tab.getAttribute("tabindex"));
 
       expect(tabIndices).toStrictEqual(["0", "-1", "-1", "-1", "-1", "-1"]);
+    });
+
+    it("should navigate from the tab that owns focus after an external selection change", async () => {
+      const { getAllByRole, rerender } = render(ContentSwitch, baseOptions);
+      const tabs = getAllByRole("tab");
+
+      tabs[2].focus();
+      await rerender({ selectedTab: items[3].id });
+
+      expect(document.activeElement).toBe(tabs[2]);
+      expect(tabs[2]).toHaveAttribute("tabindex", "0");
+      expect(tabs[3]).toHaveAttribute("tabindex", "-1");
+
+      await fireEvent.keyDown(tabs[2], { key: "ArrowRight" });
+
+      expect(document.activeElement).toBe(tabs[3]);
+    });
+
+    it("should adopt an external selection as the tab stop after focus leaves", async () => {
+      const { getAllByRole, rerender } = render(ContentSwitch, baseOptions);
+      const tabs = getAllByRole("tab");
+      const outsideButton = document.createElement("button");
+
+      document.body.append(outsideButton);
+      tabs[2].focus();
+      await rerender({ selectedTab: items[3].id });
+
+      expect(tabs[2]).toHaveAttribute("tabindex", "0");
+      expect(tabs[3]).toHaveAttribute("tabindex", "-1");
+
+      outsideButton.focus();
+
+      await vi.waitFor(() => {
+        expect(tabs[2]).toHaveAttribute("tabindex", "-1");
+        expect(tabs[3]).toHaveAttribute("tabindex", "0");
+      });
+
+      outsideButton.remove();
+    });
+
+    it("should navigate tab IDs containing selector-significant characters", async () => {
+      const specialItems = [
+        { id: 'quote"id', label: "Quoted" },
+        { id: "plain", label: "Plain" },
+      ];
+      const { getAllByRole } = render(ContentSwitch, {
+        props: { items: specialItems, selectedTab: specialItems[0].id },
+      });
+      const tabs = getAllByRole("tab");
+
+      tabs[0].focus();
+      await fireEvent.keyDown(tabs[0], { key: "ArrowRight" });
+
+      expect(document.activeElement).toBe(tabs[1]);
     });
 
     it("should move the focus and the `tabindex`, but not the selection, when the right arrow key is pressed, wrapping to start", async () => {
@@ -472,8 +525,8 @@ describe("ContentSwitch", () => {
       await rerender({ selectedTab: "icon-before" });
 
       expect(tabIconBefore).toHaveAttribute("aria-selected", "true");
-      expect(tabIconBefore).toHaveAttribute("tabindex", "0");
-      expect(tabDetails).toHaveAttribute("tabindex", "-1");
+      expect(tabIconBefore).toHaveAttribute("tabindex", "-1");
+      expect(tabDetails).toHaveAttribute("tabindex", "0");
     });
 
     it.each([

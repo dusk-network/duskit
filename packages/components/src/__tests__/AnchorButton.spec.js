@@ -43,7 +43,7 @@ describe("AnchorButton", () => {
     expect(container.firstElementChild).toMatchSnapshot();
   });
 
-  it("should add a disabled class and set its `tabindex` to `-1` if the related property is `true`", () => {
+  it("should expose disabled semantics and preserve its state class", () => {
     const props = {
       ...baseProps,
       disabled: true,
@@ -51,6 +51,7 @@ describe("AnchorButton", () => {
     const { component } = render(AnchorButton, { ...baseOptions, props });
     const element = component.getRootElement().getRootElement();
 
+    expect(element).toHaveAttribute("aria-disabled", "true");
     expect(element).toHaveClass("dusk-anchor-button--disabled");
     expect(element).toHaveAttribute("tabindex", "-1");
   });

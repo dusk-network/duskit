@@ -45,11 +45,6 @@
   background-color: var(--display-table-row-striped-bg-color);
 }
 
-.dusk-table__head-cell--hidden,
-.dusk-table__cell--hidden {
-  display: none;
-}
-
 .dusk-table__head-cell-text,
 .dusk-table__cell {
   padding-block: var(--display-box-compact-padding-block);

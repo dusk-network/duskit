@@ -79,9 +79,12 @@ describe("CopyField", () => {
       rootElement,
       ".dusk-copy-field__button"
     );
+    const textbox = getAsHTMLElement(rootElement, ".dusk-copy-field__content");
 
+    expect(rootElement).not.toHaveAttribute("aria-disabled");
     expect(rootElement).toHaveClass("dusk-copy-field--disabled");
     expect(copyButton).toBeDisabled();
+    expect(textbox).not.toBeDisabled();
   });
 
   it('should copy the raw value when the copy button is clicked and show a "toast" with a success message', async () => {

@@ -22,7 +22,7 @@
   border-radius: var(--interactive-control-border-radius-pill-size);
 }
 
-.dusk-switch--checked {
+.dusk-switch[aria-checked="true"] {
   --_switch-border-color: var(--interactive-toggle-on-border-color);
   --_switch-bg-color: var(--interactive-toggle-on-color);
   --_switch-mark-color: var(--interactive-toggle-on-mark-color);
