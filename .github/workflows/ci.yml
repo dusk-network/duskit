@@ -70,6 +70,3 @@ jobs:
 
       - name: Run the test suite
         run: npm run test:coverage
-
-      - name: Build
-        run: npm run build

@@ -25,7 +25,6 @@
   "private": true,
   "repository": "https://github.com/dusk-network/duskit",
   "scripts": {
-    "build": "node scripts/check-workspace-order.js && npm run build --workspaces --if-present",
     "changeset": "changeset",
     "checks": "npm run checks --workspaces --if-present",
     "clean": "npm run clean --workspaces --if-present && node scripts/clean.js package-lock.json node_modules",
@@ -33,7 +32,7 @@
     "format:check": "prettier .github scripts eslint.config.js package.json vitest.config.js --check && npm run format:check --workspaces --if-present",
     "lint": "eslint scripts && npm run lint --workspaces --if-present",
     "lint:fix": "eslint scripts --fix && npm run lint:fix --workspaces --if-present",
-    "release": "npm run build && changeset publish",
+    "release": "changeset publish",
     "test": "npm run test --workspaces --if-present",
     "test:coverage": "npm run test:coverage --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",

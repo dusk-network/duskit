@@ -78,8 +78,7 @@ Alternatively you can move to a package root and install the dependency from the
 
 All [terminal commands](#npm-scripts) listed here assume that you are positioned in root folder of the repository.
 
-The following commands act on all packages in the monorepo, where applicable, one package at a time in the order of the `workspaces` list in `package.json`.
-That list is kept in dependency order, and `npm run build` fails if a package comes before one it depends on.
+The following commands act on all packages in the monorepo, where applicable, one package at a time.
 If you want instead to run a command for a single package you can use the `--workspace` flag:
 
 ```bash
@@ -93,7 +92,6 @@ Refer to the package's README to see which commands are available.
 
 **N.B.** the `changeset`, `release` and `version-packages` scripts are commands related to the whole monorepo and cannot be run from a single package.
 
-- `npm run build` - runs the `build` script of every package that has one, in dependency order
 - `npm run changeset` - shows an interactive shell to [create][changeset-add] a new changeset entry
 - `npm run checks` - runs all health checks (formatting, linting, type checking, tests)
 - `npm run clean` - runs the `clean` script for all packages (currently removes all `coverage` and `node_modules` folders)
