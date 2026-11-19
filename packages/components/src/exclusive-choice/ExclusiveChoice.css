@@ -44,11 +44,6 @@
   opacity: 0;
 }
 
-.dusk-exclusive-choice__radio:enabled:not(:checked)
-  + .dusk-exclusive-choice__label:hover {
-  --_label-bg-color: var(--interactive-selection-hover-bg-color);
-}
-
 .dusk-exclusive-choice__radio:checked + .dusk-exclusive-choice__label {
   --_label-bg-color: var(--interactive-toggle-on-color);
   --_label-text-color: var(--interactive-toggle-on-mark-color);
@@ -61,4 +56,9 @@
 
 .dusk-exclusive-choice__radio:disabled + .dusk-exclusive-choice__label {
   opacity: 0.5;
+}
+
+.dusk-exclusive-choice__radio:enabled:not(:checked)
+  + .dusk-exclusive-choice__label:hover {
+  --_label-bg-color: var(--interactive-selection-hover-bg-color);
 }

@@ -40,11 +40,6 @@
   border-bottom: var(--display-box-border-width) solid currentcolor;
 }
 
-.dusk-table__row:nth-child(even) > .dusk-table__cell {
-  color: var(--display-table-row-striped-text-color);
-  background-color: var(--display-table-row-striped-bg-color);
-}
-
 .dusk-table__head-cell--hidden,
 .dusk-table__cell--hidden {
   display: none;
@@ -69,6 +64,11 @@
   font-size: var(--display-text-size);
   letter-spacing: var(--display-text-letter-spacing);
   font-variant-numeric: var(--display-font-variant-numeric);
+}
+
+.dusk-table__row:nth-child(even) > .dusk-table__cell {
+  color: var(--display-table-row-striped-text-color);
+  background-color: var(--display-table-row-striped-bg-color);
 }
 
 .dusk-table__head-cell-text {

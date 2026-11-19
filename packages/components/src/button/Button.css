@@ -1,3 +1,16 @@
+/* Anchor Button specifics */
+
+.dusk-anchor-button {
+  text-align: center;
+  text-decoration: none;
+  appearance: auto;
+}
+
+.dusk-anchor-button.dusk-anchor-button--disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
 /* General Styles */
 
 .dusk-button,
@@ -30,6 +43,15 @@
   justify-content: center;
 }
 
+/* Disabled status */
+
+.dusk-button:disabled,
+.dusk-anchor-button.dusk-anchor-button--disabled,
+.dusk-anchor-button.dusk-anchor-button--disabled:hover,
+.dusk-anchor-button.dusk-anchor-button--disabled:visited {
+  opacity: 0.5;
+}
+
 .dusk-button:enabled:active,
 .dusk-anchor-button:active,
 .dusk-button--pressed {
@@ -41,19 +63,6 @@
     [aria-disabled="true"]
   ).dusk-icon-button:hover:not(:active) {
   --_button-scale: 1.1;
-}
-
-/* Anchor Button specifics */
-
-.dusk-anchor-button {
-  text-align: center;
-  text-decoration: none;
-  appearance: auto;
-}
-
-.dusk-anchor-button.dusk-anchor-button--disabled {
-  pointer-events: none;
-  cursor: default;
 }
 
 /* Icon Button specifics */
@@ -157,15 +166,6 @@
   --_button-bg-color: var(--interactive-action-naked-bg-hover-color);
   --_button-border-color: var(--interactive-action-naked-border-hover-color);
   --_button-text-color: var(--interactive-action-naked-text-hover-color);
-}
-
-/* Disabled status */
-
-.dusk-button:disabled,
-.dusk-anchor-button.dusk-anchor-button--disabled,
-.dusk-anchor-button.dusk-anchor-button--disabled:hover,
-.dusk-anchor-button.dusk-anchor-button--disabled:visited {
-  opacity: 0.5;
 }
 
 /* Focus */

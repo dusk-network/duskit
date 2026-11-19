@@ -56,11 +56,6 @@
   opacity: 0.5;
 }
 
-.dusk-select:enabled:focus-visible {
-  outline: var(--interactive-control-focus-ring-outline);
-  outline-offset: var(--interactive-control-focus-ring-outline-offset);
-}
-
 /*
  * Fallback for RTL layouts.
  * Background-position logical properties are not widely supported yet.
@@ -71,4 +66,9 @@
   background-position:
     var(--_chevron-offset) 50%,
     calc(var(--_chevron-offset) + var(--_chevron-stroke)) 50%;
+}
+
+.dusk-select:enabled:focus-visible {
+  outline: var(--interactive-control-focus-ring-outline);
+  outline-offset: var(--interactive-control-focus-ring-outline-offset);
 }
