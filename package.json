@@ -18,7 +18,7 @@
     "node": ">=24.0.0",
     "npm": "11.18.0"
   },
-  "homepage": "https://dusk-network.github.io/duskit/",
+  "homepage": "https://github.com/dusk-network/duskit#readme",
   "license": "MIT",
   "name": "duskit",
   "packageManager": "npm@11.18.0",
@@ -26,12 +26,9 @@
   "repository": "https://github.com/dusk-network/duskit",
   "scripts": {
     "build": "turbo run build",
-    "build:storybook": "turbo run build --filter=@duskit/storybook",
     "changeset": "changeset",
     "checks": "turbo run checks",
     "clean": "turbo run clean && node scripts/clean.js package-lock.json node_modules docs",
-    "dev": "turbo run dev --no-cache --continue",
-    "dev:storybook": "turbo run dev --no-cache --continue --filter=@duskit/storybook",
     "docs": "typedoc",
     "format": "prettier .github scripts eslint.config.js package.json typedoc.config.js vitest.config.js --write && turbo run format",
     "format:check": "prettier .github scripts eslint.config.js package.json typedoc.config.js vitest.config.js --check && turbo run format:check",
@@ -47,7 +44,6 @@
   },
   "type": "module",
   "workspaces": [
-    "apps/storybook",
     "packages/array",
     "packages/components",
     "packages/css",

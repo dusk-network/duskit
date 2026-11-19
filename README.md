@@ -18,8 +18,6 @@
 
 Duskit (Dusk Kit) contains Svelte components and JS utilities that can help you quickly build a Dusk web app.
 
-The interactive documentation and visual playground for all components is available on our public [Storybook](https://dusk-network.github.io/duskit/).
-
 ## TOC
 
 - [Dev environment](#dev-environment)
@@ -101,15 +99,11 @@ Refer to the package's README to see which commands are available.
 
 **N.B.** the `changeset`, `release` and `version-packages` scripts are commands related to the whole monorepo and cannot be run from a single package.
 
-- `npm run build` - runs all build tasks (tokens + Storybook)
-- `npm run build:storybook` - builds a static Storybook into `apps/storybook/storybook-static`
-- `npm run build:tokens` - builds the design tokens
+- `npm run build` - runs all build tasks
 - `npm run changeset` - shows an interactive shell to [create][changeset-add] a new changeset entry
 - `npm run checks` - runs all health checks (formatting, linting, type checking, tests)
 - `npm run clean` - runs the `clean` script for all packages (currently removes all `coverage`, `docs` and `node_modules` folders)
 - `npm run docs` - generates HTML documentation for all `@duskit` in the `docs` folder
-- `npm run dev` - runs the dev tasks (including Storybook)
-- `npm run dev:storybook` - runs Storybook only
 - `npm run format` - fixes the formatting in all files
 - `npm run format:check` - performs the formatting check
 - `npm run lint` - performs the linting check
