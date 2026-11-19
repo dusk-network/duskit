@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
-    "@vitest/coverage-istanbul": "4.1.9",
+    "@vitest/coverage-istanbul": "4.1.12",
     "eslint": "9.39.4",
     "eslint-config-prettier": "10.1.8",
     "globals": "17.7.0",
@@ -55,6 +55,6 @@
     "typedoc-plugin-dt-links": "2.0.60",
     "typedoc-plugin-mdn-links": "5.1.1",
     "typescript": "5.9.3",
-    "vitest": "4.1.9"
+    "vitest": "4.1.12"
   }
 }
