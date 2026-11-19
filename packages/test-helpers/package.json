@@ -45,17 +45,13 @@
     "svelte": "^4.2.0 || ^5.0.0"
   },
   "devDependencies": {
-    "@dusk-network/eslint-config": "4.0.1",
-    "@dusk-network/prettier-config": "1.1.0",
     "@eslint/js": "9.39.4",
     "@sveltejs/vite-plugin-svelte": "7.1.2",
     "@testing-library/svelte": "5.3.1",
     "@tsconfig/svelte": "5.0.8",
     "@vitest/coverage-istanbul": "4.1.9",
-    "@vitest/eslint-plugin": "1.6.20",
     "eslint": "9.39.4",
     "eslint-config-prettier": "10.1.8",
-    "eslint-import-resolver-typescript": "4.4.5",
     "eslint-plugin-svelte": "3.19.0",
     "globals": "17.7.0",
     "prettier": "3.8.4",

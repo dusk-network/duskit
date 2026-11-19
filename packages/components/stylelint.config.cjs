@@ -1,4 +1,3 @@
 module.exports = {
-  extends: ["@dusk-network/stylelint-config"],
-  rules: {},
+  extends: ["stylelint-config-standard"],
 };
