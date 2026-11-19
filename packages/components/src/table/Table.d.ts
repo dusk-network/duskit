@@ -20,7 +20,7 @@ export type TableCellDataRenderer<
 > = (value: T[K], row: T) => string;
 
 export type TableCellCustomRenderer<T extends Record<string, any>> = (
-  row: T
+  row: T,
 ) => string;
 
 export type TableCellDataCustomComponentRenderer<

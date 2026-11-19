@@ -14,7 +14,7 @@ const renderWithSlots = (slots) => (Component, options, renderOptions) =>
         text: slots.default,
       },
     },
-    renderOptions
+    renderOptions,
   );
 
 export default renderWithSlots;

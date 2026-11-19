@@ -19,7 +19,7 @@ describe("failureToRejection", () => {
           isType("String"),
           (v) => v.includes(response.status),
           (v) => v.includes(response.statusText),
-        ])
+        ]),
       ),
     });
   });

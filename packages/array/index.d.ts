@@ -19,7 +19,7 @@ export declare function areEqual(a: ArrayLike<any>, b: ArrayLike<any>): boolean;
  * @throws {@link !TypeError | TypeError} If the received array is empty.
  */
 export declare function max<T extends Ord, const L extends ArrayLike<T>>(
-  arrayLike: L
+  arrayLike: L,
 ): L[number];
 
 /**
@@ -52,7 +52,7 @@ export declare function maxByKey<
  * @throws {@link !TypeError | TypeError} If the received array is empty.
  */
 export declare function min<T extends Ord, const L extends ArrayLike<T>>(
-  arrayLike: L
+  arrayLike: L,
 ): L[number];
 
 /**
@@ -112,7 +112,7 @@ export declare const sum: {
  *
  */
 export declare function sumByKey<K extends string>(
-  key: K
+  key: K,
 ): <T extends number | bigint>(
-  source: ArrayLike<{ [P in K]: T } & Record<PropertyKey, any>>
+  source: ArrayLike<{ [P in K]: T } & Record<PropertyKey, any>>,
 ) => T;

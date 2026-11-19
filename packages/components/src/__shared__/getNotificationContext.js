@@ -8,7 +8,7 @@ function getNotificationContext() {
 
   if (!store) {
     throw new Error(
-      "`getNotificationContext` must be used within a `NotificationProvider`"
+      "`getNotificationContext` must be used within a `NotificationProvider`",
     );
   }
 

@@ -57,7 +57,7 @@ describe("outsideClick action", () => {
         detail: {
           originalEvent: mouseEvent,
         },
-      })
+      }),
     );
 
     action.destroy();
@@ -88,7 +88,7 @@ describe("outsideClick action", () => {
         detail: {
           originalEvent: pointerEvent,
         },
-      })
+      }),
     );
 
     action.destroy();
@@ -145,13 +145,13 @@ describe("outsideClick action", () => {
       1,
       "click",
       expect.any(Function),
-      true
+      true,
     );
     expect(addEventListenerSpy).toHaveBeenNthCalledWith(
       2,
       "pointerdown",
       expect.any(Function),
-      true
+      true,
     );
 
     insideElement.addEventListener("outsideclick", handleOutclick);
@@ -164,13 +164,13 @@ describe("outsideClick action", () => {
       1,
       "click",
       expect.any(Function),
-      true
+      true,
     );
     expect(removeEventListenerSpy).toHaveBeenNthCalledWith(
       2,
       "pointerdown",
       expect.any(Function),
-      true
+      true,
     );
 
     outsideElement.dispatchEvent(mouseEvent);
@@ -304,7 +304,7 @@ describe("outsideClick action", () => {
 
     // Simulate the user pressing the pointer inside the element
     insideElement.dispatchEvent(
-      new PointerEvent("pointerdown", { bubbles: true, cancelable: true })
+      new PointerEvent("pointerdown", { bubbles: true, cancelable: true }),
     );
 
     // Simulate the user releasing the pointer outside the element
@@ -325,7 +325,7 @@ describe("outsideClick action", () => {
 
     // Clean outside interaction
     outsideElement.dispatchEvent(
-      new PointerEvent("pointerdown", { bubbles: true, cancelable: true })
+      new PointerEvent("pointerdown", { bubbles: true, cancelable: true }),
     );
     outsideElement.dispatchEvent(mouseEvent);
 
@@ -334,7 +334,7 @@ describe("outsideClick action", () => {
         detail: {
           originalEvent: mouseEvent,
         },
-      })
+      }),
     );
 
     action.destroy();
@@ -349,7 +349,7 @@ describe("outsideClick action", () => {
     // Simulate an interaction starting inside.
     // This sets the internal `isPointerDownInside` flag to `true`.
     insideElement.dispatchEvent(
-      new PointerEvent("pointerdown", { bubbles: true, cancelable: true })
+      new PointerEvent("pointerdown", { bubbles: true, cancelable: true }),
     );
 
     // Disable the action before the interaction completes.
@@ -369,7 +369,7 @@ describe("outsideClick action", () => {
         detail: {
           originalEvent: mouseEvent,
         },
-      })
+      }),
     );
 
     action.destroy();

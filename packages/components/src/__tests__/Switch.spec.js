@@ -96,11 +96,11 @@ describe("Switch", () => {
       expect(handler).toHaveBeenCalledTimes(2);
       expect(handler).toHaveBeenNthCalledWith(
         1,
-        expect.objectContaining({ detail: true })
+        expect.objectContaining({ detail: true }),
       );
       expect(handler).toHaveBeenNthCalledWith(
         2,
-        expect.objectContaining({ detail: false })
+        expect.objectContaining({ detail: false }),
       );
     });
 
@@ -113,20 +113,20 @@ describe("Switch", () => {
       const switchElement = getByRole("switch");
 
       await expect(
-        fireEvent.keyDown(switchElement, { key: " " })
+        fireEvent.keyDown(switchElement, { key: " " }),
       ).resolves.toBe(false);
       await expect(
-        fireEvent.keyDown(switchElement, { key: " " })
+        fireEvent.keyDown(switchElement, { key: " " }),
       ).resolves.toBe(false);
 
       expect(handler).toHaveBeenCalledTimes(2);
       expect(handler).toHaveBeenNthCalledWith(
         1,
-        expect.objectContaining({ detail: true })
+        expect.objectContaining({ detail: true }),
       );
       expect(handler).toHaveBeenNthCalledWith(
         2,
-        expect.objectContaining({ detail: false })
+        expect.objectContaining({ detail: false }),
       );
     });
 
@@ -139,10 +139,10 @@ describe("Switch", () => {
       const switchElement = getByRole("switch");
 
       await expect(
-        fireEvent.keyDown(switchElement, { key: "Enter" })
+        fireEvent.keyDown(switchElement, { key: "Enter" }),
       ).resolves.toBe(true);
       await expect(
-        fireEvent.keyDown(switchElement, { key: "a" })
+        fireEvent.keyDown(switchElement, { key: "a" }),
       ).resolves.toBe(true);
 
       expect(handler).not.toHaveBeenCalled();
@@ -163,7 +163,7 @@ describe("Switch", () => {
 
       await fireEvent.click(switchElement);
       await expect(
-        fireEvent.keyDown(switchElement, { key: " " })
+        fireEvent.keyDown(switchElement, { key: " " }),
       ).resolves.toBe(true);
 
       expect(handler).not.toHaveBeenCalled();

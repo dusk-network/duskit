@@ -11,17 +11,17 @@ import type { render } from "@testing-library/svelte";
  */
 export declare function getAsHTMLElement(
   container: HTMLElement,
-  selector: string
+  selector: string,
 ): HTMLElement;
 
 export declare class IntersectionObserverMock extends IntersectionObserver {
   constructor(
     callback: IntersectionObserverCallback,
-    options?: IntersectionObserverInit
+    options?: IntersectionObserverInit,
   );
   static trigger(
     element: Element,
-    data?: Partial<IntersectionObserverEntry>
+    data?: Partial<IntersectionObserverEntry>,
   ): void;
 }
 
@@ -33,7 +33,7 @@ export declare function mockReadableStore<T>(initialValue: T): Readable<T> & {
 type CreateRenderer = (
   component: Parameters<typeof render>[0],
   options?: Parameters<typeof render>[1],
-  renderOptions?: Parameters<typeof render>[2]
+  renderOptions?: Parameters<typeof render>[2],
 ) => ReturnType<typeof render>;
 
 export declare const renderWithSimpleContent: CreateRenderer;

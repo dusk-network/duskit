@@ -213,13 +213,13 @@ describe("createPersistedStore", () => {
         const store = createPersistedStore(
           testKey,
           /** @type {NullableValue} */ (nullableInitialValue),
-          { validate }
+          { validate },
         );
 
         expect(get(store)).toBeNull();
         expect(validateSpy).toHaveBeenCalledExactlyOnceWith(
           null,
-          nullableInitialValue
+          nullableInitialValue,
         );
       });
 
@@ -245,7 +245,7 @@ describe("createPersistedStore", () => {
 
         expect(get(store)).toStrictEqual(initialValue);
         expect(consoleWarnSpy).toHaveBeenCalledWith(
-          `Validation failed for key "${testKey}". Reverting to initial value.`
+          `Validation failed for key "${testKey}". Reverting to initial value.`,
         );
 
         consoleWarnSpy.mockRestore();
@@ -276,7 +276,7 @@ describe("createPersistedStore", () => {
         store.set(updatedValue);
 
         expect(
-          JSON.parse(sessionStorage.getItem(testKey) ?? "null")
+          JSON.parse(sessionStorage.getItem(testKey) ?? "null"),
         ).toStrictEqual(updatedValue);
       });
 
@@ -300,7 +300,7 @@ describe("createPersistedStore", () => {
         });
         expect(consoleErrorSpy).toHaveBeenCalledWith(
           "Error while accessing persisted store storage:",
-          storageError
+          storageError,
         );
       });
     });
@@ -345,7 +345,7 @@ describe("createPersistedStore", () => {
         store.set(newValue);
 
         expect(localStorage.getItem(testKey)).toBe(
-          '{"balance":"100n","id":"user-1"}'
+          '{"balance":"100n","id":"user-1"}',
         );
       });
 
@@ -388,7 +388,7 @@ describe("createPersistedStore", () => {
         expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
         expect(consoleErrorSpy).toHaveBeenCalledWith(
           `Error while parsing store "${testKey}":`,
-          expect.any(SyntaxError)
+          expect.any(SyntaxError),
         );
       });
 
@@ -405,12 +405,12 @@ describe("createPersistedStore", () => {
         expect(get(store)).toStrictEqual(fallbackValue);
         expect(getLoadErrorFallback).toHaveBeenCalledWith(
           expect.any(SyntaxError),
-          "{malformed json}"
+          "{malformed json}",
         );
         expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
         expect(consoleWarnSpy).toHaveBeenCalledWith(
           `Error while parsing store "${testKey}":`,
-          expect.any(SyntaxError)
+          expect.any(SyntaxError),
         );
       });
 
@@ -427,7 +427,7 @@ describe("createPersistedStore", () => {
         expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
         expect(consoleErrorSpy).toHaveBeenCalledWith(
           `Error while parsing store "${testKey}":`,
-          expect.any(SyntaxError)
+          expect.any(SyntaxError),
         );
       });
 
@@ -455,7 +455,7 @@ describe("createPersistedStore", () => {
         expect(storage.setItem).not.toHaveBeenCalled();
         expect(consoleWarnSpy).toHaveBeenCalledWith(
           `Error while parsing store "${testKey}":`,
-          readError
+          readError,
         );
       });
     });
@@ -485,7 +485,7 @@ describe("createPersistedStore", () => {
         expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
         expect(consoleErrorSpy).toHaveBeenCalledWith(
           `Error while serializing store "${testKey}":`,
-          expect.any(TypeError)
+          expect.any(TypeError),
         );
       });
 
@@ -501,12 +501,12 @@ describe("createPersistedStore", () => {
         expect(onSaveError).toHaveBeenCalledTimes(1);
         expect(onSaveError).toHaveBeenCalledWith(
           expect.any(TypeError),
-          circularValue
+          circularValue,
         );
         expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
         expect(consoleErrorSpy).toHaveBeenCalledWith(
           `Error while serializing store "${testKey}":`,
-          expect.any(TypeError)
+          expect.any(TypeError),
         );
       });
     });
@@ -623,7 +623,7 @@ describe("createPersistedStore", () => {
         expect(getStoredValue(newKey)).toStrictEqual(initialValue);
         expect(consoleErrorSpy).toHaveBeenCalledWith(
           `Error while removing store "${testKey}":`,
-          removalError
+          removalError,
         );
 
         removeItemSpy.mockRestore();
@@ -681,7 +681,7 @@ describe("createPersistedStore", () => {
         expect(storage.removeItem).not.toHaveBeenCalled();
         expect(consoleErrorSpy).toHaveBeenCalledWith(
           `Error while parsing store "${newKey}":`,
-          readError
+          readError,
         );
 
         consoleErrorSpy.mockRestore();
@@ -716,7 +716,7 @@ describe("createPersistedStore", () => {
 
         expect(merger).toHaveBeenCalledExactlyOnceWith(
           storedOldValue,
-          storedNewValue
+          storedNewValue,
         );
         expect(get(store)).toStrictEqual(expectedMergedValue);
       });

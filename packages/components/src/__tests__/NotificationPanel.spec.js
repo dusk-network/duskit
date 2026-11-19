@@ -34,7 +34,7 @@ describe("NotificationPanel", () => {
           title: "Test Title",
           type: "info",
         },
-      ])
+      ]),
     );
   });
 
@@ -149,7 +149,7 @@ describe("NotificationPanel", () => {
           originalEvent: expect.any(MouseEvent),
           reason: "closebutton",
         },
-      })
+      }),
     );
   });
 
@@ -171,7 +171,7 @@ describe("NotificationPanel", () => {
           originalEvent: expect.any(MouseEvent),
           reason: "outsideclick",
         },
-      })
+      }),
     );
   });
 
@@ -193,7 +193,7 @@ describe("NotificationPanel", () => {
           originalEvent: expect.any(KeyboardEvent),
           reason: "cancel",
         },
-      })
+      }),
     );
   });
 });

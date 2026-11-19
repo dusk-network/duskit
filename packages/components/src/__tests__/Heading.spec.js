@@ -26,12 +26,12 @@ describe("Heading", () => {
     expect(element).toHaveClass(
       "dusk-heading",
       "dusk-heading--prominence--standard",
-      "dusk-heading--variant--plain"
+      "dusk-heading--variant--plain",
     );
     expect(element).not.toHaveClass("dusk-heading--mono");
     expect(element).not.toHaveClass("dusk-heading--uppercase");
     expect(element.querySelectorAll(".dusk-heading__decoration").length).toBe(
-      0
+      0,
     );
   });
 
@@ -71,7 +71,7 @@ describe("Heading", () => {
 
     expect(element).toHaveClass(
       "dusk-heading--mono",
-      "dusk-heading--uppercase"
+      "dusk-heading--uppercase",
     );
   });
 
@@ -111,7 +111,7 @@ describe("Heading", () => {
     expect(element).toHaveClass("dusk-heading--prominence--standard");
     expect(element).toHaveClass("dusk-heading--variant--plain");
     expect(element.querySelectorAll(".dusk-heading__decoration").length).toBe(
-      0
+      0,
     );
 
     await rerender({
@@ -122,7 +122,7 @@ describe("Heading", () => {
     expect(element).toHaveClass("dusk-heading--prominence--hero");
     expect(element).toHaveClass("dusk-heading--variant--bracketed-neutral");
     expect(element.querySelectorAll(".dusk-heading__decoration").length).toBe(
-      2
+      2,
     );
   });
 
@@ -143,16 +143,16 @@ describe("Heading", () => {
 
     // filtering away comments added by Svelte
     const childNodes = Array.from(element.childNodes).filter(
-      ({ nodeType }) => nodeType !== 8
+      ({ nodeType }) => nodeType !== 8,
     );
     const firstDecorationIdx = childNodes.findIndex(isDecorationNode);
     const lastDecorationIdx = childNodes.findLastIndex(isDecorationNode);
     const innerNodes = childNodes.slice(
       firstDecorationIdx + 1,
-      lastDecorationIdx
+      lastDecorationIdx,
     );
     const whitespaceNodes = innerNodes.filter(
-      (node) => node.nodeType === 3 && node.textContent.trim() === ""
+      (node) => node.nodeType === 3 && node.textContent.trim() === "",
     );
 
     expect(whitespaceNodes.length).toBe(0);

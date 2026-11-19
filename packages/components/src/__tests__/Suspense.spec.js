@@ -61,14 +61,14 @@ describe("Suspense", () => {
       const element = component.getRootElement();
 
       expect(element).toHaveClass(`dusk-suspense--gap--${gap}`);
-    }
+    },
   );
 
   it("should use the medium gap by default", () => {
     const { component } = render(Suspense, baseOptions);
 
     expect(component.getRootElement()).toHaveClass(
-      "dusk-suspense--gap--medium"
+      "dusk-suspense--gap--medium",
     );
   });
 

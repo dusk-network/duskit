@@ -28,7 +28,7 @@ describe("ToastContainer SSR", () => {
           title: "Custom title 1",
           type: "info",
         },
-      ])
+      ]),
     );
 
     expect(() => {

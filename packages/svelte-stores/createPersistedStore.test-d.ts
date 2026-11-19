@@ -18,7 +18,7 @@ const inferredNullableStore = createPersistedStore(
   { id: "initial" },
   {
     validate: (value): value is null => value === null,
-  }
+  },
 );
 
 inferredNullableStore.subscribe((value) => {
@@ -32,5 +32,5 @@ createPersistedStore<Selection>(
   {
     // @ts-expect-error an explicit non-null store cannot accept null
     validate: (value): value is null => value === null,
-  }
+  },
 );

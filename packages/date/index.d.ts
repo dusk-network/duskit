@@ -15,7 +15,7 @@ export declare type RelativeTimeUnit = {
  */
 export declare function getRelativeTimeString(
   date: Date,
-  style: "long" | "short" | "narrow"
+  style: "long" | "short" | "narrow",
 ): string;
 
 /**

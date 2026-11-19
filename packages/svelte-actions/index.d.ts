@@ -12,7 +12,7 @@ export interface OutsideClickOptions {
 
 export declare function outsideClick<T extends Element = Element>(
   node: T,
-  options: OutsideClickOptions
+  options: OutsideClickOptions,
 ): ActionReturn<
   OutsideClickOptions,
   { "on:outsideclick": (evt: OutsideClickEvent<T>) => void }

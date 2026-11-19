@@ -7,7 +7,7 @@ import { getAsHTMLElement } from "@duskit/test-helpers";
 import { QrCode } from "../..";
 
 const toDataURLMock = vi.hoisted(() =>
-  vi.fn().mockResolvedValue("fake-data-url")
+  vi.fn().mockResolvedValue("fake-data-url"),
 );
 
 vi.mock("qrcode", () => ({
@@ -72,7 +72,7 @@ describe("QrCode", () => {
     expect(toDataURLMock).toHaveBeenCalledTimes(1);
     expect(toDataURLMock).toHaveBeenCalledWith(
       baseProps.value,
-      expectedQrOptions
+      expectedQrOptions,
     );
     expect(element).toMatchSnapshot();
     expect(element.querySelector("dusk-throbber")).toBeNull();
@@ -107,7 +107,7 @@ describe("QrCode", () => {
     expect(toDataURLMock).toHaveBeenCalledTimes(2);
     expect(toDataURLMock).toHaveBeenCalledWith(
       newProps.value,
-      expectedQrOptions
+      expectedQrOptions,
     );
 
     const newImg = element.querySelector(".dusk-qr-code__image");
@@ -179,9 +179,9 @@ describe("QrCode", () => {
         expect(element).toHaveClass(
           "dusk-suspense",
           `dusk-suspense--gap--${gap}`,
-          "dusk-qr-code"
+          "dusk-qr-code",
         );
-      }
+      },
     );
 
     it("should pass the `pendingMessage` prop to the underlying `Suspense`", () => {
@@ -193,7 +193,7 @@ describe("QrCode", () => {
       const element = component.getRootElement().getRootElement();
 
       expect(
-        element.querySelector(".dusk-suspense__pending-message")
+        element.querySelector(".dusk-suspense__pending-message"),
       ).toHaveTextContent(props.pendingMessage);
     });
   });
@@ -217,10 +217,10 @@ describe("QrCode", () => {
     expect(dispatchMock).toHaveBeenCalledWith("error", "some error message");
     expect(banner).toHaveClass("dusk-banner--variant--error");
     expect(
-      getAsHTMLElement(banner, ".dusk-error-details__summary")
+      getAsHTMLElement(banner, ".dusk-error-details__summary"),
     ).toHaveTextContent("Unable to generate QR code");
     expect(
-      getAsHTMLElement(banner, ".dusk-error-details__error")
+      getAsHTMLElement(banner, ".dusk-error-details__error"),
     ).toHaveTextContent("some error message");
 
     createDispatcherSpy.mockRestore();

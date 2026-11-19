@@ -11,7 +11,7 @@ import { CSS_VAR_REFERENCE_PATTERN } from "./constants";
 function resolveToken(tokenName, dictionary, visited = new Set()) {
   if (visited.has(tokenName)) {
     throw new Error(
-      `Circular dependency detected: ${Array.from(visited).join(" -> ")} -> ${tokenName}`
+      `Circular dependency detected: ${Array.from(visited).join(" -> ")} -> ${tokenName}`,
     );
   }
 
@@ -26,7 +26,7 @@ function resolveToken(tokenName, dictionary, visited = new Set()) {
   const globalPattern = new RegExp(CSS_VAR_REFERENCE_PATTERN.source, "g");
 
   return rawValue.replace(globalPattern, (match, innerToken) =>
-    resolveToken(innerToken, dictionary, new Set(visited))
+    resolveToken(innerToken, dictionary, new Set(visited)),
   );
 }
 

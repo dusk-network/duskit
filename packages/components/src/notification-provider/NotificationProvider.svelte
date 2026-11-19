@@ -54,7 +54,7 @@
   });
 
   const store = createNotificationStore(rawStore, (name, config) =>
-    rawStore.rebind(name, config)
+    rawStore.rebind(name, config),
   );
 
   setContext(NOTIFICATION_CONTEXT_KEY, store);
@@ -68,7 +68,7 @@
     notifier.addEventListener(NOTIFICATION_EVENT_KEY, handleNotification);
     notifier.addEventListener(
       NOTIFICATION_NAMESPACE_CHANGE_EVENT_KEY,
-      handleNamespaceChange
+      handleNamespaceChange,
     );
   });
 
@@ -76,7 +76,7 @@
     notifier.removeEventListener(NOTIFICATION_EVENT_KEY, handleNotification);
     notifier.removeEventListener(
       NOTIFICATION_NAMESPACE_CHANGE_EVENT_KEY,
-      handleNamespaceChange
+      handleNamespaceChange,
     );
   });
 </script>

@@ -48,13 +48,13 @@ describe("NotificationProvider", () => {
     expect(createPersistedStore).toHaveBeenCalledWith(
       NOTIFICATION_STORAGE_KEY,
       [],
-      { reviver: expect.any(Function) }
+      { reviver: expect.any(Function) },
     );
     expect(createNotificationStore).toHaveBeenCalledTimes(1);
     expect(setContextSpy).toHaveBeenCalledTimes(1);
     expect(setContextSpy).toHaveBeenCalledWith(
       NOTIFICATION_CONTEXT_KEY,
-      expect.objectContaining({ _isDecorated: true })
+      expect.objectContaining({ _isDecorated: true }),
     );
   });
 
@@ -85,11 +85,11 @@ describe("NotificationProvider", () => {
     expect(addEventListenerSpy).toHaveBeenCalledTimes(2);
     expect(addEventListenerSpy).toHaveBeenCalledWith(
       NOTIFICATION_EVENT_KEY,
-      expect.any(Function)
+      expect.any(Function),
     );
     expect(addEventListenerSpy).toHaveBeenCalledWith(
       NOTIFICATION_NAMESPACE_CHANGE_EVENT_KEY,
-      expect.any(Function)
+      expect.any(Function),
     );
 
     unmount();
@@ -97,11 +97,11 @@ describe("NotificationProvider", () => {
     expect(removeEventListenerSpy).toHaveBeenCalledTimes(2);
     expect(removeEventListenerSpy).toHaveBeenCalledWith(
       NOTIFICATION_EVENT_KEY,
-      expect.any(Function)
+      expect.any(Function),
     );
     expect(removeEventListenerSpy).toHaveBeenCalledWith(
       NOTIFICATION_NAMESPACE_CHANGE_EVENT_KEY,
-      expect.any(Function)
+      expect.any(Function),
     );
   });
 
@@ -161,7 +161,7 @@ describe("NotificationProvider", () => {
 
     expect(mockRebind).toHaveBeenCalledExactlyOnceWith(
       "test-namespace",
-      testConfig
+      testConfig,
     );
   });
 
@@ -181,7 +181,7 @@ describe("NotificationProvider", () => {
 
     expect(changeNamespaceSpy).toHaveBeenCalledExactlyOnceWith(
       namespace,
-      options
+      options,
     );
   });
 
@@ -202,7 +202,7 @@ describe("NotificationProvider", () => {
 
     expect(changeNamespaceSpy).toHaveBeenCalledExactlyOnceWith(
       customInitial,
-      options
+      options,
     );
   });
 });

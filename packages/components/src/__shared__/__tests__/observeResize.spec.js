@@ -38,7 +38,7 @@ describe("observeResize", () => {
         disconnect = disconnectMock;
         observe = observeMock;
         unobserve = unobserveMock;
-      }
+      },
     );
 
     // Dynamically import the module to get a fresh instance for the current test

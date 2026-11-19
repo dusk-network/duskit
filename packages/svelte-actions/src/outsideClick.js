@@ -28,7 +28,7 @@ function outsideClick(element, options) {
           bubbles: true,
           cancelable: true,
           detail: { originalEvent: event },
-        })
+        }),
       );
     }
 

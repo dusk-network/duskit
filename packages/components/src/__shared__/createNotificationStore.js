@@ -13,13 +13,13 @@ import { randomUUID } from "@duskit/string";
 
 const getUnreadCount = compose(
   getKey("length"),
-  filterWith(({ read }) => !read)
+  filterWith(({ read }) => !read),
 );
 
 /** @type {(items: NotificationItem[]) => NotificationItem[]} */
 const normalize = compose(
   sortWith([sorterDesc(getKey("date"))]),
-  uniquesBy(getKey("id"))
+  uniquesBy(getKey("id")),
 );
 
 /**
@@ -32,10 +32,10 @@ const defaultMerger = (current, incoming) =>
 /** @type {import("./notifications").createNotificationStore} */
 function createNotificationStore(store, transitionStrategy) {
   const panels = derived(store, ($store) =>
-    $store.filter((item) => item.mode === "panel")
+    $store.filter((item) => item.mode === "panel"),
   );
   const toasts = derived(store, ($store) =>
-    $store.filter((item) => item.mode === "toast")
+    $store.filter((item) => item.mode === "toast"),
   );
   const panelCount = derived(panels, ($panels) => $panels.length);
   const unreadCount = derived(panels, ($panels) => getUnreadCount($panels));
@@ -77,13 +77,13 @@ function createNotificationStore(store, transitionStrategy) {
 
     clearPanels() {
       store.update((current) =>
-        current.filter((item) => item.mode !== "panel")
+        current.filter((item) => item.mode !== "panel"),
       );
     },
 
     clearToasts() {
       store.update((current) =>
-        current.filter((item) => item.mode !== "toast")
+        current.filter((item) => item.mode !== "toast"),
       );
     },
 
@@ -94,8 +94,8 @@ function createNotificationStore(store, transitionStrategy) {
     markAllAsRead() {
       store.update((current) =>
         current.map((item) =>
-          item.mode === "panel" ? { ...item, read: true } : item
-        )
+          item.mode === "panel" ? { ...item, read: true } : item,
+        ),
       );
     },
 
@@ -104,8 +104,8 @@ function createNotificationStore(store, transitionStrategy) {
         current.map((item) =>
           item.id === id && item.mode === "panel"
             ? { ...item, read: true }
-            : item
-        )
+            : item,
+        ),
       );
     },
 

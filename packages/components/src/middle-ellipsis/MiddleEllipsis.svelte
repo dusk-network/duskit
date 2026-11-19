@@ -68,7 +68,7 @@
       const leftPart = text.slice(0, half);
       const rightPart = text.slice(-(mid - half));
       const measured = context.measureText(
-        leftPart + ellipsis + rightPart
+        leftPart + ellipsis + rightPart,
       ).width;
 
       if (measured > availableWidth) {

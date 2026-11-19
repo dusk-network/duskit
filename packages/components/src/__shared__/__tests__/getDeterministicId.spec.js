@@ -30,7 +30,7 @@ describe("getDeterministicId", () => {
     const result = getDeterministicId("dusk-checkbox");
 
     expect(getContext).toHaveBeenCalledExactlyOnceWith(
-      DETERMINISTIC_ID_CONTEXT_KEY
+      DETERMINISTIC_ID_CONTEXT_KEY,
     );
     expect(randomUUID).toHaveBeenCalledTimes(1);
     expect(result).toBe("dusk-checkbox-mocked-uuid-1234");

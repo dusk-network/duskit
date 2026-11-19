@@ -35,7 +35,7 @@ describe("ErrorAlert", () => {
       "dusk-error-alert",
       "dusk-error-alert--gap--medium",
       "foo",
-      "bar"
+      "bar",
     );
     expect(element).toHaveAttribute("id", props.id);
   });
@@ -51,7 +51,7 @@ describe("ErrorAlert", () => {
       const element = component.getRootElement();
 
       expect(element).toHaveClass(`dusk-error-alert--gap--${gap}`);
-    }
+    },
   );
 
   it("should react to prop changes", async () => {
@@ -67,10 +67,10 @@ describe("ErrorAlert", () => {
 
     expect(element).toHaveClass("baz", `dusk-error-alert--gap--${gaps[1]}`);
     expect(
-      element.querySelector(".dusk-error-details__summary")
+      element.querySelector(".dusk-error-details__summary"),
     ).toHaveTextContent("new error summary");
     expect(
-      element.querySelector(".dusk-error-details__error")
+      element.querySelector(".dusk-error-details__error"),
     ).toHaveTextContent("some new error");
   });
 });

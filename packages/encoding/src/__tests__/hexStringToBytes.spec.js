@@ -37,7 +37,7 @@ describe("hexStringToBytes", () => {
 
     // @ts-expect-error
     expect(hexStringToBytes({ toString: () => "ffae0253" })).toStrictEqual(
-      expected
+      expected,
     );
   });
 });

@@ -87,10 +87,10 @@
   }
 
   const parseDelayHide = parseNumericAttribute(
-    defaultDelayHide ?? DEFAULT_DELAY_HIDE
+    defaultDelayHide ?? DEFAULT_DELAY_HIDE,
   );
   const parseDelayShow = parseNumericAttribute(
-    defaultDelayShow ?? DEFAULT_DELAY_SHOW
+    defaultDelayShow ?? DEFAULT_DELAY_SHOW,
   );
   const parseOffset = parseNumericAttribute(defaultOffset ?? DEFAULT_OFFSET);
 

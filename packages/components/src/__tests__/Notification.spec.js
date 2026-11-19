@@ -72,7 +72,7 @@ describe("Notification", () => {
   it("should render the component correctly", async () => {
     const { component, getByLabelText, queryByLabelText, rerender } = render(
       Notification,
-      baseOptions
+      baseOptions,
     );
     const element = component.getRootElement();
 
@@ -88,7 +88,7 @@ describe("Notification", () => {
     expect(getByLabelText(/dismiss/i)).toBeInTheDocument();
     expect(element).toHaveClass(
       "dusk-notification",
-      "dusk-notification--unread"
+      "dusk-notification--unread",
     );
   });
 
@@ -107,7 +107,7 @@ describe("Notification", () => {
     // The utility injects "some text" inside a span. We verify it exists and the fallback is absent.
     expect(container.textContent).toContain("some text");
     expect(container.textContent).not.toContain(
-      "This fallback text should be ignored"
+      "This fallback text should be ignored",
     );
   });
 
@@ -136,7 +136,7 @@ describe("Notification", () => {
 
       expect(element).toHaveClass(
         `dusk-notification--mode--${mode}`,
-        `dusk-notification--type--${type}`
+        `dusk-notification--type--${type}`,
       );
 
       /* eslint-disable vitest/no-conditional-expect */
@@ -150,7 +150,7 @@ describe("Notification", () => {
       /* eslint-enable vitest/no-conditional-expect */
 
       expect.assertions(2);
-    }
+    },
   );
 
   it("should render the mark as read button and dispatch the `markasread` event when clicked if `read` is `false`", async () => {
@@ -207,7 +207,7 @@ describe("Notification", () => {
       {
         ...baseOptions,
         props: { ...baseToastProps, dismissable: true },
-      }
+      },
     );
     const btnDismissToast = getByLabelText(/dismiss/i);
 

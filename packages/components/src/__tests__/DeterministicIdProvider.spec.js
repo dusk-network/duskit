@@ -39,10 +39,10 @@ describe("DeterministicIdProvider", () => {
     const betaConsumer = within(getByTestId("consumer-beta"));
 
     expect(alphaConsumer.getByTestId("id-1")).toHaveTextContent(
-      "myApp-alpha-1"
+      "myApp-alpha-1",
     );
     expect(alphaConsumer.getByTestId("id-2")).toHaveTextContent(
-      "myApp-alpha-2"
+      "myApp-alpha-2",
     );
     expect(betaConsumer.getByTestId("id-1")).toHaveTextContent("myApp-beta-3");
     expect(betaConsumer.getByTestId("id-2")).toHaveTextContent("myApp-beta-4");

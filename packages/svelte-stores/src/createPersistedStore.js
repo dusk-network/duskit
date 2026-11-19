@@ -26,7 +26,7 @@ function getStorage(options) {
     // eslint-disable-next-line no-console
     console.error(
       "Error while accessing persisted store storage:",
-      getErrorFrom(reason)
+      getErrorFrom(reason),
     );
 
     return undefined;
@@ -102,7 +102,7 @@ function bindStorageContext(store, context, initialValue, options) {
       context.storage,
       newKey,
       initialValue,
-      options
+      options,
     );
 
     if (!loadResult.didRead) {
@@ -119,7 +119,7 @@ function bindStorageContext(store, context, initialValue, options) {
       context.storage,
       newKey,
       nextValue,
-      options
+      options,
     );
 
     if (isSaveSuccessful) {
@@ -183,7 +183,7 @@ function loadFromStorage(storage, key, initialValue, options) {
         console.warn(
           validate
             ? `Validation failed for key "${key}". Reverting to initial value.`
-            : `Type mismatch for key "${key}": expected "${expectedType}", but got "${parsedType}". Reverting to initial value.`
+            : `Type mismatch for key "${key}": expected "${expectedType}", but got "${parsedType}". Reverting to initial value.`,
         );
 
         return { didRead, value: initialValue };

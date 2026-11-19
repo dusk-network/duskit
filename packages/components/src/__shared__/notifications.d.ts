@@ -34,15 +34,15 @@ export interface NotificationEmitter extends EventTarget {
   addEventListener(
     type: string,
     listener: EventListenerOrEventListenerObject,
-    options?: boolean | AddEventListenerOptions
+    options?: boolean | AddEventListenerOptions,
   ): void;
   addEventListener<K extends keyof NotificationEventMap>(
     type: K,
     listener: (
       this: NotificationEmitter,
-      event: NotificationEventMap[K]
+      event: NotificationEventMap[K],
     ) => any,
-    options?: boolean | AddEventListenerOptions
+    options?: boolean | AddEventListenerOptions,
   ): void;
 
   /**
@@ -56,7 +56,7 @@ export interface NotificationEmitter extends EventTarget {
    * @param getIdentity A function returning the current identity value.
    */
   bounded(
-    getIdentity: () => unknown
+    getIdentity: () => unknown,
   ): Pick<NotificationEmitter, "panel" | "toast">;
 
   /**
@@ -74,15 +74,15 @@ export interface NotificationEmitter extends EventTarget {
   removeEventListener(
     type: string,
     listener: EventListenerOrEventListenerObject,
-    options?: boolean | EventListenerOptions
+    options?: boolean | EventListenerOptions,
   ): void;
   removeEventListener<K extends keyof NotificationEventMap>(
     type: K,
     listener: (
       this: NotificationEmitter,
-      event: NotificationEventMap[K]
+      event: NotificationEventMap[K],
     ) => any,
-    options?: boolean | EventListenerOptions
+    options?: boolean | EventListenerOptions,
   ): void;
 
   toast(data: Omit<NotificationToastInput, "mode">): void;
@@ -147,7 +147,7 @@ export interface NotificationStore extends Readable<NotificationItem[]> {
    */
   changeNamespace: (
     name: string,
-    options: NotificationNamespaceOptions
+    options: NotificationNamespaceOptions,
   ) => void;
 
   clear: () => void;
@@ -168,8 +168,8 @@ export interface NotificationStore extends Readable<NotificationItem[]> {
     items: NotificationItem[],
     merger?: (
       current: NotificationItem[],
-      incoming: NotificationItem[]
-    ) => NotificationItem[]
+      incoming: NotificationItem[],
+    ) => NotificationItem[],
   ) => void;
   panelCount: Readable<number>;
   get panels(): Readable<NotificationPanelItem[]>;
@@ -185,9 +185,9 @@ export interface NamespaceTransitionStrategy {
       clearOldKey?: boolean;
       merger?: (
         current: NotificationItem[],
-        incoming: NotificationItem[]
+        incoming: NotificationItem[],
       ) => NotificationItem[];
-    }
+    },
   ): void;
 }
 
@@ -201,7 +201,7 @@ export interface NamespaceTransitionStrategy {
  */
 export function createNotificationStore(
   store: Writable<NotificationItem[]>,
-  transitionStrategy?: NamespaceTransitionStrategy
+  transitionStrategy?: NamespaceTransitionStrategy,
 ): NotificationStore;
 
 /**

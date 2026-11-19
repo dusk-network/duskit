@@ -70,7 +70,7 @@ describe("AnchorButton", () => {
       "dusk-anchor-button--variant--primary",
       "dusk-anchor-button--size--default",
       "foo",
-      "bar"
+      "bar",
     );
     expect(element).toHaveAttribute("id", props.id);
     expect(element).toHaveAttribute("tabindex", props.tabindex.toString());
@@ -86,9 +86,9 @@ describe("AnchorButton", () => {
       expect(element).toHaveClass(
         "dusk-anchor-button",
         `dusk-anchor-button--variant--${variant}`,
-        "dusk-anchor-button--size--default"
+        "dusk-anchor-button--size--default",
       );
-    }
+    },
   );
 
   it.each(sizes)(
@@ -105,10 +105,10 @@ describe("AnchorButton", () => {
       expect(element).toHaveClass(
         "dusk-anchor-button",
         "dusk-anchor-button--variant--primary",
-        `dusk-anchor-button--size--${size}`
+        `dusk-anchor-button--size--${size}`,
       );
       expect(icon).toHaveClass(`dusk-icon--size--${size}`);
-    }
+    },
   );
 
   it("should be able to render a `AnchorButton` without a text", () => {
@@ -118,10 +118,10 @@ describe("AnchorButton", () => {
     const resultB = render(AnchorButton, { ...baseOptions, props: propsB });
 
     expect(
-      resultA.container.querySelector(".dusk-anchor-button__text")
+      resultA.container.querySelector(".dusk-anchor-button__text"),
     ).toBeNull();
     expect(
-      resultB.container.querySelector(".dusk-anchor-button__text")
+      resultB.container.querySelector(".dusk-anchor-button__text"),
     ).toBeNull();
   });
 
@@ -149,9 +149,9 @@ describe("AnchorButton", () => {
       expect(element).not.toHaveClass("dusk-icon-button");
       expect(svgElement.querySelector("path")).toHaveAttribute(
         "d",
-        mdiFolderOutline
+        mdiFolderOutline,
       );
-    }
+    },
   );
 
   it.each(iconPositions)(
@@ -173,9 +173,9 @@ describe("AnchorButton", () => {
       expect(element.querySelector(".dusk-anchor-button__text")).toBeNull();
       expect(element.querySelector(".dusk-icon > path")).toHaveAttribute(
         "d",
-        mdiFolderOutline
+        mdiFolderOutline,
       );
-    }
+    },
   );
 
   it("should forward the `on:click` handler to the underlying element", async () => {
@@ -240,7 +240,7 @@ describe("AnchorButton", () => {
       await rerender(propsIconBefore);
 
       expect(
-        element.querySelector(".dusk-anchor-button__text")
+        element.querySelector(".dusk-anchor-button__text"),
       ).toHaveTextContent("Initial Before");
 
       await rerender({
@@ -250,7 +250,7 @@ describe("AnchorButton", () => {
       });
 
       expect(
-        element.querySelector(".dusk-anchor-button__text")
+        element.querySelector(".dusk-anchor-button__text"),
       ).toHaveTextContent("Updated Before");
       expect(element.querySelector("path")).toHaveAttribute("d", mdiAbTesting);
 
@@ -263,7 +263,7 @@ describe("AnchorButton", () => {
       await rerender(propsIconAfter);
 
       expect(
-        element.querySelector(".dusk-anchor-button__text")
+        element.querySelector(".dusk-anchor-button__text"),
       ).toHaveTextContent("Initial After");
 
       await rerender({
@@ -273,7 +273,7 @@ describe("AnchorButton", () => {
       });
 
       expect(
-        element.querySelector(".dusk-anchor-button__text")
+        element.querySelector(".dusk-anchor-button__text"),
       ).toHaveTextContent("Updated After");
       expect(element.querySelector("path")).toHaveAttribute("d", mdiAbTesting);
 

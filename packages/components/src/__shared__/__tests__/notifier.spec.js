@@ -94,11 +94,11 @@ describe("notifier", () => {
       expect(consoleWarnSpy).toHaveBeenCalledTimes(2);
       expect(consoleWarnSpy).toHaveBeenNthCalledWith(
         1,
-        'Notification discarded: identity context changed before dispatching "toast"'
+        'Notification discarded: identity context changed before dispatching "toast"',
       );
       expect(consoleWarnSpy).toHaveBeenNthCalledWith(
         2,
-        'Notification discarded: identity context changed before dispatching "panel"'
+        'Notification discarded: identity context changed before dispatching "panel"',
       );
 
       notifier.removeEventListener(NOTIFICATION_EVENT_KEY, listener);
@@ -115,7 +115,7 @@ describe("notifier", () => {
 
     notifier.addEventListener(
       NOTIFICATION_NAMESPACE_CHANGE_EVENT_KEY,
-      listener
+      listener,
     );
 
     notifier.namespace(testName, testOptions);
@@ -133,7 +133,7 @@ describe("notifier", () => {
 
     notifier.removeEventListener(
       NOTIFICATION_NAMESPACE_CHANGE_EVENT_KEY,
-      listener
+      listener,
     );
   });
 

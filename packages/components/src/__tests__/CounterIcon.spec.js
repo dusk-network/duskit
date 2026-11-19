@@ -39,7 +39,7 @@ describe("CounterIcon", () => {
     expect(rootElement).toBeInTheDocument();
     expect(rootElement).toHaveClass(
       "dusk-counter-icon",
-      "dusk-counter-icon--size--default"
+      "dusk-counter-icon--size--default",
     );
     expect(basePath).toBeInTheDocument();
     expect(counterGroup).toBeNull();
@@ -51,10 +51,10 @@ describe("CounterIcon", () => {
 
     const counterGroup = container.querySelector(".dusk-counter-icon__counter");
     const backgroundPath = container.querySelector(
-      ".dusk-counter-icon__background"
+      ".dusk-counter-icon__background",
     );
     const foregroundPath = container.querySelector(
-      ".dusk-counter-icon__foreground"
+      ".dusk-counter-icon__foreground",
     );
 
     expect(counterGroup).toBeInTheDocument();
@@ -67,7 +67,7 @@ describe("CounterIcon", () => {
     const { container } = render(CounterIcon, { ...baseOptions, props });
 
     const backgroundPath = container.querySelector(
-      ".dusk-counter-icon__background"
+      ".dusk-counter-icon__background",
     );
 
     expect(backgroundPath).toHaveAttribute("d", mdiNumeric9PlusCircle);
@@ -81,7 +81,7 @@ describe("CounterIcon", () => {
     await rerender({ count: 1 });
 
     expect(
-      container.querySelector(".dusk-counter-icon__counter")
+      container.querySelector(".dusk-counter-icon__counter"),
     ).toBeInTheDocument();
 
     await rerender({ count: 0 });
