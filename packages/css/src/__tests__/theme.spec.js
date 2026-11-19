@@ -76,6 +76,16 @@ describe("Test helpers", () => {
       expect(result).toStrictEqual(expected);
     });
 
+    it("should merge the declarations of a selector that appears more than once", () => {
+      const result = parseCSSToDictionary(
+        ".a { color: red; margin: 0; } .a { color: blue; padding: 1px; }",
+      );
+
+      expect(result).toStrictEqual({
+        ".a": { color: "blue", margin: "0", padding: "1px" },
+      });
+    });
+
     it("should return an empty dictionary when parsing an empty valid string", () => {
       expect(parseCSSToDictionary("")).toStrictEqual({});
       expect(parseCSSToDictionary("   \n  ")).toStrictEqual({});
