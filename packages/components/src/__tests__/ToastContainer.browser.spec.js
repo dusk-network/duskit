@@ -338,6 +338,44 @@ describe("ToastContainer", () => {
     expect(toasts[1]).toBeInTheDocument();
   });
 
+  it("should drop the timer of a toast that leaves the store and time toasts added later", async () => {
+    const { component } = render(ToastContainer, baseOptions);
+    const rootElement = component.getRootElement();
+    const firstDismissButton = /** @type {HTMLButtonElement} */ (
+      rootElement.querySelector(".dusk-notification__btn-dismiss")
+    );
+
+    await fireEvent.click(firstDismissButton);
+    await vi.advanceTimersByTimeAsync(maxTimeout + DEFAULT_ANIM_DURATION);
+
+    // the dismissed toast's timer went with it, so its timeout removes nothing
+    expect(removeSpy).toHaveBeenCalledTimes(toastsInBaseData.length);
+    expect(
+      removeSpy.mock.calls.filter(([id]) => id === toastsInBaseData[0].id),
+    ).toHaveLength(1);
+    expect(rootElement.childElementCount).toBe(0);
+
+    removeSpy.mockClear();
+
+    // @ts-expect-error we know that we have passed a store
+    baseProps.store.add({
+      dismissable: false,
+      mode: "toast",
+      text: "Added once the others are gone",
+      timeout: 100,
+      type: "info",
+    });
+    await vi.advanceTimersByTimeAsync(0);
+
+    expect(rootElement.childElementCount).toBe(1);
+    expect(removeSpy).not.toHaveBeenCalled();
+
+    await vi.advanceTimersByTimeAsync(100 + DEFAULT_ANIM_DURATION);
+
+    expect(removeSpy).toHaveBeenCalledTimes(1);
+    expect(rootElement.childElementCount).toBe(0);
+  });
+
   it("should pause every decay timer while the mouse is inside the container", async () => {
     const { component } = render(ToastContainer, baseOptions);
     const rootElement = component.getRootElement();
