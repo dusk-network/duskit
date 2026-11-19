@@ -18,10 +18,12 @@
   border-style: solid;
   border-width: var(--interactive-control-border-width);
   border-radius: var(--interactive-control-border-radius-rounded-size);
-  transition-delay: 0s;
-  transition-timing-function: ease-in-out;
-  transition-duration: 0.2s;
-  transition-property: background-color, border-color, box-shadow, color, scale;
+  transition:
+    background-color 0.2s ease-in-out 0s,
+    border-color 0.2s ease-in-out 0s,
+    box-shadow 0.2s ease-in-out 0s,
+    color 0.2s ease-in-out 0s,
+    scale 0.2s ease-in-out 0s;
   transform-origin: center center;
   scale: var(--_button-scale);
   align-items: center;

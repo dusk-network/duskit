@@ -80,7 +80,6 @@
     let newIndex = currentIndex;
 
     // We don't need a default as we do an early return just above.
-    // eslint-disable-next-line default-case
     switch (event.key) {
       case "ArrowLeft":
         newIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;

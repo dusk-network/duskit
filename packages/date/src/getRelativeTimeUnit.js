@@ -1,5 +1,3 @@
-/* eslint-disable sort-keys */
-
 /** @type {import("..").RelativeTimeUnit[]} */
 const units = [
   { name: "year", factor: 1000 * 60 * 60 * 24 * 365 },
@@ -10,8 +8,6 @@ const units = [
   { name: "minute", factor: 1000 * 60 },
   { name: "second", factor: 1000 },
 ];
-
-/* eslint-enable sort-keys */
 
 /** @type {import("..").getRelativeTimeUnit} */
 function getRelativeTimeUnit(diff) {

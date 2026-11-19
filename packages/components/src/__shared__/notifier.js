@@ -22,7 +22,6 @@ class NotificationEmitter extends EventTarget {
 
     /** @param {"panel" | "toast"} type */
     const warnDiscarded = (type) => {
-      // eslint-disable-next-line no-console
       console.warn(
         `Notification discarded: identity context changed before dispatching "${type}"`,
       );

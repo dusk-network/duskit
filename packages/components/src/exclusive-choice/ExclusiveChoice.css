@@ -34,9 +34,8 @@
 }
 
 .dusk-exclusive-choice__label:not(:first-of-type) {
-  border-inline-start-style: solid;
-  border-inline-start-width: var(--interactive-control-border-width);
-  border-inline-start-color: var(--interactive-field-border-color);
+  border-inline-start: var(--interactive-control-border-width) solid
+    var(--interactive-field-border-color);
 }
 
 .dusk-exclusive-choice__radio {

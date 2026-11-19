@@ -23,7 +23,6 @@ function getStorage(options) {
   try {
     return options.getStorage ? options.getStorage() : globalThis.localStorage;
   } catch (reason) {
-    // eslint-disable-next-line no-console
     console.error(
       "Error while accessing persisted store storage:",
       getErrorFrom(reason),
@@ -52,7 +51,6 @@ function safeSaveToStorage(storage, key, value, options) {
     const error = getErrorFrom(reason);
     const { onSaveError } = options;
 
-    // eslint-disable-next-line no-console
     console.error(`Error while serializing store "${key}":`, error);
 
     if (onSaveError) {
@@ -75,7 +73,6 @@ function safeRemoveFromStorage(storage, key) {
   try {
     storage.removeItem(key);
   } catch (reason) {
-    // eslint-disable-next-line no-console
     console.error(`Error while removing store "${key}":`, getErrorFrom(reason));
   }
 }
@@ -89,7 +86,6 @@ function safeRemoveFromStorage(storage, key) {
  * @returns {import("..").PersistedStore<T>["rebind"]}
  */
 function bindStorageContext(store, context, initialValue, options) {
-  // eslint-disable-next-line max-statements
   return (newKey, rebindOptions = {}) => {
     if (!context.storage || context.key === newKey) {
       return;
@@ -159,7 +155,6 @@ function bindStorageContext(store, context, initialValue, options) {
  * @param {PersistedStoreOptions<T>} options
  * @returns {{ didRead: boolean, value: T }}
  */
-// eslint-disable-next-line max-statements
 function loadFromStorage(storage, key, initialValue, options) {
   const { getLoadErrorFallback, reviver, validate } = options;
   let didRead = false;
@@ -179,7 +174,6 @@ function loadFromStorage(storage, key, initialValue, options) {
         : parsedType === expectedType;
 
       if (!isValid) {
-        // eslint-disable-next-line no-console
         console.warn(
           validate
             ? `Validation failed for key "${key}". Reverting to initial value.`
@@ -203,14 +197,12 @@ function loadFromStorage(storage, key, initialValue, options) {
       const fallbackValue = getLoadErrorFallback(error, storedValue);
 
       if (fallbackValue !== undefined) {
-        // eslint-disable-next-line no-console
         console.warn(message, error);
 
         return { didRead, value: fallbackValue };
       }
     }
 
-    // eslint-disable-next-line no-console
     console.error(message, error);
   }
 

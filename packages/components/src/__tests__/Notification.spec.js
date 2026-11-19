@@ -139,15 +139,11 @@ describe("Notification", () => {
         `dusk-notification--type--${type}`,
       );
 
-      /* eslint-disable vitest/no-conditional-expect */
-
       if (expectedRole) {
         expect(element).toHaveAttribute("role", expectedRole);
       } else {
         expect(element).not.toHaveAttribute("role");
       }
-
-      /* eslint-enable vitest/no-conditional-expect */
 
       expect.assertions(2);
     },

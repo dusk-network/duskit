@@ -41,7 +41,6 @@
  * Provide a visible cue for abbreviations.
  * Use a dotted underline if supported.
  */
-/* stylelint-disable-next-line selector-no-qualifying-type */
 abbr[title] {
   text-decoration: underline;
   text-decoration: underline dotted;

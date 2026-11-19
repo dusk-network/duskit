@@ -225,10 +225,8 @@ describe("Table", () => {
       const btn = headers[idx].querySelector("button");
 
       if (sortable) {
-        // eslint-disable-next-line vitest/no-conditional-expect
         expect(btn).toBeInTheDocument();
       } else {
-        // eslint-disable-next-line vitest/no-conditional-expect
         expect(btn).toBeNull();
       }
     });

@@ -132,7 +132,6 @@
   };
 
   /** @param {number} timestamp */
-  // eslint-disable-next-line max-statements
   const loop = (timestamp) => {
     let needsUpdate = false;
     const nextProgresses = { ...decayProgresses };

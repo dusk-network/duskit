@@ -213,7 +213,6 @@
   }
 
   /** @param {FocusEvent | MouseEvent} event */
-  // eslint-disable-next-line max-statements
   async function handleTooltipShow(event) {
     if (!isValidTarget(event.target)) {
       return;

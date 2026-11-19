@@ -352,7 +352,6 @@ describe("Theme consistency", async () => {
         for (const selector of selectors) {
           for (const rule of rules) {
             for (const token of rule.tokens) {
-              // eslint-disable-next-line max-depth
               for (const target of rule.testAgainst) {
                 testCases.push({ rule, selector, target, token });
               }

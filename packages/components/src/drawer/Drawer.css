@@ -28,8 +28,7 @@
   top: 0;
   bottom: 0;
   width: var(--_drawer-size);
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden auto;
 
   &.dusk-drawer--open {
     transform: translateX(0);
@@ -66,8 +65,7 @@
   right: 0;
   left: 0;
   height: var(--_drawer-size);
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto hidden;
 
   &.dusk-drawer--open {
     transform: translateY(0);
