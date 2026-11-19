@@ -41,8 +41,6 @@
   "types": "index.d.ts",
   "version": "0.0.3",
   "devDependencies": {
-    "@dusk-network/eslint-config": "4.0.1",
-    "@dusk-network/prettier-config": "1.1.0",
     "@eslint/js": "9.39.4",
     "@vitest/coverage-istanbul": "4.1.9",
     "@vitest/eslint-plugin": "1.6.20",

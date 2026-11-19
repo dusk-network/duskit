@@ -1,6 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "concurrency": "13",
+  "globalDependencies": ["eslint/**", "stylelint/**"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],

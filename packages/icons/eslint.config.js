@@ -1,6 +1,6 @@
 import { defineConfig, globalIgnores } from "@eslint/config-helpers";
 import globals from "globals";
-import jsEsLintConfig from "@dusk-network/eslint-config";
+import { jsEsLintConfig } from "../../eslint/dusk.js";
 
 /** @type {import("eslint").Linter.Config[]} */
 export default defineConfig([

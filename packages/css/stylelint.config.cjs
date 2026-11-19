@@ -1,4 +1,4 @@
 module.exports = {
-  extends: ["@dusk-network/stylelint-config"],
+  extends: ["../../stylelint/dusk.js"],
   rules: {},
 };
