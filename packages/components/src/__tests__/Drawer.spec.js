@@ -74,7 +74,7 @@ describe("Drawer", () => {
             cancelMock();
             // Simulate the native AbortError thrown by the Web Animations API
             reject(
-              new DOMException("The user aborted a request.", "AbortError")
+              new DOMException("The user aborted a request.", "AbortError"),
             );
           },
           finished: promise,
@@ -118,7 +118,7 @@ describe("Drawer", () => {
       "dusk-drawer--from--left",
       "dusk-drawer--size--default",
       "foo",
-      "bar"
+      "bar",
     );
     expect(drawer).toHaveAttribute("id", "my-drawer");
   });
@@ -138,7 +138,7 @@ describe("Drawer", () => {
       expect(animateSpy).toHaveBeenNthCalledWith(
         1,
         expectedKeyframes[from],
-        expectedOptions
+        expectedOptions,
       );
 
       await resolveAnimation(0);
@@ -152,11 +152,11 @@ describe("Drawer", () => {
       expect(animateSpy).toHaveBeenNthCalledWith(
         2,
         expectedKeyframes[from].toReversed(),
-        expectedOptions
+        expectedOptions,
       );
 
       await resolveAnimation(1);
-    }
+    },
   );
 
   it.each(sizeOptions)('should render a drawer with the "%s" size', (size) => {
@@ -274,7 +274,7 @@ describe("Drawer", () => {
       expect(animateSpy).toHaveBeenNthCalledWith(
         2,
         [{ transform: halfwayTransform }, { transform: "translateX(-100%)" }],
-        { duration: 400, easing: "ease-in-out" }
+        { duration: 400, easing: "ease-in-out" },
       );
 
       // Resolve the second animation (the closing one)
@@ -300,7 +300,7 @@ describe("Drawer", () => {
 
       // Simulate a click on the document body (outside the drawer)
       document.body.dispatchEvent(
-        new MouseEvent("click", { bubbles: true, cancelable: true })
+        new MouseEvent("click", { bubbles: true, cancelable: true }),
       );
 
       expect(outsideclickHandler).toHaveBeenCalledTimes(1);
@@ -315,7 +315,7 @@ describe("Drawer", () => {
 
       // 1. Initial state: closed. The action should not be active.
       document.body.dispatchEvent(
-        new MouseEvent("click", { bubbles: true, cancelable: true })
+        new MouseEvent("click", { bubbles: true, cancelable: true }),
       );
 
       expect(outsideclickHandler).not.toHaveBeenCalled();
@@ -324,7 +324,7 @@ describe("Drawer", () => {
       await rerender({ open: true });
 
       document.body.dispatchEvent(
-        new MouseEvent("click", { bubbles: true, cancelable: true })
+        new MouseEvent("click", { bubbles: true, cancelable: true }),
       );
 
       expect(outsideclickHandler).toHaveBeenCalledTimes(1);
@@ -333,7 +333,7 @@ describe("Drawer", () => {
       await rerender({ open: false });
 
       document.body.dispatchEvent(
-        new MouseEvent("click", { bubbles: true, cancelable: true })
+        new MouseEvent("click", { bubbles: true, cancelable: true }),
       );
 
       // The call count remains 1, confirming no new event was intercepted
@@ -364,7 +364,7 @@ describe("Drawer", () => {
           detail: {
             originalEvent: event,
           },
-        })
+        }),
       );
       expect(event.defaultPrevented).toBe(true);
     });
@@ -401,7 +401,7 @@ describe("Drawer", () => {
           bubbles: true,
           cancelable: true,
           key: "Enter",
-        })
+        }),
       );
 
       expect(cancelHandler).not.toHaveBeenCalled();
@@ -430,7 +430,7 @@ describe("Drawer", () => {
         {
           from: "left",
           open: false,
-        }
+        },
       );
 
       // Content shouldn't be in the DOM in the starting closed state

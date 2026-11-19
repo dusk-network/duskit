@@ -1,26 +1,14 @@
-import { defineConfig, globalIgnores } from "@eslint/config-helpers";
+import { defineConfig, globalIgnores } from "eslint/config";
+import js from "@eslint/js";
+import prettierConfig from "eslint-config-prettier/flat";
 import globals from "globals";
-import turboConfig from "eslint-config-turbo/flat";
-import jsEsLintConfig from "@dusk-network/eslint-config";
 
-/** @type {import("eslint").Linter.Config[]} */
 export default defineConfig([
-  ...turboConfig,
-  ...jsEsLintConfig,
+  js.configs.recommended,
+  prettierConfig,
   {
     languageOptions: {
-      ecmaVersion: "latest",
       globals: globals.node,
-      sourceType: "module",
-    },
-    settings: {
-      "import/resolver": {
-        node: {},
-      },
-      typescript: {
-        alwaysTryTypes: true,
-        project: "./tsconfig.json",
-      },
     },
   },
   globalIgnores(["apps/", "packages/"]),

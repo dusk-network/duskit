@@ -18,7 +18,7 @@ const DEFAULT_PROGRESS_BAR_MOTION_DURATION = 400;
  * completely decoupling them from the production default.
  */
 const TEST_MOTION_DURATION = nextMultipleOf16(
-  DEFAULT_PROGRESS_BAR_MOTION_DURATION
+  DEFAULT_PROGRESS_BAR_MOTION_DURATION,
 );
 
 /** @type {(container: HTMLElement) => HTMLElement} */
@@ -84,7 +84,7 @@ describe("ProgressBar", () => {
       const element = component.getRootElement();
 
       expect(element).toHaveClass(`dusk-progress-bar--size--${size}`);
-    }
+    },
   );
 
   it("should render the `ProgressBar` component with a set percentage", async () => {
@@ -169,7 +169,7 @@ describe("ProgressBar", () => {
     expect(element).toHaveAttribute("aria-valuenow", "80");
     expect(getRoundedBarPercentage(barElement)).toBe(80);
     expect(barElement).not.toHaveClass(
-      "dusk-progress-bar__filler--undetermined"
+      "dusk-progress-bar__filler--undetermined",
     );
 
     await rerender({ value: undefined });

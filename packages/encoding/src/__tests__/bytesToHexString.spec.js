@@ -42,7 +42,7 @@ describe("bytesToHexString", () => {
 
     // @ts-expect-error
     expect(() => bytesToHexString(new Uint16Array([0, 255]))).toThrow(
-      TypeError
+      TypeError,
     );
 
     // @ts-expect-error

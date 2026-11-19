@@ -22,9 +22,8 @@ class NotificationEmitter extends EventTarget {
 
     /** @param {"panel" | "toast"} type */
     const warnDiscarded = (type) => {
-      // eslint-disable-next-line no-console
       console.warn(
-        `Notification discarded: identity context changed before dispatching "${type}"`
+        `Notification discarded: identity context changed before dispatching "${type}"`,
       );
     };
 
@@ -45,7 +44,7 @@ class NotificationEmitter extends EventTarget {
           namespace: name,
           options,
         },
-      })
+      }),
     );
   }
 
@@ -54,7 +53,7 @@ class NotificationEmitter extends EventTarget {
     this.dispatchEvent(
       new CustomEvent(NOTIFICATION_EVENT_KEY, {
         detail: { ...data, mode: "panel" },
-      })
+      }),
     );
   }
 
@@ -63,7 +62,7 @@ class NotificationEmitter extends EventTarget {
     this.dispatchEvent(
       new CustomEvent(NOTIFICATION_EVENT_KEY, {
         detail: { ...data, mode: "toast" },
-      })
+      }),
     );
   }
 }

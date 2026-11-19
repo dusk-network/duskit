@@ -68,7 +68,7 @@
          */
         updateFlag ^= 1;
       },
-      typeof interval === "function" ? interval() : interval
+      typeof interval === "function" ? interval() : interval,
     );
   }
 </script>

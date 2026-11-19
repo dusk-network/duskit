@@ -70,7 +70,7 @@
     /** @type {NodeListOf<HTMLLIElement>} */
     const tabs = tabsList.querySelectorAll("[role='tab']");
     const step = event.currentTarget.matches(
-      ".dusk-tab-scroll-button:first-of-type"
+      ".dusk-tab-scroll-button:first-of-type",
     )
       ? -1
       : 1;
@@ -91,7 +91,7 @@
   function handleScrollButtonMouseDown(event) {
     if (event.buttons === 1) {
       const amount = event.currentTarget.matches(
-        ".dusk-tab-scroll-button:first-of-type"
+        ".dusk-tab-scroll-button:first-of-type",
       )
         ? -5
         : 5;

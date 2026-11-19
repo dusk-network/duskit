@@ -98,7 +98,7 @@ describe("MiddleEllipsis", () => {
 
       expect(errorSpy).toHaveBeenCalledTimes(1);
       expect(errorSpy).toHaveBeenCalledWith(
-        expect.stringContaining("display: inline")
+        expect.stringContaining("display: inline"),
       );
     });
 
@@ -112,7 +112,7 @@ describe("MiddleEllipsis", () => {
 
       expect(warnSpy).toHaveBeenCalledTimes(1);
       expect(warnSpy).toHaveBeenCalledWith(
-        expect.stringContaining("display: inline-block")
+        expect.stringContaining("display: inline-block"),
       );
     });
 

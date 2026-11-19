@@ -1,3 +1,16 @@
+/* Anchor Button specifics */
+
+.dusk-anchor-button {
+  text-align: center;
+  text-decoration: none;
+  appearance: auto;
+}
+
+.dusk-anchor-button.dusk-anchor-button--disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
 /* General Styles */
 
 .dusk-button,
@@ -18,14 +31,25 @@
   border-style: solid;
   border-width: var(--interactive-control-border-width);
   border-radius: var(--interactive-control-border-radius-rounded-size);
-  transition-delay: 0s;
-  transition-timing-function: ease-in-out;
-  transition-duration: 0.2s;
-  transition-property: background-color, border-color, box-shadow, color, scale;
+  transition:
+    background-color 0.2s ease-in-out 0s,
+    border-color 0.2s ease-in-out 0s,
+    box-shadow 0.2s ease-in-out 0s,
+    color 0.2s ease-in-out 0s,
+    scale 0.2s ease-in-out 0s;
   transform-origin: center center;
   scale: var(--_button-scale);
   align-items: center;
   justify-content: center;
+}
+
+/* Disabled status */
+
+.dusk-button:disabled,
+.dusk-anchor-button.dusk-anchor-button--disabled,
+.dusk-anchor-button.dusk-anchor-button--disabled:hover,
+.dusk-anchor-button.dusk-anchor-button--disabled:visited {
+  opacity: 0.5;
 }
 
 .dusk-button:enabled:active,
@@ -39,19 +63,6 @@
     [aria-disabled="true"]
   ).dusk-icon-button:hover:not(:active) {
   --_button-scale: 1.1;
-}
-
-/* Anchor Button specifics */
-
-.dusk-anchor-button {
-  text-align: center;
-  text-decoration: none;
-  appearance: auto;
-}
-
-.dusk-anchor-button.dusk-anchor-button--disabled {
-  pointer-events: none;
-  cursor: default;
 }
 
 /* Icon Button specifics */
@@ -155,15 +166,6 @@
   --_button-bg-color: var(--interactive-action-naked-bg-hover-color);
   --_button-border-color: var(--interactive-action-naked-border-hover-color);
   --_button-text-color: var(--interactive-action-naked-text-hover-color);
-}
-
-/* Disabled status */
-
-.dusk-button:disabled,
-.dusk-anchor-button.dusk-anchor-button--disabled,
-.dusk-anchor-button.dusk-anchor-button--disabled:hover,
-.dusk-anchor-button.dusk-anchor-button--disabled:visited {
-  opacity: 0.5;
 }
 
 /* Focus */

@@ -35,9 +35,9 @@ describe("Badge", () => {
       const { component } = render(Badge, { ...baseProps, variant });
 
       expect(component.getRootElement()).toHaveClass(
-        `dusk-badge--variant--${variant}`
+        `dusk-badge--variant--${variant}`,
       );
-    }
+    },
   );
 
   it("should pass additional class names and attributes to the rendered element", () => {
@@ -49,7 +49,7 @@ describe("Badge", () => {
       "dusk-badge",
       "dusk-badge--variant--neutral",
       "foo",
-      "bar"
+      "bar",
     );
     expect(element).toHaveAttribute("id", "some-id");
   });

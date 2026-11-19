@@ -41,7 +41,7 @@ describe("getErrorFrom", () => {
   it("should return an Error preserving the `name` property if the received argument is an object with both `message` and `name` string properties", () => {
     const domException = new DOMException(
       "Write permission denied.",
-      "NotAllowedError"
+      "NotAllowedError",
     );
 
     const genericErrorMock = {

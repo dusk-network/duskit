@@ -159,7 +159,7 @@ describe("NotificationFeed", () => {
       NotificationFeed,
       {
         props: { store },
-      }
+      },
     );
     const btnClearAll = getByLabelText(/clear all notifications/i);
 
@@ -214,7 +214,7 @@ describe("NotificationFeed", () => {
       NotificationFeed,
       {
         props: { store },
-      }
+      },
     );
 
     const btnClearAll = getByLabelText(/clear all notifications/i);

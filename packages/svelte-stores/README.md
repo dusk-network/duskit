@@ -60,7 +60,7 @@ const store = createPersistedStore<Selection | null>(
         value !== null &&
         "id" in value &&
         typeof value.id === "string"),
-  }
+  },
 );
 ```
 

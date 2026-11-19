@@ -10,10 +10,10 @@ describe("areEqual", () => {
     expect(areEqual([1, 2, 3], [1, 2, 3, 4])).toBe(false);
     expect(areEqual([1, 2, 3, 4], [1, 2, 3])).toBe(false);
     expect(
-      areEqual(Uint8Array.from([1, 2, 3]), Uint8Array.from([1, 2, 3]))
+      areEqual(Uint8Array.from([1, 2, 3]), Uint8Array.from([1, 2, 3])),
     ).toBe(true);
     expect(
-      areEqual(Uint8Array.from([1, 2, 3]), Uint8Array.from([1, 3, 2]))
+      areEqual(Uint8Array.from([1, 2, 3]), Uint8Array.from([1, 3, 2])),
     ).toBe(false);
     expect(areEqual("abcd", "abcd")).toBe(true);
     expect(areEqual("abcd", "acbd")).toBe(false);

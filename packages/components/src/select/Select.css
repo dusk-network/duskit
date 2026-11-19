@@ -20,11 +20,11 @@
   display: inline-block;
   min-block-size: var(--interactive-control-standard-min-block-size);
   padding-block: var(--interactive-control-standard-padding-block);
-  padding-inline-start: var(--interactive-control-standard-padding-inline);
-  padding-inline-end: calc(
-    var(--interactive-control-standard-padding-inline) +
-      var(--_icon-reserved-space)
-  );
+  padding-inline: var(--interactive-control-standard-padding-inline)
+    calc(
+      var(--interactive-control-standard-padding-inline) +
+        var(--_icon-reserved-space)
+    );
   font-family: inherit;
   font-size: var(--interactive-control-standard-text-size);
   line-height: 1.5;
@@ -56,11 +56,6 @@
   opacity: 0.5;
 }
 
-.dusk-select:enabled:focus-visible {
-  outline: var(--interactive-control-focus-ring-outline);
-  outline-offset: var(--interactive-control-focus-ring-outline-offset);
-}
-
 /*
  * Fallback for RTL layouts.
  * Background-position logical properties are not widely supported yet.
@@ -71,4 +66,9 @@
   background-position:
     var(--_chevron-offset) 50%,
     calc(var(--_chevron-offset) + var(--_chevron-stroke)) 50%;
+}
+
+.dusk-select:enabled:focus-visible {
+  outline: var(--interactive-control-focus-ring-outline);
+  outline-offset: var(--interactive-control-focus-ring-outline-offset);
 }

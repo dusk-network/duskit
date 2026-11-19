@@ -34,20 +34,14 @@
 }
 
 .dusk-exclusive-choice__label:not(:first-of-type) {
-  border-inline-start-style: solid;
-  border-inline-start-width: var(--interactive-control-border-width);
-  border-inline-start-color: var(--interactive-field-border-color);
+  border-inline-start: var(--interactive-control-border-width) solid
+    var(--interactive-field-border-color);
 }
 
 .dusk-exclusive-choice__radio {
   position: absolute;
   pointer-events: none;
   opacity: 0;
-}
-
-.dusk-exclusive-choice__radio:enabled:not(:checked)
-  + .dusk-exclusive-choice__label:hover {
-  --_label-bg-color: var(--interactive-selection-hover-bg-color);
 }
 
 .dusk-exclusive-choice__radio:checked + .dusk-exclusive-choice__label {
@@ -62,4 +56,9 @@
 
 .dusk-exclusive-choice__radio:disabled + .dusk-exclusive-choice__label {
   opacity: 0.5;
+}
+
+.dusk-exclusive-choice__radio:enabled:not(:checked)
+  + .dusk-exclusive-choice__label:hover {
+  --_label-bg-color: var(--interactive-selection-hover-bg-color);
 }

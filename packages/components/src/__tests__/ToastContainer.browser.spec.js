@@ -41,7 +41,7 @@ function dispatchPointerEvent(target, type, init) {
 
 const getMinAndMaxTimeouts = compose(
   collect([apply(Math.min), apply(Math.max)]),
-  pluck("timeout")
+  pluck("timeout"),
 );
 
 describe("ToastContainer", () => {
@@ -97,7 +97,7 @@ describe("ToastContainer", () => {
 
       return result;
     },
-    /** @type {number[]} */ ([])
+    /** @type {number[]} */ ([]),
   );
 
   /** @type {import("@testing-library/svelte").SvelteComponentOptions<ToastContainer>} */
@@ -138,7 +138,7 @@ describe("ToastContainer", () => {
     Object.defineProperty(
       Document.prototype,
       "visibilityState",
-      originalVisibilityState
+      originalVisibilityState,
     );
   });
 
@@ -230,7 +230,7 @@ describe("ToastContainer", () => {
 
     expect(rootElement).toHaveClass(
       "dusk-toast-container",
-      "custom-test-class"
+      "custom-test-class",
     );
     expect(rootElement).toHaveAttribute("data-testid", "toast-root");
   });
@@ -248,19 +248,19 @@ describe("ToastContainer", () => {
       "bottom-right",
       "top-left",
       "top-right",
-    ])
+    ]),
   )("should support the %s placement", async (placement) => {
     const { component, rerender } = render(ToastContainer, baseOptions);
     const rootElement = component.getRootElement();
 
     expect(rootElement).toHaveClass(
-      "dusk-toast-container--placement--top-right"
+      "dusk-toast-container--placement--top-right",
     );
 
     await rerender({ placement });
 
     expect(rootElement).toHaveClass(
-      `dusk-toast-container--placement--${placement}`
+      `dusk-toast-container--placement--${placement}`,
     );
 
     rootElement.dir = "rtl";
@@ -338,6 +338,44 @@ describe("ToastContainer", () => {
     expect(toasts[1]).toBeInTheDocument();
   });
 
+  it("should drop the timer of a toast that leaves the store and time toasts added later", async () => {
+    const { component } = render(ToastContainer, baseOptions);
+    const rootElement = component.getRootElement();
+    const firstDismissButton = /** @type {HTMLButtonElement} */ (
+      rootElement.querySelector(".dusk-notification__btn-dismiss")
+    );
+
+    await fireEvent.click(firstDismissButton);
+    await vi.advanceTimersByTimeAsync(maxTimeout + DEFAULT_ANIM_DURATION);
+
+    // the dismissed toast's timer went with it, so its timeout removes nothing
+    expect(removeSpy).toHaveBeenCalledTimes(toastsInBaseData.length);
+    expect(
+      removeSpy.mock.calls.filter(([id]) => id === toastsInBaseData[0].id),
+    ).toHaveLength(1);
+    expect(rootElement.childElementCount).toBe(0);
+
+    removeSpy.mockClear();
+
+    // @ts-expect-error we know that we have passed a store
+    baseProps.store.add({
+      dismissable: false,
+      mode: "toast",
+      text: "Added once the others are gone",
+      timeout: 100,
+      type: "info",
+    });
+    await vi.advanceTimersByTimeAsync(0);
+
+    expect(rootElement.childElementCount).toBe(1);
+    expect(removeSpy).not.toHaveBeenCalled();
+
+    await vi.advanceTimersByTimeAsync(100 + DEFAULT_ANIM_DURATION);
+
+    expect(removeSpy).toHaveBeenCalledTimes(1);
+    expect(rootElement.childElementCount).toBe(0);
+  });
+
   it("should pause every decay timer while the mouse is inside the container", async () => {
     const { component } = render(ToastContainer, baseOptions);
     const rootElement = component.getRootElement();
@@ -388,7 +426,7 @@ describe("ToastContainer", () => {
 
       expect(removeSpy).toHaveBeenCalledTimes(toastsInBaseData.length);
       expect(rootElement.childElementCount).toBe(0);
-    }
+    },
   );
 
   it("should initialize incoming toasts in the paused state", async () => {
@@ -451,7 +489,7 @@ describe("ToastContainer", () => {
     };
 
     const customStore = createNotificationStore(
-      writable([toastWithoutTimeout])
+      writable([toastWithoutTimeout]),
     );
     const localRemoveSpy = vi.spyOn(customStore, "remove");
 
@@ -471,7 +509,7 @@ describe("ToastContainer", () => {
 
   it("should suspend the decay loop when the tab is hidden and realign clocks upon return", async () => {
     const shortestToastId = toastsInBaseData.find(
-      (t) => t.timeout === minTimeout
+      (t) => t.timeout === minTimeout,
     )?.id;
     const initialTime = Math.min(minTimeout - 100, 1000);
 
@@ -501,7 +539,7 @@ describe("ToastContainer", () => {
     changeVisibilityStateTo("visible");
 
     await vi.advanceTimersByTimeAsync(
-      minTimeout - initialTime + DEFAULT_ANIM_DURATION
+      minTimeout - initialTime + DEFAULT_ANIM_DURATION,
     );
 
     for (const idx of firstToDisappearIdxs) {

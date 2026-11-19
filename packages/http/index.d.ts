@@ -4,15 +4,15 @@
  * rejects with an `Error` otherwise.
  */
 export declare function failureToRejection(
-  response: Response
+  response: Response,
 ): Promise<Response>;
 
 export declare class HttpTransport<
   RTransformer extends HttpTransportResponseTransformer = (
-    r: Response
+    r: Response,
   ) => Response,
   ETransformer extends HttpTransportErrorTransformer = (
-    reason: unknown
+    reason: unknown,
   ) => never,
 > {
   constructor(options: HttpTransportOptions<RTransformer, ETransformer>);
@@ -25,7 +25,7 @@ export declare class HttpTransport<
    */
   appendHeader(
     name: string,
-    value: string
+    value: string,
   ): HttpTransport<RTransformer, ETransformer>;
 
   /**
@@ -40,7 +40,7 @@ export declare class HttpTransport<
   delete(
     endpoint: string,
     params?: HttpTransportSearchParams,
-    options?: HttpTransportRequestOptions
+    options?: HttpTransportRequestOptions,
   ): Promise<Awaited<ReturnType<RTransformer> | ReturnType<ETransformer>>>;
 
   /**
@@ -60,7 +60,7 @@ export declare class HttpTransport<
   get(
     endpoint: string,
     params?: HttpTransportSearchParams,
-    options?: HttpTransportRequestOptions
+    options?: HttpTransportRequestOptions,
   ): Promise<Awaited<ReturnType<RTransformer> | ReturnType<ETransformer>>>;
 
   /**
@@ -75,7 +75,7 @@ export declare class HttpTransport<
   head(
     endpoint: string,
     params?: HttpTransportSearchParams,
-    options?: HttpTransportRequestOptions
+    options?: HttpTransportRequestOptions,
   ): Promise<Awaited<ReturnType<RTransformer> | ReturnType<ETransformer>>>;
 
   /**
@@ -91,7 +91,7 @@ export declare class HttpTransport<
     endpoint: string,
     params?: HttpTransportSearchParams,
     body?: HttpTransportBody | null,
-    options?: HttpTransportRequestOptions
+    options?: HttpTransportRequestOptions,
   ): Promise<Awaited<ReturnType<RTransformer> | ReturnType<ETransformer>>>;
 
   /**
@@ -107,7 +107,7 @@ export declare class HttpTransport<
     endpoint: string,
     params?: HttpTransportSearchParams,
     body?: HttpTransportBody | null,
-    options?: HttpTransportRequestOptions
+    options?: HttpTransportRequestOptions,
   ): Promise<Awaited<ReturnType<RTransformer> | ReturnType<ETransformer>>>;
 
   /**
@@ -123,7 +123,7 @@ export declare class HttpTransport<
     endpoint: string,
     params?: HttpTransportSearchParams,
     body?: HttpTransportBody | null,
-    options?: HttpTransportRequestOptions
+    options?: HttpTransportRequestOptions,
   ): Promise<Awaited<ReturnType<RTransformer> | ReturnType<ETransformer>>>;
 
   /**
@@ -131,7 +131,7 @@ export declare class HttpTransport<
    */
   setHeader(
     name: string,
-    value: string
+    value: string,
   ): HttpTransport<RTransformer, ETransformer>;
 }
 
@@ -151,10 +151,10 @@ export declare type HttpTransportHeadersInit =
 
 export declare type HttpTransportOptions<
   Transfomer extends HttpTransportResponseTransformer = (
-    r: Response
+    r: Response,
   ) => Response,
   ETransformer extends HttpTransportErrorTransformer = (
-    reason: unknown
+    reason: unknown,
   ) => never,
 > = {
   baseURL: string;

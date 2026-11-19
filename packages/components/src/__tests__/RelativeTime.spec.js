@@ -124,13 +124,13 @@ describe("RelativeTime", () => {
     await vi.advanceTimersByTimeAsync(60 * 1000);
 
     expect(component.getRootElement().textContent).toMatchInlineSnapshot(
-      `"1 hour ago"`
+      `"1 hour ago"`,
     );
 
     // The interval should have scaled up to 3600000ms (1 hour factor).
     expect(setTimeoutSpy).toHaveBeenLastCalledWith(
       expect.any(Function),
-      3600000
+      3600000,
     );
 
     setTimeoutSpy.mockRestore();
@@ -144,25 +144,25 @@ describe("RelativeTime", () => {
     const element = component.getRootElement().getRootElement();
 
     expect(element.textContent).toMatchInlineSnapshot(
-      `"The relative time now is 20 seconds ago"`
+      `"The relative time now is 20 seconds ago"`,
     );
 
     await vi.advanceTimersByTimeAsync(1000);
 
     expect(element.textContent).toMatchInlineSnapshot(
-      `"The relative time now is 21 seconds ago"`
+      `"The relative time now is 21 seconds ago"`,
     );
 
     await vi.advanceTimersByTimeAsync(1000);
 
     expect(element.textContent).toMatchInlineSnapshot(
-      `"The relative time now is 22 seconds ago"`
+      `"The relative time now is 22 seconds ago"`,
     );
 
     await rerender({ autoRefresh: false });
 
     expect(element.textContent).toMatchInlineSnapshot(
-      `"The relative time now is 22 seconds ago"`
+      `"The relative time now is 22 seconds ago"`,
     );
   });
 

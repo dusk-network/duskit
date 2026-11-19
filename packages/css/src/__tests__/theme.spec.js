@@ -83,7 +83,7 @@ describe("Test helpers", () => {
 
     it("should throw an error when the CSS string is not valid", () => {
       expect(() =>
-        parseCSSToDictionary("just random garbage syntax")
+        parseCSSToDictionary("just random garbage syntax"),
       ).toThrow();
     });
   });
@@ -134,7 +134,7 @@ describe("Test helpers", () => {
       const localDict = { "--a": "var(--b)" };
 
       expect(() => resolveToken("--a", localDict)).toThrow(
-        "Token not found: --b"
+        "Token not found: --b",
       );
     });
 
@@ -142,7 +142,7 @@ describe("Test helpers", () => {
       const localDict = { "--a": "var(--b)", "--b": "var(--a)" };
 
       expect(() => resolveToken("--a", localDict)).toThrow(
-        "Circular dependency detected: --a -> --b -> --a"
+        "Circular dependency detected: --a -> --b -> --a",
       );
     });
   });
@@ -163,7 +163,7 @@ describe("Theme consistency", async () => {
       prop,
       selector,
       value: theme[selector][prop].trim(),
-    }))
+    })),
   );
 
   describe("Architectural rules for selectors", () => {
@@ -174,9 +174,9 @@ describe("Theme consistency", async () => {
       (selector) => {
         expect(
           allowedSelectorPattern.test(selector),
-          `Invalid selector found: "${selector}". Only :root or :root.something are allowed.`
+          `Invalid selector found: "${selector}". Only :root or :root.something are allowed.`,
         ).toBe(true);
-      }
+      },
     );
   });
 
@@ -185,17 +185,17 @@ describe("Theme consistency", async () => {
       for (const { prop, selector, value } of declarations) {
         expect(
           CSS_VAR_NAME_PATTERN.test(prop),
-          `Invalid property found in ${selector}: "${prop}". Must match the \`/^--[\\w-]+$/\` pattern.`
+          `Invalid property found in ${selector}: "${prop}". Must match the \`/^--[\\w-]+$/\` pattern.`,
         ).toBe(true);
 
         expect(
           value.length,
-          `Token ${prop} in ${selector} is empty.`
+          `Token ${prop} in ${selector} is empty.`,
         ).toBeGreaterThan(0);
 
         expect(
           value.endsWith(";"),
-          `Token ${prop} in ${selector} contains a trailing semicolon.`
+          `Token ${prop} in ${selector} contains a trailing semicolon.`,
         ).toBe(false);
       }
     });
@@ -212,7 +212,7 @@ describe("Theme consistency", async () => {
       for (const { prop, selector } of declarations) {
         expect(
           physicalCoordinatesPattern.test(prop),
-          `Architectural violation in \`${selector}\`: \`${prop}\` uses physical coordinates. Use logical properties or size instead.`
+          `Architectural violation in \`${selector}\`: \`${prop}\` uses physical coordinates. Use logical properties or size instead.`,
         ).toBe(false);
       }
     });
@@ -220,7 +220,7 @@ describe("Theme consistency", async () => {
     it("should enforce pure integer values without units for `z-index` tokens", () => {
       const integerPattern = /^-?\d+$/;
       const zTokens = declarations.filter((declaration) =>
-        declaration.prop.startsWith("--z-")
+        declaration.prop.startsWith("--z-"),
       );
 
       expect(zTokens.length, "Missin `z-index` tokens.").toBeGreaterThan(0);
@@ -228,7 +228,7 @@ describe("Theme consistency", async () => {
       for (const { prop, selector, value } of zTokens) {
         expect(
           integerPattern.test(value),
-          `Architectural violation in \`${selector}\`: \`${prop}\` has an invalid value ("${value}"). \`z-index\` tokens must be unitless integers.`
+          `Architectural violation in \`${selector}\`: \`${prop}\` has an invalid value ("${value}"). \`z-index\` tokens must be unitless integers.`,
         ).toBe(true);
       }
 
@@ -248,7 +248,7 @@ describe("Theme consistency", async () => {
 
         expect(
           variantColorTokens,
-          `Theme variant "${selector}" does not match the color tokens of "${baseSelector}".`
+          `Theme variant "${selector}" does not match the color tokens of "${baseSelector}".`,
         ).toStrictEqual(baseColorTokens);
       }
     });
@@ -261,17 +261,17 @@ describe("Theme consistency", async () => {
 
           expect(
             isAllowedColorValue(value),
-            `Architectural violation in \`${selector}\`: \`${colorToken}\` has an invalid value ("${value}"). Only CSS variables and named colors are allowed`
+            `Architectural violation in \`${selector}\`: \`${colorToken}\` has an invalid value ("${value}"). Only CSS variables and named colors are allowed`,
           ).toBe(true);
         }
-      }
+      },
     );
   });
 
   describe("Contrast and Accessibility", async () => {
     const rawColorsCss = await readFile(
       "./src/0-primitives/colors.css",
-      "utf-8"
+      "utf-8",
     );
     const colorPrimitives = parseCSSToDictionary(rawColorsCss)[":root"];
 
@@ -291,12 +291,12 @@ describe("Theme consistency", async () => {
 
           expect(
             isNamedColor,
-            `Architectural violation: Primitive \`${prop}\` uses named color "${value}". Use raw physical coordinates (Hex/RGB/HSL) in the primitives layer.`
+            `Architectural violation: Primitive \`${prop}\` uses named color "${value}". Use raw physical coordinates (Hex/RGB/HSL) in the primitives layer.`,
           ).toBe(false);
 
           expect(
             isHex || (isValidCSSFunction && !hasAlpha),
-            `Architectural violation: Primitive \`${prop}\` has invalid value "${value}". Only 3/6-digit hex, rgb(), and hsl() without alpha are allowed.`
+            `Architectural violation: Primitive \`${prop}\` has invalid value "${value}". Only 3/6-digit hex, rgb(), and hsl() without alpha are allowed.`,
           ).toBe(true);
         }
       });
@@ -315,7 +315,7 @@ describe("Theme consistency", async () => {
           };
 
           const textTokens = Object.keys(themeTokens).filter((prop) =>
-            prop.startsWith("--on-")
+            prop.startsWith("--on-"),
           );
 
           for (const textToken of textTokens) {
@@ -324,7 +324,7 @@ describe("Theme consistency", async () => {
             // Implicit architectural check: ensure the background token actually exists
             expect(
               themeTokens[bgToken],
-              `Architectural violation in \`${selector}\`: Background token \`${bgToken}\` is missing for text token \`${textToken}\`.`
+              `Architectural violation in \`${selector}\`: Background token \`${bgToken}\` is missing for text token \`${textToken}\`.`,
             ).toBeDefined();
 
             const textRawColor = resolveToken(textToken, resolutionContext);
@@ -336,10 +336,10 @@ describe("Theme consistency", async () => {
             expect(
               contrastRatio,
               `Accessibility violation in \`${selector}\`: Contrast between \`${textToken}\` (${textRawColor}) and ` +
-                `\`${bgToken}\` (${bgRawColor}) is too low (${contrastRatio.toFixed(2)}:1). Expected at least 4.5:1.`
+                `\`${bgToken}\` (${bgRawColor}) is too low (${contrastRatio.toFixed(2)}:1). Expected at least 4.5:1.`,
             ).toBeGreaterThanOrEqual(4.5);
           }
-        }
+        },
       );
     });
 
@@ -352,7 +352,6 @@ describe("Theme consistency", async () => {
         for (const selector of selectors) {
           for (const rule of rules) {
             for (const token of rule.tokens) {
-              // eslint-disable-next-line max-depth
               for (const target of rule.testAgainst) {
                 testCases.push({ rule, selector, target, token });
               }
@@ -374,12 +373,12 @@ describe("Theme consistency", async () => {
             // Architectural checks
             expect(
               themeTokens[token],
-              `Architectural violation in \`${selector}\`: Token \`${token}\` defined in rule "${rule.description}" is missing.`
+              `Architectural violation in \`${selector}\`: Token \`${token}\` defined in rule "${rule.description}" is missing.`,
             ).toBeDefined();
 
             expect(
               themeTokens[target],
-              `Architectural violation in \`${selector}\`: Target token \`${target}\` defined in rule "${rule.description}" is missing.`
+              `Architectural violation in \`${selector}\`: Target token \`${target}\` defined in rule "${rule.description}" is missing.`,
             ).toBeDefined();
 
             const rawColorA = resolveToken(token, resolutionContext);
@@ -402,11 +401,11 @@ describe("Theme consistency", async () => {
               actualValue,
               `Accessibility violation in \`${selector}\`: ${rule.description}\n` +
                 `Failed between \`${token}\` (${rawColorA}) and \`${target}\` (${rawColorB}).\n` +
-                `Expected ${rule.algorithm} >= ${expectedValue}, got ${actualValue.toFixed(2)}.`
+                `Expected ${rule.algorithm} >= ${expectedValue}, got ${actualValue.toFixed(2)}.`,
             ).toBeGreaterThanOrEqual(expectedValue);
-          }
+          },
         );
-      }
+      },
     );
   });
 });

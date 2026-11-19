@@ -201,7 +201,7 @@ describe("Table", () => {
 
     expect(emailHeader).toHaveClass(
       "dusk-table__head-cell",
-      "dusk-table__head-cell--hidden"
+      "dusk-table__head-cell--hidden",
     );
     expect(nameHeader).toHaveClass("dusk-table__head-cell");
     expect(nameHeader).not.toHaveClass("dusk-table__head-cell--hidden");
@@ -209,7 +209,7 @@ describe("Table", () => {
     expect(postsHeader).not.toHaveClass("dusk-table__head-cell--hidden");
     expect(emailCell).toHaveClass(
       "dusk-table__cell",
-      "dusk-table__cell--hidden"
+      "dusk-table__cell--hidden",
     );
     expect(nameCell).toHaveClass("dusk-table__cell");
     expect(nameCell).not.toHaveClass("dusk-table__cell--hidden");
@@ -225,10 +225,8 @@ describe("Table", () => {
       const btn = headers[idx].querySelector("button");
 
       if (sortable) {
-        // eslint-disable-next-line vitest/no-conditional-expect
         expect(btn).toBeInTheDocument();
       } else {
-        // eslint-disable-next-line vitest/no-conditional-expect
         expect(btn).toBeNull();
       }
     });
@@ -319,7 +317,7 @@ describe("Table", () => {
     expect(nameHeader).toHaveAttribute("aria-sort", "none");
     expect(postsHeader).toHaveAttribute("aria-sort", "ascending");
     expect(getFirstRowCellByName("posts")).toHaveTextContent(
-      testData[1].posts.toString()
+      testData[1].posts.toString(),
     );
 
     await fireEvent.click(postsSortButton);
@@ -332,7 +330,7 @@ describe("Table", () => {
     expect(nameHeader).toHaveAttribute("aria-sort", "none");
     expect(postsHeader).toHaveAttribute("aria-sort", "descending");
     expect(getFirstRowCellByName("posts")).toHaveTextContent(
-      testData[2].posts.toString()
+      testData[2].posts.toString(),
     );
   });
 });

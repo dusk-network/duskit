@@ -4,7 +4,7 @@
  */
 export declare function rejectAfter(
   delay: number,
-  error: Error
+  error: Error,
 ): Promise<never>;
 
 /**

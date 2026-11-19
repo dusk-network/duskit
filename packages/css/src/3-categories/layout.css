@@ -10,7 +10,7 @@
   /* --- Boundaries --- */
   --layout-boundary-subtle-color: var(--neutral-subtle-color);
   --layout-boundary-strong-color: var(--neutral-strong-color);
-  --layout-boundary-context-color: oklch(from currentcolor l c h / 0.3);
+  --layout-boundary-context-color: oklch(from currentcolor l c h / 30%);
   --layout-boundary-accent-primary-color: var(--text-accent-primary-color);
   --layout-boundary-accent-secondary-color: var(--text-accent-secondary-color);
 

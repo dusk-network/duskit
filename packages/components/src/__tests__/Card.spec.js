@@ -49,7 +49,7 @@ describe("Card", () => {
       "dusk-card",
       "dusk-card--variant--surface",
       "foo",
-      "bar"
+      "bar",
     );
     expect(element).toHaveAttribute("id", props.id);
   });

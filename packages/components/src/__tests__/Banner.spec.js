@@ -43,7 +43,7 @@ describe("Banner", () => {
     expect(rootElement).toHaveClass("dusk-banner dusk-banner--variant--info");
     expect(rootElement).toHaveAttribute(
       "aria-labelledby",
-      "dusk-banner-title-mocked-id"
+      "dusk-banner-title-mocked-id",
     );
     expect(rootElement).toHaveAttribute("role", "status");
     expect(titleElement).toHaveAttribute("id", "dusk-banner-title-mocked-id");
@@ -65,7 +65,7 @@ describe("Banner", () => {
       "dusk-banner",
       "dusk-banner--variant--info",
       "foo",
-      "bar"
+      "bar",
     );
     expect(element).toHaveAttribute("id", "some-id");
   });
@@ -83,13 +83,13 @@ describe("Banner", () => {
       expect(rootElement).toHaveClass(`dusk-banner--variant--${variant}`);
       expect(rootElement).toHaveAttribute(
         "role",
-        variant === "error" || variant === "warning" ? "alert" : "status"
+        variant === "error" || variant === "warning" ? "alert" : "status",
       );
 
       // we use snapshots here as other than the class name
       // the component uses a different icon for each variant
       expect(rootElement).toMatchSnapshot();
-    }
+    },
   );
 
   it.each(variants)(
@@ -104,7 +104,7 @@ describe("Banner", () => {
 
       expect(rootElement).toHaveClass(`dusk-banner--variant--${variant}`);
       expect(rootElement).toHaveAttribute("role", props.role);
-    }
+    },
   );
 
   it("should remove the title node and apply a fallback class when the title is empty", async () => {
@@ -114,10 +114,10 @@ describe("Banner", () => {
     expect(rootElement).not.toHaveClass("dusk-banner--no-title");
     expect(rootElement).toHaveAttribute(
       "aria-labelledby",
-      "dusk-banner-title-mocked-id"
+      "dusk-banner-title-mocked-id",
     );
     expect(
-      getAsHTMLElement(rootElement, ".dusk-banner__title")
+      getAsHTMLElement(rootElement, ".dusk-banner__title"),
     ).toHaveAttribute("id", "dusk-banner-title-mocked-id");
 
     await rerender({ title: "" });
@@ -139,7 +139,7 @@ describe("Banner", () => {
 
     expect(rootElement).toHaveClass("dusk-banner--variant--error", "baz");
     expect(
-      getAsHTMLElement(rootElement, ".dusk-banner__title")
+      getAsHTMLElement(rootElement, ".dusk-banner__title"),
     ).toHaveTextContent("new title");
   });
 });

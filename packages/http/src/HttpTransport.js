@@ -101,7 +101,7 @@ class HttpTransport {
         headers: headers ? mergeHeaders(this.#headers, headers) : this.#headers,
         method,
         signal,
-      })
+      }),
     ).then(this.#responseTransformer);
 
     return this.#errorTransformer

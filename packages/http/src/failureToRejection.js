@@ -7,8 +7,8 @@ const failureToRejection = (response) =>
           `HTTP Request failed with status ${response.status}: ${response.statusText}`,
           {
             cause: response,
-          }
-        )
+          },
+        ),
       );
 
 export default failureToRejection;

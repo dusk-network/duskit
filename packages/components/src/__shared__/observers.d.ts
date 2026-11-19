@@ -23,5 +23,5 @@ export type ObserveResizeCallback = (entry: ResizeObserverEntry) => void;
  */
 export function observeResize(
   element: Element,
-  callback: ObserveResizeCallback
+  callback: ObserveResizeCallback,
 ): () => void;

@@ -57,11 +57,11 @@ describe("ExclusiveChoice", () => {
     radios.forEach((radio, idx) => {
       expect(radio).toHaveAttribute(
         "name",
-        "dusk-exclusive-choice-some-generated-id"
+        "dusk-exclusive-choice-some-generated-id",
       );
       expect(radio).toHaveAttribute(
         "id",
-        `dusk-exclusive-choice-some-generated-id-${baseProps.options[idx].value}`
+        `dusk-exclusive-choice-some-generated-id-${baseProps.options[idx].value}`,
       );
       expect(labels[idx]).toHaveAttribute("for", radio.getAttribute("id"));
     });
@@ -88,7 +88,7 @@ describe("ExclusiveChoice", () => {
       expect(radio).toHaveAttribute("name", props.name);
       expect(radio).toHaveAttribute(
         "id",
-        `dusk-exclusive-choice-some-generated-id-${baseProps.options[idx].value}`
+        `dusk-exclusive-choice-some-generated-id-${baseProps.options[idx].value}`,
       );
       expect(labels[idx]).toHaveAttribute("for", radio.getAttribute("id"));
     });
@@ -107,8 +107,8 @@ describe("ExclusiveChoice", () => {
     expect(
       everyIn(
         labels,
-        (label, idx) => label.textContent === objectOptionsB[idx].value
-      )
+        (label, idx) => label.textContent === objectOptionsB[idx].value,
+      ),
     ).toBe(true);
   });
 
@@ -185,13 +185,13 @@ describe("ExclusiveChoice", () => {
       expect(radio).toHaveAttribute("name", "some-new-name");
       expect(radio).toHaveAttribute(
         "id",
-        `dusk-exclusive-choice-some-generated-id-${objectOptionsB[idx].value}`
+        `dusk-exclusive-choice-some-generated-id-${objectOptionsB[idx].value}`,
       );
       expect(labels[idx]).toHaveAttribute("for", radio.getAttribute("id"));
     });
 
     expect(
-      element.querySelector("input[type='radio'][value='3']")
+      element.querySelector("input[type='radio'][value='3']"),
     ).toBeChecked();
 
     await rerender({
@@ -210,13 +210,13 @@ describe("ExclusiveChoice", () => {
       expect(radio).toHaveAttribute("name", "some-new-name");
       expect(radio).toHaveAttribute(
         "id",
-        `dusk-exclusive-choice-some-generated-id-${stringOptions[idx]}`
+        `dusk-exclusive-choice-some-generated-id-${stringOptions[idx]}`,
       );
       expect(labels[idx]).toHaveAttribute("for", radio.getAttribute("id"));
     });
 
     expect(
-      element.querySelector(`input[type='radio'][value='${stringOptions[1]}']`)
+      element.querySelector(`input[type='radio'][value='${stringOptions[1]}']`),
     ).toBeChecked();
 
     expect.assertions(radios.length * 3 * 2 + 9);

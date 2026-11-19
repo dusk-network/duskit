@@ -16,7 +16,7 @@
  * makeClassName([]) // => ""
  */
 export declare function makeClassName(
-  source: Record<string, any> | Array<any>
+  source: Record<string, any> | Array<any>,
 ): string;
 
 /**

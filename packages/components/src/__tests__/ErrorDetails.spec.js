@@ -61,10 +61,10 @@ describe("ErrorDetails", () => {
 
     expect(element).toHaveClass("baz");
     expect(
-      element?.querySelector(".dusk-error-details__summary")
+      element?.querySelector(".dusk-error-details__summary"),
     ).toHaveTextContent("new error summary");
     expect(
-      element?.querySelector(".dusk-error-details__error")
+      element?.querySelector(".dusk-error-details__error"),
     ).toHaveTextContent("some new error");
   });
 });

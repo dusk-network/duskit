@@ -11,7 +11,7 @@ function hexStringToBytes(s) {
   }
 
   return Uint8Array.from(s.match(/../g) ?? [], (hexByte) =>
-    parseInt(hexByte, 16)
+    parseInt(hexByte, 16),
   );
 }
 

@@ -43,10 +43,10 @@ describe("Button", () => {
 
     expect(element).toHaveClass(`dusk-button--type--${type}`);
     expect(element.getAttribute("type")).toBe(
-      type === "toggle" ? "button" : type
+      type === "toggle" ? "button" : type,
     );
     expect(element.getAttribute("aria-pressed")).toBe(
-      type === "toggle" ? "false" : null
+      type === "toggle" ? "false" : null,
     );
   });
 
@@ -82,7 +82,7 @@ describe("Button", () => {
       "dusk-button--variant--primary",
       "dusk-button--size--default",
       "foo",
-      "bar"
+      "bar",
     );
     expect(element).toHaveAttribute("id", props.id);
   });
@@ -107,9 +107,9 @@ describe("Button", () => {
         "dusk-button",
         "dusk-button--type--button",
         `dusk-button--variant--${variant}`,
-        "dusk-button--size--default"
+        "dusk-button--size--default",
       );
-    }
+    },
   );
 
   it.each(sizes)(
@@ -127,10 +127,10 @@ describe("Button", () => {
         "dusk-button",
         "dusk-button--type--button",
         "dusk-button--variant--primary",
-        `dusk-button--size--${size}`
+        `dusk-button--size--${size}`,
       );
       expect(icon).toHaveClass(`dusk-icon--size--${size}`);
-    }
+    },
   );
 
   it("should be able to render a `Button` without a text", () => {
@@ -170,9 +170,9 @@ describe("Button", () => {
       expect(element).not.toHaveClass("dusk-icon-button");
       expect(svgElement.querySelector("path")).toHaveAttribute(
         "d",
-        mdiFolderOutline
+        mdiFolderOutline,
       );
-    }
+    },
   );
 
   it.each(iconPositions)(
@@ -194,9 +194,9 @@ describe("Button", () => {
       expect(element.querySelector(".dusk-button__text")).toBeNull();
       expect(element.querySelector(".dusk-icon > path")).toHaveAttribute(
         "d",
-        mdiFolderOutline
+        mdiFolderOutline,
       );
-    }
+    },
   );
 
   it("should forward the `on:click`, `on:mousedown` and `on:mouseup` handlers to the underlying element", async () => {
@@ -264,7 +264,7 @@ describe("Button", () => {
       await rerender(propsIconBefore);
 
       expect(element.querySelector(".dusk-button__text")).toHaveTextContent(
-        "Initial Before"
+        "Initial Before",
       );
 
       await rerender({
@@ -274,7 +274,7 @@ describe("Button", () => {
       });
 
       expect(element.querySelector(".dusk-button__text")).toHaveTextContent(
-        "Updated Before"
+        "Updated Before",
       );
       expect(element.querySelector("path")).toHaveAttribute("d", mdiAbTesting);
 
@@ -287,7 +287,7 @@ describe("Button", () => {
       await rerender(propsIconAfter);
 
       expect(element.querySelector(".dusk-button__text")).toHaveTextContent(
-        "Initial After"
+        "Initial After",
       );
 
       await rerender({
@@ -297,7 +297,7 @@ describe("Button", () => {
       });
 
       expect(element.querySelector(".dusk-button__text")).toHaveTextContent(
-        "Updated After"
+        "Updated After",
       );
       expect(element.querySelector("path")).toHaveAttribute("d", mdiAbTesting);
     });

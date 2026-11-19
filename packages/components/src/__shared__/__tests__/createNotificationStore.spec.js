@@ -57,7 +57,7 @@ describe("createNotificationStore", () => {
 
   const [baseDataPanels, baseDataToasts] = partition(
     baseData,
-    (item) => item.mode === "panel"
+    (item) => item.mode === "panel",
   );
 
   /** @type {import("svelte/store").Writable<NotificationItem[]>} */
@@ -97,13 +97,13 @@ describe("createNotificationStore", () => {
     const toastsState = get(store.toasts);
 
     expect(panelsState).toHaveLength(
-      baseData.filter(({ mode }) => mode === "panel").length
+      baseData.filter(({ mode }) => mode === "panel").length,
     );
     expect(panelsState[0].id).toBe("id-2");
     expect(panelsState[0].read).toBe(false);
 
     expect(toastsState).toHaveLength(
-      baseData.filter(({ mode }) => mode === "toast").length
+      baseData.filter(({ mode }) => mode === "toast").length,
     );
     expect(toastsState[0].id).toBe("id-1");
     expect(toastsState[1].id).toBe("id-3");
@@ -111,7 +111,7 @@ describe("createNotificationStore", () => {
 
   it("should expose derived stores for the panel count and the unread count", () => {
     const unreadInBaseData = baseDataPanels.filter(
-      ({ read }) => read === false
+      ({ read }) => read === false,
     );
 
     // test pre-conditions

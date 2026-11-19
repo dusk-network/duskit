@@ -25,10 +25,10 @@
 
 .dusk-progress-bar__filler--undetermined {
   inline-size: 20%;
-  animation: progressBarAnimation 2s infinite;
+  animation: progress-bar-animation 2s infinite;
 }
 
-@keyframes progressBarAnimation {
+@keyframes progress-bar-animation {
   0% {
     inset-inline-start: -20%;
   }

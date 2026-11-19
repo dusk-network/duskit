@@ -16,6 +16,7 @@
   import { skip, skipIn } from "lamb";
   import { onDestroy } from "svelte";
   import { flip } from "svelte/animate";
+  import { SvelteMap, SvelteSet } from "svelte/reactivity";
   import { fly } from "svelte/transition";
 
   import getNotificationContext from "../__shared__/getNotificationContext";
@@ -55,11 +56,11 @@
   /** @type {boolean} */
   let isMouseInside = false;
 
-  /** @type {Set<number>} */
-  const activeTouchPointers = new Set();
+  /** @type {SvelteSet<number>} */
+  const activeTouchPointers = new SvelteSet();
 
-  /** @type {Map<string, ToastState>} */
-  const timeMap = new Map();
+  /** @type {SvelteMap<string, ToastState>} */
+  const timeMap = new SvelteMap();
 
   const getNotificationProps = skip(["id", "timeout"]);
 
@@ -132,7 +133,6 @@
   };
 
   /** @param {number} timestamp */
-  // eslint-disable-next-line max-statements
   const loop = (timestamp) => {
     let needsUpdate = false;
     const nextProgresses = { ...decayProgresses };
@@ -184,7 +184,7 @@
   ]);
   $: transitionOffset = effectivePlacement.endsWith("left") ? "-100%" : "100%";
   $: {
-    const currentIds = new Set();
+    const currentIds = new SvelteSet();
 
     for (const toast of $toasts) {
       currentIds.add(toast.id);

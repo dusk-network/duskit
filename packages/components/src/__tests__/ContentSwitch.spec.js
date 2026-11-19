@@ -83,7 +83,7 @@ describe("ContentSwitch", () => {
     expect(selected).toHaveAttribute("aria-selected", "true");
 
     expect(notSelected).not.toHaveClass(
-      "dusk-content-switch__tab-item--selected"
+      "dusk-content-switch__tab-item--selected",
     );
     expect(notSelected).toHaveAttribute("aria-selected", "false");
   });
@@ -143,7 +143,7 @@ describe("ContentSwitch", () => {
       const tab = getByRole("tab", { name: "Overview" });
 
       expect(
-        tab.querySelector(".dusk-content-switch__tab-label")
+        tab.querySelector(".dusk-content-switch__tab-label"),
       ).toHaveTextContent("Overview");
       expect(tab.querySelector(".dusk-icon")).toBeNull();
     });
@@ -153,7 +153,7 @@ describe("ContentSwitch", () => {
       const tab = getByRole("tab", { name: "id-only" });
 
       expect(
-        tab.querySelector(".dusk-content-switch__tab-label")
+        tab.querySelector(".dusk-content-switch__tab-label"),
       ).toHaveTextContent("id-only");
       expect(tab.querySelector(".dusk-icon")).toBeNull();
     });
@@ -168,7 +168,7 @@ describe("ContentSwitch", () => {
       expect(tab.querySelector(".dusk-icon")).toBeInTheDocument();
       expect(tab.querySelector(".dusk-icon path")).toHaveAttribute(
         "d",
-        mdiHome
+        mdiHome,
       );
     });
 
@@ -180,7 +180,7 @@ describe("ContentSwitch", () => {
       );
       const spanElement = getAsHTMLElement(
         tab,
-        ".dusk-content-switch__tab-label"
+        ".dusk-content-switch__tab-label",
       );
       const iconPosition = spanElement.compareDocumentPosition(svgElement);
 
@@ -197,7 +197,7 @@ describe("ContentSwitch", () => {
       );
       const spanElement = getAsHTMLElement(
         tab,
-        ".dusk-content-switch__tab-label"
+        ".dusk-content-switch__tab-label",
       );
       const iconPosition = spanElement.compareDocumentPosition(svgElement);
 
@@ -220,7 +220,7 @@ describe("ContentSwitch", () => {
 
       expect(handleChange).toHaveBeenCalledTimes(1);
       expect(handleChange).toHaveBeenCalledWith(
-        expect.objectContaining({ detail: "details" })
+        expect.objectContaining({ detail: "details" }),
       );
     });
 
@@ -251,9 +251,9 @@ describe("ContentSwitch", () => {
 
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith(
-          expect.objectContaining({ detail: "details" })
+          expect.objectContaining({ detail: "details" }),
         );
-      }
+      },
     );
   });
 
@@ -382,26 +382,26 @@ describe("ContentSwitch", () => {
 
       // The selectd tab is the one expanded by default
       expect(tabOverview).toHaveClass(
-        "dusk-content-switch__tab-item--expanded"
+        "dusk-content-switch__tab-item--expanded",
       );
       expect(tabDetails).not.toHaveClass(
-        "dusk-content-switch__tab-item--expanded"
+        "dusk-content-switch__tab-item--expanded",
       );
 
       await fireEvent.mouseOver(tabDetails);
 
       expect(tabOverview).not.toHaveClass(
-        "dusk-content-switch__tab-item--expanded"
+        "dusk-content-switch__tab-item--expanded",
       );
       expect(tabDetails).toHaveClass("dusk-content-switch__tab-item--expanded");
 
       await fireEvent.mouseOut(tabDetails);
 
       expect(tabOverview).toHaveClass(
-        "dusk-content-switch__tab-item--expanded"
+        "dusk-content-switch__tab-item--expanded",
       );
       expect(tabDetails).not.toHaveClass(
-        "dusk-content-switch__tab-item--expanded"
+        "dusk-content-switch__tab-item--expanded",
       );
     });
 
@@ -413,17 +413,17 @@ describe("ContentSwitch", () => {
       await fireEvent.focus(tabDetails);
 
       expect(tabOverview).not.toHaveClass(
-        "dusk-content-switch__tab-item--expanded"
+        "dusk-content-switch__tab-item--expanded",
       );
       expect(tabDetails).toHaveClass("dusk-content-switch__tab-item--expanded");
 
       await fireEvent.blur(tabDetails);
 
       expect(tabOverview).toHaveClass(
-        "dusk-content-switch__tab-item--expanded"
+        "dusk-content-switch__tab-item--expanded",
       );
       expect(tabDetails).not.toHaveClass(
-        "dusk-content-switch__tab-item--expanded"
+        "dusk-content-switch__tab-item--expanded",
       );
     });
   });
@@ -438,7 +438,7 @@ describe("ContentSwitch", () => {
       expect(tabOverview).toHaveAttribute("aria-selected", "true");
       expect(tabOverview).toHaveAttribute("tabindex", "0");
       expect(tabOverview).toHaveClass(
-        "dusk-content-switch__tab-item--expanded"
+        "dusk-content-switch__tab-item--expanded",
       );
       expect(tabDetails).toHaveAttribute("aria-selected", "false");
       expect(tabDetails).toHaveAttribute("tabindex", "-1");
@@ -490,14 +490,14 @@ describe("ContentSwitch", () => {
       async ({ propValue }) => {
         const { getAllByRole, getByRole, rerender } = render(
           ContentSwitch,
-          baseOptions
+          baseOptions,
         );
         const tabOverview = getByRole("tab", { name: "Overview" });
 
         expect(tabOverview).toHaveAttribute("aria-selected", "true");
         expect(tabOverview).toHaveAttribute("tabindex", "0");
         expect(tabOverview).toHaveClass(
-          "dusk-content-switch__tab-item--expanded"
+          "dusk-content-switch__tab-item--expanded",
         );
 
         // Re-render with `undefined` or invalid prop
@@ -509,12 +509,12 @@ describe("ContentSwitch", () => {
         tabs.forEach((tab) => {
           expect(tab).toHaveAttribute("aria-selected", "false");
           expect(tab).not.toHaveClass(
-            "dusk-content-switch__tab-item--expanded"
+            "dusk-content-switch__tab-item--expanded",
           );
         });
         expect(tabIndices).toStrictEqual(["0", "-1", "-1", "-1", "-1", "-1"]);
         expect.assertions(items.length * 2 + 4);
-      }
+      },
     );
   });
 });

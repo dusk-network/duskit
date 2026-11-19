@@ -38,7 +38,6 @@
 
   let displayText = text;
 
-  // eslint-disable-next-line max-statements
   function update() {
     if (!context || availableWidth < 0) {
       return;
@@ -68,7 +67,7 @@
       const leftPart = text.slice(0, half);
       const rightPart = text.slice(-(mid - half));
       const measured = context.measureText(
-        leftPart + ellipsis + rightPart
+        leftPart + ellipsis + rightPart,
       ).width;
 
       if (measured > availableWidth) {
@@ -95,7 +94,6 @@
     const { display: rootDisplay } = computedStyle;
 
     if (rootDisplay === "inline") {
-      // eslint-disable-next-line no-console
       console.error(`
         [MiddleEllipsis] Error: the root element ("${as}") has "display: inline".
         An element with a defined size is required to perform the middle ellipsis calculation.
@@ -104,7 +102,6 @@
     } else if (
       ["inline-block", "inline-flex", "inline-grid"].includes(rootDisplay)
     ) {
-      // eslint-disable-next-line no-console
       console.warn(`
         [MiddleEllipsis] Warning: the root element ("${as}") has "display: ${rootDisplay}".
         Make sure it has a defined width or switch to "display: block".
@@ -122,7 +119,6 @@
 
   $: classes = makeClassName(["dusk-middle-ellipsis", className]);
   $: {
-    // eslint-disable-next-line no-unused-expressions
     text; // We need to be reactive when text changes
     rootElement && update();
   }

@@ -32,7 +32,7 @@ describe("getNotificationContext", () => {
     getContextSpy.mockReturnValueOnce(undefined);
 
     expect(() => getNotificationContext()).toThrowError(
-      "`getNotificationContext` must be used within a `NotificationProvider`"
+      "`getNotificationContext` must be used within a `NotificationProvider`",
     );
     expect(getContextSpy).toHaveBeenCalledTimes(1);
     expect(getContextSpy).toHaveBeenCalledWith(NOTIFICATION_CONTEXT_KEY);

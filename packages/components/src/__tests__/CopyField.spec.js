@@ -77,7 +77,7 @@ describe("CopyField", () => {
     const rootElement = component.getRootElement();
     const copyButton = getAsHTMLElement(
       rootElement,
-      ".dusk-copy-field__button"
+      ".dusk-copy-field__button",
     );
 
     expect(rootElement).toHaveClass("dusk-copy-field--disabled");
@@ -88,13 +88,13 @@ describe("CopyField", () => {
     const { component } = render(CopyField, baseOptions);
     const copyButton = getAsHTMLElement(
       component.getRootElement(),
-      ".dusk-copy-field__button"
+      ".dusk-copy-field__button",
     );
 
     await fireEvent.click(copyButton);
 
     expect(navigator.clipboard.writeText).toHaveBeenCalledExactlyOnceWith(
-      baseProps.rawValue
+      baseProps.rawValue,
     );
     expect(toastSpy).toHaveBeenCalledExactlyOnceWith({
       dismissable: false,
@@ -114,13 +114,13 @@ describe("CopyField", () => {
     const { component } = render(CopyField, baseOptions);
     const copyButton = getAsHTMLElement(
       component.getRootElement(),
-      ".dusk-copy-field__button"
+      ".dusk-copy-field__button",
     );
 
     await fireEvent.click(copyButton);
 
     expect(navigator.clipboard.writeText).toHaveBeenCalledExactlyOnceWith(
-      baseProps.rawValue
+      baseProps.rawValue,
     );
     expect(toastSpy).toHaveBeenCalledExactlyOnceWith({
       dismissable: false,
@@ -138,13 +138,13 @@ describe("CopyField", () => {
     const { component } = render(CopyField, baseOptions);
     const copyButton = getAsHTMLElement(
       component.getRootElement(),
-      ".dusk-copy-field__button"
+      ".dusk-copy-field__button",
     );
 
     await fireEvent.click(copyButton);
 
     expect(navigator.clipboard.writeText).toHaveBeenCalledExactlyOnceWith(
-      baseProps.rawValue
+      baseProps.rawValue,
     );
     expect(toastSpy).toHaveBeenCalledExactlyOnceWith({
       dismissable: false,
@@ -186,7 +186,7 @@ describe("CopyField", () => {
     await fireEvent.click(copyButton);
 
     expect(navigator.clipboard.writeText).toHaveBeenCalledExactlyOnceWith(
-      "5678900"
+      "5678900",
     );
     expect(toastSpy).toHaveBeenCalledExactlyOnceWith({
       dismissable: false,

@@ -95,7 +95,7 @@ describe("HttpTransport", () => {
         expect(requestHeaders).toBeInstanceOf(Headers);
         expect(requestHeaders.get("Accept")).toBe(headers.Accept);
         expect(requestHeaders.get("X-Api-Key")).toBe(headers["X-Api-Key"]);
-      }
+      },
     );
 
     it("should use a custom fetch implementation when provided", async () => {
@@ -107,7 +107,7 @@ describe("HttpTransport", () => {
           receivers.push(this);
 
           return Promise.resolve(Response.json(data));
-        }
+        },
       );
       const transport = new HttpTransport({
         ...baseOptions,
@@ -122,7 +122,7 @@ describe("HttpTransport", () => {
       expect(receivers).toStrictEqual([undefined]);
       expect(customFetch).toHaveBeenCalledExactlyOnceWith(
         new URL("https://api.example.com/users"),
-        expect.objectContaining({ method: "GET" })
+        expect.objectContaining({ method: "GET" }),
       );
       expect(fetchSpy).not.toHaveBeenCalled();
     });
@@ -195,7 +195,7 @@ describe("HttpTransport", () => {
         expect(fetchUrl.toString()).toBe(expectedParamsUrl);
         expect(fetchOptions?.method).toBe(method.toUpperCase());
         expect(fetchOptions?.body).toBeUndefined();
-      }
+      },
     );
 
     it.each(methodsWithBody)(
@@ -237,7 +237,7 @@ describe("HttpTransport", () => {
         expect(fetchUrl.toString()).toBe(expectedParamsUrl);
         expect(fetchOptions?.method).toBe(method.toUpperCase());
         expect(fetchOptions?.body).toBe(JSON.stringify(body));
-      }
+      },
     );
 
     it("should not pass `undefined` keys in `fetch`'s options", async () => {
@@ -318,8 +318,8 @@ describe("HttpTransport", () => {
 
       await expect(transport.get("some-endpoint")).rejects.toThrow(
         expect.toSatisfy(
-          allOf([isInstanceOf(Error), hasKeyValue("message", requestError)])
-        )
+          allOf([isInstanceOf(Error), hasKeyValue("message", requestError)]),
+        ),
       );
     });
 
@@ -392,7 +392,7 @@ describe("HttpTransport", () => {
         expect(requestHeaders.get("x-request-id")).toBe("abc-987");
         expect(requestHeaders.get("x-api-key")).toBe("67890");
         expect(requestHeaders.has("accept")).toBe(type === "Headers instance");
-      }
+      },
     );
 
     it("should append header values with appendHeader", async () => {
@@ -408,7 +408,7 @@ describe("HttpTransport", () => {
 
       expect(fetchSpy).toHaveBeenCalledTimes(1);
       expect(requestHeaders.get("Accept")).toBe(
-        "application/json, application/xml"
+        "application/json, application/xml",
       );
     });
 
@@ -466,7 +466,7 @@ describe("HttpTransport", () => {
         const result = transport[method]("test-endpoint");
 
         await expect(result).resolves.toStrictEqual(data);
-      }
+      },
     );
   });
 });

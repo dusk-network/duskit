@@ -18,7 +18,7 @@
       rect = entry.contentRect;
       height = rect.height;
       width = rect.width;
-    })
+    }),
   );
 </script>
 

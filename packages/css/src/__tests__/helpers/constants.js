@@ -2,7 +2,7 @@ const CSS_VAR_CORE = "--[\\w-]+";
 
 export const CSS_VAR_NAME_PATTERN = new RegExp(`^${CSS_VAR_CORE}$`);
 export const CSS_VAR_REFERENCE_PATTERN = new RegExp(
-  `var\\(\\s*(${CSS_VAR_CORE})\\s*\\)`
+  `var\\(\\s*(${CSS_VAR_CORE})\\s*\\)`,
 );
 
 export const CSS_NAMED_COLORS = new Set([

@@ -54,7 +54,7 @@ export interface PersistedStoreOptions<T> {
    */
   getLoadErrorFallback?: (
     error: Error,
-    rawValue: string | null
+    rawValue: string | null,
   ) => T | undefined;
 
   /**
@@ -178,7 +178,7 @@ export declare function createDataStore<
 export declare function createPersistedStore<T>(
   key: string,
   initialValue: T,
-  options?: PersistedStoreOptions<T>
+  options?: PersistedStoreOptions<T>,
 ): PersistedStore<T>;
 
 /**
@@ -191,7 +191,7 @@ export declare function createPollingDataStore<
   F extends (...args: any) => Promise<any>,
 >(
   dataRetriever: F,
-  fetchInterval: number
+  fetchInterval: number,
 ): PollingDataStore<Parameters<F>, Awaited<ReturnType<F>>>;
 
 /**
@@ -207,5 +207,5 @@ export declare function createPollingDataStore<
  */
 export declare function onStoreChange<T>(
   store: Readable<T>,
-  handler: (prev: T, curr: T) => void
+  handler: (prev: T, curr: T) => void,
 ): Unsubscriber;

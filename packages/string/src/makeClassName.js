@@ -25,7 +25,7 @@ const makeClassNameFromObject = pipe([pickIf(Boolean), keys, joinWithSpace]);
 const makeClassName = condition(
   Array.isArray,
   makeClassNameFromArray,
-  makeClassNameFromObject
+  makeClassNameFromObject,
 );
 
 export default makeClassName;

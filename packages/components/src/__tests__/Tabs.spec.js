@@ -30,7 +30,7 @@ describe("Tabs", () => {
 
   vi.spyOn(HTMLUListElement.prototype, "scrollTo");
   vi.spyOn(HTMLUListElement.prototype, "clientWidth", "get").mockReturnValue(
-    TEST_CLIENT_WIDTH
+    TEST_CLIENT_WIDTH,
   );
 
   const items = [
@@ -124,7 +124,7 @@ describe("Tabs", () => {
     const { container } = await renderTabs(baseProps);
     const tab = getAsHTMLElement(
       container,
-      `[data-tabid="${baseProps.selectedTab}"]`
+      `[data-tabid="${baseProps.selectedTab}"]`,
     );
 
     expect(tab.scrollIntoView).toHaveBeenCalledTimes(1);
@@ -163,7 +163,7 @@ describe("Tabs", () => {
 
     expect(observeResize).toHaveBeenCalledExactlyOnceWith(
       tabsList,
-      expect.any(Function)
+      expect.any(Function),
     );
 
     unmount();
@@ -233,21 +233,21 @@ describe("Tabs", () => {
     const { container } = await renderTabs(baseProps);
     const leftBtn = getAsHTMLElement(
       container,
-      ".dusk-tab-scroll-button:first-of-type"
+      ".dusk-tab-scroll-button:first-of-type",
     );
     const rightBtn = getAsHTMLElement(
       container,
-      ".dusk-tab-scroll-button:last-of-type"
+      ".dusk-tab-scroll-button:last-of-type",
     );
 
     expect(leftBtn).toHaveClass(
       "dusk-tab-scroll-button",
-      "dusk-tab-scroll-button--hidden"
+      "dusk-tab-scroll-button--hidden",
     );
     expect(leftBtn.getAttribute("disabled")).toBe("");
     expect(rightBtn).toHaveClass(
       "dusk-tab-scroll-button",
-      "dusk-tab-scroll-button--hidden"
+      "dusk-tab-scroll-button--hidden",
     );
     expect(rightBtn.getAttribute("disabled")).toBe("");
   });
@@ -258,11 +258,11 @@ describe("Tabs", () => {
 
     let leftBtn = getAsHTMLElement(
       container,
-      ".dusk-tab-scroll-button:first-of-type"
+      ".dusk-tab-scroll-button:first-of-type",
     );
     let rightBtn = getAsHTMLElement(
       container,
-      ".dusk-tab-scroll-button:last-of-type"
+      ".dusk-tab-scroll-button:last-of-type",
     );
 
     expect(leftBtn).not.toHaveClass("dusk-tab-scroll-button--hidden");
@@ -289,11 +289,11 @@ describe("Tabs", () => {
 
     leftBtn = getAsHTMLElement(
       container,
-      ".dusk-tab-scroll-button:first-of-type"
+      ".dusk-tab-scroll-button:first-of-type",
     );
     rightBtn = getAsHTMLElement(
       container,
-      ".dusk-tab-scroll-button:last-of-type"
+      ".dusk-tab-scroll-button:last-of-type",
     );
 
     expect(leftBtn).not.toHaveClass("dusk-tab-scroll-button--hidden");
@@ -318,7 +318,7 @@ describe("Tabs", () => {
     const tabsList = getAsHTMLElement(container, ".dusk-tabs-list");
     const rightBtn = getAsHTMLElement(
       container,
-      ".dusk-tab-scroll-button:last-of-type"
+      ".dusk-tab-scroll-button:last-of-type",
     );
 
     expect(rightBtn).not.toHaveClass("dusk-tab-scroll-button--hidden");
@@ -346,11 +346,11 @@ describe("Tabs", () => {
     const tabsList = getAsHTMLElement(container, ".dusk-tabs-list");
     const leftBtn = getAsHTMLElement(
       container,
-      ".dusk-tab-scroll-button:first-of-type"
+      ".dusk-tab-scroll-button:first-of-type",
     );
     const rightBtn = getAsHTMLElement(
       container,
-      ".dusk-tab-scroll-button:last-of-type"
+      ".dusk-tab-scroll-button:last-of-type",
     );
 
     await fireEvent.mouseDown(leftBtn, { buttons: 2 });
@@ -370,11 +370,11 @@ describe("Tabs", () => {
     const tabsList = getAsHTMLElement(container, ".dusk-tabs-list");
     const leftBtn = getAsHTMLElement(
       container,
-      ".dusk-tab-scroll-button:first-of-type"
+      ".dusk-tab-scroll-button:first-of-type",
     );
     const rightBtn = getAsHTMLElement(
       container,
-      ".dusk-tab-scroll-button:last-of-type"
+      ".dusk-tab-scroll-button:last-of-type",
     );
     const firstTab = getAsHTMLElement(container, "[role='tab']:first-of-type");
     const lastTab = getAsHTMLElement(container, "[role='tab']:last-of-type");
@@ -388,7 +388,7 @@ describe("Tabs", () => {
     const lastTabGetRectSpy = vi
       .spyOn(lastTab, "getBoundingClientRect")
       .mockReturnValue(
-        DOMRect.fromRect({ width: 100, x: tabsList.clientWidth })
+        DOMRect.fromRect({ width: 100, x: tabsList.clientWidth }),
       );
 
     scrollIntoViewSpy.mockClear();
