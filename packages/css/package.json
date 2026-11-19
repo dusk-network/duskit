@@ -33,6 +33,7 @@
     "lint:fix": "eslint . --fix && stylelint --quiet --rd 'src/**/*.css' --fix",
     "lint:styles": "stylelint --quiet --rd 'src/**/*.css'",
     "test": "vitest --run",
+    "test:coverage": "vitest --run --coverage.enabled",
     "test:watch": "vitest",
     "typecheck": "tsc --project tsconfig.json",
     "typecheck:watch": "tsc --watch --project tsconfig.json"
