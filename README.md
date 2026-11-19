@@ -18,8 +18,6 @@
 
 Duskit (Dusk Kit) contains Svelte components and JS utilities that can help you quickly build a Dusk web app.
 
-The interactive documentation and visual playground for all components is available on our public [Storybook](https://dusk-network.github.io/duskit/).
-
 ## TOC
 
 - [Dev environment](#dev-environment)
@@ -31,7 +29,7 @@ The interactive documentation and visual playground for all components is availa
 
 The dev environment assumes that you have at least Node.js v22.15.0 installed. The LTS version is 22.15.0 at the time of writing.
 
-Duskit is a monorepo managed with [npm workspaces](https://docs.npmjs.com/cli/v10/using-npm/workspaces) and [Turbo](https://turbo.build/).
+Duskit is a monorepo managed with [npm workspaces](https://docs.npmjs.com/cli/v10/using-npm/workspaces).
 
 ### Installing dependencies
 
@@ -79,19 +77,12 @@ Alternatively you can move to a package root and install the dependency from the
 ## NPM scripts
 
 All [terminal commands](#npm-scripts) listed here assume that you are positioned in root folder of the repository.
-Commands executed from the root folder take advantage of [Turbo's caching](https://turbo.build/repo/docs/core-concepts/caching).
-To run a command skipping the cache read (not the writing), add the `--force` flag.
-For example for the `checks` task:
+
+The following commands act on all packages in the monorepo, where applicable, one package at a time.
+If you want instead to run a command for a single package you can use the `--workspace` flag:
 
 ```bash
-npm run checks -- --force
-```
-
-The following commands act on all packages in the monorepo, where applicable.
-If you want instead to run a command for a single package you can add a [filter](https://turbo.build/repo/docs/core-concepts/monorepos/filtering):
-
-```bash
-npm test -- --filter http
+npm test --workspace=packages/http
 ```
 
 This executes tests only for the [@duskit/http](packages/http/README.md) package.
@@ -101,15 +92,9 @@ Refer to the package's README to see which commands are available.
 
 **N.B.** the `changeset`, `release` and `version-packages` scripts are commands related to the whole monorepo and cannot be run from a single package.
 
-- `npm run build` - runs all build tasks (tokens + Storybook)
-- `npm run build:storybook` - builds a static Storybook into `apps/storybook/storybook-static`
-- `npm run build:tokens` - builds the design tokens
 - `npm run changeset` - shows an interactive shell to [create][changeset-add] a new changeset entry
 - `npm run checks` - runs all health checks (formatting, linting, type checking, tests)
-- `npm run clean` - runs the `clean` script for all packages (currently removes all `coverage`, `docs` and `node_modules` folders)
-- `npm run docs` - generates HTML documentation for all `@duskit` in the `docs` folder
-- `npm run dev` - runs the dev tasks (including Storybook)
-- `npm run dev:storybook` - runs Storybook only
+- `npm run clean` - runs the `clean` script for all packages (currently removes all `coverage` and `node_modules` folders)
 - `npm run format` - fixes the formatting in all files
 - `npm run format:check` - performs the formatting check
 - `npm run lint` - performs the linting check
@@ -117,9 +102,7 @@ Refer to the package's README to see which commands are available.
 - `npm run release` - [publishes][changeset-publish] a new release
 - `npm run test` - runs the test suite
 - `npm run test:coverage` - runs the test suite and generates the code coverage report in the `coverage` folder of each package
-- `npm run test:watch` - runs the test suite in watch mode
 - `npm run typecheck` - runs the type checker
-- `npm run typecheck:watch` - runs the type checker in watch mode
 - `npm run version` - [updates][changeset-version] versions and dependencies of packages and creates the changelogs
 
 <p align="right"><a href="#toc">[back to TOC]</a></p>

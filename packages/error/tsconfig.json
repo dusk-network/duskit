@@ -15,5 +15,5 @@
     "target": "ESNext",
     "types": ["lamb-types"]
   },
-  "exclude": ["coverage", "docs", "node_modules"]
+  "exclude": ["coverage", "node_modules"]
 }

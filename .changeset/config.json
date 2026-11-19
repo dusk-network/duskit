@@ -8,7 +8,7 @@
   ],
   "commit": false,
   "fixed": [],
-  "ignore": ["@duskit/storybook"],
+  "ignore": [],
   "linked": [],
   "updateInternalDependencies": "minor",
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
