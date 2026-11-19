@@ -1,5 +1,13 @@
 # @duskit/components
 
+## 4.0.1
+
+### Patch Changes
+
+- [#387](https://github.com/dusk-network/duskit/pull/387) [`58c5ca6`](https://github.com/dusk-network/duskit/commit/58c5ca6ee4af10d173959d5c35fbaf97c1f0f664) Thanks [@HDauven](https://github.com/HDauven)! - Keep the `ToastContainer` timers in Svelte's reactive `SvelteMap` and `SvelteSet`.
+
+  The progress bar's keyframes are renamed from `progressBarAnimation` to `progress-bar-animation`.
+
 ## 4.0.0
 
 ### Major Changes
