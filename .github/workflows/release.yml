@@ -10,7 +10,13 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      # npm publishes through trusted publishing (OIDC), with provenance.
+      id-token: write
     name: Release
+    # Publishing runs in the npm environment, which only main can use and
+    # which waits for an owner's approval. npm trusts this workflow in that
+    # environment (trusted publishing), so no npm token is involved.
+    environment: npm
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -49,4 +55,3 @@ jobs:
           version: npm run version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
