@@ -1,5 +1,17 @@
 # @duskit/components
 
+## 4.0.0
+
+### Major Changes
+
+- [#381](https://github.com/dusk-network/duskit/pull/381) [`2bf999f`](https://github.com/dusk-network/duskit/commit/2bf999f5f7763f190958a318ffa6eb39615e5923) Thanks [@HDauven](https://github.com/HDauven)! - Add inverse surface tokens and use them for neutral tooltip presentation. Tooltip status variants have been removed; use a feedback component when status color communicates meaning.
+
+### Minor Changes
+
+- [#378](https://github.com/dusk-network/duskit/pull/378) [`6f90d12`](https://github.com/dusk-network/duskit/commit/6f90d124b0102cdc1eb51298599996257f6d62f6) Thanks [@HDauven](https://github.com/HDauven)! - Allow component consumers to pass inline styles and support injecting a custom fetch implementation into `HttpTransport`.
+
+- [#376](https://github.com/dusk-network/duskit/pull/376) [`5b4ac52`](https://github.com/dusk-network/duskit/commit/5b4ac521785e9908de8a2feade0bbb20a6eda5d9) Thanks [@HDauven](https://github.com/HDauven)! - Add configurable ToastContainer placement and reliable container-level pointer pause behavior for mouse and touch interactions.
+
 ## 3.1.1
 
 ### Patch Changes

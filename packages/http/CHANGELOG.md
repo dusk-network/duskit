@@ -1,5 +1,11 @@
 # @duskit/http
 
+## 0.1.0
+
+### Minor Changes
+
+- [#378](https://github.com/dusk-network/duskit/pull/378) [`6f90d12`](https://github.com/dusk-network/duskit/commit/6f90d124b0102cdc1eb51298599996257f6d62f6) Thanks [@HDauven](https://github.com/HDauven)! - Allow component consumers to pass inline styles and support injecting a custom fetch implementation into `HttpTransport`.
+
 ## 0.0.5
 
 ### Patch Changes
