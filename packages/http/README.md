@@ -53,8 +53,7 @@ const transport = new HttpTransport({
 ## NPM scripts
 
 - `npm run checks` - runs all health checks (formatting, linting, type checking, tests)
-- `npm run clean` - removes the `coverage`, `docs` and `node_modules` folders
-- `npm run docs` - generates the HTML documentation in the `docs` folder
+- `npm run clean` - removes the `coverage` and `node_modules` folders
 - `npm run format` - fixes the formatting in all files
 - `npm run format:check` - performs the formatting check
 - `npm run lint` - performs the linting check

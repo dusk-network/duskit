@@ -28,10 +28,9 @@
     "build": "node scripts/check-workspace-order.js && npm run build --workspaces --if-present",
     "changeset": "changeset",
     "checks": "npm run checks --workspaces --if-present",
-    "clean": "npm run clean --workspaces --if-present && node scripts/clean.js package-lock.json node_modules docs",
-    "docs": "typedoc",
-    "format": "prettier .github scripts eslint.config.js package.json typedoc.config.js vitest.config.js --write && npm run format --workspaces --if-present",
-    "format:check": "prettier .github scripts eslint.config.js package.json typedoc.config.js vitest.config.js --check && npm run format:check --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present && node scripts/clean.js package-lock.json node_modules",
+    "format": "prettier .github scripts eslint.config.js package.json vitest.config.js --write && npm run format --workspaces --if-present",
+    "format:check": "prettier .github scripts eslint.config.js package.json vitest.config.js --check && npm run format:check --workspaces --if-present",
     "lint": "eslint scripts && npm run lint --workspaces --if-present",
     "lint:fix": "eslint scripts --fix && npm run lint:fix --workspaces --if-present",
     "release": "npm run build && changeset publish",
@@ -67,18 +66,10 @@
     "prettier": "3.8.4",
     "prettier-plugin-svelte": "4.1.1",
     "svelte": "5.56.4",
-    "typedoc": "0.28.19",
-    "typedoc-plugin-dt-links": "2.0.60",
-    "typedoc-plugin-mdn-links": "5.1.1",
     "vite": "8.1.7",
     "vitest": "4.1.12"
   },
   "allowScripts": {
     "fsevents@2.3.3": true
-  },
-  "overrides": {
-    "typedoc": {
-      "minimatch": "6.2.3"
-    }
   }
 }

@@ -15,5 +15,5 @@
     "strict": true,
     "target": "ESNext"
   },
-  "exclude": ["coverage", "docs", "node_modules"]
+  "exclude": ["coverage", "node_modules"]
 }

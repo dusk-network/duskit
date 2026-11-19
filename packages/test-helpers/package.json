@@ -25,8 +25,7 @@
   },
   "scripts": {
     "checks": "npm run format:check && npm run lint && npm run test:coverage",
-    "clean": "node -e \"const fs = require('node:fs'); for (const path of process.argv.slice(1)) fs.rmSync(path, { force: true, recursive: true })\" node_modules coverage docs",
-    "docs": "typedoc",
+    "clean": "node -e \"const fs = require('node:fs'); for (const path of process.argv.slice(1)) fs.rmSync(path, { force: true, recursive: true })\" node_modules coverage",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "lint": "eslint .",
@@ -57,9 +56,6 @@
     "prettier": "3.8.4",
     "svelte": "5.56.4",
     "svelte-check": "4.7.1",
-    "typedoc": "0.28.19",
-    "typedoc-plugin-dt-links": "2.0.60",
-    "typedoc-plugin-mdn-links": "5.1.1",
     "vitest": "4.1.12"
   }
 }
